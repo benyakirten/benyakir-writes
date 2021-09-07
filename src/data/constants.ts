@@ -1,0 +1,45 @@
+export const ICONS_TO_LINKS = {
+    Twitter: "https://twitter.com/BenyakirTen",
+    Github: "https://github.com/benyakirten",
+    Blog: "https://benyakiredits.com"
+}
+
+export const ICONS_TO_COLORS = {
+    Twitter: '#fff'
+}
+
+export const DATE_REGEX = /^\d{2}\/\d{2}\/\d{4}$/
+export const CSS_MEASUREMENT_REGEX = /^(\d+(\.\d+)?)(\w+)$/
+
+export const TRIANGLES_FOR_CORNER_INDEX = [
+    'polygon(0 0, 100% 0, 0 100%)',
+    'polygon(100% 0, 0 0, 100% 100%)',
+    'polygon(100% 0, 0 100%, 100% 100%)',
+    'polygon(0 0, 0 100%, 100% 100%)'
+]
+
+export const TRANSFORM_ORIGIN_FOR_CORNER_INDEX = [
+    'top left',
+    'top right',
+    'bottom right',
+    'bottom left'
+]
+
+export const CORNER_INDEX_TO_POSITIONING = [
+    {
+        top: 0,
+        left: 0
+    },
+    {
+        top: 0,
+        right: 0
+    },
+    {
+        bottom: 0,
+        right: 0
+    },
+    {
+        bottom: 0,
+        left: 0
+    }
+]
