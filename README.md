@@ -40,4 +40,6 @@ Page transitions use react-transition-group instead of the usual Gatsby page tra
 
 ## Changelog
 
-> 9/7/2021: First deployment
+> 9/7/2021: 
+> 1. First deployment
+> 2. Fixed a few issues I didn't notice by running build before deployment, namely that I still needed to use useLocation for the page transitions. Also that I needed a backup for categories that didn't have any posts in them (such as bens-blogs, the overarching category for my regular blog pages).

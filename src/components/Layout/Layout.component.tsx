@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import { useLocation } from "@reach/router";
 import { TransitionGroup, Transition } from "react-transition-group";
 
 import { GlobalStyles, LayoutContainer, MainContainer } from "./Layout.styles";
@@ -8,6 +9,7 @@ import Sidebar from "./Sidebar/Sidebar.component";
 import { getTransitionStyles, TIMEOUT_500 } from "@Styles/page-transitions";
 
 const Layout: React.FC = ({ children }) => {
+    const location = useLocation();
     return (
         <LayoutContainer>
             <Helmet>
