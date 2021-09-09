@@ -30,7 +30,7 @@ import { formatWpText } from "@Utils/posts";
 import { firstWords } from "@Utils/strings";
 import { getPrettyDate } from "@Utils/dates";
 
-import { WpBook } from "@Types/query";;
+import { WpBook } from "@Types/query";
 
 const Book: React.FC<WpBook> = ({ data }) => {
     const book = flattenBook(data.wpBook, data.file.publicURL);
@@ -47,7 +47,9 @@ const Book: React.FC<WpBook> = ({ data }) => {
             </Helmet>
             <LeadHeading>{book.title}</LeadHeading>
             <GroupingBox>
-                <RowUntilPhone style={{ flexWrap: "nowrap", alignItems: "start" }}>
+                <RowUntilPhone
+                    style={{ flexWrap: "nowrap", alignItems: "start" }}
+                >
                     {book.cover ? (
                         <CardSection>
                             <GatsbyImage image={book.cover} alt={book.title} />
@@ -57,7 +59,7 @@ const Book: React.FC<WpBook> = ({ data }) => {
                             <HoverImage
                                 publicURL={book.fallbackCover}
                                 name={book.title}
-                                color='#fff'
+                                color="#fff"
                                 size="20rem"
                                 square
                                 marginRightOnPhone="-1rem"

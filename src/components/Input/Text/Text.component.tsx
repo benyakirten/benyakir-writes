@@ -4,7 +4,7 @@ import { TextInputContainer } from "./Text.styles";
 
 import { TextProps } from "@Types/props";
 
-const Text: React.FC<TextProps> = ({ label, name, onChange, value, width }) => {
+const Text: React.FC<TextProps> = ({ label, name, onChange, value, width, tabIndex = 0 }) => {
     return (
         <TextInputContainer>
             <input
@@ -17,6 +17,7 @@ const Text: React.FC<TextProps> = ({ label, name, onChange, value, width }) => {
                 style={{
                     width
                 }}
+                tabIndex={tabIndex}
             />
             <label htmlFor={name}>{label}</label>
         </TextInputContainer>

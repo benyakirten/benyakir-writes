@@ -14,9 +14,9 @@ import CustomLink from "@Gen/CustomLink/CustomLink.component";
 import Logo from "./Logo/Logo.component";
 
 import useDropdown from "@Hooks/useDropdown";
-import Search from "../Search/Search.component";
-
-// TODO: Create global search logic - query all objects, generate metas, then track titles, type (project, blog post, book, story) and slugs
+// I'm disabling the search functionality for now because it's incredibly resource intensive
+// Once I think of how to do it better, I will.
+// import Search from "../Search/Search.component";
 
 const Sidebar: React.FC = () => {
     const [openDropdown, setOpenDropdown] = useDropdown();
@@ -70,21 +70,23 @@ const Sidebar: React.FC = () => {
                             open={openDropdown === "blog"}
                             onClick={() => setOpenDropdown("blog")}
                             height="7rem"
+                            tabIndex={open ? 0 : -1}
                         />
                         <LinkGroup
                             domain="author"
                             links={authorLinks}
                             open={openDropdown === "author"}
                             onClick={() => setOpenDropdown("author")}
+                            tabIndex={open ? 0 : -1}
                         />
                         <CustomLink to="/portfolio" limitUnderbar>Portfolio</CustomLink>
                     </NavGroup>
-                    <NavGroup>
+                    {/* <NavGroup>
                         <Search
                             open={openDropdown === "search"}
                             onClick={() => setOpenDropdown("search")}
                         />
-                    </NavGroup>
+                    </NavGroup> */}
                     <NavGroup>
                         <CustomLink to="/" underbarSize="12rem">Home</CustomLink>
                         <CustomLink to="/contact" underbarSize="12rem">Contact</CustomLink>

@@ -19,21 +19,38 @@ const ProjectsPage: React.FC<ProjectsQuery> = ({ data }) => {
 
     // What these functions is they format arrays so they'll be a list of items, then we want unique items
     // But we still need them to be Arrays, so we have to convert back from sets to arrays
-    const allHosts = Array.from(new Set(formattedProjects.filter((p) => !!p.hostedOn).map((p) => p.hostedOn!)))
+    const allHosts = Array.from(
+        new Set(
+            formattedProjects
+                .filter((p) => !!p.hostedOn)
+                .map((p) => p.hostedOn!)
+        )
+    );
     // We use flatmaps because each project has their long/short technologies as arrays. We just want all the names of the technologies
-    const allTechs = Array.from(new Set(formattedProjects.flatMap((p) => p.longTechnologies)))
-    const shortTechs = Array.from(new Set(formattedProjects.flatMap((p) => p.shortTechnologies)))
+    const allTechs = Array.from(
+        new Set(formattedProjects.flatMap((p) => p.longTechnologies))
+    );
+    const shortTechs = Array.from(
+        new Set(formattedProjects.flatMap((p) => p.shortTechnologies))
+    );
 
-    const allIcons: FileNode[] = data.allFile.nodes.filter(f => shortTechs.includes(f.name)).map(f => ({ ...f, name: getFullTechName(f.name) }))
+    const allIcons: FileNode[] = data.allFile.nodes
+        .filter((f) => shortTechs.includes(f.name))
+        .map((f) => ({ ...f, name: getFullTechName(f.name) }));
 
     // This will reduce memory complexity because the getIconsForProject function will get run multiple times
-    const hashedIcons = allIcons.reduce((acc, next) => ({ ...acc, [next.name]: next.publicURL }), {})
-    const getIconsForProject = (project: FlattenedProject): FileNode[] => project.longTechnologies.map(t => ({
-        name: t,
-        publicURL: hashedIcons[t as keyof typeof hashedIcons]
-    }))
+    const hashedIcons = allIcons.reduce(
+        (acc, next) => ({ ...acc, [next.name]: next.publicURL }),
+        {}
+    );
+    const getIconsForProject = (project: FlattenedProject): FileNode[] =>
+        project.longTechnologies.map((t) => ({
+            name: t,
+            publicURL: hashedIcons[t as keyof typeof hashedIcons],
+        }));
 
-    const [filteredProjects, setFilteredProjects] = React.useState<FlattenedProject[]>(formattedProjects);
+    const [filteredProjects, setFilteredProjects] =
+        React.useState<FlattenedProject[]>(formattedProjects);
 
     return (
         <LeadPage
@@ -63,7 +80,10 @@ const ProjectsPage: React.FC<ProjectsQuery> = ({ data }) => {
                             timeout={800}
                             classNames="filterable-card"
                         >
-                            <ProjectCard project={p} icons={getIconsForProject(p)} />
+                            <ProjectCard
+                                project={p}
+                                icons={getIconsForProject(p)}
+                            />
                         </CSSTransition>
                     ))}
                 </TransitionGroup>

@@ -97,11 +97,13 @@ interface TextProps extends InputProps {
     value: string;
     onChange: (newText: string) => void;
     width?: string;
+    tabIndex?: number;
 }
 
 interface CheckboxProps extends InputProps {
     value: boolean;
     onToggle: (newState: boolean) => void;
+    tabIndex?: number;
 }
 
 interface DateProps extends InputProps {

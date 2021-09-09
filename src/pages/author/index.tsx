@@ -16,7 +16,7 @@ import { WpAuthor } from "@Types/query";
 import { FlattenedBook, FlattenedStory } from "@Types/posts";
 
 const AuthorPost: React.FC<WpAuthor> = ({ data }) => {
-    console.log(data)
+    console.log(data);
     const books = formatAllBooks(data.allWpBook.nodes);
     const stories = formatAllStories(data.allWpShortstory.nodes);
 
@@ -117,7 +117,7 @@ export const query = graphql`
                                     localFile {
                                         childImageSharp {
                                             gatsbyImageData(
-                                                formats: [AUTO, AVIF, WEBP],
+                                                formats: [AUTO, AVIF, WEBP]
                                                 height: 150
                                             )
                                         }

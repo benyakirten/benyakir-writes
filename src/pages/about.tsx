@@ -18,10 +18,14 @@ import { ICONS_TO_LINKS, ICONS_TO_COLORS } from "@Constants";
 import { SVGImageQuery } from "@Types/query";
 
 const AboutPage: React.FC<SVGImageQuery> = ({ data }) => {
-    const images = data.allFile.nodes.map(n => ({
+    const images = data.allFile.nodes.map((n) => ({
         ...n,
-        url: ICONS_TO_LINKS[n.name as keyof typeof ICONS_TO_LINKS] ? ICONS_TO_LINKS[n.name as keyof typeof ICONS_TO_LINKS] : '#',
-        color: ICONS_TO_COLORS[n.name as keyof typeof ICONS_TO_COLORS] ? ICONS_TO_COLORS[n.name as keyof typeof ICONS_TO_COLORS] : undefined
+        url: ICONS_TO_LINKS[n.name as keyof typeof ICONS_TO_LINKS]
+            ? ICONS_TO_LINKS[n.name as keyof typeof ICONS_TO_LINKS]
+            : "#",
+        color: ICONS_TO_COLORS[n.name as keyof typeof ICONS_TO_COLORS]
+            ? ICONS_TO_COLORS[n.name as keyof typeof ICONS_TO_COLORS]
+            : undefined,
     }));
     return (
         <>
@@ -82,7 +86,9 @@ const AboutPage: React.FC<SVGImageQuery> = ({ data }) => {
             <Grouping>
                 <Subtitle>My Links</Subtitle>
                 <SkewRow>
-                    {images.map(i => <HoverImage {...i} />)}
+                    {images.map((i) => (
+                        <HoverImage {...i} />
+                    ))}
                 </SkewRow>
             </Grouping>
         </>

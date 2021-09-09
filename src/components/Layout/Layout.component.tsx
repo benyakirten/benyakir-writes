@@ -8,12 +8,12 @@ import { GlobalStyles, LayoutContainer, MainContainer } from "./Layout.styles";
 import Sidebar from "./Sidebar/Sidebar.component";
 import { getTransitionStyles, TIMEOUT_500 } from "@Styles/page-transitions";
 
-
 const Layout: React.FC = ({ children }) => {
     const location = useLocation();
     return (
         <LayoutContainer>
             <Helmet>
+                <html lang="en" />
                 <title>Benyakir Writes</title>
                 <meta
                     name="description"
@@ -36,7 +36,7 @@ const Layout: React.FC = ({ children }) => {
                         {(status) => (
                             <div
                                 style={{
-                                    ...getTransitionStyles(TIMEOUT_500)[status]
+                                    ...getTransitionStyles(TIMEOUT_500)[status],
                                 }}
                             >
                                 {children}

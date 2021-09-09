@@ -93,9 +93,9 @@ const ContactPage: React.FC = () => {
             </Helmet>
             <LeadHeading>Contact</LeadHeading>
             <Paragraph>
-                This form should work, and it's a nice way to contact me.
-                That said, if it doesn't work, I urge you
-                to either send me an email directly at{" "}
+                This form should work, and it's a nice way to contact me. That
+                said, if it doesn't work, I urge you to either send me an email
+                directly at{" "}
                 <CustomLink outside to="mailto:ben@benyakiredits.com">
                     ben@benyakiredits.com
                 </CustomLink>{" "}

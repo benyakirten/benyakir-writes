@@ -16,17 +16,13 @@ import { FlattenedBlogPost } from "@Types/posts";
 
 const Blog: React.FC<AllWpPost> = ({ data }) => {
     const posts = formatAllBlogPosts(data.allWpPost.nodes);
-    const [filteredPosts, setFilteredPosts] = React.useState<FlattenedBlogPost[]>(posts)
+    const [filteredPosts, setFilteredPosts] =
+        React.useState<FlattenedBlogPost[]>(posts);
     return (
         <LeadPage
-            filter={(
-                <AllFilter
-                    allPosts={posts}
-                    onFilter={setFilteredPosts}
-                />
-            )}
+            filter={<AllFilter allPosts={posts} onFilter={setFilteredPosts} />}
         >
-             <Helmet>
+            <Helmet>
                 <title>Benyakir Writes - Blogs</title>
                 <meta
                     name="description"
@@ -49,7 +45,7 @@ const Blog: React.FC<AllWpPost> = ({ data }) => {
                 </TransitionGroup>
             </Column>
         </LeadPage>
-    )
+    );
 };
 
 export const query = graphql`

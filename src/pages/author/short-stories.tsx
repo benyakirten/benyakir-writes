@@ -23,10 +23,7 @@ const StoriesPost: React.FC<WpAllStories> = ({ data }) => {
     return (
         <LeadPage
             filter={
-                <StoryFilter
-                    stories={stories}
-                    onFilter={setFilteredStories}
-                />
+                <StoryFilter stories={stories} onFilter={setFilteredStories} />
             }
         >
             <Helmet>
@@ -63,7 +60,7 @@ export const query = graphql`
                                     localFile {
                                         childImageSharp {
                                             gatsbyImageData(
-                                                formats: [AUTO, AVIF, WEBP],
+                                                formats: [AUTO, AVIF, WEBP]
                                                 height: 150
                                             )
                                         }

@@ -152,6 +152,7 @@ const Search: React.FC<SearchProps> = ({ open, onClick }) => {
                 label="Search"
                 name="global-search"
                 width="65%"
+                tabIndex={open ? 0 : -1}
             />
             <div style={{ marginLeft: "2px", marginTop: "1rem" }}>
                 <Checkbox
@@ -161,6 +162,7 @@ const Search: React.FC<SearchProps> = ({ open, onClick }) => {
                     }
                     label="Show Posts"
                     name="global-search-show-post"
+                    tabIndex={open ? 0 : -1}
                 />
                 <Checkbox
                     value={showState["project"]}
@@ -169,6 +171,7 @@ const Search: React.FC<SearchProps> = ({ open, onClick }) => {
                     }
                     label="Show Projects"
                     name="global-search-show-project"
+                    tabIndex={open ? 0 : -1}
                 />
                 <Checkbox
                     value={showState["book"]}
@@ -177,6 +180,7 @@ const Search: React.FC<SearchProps> = ({ open, onClick }) => {
                     }
                     label="Show Books"
                     name="global-search-show-book"
+                    tabIndex={open ? 0 : -1}
                 />
                 <Checkbox
                     value={showState["story"]}
@@ -185,6 +189,7 @@ const Search: React.FC<SearchProps> = ({ open, onClick }) => {
                     }
                     label="Show Stories"
                     name="global-search-show-story"
+                    tabIndex={open ? 0 : -1}
                 />
             </div>
             <ResultsContainer resultLength={filteredResults.length}>

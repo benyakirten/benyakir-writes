@@ -8,6 +8,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     name,
     onToggle,
     value,
+    tabIndex = 0
 }) => {
     return (
         <CheckboxGroup>
@@ -18,6 +19,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
                 checked={value}
                 aria-labelledby={`label-${name}`}
                 onChange={() => onToggle(!value)}
+                tabIndex={tabIndex}
             />
             <label onClick={() => onToggle(!value)} id="no-toggle">
                 <span id="no-toggle">&#9758;</span>

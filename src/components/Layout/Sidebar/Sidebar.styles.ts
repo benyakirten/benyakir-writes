@@ -68,7 +68,7 @@ export const ArrowButton = styled.button<{ open: boolean }>`
 
 export const VisibleGroup = styled.div<{ open: boolean }>`
     transition: all 1s;
-    transform: translateX(${props => props.open ? '0' : '-100%'});
+    transform: translateX(${props => props.open ? '0' : '-120%'});
     opacity: ${props => props.open ? '1': '0'};
 `
 
