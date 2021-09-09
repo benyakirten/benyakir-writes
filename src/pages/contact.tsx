@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useLocation } from '@reach/router'
 
 import { ControlGroup, Form, LeadHeading } from "@Styles/general-components";
 
@@ -9,6 +10,8 @@ import Loading from "@/components/General/Loading/Loading.component";
 import AlertBox from "@Gen/AlertBox/AlertBox.component";
 
 const ContactPage: React.FC = () => {
+    const location = useLocation()
+
     const [loading, setLoading] = React.useState<boolean>(false);
     const [email, setEmail] = React.useState("");
     const [message, setMessage] = React.useState("");
@@ -28,10 +31,10 @@ const ContactPage: React.FC = () => {
             "form-name": "Contact Form",
         };
         try {
-            const res = await fetch("/", {
+            const res = await fetch(location.pathname, {
                 method: "POST",
                 headers: {
-                    "Content-type": "application/x-www-form-urlencoded",
+                    "Content-Type": "application/x-www-form-urlencoded",
                 },
                 body: JSON.stringify(form),
             });
@@ -42,7 +45,10 @@ const ContactPage: React.FC = () => {
             }
             setResult("Message sent successfully!");
             setSuccess(true);
+            setEmail("")
+            setMessage("")
         } catch (e) {
+            console.log(e)
             setResult("Unable to process form. Please try again later");
             setSuccess(false);
         } finally {
