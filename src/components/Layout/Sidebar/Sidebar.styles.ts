@@ -15,11 +15,12 @@ export const StyledSidebar = styled.nav<{ open?: boolean }>`
     position: relative;
     align-self: stretch;
 
-    transition: all 1s;
-
+    
     min-height: 100vh;
     width: ${props => props.open ? '30rem' : '5rem'};
-
+    
+    transition: all 1s;
+    
     ${media.phone} {
         width: ${props => props.open ? '45rem' : '5rem'};
     }

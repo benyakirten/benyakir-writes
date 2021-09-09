@@ -6,6 +6,7 @@ import CustomLink from "@Gen/CustomLink/CustomLink.component";
 import { titleToKebab } from "@Utils/strings";
 
 import { LinkGroupProps } from "@Types/props";
+import { Column } from "@/styles/general-components";
 
 const LinkGroup: React.FC<LinkGroupProps> = ({
     open = false,
@@ -27,7 +28,7 @@ const LinkGroup: React.FC<LinkGroupProps> = ({
             }
         >
             {links.map((l) => (
-                <CustomLink key={l} small to={`/${domain}/${titleToKebab(l)}/`}>
+                <CustomLink key={l} small underbarSize="16rem" to={`/${domain}/${titleToKebab(l)}/`}>
                     {l}
                 </CustomLink>
             ))}

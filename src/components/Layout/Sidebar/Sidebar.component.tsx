@@ -86,10 +86,10 @@ const Sidebar: React.FC = () => {
                         />
                     </NavGroup>
                     <NavGroup>
-                        <CustomLink to="/" limitUnderbar>Home</CustomLink>
-                        <CustomLink to="/contact" limitUnderbar>Contact</CustomLink>
-                        <CustomLink to="/privacy" limitUnderbar>Privacy</CustomLink>
-                        <CustomLink to="/about" limitUnderbar>About</CustomLink>
+                        <CustomLink to="/" underbarSize="12rem">Home</CustomLink>
+                        <CustomLink to="/contact" underbarSize="12rem">Contact</CustomLink>
+                        <CustomLink to="/privacy" underbarSize="12rem">Privacy</CustomLink>
+                        <CustomLink to="/about" underbarSize="12rem">About</CustomLink>
                     </NavGroup>
                 </VisibleGroup>
                 <NavGroup>

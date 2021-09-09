@@ -1,9 +1,8 @@
 import * as React from "react";
 
-import { NoLineBreak } from "@Styles/general-components";
 import { OutsideLink, StyledLink } from "./CustomLink.styles";
 
-import { LinkProps } from "@/types/props";
+import { LinkProps } from "@Types/props";
 
 const CustomLink: React.FC<LinkProps> = ({
     small = false,
@@ -13,7 +12,8 @@ const CustomLink: React.FC<LinkProps> = ({
     children,
     outside = false,
     inline = false,
-    limitUnderbar = false
+    limitUnderbar = false,
+    underbarSize
 }) => (
     <>
         {outside ? (
@@ -24,6 +24,7 @@ const CustomLink: React.FC<LinkProps> = ({
                 dark={dark}
                 href={to}
                 limitUnderbar={limitUnderbar}
+                underbarSize={underbarSize}
             >
                 {children}
             </OutsideLink>
@@ -35,6 +36,7 @@ const CustomLink: React.FC<LinkProps> = ({
                 dark={dark}
                 to={to}
                 limitUnderbar={limitUnderbar}
+                underbarSize={underbarSize}
             >
                 {children}
             </StyledLink>

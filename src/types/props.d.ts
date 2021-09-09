@@ -37,6 +37,7 @@ type LinkProps = {
     outside?: boolean;
     inline?: boolean;
     limitUnderbar?: boolean;
+    underbarSize?: string;
 }
 type LayoutProps = {
     path: string;

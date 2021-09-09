@@ -15,7 +15,8 @@ export const StyledLink = styled(Link)<{
     dark: boolean,
     small: boolean,
     inline: boolean,
-    limitUnderbar: boolean
+    limitUnderbar: boolean,
+    underbarSize?: string
 }>`
     position: relative;
     overflow: hidden;
@@ -34,6 +35,7 @@ export const StyledLink = styled(Link)<{
         left: 0;
 
         width: ${props => props.limitUnderbar ? '90%' : '100%'};
+        ${props => props.underbarSize && `width ${props.underbarSize};`}
         height: 2px;
 
         background-color: ${props => props.inline ? SECONDARY_600: props.dark ? BLACK : WHITE};
@@ -64,7 +66,8 @@ export const OutsideLink = styled.a<{
     dark: boolean,
     small: boolean,
     inline: boolean,
-    limitUnderbar: boolean
+    limitUnderbar: boolean,
+    underbarSize?: string
 }>`
     position: relative;
     overflow: hidden;
@@ -82,7 +85,8 @@ export const OutsideLink = styled.a<{
         bottom: 0;
         left: 0;
 
-        width: ${props => props.limitUnderbar ? '90%' : '100%'};
+        width: ${props => props.limitUnderbar ? '80%' : '100%'};
+        ${props => props.underbarSize && `width: ${props.underbarSize};`}
         height: 2px;
 
         background-color: ${props => props.inline ? SECONDARY_600: props.dark ? BLACK : WHITE};
