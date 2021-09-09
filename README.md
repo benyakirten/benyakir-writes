@@ -36,6 +36,7 @@ Page transitions use react-transition-group instead of the usual Gatsby page tra
 
 > Add the showcase pages from benyakiredits.com (it will be awhile before this happens. Don't hold your breath)
 > Improve the filter functionality to use hash tables instead of arrays
+> Additional improvements to efficiency with memoization
 > Add unit and E2E testing
 
 ## Changelog
@@ -44,4 +45,4 @@ Page transitions use react-transition-group instead of the usual Gatsby page tra
 > 1. First deployment
 > 2. Fixed a few issues I didn't notice by running build before deployment, namely that I still needed to use useLocation for the page transitions. Also that I needed a backup for categories that didn't have any posts in them (such as bens-blogs, the overarching category for my regular blog pages).
 > 9/8/2021: Worked on improving media queries for a few components, added a form component that uses Netlify forms and added global search functionality. I created a new hook, useLookup, for use with a hash table for faster search results. I tested it, and the difference, using all 134 blog posts/projects/etc. from my blog? About 2 milliseconds. It is, really, more efficient. It's just that I need to write a few thousand more blog posts before it starts mattering. Oh, and it increases build time from 30ish seconds to 3 minutes. That's why, for now, I haven't fixed the other search functionalities to use the more efficient hash tables. It may come in the future, but I only get 300 free built minutes per month from Netlify, and I like to be pretty far from build time.
-> 9/9/2021: Tried another fix for the contact form, tried to fix the way the underbar exceeded the sidebar ons ome links
+> 9/9/2021: Tried another fix for the contact form, tried to fix the way the underbar exceeded the sidebar on some links
