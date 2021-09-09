@@ -264,3 +264,37 @@ interface PartiallyFlattenedBlogPost {
 interface FlattenedBlogPost extends PartiallyFlattenedBlogPost {
     meta: string;
 }
+
+type SearchType = 'book' | 'story' | 'project' | 'post'
+
+interface SearchableBlogPost extends FlattenedBlogPost {
+    type: 'post'
+}
+
+interface SearchableBook extends FlattenedBook {
+    type: 'book'
+}
+
+interface SearchableProject extends FlattenedProject {
+    type: 'project'
+}
+
+interface SearchableStory extends FlattenedStory {
+    type: 'story'
+}
+
+type GlobalSearch = {
+    books: SearchableBook[];
+    stories: SearchableStory[];
+    projects: SearchableProject[];
+    posts: SearchableBlogPost[];
+}
+
+type SearchableItem = {
+    type: SearchType;
+    meta: {
+        [key: string]: boolean
+    };
+    title: string;
+    slug: string;
+}

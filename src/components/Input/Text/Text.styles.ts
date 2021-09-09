@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
-import { ABS_BLACK, FONT_LG, FONT_XXS } from "@StyleVars"
+import { ABS_BLACK, BLACK, FONT_LG, FONT_XXS, GRAY_400 } from "@StyleVars"
+import { media } from "@Styles/queries"
 
 export const TextInputContainer = styled.div`
     position: relative;
@@ -20,8 +21,14 @@ export const TextInputContainer = styled.div`
 
     input {
         padding: 1.2rem 0.5rem;
+        outline: 2px solid ${GRAY_400};
+
         font-size: ${FONT_LG};
         color: ${ABS_BLACK};
+
+        ${media.phone} {
+            min-width: 10rem;
+        }
 
         &:hover + label,
         &:focus + label,

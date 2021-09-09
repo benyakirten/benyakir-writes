@@ -16,6 +16,7 @@ import { WpAuthor } from "@Types/query";
 import { FlattenedBook, FlattenedStory } from "@Types/posts";
 
 const AuthorPost: React.FC<WpAuthor> = ({ data }) => {
+    console.log(data)
     const books = formatAllBooks(data.allWpBook.nodes);
     const stories = formatAllStories(data.allWpShortstory.nodes);
 
@@ -62,6 +63,7 @@ const AuthorPost: React.FC<WpAuthor> = ({ data }) => {
         </LeadPage>
     );
 };
+
 export const query = graphql`
     query {
         allWpBook {

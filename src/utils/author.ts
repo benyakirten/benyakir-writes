@@ -84,7 +84,7 @@ export const formatStory = (story: StoryType): FlattenedStory => {
             slug: story.shortStory.relatedBook.slug,
             content: firstWords(story.shortStory.relatedBook.content, 250),
             relationship: story.shortStory.relationshipToBook ? story.shortStory.relationshipToBook : 'Related story',
-            cover: story.shortStory.relatedBook.book.cover
+            cover: story.shortStory.relatedBook.book && story.shortStory.relatedBook.book.cover
                 ? story.shortStory.relatedBook.book.cover.localFile.childImageSharp.gatsbyImageData
                 : null
         }

@@ -4,7 +4,7 @@ import { BLACK, FONT_LG } from '@StyleVars';
 import { media } from '@Styles/queries';
 import { multiplyCSSNumber } from '@Utils/strings';
 
-export const StyledFigure = styled.figure<{ color?: string, size?: string, square?: boolean }>`
+export const StyledFigure = styled.figure<{ color?: string, size?: string, square?: boolean, marginRightOnPhone?: string }>`
     position: relative;
     border-radius: ${props => props.square ? 'none' : '50%'};
 
@@ -20,7 +20,9 @@ export const StyledFigure = styled.figure<{ color?: string, size?: string, squar
         transition: all 0.5s;
 
         ${media.phone} {
-            margin-right: 2rem;
+            margin-right: ${props => props.marginRightOnPhone ? props.marginRightOnPhone : '2rem'};
+            min-height: ${props => props.size ? props.size : '10rem'};
+            min-width: ${props => props.size ? props.size : '10rem'};
         }
     }
 

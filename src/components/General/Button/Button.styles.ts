@@ -6,7 +6,8 @@ import {
     SECONDARY_900,
     BLACK,
     WHITE,
-    Z_ABOVE
+    Z_ABOVE,
+    GRAY_800
 } from '@StyleVars'
 
 export const ButtonExterior = styled.button`
@@ -15,6 +16,8 @@ export const ButtonExterior = styled.button`
     position: relative;
     
     padding: 1rem;
+
+    min-width: 7rem;
     
     border: 2px solid ${BLACK};
     background-color: ${GRAY_100};
@@ -23,6 +26,21 @@ export const ButtonExterior = styled.button`
 
     &:not(:last-child) {
         margin-right: 1rem;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        background-color: ${GRAY_800};
+
+        span {
+            color: ${WHITE};
+        }
+
+        &:hover {
+            div {
+                transform: scale(0) !important;
+            }
+        }
     }
 
     span {
@@ -57,5 +75,3 @@ export const ButtonExterior = styled.button`
         }
     }
 `
-// background-color: ${WHITE};
-// color: ${BLACK}

@@ -14,16 +14,17 @@ export const StyledLink = styled(Link)<{
     active: boolean,
     dark: boolean,
     small: boolean,
-    inline: boolean
+    inline: boolean,
+    limitUnderbar: boolean
 }>`
     position: relative;
     overflow: hidden;
 
-    transition: color 1s ease;
-    color: ${props => props.inline ? SECONDARY_600 : props.dark ? BLACK : WHITE};
-
     text-decoration: none;
+    color: ${props => props.inline ? SECONDARY_600 : props.dark ? BLACK : WHITE};
     font-size: ${props => props.small ? FONT_MD : 'inherit'};
+
+    transition: color 1s ease;
 
     &::after {
         content: '';
@@ -32,7 +33,7 @@ export const StyledLink = styled(Link)<{
         bottom: 0;
         left: 0;
 
-        width: 100%;
+        width: ${props => props.limitUnderbar ? '90%' : '100%'};
         height: 2px;
 
         background-color: ${props => props.inline ? SECONDARY_600: props.dark ? BLACK : WHITE};
@@ -62,7 +63,8 @@ export const OutsideLink = styled.a<{
     active: boolean,
     dark: boolean,
     small: boolean,
-    inline: boolean
+    inline: boolean,
+    limitUnderbar: boolean
 }>`
     position: relative;
     overflow: hidden;
@@ -80,7 +82,7 @@ export const OutsideLink = styled.a<{
         bottom: 0;
         left: 0;
 
-        width: 100%;
+        width: ${props => props.limitUnderbar ? '90%' : '100%'};
         height: 2px;
 
         background-color: ${props => props.inline ? SECONDARY_600: props.dark ? BLACK : WHITE};

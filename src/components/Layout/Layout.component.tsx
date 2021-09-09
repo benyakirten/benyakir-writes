@@ -8,6 +8,7 @@ import { GlobalStyles, LayoutContainer, MainContainer } from "./Layout.styles";
 import Sidebar from "./Sidebar/Sidebar.component";
 import { getTransitionStyles, TIMEOUT_500 } from "@Styles/page-transitions";
 
+
 const Layout: React.FC = ({ children }) => {
     const location = useLocation();
     return (

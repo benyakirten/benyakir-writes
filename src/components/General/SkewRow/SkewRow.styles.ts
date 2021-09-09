@@ -19,6 +19,8 @@ export const Skewed = styled.section<{ width?: string }>`
 
     ${media.phone} {
         transform: skew(0deg);
+        min-width: 20rem;
+        margin: 0;
     }
     
     &:hover {

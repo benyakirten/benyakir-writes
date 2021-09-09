@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { BLACK, FONT_XXL } from '@StyleVars';
+import { BLACK, FONT_LG, FONT_XL, FONT_XXL } from '@StyleVars';
 
 export const CheckboxGroup = styled.div`
     position: relative;
 
     display: flex;
     align-items: center;
-    margin: 1rem 0;
+    margin: 0.4rem 0;
 
     input:checked + label > span {
         transform: scale(1);
@@ -14,14 +14,16 @@ export const CheckboxGroup = styled.div`
     }
 
     label {
+        cursor: pointer;
+
         position: relative;
+        
         height: 2rem;
         width: 3.5rem;
         margin-right: 1rem;
 
         background-color: #fff;
         outline: 3px solid ${BLACK};
-        cursor: pointer;
 
         transition: all 0.4s;
         transition: transform 0.4s;
@@ -36,7 +38,14 @@ export const CheckboxGroup = styled.div`
         }
         span {
             position: absolute;
-            top: -1rem;
+            top: -1.5rem;
+            left: 0.4rem;
+
+            @supports (-webkit-box-reflect: above) {
+                top: -1rem;
+                left: 0.4rem;
+    
+            }
 
             color: ${BLACK};
             font-size: ${FONT_XXL};
@@ -53,5 +62,6 @@ export const CheckboxGroup = styled.div`
     }
     span {
         cursor: pointer;
+        font-size: ${FONT_LG};
     }
 `

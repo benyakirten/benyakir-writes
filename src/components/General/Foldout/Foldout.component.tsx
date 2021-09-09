@@ -18,8 +18,9 @@ const Foldout: React.FC<FoldoutProps> = ({
     function handleContainerClick(e: React.BaseSyntheticEvent) {
         if (
             e.target.id === "no-toggle" ||
-            e.target.parentElement.id === "no-toggle" ||
-            e.target.parentElement.parentElement.id === "no-toggle"
+            (e.target.parentElement && e.target.parentElement.id === "no-toggle") ||
+            (e.target.parentElement.parentElement && e.target.parentElement.parentElement.id === "no-toggle") ||
+            (e.target.parentElement.parentElement.parentElement && e.target.parentElement.parentElement.parentElement.id === 'no-toggle')
         ) {
             return;
         }

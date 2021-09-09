@@ -43,8 +43,8 @@ const IndexPage: React.FC = () => {
             <Grouping>
                 <Subtitle>Need to contact me?</Subtitle>
                 <BigParagraph>
-                    If you want to learn about what I can offer you, you can visit the <CustomLink inline to="/contact">contact page</CustomLink>&nbsp;
-                    on my old blog. Or you can send me an email at <CustomLink outside to="mailto:ben@benyakiredits.com">ben@benyakiredits.com</CustomLink>.
+                    If you want to learn about what I can offer you, you can visit the <CustomLink to="/contact">contact page</CustomLink>.
+                    Or you can send me an email at <CustomLink outside to="mailto:ben@benyakiredits.com">ben@benyakiredits.com</CustomLink>.
                 </BigParagraph>
             </Grouping>
         </>

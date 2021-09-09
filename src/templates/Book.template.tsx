@@ -18,6 +18,7 @@ import {
     WpContent,
     Subtitle,
     GroupingBox,
+    RowUntilPhone,
 } from "@Styles/general-components";
 
 import Button from "@Gen/Button/Button.component";
@@ -46,7 +47,7 @@ const Book: React.FC<WpBook> = ({ data }) => {
             </Helmet>
             <LeadHeading>{book.title}</LeadHeading>
             <GroupingBox>
-                <Row style={{ flexWrap: "nowrap", alignItems: "start" }}>
+                <RowUntilPhone style={{ flexWrap: "nowrap", alignItems: "start" }}>
                     {book.cover ? (
                         <CardSection>
                             <GatsbyImage image={book.cover} alt={book.title} />
@@ -59,6 +60,7 @@ const Book: React.FC<WpBook> = ({ data }) => {
                                 color='#fff'
                                 size="20rem"
                                 square
+                                marginRightOnPhone="-1rem"
                             />
                         </CardSection>
                     )}
@@ -142,7 +144,7 @@ const Book: React.FC<WpBook> = ({ data }) => {
                             )}
                         </Column>
                     </CardDoubleSection>
-                </Row>
+                </RowUntilPhone>
             </GroupingBox>
             <Grouping>
                 <Subtitle>The Book</Subtitle>

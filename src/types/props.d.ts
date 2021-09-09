@@ -9,13 +9,24 @@ type LogoProps = {
     opening: boolean;
 }
 
+type SearchProps = {
+    open: boolean;
+    onClick: () => void;
+}
+
 // GENERAL
 type ButtonProps = {
-    onClick: () => void;
+    type?: 'submit' | 'button';
+    disabled?: boolean;
+    onClick?: () => void;
 }
 
 type LoadingProps = {
     size?: string;
+}
+
+type AlertBoxProps = {
+    success: boolean;
 }
 
 type LinkProps = {
@@ -25,6 +36,7 @@ type LinkProps = {
     small?: boolean;
     outside?: boolean;
     inline?: boolean;
+    limitUnderbar?: boolean;
 }
 type LayoutProps = {
     path: string;
@@ -56,6 +68,7 @@ type HoverImageProps = {
     color?: string;
     size?: string;
     square?: boolean;
+    marginRightOnPhone?: string;
 }
 
 type IconGridProps = {
@@ -82,6 +95,7 @@ interface InputProps {
 interface TextProps extends InputProps {
     value: string;
     onChange: (newText: string) => void;
+    width?: string;
 }
 
 interface CheckboxProps extends InputProps {

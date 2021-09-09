@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { GatsbyImage } from 'gatsby-plugin-image'
 
-import { fadeIn, slideInLeft, slideInRight } from './animations';
+import { fadeIn, rollOut, slideInLeft, slideInRight } from './animations';
 import { media } from './queries';
-import { BLACK, FAUSTINA, FONT_LG, FONT_MD, FONT_XL, FONT_XXL, FONT_XXXL, SECONDARY_600, SHADOW_MD } from './variables';
+import { ABS_WHITE, BLACK, ERROR, FAUSTINA, FONT_LG, FONT_MD, FONT_XL, FONT_XXL, FONT_XXXL, GRAY_100, GRAY_700, GRAY_800, PRIMARY_300, SECONDARY_600, SHADOW_MD, SUCCESS } from './variables';
 
 export const FadeIn = styled.div<{ duration?: string, delay?: string }>`
     opacity: 0;
@@ -121,6 +121,17 @@ export const Paragraph = styled.p`
     margin: 1rem 0;
 `
 
+export const Centered = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    font-size: ${FONT_MD};
+`
+
 export const Card = styled.article`
     position: relative;
 
@@ -164,6 +175,16 @@ export const Row = styled.div`
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+`
+
+export const RowUntilPhone = styled.div`
+    display: flex;
+    align-items: center;
+
+    ${media.phone} {
+        flex-direction: column;
+        align-items: start;
+    }
 `
 
 export const Column = styled.div`
@@ -252,6 +273,18 @@ export const WpContentDescription = styled.div`
             }
         }
     }
+`
+
+export const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+    transition: all 1s ease;
+`
+
+export const ControlGroup = styled.div`
+    margin: 1rem 0;
 `
 
 export const DisappearOnTablet = styled.div`

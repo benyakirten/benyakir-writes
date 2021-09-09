@@ -1,13 +1,13 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { CheckboxGroup } from './Checkbox.style';
-import { CheckboxProps } from '@/types/props';
+import { CheckboxGroup } from "./Checkbox.style";
+import { CheckboxProps } from "@/types/props";
 
 const Checkbox: React.FC<CheckboxProps> = ({
     label,
     name,
     onToggle,
-    value
+    value,
 }) => {
     return (
         <CheckboxGroup>
@@ -19,10 +19,14 @@ const Checkbox: React.FC<CheckboxProps> = ({
                 aria-labelledby={`label-${name}`}
                 onChange={() => onToggle(!value)}
             />
-            <label onClick={() => onToggle(!value)}><span>&#9758;</span></label>
-            <span onClick={() => onToggle(!value)} id={`label-${name}`}>{label}</span>
+            <label onClick={() => onToggle(!value)} id="no-toggle">
+                <span id="no-toggle">&#9758;</span>
+            </label>
+            <span onClick={() => onToggle(!value)} id={`label-${name}`}>
+                {label}
+            </span>
         </CheckboxGroup>
-    )
-}
+    );
+};
 
 export default Checkbox;

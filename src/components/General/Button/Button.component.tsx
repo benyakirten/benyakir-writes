@@ -12,7 +12,12 @@ import {
 
 import { ButtonProps } from '@Types/props';
 
-const Button: React.FC<ButtonProps> = ({ children, onClick }) => {
+const Button: React.FC<ButtonProps> = ({
+    disabled = false,
+    type = 'button',
+    children,
+    onClick = () => {}
+}) => {
     const [cornerIdx, setCornerIdx] = React.useState<number>(0)
     function handleMouseover(e: any) {
         const mouseLoc: Coord = { x: e.clientX, y: e.clientY }
@@ -21,7 +26,7 @@ const Button: React.FC<ButtonProps> = ({ children, onClick }) => {
         setCornerIdx(_cornerIdx)
     }
     return (
-        <ButtonExterior onMouseEnter={handleMouseover} onClick={onClick}>
+        <ButtonExterior type={type} disabled={disabled} onMouseEnter={handleMouseover} onClick={onClick}>
             <div
                 style={{
                     ...CORNER_INDEX_TO_POSITIONING[cornerIdx],

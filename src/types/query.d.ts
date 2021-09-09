@@ -98,3 +98,18 @@ type ProjectsQuery = {
         }
     }
 }
+
+type GlobalQuery = {
+    allWpBook: {
+        nodes: BookType[];
+    }
+    allWpProject: {
+        nodes: ProjectType[]
+    }
+    allWpShortstory: {
+        nodes: StoryType[];
+    }
+    allWpPost: {
+        nodes: BlogPostType[]
+    }
+}

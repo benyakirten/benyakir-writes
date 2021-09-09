@@ -13,6 +13,7 @@ const CustomLink: React.FC<LinkProps> = ({
     children,
     outside = false,
     inline = false,
+    limitUnderbar = false
 }) => (
     <>
         {outside ? (
@@ -22,6 +23,7 @@ const CustomLink: React.FC<LinkProps> = ({
                 active={active}
                 dark={dark}
                 href={to}
+                limitUnderbar={limitUnderbar}
             >
                 {children}
             </OutsideLink>
@@ -32,6 +34,7 @@ const CustomLink: React.FC<LinkProps> = ({
                 active={active}
                 dark={dark}
                 to={to}
+                limitUnderbar={limitUnderbar}
             >
                 {children}
             </StyledLink>

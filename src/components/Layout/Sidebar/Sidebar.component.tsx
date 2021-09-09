@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 
 import {
     StyledSidebar,
@@ -7,44 +7,41 @@ import {
     ArrowButton,
     VisibleGroup,
     SidebarContents,
-} from "./Sidebar.styles"
+} from "./Sidebar.styles";
 
-import LinkGroup from "../LinkGroup/LinkGroup.component"
-import CustomLink from "@Gen/CustomLink/CustomLink.component"
-import Logo from './Logo/Logo.component'
+import LinkGroup from "../LinkGroup/LinkGroup.component";
+import CustomLink from "@Gen/CustomLink/CustomLink.component";
+import Logo from "./Logo/Logo.component";
 
-import useDropdown from "@Hooks/useDropdown"
+import useDropdown from "@Hooks/useDropdown";
+import Search from "../Search/Search.component";
 
 // TODO: Create global search logic - query all objects, generate metas, then track titles, type (project, blog post, book, story) and slugs
 
 const Sidebar: React.FC = () => {
-    const [openDropdown, setOpenDropdown] = useDropdown()
-    
-    const [opening, setOpening] = React.useState<boolean>(false)
+    const [openDropdown, setOpenDropdown] = useDropdown();
+
+    const [opening, setOpening] = React.useState<boolean>(false);
     React.useEffect(() => {
         if (opening) {
-            setTimeout(() => setOpening(false), 1000)
+            setTimeout(() => setOpening(false), 1000);
         }
-    }, [opening])
+    }, [opening]);
 
-    const [open, setOpen] = React.useState<boolean>(false)
+    const [open, setOpen] = React.useState<boolean>(false);
     function toggleOpen(e: React.BaseSyntheticEvent) {
-        if (e.target.tagName === "A") return
-        setOpen((state) => !state)
-        setOpening(true)
+        if (e.target.tagName === "A") return;
+        setOpen((state) => !state);
+        setOpening(true);
     }
     function handleNavClick(e: React.BaseSyntheticEvent) {
         if (e.target.id === "nav-toggle") {
-            toggleOpen(e)
+            toggleOpen(e);
         }
     }
 
-    const blogLinks = [
-        "Ben's Thoughts",
-        "Reviews",
-        "Down South Boulder Road",
-    ]
-    const authorLinks = ["Books", "Short Stories"]
+    const blogLinks = ["Ben's Thoughts", "Reviews", "Down South Boulder Road"];
+    const authorLinks = ["Books", "Short Stories"];
 
     return (
         <StyledSidebar
@@ -80,18 +77,19 @@ const Sidebar: React.FC = () => {
                             open={openDropdown === "author"}
                             onClick={() => setOpenDropdown("author")}
                         />
-                        <CustomLink to="/portfolio">Portfolio</CustomLink>
+                        <CustomLink to="/portfolio" limitUnderbar>Portfolio</CustomLink>
                     </NavGroup>
                     <NavGroup>
-                        <CustomLink to="/">Home</CustomLink>
-                        <CustomLink
-                            outside
-                            to="https://benyakiredits.com/about-me/contact/"
-                        >
-                            Contact
-                        </CustomLink>
-                        <CustomLink to="/privacy">Privacy</CustomLink>
-                        <CustomLink to="/about">About</CustomLink>
+                        <Search
+                            open={openDropdown === "search"}
+                            onClick={() => setOpenDropdown("search")}
+                        />
+                    </NavGroup>
+                    <NavGroup>
+                        <CustomLink to="/" limitUnderbar>Home</CustomLink>
+                        <CustomLink to="/contact" limitUnderbar>Contact</CustomLink>
+                        <CustomLink to="/privacy" limitUnderbar>Privacy</CustomLink>
+                        <CustomLink to="/about" limitUnderbar>About</CustomLink>
                     </NavGroup>
                 </VisibleGroup>
                 <NavGroup>
@@ -103,7 +101,7 @@ const Sidebar: React.FC = () => {
                 </NavGroup>
             </SidebarContents>
         </StyledSidebar>
-    )
-}
+    );
+};
 
-export default Sidebar
+export default Sidebar;

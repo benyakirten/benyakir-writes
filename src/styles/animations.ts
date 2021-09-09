@@ -17,6 +17,18 @@ export const fadeIn = keyframes`
         opacity: 100%;
     }
 `
+
+export const rollOut = keyframes`
+    from {
+        opacity: 0.2;
+        transform: scaleY(0.6);
+    }
+    to {
+        opactiy: 1;
+        transform: scaleY(1);
+    }
+`
+
 export const slideInLeft = keyframes`
     0% {
         transform: translateX(-40vw);

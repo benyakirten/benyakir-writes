@@ -7,8 +7,9 @@ import {
     FONT_XXL,
     FONT_XL,
     SHADOW_MD,
-    FONT_XXS,
+    FONT_XXS
 } from '@StyleVars'
+import { media } from '@Styles/queries'
 
 export const StyledSidebar = styled.nav<{ open?: boolean }>`
     position: relative;
@@ -18,6 +19,11 @@ export const StyledSidebar = styled.nav<{ open?: boolean }>`
 
     min-height: 100vh;
     width: ${props => props.open ? '30rem' : '5rem'};
+
+    ${media.phone} {
+        width: ${props => props.open ? '45rem' : '5rem'};
+    }
+
     padding: ${props => props.open ? '2rem 1rem 2rem 4rem' : '2rem 1rem'};
 
     font-family: ${FAUSTINA};

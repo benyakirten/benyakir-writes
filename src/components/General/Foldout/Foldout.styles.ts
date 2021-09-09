@@ -11,8 +11,6 @@ export const FoldoutContainer = styled.div<{ open: boolean }>`
 export const FoldoutBody = styled.div<{ open: boolean, height: string, heightMultiplierOnPhone?: number, heightMultiplierOnTablet?: number }>`
     display: flex;
     flex-direction: column;
-
-    margin-left: 1rem;
     
     transform-origin: top;
     transition: all 1s ease;

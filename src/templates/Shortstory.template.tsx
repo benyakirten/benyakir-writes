@@ -20,18 +20,18 @@ import {
     WpContent,
     Grouping,
     Subtitle,
+    RowUntilPhone,
 } from "@Styles/general-components";
 
-import { flattenBook, flattenStory } from "@Utils/author";
+import { flattenStory } from "@Utils/author";
 import { getPrettyDate } from "@Utils/dates";
 import { formatWpText } from "@Utils/posts";
 import { firstWords } from "@Utils/strings";
 
-import { WpBook, WpStory } from "@Types/query";
+import {WpStory } from "@Types/query";
 
 const Story: React.FC<WpStory> = ({ data }) => {
     const story = flattenStory(data.wpShortstory, data.file.publicURL);
-    // return <div>WIP</div>
     return (
         <>
             <Helmet>
@@ -48,7 +48,7 @@ const Story: React.FC<WpStory> = ({ data }) => {
             <LeadHeading>{story.title}</LeadHeading>
             {(story.book || story.alternateLinks || story.project) && (
                 <GroupingBox>
-                    <Row style={{ flexWrap: "nowrap", alignItems: "start" }}>
+                    <RowUntilPhone style={{ flexWrap: "nowrap", alignItems: "start" }}>
                         <CardSection>
                             <List>
                                 <LItem>
@@ -133,7 +133,7 @@ const Story: React.FC<WpStory> = ({ data }) => {
                                 </Column>
                             </CardSection>
                         )}
-                    </Row>
+                    </RowUntilPhone>
                 </GroupingBox>
             )}
             <Grouping>

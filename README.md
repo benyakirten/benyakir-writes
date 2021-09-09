@@ -33,9 +33,9 @@ If you've studied the Syntax Highlighter custom block I made (hah, hah, no, I kn
 Page transitions use react-transition-group instead of the usual Gatsby page transition plugins. They weren't working for one reason or another. All pages for blog categories (other than none), blog posts, projects, short stories and books are dynamically (then statically) generated. so typical Gatsby fare.
 
 ## Planned Changes
-> Add global search functionality to the sidebar
-> Add the showcase pages from benyakiredits.com (this is a lot more work than I'm willing to put in for now)
-> Improve the search functionality to use hash tables instead of arrays
+
+> Add the showcase pages from benyakiredits.com (it will be awhile before this happens. Don't hold your breath)
+> Improve the filter functionality to use hash tables instead of arrays
 > Add unit and E2E testing
 
 ## Changelog
@@ -43,3 +43,4 @@ Page transitions use react-transition-group instead of the usual Gatsby page tra
 > 9/7/2021: 
 > 1. First deployment
 > 2. Fixed a few issues I didn't notice by running build before deployment, namely that I still needed to use useLocation for the page transitions. Also that I needed a backup for categories that didn't have any posts in them (such as bens-blogs, the overarching category for my regular blog pages).
+> 9/8/2021: Worked on improving media queries for a few components, added a form component that uses Netlify forms and added global search functionality. I created a new hook, useLookup, for use with a hash table for faster search results. I tested it, and the difference, using all 134 blog posts/projects/etc. from my blog? About 2 milliseconds. It is, really, more efficient. It's just that I need to write a few thousand more blog posts before it starts mattering. Oh, and it increases build time from 30ish seconds to 3 minutes. That's why, for now, I haven't fixed the other search functionalities to use the more efficient hash tables. It may come in the future, but I only get 300 free built minutes per month from Netlify, and I like to be pretty far from build time.

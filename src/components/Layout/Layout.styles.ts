@@ -1,6 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
-import { MULISH } from '@StyleVars';
+import { GRAY_700, MULISH, PRIMARY_200, WHITE } from '@StyleVars';
 import { media } from '@Styles/queries';
 
 export const GlobalStyles = createGlobalStyle`

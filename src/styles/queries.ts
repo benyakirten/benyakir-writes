@@ -6,5 +6,6 @@ export const media = {
   desktop: customMediaQuery(922),
   tablet: customMediaQuery(768),
   phone: customMediaQuery(576),
-  reducedMotion: '@media (prefers-reduced-motion)'
+  reducedMotion: '@media (prefers-reduced-motion)',
+  noHover: '@media (any-hover: none)'
 };
