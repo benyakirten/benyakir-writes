@@ -16,7 +16,7 @@ import Logo from "./Logo/Logo.component";
 import useDropdown from "@Hooks/useDropdown";
 // I'm disabling the search functionality for now because it's incredibly resource intensive
 // Once I think of how to do it better, I will.
-// import Search from "../Search/Search.component";
+import Search from "../Search/Search.component";
 
 const Sidebar: React.FC = () => {
     const [openDropdown, setOpenDropdown] = useDropdown();
@@ -81,12 +81,12 @@ const Sidebar: React.FC = () => {
                         />
                         <CustomLink to="/portfolio" limitUnderbar>Portfolio</CustomLink>
                     </NavGroup>
-                    {/* <NavGroup>
+                    <NavGroup>
                         <Search
                             open={openDropdown === "search"}
                             onClick={() => setOpenDropdown("search")}
                         />
-                    </NavGroup> */}
+                    </NavGroup>
                     <NavGroup>
                         <CustomLink to="/" underbarSize="12rem">Home</CustomLink>
                         <CustomLink to="/contact" underbarSize="12rem">Contact</CustomLink>

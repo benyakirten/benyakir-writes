@@ -105,8 +105,8 @@ export const createMetaForStory = (story: PartialFlattenedStory): string => {
         story.published.year
     ]
     if (story.book) {
-        data.push(story.book.title),
-            data.push(story.book.relationship)
+        data.push(story.book.title)
+        data.push(story.book.relationship)
     }
     return createSearchableString(data)
 }

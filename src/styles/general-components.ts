@@ -44,6 +44,9 @@ export const LeadHeading = styled.h1`
 
     font-family: ${FAUSTINA};
     font-size: ${FONT_XXXL};
+    ${media.phone} {
+        font-size: ${FONT_XXL};
+    }
     letter-spacing: 2px;
     
     &::after {
@@ -77,6 +80,9 @@ export const LeadHeading = styled.h1`
 export const Subtitle = styled.h2<{ noUnderline?: boolean }>`
     font-family: ${FAUSTINA};
     font-size: ${FONT_XXL};
+    ${media.phone} {
+        ${FONT_XL};
+    }
     text-decoration: ${props => props.noUnderline ? 'none' : 'underline'};
 
     margin-bottom: 1rem;

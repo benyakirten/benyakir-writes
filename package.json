@@ -13,10 +13,10 @@
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "test:unit": "jest"
   },
   "dependencies": {
-    "@types/react-transition-group": "^4.4.2",
     "babel-plugin-styled-components": "^1.13.2",
     "gatsby": "^3.12.1",
     "gatsby-plugin-image": "^1.12.0",
@@ -36,14 +36,22 @@
     "styled-components": "^5.3.1"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@types/jest": "^27.0.1",
     "@types/react-helmet": "^6.1.2",
     "@types/react-syntax-highlighter": "^13.5.2",
+    "@types/react-test-renderer": "^17.0.1",
+    "@types/react-transition-group": "^4.4.2",
     "@types/styled-components": "^5.1.13",
     "babel-jest": "^27.1.1",
     "babel-preset-gatsby": "^1.13.0",
+    "cypress": "^8.3.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.1.1",
     "jest-styled-components": "^7.0.5",
-    "react-test-renderer": "^17.0.2"
+    "react-test-renderer": "^17.0.2",
+    "start-server-and-test": "^1.14.0",
+    "ts-jest": "^27.0.5"
   }
 }
