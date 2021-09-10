@@ -32,14 +32,7 @@ module.exports = {
         allExtensions: true, // defaults to false
       },
     },
-    {
-      resolve: 'gatsby-plugin-web-font-loader',
-      options: {
-        google: {
-          families: ['Mulish', 'Faustina']
-        }
-      }
-    },
+    `gatsby-plugin-preload-fonts`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: 'gatsby-plugin-manifest',

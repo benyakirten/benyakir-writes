@@ -24,7 +24,7 @@ const AllFilter: React.FC<AllBlogFilterProps> = ({
 
     const [filterWords, setFilterWords] = React.useState<string[]>([])
 
-    const _categories = [...new Set(allPosts.flatMap(p => p.categories))]
+    const _categories = React.useMemo(() => [...new Set(allPosts.flatMap(p => p.categories))], allPosts)
     const [categoryChoices, setCategoryChoices] = React.useState<PotentialChoice[]>(
         _categories.map((p) => ({
             value: p,
@@ -32,7 +32,7 @@ const AllFilter: React.FC<AllBlogFilterProps> = ({
         }))
     )
 
-    const _tags = [...new Set(allPosts.flatMap(p => p.tags))]
+    const _tags = React.useMemo(() => [...new Set(allPosts.flatMap(p => p.tags))], allPosts)
     const [tagChoices, setTagChoices] = React.useState<PotentialChoice[]>(
         _tags.map(t => ({
             value: t,
