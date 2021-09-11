@@ -79,7 +79,7 @@ const Sidebar: React.FC = () => {
                             onClick={() => setOpenDropdown("author")}
                             tabIndex={open ? 0 : -1}
                         />
-                        <CustomLink to="/portfolio" limitUnderbar>Portfolio</CustomLink>
+                        <CustomLink to="/portfolio" underbarSize="12rem">Portfolio</CustomLink>
                     </NavGroup>
                     <NavGroup>
                         <Search

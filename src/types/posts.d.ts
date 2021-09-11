@@ -33,7 +33,7 @@ interface FlattenedProject extends PartialFlattenedProject {
 
 interface BookType extends PostType {
     book: {
-        relatedProjectDesc: string;
+        relatedProjectDesc?: string;
         purchaseLinks: string;
         purchaseLinksNames: string;
         publishedOn: string;
@@ -73,7 +73,7 @@ interface PartialFlattenedBook extends PostType {
     project: null | {
         title: string;
         slug: string;
-        description: string;
+        description: string | undefined;
     }
 }
 

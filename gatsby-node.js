@@ -471,22 +471,26 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     function prepareGlobalSearch(query) {
         const stories = query.data.allWpShortstory.nodes.map(s => ({
             ...generateGenericInfo(s, 'story'),
-            meta: generateStoryMeta(s)
+            meta: generateStoryMeta(s),
+            date: getTimeFromDateString(s.shortStory.publishedOn).date
         }))
 
         const books = query.data.allWpBook.nodes.map(b => ({
             ...generateGenericInfo(b, 'book'),
-            meta: generateBookMeta(b)
+            meta: generateBookMeta(b),
+            date: getTimeFromDateString(b.book.publishedOn).date
         }))
 
         const projects = query.data.allWpProject.nodes.map(p => ({
             ...generateGenericInfo(p, 'project'),
-            meta: generateProjectMeta(p)
+            meta: generateProjectMeta(p),
+            date: getTimeFromDateString(p.project.firstReleased).date
         }))
 
         const posts = query.data.allWpPost.nodes.map(p => ({
             ...generateGenericInfo(p, 'post'),
-            meta: generatePostMeta(p)
+            meta: generatePostMeta(p),
+            date: getBlogPostDateInformation(p.date).date
         }))
 
         return {
@@ -503,8 +507,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             type: i.type,
             meta: i.meta,
             slug: i.slug,
-            title: i.title
-        }))
+            title: i.title,
+            date: i.date
+        })).sort((a, b) => b.date.getTime() - a.date.getTime())
     }
 
     const globalSearch = prepareGlobalSearch(searchQuery)
