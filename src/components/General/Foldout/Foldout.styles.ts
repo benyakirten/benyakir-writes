@@ -8,7 +8,13 @@ export const FoldoutContainer = styled.div<{ open: boolean }>`
     cursor: ${props => props.open ? 'n-resize' : 's-resize'};
 `
 
-export const FoldoutBody = styled.div<{ open: boolean, height: string, heightMultiplierOnPhone?: number, heightMultiplierOnTablet?: number }>`
+export const FoldoutBody = styled.div<{
+    open: boolean,
+    height: string,
+    heightMultiplierOnPhone?: number,
+    heightMultiplierOnTablet?: number,
+    heightMultiplierOnLarger?: number
+}>`
     display: flex;
     flex-direction: column;
     
@@ -16,6 +22,10 @@ export const FoldoutBody = styled.div<{ open: boolean, height: string, heightMul
     transition: all 1s ease;
     height: ${props => props.open ? props.height : '0'};
     opacity: ${props => props.open ? '1': '0'};
+
+    ${media.custom(1400)} {
+        height: ${props => props.open ? multiplyCSSNumber(props.height, props.heightMultiplierOnLarger ? props.heightMultiplierOnLarger : 1) : '0'};
+    }
 
     ${media.desktop} {
         height: ${props => props.open ? multiplyCSSNumber(props.height, props.heightMultiplierOnTablet ? props.heightMultiplierOnTablet : 1) : '0'};

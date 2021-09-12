@@ -120,6 +120,7 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
                 height={getMultipleChoiceHeight(techChoices)}
                 heightMultiplierOnPhone={4.1}
                 heightMultiplierOnTablet={2}
+                heightMultiplierOnLarger={1.4}
             >
                 <MultipleChoice
                     choices={techChoices}

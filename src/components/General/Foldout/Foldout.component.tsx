@@ -13,7 +13,8 @@ const Foldout: React.FC<FoldoutProps> = ({
     onClick,
     children,
     heightMultiplierOnPhone,
-    heightMultiplierOnTablet
+    heightMultiplierOnTablet,
+    heightMultiplierOnLarger
 }) => {
     function handleContainerClick(e: React.BaseSyntheticEvent) {
         if (
@@ -34,6 +35,7 @@ const Foldout: React.FC<FoldoutProps> = ({
                 id="no-toggle"
                 heightMultiplierOnPhone={heightMultiplierOnPhone}
                 heightMultiplierOnTablet={heightMultiplierOnTablet}
+                heightMultiplierOnLarger={heightMultiplierOnLarger}
                 height={height}
                 open={open}
                 aria-hidden={!open}

@@ -44,35 +44,17 @@ interface BookType extends PostType {
                 }
             }
         }
-        relatedStories: null | [
-            {
-                title: string;
-                slug: string;
-            }
-        ]
-        relatedProject: null | {
-            title: string;
-            slug: string;
-        }
+        relatedStories: null | TitleWithSlug[]
+        relatedProject: null | TitleWithSlug
     }
 }
 
 interface PartialFlattenedBook extends PostType {
     cover: null | IGatsbyImageData;
     published: DateInformation;
-    purchaseLinks: {
-        link: string,
-        name: string
-    }[];
-    stories: null | [
-        {
-            title: string;
-            slug: string;
-        }
-    ]
-    project: null | {
-        title: string;
-        slug: string;
+    purchaseLinks: NamedLink[];
+    stories: null | TitleWithSlug[];
+    project: null | TitleWithSlug & {
         description: string | undefined;
     }
 }
@@ -84,9 +66,7 @@ interface FlattenedBook extends PartialFlattenedBook {
 interface StoryType extends PostType {
     shortStory: {
         publishedOn: string;
-        relatedBook: null | {
-            title: string;
-            slug: string;
+        relatedBook: null | TitleWithSlug & {
             content: string;
             book: {
                 cover: null | {
@@ -104,9 +84,7 @@ interface StoryType extends PostType {
 
 interface PartialFlattenedStory extends PostType {
     published: DateInformation;
-    book: null | {
-        title: string;
-        slug: string;
+    book: null | TitleWithSlug & {
         content: string;
         relationship: string;
         cover: null | IGatsbyImageData;
@@ -132,7 +110,7 @@ type SingleBook = {
             title: string;
             slug: string;
         }
-        relatedProjectDesc: string;
+        relatedProjectDesc?: string;
         relatedStories: null | {
             title: string;
             slug: string;
@@ -155,19 +133,13 @@ type FlattenedSingleBook = {
     coverDesigner?: {
         name: string;
         bio: string;
-        links?: {
-            name: string;
-            link: string;
-        }[];
+        links?: NamedLink[];
     }
-    purchaseLinks: {
-        link: string;
-        name: string;
-    }[];
+    purchaseLinks: NamedLink[];
     project: null | {
         title: string;
         slug: string;
-        description: string;
+        description?: string;
     }
     stories: null | {
         title: string;
@@ -186,7 +158,7 @@ type SingleStory = {
         alternateLinks: null | string;
         alternateLinksNames: null | string;
         publishedOn: string;
-        relationshipToBook: string;
+        relationshipToBook?: string;
         relatedBook: null | {
             title: string;
             content: string;
@@ -213,10 +185,7 @@ type FlattenedSingleStory = {
     title: string;
     content: string;
     slug: string;
-    alternateLinks?: {
-        link: string;
-        name: string;
-    }[];
+    alternateLinks?: NamedLink[];
     published: DateInformation;
     book: null | {
         title: string;

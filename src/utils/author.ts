@@ -162,7 +162,7 @@ export const flattenStory = (story: SingleStory, fallbackCover: string): Flatten
             title: story.shortStory.relatedBook.title,
             content: firstWords(story.shortStory.relatedBook.content, 150),
             slug: story.shortStory.relatedBook.slug,
-            relationship: story.shortStory.relationshipToBook,
+            relationship: story.shortStory.relationshipToBook ? story.shortStory.relationshipToBook : 'Related book',
             cover: story.shortStory.relatedBook.book.cover ? story.shortStory.relatedBook.book.cover.localFile.childImageSharp.gatsbyImageData : null
         },
         project: !story.shortStory.relatedBook?.book.relatedProject ? null : {

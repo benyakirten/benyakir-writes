@@ -109,7 +109,8 @@ const AllFilter: React.FC<AllBlogFilterProps> = ({
                 onClick={() => setDropdown("tags")}
                 height={getMultipleChoiceHeight(tagChoices)}
                 heightMultiplierOnPhone={4.05}
-                heightMultiplierOnTablet={2}
+                heightMultiplierOnTablet={3}
+                heightMultiplierOnLarger={1.45}
             >
                 <MultipleChoice
                     choices={tagChoices}

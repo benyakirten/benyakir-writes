@@ -96,6 +96,7 @@ const AuthorFilter: React.FC<AuthorFilterProps> = ({
                 height={getMultipleChoiceHeight(bookChoices)}
                 heightMultiplierOnPhone={3.4}
                 heightMultiplierOnTablet={2}
+                heightMultiplierOnLarger={1.4}
             >
                 <MultipleChoice
                     choices={bookChoices}

@@ -54,6 +54,7 @@ type FoldoutProps = OpenProps & {
     height?: string;
     heightMultiplierOnPhone?: number;
     heightMultiplierOnTablet?: number;
+    heightMultiplierOnLarger?: number;
 }
 
 type LinkGroupProps = OpenProps & {

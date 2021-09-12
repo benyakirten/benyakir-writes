@@ -1,5 +1,5 @@
 export function createSearchableString(arr: (string | number | undefined)[]) {
-    return arr.reduce((acc, next) => next ? `${formatWpText(next.toString().toLowerCase())} ${acc}` : `${acc}`, '') as string
+    return (arr.reduce((acc, next) => next ? `${formatWpText(next.toString().toLowerCase())} ${acc}` : `${acc}`, '') as string).trim()
 }
 
 export function formatWpText (text: string) {
