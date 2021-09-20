@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Link } from "gatsby";
-import { navigate } from "@reach/router";
+import { Link, navigate} from "gatsby";
 
 import {
     Card,
@@ -80,9 +79,11 @@ const BookCard: React.FC<BookCardProps> = ({ item }) => {
                                 <Column>
                                     <SubHeading>
                                         Related Short{" "}
-                                        {item.stories!.length > 1
-                                            ? "Stories"
-                                            : "Story"}
+                                        {
+                                            item.stories!.length > 1
+                                                ? "Stories"
+                                                : "Story"
+                                        }
                                     </SubHeading>
                                     {item.stories!.map((s, idx) => (
                                         <Paragraph key={s.title + idx}>

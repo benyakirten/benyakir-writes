@@ -24,7 +24,7 @@ const AllFilter: React.FC<AllBlogFilterProps> = ({
 
     const [filterWords, setFilterWords] = React.useState<string[]>([])
 
-    const _categories = React.useMemo(() => [...new Set(allPosts.flatMap(p => p.categories))], allPosts)
+    const _categories = React.useMemo(() => [...new Set(allPosts.flatMap(p => p.categories!))], allPosts)
     const [categoryChoices, setCategoryChoices] = React.useState<PotentialChoice[]>(
         _categories.map((p) => ({
             value: p,
@@ -32,7 +32,7 @@ const AllFilter: React.FC<AllBlogFilterProps> = ({
         }))
     )
 
-    const _tags = React.useMemo(() => [...new Set(allPosts.flatMap(p => p.tags))], allPosts)
+    const _tags = React.useMemo(() => [...new Set(allPosts.flatMap(p => p.tags!))], allPosts)
     const [tagChoices, setTagChoices] = React.useState<PotentialChoice[]>(
         _tags.map(t => ({
             value: t,
@@ -45,17 +45,15 @@ const AllFilter: React.FC<AllBlogFilterProps> = ({
             .filter(p => filterWords.every((w) => p.meta.indexOf(w.toLowerCase()) !== -1))
             .filter(p => p.published.date.getTime() <= publishedBefore.getTime())
             .filter(p => p.published.date.getTime() >= publishedAfter.getTime())
-        // It doesn't get any better here - I just am glad modern
-        // computers are much more powerful than they used to be
+            
         if (categoryChoices.some((c) => c.selected)) {
             const _cats = getValuesForSelected(categoryChoices)
-            _posts = _posts.filter((p) => _cats.every((c) => p.categories.includes(c)))
+            _posts = _posts.filter((p) => _cats.every((c) => p.categories && p.categories.includes(c)))
         }
 
         if (tagChoices.some((t) => t.selected)) {
             const _ts = getValuesForSelected(tagChoices)
-            console.log(_ts)
-            _posts = _posts.filter((p) => _ts.every((t) => p.tags.includes(t)))
+            _posts = _posts.filter((p) => _ts.every((t) => p.tags && p.tags.includes(t)))
         }
 
         onFilter(_posts)

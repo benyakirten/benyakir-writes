@@ -53,7 +53,7 @@ const AboutPage: React.FC<SVGImageQuery> = ({ data }) => {
                 <BigParagraph>
                     This website's powered by{" "}
                     <CustomLink outside inline to="https://www.gatsbyjs.com">
-                        GatsbyJs
+                        GatsbyJS
                     </CustomLink>
                     . It may not mean much to you, but there are a few reasons
                     why this is valuable. Gatsby uses React, which is a single
@@ -66,7 +66,7 @@ const AboutPage: React.FC<SVGImageQuery> = ({ data }) => {
                     doesn't do this. Your computer sends only one request. It
                     sends back one package that contains everything. Gatsby is a
                     little addition that has a few extra features to allow
-                    search engine optimization and the use of GraphQl.
+                    search engine optimization and the use of GraphQL.
                 </BigParagraph>
             </Grouping>
             <Grouping>
@@ -78,7 +78,7 @@ const AboutPage: React.FC<SVGImageQuery> = ({ data }) => {
                     visit. This is possible because of React. Or, rather, it's
                     facilitated by React. It wouldn't be easy with just
                     WordPress, and having a second site with its own routing and
-                    data management makes it easier. Gatsby makes that e cinch
+                    data management makes it easier. Gatsby makes that a cinch
                     in a bunch of complicated ways I don't want to explain right
                     now.
                 </BigParagraph>
@@ -86,8 +86,8 @@ const AboutPage: React.FC<SVGImageQuery> = ({ data }) => {
             <Grouping>
                 <Subtitle>My Links</Subtitle>
                 <SkewRow>
-                    {images.map((i) => (
-                        <HoverImage {...i} />
+                    {images.map((i, idx) => (
+                        <HoverImage key={i + idx} {...i} />
                     ))}
                 </SkewRow>
             </Grouping>

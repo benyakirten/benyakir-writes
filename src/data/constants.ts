@@ -1,3 +1,5 @@
+import SyntaxHighlighter from "@Blocks/SyntaxHighlighter/SyntaxHighlighter.component"
+
 export const ICONS_TO_LINKS = {
     Twitter: "https://twitter.com/BenyakirTen",
     Github: "https://github.com/benyakirten",
@@ -8,8 +10,12 @@ export const ICONS_TO_COLORS = {
     Twitter: '#fff'
 }
 
+export const KNOWN_BLOCK_CLASSES: BlockComponents = {
+    "benyakir-syntax-highlighter": SyntaxHighlighter
+}
+
 export const DATE_REGEX = /^\d{2}\/\d{2}\/\d{4}$/
-export const CSS_MEASUREMENT_REGEX = /^(\d+(\.\d+)?)(\w+)$/
+export const CSS_MEASUREMENT_REGEX = /^(\d+(\.\d+)?)([%\w]+)$/
 export const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
 export const TRIANGLES_FOR_CORNER_INDEX = [

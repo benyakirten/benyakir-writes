@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SkewRow component should render properly 1`] = `
+<section
+  className="sc-bdfBQB ePWaJD"
+>
+  <div
+    className="sc-gsTEea geHzKZ"
+  />
+</section>
+`;

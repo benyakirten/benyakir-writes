@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Choice component should change the background and text color based on the value prop 1`] = `
+.c0 {
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 1rem;
+  margin: 1rem;
+  margin-left: 0;
+  width: 24%;
+  border-radius: 2px;
+  background-color: #6c757d;
+  color: #FDEDC4;
+  font-size: 1.8rem;
+  -webkit-transition: all 0.8s;
+  transition: all 0.8s;
+}
+
+@media (max-width:922px) {
+  .c0 {
+    width: 45%;
+  }
+}
+
+@media (max-width:576px) {
+  .c0 {
+    width: 75%;
+  }
+}
+
+<div
+  aria-checked={false}
+  aria-labelledby="test label-label"
+  checked={false}
+  className="c0"
+  onClick={[Function]}
+  role="checkbox"
+  tabIndex={0}
+>
+  <span
+    id="test label-label"
+  >
+    test label
+  </span>
+</div>
+`;
+
+exports[`Choice component should change the background and text color based on the value prop 2`] = `
+.c0 {
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 1rem;
+  margin: 1rem;
+  margin-left: 0;
+  width: 24%;
+  border-radius: 2px;
+  background-color: #FDEDC4;
+  color: #6c757d;
+  font-size: 1.8rem;
+  -webkit-transition: all 0.8s;
+  transition: all 0.8s;
+}
+
+@media (max-width:922px) {
+
+}
+
+@media (max-width:576px) {
+
+}
+
+@media (max-width:922px) {
+  .c0 {
+    width: 45%;
+  }
+}
+
+@media (max-width:576px) {
+  .c0 {
+    width: 75%;
+  }
+}
+
+<div
+  aria-checked={true}
+  aria-labelledby="test label-label"
+  checked={true}
+  className="c0"
+  onClick={[Function]}
+  role="checkbox"
+  tabIndex={0}
+>
+  <span
+    id="test label-label"
+  >
+    test label
+  </span>
+</div>
+`;

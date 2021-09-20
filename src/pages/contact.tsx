@@ -31,11 +31,9 @@ const ContactPage: React.FC = () => {
     const dismissResult = () => setResult("");
 
     React.useEffect(() => {
-        if (EMAIL_REGEX.test(email) && message.length > 0) {
-            setDisabled(false);
-        } else {
-            setDisabled(true);
-        }
+        EMAIL_REGEX.test(email) && message.length > 0
+            ? setDisabled(false)
+            : setDisabled(true);
     }, [email, message]);
 
     function encode(data: object) {
@@ -67,7 +65,7 @@ const ContactPage: React.FC = () => {
                 }),
             });
             if (!res.ok) {
-                setResult("Unable to process form. Please try again later");
+                setResult("Unable to process form. Please try again later.");
                 setSuccess(false);
                 return;
             }
@@ -76,7 +74,7 @@ const ContactPage: React.FC = () => {
             setEmail("");
             setMessage("");
         } catch (e) {
-            setResult("Unable to process form. Please try again later");
+            setResult("Unable to process form. Please try again later.");
             setSuccess(false);
         } finally {
             setLoading(false);
@@ -93,18 +91,17 @@ const ContactPage: React.FC = () => {
             </Helmet>
             <LeadHeading>Contact</LeadHeading>
             <Paragraph>
-                This form should work, and it's a nice way to contact me. That
-                said, if it doesn't work, I urge you to either send me an email
+                This form is a nice way to contact me. However, if it doesn't work, I urge you to either send me an email
                 directly at{" "}
                 <CustomLink outside to="mailto:ben@benyakiredits.com">
                     ben@benyakiredits.com
                 </CustomLink>{" "}
-                or send me a message through the&nbsp;
+                or send me a message through the{" "}
                 <CustomLink
                     outside
                     to="https://benyakiredits.com/about-me/contact"
                 >
-                    contact screen on my old blog
+                    contact page on my old blog
                 </CustomLink>
                 .
             </Paragraph>
@@ -122,6 +119,7 @@ const ContactPage: React.FC = () => {
                         label="Email"
                         value={email}
                         onChange={setEmail}
+                        autofocus
                     />
                 </ControlGroup>
                 <ControlGroup>

@@ -39,5 +39,3 @@ export const prepareGlobalValues = (query: GlobalQuery) => {
     }
     return flattenSearchItems([...prep.stories, ...prep.books, ...prep.projects, ...prep.posts])
 }
-
-export const capitalize = (word: string) => `${word[0].toUpperCase()}${word.slice(1)}`

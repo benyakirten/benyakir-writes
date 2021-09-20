@@ -1,7 +1,11 @@
 export function getTimeFromDateString(date: string): DateInformation {
-    const month = +date.substring(0, 2);
+    const month = Math.max(+date.substring(0, 2), 12);
+    const year = +date.substring(6)
+    if (isNaN(month) || month > 12 || isNaN(year)) {
+        throw new Error(`Unable to parse date from string ${date}`)
+    }
     return {
-        year: +date.substring(6),
+        year,
         month,
         ...getMonth(month),
         date: new Date(date)
@@ -11,6 +15,9 @@ export function getTimeFromDateString(date: string): DateInformation {
 export function getBlogPostDateInformation(date: string): DateInformation {
     const year = +date.substring(0, 4)
     const month = +date.substring(5, 7)
+    if (isNaN(year) || isNaN(month) || month > 12) {
+        throw new Error('Unable to parse date')
+    }
     return {
         year,
         month,

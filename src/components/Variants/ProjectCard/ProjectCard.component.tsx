@@ -62,7 +62,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, icons }) => {
                 </CardSection>
                 <DisappearOnPhone>
                     <CardSection>
-                        <SubHeading>Technologies used:</SubHeading>
+                        <SubHeading>Technologies Used</SubHeading>
                         <IconGrid icons={icons} />
                     </CardSection>
                 </DisappearOnPhone>

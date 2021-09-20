@@ -17,7 +17,7 @@ const Layout: React.FC = ({ children }) => {
                 <title>Benyakir Writes</title>
                 <meta
                     name="description"
-                    content="Benyakir Writes is a portal to Benyakir Horowitz's latest work. Learn about the latest books, projects and short stories he's written.
+                    content="Benyakir Writes is a portal to my latest work. Learn about the latest books, projects and short stories he's written.
                     Or check out his blog posts, reviews of books or podcast episodes.."
                 />
             </Helmet>

@@ -13,7 +13,7 @@ const TextArea: React.FC<TextProps> = ({
 }) => {
     const letters = value.replace(/\s/g, '').length
     const words = value.length === 0 ? 0 : value.split(" ").length
-    const density = letters === 0 ? 0 : +(letters/words).toFixed(2)
+    const density = letters === 0 ? 0 : +((letters/words).toFixed(2))
     return (
         <TextAreaContainer>
             <textarea

@@ -16,8 +16,8 @@ export function formatBlogPost (post: BlogPostType): FlattenedBlogPost {
         excerpt: post.excerpt,
         content: post.content,
         published: getBlogPostDateInformation(post.date),
-        categories: post.categories.nodes.map(n => n.name),
-        tags: post.tags.nodes.map(n => n.name)
+        categories: post.categories.nodes && post.categories.nodes.map(n => n.name),
+        tags: post.tags.nodes && post.tags.nodes.map(n => n.name)
     }
 
     const flattenedPost: FlattenedBlogPost = {
@@ -29,9 +29,7 @@ export function formatBlogPost (post: BlogPostType): FlattenedBlogPost {
 }
 
 export function createMetaForPost(post: PartiallyFlattenedBlogPost) {
-    const data = [
-        ...post.categories,
-        ...post.tags,
+    let data = [
         post.title,
         post.slug,
         post.excerpt,
@@ -41,5 +39,11 @@ export function createMetaForPost(post: PartiallyFlattenedBlogPost) {
         post.published.short,
         post.published.year,
     ]
+    if (post.categories) {
+        data = data.concat(post.categories)
+    }
+    if (post.tags) {
+        data = data.concat(post.tags)
+    }
     return createSearchableString(data)
 }

@@ -11,7 +11,6 @@ import { getMultipleChoiceHeight, getValuesForSelected } from "@Utils/filter";
 import { SubHeading} from "@Styles/general-components";
 
 import { AuthorFilterProps } from "@Types/props";
-import { multiplyCSSNumber } from "@/utils/strings";
 
 const AuthorFilter: React.FC<AuthorFilterProps> = ({
     allBooks,
@@ -50,8 +49,6 @@ const AuthorFilter: React.FC<AuthorFilterProps> = ({
 
         if (bookChoices.some(b => b.selected)) {
             const _bookChoices = getValuesForSelected(bookChoices)
-            console.log(_bookChoices)
-            console.log(filteredStories.filter(s => !!s.book).map(s => s.book?.title))
             filteredBooks = filteredBooks.filter(b => _bookChoices.some(c => c === b.title))
             filteredStories = filteredStories.filter(s => _bookChoices.some(c => c === s.book?.title))
         }

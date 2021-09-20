@@ -15,10 +15,10 @@ import {
 import { firstWords } from "@Utils/strings";
 import { formatWpText } from "@Utils/posts";
 import { formatBlogPost } from "@Utils/blog";
+import { getPrettyDate } from "@Utils/dates";
 import { createBlocks, preprocessWPEntry } from "@Utils/identify-blocks";
 
 import { WpPost } from "@Types/query";
-import { getPrettyDate } from "@/utils/dates";
 
 const Post: React.FC<WpPost> = ({ data }) => {
     const entry = preprocessWPEntry(data.wpPost.content!);
@@ -37,27 +37,35 @@ const Post: React.FC<WpPost> = ({ data }) => {
             <LeadHeading>{post.title}</LeadHeading>
             <GroupingBox>
                 <Row style={{ justifyContent: "space-between" }}>
-                    <Column>
-                        <SubHeading>
-                            {post.categories.length > 1
-                                ? "Categories"
-                                : "Category"}
-                        </SubHeading>
-                        <Paragraph>{post.categories.join(", ")}</Paragraph>
-                    </Column>
-                    <Column>
-                        {post.tags.length > 0 && (
-                            <>
-                                <SubHeading>
-                                    {post.tags.length > 1 ? "Tags" : "Tag"}
-                                </SubHeading>
-                                <Paragraph>{post.tags.join(", ")}</Paragraph>
-                            </>
-                        )}
-                    </Column>
+                    {post.categories && (
+                        <Column>
+                            <SubHeading>
+                                {post.categories.length > 1
+                                    ? "Categories"
+                                    : "Category"}
+                            </SubHeading>
+                            <Paragraph>{post.categories.join(", ")}</Paragraph>
+                        </Column>
+                    )}
+                    {post.tags && (
+                        <Column>
+                            {post.tags.length > 0 && (
+                                <>
+                                    <SubHeading>
+                                        {post.tags.length > 1 ? "Tags" : "Tag"}
+                                    </SubHeading>
+                                    <Paragraph>
+                                        {post.tags.join(", ")}
+                                    </Paragraph>
+                                </>
+                            )}
+                        </Column>
+                    )}
                     <Column>
                         <SubHeading>Posted</SubHeading>
-                        <Paragraph>{getPrettyDate(post.published.date)}</Paragraph>
+                        <Paragraph>
+                            {getPrettyDate(post.published.date)}
+                        </Paragraph>
                     </Column>
                 </Row>
             </GroupingBox>

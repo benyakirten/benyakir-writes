@@ -1,5 +1,5 @@
 import * as React from "react";
-import { navigate } from "@reach/router";
+import { Link, navigate } from "gatsby";
 
 import {
     Card,
@@ -9,6 +9,7 @@ import {
     DisappearOnTablet,
     HoverableContainer,
     HoverableGatsbyImage,
+    MinorHeading,
     Row,
     SubHeading,
     WpContentDescription,
@@ -20,10 +21,9 @@ import Button from "@Gen/Button/Button.component";
 import { firstWords } from "@Utils/strings";
 
 import { StoryCardProps } from "@Types/props";
-import { Link } from "gatsby";
+
 
 const StoryCard: React.FC<StoryCardProps> = ({ item }) => {
-    const relatedBook = !!item.book;
     return (
         <Card>
             <Row style={{ alignItems: "stretch" }}>
@@ -35,7 +35,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ item }) => {
                     </SubHeading>
                     <WpContentDescription
                         dangerouslySetInnerHTML={{
-                            __html: relatedBook
+                            __html: item.book
                                 ? firstWords(item.content, 200)
                                 : firstWords(item.content, 500),
                         }}
@@ -50,16 +50,16 @@ const StoryCard: React.FC<StoryCardProps> = ({ item }) => {
                         </CardLinkBox>
                     </DisappearOnPhone>
                 </CardSection>
-                {!!item.book && (
+                {item.book && (
                     <DisappearOnTablet>
                         <DisappearOnPhone>
                             <CardSection>
-                                <SubHeading noUnderline>
+                                <MinorHeading>
                                     <CustomLink to={`/book/${item.book.slug}`}>
                                         {item.book.relationship} of{" "}
                                         {item.book.title}
                                     </CustomLink>
-                                </SubHeading>
+                                </MinorHeading>
                                 {item.book.cover ? (
                                     <Link to={`/book/${item.book.slug}`}>
                                         <HoverableContainer

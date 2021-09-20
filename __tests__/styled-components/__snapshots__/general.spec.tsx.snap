@@ -1,0 +1,241 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`general styled components Other components HoverableContainer should set a default height and width if there is no marginRight prop passed in 1`] = `
+.c0 {
+  height: 200px;
+  width: 134px;
+  border: 2px solid #05491F;
+  overflow: hidden;
+}
+
+<div
+  className="c0"
+/>
+`;
+
+exports[`general styled components Other components HoverableContainer should set the height and width peropties based on the props passed in 1`] = `
+.c0 {
+  height: 400px;
+  width: 800px;
+  border: 2px solid #05491F;
+  overflow: hidden;
+}
+
+<div
+  className="c0"
+  height={400}
+  width={800}
+/>
+`;
+
+exports[`general styled components Text components BigParagraph should set a default margin-right of 0 if there is no marginRight prop passed in 1`] = `
+.c0 {
+  font-size: 2.4rem;
+  margin-right: 0;
+}
+
+<p
+  className="c0"
+/>
+`;
+
+exports[`general styled components Text components BigParagraph should set the margin-right property to the marginRight prop passed in 1`] = `
+.c0 {
+  font-size: 2.4rem;
+  margin-right: 12rem;
+}
+
+<p
+  className="c0"
+/>
+`;
+
+exports[`general styled components Text components SubHeading should set the text-decoration by default to underline if the no Underline prop is not set 1`] = `
+.c0 {
+  font-family: 'Faustina',serif;
+  font-size: 2.4rem;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width:768px) {
+  .c0 {
+    font-size: 1.8rem;
+  }
+}
+
+<h3
+  className="c0"
+/>
+`;
+
+exports[`general styled components Text components SubHeading should set the text-decoration property to none based on the noUnderline prop 1`] = `
+.c0 {
+  font-family: 'Faustina',serif;
+  font-size: 2.4rem;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width:768px) {
+  .c0 {
+    font-size: 1.8rem;
+  }
+}
+
+<h3
+  className="c0"
+/>
+`;
+
+exports[`general styled components Text components SubHeading should set the text-decoration property to none based on the noUnderline prop 2`] = `
+.c0 {
+  font-family: 'Faustina',serif;
+  font-size: 2.4rem;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width:768px) {
+
+}
+
+@media (max-width:768px) {
+  .c0 {
+    font-size: 1.8rem;
+  }
+}
+
+<h3
+  className="c0"
+/>
+`;
+
+exports[`general styled components Transition components FadeIn should accept a duration and delay prop that determines the animations duration and delay of the component 1`] = `
+.c0 {
+  opacity: 0;
+  -webkit-animation: dMKEGd 1000ms 300ms ease forwards;
+  animation: dMKEGd 1000ms 300ms ease forwards;
+}
+
+<div
+  className="c0"
+/>
+`;
+
+exports[`general styled components Transition components FadeIn should accept a duration and delay prop that determines the animations duration and delay of the component 2`] = `
+.c0 {
+  opacity: 0;
+  -webkit-animation: dMKEGd 2000ms 600ms ease forwards;
+  animation: dMKEGd 2000ms 600ms ease forwards;
+}
+
+<div
+  className="c0"
+/>
+`;
+
+exports[`general styled components Transition components FadeIn should have a default value for the delay and duration if none is provided 1`] = `
+.c0 {
+  opacity: 0;
+  -webkit-animation: dMKEGd 1600ms 0ms ease forwards;
+  animation: dMKEGd 1600ms 0ms ease forwards;
+}
+
+<div
+  className="c0"
+/>
+`;
+
+exports[`general styled components Transition components SlideInLeft SlideInRight should accept a duration and delay prop that determines the animations duration and delay of the component 1`] = `
+.c0 {
+  opacity: 0;
+  -webkit-transform: translateX(40vw);
+  -ms-transform: translateX(40vw);
+  transform: translateX(40vw);
+  -webkit-animation: dcBvEg 1000ms 300ms ease forwards;
+  animation: dcBvEg 1000ms 300ms ease forwards;
+}
+
+<div
+  className="c0"
+/>
+`;
+
+exports[`general styled components Transition components SlideInLeft SlideInRight should accept a duration and delay prop that determines the animations duration and delay of the component 2`] = `
+.c0 {
+  opacity: 0;
+  -webkit-transform: translateX(40vw);
+  -ms-transform: translateX(40vw);
+  transform: translateX(40vw);
+  -webkit-animation: dcBvEg 2000ms 600ms ease forwards;
+  animation: dcBvEg 2000ms 600ms ease forwards;
+}
+
+<div
+  className="c0"
+/>
+`;
+
+exports[`general styled components Transition components SlideInLeft SlideInRight should have a default value for the delay and duration if none is provided 1`] = `
+.c0 {
+  opacity: 0;
+  -webkit-transform: translateX(40vw);
+  -ms-transform: translateX(40vw);
+  transform: translateX(40vw);
+  -webkit-animation: dcBvEg 4s 0ms ease forwards;
+  animation: dcBvEg 4s 0ms ease forwards;
+}
+
+<div
+  className="c0"
+/>
+`;
+
+exports[`general styled components Transition components SlideInLeft should accept a duration and delay prop that determines the animations duration and delay of the component 1`] = `
+.c0 {
+  opacity: 0;
+  -webkit-transform: translateX(-40vw);
+  -ms-transform: translateX(-40vw);
+  transform: translateX(-40vw);
+  -webkit-animation: hOeomY 1000ms 300ms ease forwards;
+  animation: hOeomY 1000ms 300ms ease forwards;
+}
+
+<div
+  className="c0"
+/>
+`;
+
+exports[`general styled components Transition components SlideInLeft should accept a duration and delay prop that determines the animations duration and delay of the component 2`] = `
+.c0 {
+  opacity: 0;
+  -webkit-transform: translateX(-40vw);
+  -ms-transform: translateX(-40vw);
+  transform: translateX(-40vw);
+  -webkit-animation: hOeomY 2000ms 600ms ease forwards;
+  animation: hOeomY 2000ms 600ms ease forwards;
+}
+
+<div
+  className="c0"
+/>
+`;
+
+exports[`general styled components Transition components SlideInLeft should have a default value for the delay and duration if none is provided 1`] = `
+.c0 {
+  opacity: 0;
+  -webkit-transform: translateX(-40vw);
+  -ms-transform: translateX(-40vw);
+  transform: translateX(-40vw);
+  -webkit-animation: hOeomY 4s 0ms ease forwards;
+  animation: hOeomY 4s 0ms ease forwards;
+}
+
+<div
+  className="c0"
+/>
+`;

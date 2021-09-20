@@ -1,8 +1,7 @@
 import * as React from "react";
-import { graphql } from "gatsby";
+import { graphql, navigate } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
 import { Helmet } from "react-helmet";
-import { navigate } from "@reach/router";
 
 import {
     LeadHeading,
@@ -85,7 +84,7 @@ const Book: React.FC<WpBook> = ({ data }) => {
                                         book.coverDesigner.links.map(
                                             (l, idx) => (
                                                 <LItem key={l.name + idx}>
-                                                    <CustomLink to={l.link}>
+                                                    <CustomLink outside to={l.link}>
                                                         {l.name}
                                                     </CustomLink>
                                                 </LItem>
@@ -127,8 +126,8 @@ const Book: React.FC<WpBook> = ({ data }) => {
                                 <Column>
                                     <SubHeading>Related Stories</SubHeading>
                                     {book.stories.map((s) => (
-                                        <>
-                                            <MinorHeading key={s.title}>
+                                        <React.Fragment key={s.title}>
+                                            <MinorHeading>
                                                 <CustomLink
                                                     to={`/story/${s.slug}`}
                                                 >
@@ -140,7 +139,7 @@ const Book: React.FC<WpBook> = ({ data }) => {
                                                     __html: s.content,
                                                 }}
                                             />
-                                        </>
+                                        </React.Fragment>
                                     ))}
                                 </Column>
                             )}

@@ -3,8 +3,9 @@
 2. [How to run the repository](#how-do-i-get-it-working)
 3. [How does it work?](#how-does-it-work)
 4. [Some notable features](#some-notable-features)
-5. [Planned Changes](#planned-changes)
-6. [Change Log](#change-log)
+5. [Notes About Unit Testing](#some-notes-about-unit-testing)
+6. [Planned Changes](#planned-changes)
+7. [Change Log](#change-log)
 
 ## What am I looking at?
 
@@ -32,21 +33,33 @@ If you've studied the Syntax Highlighter custom block I made (hah, hah, no, I kn
 
 Page transitions use react-transition-group instead of the usual Gatsby page transition plugins. They weren't working for one reason or another. All pages for blog categories (other than none), blog posts, projects, short stories and books are dynamically (then statically) generated. so typical Gatsby fare.
 
+## Notes About Unit Testing
+
+I, as of yet, do not know how to simulate a mouseover event with specific coordinates (or just to manually set the clientX and clientY). This makes me unable to test the Button component's changing transform origin/position/clip-path. Also, I couldn't figure out how to test the CustomLink's :after pseudoelement. When using native img elements, I couldn't figure out how to set the onerror property. Other than those things, I was able to test virtually every property I saw fit. I also found a number of errors. I planned to improve the filter functionality's effeciency while I was at this, but I'm getting pretty burnt out right now.
+
+Okay, so if you run the tests, your terminal will flip out, but all the tests run correctly. As far as I can tell, these are eccentricities of Gatsby (and mostly come from using a styled component that inherits from Gatsby's Link component), For example, it doesn't like that I named one prop underbarSiize or that dark is a non-boolean property (or that it is)? It all works correctly, so I don't know.
+
 ## Planned Changes
 
 > Add the showcase pages from benyakiredits.com (it will be awhile before this happens. Don't hold your breath)
 > Improve the filter functionality to use hash tables instead of arrays and pre-preparing search terms during the build process
-> Additional improvements to efficiency with memoization
-> Add unit and E2E testing
+> Add E2E testing
 
 ## Changelog
 
 > 9/7/2021: 
-> 1. First deployment
-> 2. Fixed a few issues I didn't notice by running build before deployment, namely that I still needed to use useLocation for the page transitions. Also that I needed a backup for categories that didn't have any posts in them (such as bens-blogs, the overarching category for my regular blog pages).
+>> 1. First deployment
+>> 2. Fixed a few issues I didn't notice by running build before deployment, namely that I still needed to use useLocation for the page transitions. Also that I needed a backup for categories that didn't have any posts in them (such as bens-blogs, the overarching category for my regular blog pages).
 > 9/8/2021: Worked on improving media queries for a few components, added a form component that uses Netlify forms and added global search functionality. I created a new hook, useLookup, for use with a hash table for faster search results. I tested it, and the difference, using all 134 blog posts/projects/etc. from my blog? About 2 milliseconds. It is, really, more efficient. It's just that I need to write a few thousand more blog posts before it starts mattering. Oh, and it increases build time from 30ish seconds to 3 minutes. That's why, for now, I haven't fixed the other search functionalities to use the more efficient hash tables. It may come in the future, but I only get 300 free built minutes per month from Netlify, and I like to be pretty far from build time.
 > 9/9/2021: Tried another fix for the contact form, tried to fix the way the underbar exceeded the sidebar on some links
 > 9/10/2021 (1 AM): I promise I'm going to work on testing soon. But for now I found a way to make the search functionality not (too) slow and laggy. During the createPages node process in gatsby-node, the graphql backend is queried, and the items are prepared for search then saved to a JSON file. Then that file is opened and used for the search component. Effectively, the search items are prepared on build, which works out fine because the repo is rebuilt every time a post/etc is added. I kept all the old search functionality in utils/search.ts, though most of the functionality has been remade in gatsby-node.js. One day, I will add the same sort of functionality to the other filters.
 > 9/10/2021 (4 PM): Fonts now preload with use of the gatsby-plugin-preload-fonts. I promise tests are coming soon.
 > 9/11/2021: Fixed a small error on the underbar for the portfolio link and now search items are automatically sorted by date.
 > 9/12/2021: Added a small fix to the foldout height between 900px and 1400px
+> 9/20/2021: A humongous amount of changes and the first set of unit tests.
+>> 1. Filter functionality has been fixed in the book and story filters. Dates were previously set incorrectly and any new upper limit would be set to the lower limit and vice versa. This has been fixed.
+>> 2. Search functionality now properly uses the useEffect hook so that the search no longer only changes when the search string changes. Now, if there is a search string and one of the categories becomes enabled/disabled, the search will dynamically show the results instead of needing to change the search string
+>> 3. The choice input component now properly takes on the checkbox role and has an aria-checked property as well as a label.
+>> 4. Added memoization to most components that processed posts (mostly filters)
+>> 5. I noticed that the latestUpdate field on my WordPress blog was giving dates as d/m/y instead of m/d/y, which was causing errors.
+>> 6. A whole lot of minor fixes I should've written down as I was doing them like random log statements I forgot to delete. Oh, I remembered another one right now. The logo now longer errors out if the static query cannot retrieve the icon.

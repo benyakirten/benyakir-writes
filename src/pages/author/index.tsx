@@ -15,10 +15,9 @@ import { formatAllBooks, formatAllStories } from "@Utils/author";
 import { WpAuthor } from "@Types/query";
 import { FlattenedBook, FlattenedStory } from "@Types/posts";
 
-const AuthorPost: React.FC<WpAuthor> = ({ data }) => {
-    console.log(data);
-    const books = formatAllBooks(data.allWpBook.nodes);
-    const stories = formatAllStories(data.allWpShortstory.nodes);
+const AuthorPage: React.FC<WpAuthor> = ({ data }) => {
+    const books = React.useMemo(() => formatAllBooks(data.allWpBook.nodes), data.allWpBook.nodes);
+    const stories = React.useMemo(() => formatAllStories(data.allWpShortstory.nodes), data.allWpShortstory.nodes);
 
     const [filteredBooks, setFilteredBooks] =
         React.useState<FlattenedBook[]>(books);
@@ -133,4 +132,4 @@ export const query = graphql`
     }
 `;
 
-export default AuthorPost;
+export default AuthorPage;

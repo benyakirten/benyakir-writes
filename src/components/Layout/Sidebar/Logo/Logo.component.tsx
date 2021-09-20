@@ -16,7 +16,7 @@ const Logo: React.FC<LogoProps> = ({ opening }) => {
     return (
         <Link to="/">
             <LogoContainer
-                src={data.file.publicURL}
+                src={data?.file?.publicURL}
                 alt="Benyakir Writes Logo"
                 opening={opening}
             />

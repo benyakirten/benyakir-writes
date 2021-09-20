@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Foldout component should render the outer div's cursor based on the open prop 1`] = `
+.c0 {
+  position: relative;
+  cursor: n-resize;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-transform-origin: top;
+  -ms-transform-origin: top;
+  transform-origin: top;
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
+  height: 4rem;
+  opacity: 1;
+}
+
+.c1 {
+  position: absolute;
+  left: -1.5rem;
+  top: 0.4rem;
+  outline: none;
+  font-size: 2.4rem;
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+@media (max-width:1400px) {
+  .c2 {
+    height: 4rem;
+  }
+}
+
+@media (max-width:922px) {
+  .c2 {
+    height: 4rem;
+  }
+}
+
+@media (max-width:576px) {
+  .c2 {
+    height: 4rem;
+  }
+}
+
+@media (prefers-reduced-motion) {
+  .c2 {
+    -webkit-transition: all 0.01s ease !important;
+    transition: all 0.01s ease !important;
+  }
+}
+
+<div
+  className="c0"
+  onClick={[Function]}
+  open={true}
+>
+  <span
+    className="c1"
+    open={true}
+    role="button"
+    tabIndex={0}
+  >
+    ↡
+  </span>
+  <p>
+    Test Topbar
+  </p>
+  <div
+    aria-hidden={false}
+    className="c2"
+    height="4rem"
+    id="no-toggle"
+    open={true}
+  />
+</div>
+`;

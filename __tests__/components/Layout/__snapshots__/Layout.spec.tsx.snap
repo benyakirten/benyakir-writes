@@ -1,0 +1,459 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout component should render correctly 1`] = `
+<div
+  className="sc-bdfBQB iRScpY"
+>
+  <nav
+    className="sc-dlfnuX dhFKmv nav-toggle-close"
+    id="nav-toggle"
+    onClick={[Function]}
+    open={false}
+  >
+    <div
+      className="sc-hKgJUU botUjJ nav-toggle-close"
+      id="nav-toggle"
+    >
+      <button
+        className="sc-eCstlR gHjuob"
+        onClick={[Function]}
+        open={false}
+        tabIndex={0}
+      >
+        ←
+      </button>
+      <div
+        aria-hidden={true}
+        className="sc-jSgvzq eQMidy nav-toggle-close"
+        id="nav-toggle"
+        open={false}
+      >
+        <div
+          className="sc-gKseQn cOJtMT"
+        >
+          <div
+            className="sc-dQoVA iFfNzS"
+            onClick={[Function]}
+            open={false}
+          >
+            <span
+              className="sc-kstqJO dtoKpy"
+              onClick={[Function]}
+              open={false}
+              role="button"
+              tabIndex={-1}
+            >
+              ↡
+            </span>
+            <a
+              active={false}
+              className="sc-hBEYId iovJMV"
+              dark={true}
+              href="/blog"
+              inline={false}
+              limitUnderbar={false}
+              small={false}
+            >
+              BLOG
+            </a>
+            <div
+              aria-hidden={true}
+              className="sc-bqyKOL gpHbjR"
+              height="7rem"
+              id="no-toggle"
+              open={false}
+            >
+              <a
+                active={false}
+                className="sc-hBEYId gTOgZh"
+                dark={true}
+                href="/blog/bens-thoughts/"
+                inline={false}
+                limitUnderbar={false}
+                small={true}
+                underbarSize="16rem"
+              >
+                Ben's Thoughts
+              </a>
+              <a
+                active={false}
+                className="sc-hBEYId gTOgZh"
+                dark={true}
+                href="/blog/reviews/"
+                inline={false}
+                limitUnderbar={false}
+                small={true}
+                underbarSize="16rem"
+              >
+                Reviews
+              </a>
+              <a
+                active={false}
+                className="sc-hBEYId gTOgZh"
+                dark={true}
+                href="/blog/down-south-boulder-road/"
+                inline={false}
+                limitUnderbar={false}
+                small={true}
+                underbarSize="16rem"
+              >
+                Down South Boulder Road
+              </a>
+            </div>
+          </div>
+          <div
+            className="sc-dQoVA iFfNzS"
+            onClick={[Function]}
+            open={false}
+          >
+            <span
+              className="sc-kstqJO dtoKpy"
+              onClick={[Function]}
+              open={false}
+              role="button"
+              tabIndex={-1}
+            >
+              ↡
+            </span>
+            <a
+              active={false}
+              className="sc-hBEYId iovJMV"
+              dark={true}
+              href="/author"
+              inline={false}
+              limitUnderbar={false}
+              small={false}
+            >
+              AUTHOR
+            </a>
+            <div
+              aria-hidden={true}
+              className="sc-bqyKOL gpHbjR"
+              height="4rem"
+              id="no-toggle"
+              open={false}
+            >
+              <a
+                active={false}
+                className="sc-hBEYId gTOgZh"
+                dark={true}
+                href="/author/books/"
+                inline={false}
+                limitUnderbar={false}
+                small={true}
+                underbarSize="16rem"
+              >
+                Books
+              </a>
+              <a
+                active={false}
+                className="sc-hBEYId gTOgZh"
+                dark={true}
+                href="/author/short-stories/"
+                inline={false}
+                limitUnderbar={false}
+                small={true}
+                underbarSize="16rem"
+              >
+                Short Stories
+              </a>
+            </div>
+          </div>
+          <a
+            active={false}
+            className="sc-hBEYId jhjoYR"
+            dark={true}
+            href="/portfolio"
+            inline={false}
+            limitUnderbar={false}
+            small={false}
+            underbarSize="12rem"
+          >
+            Portfolio
+          </a>
+        </div>
+        <div
+          className="sc-gKseQn cOJtMT"
+        >
+          <div
+            className="sc-dQoVA iFfNzS"
+            onClick={[Function]}
+            open={false}
+          >
+            <span
+              className="sc-kstqJO dtoKpy"
+              onClick={[Function]}
+              open={false}
+              role="button"
+              tabIndex={-1}
+            >
+              ↡
+            </span>
+            <h3
+              className="sc-bBXrwG kAOSz"
+            >
+              Search
+            </h3>
+            <div
+              aria-hidden={true}
+              className="sc-bqyKOL gpHbjR"
+              height="auto"
+              id="no-toggle"
+              open={false}
+            >
+              <div
+                className="sc-hTZgZg eXDGds"
+              >
+                <input
+                  autoFocus={false}
+                  id="global-search"
+                  name="global-search"
+                  onChange={[Function]}
+                  placeholder=" "
+                  style={
+                    Object {
+                      "width": "65%",
+                    }
+                  }
+                  tabIndex={-1}
+                  type="text"
+                  value=""
+                />
+                <label
+                  htmlFor="global-search"
+                >
+                  Search
+                </label>
+              </div>
+              <div
+                style={
+                  Object {
+                    "marginLeft": "2px",
+                    "marginTop": "1rem",
+                  }
+                }
+              >
+                <div
+                  className="sc-jgHCSr yGbWb"
+                >
+                  <input
+                    aria-labelledby="label-global-search-show-post"
+                    checked={true}
+                    id="global-search-show-post"
+                    name="global-search-show-post"
+                    onChange={[Function]}
+                    type="checkbox"
+                  />
+                  <label
+                    id="no-toggle"
+                    onClick={[Function]}
+                    tabIndex={-1}
+                  >
+                    <span
+                      id="no-toggle"
+                    >
+                      ☞
+                    </span>
+                  </label>
+                  <span
+                    id="label-global-search-show-post"
+                    onClick={[Function]}
+                  >
+                    Show Posts
+                  </span>
+                </div>
+                <div
+                  className="sc-jgHCSr yGbWb"
+                >
+                  <input
+                    aria-labelledby="label-global-search-show-project"
+                    checked={true}
+                    id="global-search-show-project"
+                    name="global-search-show-project"
+                    onChange={[Function]}
+                    type="checkbox"
+                  />
+                  <label
+                    id="no-toggle"
+                    onClick={[Function]}
+                    tabIndex={-1}
+                  >
+                    <span
+                      id="no-toggle"
+                    >
+                      ☞
+                    </span>
+                  </label>
+                  <span
+                    id="label-global-search-show-project"
+                    onClick={[Function]}
+                  >
+                    Show Projects
+                  </span>
+                </div>
+                <div
+                  className="sc-jgHCSr yGbWb"
+                >
+                  <input
+                    aria-labelledby="label-global-search-show-book"
+                    checked={true}
+                    id="global-search-show-book"
+                    name="global-search-show-book"
+                    onChange={[Function]}
+                    type="checkbox"
+                  />
+                  <label
+                    id="no-toggle"
+                    onClick={[Function]}
+                    tabIndex={-1}
+                  >
+                    <span
+                      id="no-toggle"
+                    >
+                      ☞
+                    </span>
+                  </label>
+                  <span
+                    id="label-global-search-show-book"
+                    onClick={[Function]}
+                  >
+                    Show Books
+                  </span>
+                </div>
+                <div
+                  className="sc-jgHCSr yGbWb"
+                >
+                  <input
+                    aria-labelledby="label-global-search-show-story"
+                    checked={true}
+                    id="global-search-show-story"
+                    name="global-search-show-story"
+                    onChange={[Function]}
+                    type="checkbox"
+                  />
+                  <label
+                    id="no-toggle"
+                    onClick={[Function]}
+                    tabIndex={-1}
+                  >
+                    <span
+                      id="no-toggle"
+                    >
+                      ☞
+                    </span>
+                  </label>
+                  <span
+                    id="label-global-search-show-story"
+                    onClick={[Function]}
+                  >
+                    Show Stories
+                  </span>
+                </div>
+              </div>
+              <div
+                className="sc-Azgjq leunDA"
+              >
+                <div
+                  className="sc-iJuVqt bkKAyb"
+                >
+                  No results yet!
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="sc-gKseQn cOJtMT"
+        >
+          <a
+            active={false}
+            className="sc-hBEYId jhjoYR"
+            dark={true}
+            href="/"
+            inline={false}
+            limitUnderbar={false}
+            small={false}
+            underbarSize="12rem"
+          >
+            Home
+          </a>
+          <a
+            active={false}
+            className="sc-hBEYId jhjoYR"
+            dark={true}
+            href="/contact"
+            inline={false}
+            limitUnderbar={false}
+            small={false}
+            underbarSize="12rem"
+          >
+            Contact
+          </a>
+          <a
+            active={false}
+            className="sc-hBEYId jhjoYR"
+            dark={true}
+            href="/privacy"
+            inline={false}
+            limitUnderbar={false}
+            small={false}
+            underbarSize="12rem"
+          >
+            Privacy
+          </a>
+          <a
+            active={false}
+            className="sc-hBEYId jhjoYR"
+            dark={true}
+            href="/about"
+            inline={false}
+            limitUnderbar={false}
+            small={false}
+            underbarSize="12rem"
+          >
+            About
+          </a>
+        </div>
+      </div>
+      <div
+        className="sc-gKseQn cOJtMT"
+      >
+        <aside
+          className="sc-fubCzh bvKCHt"
+          open={false}
+        >
+          <div>
+            © 2021 by Benyakir Horowitz.
+          </div>
+          <div>
+            All Rights Reserved.
+          </div>
+        </aside>
+        <a
+          href="/"
+        >
+          <img
+            alt="Benyakir Writes Logo"
+            className="sc-fFucqa blplGB"
+          />
+        </a>
+      </div>
+    </div>
+  </nav>
+  <main
+    className="sc-gsTEea gEMJgI"
+  >
+    <div>
+      <div
+        style={
+          Object {
+            "opacity": 1,
+            "transform": "translateY(0)",
+            "transition": "all 500ms ease-in-out",
+          }
+        }
+      />
+    </div>
+  </main>
+</div>
+`;

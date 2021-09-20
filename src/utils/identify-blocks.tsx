@@ -1,17 +1,13 @@
-import React from "react";
+import React from "react"
 
-import SyntaxHighlighter from "@Blocks/SyntaxHighlighter/SyntaxHighlighter.component";
-import { WpContent } from "@Styles/general-components";
+import { KNOWN_BLOCK_CLASSES } from '@Constants'
+import { WpContent } from "@Styles/general-components"
 
-const KNOWN_BLOCK_CLASSES: BlockComponents = {
-    "benyakir-syntax-highlighter": SyntaxHighlighter
-}
+const END_DIV_STRING = "</div>"
+const END_DIV_LENGTH = 6
 
-const END_DIV_STRING = "</div>";
-const END_DIV_LENGTH = 6;
-
-const END_PRE_STRING = "</pre>";
-const BEGINNING_PRE_LENGTH = 28;
+const END_PRE_STRING = "</pre>"
+const BEGINNING_PRE_LENGTH = 28
 // The initial string is always: <pre style=\"display: none;\">
 
 function createDefaultBlock(content: string): DefaultBlock {
@@ -47,7 +43,10 @@ export function findBlock<T extends BaseBlock>(
         } as T;
 
         finalEntries.push(encodedInfo);
-        finalEntries.push(createDefaultBlock(outsideBlock));
+
+        if (outsideBlock) {
+            finalEntries.push(createDefaultBlock(outsideBlock));
+        }
     }
     return finalEntries;
 }
@@ -82,6 +81,9 @@ export function preprocessWPEntry(content: string) {
                     // of new blocks and items between we find
                     finalResults.splice(i + j, 0, innerResults[j]);
                 }
+                // This removes all empty default blocks that would enter otherwise if there are two
+                // custom blocks right in a row
+                finalResults = finalResults.filter(r => r.type === 'default' && !r.content ? false : true )
             }
         }
     }

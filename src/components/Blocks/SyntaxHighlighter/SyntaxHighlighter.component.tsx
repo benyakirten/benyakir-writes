@@ -1,13 +1,13 @@
 import * as React from "react";
 import { PrismLight } from "react-syntax-highlighter";
 
-
 import {
     HighlighterContainer,
     HighlighterTopbar,
     LoadingBackground,
     LoadingContainer
 } from "./SyntaxHighlighter.styles";
+
 import Loading from "@Gen/Loading/Loading.component";
 
 import {
@@ -22,14 +22,12 @@ import {
 const SyntaxHighlighter: React.FC<SyntaxHighlighterBlock> = ({
     lang,
     code,
-    theme,
+    theme = 'darcula'
 }) => {
     const [initialized, setInitialized] = React.useState<boolean>(false);
     const [finalTheme, setFinalTheme] = React.useState<any>();
     const [loading, setLoading] = React.useState<boolean>(true);
-    const [showTheme, setShowTheme] = React.useState<EnabledTheme>(
-        theme || "darcula"
-    );
+    const [showTheme, setShowTheme] = React.useState<EnabledTheme>(theme);
 
     async function fetchTheme() {
         const _theme = await getPrismTheme(showTheme);

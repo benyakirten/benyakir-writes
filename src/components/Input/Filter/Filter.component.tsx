@@ -1,11 +1,11 @@
 import * as React from "react";
+
 import { FilterContainer } from "./Filter.styles";
+import { Subtitle } from "@Styles/general-components";
 
 import Text from "@Input/Text/Text.component";
 
-import { Subtitle } from "@Styles/general-components";
-
-import { FilterProps } from "@/types/props";
+import { FilterProps } from "@Types/props";
 
 const Filter: React.FC<FilterProps> = ({ name, onSearch, children }) => {
     const SEARCH_TIMEOUT = 600;
@@ -26,12 +26,13 @@ const Filter: React.FC<FilterProps> = ({ name, onSearch, children }) => {
     }
     return (
         <FilterContainer>
-            <Subtitle>Filter {name}</Subtitle>
+            <Subtitle>Filter{" " + name}</Subtitle>
             <Text
                 value={searchText}
                 onChange={onSearchChange}
                 label="Search"
                 name={`${name}-filter-search`}
+                autofocus
             />
             {children}
         </FilterContainer>

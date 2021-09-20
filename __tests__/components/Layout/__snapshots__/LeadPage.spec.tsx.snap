@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LeadPage component should render correctly 1`] = `
+<div
+  className="sc-bdfBQB hPubXE"
+>
+  <div
+    className="sc-dlfnuX fTYuwV"
+  >
+    <div />
+  </div>
+  <div
+    className="sc-gsTEea CIain"
+  />
+</div>
+`;

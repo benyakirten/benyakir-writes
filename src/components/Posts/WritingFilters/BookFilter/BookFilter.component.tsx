@@ -17,8 +17,8 @@ const BookFilter: React.FC<BookFilterProps> = ({
     const [dropdownOpen, setDropdown] = useDropdown();
 
     // Min and day range is based on first and latest repo published
-    const [publishedBefore, setPublishedAfter] = React.useState<Date>(books[0].published.date)
-    const [publishedAfter, setPublishedBefore] = React.useState<Date>(books[books.length - 1].published.date)
+    const [publishedBefore, setPublishedBefore] = React.useState<Date>(books[0].published.date)
+    const [publishedAfter, setPublishedAfter] = React.useState<Date>(books[books.length - 1].published.date)
 
     const [filterWords, setFilterWords] = React.useState<string[]>([])
 
@@ -40,7 +40,7 @@ const BookFilter: React.FC<BookFilterProps> = ({
     }
 
     return (
-        <Filter name="projects" onSearch={setSearchString}>
+        <Filter name="books" onSearch={setSearchString}>
             <Foldout
                 topbar={<SubHeading>Filter by date</SubHeading>}
                 open={dropdownOpen === "date"}
@@ -48,13 +48,13 @@ const BookFilter: React.FC<BookFilterProps> = ({
                 height="10rem"
             >
                 <DatePicker
-                    name="proect-published-before"
+                    name="book-published-before"
                     value={publishedBefore}
                     label="Published before"
                     onChange={setPublishedBefore}
                 />
                 <DatePicker
-                    name="project-published-after"
+                    name="book-published-after"
                     value={publishedAfter}
                     label="Published after"
                     onChange={setPublishedAfter}

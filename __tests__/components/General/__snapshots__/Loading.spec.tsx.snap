@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loading component should render correctly 1`] = `
+<span
+  className="sc-bdfBQB cWCOoS"
+  size="2rem"
+/>
+`;

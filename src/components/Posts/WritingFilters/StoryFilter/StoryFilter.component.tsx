@@ -17,8 +17,8 @@ const StoryFilter: React.FC<StoryFilterProps> = ({
     const [dropdownOpen, setDropdown] = useDropdown();
 
     // Min and day range is based on first and latest repo published
-    const [publishedBefore, setPublishedAfter] = React.useState<Date>(stories[0].published.date)
-    const [publishedAfter, setPublishedBefore] = React.useState<Date>(stories[stories.length - 1].published.date)
+    const [publishedBefore, setPublishedBefore] = React.useState<Date>(stories[0].published.date)
+    const [publishedAfter, setPublishedAfter] = React.useState<Date>(stories[stories.length - 1].published.date)
 
     const [filterWords, setFilterWords] = React.useState<string[]>([])
 

@@ -26,7 +26,7 @@ type LoadingProps = {
 }
 
 type AlertBoxProps = {
-    success: boolean;
+    success?: boolean;
 }
 
 type LinkProps = {
@@ -85,7 +85,7 @@ type IconProps = {
 
 // INPUT
 type FilterProps = {
-    name?: string;
+    name: string;
     onSearch: (val: string) => void;
 }
 
@@ -99,6 +99,7 @@ interface TextProps extends InputProps {
     onChange: (newText: string) => void;
     width?: string;
     tabIndex?: number;
+    autofocus?: boolean;
 }
 
 interface CheckboxProps extends InputProps {

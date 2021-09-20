@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { GatsbyImage } from 'gatsby-plugin-image'
 
-import { fadeIn, rollOut, slideInLeft, slideInRight } from './animations';
+import { fadeIn, slideInLeft, slideInRight } from './animations';
 import { media } from './queries';
-import { ABS_WHITE, BLACK, ERROR, FAUSTINA, FONT_LG, FONT_MD, FONT_XL, FONT_XXL, FONT_XXXL, GRAY_100, GRAY_700, GRAY_800, PRIMARY_300, SECONDARY_600, SHADOW_MD, SUCCESS } from './variables';
+import { BLACK, FAUSTINA, FONT_LG, FONT_MD, FONT_XL, FONT_XXL, FONT_XXXL, SECONDARY_600, SHADOW_MD } from './variables';
 
 export const FadeIn = styled.div<{ duration?: string, delay?: string }>`
     opacity: 0;

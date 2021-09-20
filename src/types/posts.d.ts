@@ -169,7 +169,7 @@ type SingleStory = {
                     title: string;
                     slug: string;
                 }
-                cover: {
+                cover: null | {
                     localFile: {
                         childImageSharp: {
                             gatsbyImageData: IGatsbyImageData;
@@ -209,12 +209,12 @@ type BlogPostType = {
     date: string;
     content?: string;
     categories: {
-        nodes: {
+        nodes: null | {
             name: string;
         }[]
     }
     tags: {
-        nodes: {
+        nodes: null | {
             name: string;
         }[]
     }
@@ -226,8 +226,8 @@ interface PartiallyFlattenedBlogPost {
     published: DateInformation;
     excerpt?: string;
     content?: string;
-    categories: string[]
-    tags: string[];
+    categories: null | string[]
+    tags: null | string[];
 }
 
 interface FlattenedBlogPost extends PartiallyFlattenedBlogPost {

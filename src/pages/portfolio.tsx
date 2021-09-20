@@ -15,33 +15,56 @@ import { FlattenedProject } from "@Types/posts";
 import { ProjectsQuery } from "@Types/query";
 
 const ProjectsPage: React.FC<ProjectsQuery> = ({ data }) => {
-    const formattedProjects = formatAllProjects(data.allWpProject.nodes);
+    const formattedProjects = React.useMemo(
+        () => formatAllProjects(data.allWpProject.nodes),
+        data.allWpProject.nodes
+    );
 
     // What these functions is they format arrays so they'll be a list of items, then we want unique items
     // But we still need them to be Arrays, so we have to convert back from sets to arrays
-    const allHosts = Array.from(
-        new Set(
-            formattedProjects
-                .filter((p) => !!p.hostedOn)
-                .map((p) => p.hostedOn!)
-        )
+    const allHosts = React.useMemo(
+        () =>
+            Array.from(
+                new Set(
+                    formattedProjects
+                        .filter((p) => !!p.hostedOn)
+                        .map((p) => p.hostedOn!)
+                )
+            ),
+        formattedProjects
     );
     // We use flatmaps because each project has their long/short technologies as arrays. We just want all the names of the technologies
-    const allTechs = Array.from(
-        new Set(formattedProjects.flatMap((p) => p.longTechnologies))
+    const allTechs = React.useMemo(
+        () =>
+            Array.from(
+                new Set(formattedProjects.flatMap((p) => p.longTechnologies))
+            ),
+        formattedProjects
     );
-    const shortTechs = Array.from(
-        new Set(formattedProjects.flatMap((p) => p.shortTechnologies))
+    const shortTechs = React.useMemo(
+        () =>
+            Array.from(
+                new Set(formattedProjects.flatMap((p) => p.shortTechnologies))
+            ),
+        formattedProjects
     );
 
-    const allIcons: FileNode[] = data.allFile.nodes
-        .filter((f) => shortTechs.includes(f.name))
-        .map((f) => ({ ...f, name: getFullTechName(f.name) }));
+    const allIcons: FileNode[] = React.useMemo(
+        () =>
+            data.allFile.nodes
+                .filter((f) => shortTechs.includes(f.name))
+                .map((f) => ({ ...f, name: getFullTechName(f.name) })),
+        data.allFile.nodes
+    );
 
     // This will reduce memory complexity because the getIconsForProject function will get run multiple times
-    const hashedIcons = allIcons.reduce(
-        (acc, next) => ({ ...acc, [next.name]: next.publicURL }),
-        {}
+    const hashedIcons = React.useMemo(
+        () =>
+            allIcons.reduce(
+                (acc, next) => ({ ...acc, [next.name]: next.publicURL }),
+                {}
+            ),
+        allIcons
     );
     const getIconsForProject = (project: FlattenedProject): FileNode[] =>
         project.longTechnologies.map((t) => ({

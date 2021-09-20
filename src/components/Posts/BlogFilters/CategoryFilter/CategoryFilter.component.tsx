@@ -24,7 +24,7 @@ const CategoryFilter: React.FC<AllBlogFilterProps> = ({
 
     const [filterWords, setFilterWords] = React.useState<string[]>([])
 
-    const _tags = React.useMemo(() => [...new Set(allPosts.flatMap(p => p.tags))], allPosts)
+    const _tags = React.useMemo(() => [...new Set(allPosts.flatMap(p => p.tags!))], allPosts)
     const [tagChoices, setTagChoices] = React.useState<PotentialChoice[]>(
         _tags.map(t => ({
             value: t,
@@ -40,8 +40,7 @@ const CategoryFilter: React.FC<AllBlogFilterProps> = ({
 
         if (tagChoices.some((t) => t.selected)) {
             const _ts = getValuesForSelected(tagChoices)
-            console.log(_ts)
-            _posts = _posts.filter((p) => _ts.every((t) => p.tags.includes(t)))
+            _posts = _posts.filter((p) => _ts.every((t) => p.tags && p.tags.includes(t)))
         }
 
         onFilter(_posts)

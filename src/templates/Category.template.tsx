@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 
 import { LeadHeading, Column, BigParagraph } from "@Styles/general-components";
 
+import CustomLink from "@Gen/CustomLink/CustomLink.component";
 import LeadPage from "@Layout/LeadPage/LeadPage.component";
 import CategoryFilter from "@Posts/BlogFilters/CategoryFilter/CategoryFilter.component";
 import BlogCard from "@Variant/BlogCard/BlogCard.component";
@@ -13,7 +14,6 @@ import { formatAllBlogPosts } from "@Utils/blog";
 
 import { WpPostByCategory } from "@Types/query";
 import { FlattenedBlogPost } from "@Types/posts";
-import CustomLink from "@/components/General/CustomLink/CustomLink.component";
 
 const CategoryTemplate: React.FC<WpPostByCategory> = ({
     data,
@@ -22,10 +22,10 @@ const CategoryTemplate: React.FC<WpPostByCategory> = ({
     if (data.allWpPost.nodes.length === 0) {
         return (
             <>
-                <LeadHeading>No posts exist </LeadHeading>
+                <LeadHeading>No posts exist</LeadHeading>
                 <BigParagraph>
-                    For this category, at least. Maybe you want to check out the
-                    general <CustomLink to="/blog">blog page </CustomLink>{" "}
+                    For the category {pageContext.name}, at least. Maybe you want to check out the
+                    general <CustomLink to="/blog">blog page</CustomLink>{" "}
                     instead?
                 </BigParagraph>
             </>

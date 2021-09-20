@@ -14,7 +14,7 @@ import { formatAllStories } from "@Utils/author";
 import { WpAllStories } from "@Types/query";
 import { FlattenedStory } from "@Types/posts";
 
-const StoriesPost: React.FC<WpAllStories> = ({ data }) => {
+const ShortstoriesPage: React.FC<WpAllStories> = ({ data }) => {
     const stories = formatAllStories(data.allWpShortstory.nodes);
 
     const [filteredStories, setFilteredStories] =
@@ -76,4 +76,4 @@ export const query = graphql`
     }
 `;
 
-export default StoriesPost;
+export default ShortstoriesPage;

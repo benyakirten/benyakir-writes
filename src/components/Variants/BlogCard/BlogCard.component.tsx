@@ -12,13 +12,15 @@ import {
     WpContentDescription,
 } from "@Styles/general-components";
 
+import CustomLink from "@Gen/CustomLink/CustomLink.component";
+
 import { firstWords, titleToKebab } from "@Utils/strings";
+import { getPrettyDate } from "@Utils/dates";
 
 import { BlogCardProps } from "@Types/props";
-import CustomLink from "@/components/General/CustomLink/CustomLink.component";
-import { getPrettyDate } from "@/utils/dates";
 
 const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
+    const categoryOrTags = post.categories || post.tags
     return (
         <Card style={{ height: "18rem" }}>
             <Row style={{ alignItems: "start" }}>
@@ -31,7 +33,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
                         </SubHeading>
                         <WpContentDescription
                             dangerouslySetInnerHTML={{
-                                __html: firstWords(post.excerpt!, 100),
+                                __html: categoryOrTags ? firstWords(post.excerpt!, 100) : firstWords(post.excerpt!, 300),
                             }}
                         />
                         <DisappearOnTablet>
@@ -44,37 +46,49 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
                         </DisappearOnTablet>
                     </Column>
                 </CardSection>
-                <DisappearOnPhone>
-                    <CardSection>
-                        <Column style={{ marginLeft: 'auto', width: '12rem' }}>
-                            <SubHeading>
-                                {post.categories.length > 1
-                                    ? "Categories"
-                                    : "Category"}
-                            </SubHeading>
-                            <Paragraph style={{ margin: '0' }}>
-                                {post.categories.map((cat) => (
-                                    <CustomLink
-                                        to={`/blog/${titleToKebab(cat)}`}
-                                        key={cat}
-                                    >
-                                        {cat}
-                                    </CustomLink>
-                                ))}
-                            </Paragraph>
-                            {post.tags.length > 0 && (
-                                <>
-                                    <SubHeading>
-                                        {post.tags.length > 1 ? "Tags" : "Tag"}
-                                    </SubHeading>
-                                    <Paragraph style={{ margin: '0' }}>
-                                        {post.tags.join(", ")}
-                                    </Paragraph>
-                                </>
-                            )}
-                        </Column>
-                    </CardSection>
-                </DisappearOnPhone>
+                {categoryOrTags && (
+                    <DisappearOnPhone>
+                        <CardSection>
+                            <Column
+                                style={{ marginLeft: "auto", width: "12rem" }}
+                            >
+                                {post.categories && (
+                                    <>
+                                        <SubHeading>
+                                            {post.categories.length > 1
+                                                ? "Categories"
+                                                : "Category"}
+                                        </SubHeading>
+                                        <Paragraph style={{ margin: "0" }}>
+                                            {post.categories.map((cat) => (
+                                                <CustomLink
+                                                    to={`/blog/${titleToKebab(
+                                                        cat
+                                                    )}`}
+                                                    key={cat}
+                                                >
+                                                    {cat}
+                                                </CustomLink>
+                                            ))}
+                                        </Paragraph>
+                                    </>
+                                )}
+                                {post.tags && (
+                                    <>
+                                        <SubHeading>
+                                            {post.tags.length > 1
+                                                ? "Tags"
+                                                : "Tag"}
+                                        </SubHeading>
+                                        <Paragraph style={{ margin: "0" }}>
+                                            {post.tags.join(", ")}
+                                        </Paragraph>
+                                    </>
+                                )}
+                            </Column>
+                        </CardSection>
+                    </DisappearOnPhone>
+                )}
             </Row>
         </Card>
     );

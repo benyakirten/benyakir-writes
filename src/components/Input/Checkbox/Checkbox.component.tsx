@@ -19,9 +19,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
                 checked={value}
                 aria-labelledby={`label-${name}`}
                 onChange={() => onToggle(!value)}
-                tabIndex={tabIndex}
             />
-            <label onClick={() => onToggle(!value)} id="no-toggle">
+            <label onClick={() => onToggle(!value)} id="no-toggle" tabIndex={tabIndex}>
                 <span id="no-toggle">&#9758;</span>
             </label>
             <span onClick={() => onToggle(!value)} id={`label-${name}`}>

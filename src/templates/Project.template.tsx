@@ -3,12 +3,10 @@ import { graphql, navigate } from "gatsby";
 import { Helmet } from "react-helmet";
 
 import {
-    Column,
     Grouping,
     LeadHeading,
     List,
     LItem,
-    Paragraph,
     Row,
     SubHeading,
     WpContent,
@@ -48,7 +46,7 @@ const Project: React.FC<WpProject> = ({ data }) => {
             } catch (e) {
                 setErr("Unable to fetch data");
             } finally {
-                setTimeout(() => setLoading(false), 5000);
+                setLoading(false)
             }
         }
         if (project.repoLink) {
@@ -97,7 +95,6 @@ const Project: React.FC<WpProject> = ({ data }) => {
                         First Released: {getPrettyDate(project.firstReleased.date)}
                     </LItem>
                     <LItem>
-                        Latest update:&nbsp;
                         {!!project.latestUpdate && getPrettyDate(project.latestUpdate.date)}
                         {!project.latestUpdate && loading && (
                             <Loading size="1.4rem" />

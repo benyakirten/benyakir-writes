@@ -14,7 +14,7 @@ import { formatAllBlogPosts } from "@Utils/blog";
 import { AllWpPost } from "@Types/query";
 import { FlattenedBlogPost } from "@Types/posts";
 
-const Blog: React.FC<AllWpPost> = ({ data }) => {
+const BlogPage: React.FC<AllWpPost> = ({ data }) => {
     const posts = formatAllBlogPosts(data.allWpPost.nodes);
     const [filteredPosts, setFilteredPosts] =
         React.useState<FlattenedBlogPost[]>(posts);
@@ -71,4 +71,4 @@ export const query = graphql`
     }
 `;
 
-export default Blog;
+export default BlogPage;

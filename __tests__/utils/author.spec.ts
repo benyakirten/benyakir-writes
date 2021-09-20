@@ -2,7 +2,7 @@ import * as author from '@Utils/author'
 
 import { BookType, FlattenedBook, FlattenedStory, SingleBook, SingleStory, StoryType } from '@Types/posts'
 
-describe('author', () => {
+describe('author util', () => {
     describe('books', () => {
         const dummyQueryBooks: BookType[] = [
             {

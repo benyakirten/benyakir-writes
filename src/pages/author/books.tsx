@@ -14,7 +14,7 @@ import { formatAllBooks } from "@Utils/author";
 import { WpAllBooks } from "@Types/query";
 import { FlattenedBook } from "@Types/posts";
 
-const BooksPost: React.FC<WpAllBooks> = ({ data }) => {
+const BooksPage: React.FC<WpAllBooks> = ({ data }) => {
     const books = formatAllBooks(data.allWpBook.nodes);
 
     const [filteredBooks, setFilteredBooks] =
@@ -83,4 +83,4 @@ export const query = graphql`
     }
 `;
 
-export default BooksPost;
+export default BooksPage;

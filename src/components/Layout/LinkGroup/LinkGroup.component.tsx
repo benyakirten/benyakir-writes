@@ -6,7 +6,6 @@ import CustomLink from "@Gen/CustomLink/CustomLink.component";
 import { titleToKebab } from "@Utils/strings";
 
 import { LinkGroupProps } from "@Types/props";
-import { Column } from "@/styles/general-components";
 
 const LinkGroup: React.FC<LinkGroupProps> = ({
     open = false,

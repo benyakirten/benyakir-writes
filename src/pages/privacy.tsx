@@ -41,9 +41,8 @@ const PrivacyPage: React.FC = () => {
                 <BigParagraph>
                     Data used for searches will remain where it is. It isn't
                     going anywhere. If you do use the form on this website to
-                    contact me, the message will be sent to me, personally,
-                    through WordPress email. The information will remain between
-                    us,
+                    contact me, the message will be sent to me, personally.
+                    The information, however, will remain between us.
                 </BigParagraph>
             </Grouping>
         </>
