@@ -6,13 +6,13 @@ exports[`Layout component should render correctly 1`] = `
 >
   <nav
     className="sc-dlfnuX dhFKmv nav-toggle-close"
-    id="nav-toggle"
+    data-navtoggle="nav-toggle"
     onClick={[Function]}
     open={false}
   >
     <div
       className="sc-hKgJUU botUjJ nav-toggle-close"
-      id="nav-toggle"
+      data-navtoggle="nav-toggle"
     >
       <button
         className="sc-eCstlR gHjuob"
@@ -25,19 +25,19 @@ exports[`Layout component should render correctly 1`] = `
       <div
         aria-hidden={true}
         className="sc-jSgvzq eQMidy nav-toggle-close"
-        id="nav-toggle"
+        data-navtoggle="nav-toggle"
         open={false}
       >
         <div
           className="sc-gKseQn cOJtMT"
         >
           <div
-            className="sc-dQoVA iFfNzS"
+            className="sc-bqyKOL vFWqF"
             onClick={[Function]}
             open={false}
           >
             <span
-              className="sc-kstqJO dtoKpy"
+              className="sc-hBEYId cVqZVR"
               onClick={[Function]}
               open={false}
               role="button"
@@ -47,54 +47,58 @@ exports[`Layout component should render correctly 1`] = `
             </span>
             <a
               active={false}
-              className="sc-hBEYId iovJMV"
+              className="sc-fodVek hmiHRn"
               dark={true}
               href="/blog"
               inline={false}
               limitUnderbar={false}
               small={false}
+              tabIndex={-1}
             >
               BLOG
             </a>
             <div
               aria-hidden={true}
-              className="sc-bqyKOL gpHbjR"
+              className="sc-kstqJO brGSJA"
+              data-navtoggle="no-toggle"
               height="7rem"
-              id="no-toggle"
               open={false}
             >
               <a
                 active={false}
-                className="sc-hBEYId gTOgZh"
+                className="sc-fodVek dnZZub"
                 dark={true}
                 href="/blog/bens-thoughts/"
                 inline={false}
                 limitUnderbar={false}
                 small={true}
+                tabIndex={-1}
                 underbarSize="16rem"
               >
                 Ben's Thoughts
               </a>
               <a
                 active={false}
-                className="sc-hBEYId gTOgZh"
+                className="sc-fodVek dnZZub"
                 dark={true}
                 href="/blog/reviews/"
                 inline={false}
                 limitUnderbar={false}
                 small={true}
+                tabIndex={-1}
                 underbarSize="16rem"
               >
                 Reviews
               </a>
               <a
                 active={false}
-                className="sc-hBEYId gTOgZh"
+                className="sc-fodVek dnZZub"
                 dark={true}
                 href="/blog/down-south-boulder-road/"
                 inline={false}
                 limitUnderbar={false}
                 small={true}
+                tabIndex={-1}
                 underbarSize="16rem"
               >
                 Down South Boulder Road
@@ -102,12 +106,12 @@ exports[`Layout component should render correctly 1`] = `
             </div>
           </div>
           <div
-            className="sc-dQoVA iFfNzS"
+            className="sc-bqyKOL vFWqF"
             onClick={[Function]}
             open={false}
           >
             <span
-              className="sc-kstqJO dtoKpy"
+              className="sc-hBEYId cVqZVR"
               onClick={[Function]}
               open={false}
               role="button"
@@ -117,42 +121,45 @@ exports[`Layout component should render correctly 1`] = `
             </span>
             <a
               active={false}
-              className="sc-hBEYId iovJMV"
+              className="sc-fodVek hmiHRn"
               dark={true}
               href="/author"
               inline={false}
               limitUnderbar={false}
               small={false}
+              tabIndex={-1}
             >
               AUTHOR
             </a>
             <div
               aria-hidden={true}
-              className="sc-bqyKOL gpHbjR"
+              className="sc-kstqJO brGSJA"
+              data-navtoggle="no-toggle"
               height="4rem"
-              id="no-toggle"
               open={false}
             >
               <a
                 active={false}
-                className="sc-hBEYId gTOgZh"
+                className="sc-fodVek dnZZub"
                 dark={true}
                 href="/author/books/"
                 inline={false}
                 limitUnderbar={false}
                 small={true}
+                tabIndex={-1}
                 underbarSize="16rem"
               >
                 Books
               </a>
               <a
                 active={false}
-                className="sc-hBEYId gTOgZh"
+                className="sc-fodVek dnZZub"
                 dark={true}
                 href="/author/short-stories/"
                 inline={false}
                 limitUnderbar={false}
                 small={true}
+                tabIndex={-1}
                 underbarSize="16rem"
               >
                 Short Stories
@@ -161,12 +168,13 @@ exports[`Layout component should render correctly 1`] = `
           </div>
           <a
             active={false}
-            className="sc-hBEYId jhjoYR"
+            className="sc-fodVek lgTBpb"
             dark={true}
             href="/portfolio"
             inline={false}
             limitUnderbar={false}
             small={false}
+            tabIndex={-1}
             underbarSize="12rem"
           >
             Portfolio
@@ -176,12 +184,12 @@ exports[`Layout component should render correctly 1`] = `
           className="sc-gKseQn cOJtMT"
         >
           <div
-            className="sc-dQoVA iFfNzS"
+            className="sc-bqyKOL vFWqF"
             onClick={[Function]}
             open={false}
           >
             <span
-              className="sc-kstqJO dtoKpy"
+              className="sc-hBEYId cVqZVR"
               onClick={[Function]}
               open={false}
               role="button"
@@ -190,19 +198,19 @@ exports[`Layout component should render correctly 1`] = `
               ↡
             </span>
             <h3
-              className="sc-bBXrwG kAOSz"
+              className="sc-iwyWTf hpbdPn"
             >
               Search
             </h3>
             <div
               aria-hidden={true}
-              className="sc-bqyKOL gpHbjR"
+              className="sc-kstqJO brGSJA"
+              data-navtoggle="no-toggle"
               height="auto"
-              id="no-toggle"
               open={false}
             >
               <div
-                className="sc-hTZgZg eXDGds"
+                className="sc-jgHCSr eWvmVj"
               >
                 <input
                   autoFocus={false}
@@ -234,7 +242,7 @@ exports[`Layout component should render correctly 1`] = `
                 }
               >
                 <div
-                  className="sc-jgHCSr yGbWb"
+                  className="sc-gTgzoy bjvVbk"
                 >
                   <input
                     aria-labelledby="label-global-search-show-post"
@@ -245,12 +253,12 @@ exports[`Layout component should render correctly 1`] = `
                     type="checkbox"
                   />
                   <label
-                    id="no-toggle"
+                    data-navtoggle="no-toggle"
                     onClick={[Function]}
                     tabIndex={-1}
                   >
                     <span
-                      id="no-toggle"
+                      data-navtoggle="no-toggle"
                     >
                       ☞
                     </span>
@@ -263,7 +271,7 @@ exports[`Layout component should render correctly 1`] = `
                   </span>
                 </div>
                 <div
-                  className="sc-jgHCSr yGbWb"
+                  className="sc-gTgzoy bjvVbk"
                 >
                   <input
                     aria-labelledby="label-global-search-show-project"
@@ -274,12 +282,12 @@ exports[`Layout component should render correctly 1`] = `
                     type="checkbox"
                   />
                   <label
-                    id="no-toggle"
+                    data-navtoggle="no-toggle"
                     onClick={[Function]}
                     tabIndex={-1}
                   >
                     <span
-                      id="no-toggle"
+                      data-navtoggle="no-toggle"
                     >
                       ☞
                     </span>
@@ -292,7 +300,7 @@ exports[`Layout component should render correctly 1`] = `
                   </span>
                 </div>
                 <div
-                  className="sc-jgHCSr yGbWb"
+                  className="sc-gTgzoy bjvVbk"
                 >
                   <input
                     aria-labelledby="label-global-search-show-book"
@@ -303,12 +311,12 @@ exports[`Layout component should render correctly 1`] = `
                     type="checkbox"
                   />
                   <label
-                    id="no-toggle"
+                    data-navtoggle="no-toggle"
                     onClick={[Function]}
                     tabIndex={-1}
                   >
                     <span
-                      id="no-toggle"
+                      data-navtoggle="no-toggle"
                     >
                       ☞
                     </span>
@@ -321,7 +329,7 @@ exports[`Layout component should render correctly 1`] = `
                   </span>
                 </div>
                 <div
-                  className="sc-jgHCSr yGbWb"
+                  className="sc-gTgzoy bjvVbk"
                 >
                   <input
                     aria-labelledby="label-global-search-show-story"
@@ -332,12 +340,12 @@ exports[`Layout component should render correctly 1`] = `
                     type="checkbox"
                   />
                   <label
-                    id="no-toggle"
+                    data-navtoggle="no-toggle"
                     onClick={[Function]}
                     tabIndex={-1}
                   >
                     <span
-                      id="no-toggle"
+                      data-navtoggle="no-toggle"
                     >
                       ☞
                     </span>
@@ -351,10 +359,10 @@ exports[`Layout component should render correctly 1`] = `
                 </div>
               </div>
               <div
-                className="sc-Azgjq leunDA"
+                className="sc-khAkCZ geYNqj"
               >
                 <div
-                  className="sc-iJuVqt bkKAyb"
+                  className="sc-giImIA fPLbSg"
                 >
                   No results yet!
                 </div>
@@ -367,48 +375,52 @@ exports[`Layout component should render correctly 1`] = `
         >
           <a
             active={false}
-            className="sc-hBEYId jhjoYR"
+            className="sc-fodVek lgTBpb"
             dark={true}
             href="/"
             inline={false}
             limitUnderbar={false}
             small={false}
+            tabIndex={-1}
             underbarSize="12rem"
           >
             Home
           </a>
           <a
             active={false}
-            className="sc-hBEYId jhjoYR"
+            className="sc-fodVek lgTBpb"
             dark={true}
             href="/contact"
             inline={false}
             limitUnderbar={false}
             small={false}
+            tabIndex={-1}
             underbarSize="12rem"
           >
             Contact
           </a>
           <a
             active={false}
-            className="sc-hBEYId jhjoYR"
+            className="sc-fodVek lgTBpb"
             dark={true}
             href="/privacy"
             inline={false}
             limitUnderbar={false}
             small={false}
+            tabIndex={-1}
             underbarSize="12rem"
           >
             Privacy
           </a>
           <a
             active={false}
-            className="sc-hBEYId jhjoYR"
+            className="sc-fodVek lgTBpb"
             dark={true}
             href="/about"
             inline={false}
             limitUnderbar={false}
             small={false}
+            tabIndex={-1}
             underbarSize="12rem"
           >
             About
@@ -418,23 +430,27 @@ exports[`Layout component should render correctly 1`] = `
       <div
         className="sc-gKseQn cOJtMT"
       >
-        <aside
-          className="sc-fubCzh bvKCHt"
+        <div
+          className="sc-fubCzh hgeMBo"
           open={false}
         >
-          <div>
-            © 2021 by Benyakir Horowitz.
-          </div>
-          <div>
-            All Rights Reserved.
-          </div>
-        </aside>
+          <span
+            className="sc-pGacB RvNja"
+          >
+            © 2021 by Benyakir Horowitz
+          </span>
+          <span
+            className="sc-pGacB RvNja"
+          >
+            All Rights Reserved
+          </span>
+        </div>
         <a
           href="/"
         >
           <img
             alt="Benyakir Writes Logo"
-            className="sc-fFucqa blplGB"
+            className="sc-bkzYnD iEBnrP"
           />
         </a>
       </div>

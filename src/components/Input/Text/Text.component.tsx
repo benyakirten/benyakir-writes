@@ -18,7 +18,7 @@ const Text: React.FC<TextProps> = ({ label, name, onChange, value, width, tabInd
                     width
                 }}
                 tabIndex={tabIndex}
-                autoFocus={autofocus}
+                autoFocus={tabIndex === 0 ? autofocus : false}
             />
             <label htmlFor={name}>{label}</label>
         </TextInputContainer>

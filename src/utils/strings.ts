@@ -21,7 +21,7 @@ export function firstWords(sentence: string, length: number) {
     };
     const sub = sentence.substring(0, length)
     if (/^\s*$/.test(sub) || sub.length === 0) {
-        throw new Error('Sentence section must be longer than 0 and ')
+        throw new Error('Sentence section must be longer than 0 and contain letters other than blank spaces')
     }
     return sub.replace(/\s\S*$/, '...')
 }

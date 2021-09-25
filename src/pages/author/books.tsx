@@ -1,31 +1,32 @@
 import * as React from "react";
-import { graphql } from "gatsby";
 import { Helmet } from "react-helmet";
 
 import { Grouping, LeadHeading } from "@Styles/general-components";
 
 import LeadPage from "@Layout/LeadPage/LeadPage.component";
+import Paginate from "@Layout/Paginate/Paginate.component";
 import BookFilter from "@Posts/WritingFilters/BookFilter/BookFilter.component";
-import Half from "@Variant/Author/Half/Half.component";
 import BookCard from "@Variant/Author/BookCard/BookCard.component";
 
-import { formatAllBooks } from "@Utils/author";
+import usePagination from "@Hooks/usePagination";
 
-import { WpAllBooks } from "@Types/query";
-import { FlattenedBook } from "@Types/posts";
+import booksJson from "@WPData/Author/books.json";
 
-const BooksPage: React.FC<WpAllBooks> = ({ data }) => {
-    const books = formatAllBooks(data.allWpBook.nodes);
+import { FlattenedBookCard } from "@Types/posts";
 
-    const [filteredBooks, setFilteredBooks] =
-        React.useState<FlattenedBook[]>(books);
+const BooksPage: React.FC = () => {
+    const books = React.useMemo<FlattenedBookCard[]>(
+        () => booksJson.map((b: FlattenedBookCard) => ({ ...b, published: { ...b.published, date: new Date(b.published.date) } })),
+        [booksJson]
+    )
+    const bookPagination = usePagination<FlattenedBookCard>(books)
 
     return (
         <LeadPage
             filter={
                 <BookFilter
                     books={books}
-                    onFilter={setFilteredBooks}
+                    onFilter={bookPagination.setCurrentItems}
                 />
             }
         >
@@ -39,48 +40,13 @@ const BooksPage: React.FC<WpAllBooks> = ({ data }) => {
             </Helmet>
             <LeadHeading>Books</LeadHeading>
             <Grouping>
-                <Half items={filteredBooks} El={BookCard} />
+                <Paginate
+                    {...bookPagination}
+                    El={BookCard}
+                />
             </Grouping>
         </LeadPage>
     );
 };
-export const query = graphql`
-    query {
-        allWpBook {
-            nodes {
-                slug
-                title
-                content
-                book {
-                    publishedOn
-                    purchaseLinks
-                    purchaseLinksNames
-                    cover {
-                        localFile {
-                            childImageSharp {
-                                gatsbyImageData(
-                                    formats: [AUTO, AVIF, WEBP]
-                                    height: 200
-                                )
-                            }
-                        }
-                    }
-                    relatedStories {
-                        ... on WpShortstory {
-                            title
-                            slug
-                        }
-                    }
-                    relatedProject {
-                        ... on WpProject {
-                            title
-                        }
-                    }
-                    relatedProjectDesc
-                }
-            }
-        }
-    }
-`;
 
 export default BooksPage;

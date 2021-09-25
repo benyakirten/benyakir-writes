@@ -1,43 +1,62 @@
 import * as React from "react";
-import { graphql } from "gatsby";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { Helmet } from "react-helmet";
 
-import { LeadHeading, Column, BigParagraph } from "@Styles/general-components";
+import {
+    LeadHeading,
+    BigParagraph,
+    Grouping,
+} from "@Styles/general-components";
 
-import CustomLink from "@Gen/CustomLink/CustomLink.component";
+import Paginate from "@Layout/Paginate/Paginate.component";
 import LeadPage from "@Layout/LeadPage/LeadPage.component";
+import CustomLink from "@Gen/CustomLink/CustomLink.component";
+import Loading from "@Gen/Loading/Loading.component";
 import CategoryFilter from "@Posts/BlogFilters/CategoryFilter/CategoryFilter.component";
 import BlogCard from "@Variant/BlogCard/BlogCard.component";
 
-import { formatAllBlogPosts } from "@Utils/blog";
+import usePagination from "@Hooks/usePagination";
+import { titleToKebab } from "@Utils/strings";
 
 import { WpPostByCategory } from "@Types/query";
-import { FlattenedBlogPost } from "@Types/posts";
+import { FlattenedBlogCard } from "@Types/posts";
 
-const CategoryTemplate: React.FC<WpPostByCategory> = ({
-    data,
-    pageContext,
-}) => {
-    if (data.allWpPost.nodes.length === 0) {
-        return (
-            <>
-                <LeadHeading>No posts exist</LeadHeading>
-                <BigParagraph>
-                    For the category {pageContext.name}, at least. Maybe you want to check out the
-                    general <CustomLink to="/blog">blog page</CustomLink>{" "}
-                    instead?
-                </BigParagraph>
-            </>
-        );
-    }
-    const posts = formatAllBlogPosts(data.allWpPost.nodes);
-    const [filteredPosts, setFilteredPosts] =
-        React.useState<FlattenedBlogPost[]>(posts);
+const CategoryTemplate: React.FC<WpPostByCategory> = ({ pageContext }) => {
+    const [loading, setLoading] = React.useState(true);
+    const [catPosts, setCatPosts] = React.useState<FlattenedBlogCard[]>([]);
+
+    React.useEffect(() => {
+        const catName = titleToKebab(pageContext.name);
+        import(`@WPData/Posts/${catName}.json`).then((posts) => {
+            setCatPosts(
+                posts.default.map((b: FlattenedBlogCard) => ({
+                    ...b,
+                    published: {
+                        ...b.published,
+                        date: new Date(b.published.date),
+                    },
+                }))
+            );
+            // The loading should come at the end because then the dates will be properly loaded.
+            // Even though the category filter has a backup and can handle an empty array, the dates
+            // will be set for a moment to today's date then go to the correct one
+            // Or maybe not! Gatsby's static generation might do some magic that I don't understand
+            setLoading(false);
+        });
+    }, []);
+
+    const postPagination = usePagination<FlattenedBlogCard>(catPosts);
+
     return (
         <LeadPage
             filter={
-                <CategoryFilter allPosts={posts} onFilter={setFilteredPosts} />
+                loading ? (
+                    <Loading />
+                ) : (
+                    <CategoryFilter
+                        allPosts={catPosts}
+                        onFilter={postPagination.setCurrentItems}
+                    />
+                )
             }
         >
             <Helmet>
@@ -48,49 +67,28 @@ const CategoryTemplate: React.FC<WpPostByCategory> = ({
                     filter the blog results by publication date and tags.`}
                 />
             </Helmet>
-            <LeadHeading>{pageContext.name}</LeadHeading>
-            <Column>
-                <TransitionGroup>
-                    {filteredPosts.map((p) => (
-                        <CSSTransition
-                            key={p.slug}
-                            timeout={800}
-                            classNames="filterable-card"
-                        >
-                            <BlogCard post={p} />
-                        </CSSTransition>
-                    ))}
-                </TransitionGroup>
-            </Column>
+            {loading ? (
+                <Loading size="4rem" />
+            ) : (
+                <>
+                    <LeadHeading>{pageContext.name}</LeadHeading>
+                    <Grouping>
+                        {catPosts.length > 0 ? (
+                            <Paginate {...postPagination} El={BlogCard} />
+                        ) : (
+                            <BigParagraph>
+                                There are no posts in the category{" "}
+                                {pageContext.name}. Maybe you want to check out
+                                the general{" "}
+                                <CustomLink to="/blog">blog page</CustomLink>{" "}
+                                instead?
+                            </BigParagraph>
+                        )}
+                    </Grouping>
+                </>
+            )}
         </LeadPage>
     );
 };
-
-export const query = graphql`
-    query ($name: String) {
-        allWpPost(
-            filter: {
-                categories: { nodes: { elemMatch: { name: { eq: $name } } } }
-            }
-        ) {
-            nodes {
-                title
-                slug
-                categories {
-                    nodes {
-                        name
-                    }
-                }
-                excerpt
-                date
-                tags {
-                    nodes {
-                        name
-                    }
-                }
-            }
-        }
-    }
-`;
 
 export default CategoryTemplate;

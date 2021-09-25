@@ -1,35 +1,41 @@
 import * as React from "react";
-import { graphql } from "gatsby";
 import { Helmet } from "react-helmet";
 
 import { Grouping, LeadHeading, Subtitle } from "@Styles/general-components";
 
 import LeadPage from "@Layout/LeadPage/LeadPage.component";
 import AuthorFilter from "@Posts/WritingFilters/AuthorFilter/AuthorFilter.component";
-import Half from "@Variant/Author/Half/Half.component";
 import BookCard from "@Variant/Author/BookCard/BookCard.component";
 import StoryCard from "@Variant/Author/StoryCard/StoryCard.component";
+import Paginate from "@Layout/Paginate/Paginate.component";
 
-import { formatAllBooks, formatAllStories } from "@Utils/author";
+import usePagination from "@Hooks/usePagination";
 
-import { WpAuthor } from "@Types/query";
-import { FlattenedBook, FlattenedStory } from "@Types/posts";
+import booksJson from "@WPData/Author/books.json";
+import storiesJson from "@WPData/Author/stories.json"
 
-const AuthorPage: React.FC<WpAuthor> = ({ data }) => {
-    const books = React.useMemo(() => formatAllBooks(data.allWpBook.nodes), data.allWpBook.nodes);
-    const stories = React.useMemo(() => formatAllStories(data.allWpShortstory.nodes), data.allWpShortstory.nodes);
+import { FlattenedBookCard, FlattenedStoryCard } from "@Types/posts";
 
-    const [filteredBooks, setFilteredBooks] =
-        React.useState<FlattenedBook[]>(books);
-    const [filteredStories, setFilteredStories] =
-        React.useState<FlattenedStory[]>(stories);
+const AuthorPage: React.FC = () => {
+    const books = React.useMemo<FlattenedBookCard[]>(
+        () => booksJson.map((b: FlattenedBookCard) => ({ ...b, published: { ...b.published, date: new Date(b.published.date) } })),
+        [booksJson]
+    )
+
+    const stories = React.useMemo<FlattenedStoryCard[]>(
+        () => storiesJson.map((s: FlattenedStoryCard) => ({ ...s, published: { ...s.published, date: new Date(s.published.date) } })),
+        [storiesJson]
+    )
+
+    const bookPagination = usePagination<FlattenedBookCard>(books)
+    const storyPagination = usePagination<FlattenedStoryCard>(stories)
 
     function handleFilter(
-        newBooks: FlattenedBook[],
-        newStories: FlattenedStory[]
+        newBooks: FlattenedBookCard[],
+        newStories: FlattenedStoryCard[]
     ) {
-        setFilteredBooks(newBooks);
-        setFilteredStories(newStories);
+        bookPagination.setCurrentItems(newBooks);
+        storyPagination.setCurrentItems(newStories);
     }
 
     return (
@@ -53,83 +59,20 @@ const AuthorPage: React.FC<WpAuthor> = ({ data }) => {
             <LeadHeading>Author</LeadHeading>
             <Grouping>
                 <Subtitle>Books</Subtitle>
-                <Half items={filteredBooks} El={BookCard} />
+                <Paginate
+                    {...bookPagination}
+                    El={BookCard}
+                />
             </Grouping>
             <Grouping>
                 <Subtitle>Short Stories</Subtitle>
-                <Half items={filteredStories} El={StoryCard} />
+                <Paginate
+                    {...storyPagination}
+                    El={StoryCard}
+                />
             </Grouping>
         </LeadPage>
     );
 };
-
-export const query = graphql`
-    query {
-        allWpBook {
-            nodes {
-                slug
-                title
-                content
-                book {
-                    publishedOn
-                    purchaseLinks
-                    purchaseLinksNames
-                    cover {
-                        localFile {
-                            childImageSharp {
-                                gatsbyImageData(
-                                    formats: [AUTO, AVIF, WEBP]
-                                    height: 200
-                                )
-                            }
-                        }
-                    }
-                    relatedStories {
-                        ... on WpShortstory {
-                            title
-                            slug
-                        }
-                    }
-                    relatedProject {
-                        ... on WpProject {
-                            title
-                        }
-                    }
-                    relatedProjectDesc
-                }
-            }
-        }
-        allWpShortstory {
-            nodes {
-                title
-                content
-                slug
-                shortStory {
-                    publishedOn
-                    relatedBook {
-                        ... on WpBook {
-                            title
-                            content
-                            slug
-                            book {
-                                cover {
-                                    localFile {
-                                        childImageSharp {
-                                            gatsbyImageData(
-                                                formats: [AUTO, AVIF, WEBP]
-                                                height: 150
-                                            )
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    relationshipToBook
-                }
-            }
-        }
-    }
-`;
 
 export default AuthorPage;

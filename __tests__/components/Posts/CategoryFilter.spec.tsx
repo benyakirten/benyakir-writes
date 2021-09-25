@@ -8,7 +8,8 @@ import {
 } from "@testing-library/react";
 
 import CategoryFilter from "@Posts/BlogFilters/CategoryFilter/CategoryFilter.component";
-import { FlattenedBlogPost } from "@Types/posts";
+import { createLookupMeta } from "@Utils/posts";
+import { FlattenedBlogCard} from "@Types/posts";
 
 describe("CategoryFilter component", () => {
     const testPosts = [
@@ -26,7 +27,7 @@ describe("CategoryFilter component", () => {
             },
             categories: ["cat abcd"],
             tags: null,
-            meta: "2019 8 august blog-post-c blog post c",
+            meta: createLookupMeta("2019 8 august blog-post-c blog post c"),
         },
         {
             title: "blog post A",
@@ -42,7 +43,7 @@ describe("CategoryFilter component", () => {
             },
             categories: null,
             tags: ["tag abc"],
-            meta: "2019 sep 9 september blogpostaslug blog post a tag abc",
+            meta: createLookupMeta("2019 sep 9 september blogpostaslug blog post a tag abc"),
         },
         {
             title: "blog post E",
@@ -58,7 +59,7 @@ describe("CategoryFilter component", () => {
             },
             categories: ["cat abcd"],
             tags: ["tag abc"],
-            meta: "2020 8 august blog-post-e blog post e cat abcd tag abc",
+            meta: createLookupMeta("2020 8 august blog-post-e blog post e cat abcd tag abc"),
         },
         {
             title: "blog post B",
@@ -74,7 +75,7 @@ describe("CategoryFilter component", () => {
             },
             categories: ["cat abcd"],
             tags: null,
-            meta: "2020 sep 9 september blog-post-b blog post b cat abcd",
+            meta: createLookupMeta("2020 sep 9 september blog-post-b blog post b cat abcd"),
         },
         {
             title: "blog post F",
@@ -90,7 +91,7 @@ describe("CategoryFilter component", () => {
             },
             categories: ["cat abcd"],
             tags: null,
-            meta: "2021 9 august blog-post-f blog post f cat abcd",
+            meta: createLookupMeta("2021 9 august blog-post-f blog post f cat abcd"),
         },
         {
             title: "blog post C",
@@ -106,9 +107,9 @@ describe("CategoryFilter component", () => {
             },
             categories: ["cat abcd"],
             tags: null,
-            meta: "2021 sep 9 september blog-post-c blog post c cat abcd",
+            meta: createLookupMeta("2021 sep 9 september blog-post-c blog post c cat abcd"),
         },
-    ].sort((a, b) => b.published.date.getTime() - a.published.date.getTime()) as FlattenedBlogPost[];
+    ].sort((a, b) => b.published.date.getTime() - a.published.date.getTime()) as FlattenedBlogCard[];
 
     const filterSpy = jest.fn();
 

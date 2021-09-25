@@ -12,7 +12,15 @@ import {
 import Button from "@Gen/Button/Button.component";
 
 describe("Button component", () => {
-    afterEach(cleanup);
+    beforeEach(() => {
+        jest.useFakeTimers();
+    });
+
+    afterEach(() => {
+        jest.runOnlyPendingTimers();
+        jest.useRealTimers();
+        cleanup();
+    });
 
     it("should render successfully", () => {
         expect(() => render(<Button />)).not.toThrow();
@@ -37,14 +45,14 @@ describe("Button component", () => {
         render(<Button />);
         button = await screen.findByRole("button");
         (button as any).getBoundingClientRect = jest.fn(() => ({
-            bottom: 110,
+            bottom: 100,
             height: 100,
-            left: 10,
-            right: 110,
-            top: 10,
+            left: 0,
+            right: 100,
+            top: 0,
             width: 100,
-            x: 10,
-            y: 10,
+            x: 0,
+            y: 0,
         }));
 
         const div = button.firstElementChild as HTMLElement;
@@ -55,16 +63,52 @@ describe("Button component", () => {
         expect(div.style.top).toEqual("0px")
         expect(div.style.left).toEqual("0px")
 
-        // I don't know how to dispatch a mouseEnter even with custom coordinates
-        // await act(async () => {
-        //     fireEvent.mouseEnter(button, {
-        //         screenX: 90,
-        //         screenY: 20
-        //     })
-        //     expect(div.style.transformOrigin).toEqual("top right")
-        //     expect(div.style.clipPath).toEqual("polygon(100% 0, 0 0, 100% 100%)")
-        //     expect(div.style.top).toEqual("0px")
-        //     expect(div.style.right).toEqual("0px")
-        // })
+        await act(async () => {
+            fireEvent.mouseEnter(button, {
+                clientX: 90,
+                clientY: 20
+            })
+            jest.runAllTimers()
+            expect(div.style.transformOrigin).toEqual("top right")
+            expect(div.style.clipPath).toEqual("polygon(100% 0, 0 0, 100% 100%)")
+            expect(div.style.top).toEqual("0px")
+            expect(div.style.right).toEqual("0px")
+        })
+
+        await act(async () => {
+            fireEvent.mouseEnter(button, {
+                clientX: 90,
+                clientY: 90
+            })
+            jest.runAllTimers()
+            expect(div.style.transformOrigin).toEqual("bottom right")
+            expect(div.style.clipPath).toEqual("polygon(100% 0, 0 100%, 100% 100%)")
+            expect(div.style.bottom).toEqual("0px")
+            expect(div.style.right).toEqual("0px")
+        })
+
+        await act(async () => {
+            fireEvent.mouseEnter(button, {
+                clientX: 20,
+                clientY: 90
+            })
+            jest.runAllTimers()
+            expect(div.style.transformOrigin).toEqual("bottom left")
+            expect(div.style.clipPath).toEqual("polygon(0 0, 0 100%, 100% 100%)")
+            expect(div.style.bottom).toEqual("0px")
+            expect(div.style.left).toEqual("0px")
+        })
+
+        await act(async () => {
+            fireEvent.mouseEnter(button, {
+                clientX: 20,
+                clientY: 20
+            })
+            jest.runAllTimers()
+            expect(div.style.transformOrigin).toEqual("top left")
+            expect(div.style.clipPath).toEqual("polygon(0 0, 100% 0, 0 100%)")
+            expect(div.style.top).toEqual("0px")
+            expect(div.style.left).toEqual("0px")
+        })
     });
 });

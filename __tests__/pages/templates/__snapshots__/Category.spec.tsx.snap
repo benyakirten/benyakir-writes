@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`category template should render correctly 1`] = `
+<div
+  className="sc-iktFfs kXOyTs"
+>
+  <div
+    className="sc-hiSbEG fylwSO"
+  >
+    <span
+      className="sc-citxvW jhocck"
+      size="2rem"
+    />
+  </div>
+  <div
+    className="sc-jJEKmz iZOlBP"
+  >
+    <span
+      className="sc-citxvW fJstFw"
+      size="4rem"
+    />
+  </div>
+</div>
+`;
+
+exports[`category template should render correctly 2`] = `
+<div
+  className="sc-iktFfs kXOyTs"
+>
+  <div
+    className="sc-hiSbEG fylwSO"
+  >
+    <span
+      className="sc-citxvW jhocck"
+      size="2rem"
+    />
+  </div>
+  <div
+    className="sc-jJEKmz iZOlBP"
+  >
+    <span
+      className="sc-citxvW fJstFw"
+      size="4rem"
+    />
+  </div>
+</div>
+`;

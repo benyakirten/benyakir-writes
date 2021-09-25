@@ -1,5 +1,8 @@
 import SyntaxHighlighter from "@Blocks/SyntaxHighlighter/SyntaxHighlighter.component"
 
+// In milliseconds
+export const SEARCH_TIMEOUT = 250
+
 export const ICONS_TO_LINKS = {
     Twitter: "https://twitter.com/BenyakirTen",
     Github: "https://github.com/benyakirten",

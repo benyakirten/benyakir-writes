@@ -9,9 +9,11 @@ import {
 
 import StoryFilter from "@Posts/WritingFilters/StoryFilter/StoryFilter.component";
 
-import { FlattenedStory } from "@Types/posts";
-
 import { cover } from "../../props";
+import { createLookupMeta } from "@Utils/posts";
+
+import { FlattenedStoryCard } from "@Types/posts";
+
 
 describe("StoryFilter component", () => {
     const testStories = [
@@ -27,7 +29,7 @@ describe("StoryFilter component", () => {
                 year: 2020,
             },
             book: null,
-            meta: "2020 sep september story A content a story A title",
+            meta: createLookupMeta("2020 sep september story A content a story A title"),
         },
         {
             title: "story B",
@@ -47,7 +49,7 @@ describe("StoryFilter component", () => {
                 relationship: "Preamble",
                 cover: null,
             },
-            meta: "test story b test project desc b test project name b 2020 oct october test book content b test book title b",
+            meta: createLookupMeta("test story b test project desc b test project name b 2020 oct october test book content b test book title b"),
         },
         {
             title: "story C",
@@ -67,11 +69,11 @@ describe("StoryFilter component", () => {
                 relationship: "Forestory",
                 cover,
             },
-            meta: "test story b test project desc b test project name b 2020 nov november test book content b test book title b",
+            meta: createLookupMeta("test story b test project desc b test project name b 2020 nov november test book content b test book title b"),
         },
     ].sort(
         (a, b) => b.published.date.getTime() - a.published.date.getTime()
-    ) as FlattenedStory[];
+    ) as FlattenedStoryCard[];
 
     const filterSpy = jest.fn();
 

@@ -6,6 +6,7 @@ import {
     Column,
     DisappearOnPhone,
     DisappearOnTablet,
+    MinorHeading,
     Paragraph,
     Row,
     SubHeading,
@@ -19,48 +20,49 @@ import { getPrettyDate } from "@Utils/dates";
 
 import { BlogCardProps } from "@Types/props";
 
-const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
-    const categoryOrTags = post.categories || post.tags
+const BlogCard: React.FC<BlogCardProps> = ({ item }) => {
+    const categoryOrTags = item.categories || item.tags
     return (
         <Card style={{ height: "18rem" }}>
             <Row style={{ alignItems: "start" }}>
                 <CardSection>
                     <Column>
-                        <SubHeading noUnderline>
-                            <CustomLink to={`/post/${post.slug}`}>
-                                {firstWords(post.title, 18)}
+                        <MinorHeading>
+                            <CustomLink to={`/post/${item.slug}`}>
+                                {firstWords(item.title, 18)}
                             </CustomLink>
-                        </SubHeading>
+                        </MinorHeading>
                         <WpContentDescription
+                            fontSize="1.4rem"
                             dangerouslySetInnerHTML={{
-                                __html: categoryOrTags ? firstWords(post.excerpt!, 100) : firstWords(post.excerpt!, 300),
+                                __html: categoryOrTags ? firstWords(item.excerpt!, 100) : item.excerpt!,
                             }}
                         />
                         <DisappearOnTablet>
                             <DisappearOnPhone>
-                                <SubHeading>Posted on</SubHeading>
+                                <MinorHeading>Posted on</MinorHeading>
                                 <Paragraph>
-                                    {getPrettyDate(post.published.date)}
+                                    {getPrettyDate(item.published.date)}
                                 </Paragraph>
                             </DisappearOnPhone>
                         </DisappearOnTablet>
                     </Column>
                 </CardSection>
                 {categoryOrTags && (
-                    <DisappearOnPhone>
+                    <DisappearOnTablet>
                         <CardSection>
                             <Column
-                                style={{ marginLeft: "auto", width: "12rem" }}
+                                style={{ marginLeft: "auto", width: "20rem" }}
                             >
-                                {post.categories && (
+                                {item.categories && (
                                     <>
-                                        <SubHeading>
-                                            {post.categories.length > 1
+                                        <MinorHeading>
+                                            {item.categories.length > 1
                                                 ? "Categories"
                                                 : "Category"}
-                                        </SubHeading>
+                                        </MinorHeading>
                                         <Paragraph style={{ margin: "0" }}>
-                                            {post.categories.map((cat) => (
+                                            {item.categories.map((cat) => (
                                                 <CustomLink
                                                     to={`/blog/${titleToKebab(
                                                         cat
@@ -73,21 +75,21 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
                                         </Paragraph>
                                     </>
                                 )}
-                                {post.tags && (
+                                {item.tags && (
                                     <>
-                                        <SubHeading>
-                                            {post.tags.length > 1
+                                        <MinorHeading>
+                                            {item.tags.length > 1
                                                 ? "Tags"
                                                 : "Tag"}
-                                        </SubHeading>
+                                        </MinorHeading>
                                         <Paragraph style={{ margin: "0" }}>
-                                            {post.tags.join(", ")}
+                                            {item.tags.join(", ")}
                                         </Paragraph>
                                     </>
                                 )}
                             </Column>
                         </CardSection>
-                    </DisappearOnPhone>
+                    </DisappearOnTablet>
                 )}
             </Row>
         </Card>

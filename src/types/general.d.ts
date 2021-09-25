@@ -53,3 +53,7 @@ type FileNode = {
 type BooleanLookup = {
     [key: string]: boolean
 }
+
+type StringLookup = {
+    [key: string]: string
+}

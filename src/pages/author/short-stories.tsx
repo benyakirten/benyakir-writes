@@ -1,29 +1,30 @@
 import * as React from "react";
-import { graphql } from "gatsby";
 import { Helmet } from "react-helmet";
 
 import { Grouping, LeadHeading } from "@Styles/general-components";
 
 import LeadPage from "@Layout/LeadPage/LeadPage.component";
+import Paginate from "@Layout/Paginate/Paginate.component";
 import StoryFilter from "@Posts/WritingFilters/StoryFilter/StoryFilter.component";
-import Half from "@Variant/Author/Half/Half.component";
 import StoryCard from "@Variant/Author/StoryCard/StoryCard.component";
 
-import { formatAllStories } from "@Utils/author";
+import usePagination from "@Hooks/usePagination";
 
-import { WpAllStories } from "@Types/query";
-import { FlattenedStory } from "@Types/posts";
+import storiesJson from "@WPData/Author/stories.json"
 
-const ShortstoriesPage: React.FC<WpAllStories> = ({ data }) => {
-    const stories = formatAllStories(data.allWpShortstory.nodes);
+import { FlattenedStoryCard } from "@Types/posts";
 
-    const [filteredStories, setFilteredStories] =
-        React.useState<FlattenedStory[]>(stories);
+const ShortstoriesPage: React.FC = () => {
+    const stories = React.useMemo<FlattenedStoryCard[]>(
+        () => storiesJson.map((s: FlattenedStoryCard) => ({ ...s, published: { ...s.published, date: new Date(s.published.date) } })),
+        [storiesJson]
+    )
+    const storyPagination = usePagination<FlattenedStoryCard>(stories)
 
     return (
         <LeadPage
             filter={
-                <StoryFilter stories={stories} onFilter={setFilteredStories} />
+                <StoryFilter stories={stories} onFilter={storyPagination.setCurrentItems} />
             }
         >
             <Helmet>
@@ -36,44 +37,13 @@ const ShortstoriesPage: React.FC<WpAllStories> = ({ data }) => {
             </Helmet>
             <LeadHeading>Short Stories</LeadHeading>
             <Grouping>
-                <Half items={filteredStories} El={StoryCard} />
+                <Paginate
+                    {...storyPagination}
+                    El={StoryCard}
+                />
             </Grouping>
         </LeadPage>
     );
 };
-export const query = graphql`
-    query {
-        allWpShortstory {
-            nodes {
-                title
-                content
-                slug
-                shortStory {
-                    publishedOn
-                    relatedBook {
-                        ... on WpBook {
-                            title
-                            content
-                            slug
-                            book {
-                                cover {
-                                    localFile {
-                                        childImageSharp {
-                                            gatsbyImageData(
-                                                formats: [AUTO, AVIF, WEBP]
-                                                height: 150
-                                            )
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    relationshipToBook
-                }
-            }
-        }
-    }
-`;
 
 export default ShortstoriesPage;

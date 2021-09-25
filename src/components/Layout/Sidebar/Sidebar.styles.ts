@@ -1,13 +1,15 @@
 import styled from 'styled-components'
+
 import {
     PRIMARY_200,
     PRIMARY_100,
     SECONDARY_900,
+    ABS_BLACK,
     FAUSTINA,
+    SHADOW_MD,
     FONT_XXL,
     FONT_XL,
-    SHADOW_MD,
-    FONT_XXS
+    FONT_SM,
 } from '@StyleVars'
 import { media } from '@Styles/queries'
 
@@ -17,7 +19,7 @@ export const StyledSidebar = styled.nav<{ open?: boolean }>`
 
     
     min-height: 100vh;
-    width: ${props => props.open ? '30rem' : '5rem'};
+    width: ${props => props.open ? '40rem' : '5rem'};
     
     transition: all 1s;
     
@@ -69,7 +71,7 @@ export const ArrowButton = styled.button<{ open: boolean }>`
 export const VisibleGroup = styled.div<{ open: boolean }>`
     transition: all 1s;
     transform: translateX(${props => props.open ? '0' : '-120%'});
-    opacity: ${props => props.open ? '1': '0'};
+    opacity: ${props => props.open ? '1' : '0'};
 `
 
 export const NavGroup = styled.div`
@@ -90,15 +92,20 @@ export const SubLinks = styled.div<{ open: boolean }>`
     transform-origin: top;
     transition: all 1s ease;
     height: ${props => props.open ? '5rem' : '0'};
-    opacity: ${props => props.open ? '1': '0'};
+    opacity: ${props => props.open ? '1' : '0'};
 `
 
-export const LegalBox = styled.aside<{ open: boolean }>`
-    margin: 2rem 0;
+export const LegalBox = styled.div<{ open: boolean }>`
+    display: flex;
+    flex-direction: column;
 
-    color: ${SECONDARY_900};
-    font-size: ${FONT_XXS};
+    margin: 2rem 0;
 
     transition: opacity 0.5s ease;
     opacity: ${props => props.open ? '1' : '0'};
+`
+
+export const LegalItem = styled.span`
+    font-size: ${FONT_SM};
+    color: ${ABS_BLACK};
 `

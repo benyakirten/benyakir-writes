@@ -37,12 +37,14 @@ describe('Filter component', () => {
 
     it('should call the onSearchfunction after a small delay when something is entered in the search field', async () => {
         render(<Filter {...testProps} />)
+        // Because of the new useDebounce hook, the search is called once on component render
+        expect(searchSpy).toHaveBeenCalledTimes(1)
         
         const input = await screen.getByRole("textbox")
         await act(async () => {
             fireEvent.change(input, { target: { value: 'test input' } })
             jest.runAllTimers()
-            expect(searchSpy).toHaveBeenCalledTimes(1)
+            expect(searchSpy).toHaveBeenCalledTimes(2)
             expect(searchSpy).toHaveBeenCalledWith('test input')
         })
     })

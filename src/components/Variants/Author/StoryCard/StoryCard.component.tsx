@@ -18,10 +18,7 @@ import {
 import CustomLink from "@Gen/CustomLink/CustomLink.component";
 import Button from "@Gen/Button/Button.component";
 
-import { firstWords } from "@Utils/strings";
-
 import { StoryCardProps } from "@Types/props";
-
 
 const StoryCard: React.FC<StoryCardProps> = ({ item }) => {
     return (
@@ -34,17 +31,14 @@ const StoryCard: React.FC<StoryCardProps> = ({ item }) => {
                         </CustomLink>
                     </SubHeading>
                     <WpContentDescription
+                        fontSize="1.4rem"
                         dangerouslySetInnerHTML={{
-                            __html: item.book
-                                ? firstWords(item.content, 200)
-                                : firstWords(item.content, 500),
+                            __html: item.content,
                         }}
                     />
                     <DisappearOnPhone>
                         <CardLinkBox>
-                            <Button
-                                onClick={() => navigate(`/story/${item.slug}`)}
-                            >
+                            <Button onClick={() => navigate(`/story/${item.slug}`)}>
                                 Read More
                             </Button>
                         </CardLinkBox>
@@ -52,36 +46,33 @@ const StoryCard: React.FC<StoryCardProps> = ({ item }) => {
                 </CardSection>
                 {item.book && (
                     <DisappearOnTablet>
-                        <DisappearOnPhone>
-                            <CardSection>
-                                <MinorHeading>
-                                    <CustomLink to={`/book/${item.book.slug}`}>
-                                        {item.book.relationship} of{" "}
-                                        {item.book.title}
-                                    </CustomLink>
-                                </MinorHeading>
-                                {item.book.cover ? (
-                                    <Link to={`/book/${item.book.slug}`}>
-                                        <HoverableContainer
-                                            style={{ margin: "0 auto" }}
-                                            height={item.book.cover.height}
-                                            width={item.book.cover.width}
-                                        >
-                                            <HoverableGatsbyImage
-                                                image={item.book.cover}
-                                                alt={item.book.title}
-                                            />
-                                        </HoverableContainer>
-                                    </Link>
-                                ) : (
-                                    <WpContentDescription
-                                        dangerouslySetInnerHTML={{
-                                            __html: item.book.content,
-                                        }}
-                                    />
-                                )}
-                            </CardSection>
-                        </DisappearOnPhone>
+                        <CardSection>
+                            <MinorHeading>
+                                <CustomLink to={`/book/${item.book.slug}`}>
+                                    Related Book
+                                </CustomLink>
+                            </MinorHeading>
+                            {item.book.cover ? (
+                                <Link to={`/book/${item.book.slug}`}>
+                                    <HoverableContainer
+                                        style={{ margin: "0 auto" }}
+                                        height={item.book.cover.height}
+                                        width={item.book.cover.width}
+                                    >
+                                        <HoverableGatsbyImage
+                                            image={item.book.cover}
+                                            alt={item.book.title}
+                                        />
+                                    </HoverableContainer>
+                                </Link>
+                            ) : (
+                                <WpContentDescription
+                                    dangerouslySetInnerHTML={{
+                                        __html: item.book.content,
+                                    }}
+                                />
+                            )}
+                        </CardSection>
                     </DisappearOnTablet>
                 )}
             </Row>

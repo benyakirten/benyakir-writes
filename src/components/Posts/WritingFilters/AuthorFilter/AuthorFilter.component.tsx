@@ -11,6 +11,7 @@ import { getMultipleChoiceHeight, getValuesForSelected } from "@Utils/filter";
 import { SubHeading} from "@Styles/general-components";
 
 import { AuthorFilterProps } from "@Types/props";
+import { hasSomeContent } from "@/utils/search";
 
 const AuthorFilter: React.FC<AuthorFilterProps> = ({
     allBooks,
@@ -35,17 +36,18 @@ const AuthorFilter: React.FC<AuthorFilterProps> = ({
     )
 
     React.useEffect(() => {
-        
         let filteredBooks = allBooks
-            .filter(b => filterWords.every((w) => b.meta.indexOf(w.toLowerCase()) !== -1))
             .filter(b => b.published.date.getTime() <= publishedBefore.getTime())
             .filter(b => b.published.date.getTime() >= publishedAfter.getTime());
-        
+
         let filteredStories = allStories
-            .filter(s => filterWords.every((w) => s.meta.indexOf(w.toLowerCase()) !== -1))
             .filter(s => s.published.date.getTime() <= publishedBefore.getTime())
             .filter(s => s.published.date.getTime() >= publishedAfter.getTime());
 
+        if (hasSomeContent(filterWords)) {
+            filteredBooks = filteredBooks.filter(b => filterWords.every((w) => b.meta[w] || b.meta[w.toLowerCase()]))
+            filteredStories = filteredStories.filter(s => filterWords.every((w) => s.meta[w] || s.meta[w.toLowerCase()]))
+        }
 
         if (bookChoices.some(b => b.selected)) {
             const _bookChoices = getValuesForSelected(bookChoices)
@@ -62,7 +64,12 @@ const AuthorFilter: React.FC<AuthorFilterProps> = ({
     ]);
 
     function setSearchString(filterString: string) {
-        setFilterWords(filterString ? filterString.split(' ') : [' ']);
+        // This line is redundant because there are already checks for empty strings
+        // However, testing fails otherwise because the useDebounce hook will
+        // cause an internal state change as the component is rendering
+        // This line prevents that state change and allows the tests to work
+        if (!filterString && !hasSomeContent(filterWords)) return
+        setFilterWords(filterString ? filterString.split(' ') : [''])
     }
 
     return (

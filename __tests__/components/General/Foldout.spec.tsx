@@ -67,7 +67,7 @@ describe("Foldout component", () => {
         expect(clickSpy).toHaveBeenCalledTimes(3);
 
         const body = topbar.nextElementSibling!;
-        expect(body.id).toEqual("no-toggle");
+        expect(body.getAttribute('data-navtoggle')).toEqual("no-toggle");
         fireEvent.click(body);
         expect(clickSpy).toHaveBeenCalledTimes(3);
 

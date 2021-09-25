@@ -8,11 +8,12 @@ import {
 } from "@testing-library/react";
 
 import ProjectFilter from "@Posts/ProjectFilter/ProjectFilter.component";
+import { createLookupMeta } from "@Utils/posts";
 
-import { FlattenedProject } from "@Types/posts";
+import { FlattenedProjectCard } from "@Types/posts";
 
 describe("ProjectFilter component", () => {
-    const testProjects: FlattenedProject[] = [
+    const testProjects = [
         {
             title: 'project title A',
             content: 'project content A',
@@ -26,7 +27,7 @@ describe("ProjectFilter component", () => {
                 month: 9,
                 year: 2019
             },
-            meta: 'python py sep september 2019 project content a projectaslug project title a'
+            meta: createLookupMeta('python py sep september 2019 project content a projectaslug project title a')
         },
         {
             title: 'project title B',
@@ -52,11 +53,11 @@ describe("ProjectFilter component", () => {
                 year: 2019
             },
 
-            meta: 'repo github angular graphql ng gql oct october 2019 google project content b projectbslug project title b'
+            meta: createLookupMeta('repo github angular graphql ng gql oct october 2019 google project content b projectbslug project title b')
         }
     ].sort(
         (a, b) => b.firstReleased.date.getTime() - a.firstReleased.date.getTime()
-    ) as FlattenedProject[];
+    ) as FlattenedProjectCard[];
 
     const filterSpy = jest.fn();
 

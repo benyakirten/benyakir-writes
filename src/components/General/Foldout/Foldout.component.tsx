@@ -18,10 +18,10 @@ const Foldout: React.FC<FoldoutProps> = ({
 }) => {
     function handleContainerClick(e: React.BaseSyntheticEvent) {
         if (
-            e.target.id === "no-toggle" ||
-            (e.target.parentElement && e.target.parentElement.id === "no-toggle") ||
-            (e.target.parentElement.parentElement && e.target.parentElement.parentElement.id === "no-toggle") ||
-            (e.target.parentElement.parentElement.parentElement && e.target.parentElement.parentElement.parentElement.id === 'no-toggle')
+            e.target.getAttribute("data-navtoggle") === "no-toggle" ||
+            (e.target.parentElement && e.target.parentElement.getAttribute("data-navtoggle") === "no-toggle") ||
+            (e.target.parentElement.parentElement && e.target.parentElement.parentElement.getAttribute("data-navtoggle") === "no-toggle") ||
+            (e.target.parentElement.parentElement.parentElement && e.target.parentElement.parentElement.parentElement.getAttribute("data-navtoggle") === 'no-toggle')
         ) {
             return;
         }
@@ -32,7 +32,7 @@ const Foldout: React.FC<FoldoutProps> = ({
             <DownArrow open={open} tabIndex={open ? 0 : -1} onClick={onClick} />
             {topbar}
             <FoldoutBody
-                id="no-toggle"
+                data-navtoggle="no-toggle"
                 heightMultiplierOnPhone={heightMultiplierOnPhone}
                 heightMultiplierOnTablet={heightMultiplierOnTablet}
                 heightMultiplierOnLarger={heightMultiplierOnLarger}

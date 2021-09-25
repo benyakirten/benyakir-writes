@@ -8,6 +8,7 @@ export const FONT_XXL = '3rem'
 export const FONT_XL = '2.4rem'
 export const FONT_LG = '1.8rem'
 export const FONT_MD = '1.4rem'
+export const FONT_SM = '1.2rem'
 export const FONT_XS = '1rem'
 export const FONT_XXS = '0.6rem'
 
@@ -86,3 +87,4 @@ export const Z_HIGH = 3
 export const Z_RAISED = 2
 export const Z_ABOVE = 1
 export const Z_BASE = 0
+export const Z_UNDER = -1

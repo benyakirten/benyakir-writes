@@ -3,7 +3,7 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 
 import { fadeIn, slideInLeft, slideInRight } from './animations';
 import { media } from './queries';
-import { BLACK, FAUSTINA, FONT_LG, FONT_MD, FONT_XL, FONT_XXL, FONT_XXXL, SECONDARY_600, SHADOW_MD } from './variables';
+import { BLACK, FAUSTINA, FONT_LG, FONT_MD, FONT_XL, FONT_XXL, FONT_XXXL, SECONDARY_800, SHADOW_MD } from './variables';
 
 export const FadeIn = styled.div<{ duration?: string, delay?: string }>`
     opacity: 0;
@@ -44,6 +44,7 @@ export const LeadHeading = styled.h1`
 
     font-family: ${FAUSTINA};
     font-size: ${FONT_XXXL};
+
     ${media.phone} {
         font-size: ${FONT_XXL};
     }
@@ -80,6 +81,7 @@ export const LeadHeading = styled.h1`
 export const Subtitle = styled.h2<{ noUnderline?: boolean }>`
     font-family: ${FAUSTINA};
     font-size: ${FONT_XXL};
+
     ${media.phone} {
         ${FONT_XL};
     }
@@ -138,6 +140,9 @@ export const Centered = styled.div`
     font-size: ${FONT_MD};
 `
 
+// There's no reason to include a third google font
+// and cause browsers to download another ~10kb of data
+// Especially since the monospace font will only be used here
 export const Card = styled.article`
     position: relative;
 
@@ -145,7 +150,9 @@ export const Card = styled.article`
     height: 24rem;
     box-shadow: ${SHADOW_MD};
 
-    overflow: hidden;
+    font-family: monospace;
+
+    overflow: auto;
 
     padding: 2rem;
     
@@ -178,6 +185,8 @@ export const Grid = styled.div`
 `
 
 export const Row = styled.div`
+    position: relative;
+    
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -204,12 +213,12 @@ export const NoLineBreak = styled.span`
 `
 
 export const CardLinkBox = styled.div`
+    margin-top: 1rem;
+
     display: flex;
+
     align-items: center;
 
-    position: absolute;
-    bottom: 2rem;
-    left: 2rem;
 `
 
 export const HoverableContainer = styled.div<{ height?: number, width?: number }>`
@@ -237,8 +246,8 @@ export const LItem = styled.li`
     margin: 1rem 0;
 `
 
-export const WpContentDescription = styled.div`
-    font-size: ${FONT_LG};
+export const WpContentDescription = styled.div<{ fontSize?: string }>`
+    font-size: ${props => props.fontSize ? props.fontSize : FONT_LG};
     ${media.desktop} {
         font-size: ${FONT_MD};
     }
@@ -247,7 +256,7 @@ export const WpContentDescription = styled.div`
     a:visited {
         position: relative;
 
-        color: ${SECONDARY_600};
+        color: ${SECONDARY_800};
 
         overflow: hidden;
         white-space: nowrap;
@@ -262,7 +271,7 @@ export const WpContentDescription = styled.div`
             height: 2px;
             width: 100%;
             
-            background-color: ${SECONDARY_600};
+            background-color: ${SECONDARY_800};
 
             transition: transform 0.5s ease;
             transform-origin: left;
@@ -305,14 +314,14 @@ export const DisappearOnPhone= styled.div`
     }
 `
 
-export const WpContent = styled.div`
-    font-size: ${FONT_LG};
+export const WpContent = styled.div<{ fontSize?: string }>`
+    font-size: ${props => props.fontSize ? props.fontSize : FONT_LG};
 
     a:link,
     a:visited {
         position: relative;
 
-        color: ${SECONDARY_600};
+        color: ${SECONDARY_800};
 
         overflow: hidden;
         white-space: nowrap;
@@ -327,7 +336,7 @@ export const WpContent = styled.div`
             height: 2px;
             width: 100%;
             
-            background-color: ${SECONDARY_600};
+            background-color: ${SECONDARY_800};
 
             transition: transform 0.5s ease;
             transform-origin: left;

@@ -25,6 +25,8 @@
       "@Tech/*": ["src/images/tech/*"],
       "@Constants": ["src/data/constants.ts"],
       "@Hooks/*": ["src/hooks/*"],
+      "@Data/*": ["src/data/*"],
+      "@WPData/*": ["src/data/wp/*"],
       "@Types/*": ["src/types/*"]
     }, 
     "esModuleInterop": true,

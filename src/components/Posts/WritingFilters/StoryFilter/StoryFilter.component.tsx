@@ -1,12 +1,13 @@
 import * as React from "react";
 
+import { SubHeading} from "@Styles/general-components";
+
 import Filter from "@Input/Filter/Filter.component";
 import DatePicker from "@Input/DatePicker/DatePicker.component";
 import Foldout from "@Gen/Foldout/Foldout.component";
 
 import useDropdown from "@Hooks/useDropdown";
-
-import { SubHeading} from "@Styles/general-components";
+import { hasSomeContent } from "@Utils/search";
 
 import { StoryFilterProps } from "@Types/props";
 
@@ -23,10 +24,13 @@ const StoryFilter: React.FC<StoryFilterProps> = ({
     const [filterWords, setFilterWords] = React.useState<string[]>([])
 
     React.useEffect(() => {
-        const filteredStories = stories
-            .filter(s => filterWords.every((w) => s.meta.indexOf(w.toLowerCase()) !== -1))
+        let filteredStories = stories
             .filter(s => s.published.date.getTime() <= publishedBefore.getTime())
             .filter(s => s.published.date.getTime() >= publishedAfter.getTime());
+        
+        if(hasSomeContent(filterWords)) {
+            filteredStories = filteredStories.filter(s => filterWords.every(w => s.meta[w] || s.meta[w.toLowerCase()]))
+        }
 
         onFilter(filteredStories)
     }, [
@@ -36,6 +40,11 @@ const StoryFilter: React.FC<StoryFilterProps> = ({
     ]);
 
     function setSearchString(filterString: string) {
+        // This line is redundant because there are already checks for empty strings
+        // However, testing fails otherwise because the useDebounce hook will
+        // cause an internal state change as the component is rendering
+        // This line prevents that state change and allows the tests to work
+        if (!filterString && !hasSomeContent(filterWords)) return
         setFilterWords(filterString ? filterString.split(' ') : [' ']);
     }
 

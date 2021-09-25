@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { render, fireEvent, screen } from '@testing-library/react'
+import { render, fireEvent, screen, cleanup } from '@testing-library/react'
 
 import useLookup from "@Hooks/useLookup"
 
@@ -41,6 +41,8 @@ describe('useLookup hook', () => {
         toggleButton = await screen.findByTitle('toggle') as HTMLButtonElement
         output = await screen.findByTitle('output') as HTMLDivElement
     })
+
+    afterEach(cleanup)
 
     it('should render the designated item false if the deactivated dispatch type is called', () => {
         expect(output).toHaveTextContent('true')

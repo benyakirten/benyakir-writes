@@ -1,5 +1,5 @@
-const path = require("path")
-const fs = require('fs')
+const path = require("path");
+const fs = require("fs");
 
 exports.onCreateWebpackConfig = ({ actions }) => {
     actions.setWebpackConfig({
@@ -27,6 +27,8 @@ exports.onCreateWebpackConfig = ({ actions }) => {
                 "@Tech": path.resolve(__dirname, "src/images/tech"),
                 "@Constants": path.resolve(__dirname, "src/data/constants.ts"),
                 "@Hooks": path.resolve(__dirname, "src/hooks"),
+                "@Data": path.resolve(__dirname, "src/data"),
+                "@WPData": path.resolve(__dirname, "src/data/wp"),
                 "@Types": path.resolve(__dirname, "src/types"),
             },
         },
@@ -72,8 +74,18 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     }
 
     function titleToKebab(title) {
-        const _title = title.toLowerCase().replace(/'/g, "").split(" ");
-        return _title.join("-");
+        // Since this function is only applied in the build phase
+        // and on titles written by humans, the complexity/lack of it doesn't matter
+        const _title = title
+            .toLowerCase()
+            .trim()
+            .replace(/['\.\[\]\{\}\!\?\,:@#\*]/g, '')
+            .replace(/\s{2,}/g, ' ')
+            .split(' ')
+        if (_title.every(part => part.length === 0)) {
+            throw new Error('Invalid title -- format must include characters other than apostraphes, spaces, !@#*[]{} or punctuation')
+        }
+        return _title.join('-')
     }
 
     const {
@@ -157,6 +169,16 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                         publishedOn
                         purchaseLinks
                         purchaseLinksNames
+                        cover {
+                            localFile {
+                                childImageSharp {
+                                    gatsbyImageData(
+                                        formats: [AUTO, AVIF, WEBP]
+                                        height: 200
+                                    )
+                                }
+                            }
+                        }
                         relatedStories {
                             ... on WpShortstory {
                                 title
@@ -184,9 +206,39 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                                 title
                                 content
                                 slug
+                                book {
+                                    cover {
+                                        localFile {
+                                            childImageSharp {
+                                                gatsbyImageData(
+                                                    formats: [AUTO, AVIF, WEBP]
+                                                    height: 150
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                         relationshipToBook
+                    }
+                }
+            }
+            allWpPost {
+                nodes {
+                    title
+                    slug
+                    date
+                    excerpt
+                    categories {
+                        nodes {
+                            name
+                        }
+                    }
+                    tags {
+                        nodes {
+                            name
+                        }
                     }
                 }
             }
@@ -205,29 +257,17 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                     slug
                 }
             }
-            allWpPost {
+            allFile {
                 nodes {
-                    title
-                    slug
-                    date
-                    content
-                    categories {
-                        nodes {
-                            name
-                        }
-                    }
-                    tags {
-                        nodes {
-                            name
-                        }
-                    }
+                    publicURL
+                    name
                 }
             }
         }
     `);
 
     if (searchQuery.errors) {
-        reporter.error("Unable to query general search criteria");
+        reporter.error("Unable to query general filtering and search data");
     }
 
     function getTimeFromDateString(date) {
@@ -236,19 +276,19 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             year: +date.substring(6),
             month,
             ...getMonth(month),
-            date: new Date(date)
-        }
+            date: new Date(date),
+        };
     }
 
     function getBlogPostDateInformation(date) {
-        const year = +date.substring(0, 4)
-        const month = +date.substring(5, 7)
+        const year = +date.substring(0, 4);
+        const month = +date.substring(5, 7);
         return {
             year,
             month,
             ...getMonth(month),
-            date: new Date(date)
-        }
+            date: new Date(date),
+        };
     }
 
     function getMonth(month) {
@@ -256,68 +296,68 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             case 1:
                 return {
                     full: "January",
-                    short: "JAN"
-                }
+                    short: "JAN",
+                };
             case 2:
                 return {
                     full: "February",
-                    short: "FEB"
-                }
+                    short: "FEB",
+                };
             case 3:
                 return {
                     full: "March",
-                    short: "MAR"
-                }
+                    short: "MAR",
+                };
             case 4:
                 return {
                     full: "April",
-                    short: "APR"
-                }
+                    short: "APR",
+                };
             case 5:
                 return {
                     full: "May",
-                    short: "MAY"
-                }
+                    short: "MAY",
+                };
             case 6:
                 return {
                     full: "June",
-                    short: "JUN"
-                }
+                    short: "JUN",
+                };
             case 7:
                 return {
                     full: "July",
-                    short: "JUL"
-                }
+                    short: "JUL",
+                };
             case 8:
                 return {
                     full: "August",
-                    short: "AUG"
-                }
+                    short: "AUG",
+                };
             case 9:
                 return {
                     full: "September",
-                    short: "SEP"
-                }
+                    short: "SEP",
+                };
             case 10:
                 return {
                     full: "October",
-                    short: "OCT"
-                }
+                    short: "OCT",
+                };
             case 11:
                 return {
                     full: "November",
-                    short: "NOV"
-                }
+                    short: "NOV",
+                };
             case 12:
                 return {
                     full: "December",
-                    short: "DEC"
-                }
+                    short: "DEC",
+                };
             default:
                 return {
                     full: "January",
-                    short: "JAN"
-                }
+                    short: "JAN",
+                };
         }
     }
 
@@ -364,167 +404,464 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         }
     }
 
-    function formatText (text) {
+    function formatText(text) {
+        if (!text) return;
         return text
-            .replace(/<p>/g, '')
-            .replace(/<\/p>/g, '')
-            .replace(/&#?\w+;/g, '')
-            .replace(/\[/g, '')
-            .replace(/\]/g, '')
-            .replace(/\n/g, '')
-            .replace(/,/g, '')
-            .replace(/"/g, '')
-            .replace(/'/g, '')
-            .replace(/\)/g, '')
-            .replace(/\(/g, '')
-            .replace(/\./g, '')
-            .replace(/\?/g, '')
-            .replace(/\!/g, '')
+            .replace(/<\/?[\w\s=":\/\.]+>/g, "")
+            .replace(/&#?\w+;/g, "")
+            .replace(/\[/g, "")
+            .replace(/\]/g, "")
+            .replace(/\n/g, "")
+            .replace(/,/g, "")
+            .replace(/"/g, "")
+            .replace(/'/g, "")
+            .replace(/\)/g, "")
+            .replace(/\(/g, "")
+            .replace(/\./g, "")
+            .replace(/\?/g, "")
+            .replace(/\!/g, "");
+    }
+
+    function firstWords(sentence, length) {
+        if (length >= sentence.length) {
+            return sentence;
+        }
+        const sub = sentence.substring(0, length);
+        if (/^\s*$/.test(sub) || sub.length === 0) {
+            throw new Error(
+                "Sentence section must be longer than 0 and contain letters other than blank spaces"
+            );
+        }
+        return sub.replace(/\s\S*$/, "...");
     }
 
     function generateLookup(arr) {
-        return arr.reduce((acc, next) => ({ ...acc, [formatText(next.toString()).toLowerCase()]: true }), {})
+        return arr.reduce(
+            (acc, next) => ({
+                ...acc,
+                [formatText(next.toString()).toLowerCase()]: true,
+            }),
+            {}
+        );
     }
 
-    function generateStoryMeta(story) {
-        const date = getTimeFromDateString(story.shortStory.publishedOn)
-        let data = [
-            ...story.title.split(" "),
-            ...formatText(story.content).split(" "),
-            date.full,
-            date.short,
-            date.year
-        ]
-        if (story.shortStory.alternateLinksNames) {
-            data = data.concat(story.shortStory.alternateLinksNames.split(", "))
+    function formatProject(project, hashedIcons) {
+        const tech = project.project.technologies.split(", ");
+        const piecemealProject = {
+            title: project.title,
+            slug: project.slug,
+            mainLink: project.project.mainLink,
+            hostedOn: project.project.hostedOn,
+            repoLink: project.project.repoLink,
+            content: firstWords(project.content, 140),
+            firstReleased: getTimeFromDateString(project.project.firstReleased),
+            shortTechnologies: tech,
+            longTechnologies: tech.map((t) => getFullTechName(t)),
+        };
+        if (project.project.latestUpdate) {
+            piecemealProject.latestUpdate = getTimeFromDateString(
+                project.project.latestUpdate
+            );
         }
-        if (story.shortStory.relatedBook) {
-            data = data.concat(story.shortStory.relatedBook.title.split(" "))
-            data.push(story.shortStory.relationshipToBook)
-        }
-        return generateLookup(data.filter(d => !!d))
+        piecemealProject.icons = getIconsForProject(
+            piecemealProject,
+            hashedIcons
+        );
+        return {
+            ...piecemealProject,
+            meta: generateProjectMeta(piecemealProject),
+        };
     }
 
-    function generateBookMeta(book) {
-        const date = getTimeFromDateString(book.book.publishedOn)
-        let data = [
-            ...book.title.split(" "),
-            date.full,
-            date.short,
-            date.year,
-            ...formatText(book.content).split(" "),
-        ];
-        if (book.book.relatedStories) {
-            data = data.concat(book.book.relatedStories.flatMap(s => s.title.split(" ")))
-        }
-        if (book.book.relatedProject) {
-            data = data.concat(book.book.relatedProject.title.split(" "))
-        }
-        if (book.book.relatedProjectDesc) {
-            data = data.concat(book.book.relatedProjectDesc.split(" "))
-        }
-        return generateLookup(data.filter(d => !!d))
+    function getAllUsedShortTechs(rawProjects) {
+        const techs = rawProjects.flatMap((p) =>
+            p.project.technologies.split(", ")
+        );
+        return Array.from(new Set(techs));
+    }
+
+    function getAllUsedTechnologies(shortTechs) {
+        return Array.from(new Set(shortTechs.map((t) => getFullTechName(t))));
+    }
+
+    function getAllHosts(projects) {
+        const nonUniqueHosts = projects
+            .filter(p => !!p.hostedOn)
+            .map(p => p.hostedOn)
+        return Array.from(new Set(nonUniqueHosts))
+    }
+
+    function hashUsedIcons(allIcons, allShortTechs) {
+        return allIcons
+            .filter((f) => allShortTechs.includes(f.name))
+            .map((f) => ({ ...f, name: getFullTechName(f.name) }))
+            .reduce(
+                (acc, next) => ({ ...acc, [next.name]: next.publicURL }),
+                {}
+            );
+    }
+
+    function getIconsForProject(project, hashedIcons) {
+        return project.longTechnologies.map((t) => ({
+            name: t,
+            publicURL: hashedIcons[t],
+        }));
     }
 
     function generateProjectMeta(project) {
-        const tech = project.project.technologies.split(", ")
-        const date = getTimeFromDateString(project.project.firstReleased)
         const data = [
             ...project.title.split(" "),
-            project.project.hostedOn,
+            project.hostedOn,
             ...formatText(project.content).split(" "),
+            project.firstReleased.full,
+            project.firstReleased.short,
+            project.firstReleased.year,
+            ...project.shortTechnologies,
+            ...project.longTechnologies,
+        ];
+        if (project.repoLink) {
+            data.push("github");
+            data.push("repo");
+        }
+        return generateLookup(data.filter((d) => !!d));
+    }
+
+    function formatStory(story) {
+        const _story = {
+            slug: story.slug,
+            title: story.title,
+            content: firstWords(formatText(story.content), 200),
+            published: getTimeFromDateString(story.shortStory.publishedOn),
+            book: !story.shortStory.relatedBook
+                ? null
+                : {
+                      title: story.shortStory.relatedBook.title,
+                      slug: story.shortStory.relatedBook.slug,
+                      content: formatText(
+                          firstWords(story.shortStory.relatedBook.content, 50)
+                      ),
+                      relationship: story.shortStory.relationshipToBook
+                          ? story.shortStory.relationshipToBook
+                          : "Related story",
+                      cover:
+                          story.shortStory.relatedBook.book &&
+                          story.shortStory.relatedBook.book.cover
+                              ? story.shortStory.relatedBook.book.cover
+                                    .localFile.childImageSharp.gatsbyImageData
+                              : null,
+                  },
+        };
+        const flattenedStory = {
+            ..._story,
+            meta: generateStoryMeta(story),
+        };
+        return flattenedStory;
+    }
+
+    function generateStoryMeta(rawStory) {
+        const date = getTimeFromDateString(rawStory.shortStory.publishedOn);
+        let data = [
+            ...rawStory.title.split(" "),
+            ...formatText(rawStory.content).split(" "),
             date.full,
             date.short,
             date.year,
-            ...project.project.technologies.split(", "),
-            ...tech.map(t => getFullTechName(t))
-        ]
-        if (project.repoLink) {
-            data.push('github')
-            data.push('repo')
+        ];
+        if (rawStory.shortStory.alternateLinksNames) {
+            data = data.concat(
+                rawStory.shortStory.alternateLinksNames.split(", ")
+            );
         }
-        return generateLookup(data.filter(d => !!d))
+        if (rawStory.shortStory.relatedBook) {
+            data = data.concat(
+                rawStory.shortStory.relatedBook.title.split(" ")
+            );
+            data.push(rawStory.shortStory.relationshipToBook);
+        }
+        return generateLookup(data.filter((d) => !!d));
+    }
+
+    function formatBook(book) {
+        const links = book.book.purchaseLinks.split(", ");
+        const linkNames = book.book.purchaseLinksNames.split(", ");
+        const purchaseLinks = [];
+        for (let i = 0; i < links.length; i++) {
+            purchaseLinks.push({
+                link: links[i],
+                name: i < linkNames.length ? linkNames[i] : links[i],
+            });
+        }
+        const _book = {
+            slug: book.slug,
+            title: book.title,
+            published: getTimeFromDateString(book.book.publishedOn),
+            content: firstWords(book.content, 200),
+            cover: book.book.cover
+                ? book.book.cover.localFile.childImageSharp.gatsbyImageData
+                : null,
+            stories: book.book.relatedStories,
+            project: !book.book.relatedProject
+                ? null
+                : {
+                      ...book.book.relatedProject,
+                      description: book.book.relatedProjectDesc,
+                  },
+            purchaseLinks,
+        };
+        const flattenedBook = {
+            ..._book,
+            meta: generateBookMeta(_book),
+        };
+        return flattenedBook;
+    }
+
+    function generateBookMeta(book) {
+        let data = [
+            ...book.title.split(" "),
+            book.published.full,
+            book.published.short,
+            book.published.year,
+            ...book.purchaseLinks,
+            ...formatText(book.content).split(" "),
+        ];
+        if (book.stories) {
+            data = data.concat(
+                book.stories.flatMap((s) => s.title.split(" "))
+            );
+        }
+        if (book.project) {
+            data = data.concat(book.project.title.split(" "));
+            data = data.concat(book.project.description.split(" "));
+        }
+        return generateLookup(data.filter((d) => !!d));
+    }
+
+    function formatPost(post) {
+        const data = {
+            title: post.title,
+            slug: post.slug,
+            excerpt: firstWords(formatText(post.excerpt), 200),
+            content: formatText(post.content),
+            published: getBlogPostDateInformation(post.date),
+            categories:
+                post.categories.nodes &&
+                post.categories.nodes.map((n) => n.name),
+            tags: post.tags.nodes && post.tags.nodes.map((n) => n.name),
+        };
+
+        const flattenedPost = {
+            ...data,
+            meta: generatePostMeta(data),
+        };
+
+        return flattenedPost;
     }
 
     function generatePostMeta(post) {
-        const date = getBlogPostDateInformation(post.date)
         const data = [
-            ...post.categories.nodes.flatMap(n => n.name.split(" ")),
-            date.full,
-            date.short,
-            date.year,
+            ...post.categories,
+            ...post.tags,
+            post.published.full,
+            post.published.short,
+            post.published.year,
             ...post.title.split(" "),
-            ...formatText(post.content).split(" "),
-            ...post.tags.nodes.flatMap(n => n.name.split(" "))
-        ]
-        return generateLookup(data.filter(d => !!d))
+            ...formatText(post.excerpt).split(" "),
+        ];
+        return generateLookup(data.filter((d) => !!d));
     }
+
+    const books = searchQuery.data.allWpBook.nodes;
+    const stories = searchQuery.data.allWpShortstory.nodes;
+    const projects = searchQuery.data.allWpProject.nodes;
+    const posts = searchQuery.data.allWpPost.nodes;
+    const icons = searchQuery.data.allFile.nodes;
+
+    const shortTechs = getAllUsedShortTechs(projects);
+    const longTechs = getAllUsedTechnologies(shortTechs);
+    const usedIcons = hashUsedIcons(icons, shortTechs);
+    const allCategories = allWpCategory.nodes.map((cat) => cat.name);
+
+    const formattedBooks = books
+        .map((b) => formatBook(b))
+        .sort(
+            (a, b) => b.published.date.getTime() - a.published.date.getTime()
+        );
+    const formattedStories = stories
+        .map((s) => formatStory(s))
+        .sort(
+            (a, b) => b.published.date.getTime() - a.published.date.getTime()
+        );
+    const formattedPosts = posts
+        .map((p) => formatPost(p))
+        .sort(
+            (a, b) => b.published.date.getTime() - a.published.date.getTime()
+        );
+    const formattedProjects = projects
+        .map((p) => formatProject(p, usedIcons))
+        .sort(
+            (a, b) =>
+                b.firstReleased.date.getTime() - a.firstReleased.date.getTime()
+        );
+    
+    const allHosts = getAllHosts(formattedProjects)
 
     function generateGenericInfo(item, itemType) {
         return {
             type: itemType,
             slug: item.slug,
-            title: item.title
-        }
+            title: item.title,
+        };
     }
 
-    function prepareGlobalSearch(query) {
-        const stories = query.data.allWpShortstory.nodes.map(s => ({
-            ...generateGenericInfo(s, 'story'),
-            meta: generateStoryMeta(s),
-            date: getTimeFromDateString(s.shortStory.publishedOn).date
-        }))
+    function prepareGlobalSearch() {
+        const stories = formattedStories.map((s) => ({
+            ...generateGenericInfo(s, "story"),
+            meta: s.meta,
+        }));
 
-        const books = query.data.allWpBook.nodes.map(b => ({
-            ...generateGenericInfo(b, 'book'),
-            meta: generateBookMeta(b),
-            date: getTimeFromDateString(b.book.publishedOn).date
-        }))
+        const books = formattedBooks.map((b) => ({
+            ...generateGenericInfo(b, "book"),
+            meta: b.meta,
+        }));
 
-        const projects = query.data.allWpProject.nodes.map(p => ({
-            ...generateGenericInfo(p, 'project'),
-            meta: generateProjectMeta(p),
-            date: getTimeFromDateString(p.project.firstReleased).date
-        }))
+        const projects = formattedProjects.map((p) => ({
+            ...generateGenericInfo(p, "project"),
+            meta: p.meta,
+        }));
 
-        const posts = query.data.allWpPost.nodes.map(p => ({
-            ...generateGenericInfo(p, 'post'),
-            meta: generatePostMeta(p),
-            date: getBlogPostDateInformation(p.date).date
-        }))
+        const posts = formattedPosts.map((p) => ({
+            ...generateGenericInfo(p, "post"),
+            meta: p.meta,
+        }));
 
         return {
             stories,
             books,
             projects,
-            posts
-        }
-
+            posts,
+        };
     }
 
     function flattenSearchItems(items) {
-        return items.map(i => ({
+        return items.map((i) => ({
             type: i.type,
             meta: i.meta,
             slug: i.slug,
             title: i.title,
-            date: i.date
-        })).sort((a, b) => b.date.getTime() - a.date.getTime())
+            date: i.date,
+        }));
     }
 
-    const globalSearch = prepareGlobalSearch(searchQuery)
+    const globalSearch = prepareGlobalSearch();
     const flattenedSearch = flattenSearchItems([
         ...globalSearch.stories,
         ...globalSearch.books,
         ...globalSearch.projects,
-        ...globalSearch.posts
-    ])
-    
-    fs.writeFile('./src/data/searchData.json', JSON.stringify(flattenedSearch), 'utf-8', err => {
-        if (err) {
-            console.log("Error! " + err)
-        } else {
-            console.log("Success! Doing stuff!")
+        ...globalSearch.posts,
+    ]);
+
+    fs.writeFile(
+        "./src/data/wp/Author/books.json",
+        JSON.stringify(formattedBooks),
+        "utf-8",
+        (err) => {
+            if (err) {
+                console.error("Error writing book data! " + err);
+            } else {
+                console.log("Success writing book data!");
+            }
         }
-    })
+    );
+
+    fs.writeFile(
+        "./src/data/wp/Author/stories.json",
+        JSON.stringify(formattedStories),
+        "utf-8",
+        (err) => {
+            if (err) {
+                console.error("Error writing stories data! " + err);
+            } else {
+                console.log("Success writing stories data!");
+            }
+        }
+    );
+
+    fs.writeFile(
+        "./src/data/wp/Projects/projects.json",
+        JSON.stringify(formattedProjects),
+        "utf-8",
+        (err) => {
+            if (err) {
+                console.error("Error writing project data! " + err);
+            } else {
+                console.log("Success writing project data!");
+            }
+        }
+    );
+
+    fs.writeFile(
+        "./src/data/wp/Projects/misc.json",
+        JSON.stringify({
+            longTechs,
+            shortTechs,
+            usedIcons,
+            hosts: allHosts
+        }),
+        "utf-8",
+        (err) => {
+            if (err) {
+                console.error("Error writing project misc! " + err);
+            } else {
+                console.log("Success writing project misc!");
+            }
+        }
+    );
+
+    fs.writeFile(
+        "./src/data/wp/Posts/all.json",
+        JSON.stringify(formattedPosts),
+        "utf-8",
+        (err) => {
+            if (err) {
+                console.error("Error writing posts data! " + err);
+            } else {
+                console.log("Success writing posts data!");
+            }
+        }
+    );
+
+    for (let cat of allCategories) {
+        const filteredPosts = formattedPosts.filter((p) =>
+            p.categories.includes(cat)
+        );
+        if (filteredPosts.length > 0) {
+            fs.writeFile(
+                `./src/data/wp/Posts/${titleToKebab(cat)}.json`,
+                JSON.stringify(filteredPosts),
+                "utf-8",
+                (err) => {
+                    if (err) {
+                        console.error(`Error writing posts data for category ${cat}! ` + err);
+                    } else {
+                        console.log(`Success writing posts data for ${cat}!`);  
+                    }
+                }
+            )
+        }
+    }
+
+
+
+    fs.writeFile(
+        "./src/data/searchData.json",
+        JSON.stringify(flattenedSearch),
+        "utf-8",
+        (err) => {
+            if (err) {
+                console.log("Error writing general search data! " + err);
+            } else {
+                console.log("Success writing general search data!");
+            }
+        }
+    );
 };

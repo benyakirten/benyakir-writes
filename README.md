@@ -35,14 +35,13 @@ Page transitions use react-transition-group instead of the usual Gatsby page tra
 
 ## Notes About Unit Testing
 
-I, as of yet, do not know how to simulate a mouseover event with specific coordinates (or just to manually set the clientX and clientY). This makes me unable to test the Button component's changing transform origin/position/clip-path. Also, I couldn't figure out how to test the CustomLink's :after pseudoelement. When using native img elements, I couldn't figure out how to set the onerror property. Other than those things, I was able to test virtually every property I saw fit. I also found a number of errors. I planned to improve the filter functionality's effeciency while I was at this, but I'm getting pretty burnt out right now.
+I can't figure out how to test the CustomLink's :after pseudoelement. When using native img elements, I couldn't figure out how to set the onerror property. Other than those things, I was able to test virtually every property I saw fit. The three big exceptions are 1. a few style properties, especially pseudo elements; 2. the category template component. I believe I'm running into problems because upon mount, the component loads a json file based on the category name, causing the state to update; 3. all the filter components using the new useDebounce hook were having an internal state change as soon as the component loaded. This usually doesn't cause a problem, but @testing-library/react cannot test state changes if this happens. Therefore, I had to add a special check that wouldn't modify the text search if the new text was empty and the already existing search was an empty array. This will never happen in real life and is an unnecessary check, but thankfully it should only cause O(2) additional time complexity per render.
 
-Okay, so if you run the tests, your terminal will flip out, but all the tests run correctly. As far as I can tell, these are eccentricities of Gatsby (and mostly come from using a styled component that inherits from Gatsby's Link component), For example, it doesn't like that I named one prop underbarSiize or that dark is a non-boolean property (or that it is)? It all works correctly, so I don't know.
+One last note: if you run the tests, your terminal will flip out, but all the tests run correctly. As far as I can tell, these are eccentricities of Gatsby (and mostly come from adding custom props to a styled component that inherits from Gatsby's Link component), For example, it doesn't like that I named one prop underbarSize or that dark is a non-boolean property (or that it is?). Nevertheless, it all works correctly, so I don't know.
 
 ## Planned Changes
 
 > Add the showcase pages from benyakiredits.com (it will be awhile before this happens. Don't hold your breath)
-> Improve the filter functionality to use hash tables instead of arrays and pre-preparing search terms during the build process
 > Add E2E testing
 
 ## Changelog
@@ -63,3 +62,13 @@ Okay, so if you run the tests, your terminal will flip out, but all the tests ru
 >> 4. Added memoization to most components that processed posts (mostly filters)
 >> 5. I noticed that the latestUpdate field on my WordPress blog was giving dates as d/m/y instead of m/d/y, which was causing errors.
 >> 6. A whole lot of minor fixes I should've written down as I was doing them like random log statements I forgot to delete. Oh, I remembered another one right now. The logo now longer errors out if the static query cannot retrieve the icon.
+> 9/24/2021: A humongous amount of changes:
+>> 1. I figured out what the problem was with testing the button component. I just had to let jest run through the timers so that unit test is nwo functioning
+>> 2. Filter pages now use pagination with a few options to customize them. It streamlines things, reduces load time and increases accessibility.
+>> 3. Made some minor accessibility changes to the sidebar - more changes coming int he future
+>> 4. I changed cards to use a monospace font. This way how much space the content is relatively equal per word (minus line breaks)
+>> 5. All data for the filters is created during the static build process, much like the global search items. This way they are generated at build time and not whenever the page is loaded. There are a number of additional effeciency I added into this (it was my plan to do it separately, but it worked out this way).
+>> 6. The content/excerpt is limited to 150-200 words depending on the category
+>> 7. The meta criteria is generated as a hashtable. This limits search time to O(n * m) (instead of of O(m * n * o)), though n is an array of length 1-2 usually. To go with this, the filters now use the hashtable instead of the string to filter. The one disadvantage is that partially completed search strings will now no longer give the results for the full string (such as typing 'ap' instead of 'api'). This, however, I think is worth it because the slight decrease in functionality greatly increases effeciency - words for a programmer to die by.
+>> 8. Decreased the debounce timeout for the filter string to search for the items. 600ms felt like it was loading something instead of waiting for the input to be complete. 250ms now gives the user a moment to search.
+>> 9. Unit tests have been fixed to work with these new changes.

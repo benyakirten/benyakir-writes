@@ -31,6 +31,11 @@ interface FlattenedProject extends PartialFlattenedProject {
     meta: string;
 }
 
+interface FlattenedProjectCard extends PartialFlattenedProject {
+    icons: FileNode[];
+    meta: BooleanLookup;
+}
+
 interface BookType extends PostType {
     book: {
         relatedProjectDesc?: string;
@@ -61,6 +66,14 @@ interface PartialFlattenedBook extends PostType {
 
 interface FlattenedBook extends PartialFlattenedBook {
     meta: string;
+}
+
+interface FlattenedBookCard extends PartialFlattenedBook {
+    meta: BooleanLookup;
+}
+
+interface FlattenedStoryCard extends PartialFlattenedStory {
+    meta: BooleanLookup;
 }
 
 interface StoryType extends PostType {
@@ -232,6 +245,10 @@ interface PartiallyFlattenedBlogPost {
 
 interface FlattenedBlogPost extends PartiallyFlattenedBlogPost {
     meta: string;
+}
+
+interface FlattenedBlogCard extends PartiallyFlattenedBlogPost {
+    meta: BooleanLookup;
 }
 
 type SearchType = 'book' | 'story' | 'project' | 'post'

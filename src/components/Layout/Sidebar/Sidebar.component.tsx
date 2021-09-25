@@ -3,10 +3,11 @@ import * as React from "react";
 import {
     StyledSidebar,
     NavGroup,
-    LegalBox,
     ArrowButton,
     VisibleGroup,
     SidebarContents,
+    LegalBox,
+    LegalItem,
 } from "./Sidebar.styles";
 
 import LinkGroup from "../LinkGroup/LinkGroup.component";
@@ -14,8 +15,6 @@ import CustomLink from "@Gen/CustomLink/CustomLink.component";
 import Logo from "./Logo/Logo.component";
 
 import useDropdown from "@Hooks/useDropdown";
-// I'm disabling the search functionality for now because it's incredibly resource intensive
-// Once I think of how to do it better, I will.
 import Search from "../Search/Search.component";
 
 const Sidebar: React.FC = () => {
@@ -35,7 +34,7 @@ const Sidebar: React.FC = () => {
         setOpening(true);
     }
     function handleNavClick(e: React.BaseSyntheticEvent) {
-        if (e.target.id === "nav-toggle") {
+        if (e.target.getAttribute('data-navtoggle') === "nav-toggle") {
             toggleOpen(e);
         }
     }
@@ -46,20 +45,20 @@ const Sidebar: React.FC = () => {
     return (
         <StyledSidebar
             className={open ? "nav-toggle-open" : "nav-toggle-close"}
-            id="nav-toggle"
+            data-navtoggle="nav-toggle"
             onClick={handleNavClick}
             open={open}
         >
             <SidebarContents
                 className={open ? "nav-toggle-open" : "nav-toggle-close"}
-                id="nav-toggle"
+                data-navtoggle="nav-toggle"
             >
                 <ArrowButton tabIndex={0} open={open} onClick={toggleOpen}>
                     &larr;
                 </ArrowButton>
                 <VisibleGroup
                     className={open ? "nav-toggle-open" : "nav-toggle-close"}
-                    id="nav-toggle"
+                    data-navtoggle="nav-toggle"
                     aria-hidden={!open}
                     open={open}
                 >
@@ -70,16 +69,16 @@ const Sidebar: React.FC = () => {
                             open={openDropdown === "blog"}
                             onClick={() => setOpenDropdown("blog")}
                             height="7rem"
-                            tabIndex={open ? 0 : -1}
+                            tabIndex={openDropdown === "blog" ? 0 : -1}
                         />
                         <LinkGroup
                             domain="author"
                             links={authorLinks}
                             open={openDropdown === "author"}
                             onClick={() => setOpenDropdown("author")}
-                            tabIndex={open ? 0 : -1}
+                            tabIndex={openDropdown === "author" ? 0 : -1}
                         />
-                        <CustomLink to="/portfolio" underbarSize="12rem">Portfolio</CustomLink>
+                        <CustomLink tabIndex={open ? 0 : -1} to="/portfolio" underbarSize="12rem">Portfolio</CustomLink>
                     </NavGroup>
                     <NavGroup>
                         <Search
@@ -88,16 +87,16 @@ const Sidebar: React.FC = () => {
                         />
                     </NavGroup>
                     <NavGroup>
-                        <CustomLink to="/" underbarSize="12rem">Home</CustomLink>
-                        <CustomLink to="/contact" underbarSize="12rem">Contact</CustomLink>
-                        <CustomLink to="/privacy" underbarSize="12rem">Privacy</CustomLink>
-                        <CustomLink to="/about" underbarSize="12rem">About</CustomLink>
+                        <CustomLink tabIndex={open ? 0 : -1} to="/" underbarSize="12rem">Home</CustomLink>
+                        <CustomLink tabIndex={open ? 0 : -1} to="/contact" underbarSize="12rem">Contact</CustomLink>
+                        <CustomLink tabIndex={open ? 0 : -1} to="/privacy" underbarSize="12rem">Privacy</CustomLink>
+                        <CustomLink tabIndex={open ? 0 : -1} to="/about" underbarSize="12rem">About</CustomLink>
                     </NavGroup>
                 </VisibleGroup>
                 <NavGroup>
                     <LegalBox open={open}>
-                        <div>&copy; 2021 by Benyakir Horowitz.</div>
-                        <div>All Rights Reserved.</div>
+                        <LegalItem>&copy; 2021 by Benyakir Horowitz</LegalItem>
+                        <LegalItem>All Rights Reserved</LegalItem>
                     </LegalBox>
                     <Logo opening={opening} />
                 </NavGroup>

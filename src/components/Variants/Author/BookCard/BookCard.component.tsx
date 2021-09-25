@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link, navigate} from "gatsby";
+import { Link, navigate } from "gatsby";
 
 import {
     Card,
@@ -19,8 +19,6 @@ import {
 import Button from "@Gen/Button/Button.component";
 import CustomLink from "@Gen/CustomLink/CustomLink.component";
 
-import { firstWords } from "@Utils/strings";
-
 import { BookCardProps } from "@Types/props";
 
 const BookCard: React.FC<BookCardProps> = ({ item }) => {
@@ -35,18 +33,14 @@ const BookCard: React.FC<BookCardProps> = ({ item }) => {
                         </CustomLink>
                     </SubHeading>
                     <WpContentDescription
+                        fontSize="1.4rem"
                         dangerouslySetInnerHTML={{
-                            __html: firstWords(
-                                item.content,
-                                coverOrStories ? 200 : 600
-                            ),
+                            __html: item.content,
                         }}
                     />
                     <DisappearOnPhone>
                         <CardLinkBox>
-                            <Button
-                                onClick={() => navigate(`/book/${item.slug}`)}
-                            >
+                            <Button onClick={() => navigate(`/book/${item.slug}`)}>
                                 Read More
                             </Button>
                             {item.purchaseLinks.map((link, idx) => (
@@ -79,11 +73,9 @@ const BookCard: React.FC<BookCardProps> = ({ item }) => {
                                 <Column>
                                     <SubHeading>
                                         Related Short{" "}
-                                        {
-                                            item.stories!.length > 1
-                                                ? "Stories"
-                                                : "Story"
-                                        }
+                                        {item.stories!.length > 1
+                                            ? "Stories"
+                                            : "Story"}
                                     </SubHeading>
                                     {item.stories!.map((s, idx) => (
                                         <Paragraph key={s.title + idx}>

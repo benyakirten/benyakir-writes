@@ -6,6 +6,7 @@ import {
     WHITE,
     FONT_MD,
     SECONDARY_600,
+    FONT_LG,
 } from '@StyleVars';
 import { media } from '@Styles/queries';
 
@@ -23,7 +24,7 @@ export const StyledLink = styled(Link)<{
 
     text-decoration: none;
     color: ${props => props.inline ? SECONDARY_600 : props.dark ? BLACK : WHITE};
-    font-size: ${props => props.small ? FONT_MD : 'inherit'};
+    font-size: ${props => props.small ? FONT_LG : 'inherit'};
 
     transition: color 1s ease;
 

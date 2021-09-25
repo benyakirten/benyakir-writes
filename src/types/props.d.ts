@@ -1,8 +1,8 @@
-import { ReactElement } from "react"
+import React, { ReactElement } from "react"
 
 import BookCard from '@Variants/Author/BookCard/BookCard.component'
 import StoryCard from '@Variants/Author/StoryCard/StoryCard.component'
-import { FlattenedBlogPost, FlattenedBook, FlattenedStory } from "./posts"
+import { FlattenedBlogPost, FlattenedBook, FlattenedBookCard, FlattenedProject, FlattenedProjectCard, FlattenedStory, FlattenedBlogCard, PartiallyFlattenedBlogPost, PartialFlattenedBook } from "./posts"
 
 // LAYOUT
 type LogoProps = {
@@ -12,6 +12,23 @@ type LogoProps = {
 type SearchProps = {
     open: boolean;
     onClick: () => void;
+}
+
+type PaginateProps = {
+    currentPage: number;
+    items: any[];
+    El: React.Element;
+    onPageChange: (n: number) => void;
+}
+
+type PaginateMenuProps = {
+    limit: number;
+    setLimit: (n: number) => void;
+    currentPage: number;
+    maxPages: number;
+    onLeft: () => void;
+    onRight: () => void;
+    disableRight?: boolean
 }
 
 // GENERAL
@@ -38,6 +55,7 @@ type LinkProps = {
     inline?: boolean;
     limitUnderbar?: boolean;
     underbarSize?: string;
+    tabIndex?: number;
 }
 type LayoutProps = {
     path: string;
@@ -111,15 +129,18 @@ interface CheckboxProps extends InputProps {
 interface DateProps extends InputProps {
     value: Date;
     onChange: (date: Date) => void;
+    tabIndex?: number;
 }
 
 interface ChoiceProps {
+    tabIndex?: number;
     label: string;
     value: boolean;
     onSelect: (label: string) => void;
 }
 
 interface MultipleChoiceProps {
+    tabIndex?: number;
     choices: PotentialChoice[];
     onSelect: (choices: PotentialChoice[]) => void;
 }
@@ -130,53 +151,54 @@ type LeadPageProps = {
 }
 
 type ProjectsFilterProps = {
-    allProjects: FlattenedProject[];
+    allProjects: FlattenedProjectCard[];
     allHosts: string[];
     allTechs: string[];
-    onFilter: (projects: FlattenedProject[]) => void;
+    onFilter: (projects: FlattenedProjectCard[]) => void;
 }
 
 type ProjectCardProps = {
-    project: FlattenedProject;
-    icons: FileNode[];
+    item: FlattenedProjectCard;
 }
 
 type AuthorFilterProps = {
-    allBooks: FlattenedBook[];
-    allStories: FlattenedStory[];
-    onFilter: (books: FlattenedBook[], stories: FlattenedStory[]) => void;
+    allBooks: FlattenedBookCard[];
+    allStories: FlattenedStoryCard[];
+    onFilter: (books: FlattenedBookCard[], stories: FlattenedStorCard[]) => void;
 }
 
 type BookFilterProps = {
-    books: FlattenedBook[];
-    onFilter: (stories: FlattenedBook[]) => void;
+    books: FlattenedBookCard[];
+    onFilter: (stories: FlattenedBookCard[]) => void;
 }
 
 type StoryFilterProps = {
-    stories: FlattenedStory[];
-    onFilter: (stories: FlattenedStory[]) => void;
+    stories: FlattenedStoryCard[];
+    onFilter: (stories: FlattenedStoryCard[]) => void;
 }
 
 type BookCardProps = {
-    item: FlattenedBook;
+    item: PartialFlattenedBook;
 }
 
 type StoryCardProps = {
-    item: FlattenedStory
+    item: FlattenedStoryCard
 }
 
 type BlogCardProps = {
-    post: FlattenedBlogPost
+    item: PartiallyFlattenedBlogPost
 }
 
 type HalfProps = {
+    currentPage: number;
+    setCurrentPage: (n: number) => void;
     items: FlattenedBook[] | FlattenedStory[]
     El: BookCard | StoryCard;
 }
 
 type AllBlogFilterProps = {
-    allPosts: FlattenedBlogPost[]
-    onFilter: (posts: FlattenedBlogPost[]) => void;
+    allPosts: FlattenedBlogCard[]
+    onFilter: (posts: FlattenedBlogCard[]) => void;
 }
 
 type CategoryBlogFilterProps = {

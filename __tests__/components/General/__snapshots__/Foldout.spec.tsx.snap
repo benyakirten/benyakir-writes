@@ -36,7 +36,7 @@ exports[`Foldout component should render the outer div's cursor based on the ope
   transform: rotate(180deg);
 }
 
-@media (max-width:1400px) {
+@media (max-width:1160px) {
   .c2 {
     height: 4rem;
   }
@@ -80,8 +80,8 @@ exports[`Foldout component should render the outer div's cursor based on the ope
   <div
     aria-hidden={false}
     className="c2"
+    data-navtoggle="no-toggle"
     height="4rem"
-    id="no-toggle"
     open={true}
   />
 </div>

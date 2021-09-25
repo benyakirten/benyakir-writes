@@ -5,6 +5,7 @@ import { OutsideLink, StyledLink } from "./CustomLink.styles";
 import { LinkProps } from "@Types/props";
 
 const CustomLink: React.FC<LinkProps> = ({
+    tabIndex = 0,
     small = false,
     dark = true,
     active = false,
@@ -18,6 +19,7 @@ const CustomLink: React.FC<LinkProps> = ({
     <>
         {outside ? (
             <OutsideLink
+                tabIndex={tabIndex}
                 inline={inline}
                 small={small}
                 active={active}
@@ -30,6 +32,7 @@ const CustomLink: React.FC<LinkProps> = ({
             </OutsideLink>
         ) : (
             <StyledLink
+                tabIndex={tabIndex}
                 inline={inline}
                 small={small}
                 active={active}

@@ -9,9 +9,10 @@ import {
 
 import BookFilter from "@Posts/WritingFilters/BookFilter/BookFilter.component";
 
-import { FlattenedBook } from "@Types/posts";
-
 import { cover } from "../../props";
+import { createLookupMeta } from "@Utils/posts";
+
+import { FlattenedBookCard } from "@Types/posts";
 
 describe("BookFilter component", () => {
     const testBooks = [
@@ -20,7 +21,7 @@ describe("BookFilter component", () => {
             content: "Test book A content",
             slug: "test-book-a",
             cover: null,
-            meta: "2019 sep september test book content a test book a",
+            meta: createLookupMeta("2019 sep september test book content a test book a"),
             project: null,
             published: {
                 date: new Date("2019/09/15"),
@@ -46,7 +47,7 @@ describe("BookFilter component", () => {
             content: "test book B content",
             slug: "test-book-b",
             cover,
-            meta: "test story a test project desc a test project name a 2019 oct october test book content b test book b",
+            meta: createLookupMeta("test story a test project desc a test project name a 2019 oct october test book content b test book b"),
             project: {
                 description: "test project desc A",
                 title: "test project name A",
@@ -78,7 +79,7 @@ describe("BookFilter component", () => {
         },
     ].sort(
         (a, b) => b.published.date.getTime() - a.published.date.getTime()
-    ) as FlattenedBook[];
+    ) as FlattenedBookCard[];
 
     const filterSpy = jest.fn();
 

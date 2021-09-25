@@ -16,11 +16,6 @@ type AllWpPost = {
 }
 
 type WpPostByCategory = {
-    data: {
-        allWpPost: {
-            nodes: BlogPostType[]
-        }
-    }
     pageContext: {
         name: string;
     }

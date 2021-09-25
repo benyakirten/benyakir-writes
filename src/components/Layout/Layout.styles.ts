@@ -4,8 +4,6 @@ import { MULISH } from '@StyleVars';
 import { media } from '@Styles/queries';
 
 export const GlobalStyles = createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css2?family=Faustina&family=Mulish&display=swap');
-    
     *,
     *::after,
     *::before {

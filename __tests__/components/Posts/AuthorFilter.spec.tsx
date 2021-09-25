@@ -9,9 +9,11 @@ import {
 
 import AuthorFilter from "@Posts/WritingFilters/AuthorFilter/AuthorFilter.component";
 
-import { FlattenedBook, FlattenedStory } from "@Types/posts";
-
+import { createLookupMeta } from "@Utils/posts"
 import { cover } from "../../props";
+;
+import { FlattenedBookCard, FlattenedStoryCard } from "@Types/posts";
+
 
 describe("AuthorFilter component", () => {
     const testBooks = [
@@ -20,7 +22,7 @@ describe("AuthorFilter component", () => {
             content: "Test book A content",
             slug: "test-book-a",
             cover: null,
-            meta: "2019 sep september test book content a test book a",
+            meta: createLookupMeta("2019 sep september test book content a test book a"),
             project: null,
             published: {
                 date: new Date("2019/09/15"),
@@ -46,7 +48,7 @@ describe("AuthorFilter component", () => {
             content: "test book B content",
             slug: "test-book-b",
             cover,
-            meta: "test story a test project desc a test project name a 2019 oct october test book content b test book b",
+            meta: createLookupMeta("test story a test project desc a test project name a 2019 oct october test book content b test book b"),
             project: {
                 description: "test project desc A",
                 title: "test project name A",
@@ -78,7 +80,7 @@ describe("AuthorFilter component", () => {
         },
     ].sort(
         (a, b) => b.published.date.getTime() - a.published.date.getTime()
-    ) as FlattenedBook[];
+    ) as FlattenedBookCard[];
 
     const testStories = [
         {
@@ -93,7 +95,7 @@ describe("AuthorFilter component", () => {
                 year: 2020,
             },
             book: null,
-            meta: "2020 sep september story A content a story A title",
+            meta: createLookupMeta("2020 sep september story A content a story A title"),
         },
         {
             title: "story B",
@@ -113,7 +115,7 @@ describe("AuthorFilter component", () => {
                 relationship: "Preamble",
                 cover: null,
             },
-            meta: "test story b test project desc b test project name b 2020 oct october test book content b test book title b",
+            meta: createLookupMeta("test story b test project desc b test project name b 2020 oct october test book content b test book title b"),
         },
         {
             title: "story C",
@@ -133,11 +135,11 @@ describe("AuthorFilter component", () => {
                 relationship: "Forestory",
                 cover,
             },
-            meta: "test story b test project desc b test project name b 2020 nov november test book content b test book title b",
+            meta: createLookupMeta("test story b test project desc b test project name b 2020 nov november test book content b test book title b"),
         },
     ].sort(
         (a, b) => b.published.date.getTime() - a.published.date.getTime()
-    ) as FlattenedStory[];
+    ) as FlattenedStoryCard[];
 
     const filterSpy = jest.fn();
 

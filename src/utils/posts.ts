@@ -32,4 +32,4 @@ export function rigorousTextFormat (text: string) {
 
 export const createMetaForObject = (item: object) => createSearchableString(Object.values(item).filter(v => !!v))
 
-export const createLookupMeta = (meta: string) => rigorousTextFormat(meta).split(" ").reduce((acc, next) => next ? ({ ...acc, [next]: true }) : acc, {})
+export const createLookupMeta = (meta: string) => rigorousTextFormat(meta).split(/[-\s]/).reduce((acc, next) => next ? ({ ...acc, [next]: true }) : acc, {})

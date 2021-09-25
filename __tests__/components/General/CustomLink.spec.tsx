@@ -2,13 +2,23 @@ import * as React from "react";
 import {
     cleanup,
     render,
-    screen
+    screen,
+    act,
+    fireEvent
 } from "@testing-library/react";
 
 import CustomLink from '@Gen/CustomLink/CustomLink.component'
 
 describe('CustomLink component', () => {
-    afterEach(cleanup)
+    beforeEach(() => {
+        jest.useFakeTimers();
+    });
+
+    afterEach(() => {
+        jest.runOnlyPendingTimers();
+        jest.useRealTimers();
+        cleanup();
+    });
 
     it('should render properly', () => {
         expect(() => render(<CustomLink to="dummyroute" />)).not.toThrow()
@@ -20,6 +30,17 @@ describe('CustomLink component', () => {
         expect(link.getAttribute("href")).toEqual("testroute")
     })
 
-    // I'm not going to test styles here, mostly because I could not get the renderer to
-    // appropriately detect the after pseudoelement.
+    // This test does not work. I do not know why
+    // The getComputedStyle gets the link's styles, not the :after element
+    // it('should render the underbar when the link is hovered', async () => {
+    //     render(<CustomLink to="testroute" />)
+    //     const link = await screen.getByRole("link")
+    //     expect(getComputedStyle(link, ':after').transform).toEqual("scale(0)")
+
+    //     await act(() => {
+    //         fireEvent.mouseOver(link)
+    //         jest.runAllTimers()
+    //         expect(getComputedStyle(link, ':after').transform).toEqual("scale(1)")
+    //     })
+    // })
 })

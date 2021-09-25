@@ -1,0 +1,83 @@
+import React from "react";
+import { render, fireEvent, screen, cleanup } from "@testing-library/react"
+
+import usePagination from "@Hooks/usePagination"
+import { act } from "react-test-renderer";
+
+const TestHook: React.FC = () => {
+    const {
+        currentPage,
+        onPageChange,
+        items,
+        setCurrentItems
+    } = usePagination([1, 2, 3, 4, 5])
+    return (
+        <>
+            <button onClick={() => onPageChange(currentPage + 1)}>&times;</button>
+            <button onClick={() => setCurrentItems([2,3,4,5])}>&times;</button>
+            <article>{currentPage}</article>
+            <article>{items.join(" ")}</article>
+        </>
+    )
+}
+
+describe('usePagination hook', () => {
+    let buttonOne: HTMLButtonElement
+    let buttonTwo: HTMLButtonElement
+    let outputOne: HTMLElement
+    let outputTwo: HTMLElement
+
+    beforeEach(async () => {
+        render(<TestHook />)
+        const buttons = await screen.getAllByRole("button")
+        buttonOne = buttons[0] as HTMLButtonElement
+        buttonTwo = buttons[1] as HTMLButtonElement
+        
+        let outputs = await screen.getAllByRole("article")
+        outputOne = outputs[0]
+        outputTwo = outputs[1]
+    })
+
+    afterEach(cleanup)
+
+    it('should increment the page number if the onPageChange function is called', async () => {
+        expect(outputOne.textContent).toEqual("0")
+
+        await act(async () => {
+            fireEvent.click(buttonOne)
+            expect(outputOne.textContent).toEqual("1")
+        })
+
+        await act(async () => {
+            fireEvent.click(buttonOne)
+            expect(outputOne.textContent).toEqual("2")
+        })
+
+        await act(async () => {
+            fireEvent.click(buttonOne)
+            expect(outputOne.textContent).toEqual("3")
+        })
+
+        await act(async () => {
+            fireEvent.click(buttonOne)
+            expect(outputOne.textContent).toEqual("4")
+        })
+    })
+
+    it('should reset the page number to 0 if the setCurrentItems function is called', async () => {
+        expect(outputOne.textContent).toEqual("0")
+        expect(outputTwo.textContent).toEqual("1 2 3 4 5")
+
+        await act(async () => {
+            fireEvent.click(buttonOne)
+            expect(outputOne.textContent).toEqual("1")
+            expect(outputTwo.textContent).toEqual("1 2 3 4 5")
+        })
+
+        await act(async () => {
+            fireEvent.click(buttonTwo)
+            expect(outputOne.textContent).toEqual("0")
+            expect(outputTwo.textContent).toEqual("2 3 4 5")
+        })
+    })
+})

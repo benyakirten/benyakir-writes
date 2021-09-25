@@ -1,0 +1,130 @@
+[
+    {
+        "title": "Benyakir Writes",
+        "slug": "benyakir-writes",
+        "mainLink": "Benyakir-writes.com",
+        "hostedOn": "Netlify",
+        "repoLink": "https://github.com/benyakirten/benyakir-writes",
+        "content": "\n<p>A GatsbyJS-powered frontend for my blog that uses TypeScript and Styled Components. The main purpose of this was to create a...",
+        "firstReleased": {
+            "year": 2021,
+            "month": 9,
+            "full": "September",
+            "short": "SEP",
+            "date": "2021-09-07T06:00:00.000Z"
+        },
+        "shortTechnologies": ["ts", "react", "gql"],
+        "longTechnologies": ["TypeScript", "React", "GraphQL"],
+        "icons": [
+            {
+                "name": "TypeScript",
+                "publicURL": "/static/2eb4c65b355636c2f2989307858a80b1/ts.svg"
+            },
+            {
+                "name": "React",
+                "publicURL": "/static/fc731bf82f60bb560cfcf64b8edda5aa/react.svg"
+            },
+            {
+                "name": "GraphQL",
+                "publicURL": "/static/0fb1309574e46b0b37a12ec8726192da/gql.svg"
+            }
+        ],
+        "meta": {
+            "2021": true,
+            "benyakir": true,
+            "writes": true,
+            "netlify": true,
+            "a": true,
+            "gatsbyjs-powered": true,
+            "frontend": true,
+            "for": true,
+            "my": true,
+            "blog": true,
+            "that": true,
+            "uses": true,
+            "typescript": true,
+            "and": true,
+            "styled": true,
+            "components": true,
+            "the": true,
+            "main": true,
+            "purpose": true,
+            "of": true,
+            "this": true,
+            "was": true,
+            "to": true,
+            "create": true,
+            "september": true,
+            "sep": true,
+            "ts": true,
+            "react": true,
+            "gql": true,
+            "graphql": true,
+            "github": true,
+            "repo": true
+        }
+    },
+    {
+        "title": "egt-press",
+        "slug": "egt-press",
+        "mainLink": "https://egt-press.vercel.app",
+        "hostedOn": "Vercel",
+        "repoLink": "https://github.com/benyakirten/egt-press",
+        "content": "\n<p>A statically generated website for a small business. It uses SvelteKit alongside Tailwind CSS</p>\n",
+        "firstReleased": {
+            "year": 2021,
+            "month": 8,
+            "full": "August",
+            "short": "AUG",
+            "date": "2021-08-18T06:00:00.000Z"
+        },
+        "shortTechnologies": ["sass", "tw", "svelte", "ts"],
+        "longTechnologies": ["Sass", "Tailwind CSS", "Svelte", "TypeScript"],
+        "icons": [
+            {
+                "name": "Sass",
+                "publicURL": "/static/a3e78eb9ddecd7f0e9e7a89fabc992a2/sass.svg"
+            },
+            {
+                "name": "Tailwind CSS",
+                "publicURL": "/static/afad9fd5b47c56c7f467822be895d3d7/tw.svg"
+            },
+            {
+                "name": "Svelte",
+                "publicURL": "/static/f2c9cf12a61d43dcb742bb9552c60ad8/svelte.svg"
+            },
+            {
+                "name": "TypeScript",
+                "publicURL": "/static/2eb4c65b355636c2f2989307858a80b1/ts.svg"
+            }
+        ],
+        "meta": {
+            "2021": true,
+            "egt-press": true,
+            "vercel": true,
+            "a": true,
+            "statically": true,
+            "generated": true,
+            "website": true,
+            "for": true,
+            "small": true,
+            "business": true,
+            "it": true,
+            "uses": true,
+            "sveltekit": true,
+            "alongside": true,
+            "tailwind": true,
+            "css": true,
+            "august": true,
+            "aug": true,
+            "sass": true,
+            "tw": true,
+            "svelte": true,
+            "ts": true,
+            "tailwind css": true,
+            "typescript": true,
+            "github": true,
+            "repo": true
+        }
+    }
+]

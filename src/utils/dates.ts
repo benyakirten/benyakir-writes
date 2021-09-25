@@ -1,5 +1,5 @@
 export function getTimeFromDateString(date: string): DateInformation {
-    const month = Math.max(+date.substring(0, 2), 12);
+    const month = +date.substring(0, 2);
     const year = +date.substring(6)
     if (isNaN(month) || month > 12 || isNaN(year)) {
         throw new Error(`Unable to parse date from string ${date}`)

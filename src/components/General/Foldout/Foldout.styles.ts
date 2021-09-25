@@ -23,7 +23,7 @@ export const FoldoutBody = styled.div<{
     height: ${props => props.open ? props.height : '0'};
     opacity: ${props => props.open ? '1': '0'};
 
-    ${media.custom(1400)} {
+    ${media.custom(1160)} {
         height: ${props => props.open ? multiplyCSSNumber(props.height, props.heightMultiplierOnLarger ? props.heightMultiplierOnLarger : 1) : '0'};
     }
 

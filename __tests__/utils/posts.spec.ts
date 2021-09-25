@@ -154,7 +154,9 @@ describe('posts util', () => {
                 {
                     input: 'all-one-item',
                     result: {
-                        'all-one-item': true
+                        'all': true,
+                        'one': true,
+                        'item': true
                     }
                 },
             ]

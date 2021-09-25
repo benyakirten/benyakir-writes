@@ -5,31 +5,19 @@ import { Subtitle } from "@Styles/general-components";
 
 import Text from "@Input/Text/Text.component";
 
+import useDebounce from "@Hooks/useDebounce";
+
 import { FilterProps } from "@Types/props";
 
 const Filter: React.FC<FilterProps> = ({ name, onSearch, children }) => {
-    const SEARCH_TIMEOUT = 600;
-    const [timer, setTimer] = React.useState<NodeJS.Timeout>();
-    const [searchText, setSearchText] = React.useState<string>("");
-    function onSearchChange(val: string) {
-        setSearchText(val);
-        if (timer) {
-            clearTimeout(timer);
-            setTimer(undefined);
-        }
-        if (!val) {
-            onSearch(val);
-            return;
-        }
-        const _timeout = setTimeout(() => onSearch(val), SEARCH_TIMEOUT);
-        setTimer(_timeout);
-    }
+    const [search, setSearch] = useDebounce(onSearch)
+
     return (
         <FilterContainer>
             <Subtitle>Filter{" " + name}</Subtitle>
             <Text
-                value={searchText}
-                onChange={onSearchChange}
+                value={search}
+                onChange={setSearch}
                 label="Search"
                 name={`${name}-filter-search`}
                 autofocus

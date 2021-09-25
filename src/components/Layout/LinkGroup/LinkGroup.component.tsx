@@ -14,20 +14,22 @@ const LinkGroup: React.FC<LinkGroupProps> = ({
     height = "4rem",
     onClick,
     children,
+    tabIndex = 0
 }) => {
     return (
         <Foldout
             open={open}
+            tabIndex={tabIndex}
             onClick={onClick}
             height={height}
             topbar={
-                <CustomLink to={`/${domain}`}>
+                <CustomLink tabIndex={tabIndex} to={`/${domain}`}>
                     {domain.toUpperCase()}
                 </CustomLink>
             }
         >
             {links.map((l) => (
-                <CustomLink key={l} small underbarSize="16rem" to={`/${domain}/${titleToKebab(l)}/`}>
+                <CustomLink tabIndex={tabIndex} key={l} small underbarSize="16rem" to={`/${domain}/${titleToKebab(l)}/`}>
                     {l}
                 </CustomLink>
             ))}

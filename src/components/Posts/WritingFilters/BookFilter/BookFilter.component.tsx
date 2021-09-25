@@ -1,12 +1,13 @@
 import * as React from "react";
 
+import { SubHeading} from "@Styles/general-components";
+
 import Filter from "@Input/Filter/Filter.component";
 import DatePicker from "@Input/DatePicker/DatePicker.component";
 import Foldout from "@Gen/Foldout/Foldout.component";
 
 import useDropdown from "@Hooks/useDropdown";
-
-import { SubHeading} from "@Styles/general-components";
+import { hasSomeContent } from "@Utils/search";
 
 import { BookFilterProps } from "@Types/props";
 
@@ -16,17 +17,19 @@ const BookFilter: React.FC<BookFilterProps> = ({
 }) => {
     const [dropdownOpen, setDropdown] = useDropdown();
 
-    // Min and day range is based on first and latest repo published
     const [publishedBefore, setPublishedBefore] = React.useState<Date>(books[0].published.date)
     const [publishedAfter, setPublishedAfter] = React.useState<Date>(books[books.length - 1].published.date)
 
     const [filterWords, setFilterWords] = React.useState<string[]>([])
 
     React.useEffect(() => {
-        const filteredBooks = books
-            .filter(b => filterWords.every((w) => b.meta.indexOf(w.toLowerCase()) !== -1))
+        let filteredBooks = books
             .filter(b => b.published.date.getTime() <= publishedBefore.getTime())
             .filter(b => b.published.date.getTime() >= publishedAfter.getTime());
+
+        if (hasSomeContent(filterWords)) {
+            filteredBooks = filteredBooks.filter(b => filterWords.every((w) => b.meta[w] || b.meta[w.toLowerCase()]))
+        }
 
         onFilter(filteredBooks)
     }, [
@@ -36,7 +39,12 @@ const BookFilter: React.FC<BookFilterProps> = ({
     ]);
 
     function setSearchString(filterString: string) {
-        setFilterWords(filterString ? filterString.split(' ') : [' ']);
+        // This line is redundant because there are already checks for empty strings
+        // However, testing fails otherwise because the useDebounce hook will
+        // cause an internal state change as the component is rendering
+        // This line prevents that state change and allows the tests to work
+        if (!filterString && !hasSomeContent(filterWords)) return
+        setFilterWords(filterString ? filterString.split(' ') : ['']);
     }
 
     return (

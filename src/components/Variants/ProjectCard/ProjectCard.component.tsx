@@ -15,44 +15,41 @@ import Button from "@Gen/Button/Button.component";
 import IconGrid from "@Gen/IconGrid/IconGrid.component";
 import CustomLink from "@Gen/CustomLink/CustomLink.component";
 
-import { firstWords } from "@Utils/strings";
-
 import { ProjectCardProps } from "@Types/props";
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, icons }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ item }) => {
     return (
         <Card>
             <Row style={{ alignItems: "stretch" }}>
                 <CardSection>
                     <SubHeading noUnderline>
-                        <CustomLink to={`/project/${project.slug}`}>
-                            {project.title}
+                        <CustomLink to={`/project/${item.slug}`}>
+                            {item.title}
                         </CustomLink>
                     </SubHeading>
                     <WpContentDescription
+                        fontSize="1.4rem"
                         dangerouslySetInnerHTML={{
-                            __html: firstWords(project.content, 200),
+                            __html: item.content,
                         }}
                     />
                     <DisappearOnPhone>
                         <CardLinkBox>
                             <Button
-                                onClick={() =>
-                                    navigate(`/project/${project.slug}`)
-                                }
+                                onClick={() => navigate(`/project/${item.slug}`)}
                             >
                                 More Information
                             </Button>
-                            {project.hostedOn && project.mainLink && (
+                            {item.hostedOn && item.mainLink && (
                                 <Button
-                                    onClick={() => navigate(project.mainLink!)}
+                                    onClick={() => navigate(item.mainLink!)}
                                 >
-                                    On {project.hostedOn}
+                                    On {item.hostedOn}
                                 </Button>
                             )}
-                            {project.repoLink && (
+                            {item.repoLink && (
                                 <Button
-                                    onClick={() => navigate(project.repoLink!)}
+                                    onClick={() => navigate(item.repoLink!)}
                                 >
                                     On GitHub
                                 </Button>
@@ -60,12 +57,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, icons }) => {
                         </CardLinkBox>
                     </DisappearOnPhone>
                 </CardSection>
-                <DisappearOnPhone>
-                    <CardSection>
-                        <SubHeading>Technologies Used</SubHeading>
-                        <IconGrid icons={icons} />
-                    </CardSection>
-                </DisappearOnPhone>
+                <CardSection>
+                    <SubHeading>Technologies Used</SubHeading>
+                    <IconGrid icons={item.icons} />
+                </CardSection>
             </Row>
         </Card>
     );

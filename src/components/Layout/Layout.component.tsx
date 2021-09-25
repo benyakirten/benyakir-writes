@@ -14,6 +14,12 @@ const Layout: React.FC = ({ children }) => {
         <LayoutContainer>
             <Helmet>
                 <html lang="en" />
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Faustina&family=Mulish&display=swap"
+                    rel="stylesheet"
+                />
                 <title>Benyakir Writes</title>
                 <meta
                     name="description"

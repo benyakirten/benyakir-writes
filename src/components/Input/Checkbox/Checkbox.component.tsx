@@ -20,8 +20,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
                 aria-labelledby={`label-${name}`}
                 onChange={() => onToggle(!value)}
             />
-            <label onClick={() => onToggle(!value)} id="no-toggle" tabIndex={tabIndex}>
-                <span id="no-toggle">&#9758;</span>
+            <label onClick={() => onToggle(!value)} data-navtoggle="no-toggle" tabIndex={tabIndex}>
+                <span data-navtoggle="no-toggle">&#9758;</span>
             </label>
             <span onClick={() => onToggle(!value)} id={`label-${name}`}>
                 {label}

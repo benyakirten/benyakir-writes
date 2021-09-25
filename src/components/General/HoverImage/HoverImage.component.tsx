@@ -1,5 +1,4 @@
 import * as React from "react";
-import { graphql, useStaticQuery } from "gatsby";
 
 import { StyledFigure } from "./HoverImage.styles";
 

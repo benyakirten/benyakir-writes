@@ -6,11 +6,12 @@ import MultipleChoice from "@Input/MultipleChoice/MultipleChoice.component"
 import Foldout from "@Gen/Foldout/Foldout.component"
 
 import useDropdown from "@Hooks/useDropdown"
+import { getMultipleChoiceHeight, getValuesForSelected } from "@Utils/filter"
 
 import { SubHeading} from "@Styles/general-components"
 
 import { ProjectsFilterProps } from "@Types/props"
-import { getMultipleChoiceHeight, getValuesForSelected } from "@Utils/filter"
+import { hasSomeContent } from "@/utils/search"
 
 const ProjectFilter: React.FC<ProjectsFilterProps> = ({
     allProjects,
@@ -20,7 +21,6 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
 }) => {
     const [dropdownOpen, setDropdown] = useDropdown()
 
-    // Min and day range is based on first and latest repo published
     const [publishedBefore, setPublishedBefore] = React.useState<Date>(allProjects[0].firstReleased.date)
     const [publishedAfter, setPublishedAfter] = React.useState<Date>(allProjects[allProjects.length - 1].firstReleased.date)
 
@@ -41,23 +41,20 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
     )
 
     React.useEffect(() => {
-        // This is highly ineffecient - this is (potentially) o^3 time. However, it works and is readable
-        // It's really allProjects.length * filterWords.length * project.meta.length
-        // allProjects.length is currently something like 9. It could increase to more, on the other hand
-        // filterWords.length is not likely more to be more than 1 or 2. At most it'll be something like 5 or 6
-        // project.meta.length is not longer than 50 at most
-        // That said, this is not a particularly efficient solution and won't scale well
-        // However, this is for my personal blog site, so whatevs - the at most 1-2 megabytes of ram used to perform
-        // this search won't tax modern computers. It would tax the computer I had as a child in 1996
-
-        // However, the efficiency of this could be improved by changing all the techchoices and such to hashtables
-        // I may do that at some point in the future
+        // Consult previous commits to compare this with previous forms
         let _projects = allProjects
-            .filter(p => filterWords.every((w) => p.meta.indexOf(w.toLowerCase()) !== -1))
             .filter(p => p.firstReleased.date.getTime() <= publishedBefore.getTime())
             .filter(p => p.firstReleased.date.getTime() >= publishedAfter.getTime())
-        // It doesn't get any better here - I just am glad modern
-        // computers are much more powerful than they used to be
+
+        // The main change here is the change of every projects' meta from a string to a hashtable
+        // This decreases the complexity from O(n + m + o) to O(n + m)
+        // n is the number of projects and the largest element of the three
+        // m is the number of filter words (usually 1 or 2)
+        // o used to be the indexing of a string but is now constant time because it's looking up values in a hashtable
+        if (hasSomeContent(filterWords)) {
+            _projects = _projects.filter(p => filterWords.every((w) => p.meta[w] || p.meta[w.toLowerCase()]))
+        }
+
         if (techChoices.some((t) => t.selected)) {
             const _techs = getValuesForSelected(techChoices)
             _projects = _projects.filter((p) =>_techs.every((t) => p.longTechnologies.includes(t)))
@@ -78,7 +75,12 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
     ])
 
     function setSearchString(filterString: string) {
-        setFilterWords(filterString ? filterString.split(" ") : [" "])
+        // This line is redundant because there are already checks for empty strings
+        // However, testing fails otherwise because the useDebounce hook will
+        // cause an internal state change as the component is rendering
+        // This line prevents that state change and allows the tests to work
+        if (!filterString && !hasSomeContent(filterWords)) return
+        setFilterWords(filterString ? filterString.split(" ") : [""])
     }
 
     return (
@@ -94,12 +96,14 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
                     value={publishedBefore}
                     label="Published before"
                     onChange={setPublishedBefore}
+                    tabIndex={dropdownOpen === "date" ? 0 : -1}
                 />
                 <DatePicker
                     name="project-published-after"
                     value={publishedAfter}
                     label="Published after"
                     onChange={setPublishedAfter}
+                    tabIndex={dropdownOpen === "date" ? 0 : -1}
                 />
             </Foldout>
             <Foldout
@@ -107,8 +111,11 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
                 open={dropdownOpen === "host"}
                 onClick={() => setDropdown("host")}
                 height={getMultipleChoiceHeight(hostChoices)}
+                heightMultiplierOnPhone={3}
+                heightMultiplierOnTablet={1.6}
             >
                 <MultipleChoice
+                    tabIndex={dropdownOpen === "host" ? 0 : -1}
                     choices={hostChoices}
                     onSelect={setHostChoices}
                 />
@@ -125,6 +132,7 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
                 <MultipleChoice
                     choices={techChoices}
                     onSelect={setTechChoices}
+                    tabIndex={dropdownOpen === "tech" ? 0 : -1}
                 />
             </Foldout>
         </Filter>

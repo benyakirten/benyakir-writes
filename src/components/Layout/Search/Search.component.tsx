@@ -9,20 +9,20 @@ import Foldout from "@Gen/Foldout/Foldout.component";
 import CustomLink from "@Gen/CustomLink/CustomLink.component";
 
 import useLookup from "@Hooks/useLookup";
+import useDebounce from "@Hooks/useDebounce";
 import { firstWords, capitalize } from "@Utils/strings";
+import { hasSomeContent } from "@Utils/search";
+
+import data from "@Data/searchData.json";
 
 import { SearchProps } from "@Types/props";
 import { SearchableItem } from "@Types/posts";
 
-import data from "@/data/searchData.json";
 
 const Search: React.FC<SearchProps> = ({ open, onClick }) => {
     const allResults = React.useMemo<SearchableItem[]>(() => data, [data]);
 
-    const SEARCH_TIMEOUT = 600;
-    const [timer, setTimer] = React.useState<NodeJS.Timeout>();
-    const [searchValue, setSearchValue] = React.useState<string>("");
-    const [finalSearchValue, setFinalSearchValue] = React.useState<string>("")
+    const [search, setSearch] = useDebounce(filterResults)
     const [filteredResults, setFilteredResults] = React.useState<
         SearchableItem[]
     >([]);
@@ -34,30 +34,23 @@ const Search: React.FC<SearchProps> = ({ open, onClick }) => {
         story: true,
     });
 
-    function onSearchChange(val: string) {
-        setSearchValue(val);
-        if (timer) {
-            clearTimeout(timer);
-            setTimer(undefined);
-        }
-        if (!val) {
-            setFilteredResults([]);
-            return;
-        }
-        const _timeout = setTimeout(() => setFinalSearchValue(val), SEARCH_TIMEOUT);
-        setTimer(_timeout);
-    }
-
     const togglePostType = (postType: string) => showDispatch({ type: "TOGGLE", payload: postType })
 
-    React.useEffect(() => {
-        if (!finalSearchValue) return
-        const _search = finalSearchValue.toLowerCase().split(" ");
+    function filterResults(val: string) {
+        const _search = val.toLowerCase().split(" ")
+        // This is unnecessary for the component to function,
+        // but it causes the component not to re-render on initial render
+        if (!val && !hasSomeContent(_search)) return
+        if (!val) setFilteredResults([])
         const _results = allResults.filter(
             (r) => showState[r.type] && _search.every((s) => r.meta[s])
         );
-        setFilteredResults(_results);
-    }, [finalSearchValue, showState])
+        setFilteredResults(_results)
+    }
+
+    React.useEffect(() => {
+        filterResults(search)
+    }, [showState])
 
     return (
         <Foldout
@@ -67,8 +60,8 @@ const Search: React.FC<SearchProps> = ({ open, onClick }) => {
             height="auto"
         >
             <Text
-                value={searchValue}
-                onChange={onSearchChange}
+                value={search}
+                onChange={setSearch}
                 label="Search"
                 name="global-search"
                 width="65%"
@@ -110,7 +103,7 @@ const Search: React.FC<SearchProps> = ({ open, onClick }) => {
                 ) : (
                     <>
                         {filteredResults.map((r, idx) => (
-                            <SingleResult id="no-toggle" key={r.slug + idx}>
+                            <SingleResult data-navtoggle="no-toggle" key={r.slug + idx}>
                                 <CustomLink
                                     dark={false}
                                     to={`/${r.type}/${r.slug}`}
