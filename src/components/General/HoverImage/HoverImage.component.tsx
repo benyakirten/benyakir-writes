@@ -13,6 +13,7 @@ const HoverImage: React.FC<HoverImageProps> = ({
     square,
     marginRightOnPhone,
 }) => {
+    // Note: For accessibility reasons, img alt and figcaption need to have different values
     return url ? (
         <a href={url}>
             <StyledFigure
@@ -21,7 +22,7 @@ const HoverImage: React.FC<HoverImageProps> = ({
                 color={color}
                 marginRightOnPhone={marginRightOnPhone}
             >
-                <img src={publicURL} alt={name} />
+                <img src={publicURL} alt={`Link to ${name}`} />
                 <figcaption>{name}</figcaption>
             </StyledFigure>
         </a>

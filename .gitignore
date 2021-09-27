@@ -2,3 +2,9 @@ node_modules/
 .cache/
 public
 .DS_STORE
+
+# Statically built data
+src/data/searchData.json
+src/data/wp/Author/*.json
+src/data/wp/Posts/*.json
+src/data/wp/Projects/*.json

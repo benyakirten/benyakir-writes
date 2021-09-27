@@ -119,8 +119,10 @@ export const MinorHeading = styled.h4`
     }
 `
 
-export const BigParagraph = styled.p<{ marginRight?: string }>`
+export const BigParagraph = styled.p<{ marginRight?: string, marginVertical?: string }>`
     font-size: ${FONT_XL};
+    margin-top: ${props => props.marginVertical ? props.marginVertical : '0'};
+    margin-bottom: ${props => props.marginVertical ? props.marginVertical : '0'};
     margin-right: ${props => props.marginRight ? props.marginRight : '0'};
 `
 
@@ -315,6 +317,66 @@ export const DisappearOnPhone= styled.div`
 `
 
 export const WpContent = styled.div<{ fontSize?: string }>`
+    font-size: ${props => props.fontSize ? props.fontSize : FONT_LG};
+
+    a:link,
+    a:visited {
+        position: relative;
+
+        color: ${SECONDARY_800};
+
+        overflow: hidden;
+        white-space: nowrap;
+
+        &::after {
+            content: '';
+            
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            
+            height: 2px;
+            width: 100%;
+            
+            background-color: ${SECONDARY_800};
+
+            transition: transform 0.5s ease;
+            transform-origin: left;
+            transform: scaleX(0);
+        }
+
+        &:hover {
+            &::after {
+                transform: scaleX(1);
+
+                ${media.reducedMotion} {
+                    transform: scaleX(0);
+                }
+            }
+        }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: ${FAUSTINA};
+        margin: 2rem 0;
+    }
+
+    ol,
+    li {
+        margin-left: 1rem;
+    }
+
+    p {
+        margin: 1rem 0;
+    }
+`
+
+export const WpContentInline = styled.span<{ fontSize?: string }>`
     font-size: ${props => props.fontSize ? props.fontSize : FONT_LG};
 
     a:link,

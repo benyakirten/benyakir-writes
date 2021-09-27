@@ -11,40 +11,41 @@ describe("Accessibility tests", () => {
 
     describe("the side menu", () => {
         beforeEach(() => {
-            // The arrow to open the menu is the first button on the screen
-            cy.get('button').click()
-            cy.waitFor(1000)
+            cy.get('[data-cy=open-sidemenu]').click()
+            cy.wait(1000)
         })
+
         it("Has no accessibility violations after the side menu is opened", () => {
             cy.checkA11y();
         })
 
         it('Has no accessibility violations when the blog sub menu is opened', () => {
-            cy.get("span").eq(0).click()
+            cy.get("[data-cy=submenu-open]").eq(0).click()
             cy.wait(1000)
             cy.checkA11y();
         })
 
         it('Has no accessibility violations when the author sub menu is opened', () => {
-            cy.get("span").eq(1).click()
+            cy.get("[data-cy=submenu-open]").eq(1).click()
             cy.wait(1000)
             cy.checkA11y();
         })
 
         it('Has no accessibility violations when the search menu is opened', () => {
-            cy.get("span").eq(2).click()
+            cy.get("[data-cy=submenu-open]").eq(2).click()
             cy.wait(1000)
             cy.checkA11y();
         })
 
         it('Has no accessibility violations when searches are performed', () => {
-            cy.get("span").eq(2).click()
+            cy.get("[data-cy=submenu-open]").eq(2).click()
             cy.wait(1000)
-            cy.get("input[type=text]").type("syntax")
+            cy.get("[data-cy=search-text-input]").type("syntax")
             cy.wait(4000)
             cy.checkA11y();
         })
     })
+});
 
    
     // describe("Portfolio accessibility", () => {
@@ -140,4 +141,3 @@ describe("Accessibility tests", () => {
     //         })
     //     })
     // })
-});

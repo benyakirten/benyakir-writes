@@ -41,8 +41,7 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 
 ## Planned Changes
 
-> Add the showcase pages from benyakiredits.com (it will be awhile before this happens. Don't hold your breath)
-> Add E2E testing
+> Add the showcase pages from benyakiredits.com. It will be awhile before this happens so don't hold your breath.
 
 ## Changelog
 
@@ -72,3 +71,4 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 >> 7. The meta criteria is generated as a hashtable. This limits search time to O(n * m) (instead of of O(m * n * o)), though n is an array of length 1-2 usually. To go with this, the filters now use the hashtable instead of the string to filter. The one disadvantage is that partially completed search strings will now no longer give the results for the full string (such as typing 'ap' instead of 'api'). This, however, I think is worth it because the slight decrease in functionality greatly increases effeciency - words for a programmer to die by.
 >> 8. Decreased the debounce timeout for the filter string to search for the items. 600ms felt like it was loading something instead of waiting for the input to be complete. 250ms now gives the user a moment to search.
 >> 9. Unit tests have been fixed to work with these new changes.
+> 9/26/2021: Added E2E tests for accessibility and obviously changed a bunch of stuff to increase accessibility. For some reason, this gives a bunch of weird messages, durign the build process, but I have no idea why. I may do more E2E tests, but almost all functionality is covered under the normal tests. I also added the static filter files to .gitignore so they're forcibly generated. Because of this, the file system now generates the appropriate folders if they don't exist already. I also formatted the messages using the reporter given to the method during the build process so they look more similar to the other gatsby messages (I swear this has nothing to do with adding the weird messages).

@@ -25,6 +25,7 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = ({
                 zIndex: tabIndex < 0 ? Z_UNDER : Z_BASE,
                 height: tabIndex < 0 ? 0 : 'auto'
             }}
+            data-cy="multiple-choice"
         >
             {choices.map((c) => (
                 <Choice

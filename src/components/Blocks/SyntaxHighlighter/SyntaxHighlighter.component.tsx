@@ -58,6 +58,7 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterBlock> = ({
         if (initialized) changeTheme();
     }, [showTheme]);
 
+    const randId = Math.random().toString()
     return (
         <HighlighterContainer>
             {loading && (
@@ -71,9 +72,9 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterBlock> = ({
             <HighlighterTopbar>
                 <span>Language: {getFullLanguage(lang)}</span>
                 <span>
-                    <label htmlFor="theme">Theme: </label>
+                    <label htmlFor={`theme-${randId}`}>Theme: </label>
                     <select
-                        id="theme"
+                        id={`theme-${randId}`}
                         value={showTheme}
                         onChange={(e) =>
                             setShowTheme(e.target.value as EnabledTheme)

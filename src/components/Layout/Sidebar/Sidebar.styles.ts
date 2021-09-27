@@ -9,7 +9,7 @@ import {
     SHADOW_MD,
     FONT_XXL,
     FONT_XL,
-    FONT_SM,
+    FONT_SM
 } from '@StyleVars'
 import { media } from '@Styles/queries'
 
@@ -17,7 +17,6 @@ export const StyledSidebar = styled.nav<{ open?: boolean }>`
     position: relative;
     align-self: stretch;
 
-    
     min-height: 100vh;
     width: ${props => props.open ? '40rem' : '5rem'};
     
@@ -38,7 +37,6 @@ export const StyledSidebar = styled.nav<{ open?: boolean }>`
         ${PRIMARY_200},
         ${PRIMARY_100}
     );
-
     border-right: 2px solid ${SECONDARY_900};
     box-shadow: ${SHADOW_MD};
 `
@@ -48,7 +46,7 @@ export const SidebarContents = styled.div`
 
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
 `
 
 export const ArrowButton = styled.button<{ open: boolean }>`
@@ -78,7 +76,6 @@ export const NavGroup = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    width: 100%;
 
     margin-bottom: 4rem;
 `
@@ -95,14 +92,14 @@ export const SubLinks = styled.div<{ open: boolean }>`
     opacity: ${props => props.open ? '1' : '0'};
 `
 
-export const LegalBox = styled.div<{ open: boolean }>`
+export const LegalBox = styled.div`
     display: flex;
     flex-direction: column;
+    cursor: default;
 
     margin: 2rem 0;
 
     transition: opacity 0.5s ease;
-    opacity: ${props => props.open ? '1' : '0'};
 `
 
 export const LegalItem = styled.span`

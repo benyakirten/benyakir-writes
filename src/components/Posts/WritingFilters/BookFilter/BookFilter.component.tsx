@@ -54,18 +54,21 @@ const BookFilter: React.FC<BookFilterProps> = ({
                 open={dropdownOpen === "date"}
                 onClick={() => setDropdown("date")}
                 height="10rem"
+                cyId="foldout-dates"
             >
                 <DatePicker
                     name="book-published-before"
                     value={publishedBefore}
                     label="Published before"
                     onChange={setPublishedBefore}
+                    tabIndex={dropdownOpen === "date" ? 0 : -1}
                 />
                 <DatePicker
                     name="book-published-after"
                     value={publishedAfter}
                     label="Published after"
                     onChange={setPublishedAfter}
+                    tabIndex={dropdownOpen === "date" ? 0 : -1}
                 />
             </Foldout>
         </Filter>

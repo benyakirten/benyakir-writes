@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Link, navigate } from "gatsby";
+import { GatsbyImage } from "gatsby-plugin-image";
 
 import {
     Card,
@@ -38,7 +39,9 @@ const StoryCard: React.FC<StoryCardProps> = ({ item }) => {
                     />
                     <DisappearOnPhone>
                         <CardLinkBox>
-                            <Button onClick={() => navigate(`/story/${item.slug}`)}>
+                            <Button
+                                onClick={() => navigate(`/story/${item.slug}`)}
+                            >
                                 Read More
                             </Button>
                         </CardLinkBox>
@@ -53,9 +56,11 @@ const StoryCard: React.FC<StoryCardProps> = ({ item }) => {
                                 </CustomLink>
                             </MinorHeading>
                             {item.book.cover ? (
-                                <Link to={`/book/${item.book.slug}`}>
+                                <Link
+                                    aria-label={`Link to ${item.book.title}`}
+                                    to={`/book/${item.book.slug}`}
+                                >
                                     <HoverableContainer
-                                        style={{ margin: "0 auto" }}
                                         height={item.book.cover.height}
                                         width={item.book.cover.width}
                                     >

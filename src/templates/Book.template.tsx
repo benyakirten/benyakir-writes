@@ -18,6 +18,8 @@ import {
     Subtitle,
     GroupingBox,
     RowUntilPhone,
+    Paragraph,
+    BigParagraph,
 } from "@Styles/general-components";
 
 import Button from "@Gen/Button/Button.component";
@@ -72,46 +74,47 @@ const Book: React.FC<WpBook> = ({ data }) => {
                                 {getPrettyDate(book.published.date)}
                             </LItem>
                             {book.coverDesigner && (
-                                <List>
+                                <>
                                     <LItem>
-                                        <MinorHeading>
-                                            Cover designer:{" "}
-                                            {book.coverDesigner.name}
-                                        </MinorHeading>
+                                        Cover designer:{" "}
+                                        {book.coverDesigner.name}
                                     </LItem>
                                     <LItem>{book.coverDesigner.bio}</LItem>
                                     {book.coverDesigner.links &&
                                         book.coverDesigner.links.map(
                                             (l, idx) => (
                                                 <LItem key={l.name + idx}>
-                                                    <CustomLink outside to={l.link}>
+                                                    <CustomLink
+                                                        outside
+                                                        to={l.link}
+                                                    >
                                                         {l.name}
                                                     </CustomLink>
                                                 </LItem>
                                             )
                                         )}
-                                </List>
+                                </>
                             )}
                             {book.project && (
-                                <List>
+                                <>
                                     <LItem>
-                                        <MinorHeading>
-                                            <CustomLink
-                                                to={`/project/${book.project.slug}`}
-                                            >
-                                                Related Project:{" "}
-                                                {book.project.title}
-                                            </CustomLink>
-                                        </MinorHeading>
+                                        <CustomLink
+                                            to={`/project/${book.project.slug}`}
+                                        >
+                                            Related Project:{" "}
+                                            {book.project.title}
+                                        </CustomLink>
                                     </LItem>
                                     <LItem>{book.project.description}</LItem>
-                                </List>
+                                </>
                             )}
                         </List>
                     </CardDoubleSection>
                     <CardDoubleSection>
                         <Column>
-                            <SubHeading>Purchase Links</SubHeading>
+                            <BigParagraph marginVertical="1rem">
+                                Purchase Links:
+                            </BigParagraph>
                             <Row>
                                 {book.purchaseLinks.map((link, idx) => (
                                     <Button
@@ -124,16 +127,14 @@ const Book: React.FC<WpBook> = ({ data }) => {
                             </Row>
                             {book.stories && (
                                 <Column>
-                                    <SubHeading>Related Stories</SubHeading>
+                                    <BigParagraph marginVertical="1rem">
+                                        Related Stories:
+                                    </BigParagraph>
                                     {book.stories.map((s) => (
                                         <React.Fragment key={s.title}>
-                                            <MinorHeading>
-                                                <CustomLink
-                                                    to={`/story/${s.slug}`}
-                                                >
-                                                    {s.title}
-                                                </CustomLink>
-                                            </MinorHeading>
+                                            <CustomLink to={`/story/${s.slug}`}>
+                                                {s.title}
+                                            </CustomLink>
                                             <WpContent
                                                 dangerouslySetInnerHTML={{
                                                     __html: s.content,

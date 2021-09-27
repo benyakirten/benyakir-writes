@@ -14,8 +14,10 @@ const PaginateMenu: React.FC<PaginateMenuProps> = ({
     onRight,
     limit,
     setLimit,
-    disableRight
+    disableRight,
+    name
 }) => {
+    const randId = Math.random().toString();
     const doNothing = () => {};
     const adjustLimit = (newLimit: string) => {
         const lim = +newLimit
@@ -31,6 +33,7 @@ const PaginateMenu: React.FC<PaginateMenuProps> = ({
                     disabled={currentPage === 0}
                     onClick={currentPage === 0 ? doNothing : onLeft}
                     left={true}
+                    data-cy="page-flip-left"
                 >
                     &#10148;
                 </PageFlip>
@@ -38,6 +41,7 @@ const PaginateMenu: React.FC<PaginateMenuProps> = ({
                 <PageFlip
                     disabled={!enableRightButton}
                     onClick={enableRightButton ? onRight : doNothing}
+                    data-cy="page-flip-right"
                 >
                     &#10148;
                 </PageFlip>
@@ -46,7 +50,8 @@ const PaginateMenu: React.FC<PaginateMenuProps> = ({
                 value={limit.toString()}
                 onChange={adjustLimit}
                 label="Items Per Page"
-                name="adjust-items-per-page"
+                name={`${name}-adjust-items-per-page-${randId}`}
+                cyId="adjust-items-per-page"
             />
         </Row>
     );

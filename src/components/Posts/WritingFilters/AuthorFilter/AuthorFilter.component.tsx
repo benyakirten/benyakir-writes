@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import { SubHeading} from "@Styles/general-components";
+
 import Filter from "@Input/Filter/Filter.component";
 import DatePicker from "@Input/DatePicker/DatePicker.component";
 import MultipleChoice from "@Input/MultipleChoice/MultipleChoice.component";
@@ -7,11 +9,9 @@ import Foldout from "@Gen/Foldout/Foldout.component";
 
 import useDropdown from "@Hooks/useDropdown";
 import { getMultipleChoiceHeight, getValuesForSelected } from "@Utils/filter";
-
-import { SubHeading} from "@Styles/general-components";
+import { hasSomeContent } from "@Utils/search";
 
 import { AuthorFilterProps } from "@Types/props";
-import { hasSomeContent } from "@/utils/search";
 
 const AuthorFilter: React.FC<AuthorFilterProps> = ({
     allBooks,
@@ -73,24 +73,27 @@ const AuthorFilter: React.FC<AuthorFilterProps> = ({
     }
 
     return (
-        <Filter name="projects" onSearch={setSearchString}>
+        <Filter name="author" onSearch={setSearchString}>
             <Foldout
                 topbar={<SubHeading>Filter by date</SubHeading>}
                 open={dropdownOpen === "date"}
                 onClick={() => setDropdown("date")}
                 height="10rem"
+                cyId="foldout-dates"
             >
                 <DatePicker
                     name="proect-published-before"
                     value={publishedBefore}
                     label="Published before"
                     onChange={setPublishedBefore}
+                    tabIndex={dropdownOpen === "date" ? 0 : -1}
                 />
                 <DatePicker
                     name="project-published-after"
                     value={publishedAfter}
                     label="Published after"
                     onChange={setPublishedAfter}
+                    tabIndex={dropdownOpen === "date" ? 0 : -1}
                 />
             </Foldout>
             <Foldout
@@ -101,10 +104,12 @@ const AuthorFilter: React.FC<AuthorFilterProps> = ({
                 heightMultiplierOnPhone={3.4}
                 heightMultiplierOnTablet={2}
                 heightMultiplierOnLarger={1.4}
+                cyId="foldout-book"
             >
                 <MultipleChoice
                     choices={bookChoices}
                     onSelect={setBookChoices}
+                    tabIndex={dropdownOpen === "book" ? 0 : -1}
                 />
             </Foldout>
         </Filter>

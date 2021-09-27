@@ -48,8 +48,8 @@ export const WHITE = '#D8E3FD'
 export const ABS_BLACK = '#000'
 export const ABS_WHITE = '#FFF'
 
-export const SUCCESS = '#74966d'
-export const ERROR = '#cc4d6d'
+export const SUCCESS = '#44764d'
+export const ERROR = '#993d4d'
 
 // SIZE
 export const SIZE_XL = '8rem'

@@ -2,7 +2,18 @@ import React, { ReactElement } from "react"
 
 import BookCard from '@Variants/Author/BookCard/BookCard.component'
 import StoryCard from '@Variants/Author/StoryCard/StoryCard.component'
-import { FlattenedBlogPost, FlattenedBook, FlattenedBookCard, FlattenedProject, FlattenedProjectCard, FlattenedStory, FlattenedBlogCard, PartiallyFlattenedBlogPost, PartialFlattenedBook } from "./posts"
+import {
+    PartiallyFlattenedBlogPost,
+    FlattenedBlogPost,
+    FlattenedBlogCard,
+    PartialFlattenedBook,
+    FlattenedBook,
+    FlattenedBookCard,
+    FlattenedProject,
+    FlattenedProjectCard,
+    FlattenedStory,
+    FlattenedStoryCard
+} from "./posts"
 
 // LAYOUT
 type LogoProps = {
@@ -28,7 +39,8 @@ type PaginateMenuProps = {
     maxPages: number;
     onLeft: () => void;
     onRight: () => void;
-    disableRight?: boolean
+    disableRight?: boolean;
+    name: string;
 }
 
 // GENERAL
@@ -65,6 +77,7 @@ type OpenProps = {
     open?: boolean;
     tabIndex?: number;
     onClick?: () => void;
+    cyId?: string;
 }
 
 type FoldoutProps = OpenProps & {
@@ -73,6 +86,7 @@ type FoldoutProps = OpenProps & {
     heightMultiplierOnPhone?: number;
     heightMultiplierOnTablet?: number;
     heightMultiplierOnLarger?: number;
+    cyId?: string;
 }
 
 type LinkGroupProps = OpenProps & {
@@ -118,6 +132,7 @@ interface TextProps extends InputProps {
     width?: string;
     tabIndex?: number;
     autofocus?: boolean;
+    cyId?: string;
 }
 
 interface CheckboxProps extends InputProps {
@@ -148,6 +163,7 @@ interface MultipleChoiceProps {
 // POSTS
 type LeadPageProps = {
     filter: ReactElement;
+    title: string;
 }
 
 type ProjectsFilterProps = {

@@ -40,7 +40,7 @@ const Search: React.FC<SearchProps> = ({ open, onClick }) => {
         const _search = val.toLowerCase().split(" ")
         // This is unnecessary for the component to function,
         // but it causes the component not to re-render on initial render
-        if (!val && !hasSomeContent(_search)) return
+        if (!val && !hasSomeContent(_search)) setFilteredResults(data)
         if (!val) setFilteredResults([])
         const _results = allResults.filter(
             (r) => showState[r.type] && _search.every((s) => r.meta[s])
@@ -57,7 +57,7 @@ const Search: React.FC<SearchProps> = ({ open, onClick }) => {
             open={open}
             topbar={<SubHeading>Search</SubHeading>}
             onClick={onClick}
-            height="auto"
+            height={filteredResults.length === 0 ? '25rem' : '32rem'}
         >
             <Text
                 value={search}
@@ -66,6 +66,7 @@ const Search: React.FC<SearchProps> = ({ open, onClick }) => {
                 name="global-search"
                 width="65%"
                 tabIndex={open ? 0 : -1}
+                cyId="search-text-input"
             />
             <div style={{ marginLeft: "2px", marginTop: "1rem" }}>
                 <Checkbox

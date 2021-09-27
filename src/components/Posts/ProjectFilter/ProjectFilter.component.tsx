@@ -90,6 +90,7 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
                 open={dropdownOpen === "date"}
                 onClick={() => setDropdown("date")}
                 height="10rem"
+                cyId="foldout-dates"
             >
                 <DatePicker
                     name="proect-published-before"
@@ -113,6 +114,7 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
                 height={getMultipleChoiceHeight(hostChoices)}
                 heightMultiplierOnPhone={3}
                 heightMultiplierOnTablet={1.6}
+                cyId="foldout-host"
             >
                 <MultipleChoice
                     tabIndex={dropdownOpen === "host" ? 0 : -1}
@@ -124,10 +126,8 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
                 topbar={<SubHeading>Filter by technology</SubHeading>}
                 open={dropdownOpen === "tech"}
                 onClick={() => setDropdown("tech")}
-                height={getMultipleChoiceHeight(techChoices)}
-                heightMultiplierOnPhone={4.1}
-                heightMultiplierOnTablet={2}
-                heightMultiplierOnLarger={1.4}
+                height='auto'
+                cyId="foldout-tech"
             >
                 <MultipleChoice
                     choices={techChoices}

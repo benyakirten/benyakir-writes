@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
 
-import { Grouping, LeadHeading } from "@Styles/general-components";
+import { Grouping } from "@Styles/general-components";
 
 import LeadPage from "@Layout/LeadPage/LeadPage.component";
 import Paginate from "@Layout/Paginate/Paginate.component";
@@ -23,6 +23,7 @@ const ShortstoriesPage: React.FC = () => {
 
     return (
         <LeadPage
+            title="Short Stories"
             filter={
                 <StoryFilter stories={stories} onFilter={storyPagination.setCurrentItems} />
             }
@@ -35,7 +36,6 @@ const ShortstoriesPage: React.FC = () => {
                     Get an overview of them on this page before reading them individually and seeing more details about them."
                 />
             </Helmet>
-            <LeadHeading>Short Stories</LeadHeading>
             <Grouping>
                 <Paginate
                     {...storyPagination}

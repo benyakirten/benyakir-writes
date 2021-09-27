@@ -7,7 +7,7 @@ import {
     act,
 } from "@testing-library/react";
 
-import BookFilter from "@Posts/WritingFilters/BookFilter/BookFilter.component";
+import BookFilter from "@/components/Posts/WritingFilters/BookFilter/BookFilter.component";
 
 import { cover } from "../../props";
 import { createLookupMeta } from "@Utils/posts";

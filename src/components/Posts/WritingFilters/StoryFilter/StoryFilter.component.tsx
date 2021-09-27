@@ -55,18 +55,21 @@ const StoryFilter: React.FC<StoryFilterProps> = ({
                 open={dropdownOpen === "date"}
                 onClick={() => setDropdown("date")}
                 height="10rem"
+                cyId="foldout-dates"
             >
                 <DatePicker
                     name="proect-published-before"
                     value={publishedBefore}
                     label="Published before"
                     onChange={setPublishedBefore}
+                    tabIndex={dropdownOpen === "date" ? 0 : -1}
                 />
                 <DatePicker
                     name="project-published-after"
                     value={publishedAfter}
                     label="Published after"
                     onChange={setPublishedAfter}
+                    tabIndex={dropdownOpen === "date" ? 0 : -1}
                 />
             </Foldout>
         </Filter>

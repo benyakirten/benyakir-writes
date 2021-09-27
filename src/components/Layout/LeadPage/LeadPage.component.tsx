@@ -7,10 +7,12 @@ import {
 } from "./LeadPage.styles";
 
 import { LeadPageProps } from "@Types/props";
+import { LeadHeading } from "@/styles/general-components";
 
-const LeadPage: React.FC<LeadPageProps> = ({ children, filter }) => {
+const LeadPage: React.FC<LeadPageProps> = ({ title, children, filter }) => {
     return (
         <PageContainer>
+            <LeadHeading>{title}</LeadHeading>
             <SideArea>
                 {filter}
             </SideArea>

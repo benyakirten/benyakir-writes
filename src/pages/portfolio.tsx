@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
 
-import { Grouping, LeadHeading } from "@Styles/general-components";
+import { Grouping } from "@Styles/general-components";
 
 import LeadPage from "@Layout/LeadPage/LeadPage.component";
 import Paginate from "@Layout/Paginate/Paginate.component";
@@ -43,6 +43,7 @@ const ProjectsPage: React.FC = () => {
 
     return (
         <LeadPage
+            title="Projects"
             filter={
                 <ProjectFilter
                     allProjects={preparedProjects}
@@ -60,7 +61,6 @@ const ProjectsPage: React.FC = () => {
                     including dynamically-generated criteria such as web hosts and what technologies are used to power them."
                 />
             </Helmet>
-            <LeadHeading>Projects</LeadHeading>
             <Grouping>
                 <Paginate {...projectPagination} El={ProjectCard} />
             </Grouping>

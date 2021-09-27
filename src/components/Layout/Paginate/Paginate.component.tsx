@@ -41,6 +41,7 @@ const Paginate: React.FC<PaginateProps> = ({
                 limit={itemsPerPage}
                 setLimit={adjustItemsPerPage}
                 disableRight={secondCriteria}
+                name="top"
             />
             <Column style={{ margin: "1rem 0" }}>
                 {items.length > 0 ? (
@@ -64,6 +65,7 @@ const Paginate: React.FC<PaginateProps> = ({
                 limit={itemsPerPage}
                 setLimit={adjustItemsPerPage}
                 disableRight={secondCriteria}
+                name="bottom"
             />
         </Column>
     );

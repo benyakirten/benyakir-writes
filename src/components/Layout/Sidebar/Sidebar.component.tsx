@@ -34,7 +34,7 @@ const Sidebar: React.FC = () => {
         setOpening(true);
     }
     function handleNavClick(e: React.BaseSyntheticEvent) {
-        if (e.target.getAttribute('data-navtoggle') === "nav-toggle") {
+        if (e.target.getAttribute("data-navtoggle") === "nav-toggle") {
             toggleOpen(e);
         }
     }
@@ -53,7 +53,12 @@ const Sidebar: React.FC = () => {
                 className={open ? "nav-toggle-open" : "nav-toggle-close"}
                 data-navtoggle="nav-toggle"
             >
-                <ArrowButton tabIndex={0} open={open} onClick={toggleOpen}>
+                <ArrowButton
+                    tabIndex={0}
+                    open={open}
+                    onClick={toggleOpen}
+                    data-cy="open-sidemenu"
+                >
                     &larr;
                 </ArrowButton>
                 <VisibleGroup
@@ -78,7 +83,13 @@ const Sidebar: React.FC = () => {
                             onClick={() => setOpenDropdown("author")}
                             tabIndex={openDropdown === "author" ? 0 : -1}
                         />
-                        <CustomLink tabIndex={open ? 0 : -1} to="/portfolio" underbarSize="12rem">Portfolio</CustomLink>
+                        <CustomLink
+                            tabIndex={open ? 0 : -1}
+                            to="/portfolio"
+                            underbarSize="12rem"
+                        >
+                            Portfolio
+                        </CustomLink>
                     </NavGroup>
                     <NavGroup>
                         <Search
@@ -87,17 +98,41 @@ const Sidebar: React.FC = () => {
                         />
                     </NavGroup>
                     <NavGroup>
-                        <CustomLink tabIndex={open ? 0 : -1} to="/" underbarSize="12rem">Home</CustomLink>
-                        <CustomLink tabIndex={open ? 0 : -1} to="/contact" underbarSize="12rem">Contact</CustomLink>
-                        <CustomLink tabIndex={open ? 0 : -1} to="/privacy" underbarSize="12rem">Privacy</CustomLink>
-                        <CustomLink tabIndex={open ? 0 : -1} to="/about" underbarSize="12rem">About</CustomLink>
+                        <CustomLink
+                            tabIndex={open ? 0 : -1}
+                            to="/"
+                            underbarSize="12rem"
+                        >
+                            Home
+                        </CustomLink>
+                        <CustomLink
+                            tabIndex={open ? 0 : -1}
+                            to="/contact"
+                            underbarSize="12rem"
+                        >
+                            Contact
+                        </CustomLink>
+                        <CustomLink
+                            tabIndex={open ? 0 : -1}
+                            to="/privacy"
+                            underbarSize="12rem"
+                        >
+                            Privacy
+                        </CustomLink>
+                        <CustomLink
+                            tabIndex={open ? 0 : -1}
+                            to="/about"
+                            underbarSize="12rem"
+                        >
+                            About
+                        </CustomLink>
                     </NavGroup>
-                </VisibleGroup>
-                <NavGroup>
-                    <LegalBox open={open}>
+                    <LegalBox>
                         <LegalItem>&copy; 2021 by Benyakir Horowitz</LegalItem>
                         <LegalItem>All Rights Reserved</LegalItem>
                     </LegalBox>
+                </VisibleGroup>
+                <NavGroup>
                     <Logo opening={opening} />
                 </NavGroup>
             </SidebarContents>

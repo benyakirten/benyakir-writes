@@ -72,7 +72,7 @@ const CategoryFilter: React.FC<AllBlogFilterProps> = ({
         // However, testing fails otherwise because the useDebounce hook will
         // cause an internal state change as the component is rendering
         // This line prevents that state change and allows the tests to work
-        if (!filterString && !hasSomeContent(filterWords)) return
+        if (!filterString && !hasSomeContent(filterWords)) return;
         setFilterWords(filterString ? filterString.split(" ") : [" "]);
     }
 
@@ -83,14 +83,17 @@ const CategoryFilter: React.FC<AllBlogFilterProps> = ({
                 open={dropdownOpen === "date"}
                 onClick={() => setDropdown("date")}
                 height="10rem"
+                cyId="foldout-dates"
             >
                 <DatePicker
+                    tabIndex={dropdownOpen === "date" ? 0 : -1}
                     name="proect-published-before"
                     value={publishedBefore}
                     label="Published before"
                     onChange={setPublishedBefore}
                 />
                 <DatePicker
+                    tabIndex={dropdownOpen === "date" ? 0 : -1}
                     name="project-published-after"
                     value={publishedAfter}
                     label="Published after"
@@ -106,8 +109,10 @@ const CategoryFilter: React.FC<AllBlogFilterProps> = ({
                     heightMultiplierOnPhone={4.2}
                     heightMultiplierOnTablet={3}
                     heightMultiplierOnLarger={1.45}
+                    cyId="foldout-tags"
                 >
                     <MultipleChoice
+                        tabIndex={dropdownOpen === "tags" ? 0 : -1}
                         choices={tagChoices}
                         onSelect={setTagChoices}
                     />

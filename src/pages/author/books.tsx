@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
 
-import { Grouping, LeadHeading } from "@Styles/general-components";
+import { Grouping } from "@Styles/general-components";
 
 import LeadPage from "@Layout/LeadPage/LeadPage.component";
 import Paginate from "@Layout/Paginate/Paginate.component";
-import BookFilter from "@Posts/WritingFilters/BookFilter/BookFilter.component";
+import BookFilter from "@/components/Posts/WritingFilters/BookFilter/BookFilter.component";
 import BookCard from "@Variant/Author/BookCard/BookCard.component";
 
 import usePagination from "@Hooks/usePagination";
@@ -23,6 +23,7 @@ const BooksPage: React.FC = () => {
 
     return (
         <LeadPage
+            title="Books"
             filter={
                 <BookFilter
                     books={books}
@@ -38,7 +39,6 @@ const BooksPage: React.FC = () => {
                     of the books before looking them up individually"
                 />
             </Helmet>
-            <LeadHeading>Books</LeadHeading>
             <Grouping>
                 <Paginate
                     {...bookPagination}

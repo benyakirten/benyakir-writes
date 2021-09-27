@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Link, navigate } from "gatsby";
+import { GatsbyImage } from "gatsby-plugin-image";
 
 import {
     Card,
@@ -9,11 +10,11 @@ import {
     Row,
     SubHeading,
     Column,
-    HoverableContainer,
-    HoverableGatsbyImage,
     CardLinkBox,
     DisappearOnPhone,
     WpContentDescription,
+    HoverableContainer,
+    HoverableGatsbyImage,
 } from "@Styles/general-components";
 
 import Button from "@Gen/Button/Button.component";
@@ -40,7 +41,9 @@ const BookCard: React.FC<BookCardProps> = ({ item }) => {
                     />
                     <DisappearOnPhone>
                         <CardLinkBox>
-                            <Button onClick={() => navigate(`/book/${item.slug}`)}>
+                            <Button
+                                onClick={() => navigate(`/book/${item.slug}`)}
+                            >
                                 Read More
                             </Button>
                             {item.purchaseLinks.map((link, idx) => (
@@ -58,10 +61,13 @@ const BookCard: React.FC<BookCardProps> = ({ item }) => {
                     <DisappearOnPhone>
                         <CardSection>
                             {item.cover ? (
-                                <Link to={`/book/${item.slug}`}>
+                                <Link
+                                    aria-label={`Link to ${item.title}`}
+                                    to={`/book/${item.slug}`}
+                                >
                                     <HoverableContainer
-                                        height={item.cover.height}
                                         width={item.cover.width}
+                                        height={item.cover.height}
                                     >
                                         <HoverableGatsbyImage
                                             image={item.cover}

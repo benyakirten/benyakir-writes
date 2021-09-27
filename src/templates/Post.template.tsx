@@ -10,6 +10,7 @@ import {
     Column,
     SubHeading,
     Paragraph,
+    BigParagraph,
 } from "@Styles/general-components";
 
 import { firstWords } from "@Utils/strings";
@@ -39,11 +40,11 @@ const Post: React.FC<WpPost> = ({ data }) => {
                 <Row style={{ justifyContent: "space-between" }}>
                     {post.categories && (
                         <Column>
-                            <SubHeading>
+                            <BigParagraph>
                                 {post.categories.length > 1
                                     ? "Categories"
                                     : "Category"}
-                            </SubHeading>
+                            </BigParagraph>
                             <Paragraph>{post.categories.join(", ")}</Paragraph>
                         </Column>
                     )}
@@ -51,9 +52,9 @@ const Post: React.FC<WpPost> = ({ data }) => {
                         <Column>
                             {post.tags.length > 0 && (
                                 <>
-                                    <SubHeading>
+                                    <BigParagraph>
                                         {post.tags.length > 1 ? "Tags" : "Tag"}
-                                    </SubHeading>
+                                    </BigParagraph>
                                     <Paragraph>
                                         {post.tags.join(", ")}
                                     </Paragraph>
@@ -62,7 +63,7 @@ const Post: React.FC<WpPost> = ({ data }) => {
                         </Column>
                     )}
                     <Column>
-                        <SubHeading>Posted</SubHeading>
+                        <BigParagraph>Posted</BigParagraph>
                         <Paragraph>
                             {getPrettyDate(post.published.date)}
                         </Paragraph>

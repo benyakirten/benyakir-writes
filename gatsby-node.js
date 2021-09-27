@@ -1,5 +1,6 @@
 const path = require("path");
 const fs = require("fs");
+const fsPromise = require("fs/promises")
 
 exports.onCreateWebpackConfig = ({ actions }) => {
     actions.setWebpackConfig({
@@ -79,13 +80,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         const _title = title
             .toLowerCase()
             .trim()
-            .replace(/['\.\[\]\{\}\!\?\,:@#\*]/g, '')
-            .replace(/\s{2,}/g, ' ')
-            .split(' ')
-        if (_title.every(part => part.length === 0)) {
-            throw new Error('Invalid title -- format must include characters other than apostraphes, spaces, !@#*[]{} or punctuation')
+            .replace(/['\.\[\]\{\}\!\?\,:@#\*]/g, "")
+            .replace(/\s{2,}/g, " ")
+            .split(" ");
+        if (_title.every((part) => part.length === 0)) {
+            throw new Error(
+                "Invalid title -- format must include characters other than apostraphes, spaces, !@#*[]{} or punctuation"
+            );
         }
-        return _title.join('-')
+        return _title.join("-");
     }
 
     const {
@@ -486,9 +489,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
     function getAllHosts(projects) {
         const nonUniqueHosts = projects
-            .filter(p => !!p.hostedOn)
-            .map(p => p.hostedOn)
-        return Array.from(new Set(nonUniqueHosts))
+            .filter((p) => !!p.hostedOn)
+            .map((p) => p.hostedOn);
+        return Array.from(new Set(nonUniqueHosts));
     }
 
     function hashUsedIcons(allIcons, allShortTechs) {
@@ -625,9 +628,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             ...formatText(book.content).split(" "),
         ];
         if (book.stories) {
-            data = data.concat(
-                book.stories.flatMap((s) => s.title.split(" "))
-            );
+            data = data.concat(book.stories.flatMap((s) => s.title.split(" ")));
         }
         if (book.project) {
             data = data.concat(book.project.title.split(" "));
@@ -702,8 +703,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             (a, b) =>
                 b.firstReleased.date.getTime() - a.firstReleased.date.getTime()
         );
-    
-    const allHosts = getAllHosts(formattedProjects)
+
+    const allHosts = getAllHosts(formattedProjects);
 
     function generateGenericInfo(item, itemType) {
         return {
@@ -760,15 +761,34 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         ...globalSearch.posts,
     ]);
 
+    async function checkAndCreateFolder(path) {
+        if (!fs.existsSync(path)) {
+            reporter.info(`${path} directory does not exist. Creating it now...`)
+            try {
+                await fsPromise.mkdir(path)
+                reporter.success(`${path} created successfully`)
+            } catch (e) {
+                reporter.error(`Error creating ${path}: ${e.message}`)
+            }
+        } else {
+            reporter.info(`${path} already exists, continuing...`)
+        }
+    }
+
+    await checkAndCreateFolder("./src/data/wp")
+    await checkAndCreateFolder("./src/data/wp/Author")
+    await checkAndCreateFolder("./src/data/wp/Projects")
+    await checkAndCreateFolder("./src/data/wp/Posts")
+
     fs.writeFile(
         "./src/data/wp/Author/books.json",
         JSON.stringify(formattedBooks),
         "utf-8",
         (err) => {
             if (err) {
-                console.error("Error writing book data! " + err);
+                reporter.error("Error writing book data! " + err);
             } else {
-                console.log("Success writing book data!");
+                reporter.success("Success writing book data!");
             }
         }
     );
@@ -779,9 +799,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         "utf-8",
         (err) => {
             if (err) {
-                console.error("Error writing stories data! " + err);
+                reporter.error("Error writing stories data! " + err);
             } else {
-                console.log("Success writing stories data!");
+                reporter.success("Success writing stories data!");
             }
         }
     );
@@ -792,9 +812,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         "utf-8",
         (err) => {
             if (err) {
-                console.error("Error writing project data! " + err);
+                reporter.error("Error writing project data! " + err);
             } else {
-                console.log("Success writing project data!");
+                reporter.success("Success writing project data!");
             }
         }
     );
@@ -805,14 +825,14 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             longTechs,
             shortTechs,
             usedIcons,
-            hosts: allHosts
+            hosts: allHosts,
         }),
         "utf-8",
         (err) => {
             if (err) {
-                console.error("Error writing project misc! " + err);
+                reporter.error("Error writing project misc! " + err);
             } else {
-                console.log("Success writing project misc!");
+                reporter.success("Success writing project misc!");
             }
         }
     );
@@ -823,9 +843,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         "utf-8",
         (err) => {
             if (err) {
-                console.error("Error writing posts data! " + err);
+                reporter.error("Error writing posts data! " + err);
             } else {
-                console.log("Success writing posts data!");
+                reporter.success("Success writing posts data!");
             }
         }
     );
@@ -841,16 +861,17 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                 "utf-8",
                 (err) => {
                     if (err) {
-                        console.error(`Error writing posts data for category ${cat}! ` + err);
+                        reporter.error(
+                            `Error writing posts data for category ${cat}! ` +
+                                err
+                        );
                     } else {
-                        console.log(`Success writing posts data for ${cat}!`);  
+                        reporter.success(`Success writing posts data for ${cat}!`);
                     }
                 }
-            )
+            );
         }
     }
-
-
 
     fs.writeFile(
         "./src/data/searchData.json",
@@ -858,9 +879,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         "utf-8",
         (err) => {
             if (err) {
-                console.log("Error writing general search data! " + err);
+                reporter.error("Error writing general search data! " + err);
             } else {
-                console.log("Success writing general search data!");
+                reporter.success("Success writing general search data!");
             }
         }
     );

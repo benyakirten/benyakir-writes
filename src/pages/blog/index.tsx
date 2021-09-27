@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
 
-import { Grouping, LeadHeading } from "@Styles/general-components";
+import { Grouping } from "@Styles/general-components";
 
 import LeadPage from "@Layout/LeadPage/LeadPage.component";
 import AllFilter from "@Posts/BlogFilters/AllFilter/AllFilter.component";
@@ -27,6 +27,7 @@ const BlogPage: React.FC = () => {
 
     return (
         <LeadPage
+            title="Blog Posts"
             filter={
                 <AllFilter
                     allPosts={posts}
@@ -42,7 +43,6 @@ const BlogPage: React.FC = () => {
                     filter the blog results by publication date, category and tags."
                 />
             </Helmet>
-            <LeadHeading>Blog Posts</LeadHeading>
             <Grouping>
                 <Paginate {...postPagination} El={BlogCard} />
             </Grouping>

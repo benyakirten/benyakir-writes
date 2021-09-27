@@ -9,6 +9,7 @@ import {
     LItem,
     Row,
     SubHeading,
+    Subtitle,
     WpContent,
 } from "@Styles/general-components";
 
@@ -46,7 +47,7 @@ const Project: React.FC<WpProject> = ({ data }) => {
             } catch (e) {
                 setErr("Unable to fetch data");
             } finally {
-                setLoading(false)
+                setLoading(false);
             }
         }
         if (project.repoLink) {
@@ -61,41 +62,53 @@ const Project: React.FC<WpProject> = ({ data }) => {
                 <title>{project.title}</title>
                 <meta
                     name="description"
-                    content={`${project.title}, created on ${getPrettyDate(project.firstReleased.date)}, using ${project.longTechnologies.join(', ')}. ${firstWords(formatWpText(project.content!), 150)}`}
+                    content={`${project.title}, created on ${getPrettyDate(
+                        project.firstReleased.date
+                    )}, using ${project.longTechnologies.join(
+                        ", "
+                    )}. ${firstWords(formatWpText(project.content!), 150)}`}
                 />
             </Helmet>
             <Grouping>
                 <LeadHeading>{project.title}</LeadHeading>
             </Grouping>
             <Grouping>
-                <SubHeading>General Info</SubHeading>
                 {((project.hostedOn && project.mainLink) ||
                     project.repoLink) && (
-                    <Row style={{ marginBottom: '2rem' }}>
-                        {project.hostedOn && project.mainLink && (
-                            <Button onClick={() => navigate(project.mainLink!)}>
-                                On {project.hostedOn}
-                            </Button>
-                        )}
-                        {project.repoLink && (
-                            <Button onClick={() => navigate(project.repoLink!)}>
-                                On GitHub
-                            </Button>
-                        )}
-                    </Row>
+                    <>
+                        <Subtitle>Links</Subtitle>
+                        <Row style={{ marginBottom: "2rem" }}>
+                            {project.hostedOn && project.mainLink && (
+                                <Button
+                                    onClick={() => navigate(project.mainLink!)}
+                                >
+                                    On {project.hostedOn}
+                                </Button>
+                            )}
+                            {project.repoLink && (
+                                <Button
+                                    onClick={() => navigate(project.repoLink!)}
+                                >
+                                    On GitHub
+                                </Button>
+                            )}
+                        </Row>
+                    </>
                 )}
                 <WpContent
                     dangerouslySetInnerHTML={{ __html: project.content! }}
                 />
             </Grouping>
             <Grouping>
-                <SubHeading>Releases</SubHeading>
+                <SubHeading>Information</SubHeading>
                 <List>
                     <LItem>
-                        First Released: {getPrettyDate(project.firstReleased.date)}
+                        First Released:{" "}
+                        {getPrettyDate(project.firstReleased.date)}
                     </LItem>
                     <LItem>
-                        {!!project.latestUpdate && getPrettyDate(project.latestUpdate.date)}
+                        {!!project.latestUpdate &&
+                            getPrettyDate(project.latestUpdate.date)}
                         {!project.latestUpdate && loading && (
                             <Loading size="1.4rem" />
                         )}

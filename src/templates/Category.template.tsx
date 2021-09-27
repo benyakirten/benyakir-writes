@@ -2,7 +2,6 @@ import * as React from "react";
 import { Helmet } from "react-helmet";
 
 import {
-    LeadHeading,
     BigParagraph,
     Grouping,
 } from "@Styles/general-components";
@@ -48,6 +47,7 @@ const CategoryTemplate: React.FC<WpPostByCategory> = ({ pageContext }) => {
 
     return (
         <LeadPage
+            title={pageContext.name}
             filter={
                 loading ? (
                     <Loading />
@@ -71,7 +71,6 @@ const CategoryTemplate: React.FC<WpPostByCategory> = ({ pageContext }) => {
                 <Loading size="4rem" />
             ) : (
                 <>
-                    <LeadHeading>{pageContext.name}</LeadHeading>
                     <Grouping>
                         {catPosts.length > 0 ? (
                             <Paginate {...postPagination} El={BlogCard} />

@@ -52,11 +52,17 @@ const AllFilter: React.FC<AllBlogFilterProps> = ({ allPosts, onFilter }) => {
 
     React.useEffect(() => {
         let _posts = allPosts
-            .filter((p) => p.published.date.getTime() <= publishedBefore.getTime())
-            .filter((p) => p.published.date.getTime() >= publishedAfter.getTime());
+            .filter(
+                (p) => p.published.date.getTime() <= publishedBefore.getTime()
+            )
+            .filter(
+                (p) => p.published.date.getTime() >= publishedAfter.getTime()
+            );
 
         if (hasSomeContent(filterWords)) {
-            _posts = _posts.filter((p) => filterWords.every((w) => p.meta[w] || p.meta[w.toLowerCase()] ))
+            _posts = _posts.filter((p) =>
+                filterWords.every((w) => p.meta[w] || p.meta[w.toLowerCase()])
+            );
         }
 
         if (categoryChoices.some((c) => c.selected)) {
@@ -87,8 +93,8 @@ const AllFilter: React.FC<AllBlogFilterProps> = ({ allPosts, onFilter }) => {
         // However, testing fails otherwise because the useDebounce hook will
         // cause an internal state change as the component is rendering
         // This line prevents that state change and allows the tests to work
-        if (!filterString && !hasSomeContent(filterWords)) return
-        setFilterWords(filterString ? filterString.split(' ') : ['']);
+        if (!filterString && !hasSomeContent(filterWords)) return;
+        setFilterWords(filterString ? filterString.split(" ") : [""]);
     }
 
     return (
@@ -98,6 +104,7 @@ const AllFilter: React.FC<AllBlogFilterProps> = ({ allPosts, onFilter }) => {
                 open={dropdownOpen === "date"}
                 onClick={() => setDropdown("date")}
                 height="10rem"
+                cyId="foldout-dates"
             >
                 <DatePicker
                     tabIndex={dropdownOpen === "date" ? 0 : -1}
@@ -122,6 +129,7 @@ const AllFilter: React.FC<AllBlogFilterProps> = ({ allPosts, onFilter }) => {
                 heightMultiplierOnPhone={4.05}
                 heightMultiplierOnTablet={2.6}
                 heightMultiplierOnLarger={2.8}
+                cyId="foldout-categories"
             >
                 <MultipleChoice
                     tabIndex={dropdownOpen === "category" ? 0 : -1}
@@ -133,9 +141,14 @@ const AllFilter: React.FC<AllBlogFilterProps> = ({ allPosts, onFilter }) => {
                 topbar={<SubHeading>Filter by tags</SubHeading>}
                 open={dropdownOpen === "tags"}
                 onClick={() => setDropdown("tags")}
-                height={'auto'}
+                height={"auto"}
+                cyId="foldout-tags"
             >
-                <MultipleChoice tabIndex={dropdownOpen === "tags" ? 0 : -1} choices={tagChoices} onSelect={setTagChoices} />
+                <MultipleChoice
+                    tabIndex={dropdownOpen === "tags" ? 0 : -1}
+                    choices={tagChoices}
+                    onSelect={setTagChoices}
+                />
             </Foldout>
         </Filter>
     );

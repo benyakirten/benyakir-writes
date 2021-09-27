@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
 
-import { Grouping, LeadHeading, Subtitle } from "@Styles/general-components";
+import { Grouping, MinorHeading } from "@Styles/general-components";
 
 import LeadPage from "@Layout/LeadPage/LeadPage.component";
 import AuthorFilter from "@Posts/WritingFilters/AuthorFilter/AuthorFilter.component";
@@ -40,6 +40,7 @@ const AuthorPage: React.FC = () => {
 
     return (
         <LeadPage
+            title="Author"
             filter={
                 <AuthorFilter
                     allBooks={books}
@@ -56,16 +57,15 @@ const AuthorPage: React.FC = () => {
                     or by relation to an individual book."
                 />
             </Helmet>
-            <LeadHeading>Author</LeadHeading>
             <Grouping>
-                <Subtitle>Books</Subtitle>
+                <MinorHeading>Books</MinorHeading>
                 <Paginate
                     {...bookPagination}
                     El={BookCard}
                 />
             </Grouping>
             <Grouping>
-                <Subtitle>Short Stories</Subtitle>
+                <MinorHeading>Short Stories</MinorHeading>
                 <Paginate
                     {...storyPagination}
                     El={StoryCard}

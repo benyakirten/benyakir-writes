@@ -20,11 +20,12 @@ import {
     Grouping,
     Subtitle,
     RowUntilPhone,
+    WpContentInline,
 } from "@Styles/general-components";
 
 import { flattenStory } from "@Utils/author";
 import { getPrettyDate } from "@Utils/dates";
-import { formatWpText } from "@Utils/posts";
+import { formatWpText, rigorousTextFormat } from "@Utils/posts";
 import { firstWords } from "@Utils/strings";
 
 import { WpStory } from "@Types/query";
@@ -56,41 +57,37 @@ const Story: React.FC<WpStory> = ({ data }) => {
                                 {getPrettyDate(story.published.date)}
                             </LItem>
                             {story.book && (
-                                <List>
+                                <>
                                     <LItem>
                                         {story.book.relationship} of{" "}
                                         <CustomLink to={story.book.slug}>
                                             {story.book.title}
                                         </CustomLink>
+                                        :{" "}
+                                        {rigorousTextFormat(story.book.content)}
                                     </LItem>
-                                    <LItem>
-                                        <WpContent
-                                            dangerouslySetInnerHTML={{
-                                                __html: story.book.content,
-                                            }}
-                                        />
-                                    </LItem>
-                                </List>
+                                </>
                             )}
                             {story.project && (
-                                <List>
+                                <>
                                     <LItem>
-                                        <MinorHeading>
-                                            Related Project:{" "}
-                                            <CustomLink
-                                                to={`/project/${story.project.slug}`}
-                                            >
-                                                {story.project.title}
-                                            </CustomLink>
-                                        </MinorHeading>
+                                        Related Project:{" "}
+                                        <CustomLink
+                                            to={`/project/${story.project.slug}`}
+                                        >
+                                            {story.project.title}
+                                        </CustomLink>
+                                        . {story.project.description}
                                     </LItem>
-                                    <LItem>{story.project.description}</LItem>
-                                </List>
+                                </>
                             )}
                         </List>
                     </CardSection>
                     {story.book && (
-                        <Link to={story.book.slug}>
+                        <Link
+                            to={story.book.slug}
+                            aria-label={story.book.title}
+                        >
                             {story.book.cover ? (
                                 <CardSection>
                                     <GatsbyImage
@@ -115,7 +112,11 @@ const Story: React.FC<WpStory> = ({ data }) => {
                                 <List>
                                     {story.alternateLinks.map((link, idx) => (
                                         <LItem key={link.name + idx}>
-                                            <Button onClick={() => navigate(link.link)}>
+                                            <Button
+                                                onClick={() =>
+                                                    navigate(link.link)
+                                                }
+                                            >
                                                 On {link.name}
                                             </Button>
                                         </LItem>
