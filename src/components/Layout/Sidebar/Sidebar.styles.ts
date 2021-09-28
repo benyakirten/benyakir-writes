@@ -57,7 +57,7 @@ export const ArrowButton = styled.button<{ open: boolean }>`
     left: ${props => props.open ? '-3rem' : '0'};
 
     ${media.tablet} {
-        left: -1.5rem;
+        left: ${props => props.open ? '-1rem' : '-1.5rem'};
     }
     
     background: none;
