@@ -29,8 +29,8 @@ const LinkGroup: React.FC<LinkGroupProps> = ({
             }
         >
             {links.map((l) => (
-                <CustomLink tabIndex={tabIndex} key={l} small underbarSize="85%" to={`/${domain}/${titleToKebab(l)}/`}>
-                    {l}
+                <CustomLink tabIndex={tabIndex} key={typeof l === 'string' ? l : l.name} small underbarSize="85%" to={`/${domain}/${titleToKebab(typeof l === 'string' ? l : l.link)}/`}>
+                    {typeof l === 'string' ? l : l.name}
                 </CustomLink>
             ))}
             {children}

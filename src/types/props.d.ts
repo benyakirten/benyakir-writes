@@ -92,7 +92,7 @@ type FoldoutProps = OpenProps & {
 type LinkGroupProps = OpenProps & {
     domain: string;
     height?: string;
-    links: string[];
+    links: LinkItem[];
 }
 
 type HoverImageProps = {

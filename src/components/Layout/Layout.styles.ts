@@ -81,5 +81,8 @@ export const MainContainer = styled.main`
     position: relative;
     width: 100%;
     padding: 2rem 4rem;
+    ${media.tablet} {
+        padding: 1rem 2rem;
+    }
     overflow: hidden;
 `;

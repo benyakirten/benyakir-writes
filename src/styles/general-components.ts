@@ -22,9 +22,10 @@ export const SlideInRight = styled.div<{ duration?: string, delay?: string }>`
     animation: ${slideInRight} ${props => props.duration ? props.duration : '4s'} ${props => props.delay ? props.delay : '0ms'} ease forwards;
 `
 
-export const Grouping = styled.section`
+export const Grouping = styled.section<{ marginVertical?: string }>`
     position: relative;
-    margin-bottom: 4rem;
+    margin-top: ${props => props.marginVertical ? props.marginVertical : '0'};
+    margin-bottom: ${props => props.marginVertical ? props.marginVertical : '4rem'};
 `
 
 export const GroupingBox = styled.section`

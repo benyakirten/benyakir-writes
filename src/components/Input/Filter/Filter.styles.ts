@@ -6,6 +6,8 @@ export const FilterContainer = styled.aside`
     display: flex;
     flex-direction: column;
 
+    overflow: hidden;
+
     padding: 1rem 1rem 1rem 2rem;
 
     background: ${SECONDARY_800};

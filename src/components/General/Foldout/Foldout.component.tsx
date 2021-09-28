@@ -28,7 +28,6 @@ const Foldout: React.FC<FoldoutProps> = ({
         }
         onClick && onClick();
     }
-    console.log(cyId)
     return (
         <FoldoutContainer open={open} onClick={(e) => handleContainerClick(e)}>
             <DownArrow open={open} tabIndex={open ? 0 : -1} onClick={onClick} cyId={cyId ? cyId : "foldout-bar"} />

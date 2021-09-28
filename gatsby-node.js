@@ -456,7 +456,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             mainLink: project.project.mainLink,
             hostedOn: project.project.hostedOn,
             repoLink: project.project.repoLink,
-            content: firstWords(project.content, 140),
+            content: firstWords(project.content, 100),
             firstReleased: getTimeFromDateString(project.project.firstReleased),
             shortTechnologies: tech,
             longTechnologies: tech.map((t) => getFullTechName(t)),
@@ -533,7 +533,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         const _story = {
             slug: story.slug,
             title: story.title,
-            content: firstWords(formatText(story.content), 200),
+            content: firstWords(formatText(story.content), 170),
             published: getTimeFromDateString(story.shortStory.publishedOn),
             book: !story.shortStory.relatedBook
                 ? null
@@ -598,7 +598,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             slug: book.slug,
             title: book.title,
             published: getTimeFromDateString(book.book.publishedOn),
-            content: firstWords(book.content, 200),
+            content: firstWords(book.content, 170),
             cover: book.book.cover
                 ? book.book.cover.localFile.childImageSharp.gatsbyImageData
                 : null,
@@ -641,7 +641,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         const data = {
             title: post.title,
             slug: post.slug,
-            excerpt: firstWords(formatText(post.excerpt), 200),
+            excerpt: firstWords(formatText(post.excerpt), 150),
             content: formatText(post.content),
             published: getBlogPostDateInformation(post.date),
             categories:

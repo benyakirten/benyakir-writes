@@ -19,8 +19,8 @@ import Search from "../Search/Search.component";
 
 const Sidebar: React.FC = () => {
     const [openDropdown, setOpenDropdown] = useDropdown();
-
     const [opening, setOpening] = React.useState<boolean>(false);
+
     React.useEffect(() => {
         if (opening) {
             setTimeout(() => setOpening(false), 1000);
@@ -28,19 +28,25 @@ const Sidebar: React.FC = () => {
     }, [opening]);
 
     const [open, setOpen] = React.useState<boolean>(false);
-    function toggleOpen(e: React.BaseSyntheticEvent) {
-        if (e.target.tagName === "A") return;
+    function toggleOpen() {
         setOpen((state) => !state);
         setOpening(true);
     }
     function handleNavClick(e: React.BaseSyntheticEvent) {
         if (e.target.getAttribute("data-navtoggle") === "nav-toggle") {
-            toggleOpen(e);
+            toggleOpen();
         }
     }
 
-    const blogLinks = ["Ben's Thoughts", "Reviews", "Down South Boulder Road"];
-    const authorLinks = ["Books", "Short Stories"];
+    const blogLinks: LinkItem[] = [
+        "Ben's Thoughts",
+        "Reviews",
+        {
+            name: "Podcast",
+            link: "Down South Boulder Road",
+        },
+    ];
+    const authorLinks: LinkItem[] = ["Books", "Short Stories"];
 
     return (
         <StyledSidebar

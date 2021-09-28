@@ -57,3 +57,8 @@ type BooleanLookup = {
 type StringLookup = {
     [key: string]: string
 }
+
+type LinkItem = string | {
+    name: string;
+    link: string;
+}

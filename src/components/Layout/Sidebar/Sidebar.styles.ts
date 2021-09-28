@@ -21,12 +21,13 @@ export const StyledSidebar = styled.nav<{ open?: boolean }>`
     width: ${props => props.open ? '40rem' : '5rem'};
     
     transition: all 1s;
-    
-    ${media.phone} {
-        width: ${props => props.open ? '45rem' : '5rem'};
-    }
 
     padding: ${props => props.open ? '2rem 1rem 2rem 4rem' : '2rem 1rem'};
+
+    ${media.phone} {
+        width: ${props => props.open ? '45rem' : '5rem'};
+        padding: 1rem 2rem;
+    }
 
     font-family: ${FAUSTINA};
     font-size: ${FONT_XXL};
@@ -54,6 +55,10 @@ export const ArrowButton = styled.button<{ open: boolean }>`
 
     position: relative;
     left: ${props => props.open ? '-3rem' : '0'};
+
+    ${media.tablet} {
+        left: -1.5rem;
+    }
     
     background: none;
     border: none;
@@ -61,6 +66,7 @@ export const ArrowButton = styled.button<{ open: boolean }>`
     align-self: start;
 
     font-size: ${FONT_XL};
+    color: ${ABS_BLACK};
     
     transition: all 1s ease;
     transform: rotate(${props => props.open ? '0' : '180'}deg);
