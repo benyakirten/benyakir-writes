@@ -25,6 +25,9 @@ describe('Sidebar component', () => {
         expect(() => render(<Sidebar />)).not.toThrow()
     })
 
+    // Because this component includes the search component, none of these tests work. I'm downright angry
+    // And I am not going to not use faulty testing software.
+
     it('should render only an arrow and the logo when the sidebar is closed and everythign else is hidden in an invisible group', async () => {
         render(<Sidebar />)
         const logo = await screen.findByRole("img")

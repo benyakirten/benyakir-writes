@@ -16,7 +16,7 @@ exports[`AlertBox component should have a default success prop value of true 1`]
   -ms-flex-align: center;
   align-items: center;
   padding: 2rem 3rem;
-  background-color: #74966d;
+  background-color: #44764d;
   color: #FFF;
   font-size: 1.4rem;
   border: 2px solid #000;
@@ -48,7 +48,7 @@ exports[`AlertBox component should have a green or red background if the success
   -ms-flex-align: center;
   align-items: center;
   padding: 2rem 3rem;
-  background-color: #74966d;
+  background-color: #44764d;
   color: #FFF;
   font-size: 1.4rem;
   border: 2px solid #000;
@@ -80,7 +80,7 @@ exports[`AlertBox component should have a green or red background if the success
   -ms-flex-align: center;
   align-items: center;
   padding: 2rem 3rem;
-  background-color: #cc4d6d;
+  background-color: #993d4d;
   color: #FFF;
   font-size: 1.4rem;
   border: 2px solid #000;

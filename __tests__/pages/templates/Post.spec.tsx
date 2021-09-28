@@ -99,7 +99,7 @@ describe('post template', () => {
         const subheadingOne = await screen.getByText("Categories")
         const siblingOne = subheadingOne.nextElementSibling!
         expect(subheadingOne).toBeDefined()
-        expect(subheadingOne.tagName).toEqual('H3')
+        expect(subheadingOne.tagName).toEqual('P')
 
         expect(siblingOne).toBeDefined()
         expect(siblingOne.tagName).toEqual('P')
@@ -112,7 +112,7 @@ describe('post template', () => {
         const siblingTwo = subheadingTwo.nextElementSibling!
 
         expect(subheadingTwo).toBeDefined()
-        expect(subheadingTwo.tagName).toEqual('H3')
+        expect(subheadingTwo.tagName).toEqual('P')
 
         expect(siblingTwo).toBeDefined()
         expect(siblingTwo.tagName).toEqual('P')
@@ -130,7 +130,7 @@ describe('post template', () => {
         const subheadingOne = await screen.getByText("Tags")
         const siblingOne = subheadingOne.nextElementSibling!
         expect(subheadingOne).toBeDefined()
-        expect(subheadingOne.tagName).toEqual('H3')
+        expect(subheadingOne.tagName).toEqual('P')
 
         expect(siblingOne).toBeDefined()
         expect(siblingOne.tagName).toEqual('P')
@@ -143,7 +143,7 @@ describe('post template', () => {
         const siblingTwo = subheadingTwo.nextElementSibling!
 
         expect(subheadingTwo).toBeDefined()
-        expect(subheadingTwo.tagName).toEqual('H3')
+        expect(subheadingTwo.tagName).toEqual('P')
 
         expect(siblingTwo).toBeDefined()
         expect(siblingTwo.tagName).toEqual('P')

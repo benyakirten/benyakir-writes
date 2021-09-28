@@ -23,8 +23,8 @@ exports[`Choice component should change the background and text color based on t
   height: auto;
   width: 24%;
   border-radius: 2px;
-  background-color: #6c757d;
-  color: #FDEDC4;
+  background-color: #343a40;
+  color: #FDF3D8;
   font-size: 1.8rem;
   -webkit-transition: all 0.8s;
   transition: all 0.8s;
@@ -47,6 +47,7 @@ exports[`Choice component should change the background and text color based on t
   aria-labelledby="test label-label"
   checked={false}
   className="c0"
+  data-cy="select-test-label"
   hidden={false}
   onClick={[Function]}
   role="checkbox"
@@ -88,8 +89,8 @@ exports[`Choice component should change the background and text color based on t
   height: auto;
   width: 24%;
   border-radius: 2px;
-  background-color: #FDEDC4;
-  color: #6c757d;
+  background-color: #FDF3D8;
+  color: #343a40;
   font-size: 1.8rem;
   -webkit-transition: all 0.8s;
   transition: all 0.8s;
@@ -120,6 +121,7 @@ exports[`Choice component should change the background and text color based on t
   aria-labelledby="test label-label"
   checked={true}
   className="c0"
+  data-cy="select-test-label"
   hidden={false}
   onClick={[Function]}
   role="checkbox"

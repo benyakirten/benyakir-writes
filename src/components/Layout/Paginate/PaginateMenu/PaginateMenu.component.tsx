@@ -37,7 +37,7 @@ const PaginateMenu: React.FC<PaginateMenuProps> = ({
                 >
                     &#10148;
                 </PageFlip>
-                <PageNumber>{currentPage + 1}</PageNumber>
+                <PageNumber>{currentPage + 1} (of {maxPages + 1})</PageNumber>
                 <PageFlip
                     disabled={!enableRightButton}
                     onClick={enableRightButton ? onRight : doNothing}

@@ -164,19 +164,18 @@ describe("project template", () => {
     describe("buttons", () => {
         it("should render buttons that navigate to the main link and repo link if they exist", async () => {
             render(<Project data={dummyProjects[1].data} />);
-            const generalInfo = await screen.findByText("General Info");
-            expect(generalInfo.parentElement?.childElementCount).toEqual(3);
-            const buttomRow = generalInfo.parentElement?.children[1];
-            expect(buttomRow?.childElementCount).toEqual(2);
+            const generalInfo = await screen.findByText("Links");
+            const buttonRow = generalInfo.nextElementSibling!
+            expect(buttonRow.childElementCount).toEqual(2);
 
-            const buttonOne = buttomRow?.children[0];
+            const buttonOne = buttonRow?.children[0];
             const labelOne = buttonOne?.querySelector("span");
             expect(labelOne?.textContent).toEqual("On Google");
             fireEvent.click(buttonOne!);
             expect(navigate).toHaveBeenCalledTimes(1);
             expect(navigate).toHaveBeenCalledWith("https://www.google.com");
 
-            const buttonTwo = buttomRow?.children[1];
+            const buttonTwo = buttonRow?.children[1];
             const labelTwo = buttonTwo?.querySelector("span");
             expect(labelTwo?.textContent).toEqual("On GitHub");
             fireEvent.click(buttonTwo!);
@@ -186,7 +185,7 @@ describe("project template", () => {
 
         it("should not render the above buttons if they don't exist", async () => {
             render(<Project data={dummyProjects[0].data} />);
-            const generalInfo = await screen.findByText("General Info");
+            const generalInfo = await screen.findByText("Information");
             expect(generalInfo.parentElement?.childElementCount).toEqual(2);
         });
     });

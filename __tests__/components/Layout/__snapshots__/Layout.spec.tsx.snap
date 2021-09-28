@@ -5,17 +5,18 @@ exports[`Layout component should render correctly 1`] = `
   className="sc-bdfBQB iRScpY"
 >
   <nav
-    className="sc-dlfnuX dhFKmv nav-toggle-close"
+    className="sc-dlfnuX eBwExq nav-toggle-close"
     data-navtoggle="nav-toggle"
     onClick={[Function]}
     open={false}
   >
     <div
-      className="sc-hKgJUU botUjJ nav-toggle-close"
+      className="sc-hKgJUU gkXvQK nav-toggle-close"
       data-navtoggle="nav-toggle"
     >
       <button
-        className="sc-eCstlR gHjuob"
+        className="sc-eCstlR eIzGEG"
+        data-cy="open-sidemenu"
         onClick={[Function]}
         open={false}
         tabIndex={0}
@@ -29,7 +30,7 @@ exports[`Layout component should render correctly 1`] = `
         open={false}
       >
         <div
-          className="sc-gKseQn cOJtMT"
+          className="sc-gKseQn iikzqC"
         >
           <div
             className="sc-bqyKOL vFWqF"
@@ -38,6 +39,7 @@ exports[`Layout component should render correctly 1`] = `
           >
             <span
               className="sc-hBEYId cVqZVR"
+              data-cy="foldout-bar"
               onClick={[Function]}
               open={false}
               role="button"
@@ -66,42 +68,42 @@ exports[`Layout component should render correctly 1`] = `
             >
               <a
                 active={false}
-                className="sc-fodVek dnZZub"
+                className="sc-fodVek hPGIZy"
                 dark={true}
                 href="/blog/bens-thoughts/"
                 inline={false}
                 limitUnderbar={false}
                 small={true}
                 tabIndex={-1}
-                underbarSize="16rem"
+                underbarSize="85%"
               >
                 Ben's Thoughts
               </a>
               <a
                 active={false}
-                className="sc-fodVek dnZZub"
+                className="sc-fodVek hPGIZy"
                 dark={true}
                 href="/blog/reviews/"
                 inline={false}
                 limitUnderbar={false}
                 small={true}
                 tabIndex={-1}
-                underbarSize="16rem"
+                underbarSize="85%"
               >
                 Reviews
               </a>
               <a
                 active={false}
-                className="sc-fodVek dnZZub"
+                className="sc-fodVek hPGIZy"
                 dark={true}
                 href="/blog/down-south-boulder-road/"
                 inline={false}
                 limitUnderbar={false}
                 small={true}
                 tabIndex={-1}
-                underbarSize="16rem"
+                underbarSize="85%"
               >
-                Down South Boulder Road
+                Podcast
               </a>
             </div>
           </div>
@@ -112,6 +114,7 @@ exports[`Layout component should render correctly 1`] = `
           >
             <span
               className="sc-hBEYId cVqZVR"
+              data-cy="foldout-bar"
               onClick={[Function]}
               open={false}
               role="button"
@@ -140,27 +143,27 @@ exports[`Layout component should render correctly 1`] = `
             >
               <a
                 active={false}
-                className="sc-fodVek dnZZub"
+                className="sc-fodVek hPGIZy"
                 dark={true}
                 href="/author/books/"
                 inline={false}
                 limitUnderbar={false}
                 small={true}
                 tabIndex={-1}
-                underbarSize="16rem"
+                underbarSize="85%"
               >
                 Books
               </a>
               <a
                 active={false}
-                className="sc-fodVek dnZZub"
+                className="sc-fodVek hPGIZy"
                 dark={true}
                 href="/author/short-stories/"
                 inline={false}
                 limitUnderbar={false}
                 small={true}
                 tabIndex={-1}
-                underbarSize="16rem"
+                underbarSize="85%"
               >
                 Short Stories
               </a>
@@ -181,7 +184,7 @@ exports[`Layout component should render correctly 1`] = `
           </a>
         </div>
         <div
-          className="sc-gKseQn cOJtMT"
+          className="sc-gKseQn iikzqC"
         >
           <div
             className="sc-bqyKOL vFWqF"
@@ -190,6 +193,7 @@ exports[`Layout component should render correctly 1`] = `
           >
             <span
               className="sc-hBEYId cVqZVR"
+              data-cy="foldout-bar"
               onClick={[Function]}
               open={false}
               role="button"
@@ -206,14 +210,15 @@ exports[`Layout component should render correctly 1`] = `
               aria-hidden={true}
               className="sc-kstqJO brGSJA"
               data-navtoggle="no-toggle"
-              height="auto"
+              height="25rem"
               open={false}
             >
               <div
-                className="sc-jgHCSr eWvmVj"
+                className="sc-gTgzoy chjFuk"
               >
                 <input
                   autoFocus={false}
+                  data-cy="search-text-input"
                   id="global-search"
                   name="global-search"
                   onChange={[Function]}
@@ -242,7 +247,7 @@ exports[`Layout component should render correctly 1`] = `
                 }
               >
                 <div
-                  className="sc-gTgzoy bjvVbk"
+                  className="sc-laRQdt txbLu"
                 >
                   <input
                     aria-labelledby="label-global-search-show-post"
@@ -271,7 +276,7 @@ exports[`Layout component should render correctly 1`] = `
                   </span>
                 </div>
                 <div
-                  className="sc-gTgzoy bjvVbk"
+                  className="sc-laRQdt txbLu"
                 >
                   <input
                     aria-labelledby="label-global-search-show-project"
@@ -300,7 +305,7 @@ exports[`Layout component should render correctly 1`] = `
                   </span>
                 </div>
                 <div
-                  className="sc-gTgzoy bjvVbk"
+                  className="sc-laRQdt txbLu"
                 >
                   <input
                     aria-labelledby="label-global-search-show-book"
@@ -329,7 +334,7 @@ exports[`Layout component should render correctly 1`] = `
                   </span>
                 </div>
                 <div
-                  className="sc-gTgzoy bjvVbk"
+                  className="sc-laRQdt txbLu"
                 >
                   <input
                     aria-labelledby="label-global-search-show-story"
@@ -359,7 +364,7 @@ exports[`Layout component should render correctly 1`] = `
                 </div>
               </div>
               <div
-                className="sc-khAkCZ geYNqj"
+                className="sc-hTZgZg bqIRdj"
               >
                 <div
                   className="sc-giImIA fPLbSg"
@@ -371,7 +376,7 @@ exports[`Layout component should render correctly 1`] = `
           </div>
         </div>
         <div
-          className="sc-gKseQn cOJtMT"
+          className="sc-gKseQn iikzqC"
         >
           <a
             active={false}
@@ -426,13 +431,8 @@ exports[`Layout component should render correctly 1`] = `
             About
           </a>
         </div>
-      </div>
-      <div
-        className="sc-gKseQn cOJtMT"
-      >
         <div
-          className="sc-fubCzh hgeMBo"
-          open={false}
+          className="sc-fubCzh dxoCMP"
         >
           <span
             className="sc-pGacB RvNja"
@@ -445,19 +445,23 @@ exports[`Layout component should render correctly 1`] = `
             All Rights Reserved
           </span>
         </div>
+      </div>
+      <div
+        className="sc-gKseQn iikzqC"
+      >
         <a
           href="/"
         >
           <img
             alt="Benyakir Writes Logo"
-            className="sc-bkzYnD iEBnrP"
+            className="sc-bkzYnD xjpTk"
           />
         </a>
       </div>
     </div>
   </nav>
   <main
-    className="sc-gsTEea gEMJgI"
+    className="sc-gsTEea jjDCQF"
   >
     <div>
       <div

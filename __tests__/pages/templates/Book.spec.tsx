@@ -164,18 +164,18 @@ describe("book template", () => {
             })}`
         );
 
-        const siblingList = date.nextElementSibling!;
-        expect(siblingList.tagName).toEqual("UL");
-        expect(siblingList.firstChild?.firstChild?.textContent).toEqual(
+        const parentList = date.parentElement!;
+        expect(parentList.tagName).toEqual("UL");
+        expect(parentList.children[1].textContent).toEqual(
             "Cover designer: Test book cover designer"
         );
-        expect(siblingList.children[1].textContent).toEqual(
+        expect(parentList.children[2].textContent).toEqual(
             "Test book cover designer bio"
         );
 
         const coverDesignerLinks = [
-            siblingList.children[2],
-            siblingList.children[3],
+            parentList.children[3],
+            parentList.children[4],
         ];
         expect(
             coverDesignerLinks[0].firstChild?.firstChild?.textContent
@@ -194,21 +194,7 @@ describe("book template", () => {
 
     it("should render another list following the cover designer if there is a project with a link and its details", async () => {
         render(<Book data={testData[0].data} />);
-        const date = await screen.getByText(
-            `Published on: ${new Date("09/15/2019").toLocaleString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "2-digit",
-            })}`
-        );
-
-        const projectList = date.parentElement?.children[2]!;
-        expect(projectList).toBeTruthy();
-        expect(projectList.tagName).toEqual("UL");
-
-        const projectLink =
-            projectList.firstElementChild?.firstElementChild
-                ?.firstElementChild!;
+        const projectLink = await screen.getByText("Related Project: Related project A")
         expect(projectLink.tagName).toEqual("A");
         expect(projectLink.textContent).toEqual(
             "Related Project: Related project A"
@@ -217,7 +203,7 @@ describe("book template", () => {
             "/project/related-project-a-slug"
         );
 
-        expect(projectList.children[1].textContent).toEqual(
+        expect(projectLink.parentElement!.nextElementSibling?.textContent).toEqual(
             "Related project A description"
         );
     });
@@ -236,7 +222,7 @@ describe("book template", () => {
 
     it("should render a list of purchase links", async () => {
         render(<Book data={testData[0].data} />);
-        const purchaseLinks = await screen.getByText("Purchase Links")
+        const purchaseLinks = await screen.getByText("Purchase Links:")
         const buttons = purchaseLinks.nextElementSibling!.children
         
         expect(buttons[0].textContent).toEqual("On Buy A")
@@ -252,10 +238,10 @@ describe("book template", () => {
 
     it('should render a list of stories that link to their slugs with a div under that explains their content if there are related stories', async () => {
         render(<Book data={testData[0].data} />);
-        const storiesLead = await screen.getByText("Related Stories")
-        expect(storiesLead.tagName).toEqual('H3')
+        const storiesLead = await screen.getByText("Related Stories:")
+        expect(storiesLead.tagName).toEqual('P')
 
-        const storyLink = storiesLead.nextElementSibling?.firstElementChild!
+        const storyLink = storiesLead.nextElementSibling!
         expect(storyLink.tagName).toEqual('A')
         expect(storyLink.getAttribute('href')).toEqual("/story/related-story-a")
 
@@ -267,6 +253,6 @@ describe("book template", () => {
 
     it('should not render any of the above content if there are no related stories', () => {
         render(<Book data={testData[1].data} />);
-        expect(() => screen.getByText("Related Stories")).toThrow()
+        expect(() => screen.getByText("Related Stories:")).toThrow()
     })
 });

@@ -145,7 +145,7 @@ describe("shortstory template", () => {
     })
 
     describe('book', () => {
-        it('should render a list adjacent to the date if the story has a related book', async () => {
+        it('should render a link to the book with some details if it exists', async () => {
             render(<Shortstory data={stories[1].data} />);
             const date = await screen.getByText(
                 `Published on: ${new Date("10/15/2019").toLocaleString("en-US", {
@@ -155,19 +155,10 @@ describe("shortstory template", () => {
                 })}`
             );
 
-            const bookList = date.nextElementSibling!
-            expect(bookList).toBeTruthy()
-
-            expect(bookList.firstElementChild?.textContent).toEqual("Preamble of related book A")
-
-            const bookLink = bookList.firstElementChild?.firstElementChild!
-            expect(bookLink.textContent).toEqual("related book A")
-            expect(bookLink.getAttribute('href')).toEqual("related-book-a")
-
-            const bookContentList = bookList.children[1]!
-            const bookContent = bookContentList.firstElementChild!
-            expect(bookContent.textContent).toEqual("related book A content")
-            expect(bookContent.tagName).toEqual("DIV")
+            const book = date.nextElementSibling!
+            expect(book).toBeTruthy()
+            expect(book.textContent).toEqual("Preamble of related book A: related book A content")
+            expect(book.firstElementChild!.getAttribute('href')).toEqual("/book/related-book-a")
         })
 
         it('should render the book cover if it exists', async () => {
@@ -196,7 +187,7 @@ describe("shortstory template", () => {
     })
 
     describe('projects', () => {
-        it('should render a list to describe the related project if it exists', async () => {
+        it('should render an item to describe the related project if it exists', async () => {
             render(<Shortstory data={stories[1].data} />);
             const date = await screen.getByText(
                 `Published on: ${new Date("10/15/2019").toLocaleString("en-US", {
@@ -205,17 +196,10 @@ describe("shortstory template", () => {
                     day: "2-digit",
                 })}`
             );
-
-            const project = date.nextElementSibling?.nextElementSibling!
+            const project = date.parentElement!.children[2]
             expect(project).toBeTruthy()
-
-            const projectTitle = project.firstElementChild?.firstElementChild!
-            expect(projectTitle.textContent).toEqual("Related Project: related project A")
-            expect(projectTitle.firstElementChild?.getAttribute("href")).toEqual("/project/related-project-a")
-
-            const projectDesc = project.children[1]
-            expect(projectDesc.textContent).toEqual("related project A description")
-            expect(projectDesc.tagName).toEqual("LI")
+            expect(project.textContent).toEqual("Related Project: related project A. related project A description")
+            expect(project.firstElementChild?.getAttribute("href")).toEqual("/project/related-project-a")
         })
     })
 

@@ -23,7 +23,7 @@ describe('home page', () => {
         const title = await screen.findByText("Welcome to Benyakir Writes")
         const para = title.nextElementSibling
         expect(para?.tagName).toEqual("P")
-        expect(para?.textContent).toEqual("A portal into my mind: as an author, I write about the oncoming future and the way our world leads into it. As a programmer, I participate in it and embrace the wonders that our modernity can provide.")
+        expect(para?.textContent).toEqual("Hello stranger or welcome back. Struggling to find a better term, I call this a portal into my mind. As an author, I write about the oncoming future and how us humans face the chaos of our own making. As a programmer, I participate in it and embrace the wonders that our modernity can provide. Plus, it's not that hard to make something that looks halfway decent--let's not talk about mobile right now, okay? Sidebars are great on a tablet or desktop, but they are dangerous and need to be carefully managed on mobile.")
     })
 
     it('should render a subtitle with another following paragraph', async () => {
@@ -45,10 +45,10 @@ describe('home page', () => {
 
         const para = title.nextElementSibling!
         expect(para.tagName).toEqual("P")
-        expect(para.textContent).toEqual("If you want to learn about what I can offer you, you can visit the contact page. Or you can send me an email at ben@benyakiredits.com.")
+        expect(para.textContent).toEqual("If you want to learn about what I can offer you (in terms of web design or programming), you can look at my portfolio. Or you can send me an email at ben@benyakiredits.com.")
 
         const links = para.children
-        expect(links[0].getAttribute('href')).toEqual("/contact")
+        expect(links[0].getAttribute('href')).toEqual("/portfolio")
         expect(links[1].getAttribute('href')).toEqual("mailto:ben@benyakiredits.com")
     })
 })

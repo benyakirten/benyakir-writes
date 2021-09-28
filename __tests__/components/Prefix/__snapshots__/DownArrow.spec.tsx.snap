@@ -16,6 +16,7 @@ exports[`DownArrow component should render a span with the same onClick as the p
 
 <span
   className="c0"
+  data-cy="submenu-open"
   open={false}
   role="button"
   tabIndex={-1}
@@ -40,6 +41,7 @@ exports[`DownArrow component should render a span with the same tabIndex as the 
 
 <span
   className="c0"
+  data-cy="submenu-open"
   open={false}
   role="button"
   tabIndex={-1}
@@ -64,6 +66,7 @@ exports[`DownArrow component should rotate the arrow based on the open prop 1`] 
 
 <span
   className="c0"
+  data-cy="submenu-open"
   open={false}
   role="button"
   tabIndex={-1}

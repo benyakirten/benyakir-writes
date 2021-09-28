@@ -32,7 +32,7 @@ const CategoryFilter: React.FC<AllBlogFilterProps> = ({
     const [filterWords, setFilterWords] = React.useState<string[]>([]);
 
     const _tags = React.useMemo(
-        () => [...new Set(allPosts.flatMap((p) => p.tags!))],
+        () => [...new Set(allPosts.flatMap((p) => p.tags!).filter(t => !!t))],
         allPosts
     );
     const [tagChoices, setTagChoices] = React.useState<PotentialChoice[]>(
@@ -105,10 +105,7 @@ const CategoryFilter: React.FC<AllBlogFilterProps> = ({
                     topbar={<SubHeading>Filter by tags</SubHeading>}
                     open={dropdownOpen === "tags"}
                     onClick={() => setDropdown("tags")}
-                    height={getMultipleChoiceHeight(tagChoices)}
-                    heightMultiplierOnPhone={4.2}
-                    heightMultiplierOnTablet={3}
-                    heightMultiplierOnLarger={1.45}
+                    height="auto"
                     cyId="foldout-tags"
                 >
                     <MultipleChoice

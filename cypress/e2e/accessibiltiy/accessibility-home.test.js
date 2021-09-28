@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-describe("Accessibility tests", () => {
+describe("Home page", () => {
     beforeEach(() => {
         cy.visit("/").get("main").injectAxe();
     });
@@ -20,25 +20,25 @@ describe("Accessibility tests", () => {
         })
 
         it('Has no accessibility violations when the blog sub menu is opened', () => {
-            cy.get("[data-cy=submenu-open]").eq(0).click()
+            cy.get("[data-cy=foldout-bar]").eq(0).click()
             cy.wait(1000)
             cy.checkA11y();
         })
 
         it('Has no accessibility violations when the author sub menu is opened', () => {
-            cy.get("[data-cy=submenu-open]").eq(1).click()
+            cy.get("[data-cy=foldout-bar]").eq(1).click()
             cy.wait(1000)
             cy.checkA11y();
         })
 
         it('Has no accessibility violations when the search menu is opened', () => {
-            cy.get("[data-cy=submenu-open]").eq(2).click()
+            cy.get("[data-cy=foldout-bar]").eq(2).click()
             cy.wait(1000)
             cy.checkA11y();
         })
 
         it('Has no accessibility violations when searches are performed', () => {
-            cy.get("[data-cy=submenu-open]").eq(2).click()
+            cy.get("[data-cy=foldout-bar]").eq(2).click()
             cy.wait(1000)
             cy.get("[data-cy=search-text-input]").type("syntax")
             cy.wait(4000)
@@ -46,98 +46,3 @@ describe("Accessibility tests", () => {
         })
     })
 });
-
-   
-    // describe("Portfolio accessibility", () => {
-    //     beforeEach(() => {
-    //         cy.visit("/portfolio").get("main").injectAxe();
-    //     });
-    
-    //     it("Has no accessibility violations after load", () => {
-    //         cy.visit("/portfolio")
-    //         cy.checkA11y();
-    //     })
-    // })
-
-    // describe('Filter pages', () => {
-    //     describe('blog page', () => {
-    //         beforeEach(() => {
-    //             cy.visit('/blog')
-    //         })
-    //         it('Has no accessibility violations when the page is visited', () => {
-    //             cy.checkA11y();
-    //         })
-
-    //         it('Has no accessibility violations when date submenu is opened', () => {
-    //             cy.checkA11y();
-    //         })
-    //     })
-
-    //     describe('portfolio page', () => {
-    //         beforeEach(() => {
-    //             cy.visit('/portfolio')
-    //         })
-
-    //         it("Has no accessibility violations when the page is loaded", () => {
-    //             cy.checkA11y();
-    //         })
-    //     })
-
-    //     describe('author page', () => {
-    //         beforeEach(() => {
-    //             cy.visit('/author')
-    //         })
-
-    //         it("Has no accessibility violations when the page is loaded", () => {
-    //             cy.checkA11y();
-    //         })
-    //     })
-    // })
-
-    // describe('template pages', () => {
-    //     describe('project', () => {
-    //         beforeEach(() => {
-    //             cy.visit('/portfolio')
-    //             cy.get("article").first().within().get("h3").click()
-    //         })
-
-    //         it("Has no accessibility violations when the page is loaded", () => {
-    //             cy.checkA11y();
-    //         })
-    //     })
-
-    //     describe('book', () => {
-    //         beforeEach(() => {
-    //             cy.visit('/author')
-    //             cy.get("article").first().within().get("h3").click()
-    //         })
-
-    //         it("Has no accessibility violations when the page is loaded", () => {
-    //             cy.checkA11y();
-    //         })
-    //     })
-
-    //     describe('story', () => {
-    //         beforeEach(() => {
-    //             cy.visit('/author/short-stories')
-    //             cy.get("article").first().within(article  => {
-    //                 cy.get("h3").click()
-    //             })
-    //         })
-
-    //         it("Has no accessibility violations when the page is loaded", () => {
-    //             cy.checkA11y();
-    //         })
-    //     })
-
-    //     describe('blog', () => {
-    //         beforeEach(() => {
-    //             cy.visit('/blog')
-    //             cy.get("article").first().within().get("h3").click()
-    //         })
-
-    //         it("Has no accessibility violations when the page is loaded", () => {
-    //             cy.checkA11y();
-    //         })
-    //     })
-    // })

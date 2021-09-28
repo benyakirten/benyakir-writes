@@ -15,7 +15,8 @@ describe('PageinateMenu', () => {
         onRight: rightSpy,
         setLimit: limitSpy,
         limit: 4,
-        disableRight: false
+        disableRight: false,
+        name: 'test-paginate-menu'
     }
 
     beforeEach(() => {
@@ -39,7 +40,7 @@ describe('PageinateMenu', () => {
         expect(buttons[1].textContent).toEqual("➤")
 
         const span = buttons[0].nextElementSibling!
-        expect(span.textContent).toEqual("1")
+        expect(span.textContent).toEqual("1 (of 6)")
 
         const input = await screen.getByRole("textbox") as HTMLInputElement
         expect(input.value).toEqual("4")

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { PRIMARY_200, SECONDARY_800, SHADOW_MD } from '@StyleVars';
+import { ABS_WHITE, SECONDARY_800, SHADOW_MD } from '@StyleVars';
 
 export const FilterContainer = styled.aside`
     display: flex;
@@ -11,7 +11,7 @@ export const FilterContainer = styled.aside`
     padding: 1rem 1rem 1rem 2rem;
 
     background: ${SECONDARY_800};
-    color: ${PRIMARY_200};
+    color: ${ABS_WHITE};
 
     box-shadow: ${SHADOW_MD};
 

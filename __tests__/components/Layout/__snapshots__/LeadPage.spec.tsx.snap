@@ -4,6 +4,9 @@ exports[`LeadPage component should render correctly 1`] = `
 <div
   className="sc-bdfBQB hPubXE"
 >
+  <h1
+    className="sc-fubCzh fvcvll"
+  />
   <div
     className="sc-dlfnuX fTYuwV"
   >

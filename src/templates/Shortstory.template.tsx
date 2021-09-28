@@ -60,7 +60,7 @@ const Story: React.FC<WpStory> = ({ data }) => {
                                 <>
                                     <LItem>
                                         {story.book.relationship} of{" "}
-                                        <CustomLink to={story.book.slug}>
+                                        <CustomLink to={`/book/${story.book.slug}`}>
                                             {story.book.title}
                                         </CustomLink>
                                         :{" "}

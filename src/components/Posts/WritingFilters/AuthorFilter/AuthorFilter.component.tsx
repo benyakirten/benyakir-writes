@@ -100,10 +100,7 @@ const AuthorFilter: React.FC<AuthorFilterProps> = ({
                 topbar={<SubHeading>Filter by book</SubHeading>}
                 open={dropdownOpen === "book"}
                 onClick={() => setDropdown("book")}
-                height={getMultipleChoiceHeight(bookChoices)}
-                heightMultiplierOnPhone={3.4}
-                heightMultiplierOnTablet={2}
-                heightMultiplierOnLarger={1.4}
+                height="auto"
                 cyId="foldout-book"
             >
                 <MultipleChoice

@@ -24,12 +24,8 @@ const Paginate: React.FC<PaginateProps> = ({
 
     const secondCriteria = (currentPage + 1) * itemsPerPage >= items.length;
 
-    const nextPage = () =>
-        currentPage < maxPages && !secondCriteria
-            ? onPageChange(currentPage + 1)
-            : null;
-    const lastPage = () =>
-        currentPage > 0 ? onPageChange(currentPage - 1) : null;
+    const nextPage = () => currentPage < maxPages && !secondCriteria && onPageChange(currentPage + 1);
+    const lastPage = () => currentPage > 0 && onPageChange(currentPage - 1);
 
     return (
         <Column>

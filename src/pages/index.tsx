@@ -23,10 +23,15 @@ const IndexPage: React.FC = () => {
             <Grouping>
                 <LeadHeading>Welcome to Benyakir Writes</LeadHeading>
                 <BigParagraph>
-                    A portal into my mind: as an author, I write about the
-                    oncoming future and the way our world leads into it. As a
-                    programmer, I participate in it and embrace the wonders that
-                    our modernity can provide.
+                    Hello stranger or welcome back. Struggling to find a better
+                    term, I call this a portal into my mind. As an author, I
+                    write about the oncoming future and how us humans face the
+                    chaos of our own making. As a programmer, I participate in
+                    it and embrace the wonders that our modernity can provide.
+                    Plus, it's not that hard to make something that looks
+                    halfway decent--let's not talk about mobile right now, okay?
+                    Sidebars are great on a tablet or desktop, but they are
+                    dangerous and need to be carefully managed on mobile.
                 </BigParagraph>
             </Grouping>
             <Grouping>
@@ -43,9 +48,9 @@ const IndexPage: React.FC = () => {
             <Grouping>
                 <Subtitle>Need to contact me?</Subtitle>
                 <BigParagraph>
-                    If you want to learn about what I can offer you, you can
-                    visit the{" "}
-                    <CustomLink to="/contact">contact page</CustomLink>. Or you
+                    If you want to learn about what I can offer you (in terms of
+                    web design or programming), you can look at my{" "}
+                    <CustomLink to="/portfolio">portfolio</CustomLink>. Or you
                     can send me an email at{" "}
                     <CustomLink outside to="mailto:ben@benyakiredits.com">
                         ben@benyakiredits.com

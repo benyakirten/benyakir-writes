@@ -37,10 +37,12 @@ const Search: React.FC<SearchProps> = ({ open, onClick }) => {
     const togglePostType = (postType: string) => showDispatch({ type: "TOGGLE", payload: postType })
 
     function filterResults(val: string) {
-        const _search = val.toLowerCase().split(" ")
         // This is unnecessary for the component to function,
         // but it causes the component not to re-render on initial render
-        if (!val && !hasSomeContent(_search)) setFilteredResults(data)
+        // It really annoys me
+        if (filteredResults.length === 0 && !val) return
+
+        const _search = val.toLowerCase().split(" ")
         if (!val) setFilteredResults([])
         const _results = allResults.filter(
             (r) => showState[r.type] && _search.every((s) => r.meta[s])

@@ -31,6 +31,8 @@ exports[`general styled components Other components HoverableContainer should se
 exports[`general styled components Text components BigParagraph should set a default margin-right of 0 if there is no marginRight prop passed in 1`] = `
 .c0 {
   font-size: 2.4rem;
+  margin-top: 0;
+  margin-bottom: 0;
   margin-right: 0;
 }
 
@@ -42,6 +44,8 @@ exports[`general styled components Text components BigParagraph should set a def
 exports[`general styled components Text components BigParagraph should set the margin-right property to the marginRight prop passed in 1`] = `
 .c0 {
   font-size: 2.4rem;
+  margin-top: 0;
+  margin-bottom: 0;
   margin-right: 12rem;
 }
 

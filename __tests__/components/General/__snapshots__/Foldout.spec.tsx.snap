@@ -68,6 +68,7 @@ exports[`Foldout component should render the outer div's cursor based on the ope
 >
   <span
     className="c1"
+    data-cy="foldout-bar"
     open={true}
     role="button"
     tabIndex={0}
