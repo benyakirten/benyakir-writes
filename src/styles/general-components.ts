@@ -320,6 +320,10 @@ export const DisappearOnPhone= styled.div`
 export const WpContent = styled.div<{ fontSize?: string }>`
     font-size: ${props => props.fontSize ? props.fontSize : FONT_LG};
 
+    ${media.phone} {
+        font-size: ${props => props.fontSize ? props.fontSize : FONT_MD};
+    }
+
     a:link,
     a:visited {
         position: relative;

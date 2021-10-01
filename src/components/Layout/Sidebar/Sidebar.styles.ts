@@ -18,14 +18,13 @@ export const StyledSidebar = styled.nav<{ open?: boolean }>`
     align-self: stretch;
 
     min-height: 100vh;
-    width: ${props => props.open ? '40rem' : '5rem'};
+    width: ${props => props.open ? '25rem' : '5rem'};
     
     transition: all 1s;
 
     padding: ${props => props.open ? '2rem 1rem 2rem 4rem' : '2rem 1rem'};
 
     ${media.phone} {
-        width: ${props => props.open ? '45rem' : '5rem'};
         padding: 1rem 2rem;
     }
 
@@ -44,6 +43,8 @@ export const StyledSidebar = styled.nav<{ open?: boolean }>`
 
 export const SidebarContents = styled.div`
     position: fixed;
+    top: 1rem;
+    left: 2.5rem;
 
     display: flex;
     flex-direction: column;
@@ -54,11 +55,7 @@ export const ArrowButton = styled.button<{ open: boolean }>`
     cursor: pointer;
 
     position: relative;
-    left: ${props => props.open ? '-3rem' : '0'};
-
-    ${media.tablet} {
-        left: ${props => props.open ? '-1rem' : '-1.5rem'};
-    }
+    left: -1.5rem;
     
     background: none;
     border: none;
@@ -66,6 +63,11 @@ export const ArrowButton = styled.button<{ open: boolean }>`
     align-self: start;
 
     font-size: ${FONT_XL};
+
+    ${media.phone} {
+        font-size: ${FONT_XXL};
+    }
+
     color: ${ABS_BLACK};
     
     transition: all 1s ease;

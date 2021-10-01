@@ -138,9 +138,7 @@ const Sidebar: React.FC = () => {
                         <LegalItem>All Rights Reserved</LegalItem>
                     </LegalBox>
                 </VisibleGroup>
-                <NavGroup>
-                    <Logo opening={opening} />
-                </NavGroup>
+                <Logo opening={opening} />
             </SidebarContents>
         </StyledSidebar>
     );

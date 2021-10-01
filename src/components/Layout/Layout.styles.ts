@@ -22,7 +22,12 @@ export const GlobalStyles = createGlobalStyle`
 
     html {
         font-size: 62.5%;
+        
+        ${media.phone} {
+            font-size: 45%;
+        }
     }
+
 
     body {
         box-sizing: border-box;

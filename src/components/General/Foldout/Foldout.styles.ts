@@ -31,7 +31,7 @@ export const FoldoutBody = styled.div<{
         height: ${props => props.open ? multiplyCSSNumber(props.height, props.heightMultiplierOnTablet ? props.heightMultiplierOnTablet : 1) : '0'};
     }
     ${media.phone} {
-        height: ${props => props.open ? multiplyCSSNumber(props.height, props.heightMultiplierOnPhone ? props.heightMultiplierOnPhone : 1) : '0'};
+        height: ${props => props.open ? multiplyCSSNumber(props.height, props.heightMultiplierOnPhone ? props.heightMultiplierOnPhone : 1.2) : '0'};
     }
 
     ${media.reducedMotion} {

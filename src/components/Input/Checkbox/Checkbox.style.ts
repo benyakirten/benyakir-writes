@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BLACK, FONT_LG, FONT_XL, FONT_XXL } from '@StyleVars';
+import { BLACK, FONT_LG, FONT_XXL } from '@StyleVars';
 
 export const CheckboxGroup = styled.div`
     position: relative;
@@ -41,10 +41,11 @@ export const CheckboxGroup = styled.div`
             top: -1.5rem;
             left: 0.4rem;
 
+            
+
             @supports (-webkit-box-reflect: above) {
                 top: -1rem;
                 left: 0.4rem;
-    
             }
 
             color: ${BLACK};

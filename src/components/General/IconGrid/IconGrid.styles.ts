@@ -1,3 +1,4 @@
+import { media } from '@/styles/queries'
 import styled from 'styled-components'
 
 export const StyledBox = styled.div`
@@ -10,4 +11,8 @@ export const StyledBox = styled.div`
     height: 100%;
     
     border-radius: 2px;
+
+    ${media.phone} {
+        padding: 0;
+    }
 `
