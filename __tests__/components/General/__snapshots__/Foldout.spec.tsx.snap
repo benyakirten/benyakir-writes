@@ -50,7 +50,7 @@ exports[`Foldout component should render the outer div's cursor based on the ope
 
 @media (max-width:576px) {
   .c2 {
-    height: 4rem;
+    height: 4.8rem;
   }
 }
 

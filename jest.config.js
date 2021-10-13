@@ -4,29 +4,6 @@ const paths = pathsToModuleNameMapper(compilerOptions.paths, {
     prefix: "<rootDir>/",
 });
 
-// function generateJsonPath(name) {
-//     return `<rootDir>/__mocks__/${name}.json`;
-// }
-
-// function generateAllJsonPaths(names) {
-//     const jsonPaths = {};
-//     for (let name of names) {
-//         jsonPaths[`${name}.json`] = generateJsonPath(name);
-//     }
-//     return jsonPaths;
-// }
-
-// const jsonPaths = generateAllJsonPaths([
-//     "searchData",
-//     "all",
-//     "books",
-//     "category-a",
-//     "category-b",
-//     "misc",
-//     "projects",
-//     "stories",
-// ]);
-
 module.exports = {
     transform: {
         "^.+\\.[jt]sx?$": "<rootDir>/jest-preprocess.js",
