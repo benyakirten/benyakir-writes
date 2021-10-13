@@ -1,3 +1,4 @@
+[![Build Status](https://app.travis-ci.com/benyakirten/benyakir-writes.svg?branch=main)](https://app.travis-ci.com/benyakirten/benyakir-writes)
 # Table of Contents
 1. [What am I looking at?](#what-am-i-looking-at?)
 2. [How to run the repository](#how-do-i-get-it-working)
