@@ -2,7 +2,6 @@ import React from "react";
 import { render, fireEvent, screen, cleanup } from "@testing-library/react"
 
 import usePagination from "@Hooks/usePagination"
-import { act } from "react-test-renderer";
 
 const TestHook: React.FC = () => {
     const {
@@ -42,42 +41,29 @@ describe('usePagination hook', () => {
 
     it('should increment the page number if the onPageChange function is called', async () => {
         expect(outputOne.textContent).toEqual("0")
-
-        await act(async () => {
             fireEvent.click(buttonOne)
             expect(outputOne.textContent).toEqual("1")
-        })
 
-        await act(async () => {
             fireEvent.click(buttonOne)
             expect(outputOne.textContent).toEqual("2")
-        })
 
-        await act(async () => {
             fireEvent.click(buttonOne)
             expect(outputOne.textContent).toEqual("3")
-        })
 
-        await act(async () => {
             fireEvent.click(buttonOne)
             expect(outputOne.textContent).toEqual("4")
-        })
     })
 
     it('should reset the page number to 0 if the setCurrentItems function is called', async () => {
         expect(outputOne.textContent).toEqual("0")
         expect(outputTwo.textContent).toEqual("1 2 3 4 5")
 
-        await act(async () => {
-            fireEvent.click(buttonOne)
-            expect(outputOne.textContent).toEqual("1")
-            expect(outputTwo.textContent).toEqual("1 2 3 4 5")
-        })
+        fireEvent.click(buttonOne)
+        expect(outputOne.textContent).toEqual("1")
+        expect(outputTwo.textContent).toEqual("1 2 3 4 5")
 
-        await act(async () => {
-            fireEvent.click(buttonTwo)
-            expect(outputOne.textContent).toEqual("0")
-            expect(outputTwo.textContent).toEqual("2 3 4 5")
-        })
+        fireEvent.click(buttonTwo)
+        expect(outputOne.textContent).toEqual("0")
+        expect(outputTwo.textContent).toEqual("2 3 4 5")
     })
 })

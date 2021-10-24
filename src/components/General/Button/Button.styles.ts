@@ -9,6 +9,7 @@ import {
     Z_ABOVE,
     GRAY_800
 } from '@StyleVars'
+import { media } from '@/styles/queries'
 
 export const ButtonExterior = styled.button`
     cursor: pointer;
@@ -16,6 +17,10 @@ export const ButtonExterior = styled.button`
     position: relative;
     
     padding: 1rem;
+
+    ${media.tablet} {
+        padding: 0.5rem;
+    }
 
     min-width: 7rem;
     

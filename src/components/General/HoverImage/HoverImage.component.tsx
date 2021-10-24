@@ -1,8 +1,8 @@
-import * as React from "react";
+import * as React from "react"
 
-import { StyledFigure } from "./HoverImage.styles";
+import { StyledFigure } from "./HoverImage.styles"
 
-import { HoverImageProps } from "@Types/props";
+import { HoverImageProps } from "@Types/props"
 
 const HoverImage: React.FC<HoverImageProps> = ({
     publicURL,
@@ -36,7 +36,7 @@ const HoverImage: React.FC<HoverImageProps> = ({
             <img src={publicURL} alt={name} />
             <figcaption>{name}</figcaption>
         </StyledFigure>
-    );
-};
+    )
+}
 
-export default HoverImage;
+export default HoverImage

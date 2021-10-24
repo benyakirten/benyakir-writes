@@ -86,7 +86,7 @@ export function getFullTechName(tech: string) {
         case "gql":
             return "GraphQL";
         case "tw":
-            return "Tailwind CSS";
+            return "Tailwind";
         default:
             return tech;
     }

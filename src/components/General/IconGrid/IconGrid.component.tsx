@@ -1,9 +1,9 @@
 import * as React from 'react'
 
-import { StyledBox } from './IconGrid.styles';
+import { StyledBox } from './IconGrid.styles'
 
-import { IconGridProps } from '@Types/props';
-import Icon from '@Gen/Icon/Icon.component';
+import { IconGridProps } from '@Types/props'
+import Icon from '@Gen/Icon/Icon.component'
 
 const IconGrid: React.FC<IconGridProps> = ({ icons, height = '3rem' }) => {
     return (
@@ -15,4 +15,4 @@ const IconGrid: React.FC<IconGridProps> = ({ icons, height = '3rem' }) => {
     )
 }
 
-export default IconGrid;
+export default IconGrid

@@ -7,7 +7,6 @@ export const StyledBox = styled.div`
     display: flex;
     flex-wrap: wrap;
 
-    padding: 0.5rem;
     height: 100%;
     
     border-radius: 2px;

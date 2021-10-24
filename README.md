@@ -77,3 +77,4 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 > 9/27/2021: I thought I was just going to update the text on a few items. Turns out I needed to fix the test suite. To be honest, the unit tests are way more brittle than I thought they would be. I will have to consider how I unit test React components in the future. The accessibility tests found new color contrast errors I had no idea about. I have fixed them, though I'm unsure if it will find more. It all seems functional now.
 > 10/1/2021: Adjusted some styles for media queries. Notably, reduced the font size for phones and made the expanded sidebar smaller.
 > 10/13/2021: Added Travis for CI
+> 10/23/2021: Added some memoization. A lot of extraneous stuff gets painted for reasons I'm not sure yet. I'll have to investigate.

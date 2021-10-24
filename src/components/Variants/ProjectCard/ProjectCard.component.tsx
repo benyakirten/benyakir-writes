@@ -1,5 +1,5 @@
-import * as React from "react";
-import { navigate } from "gatsby";
+import * as React from "react"
+import { navigate } from "gatsby"
 
 import {
     Card,
@@ -9,13 +9,13 @@ import {
     Row,
     SubHeading,
     WpContentDescription,
-} from "@Styles/general-components";
+} from "@Styles/general-components"
 
-import Button from "@Gen/Button/Button.component";
-import IconGrid from "@Gen/IconGrid/IconGrid.component";
-import CustomLink from "@Gen/CustomLink/CustomLink.component";
+import Button from "@Gen/Button/Button.component"
+import IconGrid from "@Gen/IconGrid/IconGrid.component"
+import CustomLink from "@Gen/CustomLink/CustomLink.component"
 
-import { ProjectCardProps } from "@Types/props";
+import { ProjectCardProps } from "@Types/props"
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ item }) => {
     return (
@@ -41,16 +41,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ item }) => {
                                 More Information
                             </Button>
                             {item.hostedOn && item.mainLink && (
-                                <Button
-                                    onClick={() => navigate(item.mainLink!)}
-                                >
+                                <Button onClick={() => navigate(item.mainLink!)}>
                                     On {item.hostedOn}
                                 </Button>
                             )}
                             {item.repoLink && (
-                                <Button
-                                    onClick={() => navigate(item.repoLink!)}
-                                >
+                                <Button onClick={() => navigate(item.repoLink!)}>
                                     On GitHub
                                 </Button>
                             )}
@@ -63,7 +59,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ item }) => {
                 </CardSection>
             </Row>
         </Card>
-    );
-};
+    )
+}
 
-export default ProjectCard;
+export default ProjectCard

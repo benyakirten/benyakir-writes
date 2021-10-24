@@ -6,7 +6,6 @@ const useDropdown: DropdownHook = () => {
         dropdownOpen === val
             ? setDropdownOpen('')
             : setDropdownOpen(val)
-
     }
     return [dropdownOpen, setDropdown]
 }
