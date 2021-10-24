@@ -40,7 +40,7 @@ const StoryFilter: React.FC<StoryFilterProps> = ({
     ]);
 
     function setSearchString(filterString: string) {
-        // This line is redundant because there are already checks for empty strings
+        // This first line is redundant because there are already checks for empty strings
         // However, testing fails otherwise because the useDebounce hook will
         // cause an internal state change as the component is rendering
         // This line prevents that state change and allows the tests to work

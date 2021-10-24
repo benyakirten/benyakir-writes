@@ -1,20 +1,21 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 import { SEARCH_TIMEOUT } from '@Constants'
 
 const useDebounce: DebounceHook = (callback: (t: string) => void, initialVal: string = '', timeLimit: number = SEARCH_TIMEOUT) => {
+    const memoizedCallback = useCallback(text => callback(text), [callback]);
     const [timer, setTimer] = useState<NodeJS.Timeout>()
     const [text, setText] = useState(initialVal)
 
     useEffect(() => {
         if (!text) {
-            callback('')
+            memoizedCallback('')
         }
         if (timer) {
             clearTimeout(timer)
             setTimer(undefined)
         }
-        const timeout = setTimeout(() => callback(text), timeLimit)
+        const timeout = setTimeout(() => memoizedCallback(text), timeLimit)
         setTimer(timeout)
     }, [text])
 

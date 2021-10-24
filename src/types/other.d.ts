@@ -3,6 +3,13 @@ declare module '*.svg';
 declare module '*.json';
 declare module '*.ttf';
 declare module '*.js';
+declare module '*.css' {
+    interface IClassNames {
+        [className: string]: string
+    }
+    const classNames: IClassNames;
+    export = classNames;
+}
 
 type DropdownHook = () => [string, (val: string) => void]
 type LookupHook = (items: BooleanLookup) => [BooleanLookup, React.Dispatch<{

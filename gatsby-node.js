@@ -401,7 +401,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             case "gql":
                 return "GraphQL";
             case "tw":
-                return "Tailwind CSS";
+                return "Tailwind";
             default:
                 return tech;
         }

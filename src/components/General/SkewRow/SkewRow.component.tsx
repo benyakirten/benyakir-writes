@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { AntiSkewed, Skewed } from './SkewRow.styles';
+import * as React from 'react'
+import { AntiSkewed, Skewed } from './SkewRow.styles'
 
 const SkewRow: React.FC = ({ children }) => {
     return (
@@ -11,4 +11,4 @@ const SkewRow: React.FC = ({ children }) => {
     )
 }
 
-export default SkewRow;
+export default SkewRow

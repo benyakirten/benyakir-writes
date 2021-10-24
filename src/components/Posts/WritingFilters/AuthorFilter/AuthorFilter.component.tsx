@@ -1,28 +1,34 @@
-import * as React from "react";
+import * as React from "react"
 
-import { SubHeading} from "@Styles/general-components";
+import { SubHeading} from "@Styles/general-components"
 
-import Filter from "@Input/Filter/Filter.component";
-import DatePicker from "@Input/DatePicker/DatePicker.component";
-import MultipleChoice from "@Input/MultipleChoice/MultipleChoice.component";
-import Foldout from "@Gen/Foldout/Foldout.component";
+import Filter from "@Input/Filter/Filter.component"
+import DatePicker from "@Input/DatePicker/DatePicker.component"
+import MultipleChoice from "@Input/MultipleChoice/MultipleChoice.component"
+import Foldout from "@Gen/Foldout/Foldout.component"
 
-import useDropdown from "@Hooks/useDropdown";
-import { getMultipleChoiceHeight, getValuesForSelected } from "@Utils/filter";
-import { hasSomeContent } from "@Utils/search";
+import useDropdown from "@Hooks/useDropdown"
+import { getValuesForSelected } from "@Utils/filter"
+import { hasSomeContent } from "@Utils/search"
 
-import { AuthorFilterProps } from "@Types/props";
+import { AuthorFilterProps } from "@Types/props"
 
 const AuthorFilter: React.FC<AuthorFilterProps> = ({
     allBooks,
     allStories,
     onFilter
 }) => {
-    const [dropdownOpen, setDropdown] = useDropdown();
+    const [dropdownOpen, setDropdown] = useDropdown()
     
     // Min and max date are determined by what's the first book or story published and idem for the latest one published
-    const earliestPubDate = Math.min(allBooks[allBooks.length - 1].published.date.getTime(), allStories[allStories.length - 1].published.date.getTime())
-    const latestPubDate = Math.max(allBooks[0].published.date.getTime(), allStories[0].published.date.getTime())
+    const earliestPubDate = React.useMemo(
+        () => Math.min(allBooks[allBooks.length - 1].published.date.getTime(), allStories[allStories.length - 1].published.date.getTime()),
+        allBooks
+    )
+    const latestPubDate = React.useMemo(
+        () => Math.max(allBooks[0].published.date.getTime(), allStories[0].published.date.getTime()),
+        allBooks
+    )
     
     const [publishedBefore, setPublishedBefore] = React.useState<Date>(new Date(latestPubDate))
     const [publishedAfter, setPublishedAfter] = React.useState<Date>(new Date(earliestPubDate))
@@ -38,11 +44,11 @@ const AuthorFilter: React.FC<AuthorFilterProps> = ({
     React.useEffect(() => {
         let filteredBooks = allBooks
             .filter(b => b.published.date.getTime() <= publishedBefore.getTime())
-            .filter(b => b.published.date.getTime() >= publishedAfter.getTime());
+            .filter(b => b.published.date.getTime() >= publishedAfter.getTime())
 
         let filteredStories = allStories
             .filter(s => s.published.date.getTime() <= publishedBefore.getTime())
-            .filter(s => s.published.date.getTime() >= publishedAfter.getTime());
+            .filter(s => s.published.date.getTime() >= publishedAfter.getTime())
 
         if (hasSomeContent(filterWords)) {
             filteredBooks = filteredBooks.filter(b => filterWords.every((w) => b.meta[w] || b.meta[w.toLowerCase()]))
@@ -61,10 +67,10 @@ const AuthorFilter: React.FC<AuthorFilterProps> = ({
         publishedAfter,
         filterWords,
         bookChoices
-    ]);
+    ])
 
     function setSearchString(filterString: string) {
-        // This line is redundant because there are already checks for empty strings
+        // This first line is redundant because there are already checks for empty strings
         // However, testing fails otherwise because the useDebounce hook will
         // cause an internal state change as the component is rendering
         // This line prevents that state change and allows the tests to work
@@ -110,7 +116,7 @@ const AuthorFilter: React.FC<AuthorFilterProps> = ({
                 />
             </Foldout>
         </Filter>
-    );
-};
+    )
+}
 
-export default AuthorFilter;
+export default AuthorFilter
