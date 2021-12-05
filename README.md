@@ -78,3 +78,4 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 > 10/1/2021: Adjusted some styles for media queries. Notably, reduced the font size for phones and made the expanded sidebar smaller.
 > 10/13/2021: Added Travis for CI
 > 10/23/2021: Added some memoization. A lot of extraneous stuff gets painted for reasons I'm not sure yet. I'll have to investigate.
+> 12/5/2021: Changed the sidebar to become just an icon on mobile when it's closed (to save screen space, inspired by me browsing elixirschool.com). I also updated gatsby to v4.3, not of my volition but because my WP plugin stopped working.

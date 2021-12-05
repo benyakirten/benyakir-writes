@@ -9,13 +9,15 @@ import {
     SHADOW_MD,
     FONT_XXL,
     FONT_XL,
-    FONT_SM
+    FONT_SM,
+    Z_ABOVE
 } from '@StyleVars'
 import { media } from '@Styles/queries'
 
 export const StyledSidebar = styled.nav<{ open?: boolean }>`
     position: relative;
     align-self: stretch;
+    z-index: ${Z_ABOVE};
 
     min-height: 100vh;
     width: ${props => props.open ? '25rem' : '5rem'};
@@ -23,10 +25,6 @@ export const StyledSidebar = styled.nav<{ open?: boolean }>`
     transition: all 1s;
 
     padding: ${props => props.open ? '2rem 1rem 2rem 4rem' : '2rem 1rem'};
-
-    ${media.phone} {
-        padding: 1rem 2rem;
-    }
 
     font-family: ${FAUSTINA};
     font-size: ${FONT_XXL};
@@ -39,12 +37,29 @@ export const StyledSidebar = styled.nav<{ open?: boolean }>`
     );
     border-right: 2px solid ${SECONDARY_900};
     box-shadow: ${SHADOW_MD};
+
+    ${media.phone} {
+        min-height: ${props => props.open ? '100vh' : '5rem'};
+        border-bottom: ${props => props.open ? 'none' : `2px solid ${SECONDARY_900}`};
+        border-top: ${props => props.open ? 'none' : `2px solid ${SECONDARY_900}`};
+
+        min-height: ${props => props.open ? '100vh' : '5rem'};
+        padding: 1rem 2rem;
+
+        position: ${props => props.open ? 'relative' : 'fixed'};
+        bottom: ${props => props.open ? 'auto' : '5rem'}
+    }
 `
 
-export const SidebarContents = styled.div`
+export const SidebarContents = styled.div<{ open: boolean }>`
     position: fixed;
     top: 1rem;
     left: 2.5rem;
+
+    ${media.phone} {
+        top: ${props => props.open ? '1rem' : 'auto'};
+        left: ${props => props.open ? '2.5rem' : 'auto'};
+    }
 
     display: flex;
     flex-direction: column;
