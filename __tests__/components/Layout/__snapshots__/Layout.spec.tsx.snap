@@ -2,20 +2,21 @@
 
 exports[`Layout component should render correctly 1`] = `
 <div
-  className="sc-bdfBQB iRScpY"
+  className="sc-bdvvtL eQvckl"
 >
   <nav
-    className="sc-dlfnuX jsbksv nav-toggle-close"
+    className="sc-dkPtRN kIHcOc nav-toggle-close"
     data-navtoggle="nav-toggle"
     onClick={[Function]}
     open={false}
   >
     <div
-      className="sc-hKgJUU kgNMIS nav-toggle-close"
+      className="sc-hKwDye eCuOMB nav-toggle-close"
       data-navtoggle="nav-toggle"
+      open={false}
     >
       <button
-        className="sc-eCstlR kODLcT"
+        className="sc-eCImPb edSkFC"
         data-cy="open-sidemenu"
         onClick={[Function]}
         open={false}
@@ -25,20 +26,20 @@ exports[`Layout component should render correctly 1`] = `
       </button>
       <div
         aria-hidden={true}
-        className="sc-jSgvzq eQMidy nav-toggle-close"
+        className="sc-jRQBWg gTVCBY nav-toggle-close"
         data-navtoggle="nav-toggle"
         open={false}
       >
         <div
-          className="sc-gKseQn iikzqC"
+          className="sc-gKclnd ffLas"
         >
           <div
-            className="sc-bqyKOL vFWqF"
+            className="sc-bqiRlB kHYMCj"
             onClick={[Function]}
             open={false}
           >
             <span
-              className="sc-hBEYId cVqZVR"
+              className="sc-hBUSln jodxde"
               data-cy="foldout-bar"
               onClick={[Function]}
               open={false}
@@ -49,7 +50,7 @@ exports[`Layout component should render correctly 1`] = `
             </span>
             <a
               active={false}
-              className="sc-fodVek hmiHRn"
+              className="sc-fotOHu fUUAlL"
               dark={true}
               href="/blog"
               inline={false}
@@ -61,14 +62,14 @@ exports[`Layout component should render correctly 1`] = `
             </a>
             <div
               aria-hidden={true}
-              className="sc-kstqJO brGSJA"
+              className="sc-ksdxgE gPpnek"
               data-navtoggle="no-toggle"
               height="7rem"
               open={false}
             >
               <a
                 active={false}
-                className="sc-fodVek lolNBs"
+                className="sc-fotOHu ZBXGw"
                 dark={true}
                 href="/blog/bens-thoughts/"
                 inline={false}
@@ -81,7 +82,7 @@ exports[`Layout component should render correctly 1`] = `
               </a>
               <a
                 active={false}
-                className="sc-fodVek lolNBs"
+                className="sc-fotOHu ZBXGw"
                 dark={true}
                 href="/blog/reviews/"
                 inline={false}
@@ -94,7 +95,7 @@ exports[`Layout component should render correctly 1`] = `
               </a>
               <a
                 active={false}
-                className="sc-fodVek lolNBs"
+                className="sc-fotOHu ZBXGw"
                 dark={true}
                 href="/blog/down-south-boulder-road/"
                 inline={false}
@@ -108,12 +109,12 @@ exports[`Layout component should render correctly 1`] = `
             </div>
           </div>
           <div
-            className="sc-bqyKOL vFWqF"
+            className="sc-bqiRlB kHYMCj"
             onClick={[Function]}
             open={false}
           >
             <span
-              className="sc-hBEYId cVqZVR"
+              className="sc-hBUSln jodxde"
               data-cy="foldout-bar"
               onClick={[Function]}
               open={false}
@@ -124,7 +125,7 @@ exports[`Layout component should render correctly 1`] = `
             </span>
             <a
               active={false}
-              className="sc-fodVek hmiHRn"
+              className="sc-fotOHu fUUAlL"
               dark={true}
               href="/author"
               inline={false}
@@ -136,14 +137,14 @@ exports[`Layout component should render correctly 1`] = `
             </a>
             <div
               aria-hidden={true}
-              className="sc-kstqJO brGSJA"
+              className="sc-ksdxgE gPpnek"
               data-navtoggle="no-toggle"
               height="4rem"
               open={false}
             >
               <a
                 active={false}
-                className="sc-fodVek lolNBs"
+                className="sc-fotOHu ZBXGw"
                 dark={true}
                 href="/author/books/"
                 inline={false}
@@ -156,7 +157,7 @@ exports[`Layout component should render correctly 1`] = `
               </a>
               <a
                 active={false}
-                className="sc-fodVek lolNBs"
+                className="sc-fotOHu ZBXGw"
                 dark={true}
                 href="/author/short-stories/"
                 inline={false}
@@ -171,7 +172,7 @@ exports[`Layout component should render correctly 1`] = `
           </div>
           <a
             active={false}
-            className="sc-fodVek lgTBpb"
+            className="sc-fotOHu gIsUET"
             dark={true}
             href="/portfolio"
             inline={false}
@@ -184,15 +185,15 @@ exports[`Layout component should render correctly 1`] = `
           </a>
         </div>
         <div
-          className="sc-gKseQn iikzqC"
+          className="sc-gKclnd ffLas"
         >
           <div
-            className="sc-bqyKOL vFWqF"
+            className="sc-bqiRlB kHYMCj"
             onClick={[Function]}
             open={false}
           >
             <span
-              className="sc-hBEYId cVqZVR"
+              className="sc-hBUSln jodxde"
               data-cy="foldout-bar"
               onClick={[Function]}
               open={false}
@@ -202,19 +203,19 @@ exports[`Layout component should render correctly 1`] = `
               ↡
             </span>
             <h3
-              className="sc-iwyWTf hpbdPn"
+              className="sc-iwjdpV ckeSEV"
             >
               Search
             </h3>
             <div
               aria-hidden={true}
-              className="sc-kstqJO brGSJA"
+              className="sc-ksdxgE gPpnek"
               data-navtoggle="no-toggle"
               height="25rem"
               open={false}
             >
               <div
-                className="sc-gTgzoy chjFuk"
+                className="sc-gSQFLo iFA-DEO"
               >
                 <input
                   autoFocus={false}
@@ -247,7 +248,7 @@ exports[`Layout component should render correctly 1`] = `
                 }
               >
                 <div
-                  className="sc-laRQdt GrkuY"
+                  className="sc-lbhJGD iKOWUz"
                 >
                   <input
                     aria-labelledby="label-global-search-show-post"
@@ -276,7 +277,7 @@ exports[`Layout component should render correctly 1`] = `
                   </span>
                 </div>
                 <div
-                  className="sc-laRQdt GrkuY"
+                  className="sc-lbhJGD iKOWUz"
                 >
                   <input
                     aria-labelledby="label-global-search-show-project"
@@ -305,7 +306,7 @@ exports[`Layout component should render correctly 1`] = `
                   </span>
                 </div>
                 <div
-                  className="sc-laRQdt GrkuY"
+                  className="sc-lbhJGD iKOWUz"
                 >
                   <input
                     aria-labelledby="label-global-search-show-book"
@@ -334,7 +335,7 @@ exports[`Layout component should render correctly 1`] = `
                   </span>
                 </div>
                 <div
-                  className="sc-laRQdt GrkuY"
+                  className="sc-lbhJGD iKOWUz"
                 >
                   <input
                     aria-labelledby="label-global-search-show-story"
@@ -364,10 +365,10 @@ exports[`Layout component should render correctly 1`] = `
                 </div>
               </div>
               <div
-                className="sc-hTZgZg bqIRdj"
+                className="sc-hUpaCq cbauBz"
               >
                 <div
-                  className="sc-giImIA fPLbSg"
+                  className="sc-giYglK iOMrmX"
                 >
                   No results yet!
                 </div>
@@ -376,11 +377,11 @@ exports[`Layout component should render correctly 1`] = `
           </div>
         </div>
         <div
-          className="sc-gKseQn iikzqC"
+          className="sc-gKclnd ffLas"
         >
           <a
             active={false}
-            className="sc-fodVek lgTBpb"
+            className="sc-fotOHu gIsUET"
             dark={true}
             href="/"
             inline={false}
@@ -393,7 +394,7 @@ exports[`Layout component should render correctly 1`] = `
           </a>
           <a
             active={false}
-            className="sc-fodVek lgTBpb"
+            className="sc-fotOHu gIsUET"
             dark={true}
             href="/contact"
             inline={false}
@@ -406,7 +407,7 @@ exports[`Layout component should render correctly 1`] = `
           </a>
           <a
             active={false}
-            className="sc-fodVek lgTBpb"
+            className="sc-fotOHu gIsUET"
             dark={true}
             href="/privacy"
             inline={false}
@@ -419,7 +420,7 @@ exports[`Layout component should render correctly 1`] = `
           </a>
           <a
             active={false}
-            className="sc-fodVek lgTBpb"
+            className="sc-fotOHu gIsUET"
             dark={true}
             href="/about"
             inline={false}
@@ -432,15 +433,15 @@ exports[`Layout component should render correctly 1`] = `
           </a>
         </div>
         <div
-          className="sc-fubCzh dxoCMP"
+          className="sc-furwcr eWpKoS"
         >
           <span
-            className="sc-pGacB RvNja"
+            className="sc-pVTFL dZkJsr"
           >
             © 2021 by Benyakir Horowitz
           </span>
           <span
-            className="sc-pGacB RvNja"
+            className="sc-pVTFL dZkJsr"
           >
             All Rights Reserved
           </span>
@@ -451,13 +452,14 @@ exports[`Layout component should render correctly 1`] = `
       >
         <img
           alt="Benyakir Writes Logo"
-          className="sc-bkzYnD bPzXO"
+          className="sc-bkkeKt hOVCsE"
+          open={false}
         />
       </a>
     </div>
   </nav>
   <main
-    className="sc-gsTEea jjDCQF"
+    className="sc-gsDKAQ fNQdXl"
   >
     <div>
       <div

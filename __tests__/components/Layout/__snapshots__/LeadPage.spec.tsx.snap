@@ -2,18 +2,18 @@
 
 exports[`LeadPage component should render correctly 1`] = `
 <div
-  className="sc-bdfBQB hPubXE"
+  className="sc-bdvvtL clbSvl"
 >
   <h1
-    className="sc-fubCzh fvcvll"
+    className="sc-furwcr fDffms"
   />
   <div
-    className="sc-dlfnuX fTYuwV"
+    className="sc-dkPtRN ldekpZ"
   >
     <div />
   </div>
   <div
-    className="sc-gsTEea CIain"
+    className="sc-gsDKAQ fIQPav"
   />
 </div>
 `;

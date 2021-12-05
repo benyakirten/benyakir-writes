@@ -2,26 +2,26 @@
 
 exports[`category template should render correctly 1`] = `
 <div
-  className="sc-jJEKmz dPuFhU"
+  className="sc-jJoQJp gJYTLH"
 >
   <h1
-    className="sc-jSgvzq FRpcC"
+    className="sc-jRQBWg jNFyNc"
   >
     Category A
   </h1>
   <div
-    className="sc-gWHigU eRSuBn"
+    className="sc-gWXbKe gOBwyS"
   >
     <span
-      className="sc-jcVcSv dSigqm"
+      className="sc-jcFjpl blLcRs"
       size="2rem"
     />
   </div>
   <div
-    className="sc-hiSbEG hObFLk"
+    className="sc-hiCibw hgPGCG"
   >
     <span
-      className="sc-jcVcSv coWmFG"
+      className="sc-jcFjpl CNaIg"
       size="4rem"
     />
   </div>
@@ -30,26 +30,26 @@ exports[`category template should render correctly 1`] = `
 
 exports[`category template should render correctly 2`] = `
 <div
-  className="sc-jJEKmz dPuFhU"
+  className="sc-jJoQJp gJYTLH"
 >
   <h1
-    className="sc-jSgvzq FRpcC"
+    className="sc-jRQBWg jNFyNc"
   >
     Category B
   </h1>
   <div
-    className="sc-gWHigU eRSuBn"
+    className="sc-gWXbKe gOBwyS"
   >
     <span
-      className="sc-jcVcSv dSigqm"
+      className="sc-jcFjpl blLcRs"
       size="2rem"
     />
   </div>
   <div
-    className="sc-hiSbEG hObFLk"
+    className="sc-hiCibw hgPGCG"
   >
     <span
-      className="sc-jcVcSv coWmFG"
+      className="sc-jcFjpl CNaIg"
       size="4rem"
     />
   </div>

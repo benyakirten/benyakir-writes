@@ -2,10 +2,10 @@
 
 exports[`SkewRow component should render properly 1`] = `
 <section
-  className="sc-bdfBQB ePWaJD"
+  className="sc-bdvvtL krqzEm"
 >
   <div
-    className="sc-gsTEea geHzKZ"
+    className="sc-gsDKAQ MhxVF"
   />
 </section>
 `;
