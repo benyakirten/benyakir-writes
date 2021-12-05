@@ -5,7 +5,7 @@ import { LogoContainer } from "./Logo.styles";
 
 import { LogoProps } from "@Types/props";
 
-const Logo: React.FC<LogoProps> = ({ opening }) => {
+const Logo: React.FC<LogoProps> = ({ opening, open }) => {
     const data = useStaticQuery(graphql`
         query {
             file(name: { eq: "Logo" }) {
@@ -19,6 +19,7 @@ const Logo: React.FC<LogoProps> = ({ opening }) => {
                 src={data?.file?.publicURL}
                 alt="Benyakir Writes Logo"
                 opening={opening}
+                open={open}
             />
         </Link>
     );

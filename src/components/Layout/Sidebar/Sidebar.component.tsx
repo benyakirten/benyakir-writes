@@ -46,6 +46,7 @@ const Sidebar: React.FC = () => {
             link: "Down South Boulder Road",
         },
     ];
+
     const authorLinks: LinkItem[] = ["Books", "Short Stories"];
 
     return (
@@ -58,6 +59,7 @@ const Sidebar: React.FC = () => {
             <SidebarContents
                 className={open ? "nav-toggle-open" : "nav-toggle-close"}
                 data-navtoggle="nav-toggle"
+                open={open}
             >
                 <ArrowButton
                     tabIndex={0}
@@ -138,7 +140,7 @@ const Sidebar: React.FC = () => {
                         <LegalItem>All Rights Reserved</LegalItem>
                     </LegalBox>
                 </VisibleGroup>
-                <Logo opening={opening} />
+                <Logo opening={opening} open={open} />
             </SidebarContents>
         </StyledSidebar>
     );

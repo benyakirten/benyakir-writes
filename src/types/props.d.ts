@@ -18,6 +18,7 @@ import {
 // LAYOUT
 type LogoProps = {
     opening: boolean;
+    open: boolean;
 }
 
 type SearchProps = {
