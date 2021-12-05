@@ -671,40 +671,167 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         return generateLookup(data.filter((d) => !!d));
     }
 
+    const allStartTime = Date.now();
+
+    async function checkAndCreateFolder(path) {
+        if (!fs.existsSync(path)) {
+            reporter.info(`${path} directory does not exist. Creating it now...`)
+            try {
+                await fsPromise.mkdir(path)
+                reporter.success(`${path} created successfully`)
+            } catch (e) {
+                reporter.error(`Error creating ${path}: ${e.message}`)
+            }
+        } else {
+            reporter.info(`${path} already exists, continuing...`)
+        }
+    }
+
+    await checkAndCreateFolder("./src/data/wp")
+    await checkAndCreateFolder("./src/data/wp/Author")
+    await checkAndCreateFolder("./src/data/wp/Projects")
+    await checkAndCreateFolder("./src/data/wp/Posts")
+
+    const bookStartTime = Date.now();
     const books = searchQuery.data.allWpBook.nodes;
-    const stories = searchQuery.data.allWpShortstory.nodes;
-    const projects = searchQuery.data.allWpProject.nodes;
-    const posts = searchQuery.data.allWpPost.nodes;
-    const icons = searchQuery.data.allFile.nodes;
-
-    const shortTechs = getAllUsedShortTechs(projects);
-    const longTechs = getAllUsedTechnologies(shortTechs);
-    const usedIcons = hashUsedIcons(icons, shortTechs);
-    const allCategories = allWpCategory.nodes.map((cat) => cat.name);
-
     const formattedBooks = books
         .map((b) => formatBook(b))
         .sort(
             (a, b) => b.published.date.getTime() - a.published.date.getTime()
         );
+    
+    function getTimeDiff(start) {
+        const diff = ((Date.now() - start) / 1000).toFixed(2);
+        return +diff;
+    }
+
+    fs.writeFile(
+        "./src/data/wp/Author/books.json",
+        JSON.stringify(formattedBooks),
+        "utf-8",
+        (err) => {
+            if (err) {
+                reporter.error("Error writing book data! " + err);
+            } else {
+                reporter.success(`Success writing book data! It took ${getTimeDiff(bookStartTime)} seconds.`);
+            }
+        }
+    );
+
+    const storyStartTime = Date.now();
+    const stories = searchQuery.data.allWpShortstory.nodes;
     const formattedStories = stories
         .map((s) => formatStory(s))
         .sort(
             (a, b) => b.published.date.getTime() - a.published.date.getTime()
         );
+    
+    fs.writeFile(
+        "./src/data/wp/Author/stories.json",
+        JSON.stringify(formattedStories),
+        "utf-8",
+        (err) => {
+            if (err) {
+                reporter.error("Error writing stories data! " + err);
+            } else {
+                reporter.success(`Success writing stories data! It took ${getTimeDiff(storyStartTime)} seconds.`);
+            }
+        }
+    );
+
+    const postsStartTime = Date.now();
+    const posts = searchQuery.data.allWpPost.nodes;
     const formattedPosts = posts
         .map((p) => formatPost(p))
         .sort(
             (a, b) => b.published.date.getTime() - a.published.date.getTime()
         );
+    const allCategories = allWpCategory.nodes.map((cat) => cat.name);
+
+    for (let cat of allCategories) {
+        const filteredPosts = formattedPosts.filter((p) =>
+            p.categories.includes(cat)
+        );
+        if (filteredPosts.length > 0) {
+            fs.writeFile(
+                `./src/data/wp/Posts/${titleToKebab(cat)}.json`,
+                JSON.stringify(filteredPosts),
+                "utf-8",
+                (err) => {
+                    if (err) {
+                        reporter.error(
+                            `Error writing posts data for category ${cat}! ` +
+                                err
+                        );
+                    } else {
+                        reporter.success(`Success writing posts data for ${cat}!`);
+                    }
+                }
+            );
+        }
+    }
+
+    fs.writeFile(
+        "./src/data/wp/Posts/all.json",
+        JSON.stringify(formattedPosts),
+        "utf-8",
+        (err) => {
+            if (err) {
+                reporter.error("Error writing posts data! " + err);
+            } else {
+                reporter.success(`Success writing posts data! It took ${getTimeDiff(postsStartTime)} seconds.`);
+            }
+        }
+    );
+    
+    
+    const projectsStartTime = Date.now();
+    const projects = searchQuery.data.allWpProject.nodes;
+    const shortTechs = getAllUsedShortTechs(projects);
+    const longTechs = getAllUsedTechnologies(shortTechs);
+    const icons = searchQuery.data.allFile.nodes;
+    const usedIcons = hashUsedIcons(icons, shortTechs);
+    
+    
     const formattedProjects = projects
         .map((p) => formatProject(p, usedIcons))
         .sort(
             (a, b) =>
-                b.firstReleased.date.getTime() - a.firstReleased.date.getTime()
+            b.firstReleased.date.getTime() - a.firstReleased.date.getTime()
         );
-
+        
     const allHosts = getAllHosts(formattedProjects);
+
+    fs.writeFile(
+        "./src/data/wp/Projects/misc.json",
+        JSON.stringify({
+            longTechs,
+            shortTechs,
+            usedIcons,
+            hosts: allHosts,
+        }),
+        "utf-8",
+        (err) => {
+            if (err) {
+                reporter.error("Error writing project misc! " + err);
+            } else {
+                reporter.success("Success writing project misc!");
+            }
+        }
+    );
+
+    fs.writeFile(
+        "./src/data/wp/Projects/projects.json",
+        JSON.stringify(formattedProjects),
+        "utf-8",
+        (err) => {
+            if (err) {
+                reporter.error("Error writing project data! " + err);
+            } else {
+                reporter.success(`Success writing project data! It took ${getTimeDiff(projectsStartTime)} seconds.`);
+            }
+        }
+    );
 
     function generateGenericInfo(item, itemType) {
         return {
@@ -761,118 +888,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         ...globalSearch.posts,
     ]);
 
-    async function checkAndCreateFolder(path) {
-        if (!fs.existsSync(path)) {
-            reporter.info(`${path} directory does not exist. Creating it now...`)
-            try {
-                await fsPromise.mkdir(path)
-                reporter.success(`${path} created successfully`)
-            } catch (e) {
-                reporter.error(`Error creating ${path}: ${e.message}`)
-            }
-        } else {
-            reporter.info(`${path} already exists, continuing...`)
-        }
-    }
-
-    await checkAndCreateFolder("./src/data/wp")
-    await checkAndCreateFolder("./src/data/wp/Author")
-    await checkAndCreateFolder("./src/data/wp/Projects")
-    await checkAndCreateFolder("./src/data/wp/Posts")
-
-    fs.writeFile(
-        "./src/data/wp/Author/books.json",
-        JSON.stringify(formattedBooks),
-        "utf-8",
-        (err) => {
-            if (err) {
-                reporter.error("Error writing book data! " + err);
-            } else {
-                reporter.success("Success writing book data!");
-            }
-        }
-    );
-
-    fs.writeFile(
-        "./src/data/wp/Author/stories.json",
-        JSON.stringify(formattedStories),
-        "utf-8",
-        (err) => {
-            if (err) {
-                reporter.error("Error writing stories data! " + err);
-            } else {
-                reporter.success("Success writing stories data!");
-            }
-        }
-    );
-
-    fs.writeFile(
-        "./src/data/wp/Projects/projects.json",
-        JSON.stringify(formattedProjects),
-        "utf-8",
-        (err) => {
-            if (err) {
-                reporter.error("Error writing project data! " + err);
-            } else {
-                reporter.success("Success writing project data!");
-            }
-        }
-    );
-
-    fs.writeFile(
-        "./src/data/wp/Projects/misc.json",
-        JSON.stringify({
-            longTechs,
-            shortTechs,
-            usedIcons,
-            hosts: allHosts,
-        }),
-        "utf-8",
-        (err) => {
-            if (err) {
-                reporter.error("Error writing project misc! " + err);
-            } else {
-                reporter.success("Success writing project misc!");
-            }
-        }
-    );
-
-    fs.writeFile(
-        "./src/data/wp/Posts/all.json",
-        JSON.stringify(formattedPosts),
-        "utf-8",
-        (err) => {
-            if (err) {
-                reporter.error("Error writing posts data! " + err);
-            } else {
-                reporter.success("Success writing posts data!");
-            }
-        }
-    );
-
-    for (let cat of allCategories) {
-        const filteredPosts = formattedPosts.filter((p) =>
-            p.categories.includes(cat)
-        );
-        if (filteredPosts.length > 0) {
-            fs.writeFile(
-                `./src/data/wp/Posts/${titleToKebab(cat)}.json`,
-                JSON.stringify(filteredPosts),
-                "utf-8",
-                (err) => {
-                    if (err) {
-                        reporter.error(
-                            `Error writing posts data for category ${cat}! ` +
-                                err
-                        );
-                    } else {
-                        reporter.success(`Success writing posts data for ${cat}!`);
-                    }
-                }
-            );
-        }
-    }
-
     fs.writeFile(
         "./src/data/searchData.json",
         JSON.stringify(flattenedSearch),
@@ -881,7 +896,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             if (err) {
                 reporter.error("Error writing general search data! " + err);
             } else {
-                reporter.success("Success writing general search data!");
+                reporter.success(`Success writing general search data! It took ${getTimeDiff(allStartTime)} seconds.`);
             }
         }
     );
