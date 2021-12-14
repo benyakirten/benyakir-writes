@@ -5,7 +5,7 @@ import {
     screen,
     act,
     fireEvent,
-} from "@testing-library/react";
+} from "@TestUtils";
 
 import Sidebar from "@Layout/Sidebar/Sidebar.component";
 
@@ -30,12 +30,13 @@ describe('Sidebar component', () => {
 
     it('should render only an arrow and the logo when the sidebar is closed and everythign else is hidden in an invisible group', async () => {
         render(<Sidebar />)
-        const logo = await screen.findByRole("img")
+        const images = await screen.findAllByRole("img")
+        const logo = images[1]
         expect(logo).toBeTruthy()
         expect(logo.parentElement?.getAttribute("href")).toEqual("/")
 
         const buttons = await screen.findAllByRole("button")
-        expect(buttons.length).toEqual(1)
+        expect(buttons.length).toEqual(2)
 
         const arrow = buttons[0]
         expect(arrow).toBeTruthy()
@@ -47,7 +48,8 @@ describe('Sidebar component', () => {
 
     it('should make the visible group visible if the sidebar is opened', async () => {
         render(<Sidebar />)
-        const arrow = await screen.findByRole("button")
+        const buttons = await screen.findAllByRole("button")
+        const arrow = buttons[0]
 
         await act(async () => {
             fireEvent.click(arrow)
@@ -58,13 +60,14 @@ describe('Sidebar component', () => {
             expect(invisibleGroup.getAttribute('aria-hidden')).toEqual("false")
 
             const buttons = await screen.findAllByRole("button")
-            expect(buttons.length).toEqual(4)
+            expect(buttons.length).toEqual(5)
         })
     })
 
     it('should close the sidebar if the arrow is clicked again', async () => {
         render(<Sidebar />)
-        const arrow = await screen.findByRole("button")
+        const buttons = await screen.findAllByRole("button")
+        const arrow = buttons[0]
 
         await act(async () => {
             fireEvent.click(arrow)
@@ -85,9 +88,10 @@ describe('Sidebar component', () => {
         })
     })
 
-    it('should not close the sidebar if a link, textbox or button other than the arrow is clicked',async () => {
+    it('should not close the sidebar if a link or button other than the arrow is clicked',async () => {
         render(<Sidebar />)
-        const arrow = await screen.findByRole("button")
+        const findButtons = await screen.findAllByRole("button")
+        const arrow = findButtons[0]
         
         const invisibleGroup = arrow.nextElementSibling!
 
@@ -100,14 +104,8 @@ describe('Sidebar component', () => {
         const buttons = await screen.findAllByRole("button")
 
         await act(async () => {
-            fireEvent.click(buttons[3])
+            fireEvent.click(buttons[4])
             jest.runAllTimers()
-            expect(invisibleGroup.getAttribute('aria-hidden')).toEqual("false")
-        })
-
-        await act(async () => {
-            const text = await screen.findByRole("textbox")
-            fireEvent.click(text)
             expect(invisibleGroup.getAttribute('aria-hidden')).toEqual("false")
         })
 

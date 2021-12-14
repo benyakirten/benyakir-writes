@@ -1,11 +1,8 @@
 import * as React from "react";
-import { cleanup, render, screen, fireEvent } from "@testing-library/react";
-
-import renderer from "react-test-renderer";
 import "jest-styled-components";
 
+import { cleanup, render, screen, fireEvent } from "@TestUtils";
 import Foldout from "@Gen/Foldout/Foldout.component";
-import { FoldoutBody } from "@Gen/Foldout/Foldout.styles";
 
 describe("Foldout component", () => {
     const clickSpy = jest.fn();
@@ -22,13 +19,15 @@ describe("Foldout component", () => {
 
     it("should set the down arrow's tabindex according to the open prop", async () => {
         render(<Foldout topbar={<p>Test Topbar</p>} open={false} />);
-        const downArrowOne = await screen.getByRole("button");
+        const buttonsOne = await screen.getAllByRole("button");
+        const downArrowOne = buttonsOne[1];
         expect(downArrowOne.getAttribute("tabindex")).toEqual("-1");
 
         cleanup();
 
         render(<Foldout topbar={<p>Test Topbar</p>} open={true} />);
-        const downArrowTwo = await screen.getByRole("button");
+        const buttonsTwo = await screen.getAllByRole("button");
+        const downArrowTwo = buttonsTwo[1]
         expect(downArrowTwo.getAttribute("tabindex")).toEqual("0");
     });
 
@@ -58,8 +57,8 @@ describe("Foldout component", () => {
                 <p>Some stuff</p>
             </Foldout>
         );
-        const button = await screen.getByRole("button");
-        fireEvent.click(button);
+        const buttons = await screen.getAllByRole("button");
+        fireEvent.click(buttons[1]);
         expect(clickSpy).toHaveBeenCalledTimes(2);
 
         const topbar = await screen.getByText("Test Topbar");
@@ -74,25 +73,5 @@ describe("Foldout component", () => {
         const stuff = await screen.getByText("Some stuff");
         fireEvent.click(stuff);
         expect(clickSpy).toHaveBeenCalledTimes(3);
-    });
-
-    it("should render the outer div's cursor based on the open prop", () => {
-        const outer = renderer.create(
-            <Foldout topbar={<p>Test Topbar</p>} open={true} />
-        );
-        expect(outer.toJSON()).toMatchSnapshot();
-        expect(outer.toJSON()).toHaveStyleRule("cursor", "n-resize");
-
-        const innerOne = (outer.toJSON()! as any).children[2]
-        expect(innerOne).toHaveStyleRule("height", "4rem")
-        expect(innerOne).toHaveStyleRule("opacity", "1")
-
-
-        outer.update(<Foldout topbar={<p>Test Topbar</p>} open={false} />);
-        expect(outer.toJSON()).toHaveStyleRule("cursor", "s-resize");
-
-        const innerTwo = (outer.toJSON()! as any).children[2]
-        expect(innerTwo).toHaveStyleRule("height", "0")
-        expect(innerTwo).toHaveStyleRule("opacity", "0")
     });
 });

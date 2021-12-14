@@ -1,10 +1,10 @@
-import React from "react";
-import { cleanup, render, screen, fireEvent } from "@testing-library/react";
+import React from "react"
 import { navigate } from 'gatsby'
 
-import Book from "@/templates/Book.template";
-import { WpBook } from "@Types/query";
-import { cover } from "../../props";
+import { cleanup, render, screen, fireEvent } from "@TestUtils"
+import Book from "@/templates/Book.template"
+import { WpBook } from "@Types/query"
+import { cover } from "@TestProps"
 
 describe("book template", () => {
     const testData: WpBook[] = [
@@ -71,157 +71,160 @@ describe("book template", () => {
                 },
             },
         },
-    ];
+    ]
 
-    jest.mock("gatsby");
+    jest.mock("gatsby")
 
     beforeEach(() => {
-        (navigate as any).mockClear();
+        (navigate as any).mockClear()
     })
 
-    afterEach(cleanup);
+    afterEach(cleanup)
 
     it("should render correctly", () => {
-        render(<Book data={testData[0].data} />);
-    });
+        render(<Book data={testData[0].data} />)
+    })
 
     it("should render a heading element with the title of the book", async () => {
-        render(<Book data={testData[0].data} />);
-        const titleOne = await screen.findAllByText("Test Book A");
-        expect(titleOne).toBeTruthy();
-        expect(titleOne.length).toEqual(1);
-        expect(titleOne[0].tagName).toEqual("H1");
+        render(<Book data={testData[0].data} />)
+        const titleOne = await screen.findAllByText("Test Book A")
+        expect(titleOne).toBeTruthy()
+        expect(titleOne.length).toEqual(1)
+        expect(titleOne[0].tagName).toEqual("H1")
 
-        const cover = await screen.findByRole("img");
-        expect(cover.getAttribute("alt")).toEqual("Test Book A");
+        const covers = await screen.findAllByRole("img")
+        const cover = covers[1]
+        expect(cover.getAttribute("alt")).toEqual("Test Book A")
 
-        cleanup();
+        cleanup()
 
-        render(<Book data={testData[1].data} />);
-        const titlesTwo = await screen.findAllByText("Test Book B");
-        expect(titlesTwo).toBeTruthy();
-        expect(titlesTwo.length).toEqual(2);
-        expect(titlesTwo[0].tagName).toEqual("H1");
-        expect(titlesTwo[1].tagName).toEqual("FIGCAPTION");
-    });
+        render(<Book data={testData[1].data} />)
+        const titlesTwo = await screen.findAllByText("Test Book B")
+        expect(titlesTwo).toBeTruthy()
+        expect(titlesTwo.length).toEqual(2)
+        expect(titlesTwo[0].tagName).toEqual("H1")
+        expect(titlesTwo[1].tagName).toEqual("FIGCAPTION")
+    })
 
     describe("the cover", () => {
         it("should render a gatsby image with the book cover if the book has one", async () => {
-            render(<Book data={testData[0].data} />);
-            const coverOne = await screen.findByRole("img");
-            expect(coverOne.tagName).toEqual("IMG");
-            expect(coverOne.getAttribute("alt")).toEqual("Test Book A");
+            render(<Book data={testData[0].data} />)
+            const covers = await screen.findAllByRole("img")
+            const coverOne = covers[1]
+            expect(coverOne.tagName).toEqual("IMG")
+            expect(coverOne.getAttribute("alt")).toEqual("Test Book A")
             expect(coverOne.getAttribute("data-src")).toEqual(
                 cover.images.fallback?.src
-            );
-            expect(coverOne.parentElement?.tagName).toEqual("PICTURE");
-        });
+            )
+            expect(coverOne.parentElement?.tagName).toEqual("PICTURE")
+        })
 
         it("should render a fallback image if the book has no cover", async () => {
-            render(<Book data={testData[1].data} />);
-            const coverTwo = await screen.findByRole("img");
-            expect(coverTwo.tagName).toEqual("IMG");
-            expect(coverTwo.getAttribute("src")).toEqual("fallbackCover");
-            expect(coverTwo.nextElementSibling?.tagName).toEqual("FIGCAPTION");
+            render(<Book data={testData[1].data} />)
+            const covers = await screen.findAllByRole("img")
+            const coverTwo = covers[1]
+            expect(coverTwo.tagName).toEqual("IMG")
+            expect(coverTwo.getAttribute("src")).toEqual("fallbackCover")
+            expect(coverTwo.nextElementSibling?.tagName).toEqual("FIGCAPTION")
             expect(coverTwo.nextElementSibling?.textContent).toEqual(
                 "Test Book B"
-            );
-            expect(coverTwo.parentElement?.tagName).toEqual("FIGURE");
-        });
-    });
+            )
+            expect(coverTwo.parentElement?.tagName).toEqual("FIGURE")
+        })
+    })
 
     it("should render the published on date", async () => {
-        render(<Book data={testData[0].data} />);
+        render(<Book data={testData[0].data} />)
         const dateOne = await screen.getByText(
             `Published on: ${new Date("09/15/2019").toLocaleString("en-US", {
                 year: "numeric",
                 month: "long",
                 day: "2-digit",
             })}`
-        );
-        expect(dateOne).toBeTruthy();
+        )
+        expect(dateOne).toBeTruthy()
 
-        cleanup();
+        cleanup()
 
-        render(<Book data={testData[1].data} />);
+        render(<Book data={testData[1].data} />)
         const dateTwo = await screen.getByText(
             `Published on: ${new Date("10/15/2019").toLocaleString("en-US", {
                 year: "numeric",
                 month: "long",
                 day: "2-digit",
             })}`
-        );
-        expect(dateTwo).toBeTruthy();
-    });
+        )
+        expect(dateTwo).toBeTruthy()
+    })
 
     it("should render a list with the cover designer's name and info underneath the date if they are present", async () => {
-        render(<Book data={testData[0].data} />);
+        render(<Book data={testData[0].data} />)
         const date = await screen.getByText(
             `Published on: ${new Date("09/15/2019").toLocaleString("en-US", {
                 year: "numeric",
                 month: "long",
                 day: "2-digit",
             })}`
-        );
+        )
 
-        const parentList = date.parentElement!;
-        expect(parentList.tagName).toEqual("UL");
+        const parentList = date.parentElement!
+        expect(parentList.tagName).toEqual("UL")
         expect(parentList.children[1].textContent).toEqual(
             "Cover designer: Test book cover designer"
-        );
+        )
         expect(parentList.children[2].textContent).toEqual(
             "Test book cover designer bio"
-        );
+        )
 
         const coverDesignerLinks = [
             parentList.children[3],
             parentList.children[4],
-        ];
+        ]
         expect(
             coverDesignerLinks[0].firstChild?.firstChild?.textContent
-        ).toEqual("Bio A");
+        ).toEqual("Bio A")
         expect(
             coverDesignerLinks[0].firstElementChild?.getAttribute("href")
-        ).toEqual("https://bio-a.com");
+        ).toEqual("https://bio-a.com")
 
         expect(
             coverDesignerLinks[1].firstChild?.firstChild?.textContent
-        ).toEqual("Bio B");
+        ).toEqual("Bio B")
         expect(
             coverDesignerLinks[1].firstElementChild?.getAttribute("href")
-        ).toEqual("https://bio-b.com");
-    });
+        ).toEqual("https://bio-b.com")
+    })
 
     it("should render another list following the cover designer if there is a project with a link and its details", async () => {
-        render(<Book data={testData[0].data} />);
+        render(<Book data={testData[0].data} />)
         const projectLink = await screen.getByText("Related Project: Related project A")
-        expect(projectLink.tagName).toEqual("A");
+        expect(projectLink.tagName).toEqual("A")
         expect(projectLink.textContent).toEqual(
             "Related Project: Related project A"
-        );
+        )
         expect(projectLink?.getAttribute("href")).toEqual(
             "/project/related-project-a-slug"
-        );
+        )
 
         expect(projectLink.parentElement!.nextElementSibling?.textContent).toEqual(
             "Related project A description"
-        );
-    });
+        )
+    })
 
     it("should not render either items of above lists if there is no cover designer nor any project", async () => {
-        render(<Book data={testData[1].data} />);
+        render(<Book data={testData[1].data} />)
         const date = await screen.getByText(
             `Published on: ${new Date("10/15/2019").toLocaleString("en-US", {
                 year: "numeric",
                 month: "long",
                 day: "2-digit",
             })}`
-        );
-        expect(date.nextElementSibling).toBeNull();
-    });
+        )
+        expect(date.nextElementSibling).toBeNull()
+    })
 
     it("should render a list of purchase links", async () => {
-        render(<Book data={testData[0].data} />);
+        render(<Book data={testData[0].data} />)
         const purchaseLinks = await screen.getByText("Purchase Links:")
         const buttons = purchaseLinks.nextElementSibling!.children
         
@@ -234,10 +237,10 @@ describe("book template", () => {
         fireEvent.click(buttons[1])
         expect(navigate).toHaveBeenCalledTimes(2)
         expect(navigate).toHaveBeenCalledWith("https://buy-b.com")
-    });
+    })
 
     it('should render a list of stories that link to their slugs with a div under that explains their content if there are related stories', async () => {
-        render(<Book data={testData[0].data} />);
+        render(<Book data={testData[0].data} />)
         const storiesLead = await screen.getByText("Related Stories:")
         expect(storiesLead.tagName).toEqual('P')
 
@@ -252,7 +255,7 @@ describe("book template", () => {
     })
 
     it('should not render any of the above content if there are no related stories', () => {
-        render(<Book data={testData[1].data} />);
+        render(<Book data={testData[1].data} />)
         expect(() => screen.getByText("Related Stories:")).toThrow()
     })
-});
+})

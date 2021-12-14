@@ -8,7 +8,7 @@ import AllFilter from "@Posts/BlogFilters/AllFilter/AllFilter.component";
 import BlogCard from "@Variant/BlogCard/BlogCard.component";
 import Paginate from "@Layout/Paginate/Paginate.component";
 
-import usePagination from "@Hooks/usePagination";
+import usePagination from "@/hooks/usePagination.hook";
 
 import postsJson from "@WPData/Posts/all.json";
 

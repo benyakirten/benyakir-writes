@@ -8,7 +8,7 @@
     "gatsby"
   ],
   "scripts": {
-    "dev": "gatsby develop -H 127.0.0.1 -p 8000",
+    "dev": "gatsby develop -H 127.0.0.1 -p 3000",
     "develop": "gatsby develop",
     "start": "gatsby develop",
     "build": "gatsby build",
@@ -19,6 +19,7 @@
     "test:e2e": "start-server-and-test develop http://localhost:8000 cy:open"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.2",
     "babel-plugin-styled-components": "^2.0.2",
     "gatsby": "^4.3.0",
     "gatsby-plugin-image": "^2.3.0",
@@ -32,13 +33,15 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
+    "react-redux": "^7.2.6",
     "react-syntax-highlighter": "^15.4.5",
     "react-transition-group": "^4.4.2",
+    "redux-logger": "^3.0.6",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "@testing-library/cypress": "^8.0.1",
-    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.0.0",
     "@types/jest": "^27.0.1",
     "@types/react": "^17.0.37",
@@ -46,6 +49,7 @@
     "@types/react-syntax-highlighter": "^13.5.2",
     "@types/react-test-renderer": "^17.0.1",
     "@types/react-transition-group": "^4.4.2",
+    "@types/redux-logger": "^3.0.9",
     "@types/styled-components": "^5.1.13",
     "axe-core": "^4.3.3",
     "babel-jest": "^27.1.1",

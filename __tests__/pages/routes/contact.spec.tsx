@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import {
     cleanup,
     render,
@@ -6,8 +7,7 @@ import {
     act,
     fireEvent,
     waitFor,
-} from "@testing-library/react";
-
+} from "@TestUtils";
 import ContactPage from "@/pages/contact";
 
 describe("contact page", () => {
@@ -35,7 +35,8 @@ describe("contact page", () => {
     it("should render a title and an adjacent paragraph", async () => {
         render(<ContactPage />);
 
-        const title = await screen.findByText("Contact");
+        const contactTexts = await screen.findAllByText("Contact");
+        const title = contactTexts[1]
         expect(title).toBeTruthy();
         expect(title.tagName).toEqual("H1");
 
@@ -69,7 +70,8 @@ describe("contact page", () => {
         render(<ContactPage />);
 
         const [email, message] = await screen.getAllByRole("textbox");
-        let button = await screen.getByRole("button");
+        let buttons = await screen.getAllByRole("button");
+        let button = buttons[1]
         expect(button).toBeDisabled();
 
         await act(async () => {
@@ -100,7 +102,8 @@ describe("contact page", () => {
         render(<ContactPage />);
 
         const [email, message] = await screen.getAllByRole("textbox");
-        let button = await screen.getByRole("button");
+        let buttons = await screen.getAllByRole("button");
+        const button = buttons[1]
         expect(button).toBeDisabled();
 
         await act(async () => {
@@ -134,7 +137,8 @@ describe("contact page", () => {
         render(<ContactPage />);
 
         const [email, message] = await screen.getAllByRole("textbox");
-        let button = await screen.getByRole("button");
+        let buttons = await screen.getAllByRole("button"); 
+        const button = buttons[1]
         expect(button).toBeDisabled();
 
         await act(async () => {

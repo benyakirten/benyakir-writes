@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import { multiplyCSSNumber } from '@Utils/strings'
 
-import { ABS_BLACK, BLACK, FONT_XS, ABS_WHITE, Z_ABOVE } from '@StyleVars'
+import { FONT_XS, Z_ABOVE } from '@StyleVars'
 
 export const IconContainer = styled.div<{ height: string }>`
     position: relative;
@@ -16,6 +16,8 @@ export const IconContainer = styled.div<{ height: string }>`
 
     margin-bottom: ${props => multiplyCSSNumber(props.height, 1/6)};
     margin-right: ${props => multiplyCSSNumber(props.height, 1/3)};
+
+    background-color: ${props => props.theme.icon.default.background};
 
     transition: all 2s ease;
     
@@ -31,7 +33,7 @@ export const IconContainer = styled.div<{ height: string }>`
         width: 0;
         
         border-radius: 50%;
-        background-color: ${ABS_BLACK};
+        background-color: ${props => props.theme.icon.hover.background};
         
         transition: all 2s ease;
     }
@@ -49,7 +51,7 @@ export const IconContainer = styled.div<{ height: string }>`
         }
 
         span {
-            color: ${ABS_WHITE};
+            color: ${props => props.theme.icon.hover.textColor};
             z-index: ${Z_ABOVE};
             top: ${props => multiplyCSSNumber(props.height, 2/3)};
         }
@@ -67,9 +69,9 @@ export const IconImage = styled.img<{ height: string }>`
 
 export const IconCaption = styled.span`
     position: relative;
-    top: 0;
+    top: 0.5rem;
 
-    color: ${BLACK}
+    color: ${props => props.theme.icon.default.textColor};
     font-size: ${FONT_XS};
 
     transition: all 2s ease;

@@ -27,7 +27,10 @@
       "@Hooks/*": ["src/hooks/*"],
       "@Data/*": ["src/data/*"],
       "@WPData/*": ["src/data/wp/*"],
-      "@Types/*": ["src/types/*"]
+      "@Types/*": ["src/types/*"],
+      "@Store/*": ["src/store/*"],
+      "@TestProps": ["__tests__/props.ts"],
+      "@TestUtils": ["__tests__/test-utils.tsx"]
     }, 
     "esModuleInterop": true,
     "skipLibCheck": true,

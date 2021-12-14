@@ -1,12 +1,10 @@
 import * as React from "react";
+
 import {
     cleanup,
     render,
-    screen,
-    act,
-    fireEvent
-} from "@testing-library/react";
-
+    screen
+} from "@TestUtils"
 import CustomLink from '@Gen/CustomLink/CustomLink.component'
 
 describe('CustomLink component', () => {
@@ -26,8 +24,8 @@ describe('CustomLink component', () => {
 
     it('should pass the to property as an href to the link element', async () => {
         render(<CustomLink to="testroute" />)
-        const link = await screen.getByRole("link")
-        expect(link.getAttribute("href")).toEqual("testroute")
+        const links = await screen.getAllByRole("link")
+        expect(links[1].getAttribute("href")).toEqual("testroute")
     })
 
     // This test does not work. I do not know why

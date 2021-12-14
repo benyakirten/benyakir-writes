@@ -24,8 +24,8 @@ export const ButtonExterior = styled.button`
 
     min-width: 7rem;
     
-    border: 2px solid ${BLACK};
-    background-color: ${GRAY_100};
+    border: 2px solid ${props => props.theme.button.border};
+    background-color: ${props => props.theme.button.default.background};
 
     overflow: hidden;
 
@@ -35,13 +35,16 @@ export const ButtonExterior = styled.button`
 
     &:disabled {
         cursor: not-allowed;
-        background-color: ${GRAY_800};
+        background-color: ${props => props.theme.button.disabled.background};
 
         span {
-            color: ${WHITE};
+            color: ${props => props.theme.button.disabled.textColor};
         }
 
         &:hover {
+            span {
+                color: ${props => props.theme.button.disabled.textColor};
+            }
             div {
                 transform: scale(0) !important;
             }
@@ -49,7 +52,7 @@ export const ButtonExterior = styled.button`
     }
 
     span {
-        color: ${SECONDARY_900};
+        color: ${props => props.theme.button.default.textColor};
         transition: color 1s ease;
 
 
@@ -64,7 +67,7 @@ export const ButtonExterior = styled.button`
         height: 200%;
         width: 200%;
 
-        background-color: ${BLACK};
+        background-color: ${props => props.theme.button.hover.background};
 
         transition: transform 1s ease;
         transform: scale(0);
@@ -72,7 +75,7 @@ export const ButtonExterior = styled.button`
 
     &:hover {
         span {
-            color: ${WHITE};
+            color: ${props => props.theme.button.hover.textColor};
         }
 
         div {

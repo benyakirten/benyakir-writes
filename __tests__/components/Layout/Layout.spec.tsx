@@ -1,18 +1,22 @@
 import React from "react";
+import { Provider } from "react-redux";
 import { cleanup, render } from "@testing-library/react";
-import renderer from 'react-test-renderer'
 
+import store from "@/store";
 import Layout from "@Layout/Layout.component";
 
-describe('Layout component', () => {
-    jest.mock("@reach/router")
+describe("Layout component", () => {
+  jest.mock("@reach/router");
 
-    afterEach(cleanup)
+  afterEach(cleanup);
 
-    it('should render correctly', () => {
-        expect(() => render(<Layout />)).not.toThrow()
-
-        const layout = renderer.create(<Layout />).toJSON()
-        expect(layout).toMatchSnapshot()
-    })
-})
+  it("should render correctly", () => {
+    expect(() =>
+      render(
+        <Provider store={store}>
+          <Layout />
+        </Provider>
+      )
+    ).not.toThrow();
+  });
+});

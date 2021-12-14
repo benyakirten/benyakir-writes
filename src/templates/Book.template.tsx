@@ -7,18 +7,15 @@ import {
     LeadHeading,
     Row,
     Column,
-    SubHeading,
     Grouping,
     List,
     LItem,
     CardSection,
     CardDoubleSection,
-    MinorHeading,
     WpContent,
     Subtitle,
     GroupingBox,
     RowUntilPhone,
-    Paragraph,
     BigParagraph,
 } from "@Styles/general-components";
 
@@ -26,7 +23,7 @@ import Button from "@Gen/Button/Button.component";
 import CustomLink from "@Gen/CustomLink/CustomLink.component";
 import HoverImage from "@Gen/HoverImage/HoverImage.component";
 
-import { flattenBook } from "@Utils/author";
+import { flattenBook } from "@/utils/author";
 import { formatWpText } from "@Utils/posts";
 import { firstWords } from "@Utils/strings";
 import { getPrettyDate } from "@Utils/dates";
@@ -132,7 +129,7 @@ const Book: React.FC<WpBook> = ({ data }) => {
                                     </BigParagraph>
                                     {book.stories.map((s) => (
                                         <React.Fragment key={s.title}>
-                                            <CustomLink to={`/story/${s.slug}`}>
+                                            <CustomLink to={`/story/${s.slug}`} small>
                                                 {s.title}
                                             </CustomLink>
                                             <WpContent

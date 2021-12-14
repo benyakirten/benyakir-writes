@@ -1,6 +1,6 @@
 import React from 'react'
-import { render, screen, cleanup } from '@testing-library/react'
 
+import { render, screen, cleanup } from '@TestUtils'
 import Post from '@/templates/Post.template'
 import { WpPost } from "@Types/query"
 

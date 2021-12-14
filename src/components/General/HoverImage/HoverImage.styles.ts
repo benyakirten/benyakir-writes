@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { BLACK, FONT_LG } from '@StyleVars';
+import { FONT_LG } from '@StyleVars';
 import { media } from '@Styles/queries';
 import { multiplyCSSNumber } from '@Utils/strings';
 
@@ -30,7 +30,7 @@ export const StyledFigure = styled.figure<{ color?: string, size?: string, squar
         text-align: center;
         font-size: ${FONT_LG};
         transition: all 0.5s ease;
-        color: ${BLACK};
+        color: ${props => props.theme.hoverImage.textColor};
     }
 
     &:hover {
@@ -42,7 +42,7 @@ export const StyledFigure = styled.figure<{ color?: string, size?: string, squar
             }
         }
         figcaption {
-            color: ${props => props.color ? props.color : '#000'};
+            color: ${props => props.color ? props.color : props.theme.hoverImage.hoveredTextColor};
             transform: translateY(${props => props.size ? multiplyCSSNumber(props.size, -0.58) : '-5.8rem'});
 
             ${media.phone} {
@@ -51,7 +51,7 @@ export const StyledFigure = styled.figure<{ color?: string, size?: string, squar
 
             ${media.reducedMotion} {
                 transform: none;
-                color: ${BLACK};
+                color: ${props => props.theme.hoverImage.textColor};
             }
         }
     }

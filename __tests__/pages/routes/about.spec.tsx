@@ -1,6 +1,6 @@
 import React from "react";
-import { cleanup, render, screen } from "@testing-library/react";
 
+import { cleanup, render, screen } from "@TestUtils";
 import AboutPage from "@/pages/about";
 import { SVGImageQuery } from "@Types/query";
 import { allIcons } from "../../props";
@@ -15,13 +15,16 @@ describe("about page", () => {
         },
     };
 
+    afterEach(cleanup)
+
     it("should render correctly", () => {
         expect(() => render(<AboutPage data={aboutData.data} />));
     });
 
     it("should render a heading with the page title with a following paragraph", async () => {
         render(<AboutPage data={aboutData.data} />);
-        const title = await screen.getByText("About");
+        const titles = await screen.getAllByText("About");
+        const title = titles[1]
         expect(title).toBeTruthy();
         expect(title.tagName).toEqual("H1");
 

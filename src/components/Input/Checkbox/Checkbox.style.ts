@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BLACK, FONT_LG, FONT_XXL } from '@StyleVars';
+import { FONT_LG, FONT_XXL } from '@StyleVars';
 
 export const CheckboxGroup = styled.div`
     position: relative;
@@ -22,15 +22,15 @@ export const CheckboxGroup = styled.div`
         width: 3.5rem;
         margin-right: 1rem;
 
-        background-color: #fff;
-        outline: 3px solid ${BLACK};
+        background-color: ${props => props.theme.checkbox.backgroundColor};
+        outline: 3px solid ${props => props.theme.checkbox.border};
 
         transition: all 0.4s;
         transition: transform 0.4s;
         transform-origin: left;
 
         &:hover {
-            transform: scale(1.05);
+            transform: scale(1.04);
         }
 
         &:active {
@@ -48,7 +48,8 @@ export const CheckboxGroup = styled.div`
                 left: 0.4rem;
             }
 
-            color: ${BLACK};
+            color: ${props => props.theme.checkbox.fingerColor};
+
             font-size: ${FONT_XXL};
             font-weight: bold;
             

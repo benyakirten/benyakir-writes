@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import { DateProps } from "@Types/props";
 import { DateContainer, DateInput } from "./DatePicker.styles";
 
 const DatePicker: React.FC<DateProps> = ({ name, label, onChange, value, tabIndex = 0 }) => {
@@ -10,9 +9,9 @@ const DatePicker: React.FC<DateProps> = ({ name, label, onChange, value, tabInde
     const convertedDate = `${value.getFullYear()}-${month.padStart(2,'0')}-${date.padStart(2, '0')}`;
     const handleChange = (e: React.BaseSyntheticEvent) => {
         const _raw: string = e.target.value;
-        const _month = _raw.substr(5,2)
-        const _day = _raw.substr(8,2)
-        const _year = _raw.substr(0,4)
+        const _month = _raw.slice(5,7)
+        const _day = _raw.slice(8,10)
+        const _year = _raw.slice(0,4)
         const _date = new Date(`${_month}/${_day}/${_year}`)
         onChange(new Date(_date))
     };

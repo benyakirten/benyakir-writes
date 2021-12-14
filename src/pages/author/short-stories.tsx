@@ -8,7 +8,7 @@ import Paginate from "@Layout/Paginate/Paginate.component";
 import StoryFilter from "@Posts/WritingFilters/StoryFilter/StoryFilter.component";
 import StoryCard from "@Variant/Author/StoryCard/StoryCard.component";
 
-import usePagination from "@Hooks/usePagination";
+import usePagination from "@/hooks/usePagination.hook";
 
 import storiesJson from "@WPData/Author/stories.json"
 

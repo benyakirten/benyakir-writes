@@ -1,11 +1,11 @@
 import * as React from "react";
-import { render, cleanup, screen, fireEvent } from "@testing-library/react";
 import { navigate } from "gatsby";
 
+import { render, cleanup, screen, fireEvent } from "@TestUtils";
 import StoryCard from "@Variant/Author/StoryCard/StoryCard.component";
 import { FlattenedStory } from "@Types/posts";
 
-import { cover } from "../../props";
+import { cover } from "@TestProps";
 
 describe("StoryCard component", () => {
     jest.mock("gatsby");
@@ -171,7 +171,8 @@ describe("StoryCard component", () => {
             expect(title.getAttribute("href")).toEqual("/book/book-b");
             expect(title.parentElement!.tagName).toEqual("H4");
 
-            const image = await screen.findByRole("img");
+            const images = await screen.findAllByRole("img");
+            const image = images[1]
             expect(image.getAttribute("alt")).toEqual("book B");
 
             const imageLink =
@@ -180,9 +181,11 @@ describe("StoryCard component", () => {
             expect(imageLink?.getAttribute("href")).toEqual("/book/book-b");
         });
 
-        it("should not render any of the above information if there is no related book or cover", () => {
+        it("should not render any of the above information if there is no related book or cover", async () => {
             render(<StoryCard item={propStories[0]} />);
-            expect(() => screen.getByRole("img")).toThrow();
+            const images = await screen.findAllByRole("img");
+            expect(images.length).toEqual(1)
+            expect(images[0].getAttribute("aria-label")).toEqual("Logo") 
         });
     });
 });

@@ -1,17 +1,14 @@
-import * as React from "react";
-import { render, cleanup } from "@testing-library/react";
-import renderer from 'react-test-renderer'
+import * as React from "react"
 
-import Icon from "@Gen/Icon/Icon.component";
-import { allIcons } from "../../props";
+import { render, cleanup } from "@TestUtils"
+
+import Icon from "@Gen/Icon/Icon.component"
+import { allIcons } from "@TestProps"
 
 describe("Icon component", () => {
     afterEach(cleanup)
     
     it("should render properly", () => {
         expect(() => render(<Icon icon={allIcons[0]} />)).not.toThrow();
-
-        const icon = renderer.create(<Icon icon={allIcons[0]} />).toJSON()
-        expect(icon).toMatchSnapshot()
     });
 });

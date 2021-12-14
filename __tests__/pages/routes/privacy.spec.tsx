@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { cleanup, render, screen } from "@testing-library/react";
 
+import { cleanup, render, screen } from "@TestUtils";
 import PrivacyPage from '@/pages/privacy'
 
 

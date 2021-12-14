@@ -1,4 +1,4 @@
-[![Build Status](https://app.travis-ci.com/benyakirten/benyakir-writes.svg?branch=main)](https://app.travis-ci.com/benyakirten/benyakir-writes)
+[![Unit Test](https://github.com/benyakirten/benyakir-writes/actions/workflows/unit_test.yml/badge.svg?branch=main)](https://github.com/benyakirten/benyakir-writes/actions/workflows/unit_test.yml)
 # Table of Contents
 1. [What am I looking at?](#what-am-i-looking-at?)
 2. [How to run the repository](#how-do-i-get-it-working)
@@ -42,7 +42,11 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 
 ## Planned Changes
 
-> Add the showcase pages from benyakiredits.com. It will be awhile before this happens so don't hold your breath.
+> Add the showcase pages from benyakiredits.com.
+> Add customizable pallets and various options for theme
+> Add E2E tests to GitHub Actions
+> Separate the header on an individual blog post/project/book/story into its own component
+> Fix cypress tests so there's less repetition
 
 ## Changelog
 
@@ -80,3 +84,15 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 > 10/23/2021: Added some memoization. A lot of extraneous stuff gets painted for reasons I'm not sure yet. I'll have to investigate.
 > 12/5/2021 (pt. 1): Changed the sidebar to become just an icon on mobile when it's closed (to save screen space, inspired by me browsing elixirschool.com). I also updated gatsby to v4.3, not of my volition but because my WP plugin stopped working.
 > 12/5/2021 (pt. 2):  Added github action because Travis CI no longer wants to let me test for free. Also changed the SyntaxHighlighter unit test and now put in a timer to measure how long static generation for search indexing takes.
+> 12/6/2021: Remove travis workflow
+> 12/10/2021: A lot of UI updates and adding day/night/customizable themes
+>> 1. The clickable part of the sidebar now should not exceed the sidebar
+>> 2. IconGrid is now a grid instead of a flexbox
+>> 3. Added a useValidation hook and changed past self-contained validation to use it
+>> 4. Project Cards are now divided into two parts with fixed widths
+>> 5. The Logo is now a div with a mask of the SVG. That way I can change the fill without having to use an svg tag.
+>> 6. Change text inputs and textareas to have a border, not an outline.
+>> 7. Pagination now sets all items within it to a certain width instead of cards specifically having that width
+>> 8. A lot of color variables have been rendered useless and been replaced by color themes - they will be removed soo 
+>> 9. A new day/night toggle is available on the sidebar.
+>> 10. To accomplish this, I added redux. For testing, I added a wrapper and removed most snapshots because snapshot testing isn't great in the first place. DownArrow is the only component that still uses it. The wrapper must include the Layout component since it contains the theme settings for the styled components. Long story short, all unit tests that required a certain button or image now have to contend with another button or image.

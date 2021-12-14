@@ -1,15 +1,15 @@
 import React from "react";
+
 import {
     cleanup,
     render,
     screen,
     fireEvent,
     act,
-} from "@testing-library/react";
+} from "@TestUtils";
+import BookFilter from "@Posts/WritingFilters/BookFilter/BookFilter.component";
 
-import BookFilter from "@/components/Posts/WritingFilters/BookFilter/BookFilter.component";
-
-import { cover } from "../../props";
+import { cover } from "@TestProps";
 import { createLookupMeta } from "@Utils/posts";
 
 import { FlattenedBookCard } from "@Types/posts";
@@ -109,9 +109,9 @@ describe("BookFilter component", () => {
         expect(text).toBeTruthy();
 
         const buttons = await screen.findAllByRole("button");
-        expect(buttons.length).toEqual(1);
+        expect(buttons.length).toEqual(2);
 
-        fireEvent.click(buttons[0]);
+        fireEvent.click(buttons[1]);
         const datePickerOne = (await screen.findByText("Published before"))
             .nextElementSibling! as HTMLInputElement;
         expect(datePickerOne).toBeTruthy();

@@ -9,7 +9,7 @@ import BookCard from "@Variant/Author/BookCard/BookCard.component";
 import StoryCard from "@Variant/Author/StoryCard/StoryCard.component";
 import Paginate from "@Layout/Paginate/Paginate.component";
 
-import usePagination from "@Hooks/usePagination";
+import usePagination from "@/hooks/usePagination.hook";
 
 import booksJson from "@WPData/Author/books.json";
 import storiesJson from "@WPData/Author/stories.json"

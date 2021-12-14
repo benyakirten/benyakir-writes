@@ -8,7 +8,7 @@ import Paginate from "@Layout/Paginate/Paginate.component";
 import BookFilter from "@/components/Posts/WritingFilters/BookFilter/BookFilter.component";
 import BookCard from "@Variant/Author/BookCard/BookCard.component";
 
-import usePagination from "@Hooks/usePagination";
+import usePagination from "@/hooks/usePagination.hook";
 
 import booksJson from "@WPData/Author/books.json";
 

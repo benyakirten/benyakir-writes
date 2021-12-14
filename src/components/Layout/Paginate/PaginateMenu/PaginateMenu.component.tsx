@@ -5,8 +5,6 @@ import Text from "@Input/Text/Text.component";
 import { Row } from "@Styles/general-components";
 import { PageFlip, PageNumber } from "./PaginateMenu.styles";
 
-import { PaginateMenuProps } from "@Types/props";
-
 const PaginateMenu: React.FC<PaginateMenuProps> = ({
     currentPage,
     maxPages,

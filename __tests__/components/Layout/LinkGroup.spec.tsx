@@ -1,6 +1,6 @@
 import React from "react";
-import { cleanup, render, screen } from "@testing-library/react";
 
+import { cleanup, render, screen } from "@TestUtils";
 import LinkGroup from "@Layout/LinkGroup/LinkGroup.component";
 
 describe('LinkGroup component', () => {
@@ -30,12 +30,12 @@ describe('LinkGroup component', () => {
     it('should render a list of links to sub domains if the foldout is open', async () => {
         render(<LinkGroup {...props} open={true} />)
         const links = await screen.getAllByRole("link")
-        expect(links.length).toEqual(3)
+        expect(links.length).toEqual(4)
 
-        expect(links[1].textContent).toEqual("Test Link A")
-        expect(links[1].getAttribute('href')).toEqual("/test-domain/test-link-a/")
+        expect(links[2].textContent).toEqual("Test Link A")
+        expect(links[2].getAttribute('href')).toEqual("/test-domain/test-link-a/")
 
-        expect(links[2].textContent).toEqual("Test Link B")
-        expect(links[2].getAttribute('href')).toEqual("/test-domain/test-link-b/")
+        expect(links[3].textContent).toEqual("Test Link B")
+        expect(links[3].getAttribute('href')).toEqual("/test-domain/test-link-b/")
     })
 })

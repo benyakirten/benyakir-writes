@@ -15,13 +15,11 @@ import Button from "@Gen/Button/Button.component"
 import IconGrid from "@Gen/IconGrid/IconGrid.component"
 import CustomLink from "@Gen/CustomLink/CustomLink.component"
 
-import { ProjectCardProps } from "@Types/props"
-
 const ProjectCard: React.FC<ProjectCardProps> = ({ item }) => {
     return (
         <Card>
             <Row style={{ alignItems: "stretch" }}>
-                <CardSection>
+                <CardSection style={{ width: '60%' }}>
                     <SubHeading noUnderline>
                         <CustomLink to={`/project/${item.slug}`}>
                             {item.title}

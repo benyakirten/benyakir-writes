@@ -1,12 +1,12 @@
 import React from "react";
+
 import {
     cleanup,
     render,
     screen,
     fireEvent,
     act,
-} from "@testing-library/react";
-
+} from "@TestUtils";
 import CategoryFilter from "@Posts/BlogFilters/CategoryFilter/CategoryFilter.component";
 import { createLookupMeta } from "@Utils/posts";
 import { FlattenedBlogCard} from "@Types/posts";
@@ -139,9 +139,9 @@ describe("CategoryFilter component", () => {
         expect(text).toBeTruthy();
 
         const buttons = await screen.findAllByRole("button");
-        expect(buttons.length).toEqual(2);
+        expect(buttons.length).toEqual(3);
 
-        fireEvent.click(buttons[0]);
+        fireEvent.click(buttons[1]);
         const datePickerOne = (await screen.findByText("Published before")).nextElementSibling! as HTMLInputElement;
         expect(datePickerOne).toBeTruthy();
         expect(datePickerOne.value).toEqual('2021-09-15')
@@ -149,7 +149,7 @@ describe("CategoryFilter component", () => {
         expect(datePickerTwo).toBeTruthy();
         expect(datePickerTwo.value).toEqual('2019-08-15')
 
-        fireEvent.click(buttons[1]);
+        fireEvent.click(buttons[2]);
         const multipleChoiceTwo = await screen.findByText("tag abc");
         expect(multipleChoiceTwo).toBeTruthy();
     });
@@ -215,7 +215,7 @@ describe("CategoryFilter component", () => {
     it('should filter the elements by tag if any of the tags are selected', async () => {
         render(<CategoryFilter {...props} />);
         const buttons = await screen.findAllByRole("button");
-        fireEvent.click(buttons[1]);
+        fireEvent.click(buttons[2]);
         const multipleChoice = await screen.findByText("tag abc");
 
         await act(async () => {
@@ -243,7 +243,7 @@ describe("CategoryFilter component", () => {
         })
 
         await act(async () => {
-            fireEvent.click(buttons[1])
+            fireEvent.click(buttons[2])
             const multipleChoiceTags = await screen.findByText("tag abc");
             fireEvent.click(multipleChoiceTags)
             jest.runAllTimers()

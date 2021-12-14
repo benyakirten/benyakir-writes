@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { render, fireEvent, screen, cleanup } from '@testing-library/react'
 
-import useLookup from "@Hooks/useLookup"
+import useLookup from "@Hooks/useLookup.hook"
 
 const LookupTest: React.FC = () => {
     const [state, dispatch] = useLookup({

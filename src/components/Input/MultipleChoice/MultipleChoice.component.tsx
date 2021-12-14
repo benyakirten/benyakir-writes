@@ -4,8 +4,7 @@ import { Row } from "@Styles/general-components";
 
 import Choice from "./Choice/Choice.component";
 
-import { MultipleChoiceProps } from "@Types/props";
-import { Z_BASE, Z_UNDER } from "@/styles/variables";
+import { Z_BASE, Z_UNDER } from "@StyleVars";
 
 const MultipleChoice: React.FC<MultipleChoiceProps> = ({
     choices,

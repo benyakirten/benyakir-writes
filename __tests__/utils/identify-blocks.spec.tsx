@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import * as idBlocks from "@Utils/identify-blocks";
+import * as idBlocks from "@/utils/blocks/identify-blocks";
 import { WpContent } from '@Styles/general-components';
 
 

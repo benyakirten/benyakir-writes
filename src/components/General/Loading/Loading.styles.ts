@@ -9,7 +9,7 @@ export const LoadingContainer = styled.span<{ size: string }>`
     height: ${props => props.size};
     border-radius: 50%;
     border: 2px solid #ddd;
-    border-top: 1px solid ${ABS_BLACK};
+    border-top: 1px solid ${props => props.theme.base.textColor};
 
     animation: rotate 1s infinite linear;
 

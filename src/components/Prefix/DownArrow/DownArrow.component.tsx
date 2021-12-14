@@ -1,7 +1,6 @@
 import * as React from "react";
-import { StyledArrow } from "./DownArrow.styles";
 
-import { OpenProps } from "@Types/props";
+import { StyledArrow } from "./DownArrow.styles";
 
 const DownArrow: React.FC<OpenProps> = ({
     open = false,

@@ -24,7 +24,7 @@ const IndexPage: React.FC = () => {
                 <LeadHeading>Welcome to Benyakir Writes</LeadHeading>
                 <BigParagraph>
                     Hello stranger or welcome back. Struggling to find a better
-                    term, I call this a portal into my mind. As an author, I
+                    term, I call this website an outlet. As an author, I
                     write about the oncoming future and how us humans face the
                     chaos of our own making. As a programmer, I participate in
                     it and embrace the wonders that our modernity can provide.

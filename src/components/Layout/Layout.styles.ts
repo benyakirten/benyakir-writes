@@ -32,6 +32,8 @@ export const GlobalStyles = createGlobalStyle`
     body {
         box-sizing: border-box;
         font-family: ${MULISH};
+        color: ${props => props.theme.base.textColor};
+        background-color: ${props => props.theme.base.background};
     }
 
     a {
@@ -84,10 +86,14 @@ export const LayoutContainer = styled.div`
 
 export const MainContainer = styled.main`
     position: relative;
+
     width: 100%;
     padding: 2rem 4rem;
     ${media.tablet} {
         padding: 1rem 2rem;
     }
+    
+    background-color: ${props => props.theme.base.background};
+
     overflow: hidden;
 `;

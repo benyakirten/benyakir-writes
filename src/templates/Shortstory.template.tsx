@@ -9,21 +9,18 @@ import HoverImage from "@Gen/HoverImage/HoverImage.component";
 import {
     LeadHeading,
     GroupingBox,
-    Row,
     CardSection,
     List,
     LItem,
-    MinorHeading,
     Column,
     SubHeading,
     WpContent,
     Grouping,
     Subtitle,
-    RowUntilPhone,
-    WpContentInline,
+    RowUntilPhone
 } from "@Styles/general-components";
 
-import { flattenStory } from "@Utils/author";
+import { flattenStory } from "@/utils/author";
 import { getPrettyDate } from "@Utils/dates";
 import { formatWpText, rigorousTextFormat } from "@Utils/posts";
 import { firstWords } from "@Utils/strings";

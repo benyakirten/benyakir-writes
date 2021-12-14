@@ -1,6 +1,6 @@
 import * as React from "react";
-import { render, cleanup, screen, fireEvent } from "@testing-library/react";
 
+import { render, cleanup, screen, fireEvent } from "@TestUtils";
 import Checkbox from "@Input/Checkbox/Checkbox.component"
 
 describe('Checkbox component', () => {

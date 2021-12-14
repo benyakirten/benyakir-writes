@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
 import { FONT_LG, SHADOW_MD, Z_ABOVE, Z_RAISED } from '@StyleVars';
+import { convertHexToRGBA } from '@Utils/colors';
 
 export const HighlighterContainer = styled.div`
     position: relative;
 
     display: flex;
     flex-direction: column;
-    box-shadow: ${SHADOW_MD};
+    box-shadow: box-shadow: ${props => `${SHADOW_MD} ${convertHexToRGBA(props.theme.base.shadowColor, 0.4)}`};;
     padding: 0.5rem 1rem;
     margin: 2rem 0;
 `

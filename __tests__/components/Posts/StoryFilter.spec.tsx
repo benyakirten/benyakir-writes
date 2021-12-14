@@ -1,12 +1,12 @@
 import React from "react";
+
 import {
     cleanup,
     render,
     screen,
     fireEvent,
     act,
-} from "@testing-library/react";
-
+} from "@TestUtils";
 import StoryFilter from "@Posts/WritingFilters/StoryFilter/StoryFilter.component";
 
 import { cover } from "../../props";
@@ -103,9 +103,9 @@ describe("StoryFilter component", () => {
         expect(text).toBeTruthy();
 
         const buttons = await screen.findAllByRole("button");
-        expect(buttons.length).toEqual(1);
+        expect(buttons.length).toEqual(2);
 
-        fireEvent.click(buttons[0]);
+        fireEvent.click(buttons[1]);
         const datePickerOne = (await screen.findByText("Published before"))
             .nextElementSibling! as HTMLInputElement;
         expect(datePickerOne).toBeTruthy();

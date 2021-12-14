@@ -2,16 +2,37 @@ describe("Static page (about/privacy/contact) accessibility", () => {
     it("Has no accessibility violations after the About page is visited", () => {
         cy.visit("/about").get("main").injectAxe();
         cy.checkA11y();
+
+        cy.get('[data-cy=open-sidemenu]').click()
+        cy.wait(1000)
+        
+        cy.get('[data-cy=sidebar-theme-toggle]').click()
+        cy.wait(1000)
+        cy.checkA11y()
     })
 
     it("Has no accessibility violations after the Privacy page is visited", () => {
         cy.visit("/privacy").get("main").injectAxe();
         cy.checkA11y();
+
+        cy.get('[data-cy=open-sidemenu]').click()
+        cy.wait(1000)
+        
+        cy.get('[data-cy=sidebar-theme-toggle]').click()
+        cy.wait(1000)
+        cy.checkA11y()
     })
 
     it("Has no accessibility violatiosn after the 404 page is visited", () => {
         cy.visit("/404").get("main").injectAxe();
         cy.checkA11y();
+
+        cy.get('[data-cy=open-sidemenu]').click()
+        cy.wait(1000)
+        
+        cy.get('[data-cy=sidebar-theme-toggle]').click()
+        cy.wait(1000)
+        cy.checkA11y()
     })
 
     describe("Contact page", () => {
@@ -21,6 +42,13 @@ describe("Static page (about/privacy/contact) accessibility", () => {
 
         it("Has no accessibility violations after load", () => {
             cy.checkA11y();
+
+            cy.get('[data-cy=open-sidemenu]').click()
+            cy.wait(1000)
+            
+            cy.get('[data-cy=sidebar-theme-toggle]').click()
+            cy.wait(1000)
+            cy.checkA11y()
         })
 
         it("Has no accessibility vigolations if the form is submitted with an error", () => {
@@ -31,6 +59,13 @@ describe("Static page (about/privacy/contact) accessibility", () => {
             cy.wait(1200)
 
             cy.checkA11y();
+
+            cy.get('[data-cy=open-sidemenu]').click()
+            cy.wait(1000)
+            
+            cy.get('[data-cy=sidebar-theme-toggle]').click()
+            cy.wait(1000)
+            cy.checkA11y()
         })
 
         it("Has no accessibility vigolations if the form is submitted with success", () => {
@@ -42,6 +77,13 @@ describe("Static page (about/privacy/contact) accessibility", () => {
             cy.wait(1200)
 
             cy.checkA11y();
+
+            cy.get('[data-cy=open-sidemenu]').click()
+            cy.wait(1000)
+            
+            cy.get('[data-cy=sidebar-theme-toggle]').click()
+            cy.wait(1000)
+            cy.checkA11y()
         })
     })
 })

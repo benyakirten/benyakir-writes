@@ -4,8 +4,12 @@ import styled from 'styled-components'
 export const StyledBox = styled.div`
     position: relative;
 
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    ${media.tablet} {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
     height: 100%;
     

@@ -1,12 +1,12 @@
 import * as React from "react";
+
 import {
     cleanup,
     render,
     screen,
     act,
     fireEvent,
-} from "@testing-library/react";
-
+} from "@TestUtils";
 import BooksPage from "@/pages/author/books";
 
 describe("books page", () => {
@@ -28,7 +28,8 @@ describe("books page", () => {
 
     it("should render a main heading", async () => {
         render(<BooksPage />);
-        const title = await screen.getByText("Books");
+        const bookTitles = await screen.getAllByText("Books");
+        const title = bookTitles[1]
         expect(title).toBeTruthy();
         expect(title.tagName).toEqual("H1");
     });

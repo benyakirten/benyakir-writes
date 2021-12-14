@@ -16,40 +16,24 @@ import Loading from "@Gen/Loading/Loading.component";
 import AlertBox from "@Gen/AlertBox/AlertBox.component";
 import CustomLink from "@Gen/CustomLink/CustomLink.component";
 
+import useValidation from "@Hooks/useValidation.hook";
 import { EMAIL_REGEX } from "@Constants";
+import { validateByRegex, validateLength } from "@Utils/validation";
+import { encode } from "@Utils/other";
 
 const ContactPage: React.FC = () => {
     const [loading, setLoading] = React.useState<boolean>(false);
-    const [email, setEmail] = React.useState("");
-    const [message, setMessage] = React.useState("");
+    const [email, setEmail, emailValid] = useValidation([validateByRegex(EMAIL_REGEX)]);
+    const [message, setMessage, messageValid] = useValidation([validateLength({ min: 1 })]);
 
     const [result, setResult] = React.useState("");
     const [success, setSuccess] = React.useState(false);
 
-    const [disabled, setDisabled] = React.useState(true);
-
     const dismissResult = () => setResult("");
-
-    React.useEffect(() => {
-        EMAIL_REGEX.test(email) && message.length > 0
-            ? setDisabled(false)
-            : setDisabled(true);
-    }, [email, message]);
-
-    function encode(data: object) {
-        return Object.keys(data)
-            .map(
-                (key) =>
-                    `${encodeURIComponent(key)}=${encodeURIComponent(
-                        data[key as keyof typeof data]
-                    )}`
-            )
-            .join("&");
-    }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (disabled) return;
+        if (!emailValid || !messageValid) return;
         dismissResult();
         setLoading(true);
         try {
@@ -86,7 +70,7 @@ const ContactPage: React.FC = () => {
                 <title>Benyakir Writes - Contact</title>
                 <meta
                     name="description"
-                    content="Write me a message and contact me, either for work I can perform, about my writing or anything else."
+                    content="Write me a message and contact me, either to see if I can help you, about my writing or anything else."
                 />
             </Helmet>
             <LeadHeading>Contact</LeadHeading>
@@ -117,7 +101,7 @@ const ContactPage: React.FC = () => {
                     <Text
                         name="email"
                         label="Email"
-                        value={email}
+                        value={email.toString()}
                         onChange={setEmail}
                         autofocus
                     />
@@ -126,11 +110,11 @@ const ContactPage: React.FC = () => {
                     <TextArea
                         name="message"
                         label="Message"
-                        value={message}
+                        value={message.toString()}
                         onChange={setMessage}
                     />
                 </ControlGroup>
-                <Button type="submit" disabled={disabled}>
+                <Button type="submit" disabled={!emailValid || !messageValid}>
                     {loading ? <Loading size="1.4rem" /> : "Submit"}
                 </Button>
             </Form>

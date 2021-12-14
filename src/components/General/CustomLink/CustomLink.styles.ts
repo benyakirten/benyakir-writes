@@ -2,10 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'gatsby';
 
 import {
-    BLACK,
-    WHITE,
     FONT_MD,
-    SECONDARY_600,
     FONT_LG,
 } from '@StyleVars';
 import { media } from '@Styles/queries';
@@ -17,13 +14,15 @@ export const StyledLink = styled(Link)<{
     small: boolean,
     inline: boolean,
     limitUnderbar: boolean,
-    underbarSize?: string
+    underbarSize?: string,
+    inheritColor?: boolean
 }>`
     position: relative;
     overflow: hidden;
 
     text-decoration: none;
-    color: ${props => props.inline ? SECONDARY_600 : props.dark ? BLACK : WHITE};
+    
+    color: ${props => props.inheritColor ? 'inherit' : props.inline ? props.theme.link.inline : props.dark ? props.theme.link.dark : props.theme.link.normal};
     font-size: ${props => props.small ? FONT_LG : 'inherit'};
 
     transition: color 1s ease;
@@ -39,7 +38,7 @@ export const StyledLink = styled(Link)<{
         ${props => props.underbarSize && `width ${props.underbarSize};`}
         height: 2px;
 
-        background-color: ${props => props.inline ? SECONDARY_600: props.dark ? BLACK : WHITE};
+        background-color: ${props => props.inline ? props.theme.link.inline : props.dark ? props.theme.link.dark : props.theme.link.normal};;
 
         transition: color 1s ease;
         transition: transform 0.35s ease-in-out;
@@ -68,13 +67,14 @@ export const OutsideLink = styled.a<{
     small: boolean,
     inline: boolean,
     limitUnderbar: boolean,
-    underbarSize?: string
+    underbarSize?: string,
+    inheritColor?: boolean
 }>`
     position: relative;
     overflow: hidden;
 
     transition: color 1s ease;
-    color: ${props => props.inline ? SECONDARY_600: props.dark ? BLACK : WHITE};
+    color: ${props => props.inheritColor ? 'inherit' : props.inline ? props.theme.link.inline : props.dark ? props.theme.link.dark : props.theme.link.normal};;
     
     text-decoration: none;
     font-size: ${props => props.small ? FONT_MD : 'inherit'};
@@ -90,7 +90,7 @@ export const OutsideLink = styled.a<{
         ${props => props.underbarSize && `width: ${props.underbarSize};`}
         height: 2px;
 
-        background-color: ${props => props.inline ? SECONDARY_600: props.dark ? BLACK : WHITE};
+        background-color: ${props => props.inline ? props.theme.link.inline : props.dark ? props.theme.link.dark : props.theme.link.normal};;
 
         transition: color 1s ease;
         transition: transform 0.35s ease-in-out;

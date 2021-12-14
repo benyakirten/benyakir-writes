@@ -62,3 +62,5 @@ type LinkItem = string | {
     name: string;
     link: string;
 }
+
+type LookupActionType = 'TOGGLE' | 'ACTIVATE' | 'DEACTIVATE'

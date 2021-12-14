@@ -1,14 +1,12 @@
 import * as React from "react";
+
 import {
     cleanup,
     render,
     screen,
     act,
     fireEvent,
-} from "@testing-library/react";
-
-import mockBlogPosts from '../../../__mocks__/all.json'
-
+} from "@TestUtils";
 import BlogPage from "@/pages/blog";
 
 describe("blog page", () => {

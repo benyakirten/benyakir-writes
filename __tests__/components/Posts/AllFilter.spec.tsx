@@ -1,12 +1,12 @@
 import React from "react";
+
 import {
     cleanup,
     render,
     screen,
     fireEvent,
     act,
-} from "@testing-library/react";
-
+} from "@TestUtils";
 import AllFilter from "@Posts/BlogFilters/AllFilter/AllFilter.component";
 import { FlattenedBlogCard } from "@Types/posts";
 import { createLookupMeta } from "@Utils/posts";
@@ -142,9 +142,9 @@ describe("AllFilter component", () => {
         expect(text).toBeTruthy();
 
         const buttons = await screen.findAllByRole("button");
-        expect(buttons.length).toEqual(3);
+        expect(buttons.length).toEqual(4);
 
-        fireEvent.click(buttons[0]);
+        fireEvent.click(buttons[1]);
         const datePickerOne = (await screen.findByText("Published before")).nextElementSibling! as HTMLInputElement;
         expect(datePickerOne).toBeTruthy();
         expect(datePickerOne.value).toEqual('2021-09-15')
@@ -152,11 +152,11 @@ describe("AllFilter component", () => {
         expect(datePickerTwo).toBeTruthy();
         expect(datePickerTwo.value).toEqual('2019-08-15')
 
-        fireEvent.click(buttons[1]);
+        fireEvent.click(buttons[2]);
         const multipleChoiceOne = await screen.findByText("cat abcd");
         expect(multipleChoiceOne).toBeTruthy();
 
-        fireEvent.click(buttons[2]);
+        fireEvent.click(buttons[3]);
         const multipleChoiceTwo = await screen.findByText("tag abc");
         expect(multipleChoiceTwo).toBeTruthy();
     });
@@ -222,7 +222,7 @@ describe("AllFilter component", () => {
     it('should filter the elements by category if any of the categories are selected', async () => {
         render(<AllFilter {...props} />);
         const buttons = await screen.findAllByRole("button");
-        fireEvent.click(buttons[1]);
+        fireEvent.click(buttons[2]);
         const multipleChoice = await screen.findByText("cat abcd");
 
         await act(async () => {
@@ -238,7 +238,7 @@ describe("AllFilter component", () => {
     it('should filter the elements by tag if any of the tags are selected', async () => {
         render(<AllFilter {...props} />);
         const buttons = await screen.findAllByRole("button");
-        fireEvent.click(buttons[2]);
+        fireEvent.click(buttons[3]);
         const multipleChoice = await screen.findByText("tag abc");
 
         await act(async () => {
@@ -266,7 +266,7 @@ describe("AllFilter component", () => {
         })
 
         await act(async () => {
-            fireEvent.click(buttons[1])
+            fireEvent.click(buttons[2])
             const multipleChoiceCategories = await screen.findByText("cat abcd");
             fireEvent.click(multipleChoiceCategories)
             jest.runAllTimers()
@@ -277,7 +277,7 @@ describe("AllFilter component", () => {
         })
 
         await act(async () => {
-            fireEvent.click(buttons[2])
+            fireEvent.click(buttons[3])
             const multipleChoiceTags = await screen.findByText("tag abc");
             fireEvent.click(multipleChoiceTags)
             jest.runAllTimers()

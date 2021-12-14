@@ -6,8 +6,7 @@ import {
     SideArea,
 } from "./LeadPage.styles";
 
-import { LeadPageProps } from "@Types/props";
-import { LeadHeading } from "@/styles/general-components";
+import { LeadHeading } from "@Styles/general-components";
 
 const LeadPage: React.FC<LeadPageProps> = ({ title, children, filter }) => {
     return (

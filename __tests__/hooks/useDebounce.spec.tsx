@@ -1,9 +1,9 @@
 import React from "react";
-import { render, fireEvent, screen, act, cleanup } from "@testing-library/react"
 
+import { render, fireEvent, screen, act, cleanup } from "@TestUtils"
 import Text from "@Input/Text/Text.component";
 
-import useDebounce from "@Hooks/useDebounce"
+import useDebounce from "@Hooks/useDebounce.hook"
 
 const HookTest: React.FC<{ callback: (val: string) => void }> = ({ callback }) => {
     const [text, setText] = useDebounce(callback)

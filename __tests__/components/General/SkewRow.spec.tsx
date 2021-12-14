@@ -1,7 +1,6 @@
 import * as React from "react";
-import { render, cleanup } from "@testing-library/react";
-import renderer from 'react-test-renderer'
 
+import { render, cleanup } from "@TestUtils";
 import SkewRow from "@Gen/SkewRow/SkewRow.component"
 
 describe('SkewRow component', () => {
@@ -9,8 +8,5 @@ describe('SkewRow component', () => {
 
     it('should render properly', () => {
         expect(() => render(<SkewRow />)).not.toThrow()
-
-        const row = renderer.create(<SkewRow />).toJSON()
-        expect(row).toMatchSnapshot()
     })
 })
