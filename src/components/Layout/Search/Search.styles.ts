@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { ABS_BLACK, ABS_WHITE, BLACK, FONT_MD, WHITE } from '@StyleVars'
+import { FONT_MD } from '@StyleVars'
 import { media } from '@Styles/queries'
 
 export const ResultsContainer = styled.div<{ resultLength?: number }>`
@@ -17,30 +17,31 @@ export const ResultsContainer = styled.div<{ resultLength?: number }>`
 
     width: 60%;
     
-    border: 2px solid ${BLACK};
-    background-color: ${ABS_BLACK};
-    color: ${WHITE};
+    border: 2px solid ${props => props.theme.searchBox.border};
+    background-color: ${props => props.theme.searchBox.background};
+    color: ${props => props.theme.searchBox.textColor};
 
     transition: height 1s ease;
 `
 
 export const SingleResult = styled.div`
-    font-size: ${FONT_MD};
+    cursor: pointer;
 
     padding: 0.5rem 1rem;
     height: 6.5rem;
     width: 100%;
 
-    border: 1px solid ${ABS_WHITE};
-    cursor: pointer;
+    font-size: ${FONT_MD};
+    color: ${props => props.theme.searchBox.resultTextColor};
+    border: 1px solid ${props => props.theme.searchBox.resultBorderColor};
 
-    opacity: 0.8;
+    opacity: 0.85;
 
     ${media.noHover} {
         opacity: 1;
     }
 
-    transition: opacity 1s ease;
+    transition: opacity 0.4s ease;
 
     &:hover {
         opacity: 1;

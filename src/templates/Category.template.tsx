@@ -13,7 +13,7 @@ import Loading from "@Gen/Loading/Loading.component";
 import CategoryFilter from "@Posts/BlogFilters/CategoryFilter/CategoryFilter.component";
 import BlogCard from "@Variant/BlogCard/BlogCard.component";
 
-import usePagination from "@Hooks/usePagination";
+import usePagination from "@/hooks/usePagination.hook";
 import { titleToKebab } from "@Utils/strings";
 
 import { WpPostByCategory } from "@Types/query";

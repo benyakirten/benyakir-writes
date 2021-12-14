@@ -1,16 +1,16 @@
 import React from "react";
+
 import {
     cleanup,
     render,
     screen,
     fireEvent,
     act,
-} from "@testing-library/react";
-
+} from "@TestUtils";
 import AuthorFilter from "@Posts/WritingFilters/AuthorFilter/AuthorFilter.component";
 
 import { createLookupMeta } from "@Utils/posts"
-import { cover } from "../../props";
+import { cover } from "@TestProps";
 ;
 import { FlattenedBookCard, FlattenedStoryCard } from "@Types/posts";
 
@@ -170,9 +170,9 @@ describe("AuthorFilter component", () => {
         expect(text).toBeTruthy();
 
         const buttons = await screen.findAllByRole("button");
-        expect(buttons.length).toEqual(2);
+        expect(buttons.length).toEqual(3);
 
-        fireEvent.click(buttons[0]);
+        fireEvent.click(buttons[1]);
         const datePickerOne = (await screen.findByText("Published before"))
             .nextElementSibling! as HTMLInputElement;
         expect(datePickerOne).toBeTruthy();
@@ -182,7 +182,7 @@ describe("AuthorFilter component", () => {
         expect(datePickerTwo).toBeTruthy();
         expect(datePickerTwo.value).toEqual("2019-09-15");
 
-        fireEvent.click(buttons[1]);
+        fireEvent.click(buttons[2]);
         const mcTitle = await screen.findByText("Filter by book");
         expect(mcTitle).toBeTruthy();
         const choices = mcTitle.nextElementSibling!.firstElementChild!.children;
@@ -255,7 +255,7 @@ describe("AuthorFilter component", () => {
     it('should filter the elements by relationship to a book if any of the books is selected', async () => {
         render(<AuthorFilter {...props} />);
         const buttons = await screen.findAllByRole("button");
-        fireEvent.click(buttons[1]);
+        fireEvent.click(buttons[2]);
         const multipleChoiceBookOne = await screen.findByText("Test book A");
         const multipleChoiceBookTwo = await screen.findByText("Test book B");
 
@@ -311,7 +311,7 @@ describe("AuthorFilter component", () => {
             expect(itemsFiltered[1].length).toEqual(3)
         });
 
-        fireEvent.click(buttons[1]);
+        fireEvent.click(buttons[2]);
         const bookOne = await screen.findByText("Test book A");
 
         await act(async () => {

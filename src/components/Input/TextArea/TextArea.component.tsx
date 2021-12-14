@@ -2,9 +2,6 @@ import * as React from 'react'
 
 import { TextAreaContainer } from './TextArea.styles'
 
-import { TextProps } from '@Types/props'
-
-
 const TextArea: React.FC<TextProps> = ({
     name,
     label,

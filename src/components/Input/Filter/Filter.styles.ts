@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-import { ABS_WHITE, SECONDARY_800, SHADOW_MD } from '@StyleVars';
+import { SHADOW_MD_BALANCED } from '@StyleVars';
+import { convertHexToRGBA } from '@Utils/colors';
 
 export const FilterContainer = styled.aside`
     display: flex;
@@ -10,10 +11,10 @@ export const FilterContainer = styled.aside`
 
     padding: 1rem 1rem 1rem 2rem;
 
-    background: ${SECONDARY_800};
-    color: ${ABS_WHITE};
+    background: ${props => props.theme.filter.background};
+    color: ${props => props.theme.filter.textColor};
 
-    box-shadow: ${SHADOW_MD};
+    box-shadow: ${props => `${SHADOW_MD_BALANCED} ${convertHexToRGBA(props.theme.base.shadowColor, 0.4)}`};
 
     transition: all 1s ease;
 

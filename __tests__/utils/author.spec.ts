@@ -1,4 +1,4 @@
-import * as author from '@Utils/author'
+import * as author from '@/utils/author'
 
 import { BookType, FlattenedBook, FlattenedStory, SingleBook, SingleStory, StoryType } from '@Types/posts'
 

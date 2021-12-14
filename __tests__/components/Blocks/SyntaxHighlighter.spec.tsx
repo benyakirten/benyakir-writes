@@ -1,14 +1,13 @@
 import * as React from "react";
+
 import {
     cleanup,
     render,
     screen,
-    act,
-    fireEvent
-} from "@testing-library/react";
-
+    act
+} from "@TestUtils";
 import SyntaxHighlighter from "@Blocks/SyntaxHighlighter/SyntaxHighlighter.component";
-import { ENABLED_THEMES, getFullTheme } from "@Utils/syntax-highlighter";
+import { ENABLED_THEMES, getFullTheme } from "@/utils/blocks/syntax-highlighter";
 
 describe("SyntaxHighlighter component", () => {
     const sampleCode = `

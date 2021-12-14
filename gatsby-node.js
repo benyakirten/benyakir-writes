@@ -31,6 +31,9 @@ exports.onCreateWebpackConfig = ({ actions }) => {
                 "@Data": path.resolve(__dirname, "src/data"),
                 "@WPData": path.resolve(__dirname, "src/data/wp"),
                 "@Types": path.resolve(__dirname, "src/types"),
+                "@Store": path.resolve(__dirname, "src/store"),
+                "@TestProps": path.resolve(__dirname, "__tests__/props.ts"),
+                "@TestUtils": path.resolve(__dirname, "__tests__/test-utils.tsx")
             },
         },
     });

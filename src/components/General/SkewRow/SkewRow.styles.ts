@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 import { media } from '@Styles/queries';
-import { BLACK, SHADOW_LG } from '@StyleVars';
+import { SHADOW_LG } from '@StyleVars';
+import { convertHexToRGBA } from '@Utils/colors';
 
 export const Skewed = styled.section<{ width?: string }>`
     display: flex;
@@ -11,8 +12,9 @@ export const Skewed = styled.section<{ width?: string }>`
     margin: 0 2rem;
     padding: 2rem 3rem;
 
-    box-shadow: ${SHADOW_LG};
-    border: 1px solid ${BLACK};
+    box-shadow: ${props => `${SHADOW_LG} ${convertHexToRGBA(props.theme.base.shadowColor, 0.4)}`};
+    border: 2px solid ${props => props.theme.base.border};
+    background-color: ${props => props.theme.skewRow.background};
     
     transition: transform 15s ease;
     transform: skew(-25deg);

@@ -1,10 +1,10 @@
 import * as React from "react";
-import { cleanup, render, screen, fireEvent } from "@testing-library/react";
 import { navigate } from "gatsby";
 
+import { cleanup, render, screen, fireEvent } from "@TestUtils";
 import Shortstory from "@/templates/Shortstory.template";
 import { WpStory } from "@Types/query";
-import { cover } from "../../props";
+import { cover } from "@TestProps";
 
 describe("shortstory template", () => {
     const stories: WpStory[] = [
@@ -163,7 +163,8 @@ describe("shortstory template", () => {
 
         it('should render the book cover if it exists', async () => {
             render(<Shortstory data={stories[1].data} />);
-            const image = await screen.getByRole("img")
+            const images = await screen.getAllByRole('img');
+            const image = images[1]
             expect(image.tagName).toEqual("IMG")
             expect(image.tagName).toEqual("IMG");
             expect(image.getAttribute("alt")).toEqual("related book A");
@@ -175,7 +176,8 @@ describe("shortstory template", () => {
 
         it('should render a fallback cover if the book exists but the cover doesn\'t', async () => {
             render(<Shortstory data={stories[2].data} />);
-            const image = await screen.getByRole("img")
+            const images = await screen.getAllByRole("img")
+            const image = images[1]
             expect(image.tagName).toEqual("IMG");
             expect(image.getAttribute("src")).toEqual("fallback-cover");
             expect(image.nextElementSibling?.tagName).toEqual("FIGCAPTION");

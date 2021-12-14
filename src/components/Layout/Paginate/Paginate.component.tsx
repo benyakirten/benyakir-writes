@@ -1,10 +1,9 @@
 import * as React from "react";
 
 import { Column } from "@Styles/general-components";
-import { NoResults } from "./Paginate.styles";
-import PaginateMenu from "./PaginateMenu/PaginateMenu.component";
+import { NoResults, PaginateColumn } from "./Paginate.styles";
 
-import { PaginateProps } from "@Types/props";
+import PaginateMenu from "./PaginateMenu/PaginateMenu.component";
 
 const Paginate: React.FC<PaginateProps> = ({
     items,
@@ -28,7 +27,7 @@ const Paginate: React.FC<PaginateProps> = ({
     const lastPage = () => currentPage > 0 && onPageChange(currentPage - 1);
 
     return (
-        <Column>
+        <PaginateColumn>
             <PaginateMenu
                 maxPages={maxPages}
                 currentPage={currentPage}
@@ -63,7 +62,7 @@ const Paginate: React.FC<PaginateProps> = ({
                 disableRight={secondCriteria}
                 name="bottom"
             />
-        </Column>
+        </PaginateColumn>
     );
 };
 

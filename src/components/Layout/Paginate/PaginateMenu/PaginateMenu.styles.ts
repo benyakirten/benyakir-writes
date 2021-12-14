@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 
-import { FONT_LG, FONT_XL, GRAY_700, SECONDARY_800, SECONDARY_900, Z_ABOVE } from '@StyleVars'
+import { FONT_LG, FONT_XL, Z_ABOVE } from '@StyleVars'
 
 export const PageFlip = styled.button<{ left?: boolean }>`
     cursor: pointer;
 
     font-size: ${FONT_XL};
     background-color: transparent;
-    color: ${SECONDARY_900};
+    color: ${props => props.theme.paginate.arrowColor};
 
     outline: none;
     border: none;
@@ -16,7 +16,7 @@ export const PageFlip = styled.button<{ left?: boolean }>`
 
     &:disabled {
         opacity: 0.6;
-        color: ${GRAY_700};
+        color: ${props => props.theme.base.disabled};
         cursor: not-allowed;
     }
 `
@@ -27,5 +27,5 @@ export const PageNumber = styled.span`
     
     margin: 0 1rem;
     font-size: ${FONT_LG};
-    color: ${SECONDARY_800};
+    color: ${props => props.theme.paginate.pageNumberColor};
 `

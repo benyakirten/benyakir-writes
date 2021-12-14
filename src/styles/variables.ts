@@ -33,15 +33,15 @@ export const SECONDARY_700 = '#566488'
 export const SECONDARY_800 = '#485372'
 export const SECONDARY_900 = '#39435b'
 
-export const GRAY_100 = '#f8f9fa';
-export const GRAY_200 = '#e9ecef';
-export const GRAY_300 = '#dee2e6';
-export const GRAY_400 = '#ced4da';
-export const GRAY_500 = '#adb5bd';
-export const GRAY_600 = '#6c757d';
-export const GRAY_700 = '#495057';
-export const GRAY_800 = '#343a40';
-export const GRAY_900 = '#212529';
+export const GRAY_100 = '#f8f9fa'
+export const GRAY_200 = '#e9ecef'
+export const GRAY_300 = '#dee2e6'
+export const GRAY_400 = '#ced4da'
+export const GRAY_500 = '#adb5bd'
+export const GRAY_600 = '#6c757d'
+export const GRAY_700 = '#495057'
+export const GRAY_800 = '#343a40'
+export const GRAY_900 = '#212529'
 
 export const BLACK = '#05491F'
 export const WHITE = '#D8E3FD'
@@ -74,11 +74,11 @@ export const BOTH_MD = '1.8rem 2.4rem'
 export const BOTH_SM = '1rem 1.6rem'
 
 // BORDER SHADOW
-export const SHADOW_XL = '0 2rem 4rem rgba(0, 0, 0, 0.4)'
-export const SHADOW_LG = '0 0.5rem 1rem rgba(0, 0, 0, 0.4)'
-export const SHADOW_MD = '0 2px 4px rgba(0, 0, 0, 0.4)'
-export const SHADOW_SM = '0 1px 2px rgba(0, 0, 0, 0.4)'
-
+export const SHADOW_XL = '0 2rem 4rem'
+export const SHADOW_LG = '0 0.5rem 1rem'
+export const SHADOW_MD = '3px 2px 4px'
+export const SHADOW_MD_BALANCED = '0px 2px 4px'
+export const SHADOW_SM = '0 1px 2px'
 export const SHADOW_UP = '-2px -3px 1.2rem -2px rgba(0,0,0,0.75)'
 
 // Z INDEX

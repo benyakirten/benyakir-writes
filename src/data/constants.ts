@@ -20,6 +20,7 @@ export const KNOWN_BLOCK_CLASSES: BlockComponents = {
 export const DATE_REGEX = /^\d{2}\/\d{2}\/\d{4}$/
 export const CSS_MEASUREMENT_REGEX = /^(\d+(\.\d+)?)([%\w]+)$/
 export const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+export const COLOR_REGEX = /^#([a-f0-9]{6}|[a-f0-9]{3})$/i
 
 export const TRIANGLES_FOR_CORNER_INDEX = [
     'polygon(0 0, 100% 0, 0 100%)',

@@ -5,13 +5,12 @@ import DatePicker from "@Input/DatePicker/DatePicker.component"
 import MultipleChoice from "@Input/MultipleChoice/MultipleChoice.component"
 import Foldout from "@Gen/Foldout/Foldout.component"
 
-import useDropdown from "@Hooks/useDropdown"
+import useDropdown from "@Hooks/useDropdown.hook"
 import { getMultipleChoiceHeight, getValuesForSelected } from "@Utils/filter"
+import { hasSomeContent } from "@Utils/search"
 
 import { SubHeading} from "@Styles/general-components"
 
-import { ProjectsFilterProps } from "@Types/props"
-import { hasSomeContent } from "@/utils/search"
 
 const ProjectFilter: React.FC<ProjectsFilterProps> = ({
     allProjects,

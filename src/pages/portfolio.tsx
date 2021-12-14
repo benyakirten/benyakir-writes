@@ -8,7 +8,7 @@ import Paginate from "@Layout/Paginate/Paginate.component";
 import ProjectCard from "@Variant/ProjectCard/ProjectCard.component";
 import ProjectFilter from "@Posts/ProjectFilter/ProjectFilter.component";
 
-import usePagination from "@Hooks/usePagination";
+import usePagination from "@/hooks/usePagination.hook";
 
 import projectsJson from "@WPData/Projects/projects.json";
 import projectsMisc from "@WPData/Projects/misc.json";

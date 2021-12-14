@@ -3,9 +3,14 @@ import styled from 'styled-components'
 import { SIZE_MD } from '@StyleVars'
 import { media } from '@/styles/queries'
 
-export const LogoContainer = styled.img<{ opening: boolean, open: boolean }>`
+// https://stackoverflow.com/questions/24933430/img-src-svg-changing-the-styles-with-css
+
+export const LogoContainer = styled.div<{ opening: boolean, open: boolean, src: string, alt: string }>`
     position: relative;
-    left: -1.5rem;
+    left: -1.8rem;
+
+    background-color: ${props => props.theme.base.textColor};
+    mask: url(${props => props.src}) no-repeat center;
     
     height: ${SIZE_MD};
     width: ${SIZE_MD};

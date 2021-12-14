@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Link, navigate } from "gatsby";
-import { GatsbyImage } from "gatsby-plugin-image";
 
 import {
     Card,
@@ -19,8 +18,6 @@ import {
 
 import Button from "@Gen/Button/Button.component";
 import CustomLink from "@Gen/CustomLink/CustomLink.component";
-
-import { BookCardProps } from "@Types/props";
 
 const BookCard: React.FC<BookCardProps> = ({ item }) => {
     const coverOrStories = !!item.stories || !!item.cover;

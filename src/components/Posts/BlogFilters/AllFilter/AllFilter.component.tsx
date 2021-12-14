@@ -5,13 +5,13 @@ import DatePicker from "@Input/DatePicker/DatePicker.component";
 import MultipleChoice from "@Input/MultipleChoice/MultipleChoice.component";
 import Foldout from "@Gen/Foldout/Foldout.component";
 
-import useDropdown from "@Hooks/useDropdown";
+import useDropdown from "@/hooks/useDropdown.hook";
 
 import { SubHeading } from "@Styles/general-components";
 
-import { AllBlogFilterProps } from "@Types/props";
 import { getMultipleChoiceHeight, getValuesForSelected } from "@Utils/filter";
-import { hasSomeContent } from "@/utils/search";
+import { hasSomeContent } from "@Utils/search";
+import { multiplyCSSNumber } from "@/utils/strings";
 
 const AllFilter: React.FC<AllBlogFilterProps> = ({ allPosts, onFilter }) => {
     const [dropdownOpen, setDropdown] = useDropdown();
@@ -125,10 +125,9 @@ const AllFilter: React.FC<AllBlogFilterProps> = ({ allPosts, onFilter }) => {
                 topbar={<SubHeading>Filter by category</SubHeading>}
                 open={dropdownOpen === "category"}
                 onClick={() => setDropdown("category")}
-                height={getMultipleChoiceHeight(categoryChoices)}
-                heightMultiplierOnPhone={4.05}
-                heightMultiplierOnTablet={2.6}
-                heightMultiplierOnLarger={2.8}
+                height={multiplyCSSNumber(getMultipleChoiceHeight(categoryChoices), 1.4)}
+                heightMultiplierOnPhone={2.4}
+                heightMultiplierOnTablet={2}
                 cyId="foldout-categories"
             >
                 <MultipleChoice

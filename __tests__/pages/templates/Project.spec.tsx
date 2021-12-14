@@ -1,18 +1,19 @@
 import React from "react";
+
 import {
     render,
     screen,
     cleanup,
     waitFor,
     fireEvent,
-} from "@testing-library/react";
+} from "@TestUtils";
 
 import { navigate } from "gatsby";
 
 import Project from "@/templates/Project.template";
 import { WpProject } from "@Types/query";
 
-import { allIcons } from "../../props";
+import { allIcons } from "@TestProps";
 
 describe("project template", () => {
     const dummyProjects: WpProject[] = [
@@ -193,7 +194,8 @@ describe("project template", () => {
     describe("icons", () => {
         it("should render one or more rows of icons for the technologies", async () => {
             render(<Project data={dummyProjects[0].data} />);
-            const iconsOne = await screen.findAllByRole('img')
+            let icons = await screen.findAllByRole('img')
+            const iconsOne = icons.slice(1)
             expect(iconsOne[0].getAttribute('alt')).toEqual('Python')
             expect(iconsOne[0].getAttribute('src')?.endsWith('py.svg')).toBe(true)
 
@@ -202,7 +204,8 @@ describe("project template", () => {
 
             cleanup()
             render(<Project data={dummyProjects[1].data} />);
-            const iconsTwo = await screen.findAllByRole('img')
+            icons = await screen.findAllByRole('img')
+            const iconsTwo = icons.slice(1)
             expect(iconsTwo[0].getAttribute('alt')).toEqual('Angular')
             expect(iconsTwo[0].getAttribute('src')?.endsWith('ng.svg')).toBe(true)
 

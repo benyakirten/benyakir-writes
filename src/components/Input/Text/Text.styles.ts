@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-import { ABS_BLACK, BLACK, FONT_LG, FONT_XXS, GRAY_400 } from "@StyleVars"
+import { ABS_BLACK, FONT_LG, FONT_XS, GRAY_400 } from "@StyleVars"
 import { media } from "@Styles/queries"
 
 export const TextInputContainer = styled.div`
@@ -8,23 +8,24 @@ export const TextInputContainer = styled.div`
     
     label {
         position: absolute;
-        top: 1.2rem;
+        top: 1.6rem;
         left: 0.75rem;
 
         cursor: text;
         
-        color: ${ABS_BLACK};
+        color: ${props => props.theme.textInput.textColor};
         font-size: ${FONT_LG};
 
         transition: all 1s ease;
     }
 
     input {
-        padding: 1.2rem 0.5rem;
-        outline: 2px solid ${GRAY_400};
+        padding: 1.6rem 0.5rem;
+        border: 2px solid ${props => props.theme.textInput.border};
 
         font-size: ${FONT_LG};
-        color: ${ABS_BLACK};
+        color: ${props => props.theme.textInput.textColor};
+        background-color: ${props => props.theme.textInput.background};
 
         ${media.phone} {
             min-width: 10rem;
@@ -34,7 +35,7 @@ export const TextInputContainer = styled.div`
         &:focus + label,
         &:not(:placeholder-shown) + label {
             top: 0.5rem;
-            font-size: ${FONT_XXS};
+            font-size: ${FONT_XS};
         }
     }
 `

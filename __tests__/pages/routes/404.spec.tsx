@@ -1,6 +1,6 @@
 import React from "react";
-import { cleanup, render, screen } from "@testing-library/react";
 
+import { cleanup, render, screen } from "@TestUtils";
 import NotFoundPage from "@/pages/404";
 
 describe("404 page", () => {

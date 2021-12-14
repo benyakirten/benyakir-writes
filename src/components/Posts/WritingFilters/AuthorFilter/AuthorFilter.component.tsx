@@ -7,11 +7,9 @@ import DatePicker from "@Input/DatePicker/DatePicker.component"
 import MultipleChoice from "@Input/MultipleChoice/MultipleChoice.component"
 import Foldout from "@Gen/Foldout/Foldout.component"
 
-import useDropdown from "@Hooks/useDropdown"
+import useDropdown from "@Hooks/useDropdown.hook"
 import { getValuesForSelected } from "@Utils/filter"
 import { hasSomeContent } from "@Utils/search"
-
-import { AuthorFilterProps } from "@Types/props"
 
 const AuthorFilter: React.FC<AuthorFilterProps> = ({
     allBooks,

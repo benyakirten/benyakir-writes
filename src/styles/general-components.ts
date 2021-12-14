@@ -3,7 +3,8 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 
 import { fadeIn, slideInLeft, slideInRight } from './animations';
 import { media } from './queries';
-import { BLACK, FAUSTINA, FONT_LG, FONT_MD, FONT_XL, FONT_XXL, FONT_XXXL, SECONDARY_800, SHADOW_MD } from './variables';
+import { BLACK, FAUSTINA, FONT_LG, FONT_MD, FONT_XL, FONT_XXL, FONT_XXXL, SECONDARY_800, SHADOW_MD_BALANCED } from './variables';
+import { convertHexToRGBA } from '@Utils/colors';
 
 export const FadeIn = styled.div<{ duration?: string, delay?: string }>`
     opacity: 0;
@@ -34,7 +35,7 @@ export const GroupingBox = styled.section`
     padding: 1rem;
     margin-bottom: 4rem;
     
-    box-shadow: ${SHADOW_MD};
+    box-shadow: ${props => `${SHADOW_MD_BALANCED} ${convertHexToRGBA(props.theme.base.shadowColor, 0.4)}`};
 `
 
 export const LeadHeading = styled.h1`
@@ -61,7 +62,7 @@ export const LeadHeading = styled.h1`
         width: 100%;
         height: 2px;
 
-        background-color: ${BLACK};
+        background-color: ${props => props.theme.base.textColor};
 
         transform-origin: left;
         transform: scaleX(1) translateY(0);
@@ -149,9 +150,8 @@ export const Centered = styled.div`
 export const Card = styled.article`
     position: relative;
 
-    width: 90%;
     height: 24rem;
-    box-shadow: ${SHADOW_MD};
+    box-shadow: ${SHADOW_MD_BALANCED};
 
     font-family: monospace;
 
@@ -296,6 +296,7 @@ export const WpContentDescription = styled.div<{ fontSize?: string }>`
 export const Form = styled.form`
     display: flex;
     flex-direction: column;
+    gap: 1rem;
     align-items: start;
 
     transition: all 1s ease;
@@ -328,7 +329,7 @@ export const WpContent = styled.div<{ fontSize?: string }>`
     a:visited {
         position: relative;
 
-        color: ${SECONDARY_800};
+        color: ${props => props.theme.base.textColor};
 
         overflow: hidden;
         white-space: nowrap;
@@ -343,7 +344,7 @@ export const WpContent = styled.div<{ fontSize?: string }>`
             height: 2px;
             width: 100%;
             
-            background-color: ${SECONDARY_800};
+            background-color: ${props => props.theme.base.textColor};
 
             transition: transform 0.5s ease;
             transform-origin: left;
@@ -388,7 +389,7 @@ export const WpContentInline = styled.span<{ fontSize?: string }>`
     a:visited {
         position: relative;
 
-        color: ${SECONDARY_800};
+        color: ${props => props.theme.base.textColor};
 
         overflow: hidden;
         white-space: nowrap;
@@ -403,7 +404,7 @@ export const WpContentInline = styled.span<{ fontSize?: string }>`
             height: 2px;
             width: 100%;
             
-            background-color: ${SECONDARY_800};
+            background-color: ${props => props.theme.base.textColor};
 
             transition: transform 0.5s ease;
             transform-origin: left;

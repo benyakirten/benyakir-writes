@@ -6,10 +6,8 @@ import Filter from "@Input/Filter/Filter.component";
 import DatePicker from "@Input/DatePicker/DatePicker.component";
 import Foldout from "@Gen/Foldout/Foldout.component";
 
-import useDropdown from "@Hooks/useDropdown";
+import useDropdown from "@Hooks/useDropdown.hook";
 import { hasSomeContent } from "@Utils/search";
-
-import { StoryFilterProps } from "@Types/props";
 
 const StoryFilter: React.FC<StoryFilterProps> = ({
     stories,

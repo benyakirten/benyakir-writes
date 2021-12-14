@@ -8,7 +8,6 @@ import {
     LeadHeading,
     Row,
     Column,
-    SubHeading,
     Paragraph,
     BigParagraph,
 } from "@Styles/general-components";
@@ -17,7 +16,7 @@ import { firstWords } from "@Utils/strings";
 import { formatWpText } from "@Utils/posts";
 import { formatBlogPost } from "@Utils/blog";
 import { getPrettyDate } from "@Utils/dates";
-import { createBlocks, preprocessWPEntry } from "@Utils/identify-blocks";
+import { createBlocks, preprocessWPEntry } from "@/utils/blocks/identify-blocks";
 
 import { WpPost } from "@Types/query";
 

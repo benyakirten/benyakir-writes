@@ -1,12 +1,12 @@
-import * as React from "react";
+import * as React from "react"
+
 import {
     cleanup,
     render,
     screen,
-} from "@testing-library/react";
-
+} from "@TestUtils"
 import HoverImage from "@Gen/HoverImage/HoverImage.component"
-import { allIcons } from "../../props"
+import { allIcons } from "@TestProps"
 
 describe('HoverImage component', () => {
     afterEach(cleanup)
@@ -17,7 +17,7 @@ describe('HoverImage component', () => {
 
     it('should wrap the image in a link if the url property is set', async () => {
         render(<HoverImage {...allIcons[0]} url="https://www.google.com" />)
-        const link = await screen.findByRole('link')
-        expect(link.getAttribute('href')).toEqual("https://www.google.com")
+        const links = await screen.findAllByRole('link')
+        expect(links[1].getAttribute('href')).toEqual("https://www.google.com")
     })
 })

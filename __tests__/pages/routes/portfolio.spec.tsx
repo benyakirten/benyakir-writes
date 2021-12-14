@@ -1,9 +1,7 @@
 import * as React from "react";
-import { cleanup, render, screen, act, fireEvent } from "@testing-library/react";
 
+import { cleanup, render, screen, act, fireEvent } from "@TestUtils";
 import ProjectsPage from "@/pages/portfolio";
-import { ProjectsQuery } from "@Types/query";
-import { allIcons } from "../../props";
 
 describe("portfolio page", () => {
 

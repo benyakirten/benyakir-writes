@@ -17,7 +17,7 @@ import {
     getFullLanguage,
     getFullTheme,
     ENABLED_THEMES,
-} from "@Utils/syntax-highlighter";
+} from "@/utils/blocks/syntax-highlighter";
 
 const SyntaxHighlighter: React.FC<SyntaxHighlighterBlock> = ({
     lang,

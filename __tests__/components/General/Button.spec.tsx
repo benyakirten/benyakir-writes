@@ -7,8 +7,7 @@ import {
     screen,
     act,
     fireEvent
-} from "@testing-library/react";
-
+} from "@TestUtils";
 import Button from "@Gen/Button/Button.component";
 
 describe("Button component", () => {
@@ -27,23 +26,26 @@ describe("Button component", () => {
     });
 
     it("should disable or enable the button depending on the prop passed in", async () => {
+        let buttons: HTMLElement[];
         let button: HTMLElement;
-
         render(<Button disabled={false} />);
-        button = await screen.findByRole("button");
+        
+        buttons = await screen.findAllByRole("button");
+        button = buttons[1]
         expect(button).toBeEnabled();
 
         cleanup();
 
         render(<Button disabled={true} />);
-        button = await screen.findByRole("button");
+        buttons = await screen.findAllByRole("button");
+        button = buttons[1]
         expect(button).toBeDisabled();
     });
 
     it("should change the position, tranformOrigin and clipPath based of the inner div based on how a mouse enters over the button", async () => {
-        let button: HTMLElement;
         render(<Button />);
-        button = await screen.findByRole("button");
+        const buttons = await screen.findAllByRole("button");
+        const button = buttons[1];
         (button as any).getBoundingClientRect = jest.fn(() => ({
             bottom: 100,
             height: 100,

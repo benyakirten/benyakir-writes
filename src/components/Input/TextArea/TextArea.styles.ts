@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 
-import { ABS_BLACK, FONT_LG, FONT_XXS, GRAY_400, MULISH } from '@StyleVars'
+import { FONT_LG, FONT_XXS, MULISH } from '@StyleVars'
 
 export const TextAreaContainer = styled.div`
     position: relative;
 
     textarea {
-        resize: none;
+        resize: both;
 
         width: 100%;
         height: 100%;
@@ -15,8 +15,10 @@ export const TextAreaContainer = styled.div`
 
         font-size: ${FONT_LG};
         font-family: ${MULISH};
-        color: ${ABS_BLACK};
-        outline: 2px solid ${GRAY_400};
+        
+        color: ${props => props.theme.textInput.textColor};
+        background-color: ${props => props.theme.textInput.background};
+        border: 2px solid ${props => props.theme.textInput.border};
 
         &:hover + label,
         &:focus + label,
@@ -33,7 +35,7 @@ export const TextAreaContainer = styled.div`
 
         cursor: text;
 
-        color: ${ABS_BLACK};
+        color: ${props => props.theme.textInput.textColor};
         font-size: ${FONT_LG};
 
         transition: all 1s ease;

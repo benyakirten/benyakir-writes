@@ -1,7 +1,7 @@
 import React from "react";
-import { render, fireEvent, screen, cleanup } from "@testing-library/react"
 
-import usePagination from "@Hooks/usePagination"
+import { render, fireEvent, screen, cleanup } from "@testing-library/react"
+import usePagination from "@Hooks/usePagination.hook"
 
 const TestHook: React.FC = () => {
     const {
@@ -41,17 +41,18 @@ describe('usePagination hook', () => {
 
     it('should increment the page number if the onPageChange function is called', async () => {
         expect(outputOne.textContent).toEqual("0")
-            fireEvent.click(buttonOne)
-            expect(outputOne.textContent).toEqual("1")
 
-            fireEvent.click(buttonOne)
-            expect(outputOne.textContent).toEqual("2")
+        fireEvent.click(buttonOne)
+        expect(outputOne.textContent).toEqual("1")
 
-            fireEvent.click(buttonOne)
-            expect(outputOne.textContent).toEqual("3")
+        fireEvent.click(buttonOne)
+        expect(outputOne.textContent).toEqual("2")
 
-            fireEvent.click(buttonOne)
-            expect(outputOne.textContent).toEqual("4")
+        fireEvent.click(buttonOne)
+        expect(outputOne.textContent).toEqual("3")
+
+        fireEvent.click(buttonOne)
+        expect(outputOne.textContent).toEqual("4")
     })
 
     it('should reset the page number to 0 if the setCurrentItems function is called', async () => {

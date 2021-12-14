@@ -5,9 +5,7 @@ import { Subtitle } from "@Styles/general-components"
 
 import Text from "@Input/Text/Text.component"
 
-import useDebounce from "@Hooks/useDebounce"
-
-import { FilterProps } from "@Types/props"
+import useDebounce from "@Hooks/useDebounce.hook"
 
 const Filter: React.FC<FilterProps> = ({ name, onSearch, children }) => {
     const [search, setSearch] = useDebounce(onSearch)

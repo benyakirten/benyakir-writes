@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import { ChoiceProps } from "@Types/props";
 import { ChoiceContainer } from "./Choice.styles";
 
 import { titleToKebab } from "@Utils/strings";

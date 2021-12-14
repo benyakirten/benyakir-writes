@@ -12,14 +12,22 @@ import {
 
 import LinkGroup from "../LinkGroup/LinkGroup.component";
 import CustomLink from "@Gen/CustomLink/CustomLink.component";
+import Toggle from "@Input/Toggle/Toggle.component";
 import Logo from "./Logo/Logo.component";
 
-import useDropdown from "@Hooks/useDropdown";
+import useDropdown from "@Hooks/useDropdown.hook";
 import Search from "../Search/Search.component";
+
+import { useAppSelector, useAppDispatch } from "@Store/hooks";
+import { toggleTimeOfDay } from "@Store/theme/theme.slice";
+import { capitalize } from "@Utils/strings";
 
 const Sidebar: React.FC = () => {
     const [openDropdown, setOpenDropdown] = useDropdown();
     const [opening, setOpening] = React.useState<boolean>(false);
+
+    const dispatch = useAppDispatch();
+    const activeTheme = useAppSelector(state => state.theme.active);
 
     React.useEffect(() => {
         if (opening) {
@@ -135,6 +143,15 @@ const Sidebar: React.FC = () => {
                             About
                         </CustomLink>
                     </NavGroup>
+                    <div>
+                        <Toggle
+                            value={activeTheme.base.name === 'night'}
+                            onToggle={() => dispatch(toggleTimeOfDay())}
+                            label={`Theme: ${capitalize(activeTheme.base.name)}`}
+                            name="active-theme-toggle"
+                            dataCy="sidebar-theme-toggle"
+                        />
+                    </div>
                     <LegalBox>
                         <LegalItem>&copy; 2021 by Benyakir Horowitz</LegalItem>
                         <LegalItem>All Rights Reserved</LegalItem>

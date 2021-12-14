@@ -1,12 +1,12 @@
 import React from "react";
+
 import {
     cleanup,
     render,
     screen,
     fireEvent,
     act,
-} from "@testing-library/react";
-
+} from "@TestUtils";
 import ProjectFilter from "@Posts/ProjectFilter/ProjectFilter.component";
 import { createLookupMeta } from "@Utils/posts";
 
@@ -89,9 +89,9 @@ describe("ProjectFilter component", () => {
         expect(text).toBeTruthy();
 
         const buttons = await screen.findAllByRole("button");
-        expect(buttons.length).toEqual(3);
+        expect(buttons.length).toEqual(4);
 
-        fireEvent.click(buttons[0]);
+        fireEvent.click(buttons[1]);
         const datePickerOne = (await screen.findByText("Published before"))
             .nextElementSibling! as HTMLInputElement;
         expect(datePickerOne).toBeTruthy();
@@ -101,11 +101,11 @@ describe("ProjectFilter component", () => {
         expect(datePickerTwo).toBeTruthy();
         expect(datePickerTwo.value).toEqual("2019-09-15");
 
-        fireEvent.click(buttons[1]);
+        fireEvent.click(buttons[2]);
         const hostChoice = await screen.findByText("Google");
         expect(hostChoice).toBeTruthy();
 
-        fireEvent.click(buttons[2]);
+        fireEvent.click(buttons[3]);
         const techChoiceOne = await screen.findByText("Python");
         expect(techChoiceOne).toBeTruthy();
         const techChoiceTwo = await screen.findByText("GraphQL");
@@ -173,7 +173,7 @@ describe("ProjectFilter component", () => {
     it('should be able to filter the elements based on their host', async () => {
         render(<ProjectFilter {...props} />);
         const buttons = await screen.findAllByRole("button");
-        fireEvent.click(buttons[1])
+        fireEvent.click(buttons[2])
 
         const hostChoice = await screen.findByText("Google");
         await act(async () => {
@@ -190,7 +190,7 @@ describe("ProjectFilter component", () => {
     it('should be able to filter the elements based on the technology used', async () => {
         render(<ProjectFilter {...props} />);
         const buttons = await screen.findAllByRole("button");
-        fireEvent.click(buttons[2])
+        fireEvent.click(buttons[3])
         const techPython = await screen.findByText("Python");
         const techAngular = await screen.findByText("Angular");
         await act(async () => {

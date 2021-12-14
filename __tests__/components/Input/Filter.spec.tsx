@@ -1,9 +1,8 @@
 import * as React from "react";
-import { render, cleanup, screen, fireEvent } from "@testing-library/react";
 import 'jest-styled-components'
 
+import { render, cleanup, screen, fireEvent, act } from "@TestUtils";
 import Filter from "@Input/Filter/Filter.component"
-import { act } from "react-test-renderer";
 
 describe('Filter component', () => {
     const searchSpy = jest.fn()

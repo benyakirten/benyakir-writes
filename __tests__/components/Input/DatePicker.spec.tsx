@@ -1,7 +1,7 @@
 import * as React from "react";
-import { render, cleanup, screen, fireEvent } from "@testing-library/react";
 import 'jest-styled-components'
 
+import { render, cleanup, screen, fireEvent } from "@TestUtils";
 import DatePicker from "@Input/DatePicker/DatePicker.component"
 
 describe('DatePicker component', () => {

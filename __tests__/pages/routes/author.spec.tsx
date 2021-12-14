@@ -1,12 +1,12 @@
 import * as React from "react";
+
 import {
     cleanup,
     render,
     screen,
     act,
     fireEvent
-} from "@testing-library/react";
-
+} from "@TestUtils";
 import AuthorPage from "@/pages/author";
 
 describe("blog page", () => {

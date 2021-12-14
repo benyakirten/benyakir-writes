@@ -8,14 +8,12 @@ import Checkbox from "@Input/Checkbox/Checkbox.component";
 import Foldout from "@Gen/Foldout/Foldout.component";
 import CustomLink from "@Gen/CustomLink/CustomLink.component";
 
-import useLookup from "@Hooks/useLookup";
-import useDebounce from "@Hooks/useDebounce";
+import useLookup from "@/hooks/useLookup.hook";
+import useDebounce from "@/hooks/useDebounce.hook";
 import { firstWords, capitalize } from "@Utils/strings";
-import { hasSomeContent } from "@Utils/search";
 
 import data from "@Data/searchData.json";
 
-import { SearchProps } from "@Types/props";
 import { SearchableItem } from "@Types/posts";
 
 
@@ -107,10 +105,7 @@ const Search: React.FC<SearchProps> = ({ open, onClick }) => {
                     <>
                         {filteredResults.map((r, idx) => (
                             <SingleResult data-navtoggle="no-toggle" key={r.slug + idx}>
-                                <CustomLink
-                                    dark={false}
-                                    to={`/${r.type}/${r.slug}`}
-                                >
+                                <CustomLink inheritColor={true} to={`/${r.type}/${r.slug}`}>
                                     <Column
                                         style={{
                                             justifyContent: "space-between",

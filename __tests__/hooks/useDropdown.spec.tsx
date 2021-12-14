@@ -1,7 +1,7 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react"
 
-import useDropdown from "@Hooks/useDropdown"
+import useDropdown from "@Hooks/useDropdown.hook"
 
 const HookTest: React.FC = () => {
     const [dropdown, setDropdown] = useDropdown()

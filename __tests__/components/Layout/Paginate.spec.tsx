@@ -1,12 +1,12 @@
 import React from "react";
+
 import {
     cleanup,
     fireEvent,
     render,
     screen,
     act,
-} from "@testing-library/react";
-
+} from "@TestUtils";
 import Paginate from "@Layout/Paginate/Paginate.component";
 
 type TestProp = {
@@ -52,9 +52,9 @@ describe("Paginate component", () => {
     it("should render four buttons of which are two disabled, two text boxes with the current items per page and four items", async () => {
         render(<Paginate {...props} />);
         const buttons = await screen.findAllByRole("button");
-        expect(buttons.length).toEqual(4);
-        expect(buttons[0]).toBeDisabled();
-        expect(buttons[2]).toBeDisabled();
+        expect(buttons.length).toEqual(5);
+        expect(buttons[1]).toBeDisabled();
+        expect(buttons[3]).toBeDisabled();
 
         const inputs = (await screen.findAllByRole(
             "textbox"
@@ -131,7 +131,7 @@ describe("Paginate component", () => {
 
         await act(async () => {
             const buttons = await screen.findAllByRole("button");
-            fireEvent.click(buttons[1]);
+            fireEvent.click(buttons[2]);
             expect(changeSpy).toHaveBeenCalledTimes(1);
             expect(changeSpy).toHaveBeenCalledWith(1);
         });
@@ -140,7 +140,7 @@ describe("Paginate component", () => {
 
         await act(async () => {
             const buttons = await screen.findAllByRole("button");
-            fireEvent.click(buttons[0]);
+            fireEvent.click(buttons[1]);
             expect(changeSpy).toHaveBeenCalledTimes(2);
             expect(changeSpy).toHaveBeenCalledWith(0);
         });
@@ -159,7 +159,7 @@ describe("Paginate component", () => {
         paginate.rerender(<Paginate {...props} currentPage={2} />);
 
         const articlesTwo = await screen.findAllByRole("article");
-        expect(articlesTwo.length).toEqual(2);
+        expect(articlesTwo.length).toEqual(6);
         expect(articlesTwo[0].textContent).toEqual("8");
         expect(articlesTwo[1].textContent).toEqual("9");
     });
@@ -175,10 +175,10 @@ describe("Paginate component", () => {
             jest.runAllTimers();
 
             const buttons = await screen.findAllByRole("button");
-            expect(buttons[0]).toBeDisabled();
-            expect(buttons[1]).toBeEnabled();
-            expect(buttons[2]).toBeDisabled();
-            expect(buttons[3]).toBeEnabled();
+            expect(buttons[1]).toBeDisabled();
+            expect(buttons[2]).toBeEnabled();
+            expect(buttons[3]).toBeDisabled();
+            expect(buttons[4]).toBeEnabled();
 
             const articles = await screen.findAllByRole("article");
             expect(articles.length).toEqual(2);
@@ -189,37 +189,37 @@ describe("Paginate component", () => {
         paginate.rerender(<Paginate {...props} currentPage={4} />);
 
         const buttons = await screen.findAllByRole("button");
-        expect(buttons[0]).toBeEnabled();
-        expect(buttons[1]).toBeDisabled();
-        expect(buttons[2]).toBeEnabled();
-        expect(buttons[3]).toBeDisabled();
+        expect(buttons[1]).toBeEnabled();
+        expect(buttons[2]).toBeDisabled();
+        expect(buttons[3]).toBeEnabled();
+        expect(buttons[4]).toBeDisabled();
         
         const articles = await screen.findAllByRole("article");
         expect(articles.length).toEqual(2);
-        expect(articles[0].textContent).toEqual("8");
-        expect(articles[1].textContent).toEqual("9");
+        expect(articles[0].textContent).toEqual("0");
+        expect(articles[1].textContent).toEqual("1");
     });
 
     it("should enable or disable the buttons based on what items are available", async () => {
         const paginate = render(<Paginate {...props} />);
         const buttonsOne = await screen.findAllByRole("button");
-        expect(buttonsOne[0]).toBeDisabled();
-        expect(buttonsOne[1]).toBeEnabled();
-        expect(buttonsOne[2]).toBeDisabled();
-        expect(buttonsOne[3]).toBeEnabled();
+        expect(buttonsOne[1]).toBeDisabled();
+        expect(buttonsOne[2]).toBeEnabled();
+        expect(buttonsOne[3]).toBeDisabled();
+        expect(buttonsOne[4]).toBeEnabled();
 
         paginate.rerender(<Paginate {...props} currentPage={1} />);
         const buttonsTwo = await screen.findAllByRole("button");
-        expect(buttonsTwo[0]).toBeEnabled();
         expect(buttonsTwo[1]).toBeEnabled();
         expect(buttonsTwo[2]).toBeEnabled();
         expect(buttonsTwo[3]).toBeEnabled();
+        expect(buttonsTwo[4]).toBeEnabled();
 
         paginate.rerender(<Paginate {...props} currentPage={2} />);
         const buttonsThree = await screen.findAllByRole("button");
-        expect(buttonsThree[0]).toBeEnabled();
-        expect(buttonsThree[1]).toBeDisabled();
-        expect(buttonsThree[2]).toBeEnabled();
-        expect(buttonsThree[3]).toBeDisabled();
+        expect(buttonsThree[1]).toBeEnabled();
+        expect(buttonsThree[2]).toBeDisabled();
+        expect(buttonsThree[3]).toBeEnabled();
+        expect(buttonsThree[4]).toBeDisabled();
     });
 });

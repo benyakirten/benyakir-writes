@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
-import { rollOut } from "@Styles/animations";
-import { SUCCESS, ERROR, ABS_WHITE, FONT_MD, ABS_BLACK } from "@StyleVars";
+import { rollOut } from "@Styles/animations"
+import { SUCCESS, ERROR, ABS_WHITE, FONT_MD, ABS_BLACK } from "@StyleVars"
 
 export const StyledAlertBox = styled.div<{ success: boolean }>`
     position: relative;
@@ -12,10 +12,10 @@ export const StyledAlertBox = styled.div<{ success: boolean }>`
 
     padding: 2rem 3rem;
     
-    background-color: ${props => props.success ? SUCCESS : ERROR};
-    color: ${ABS_WHITE};
+    background-color: ${props => props.success ? props.theme.alertBox.alert.success : props.theme.alertBox.alert.error};
+    color: ${props => props.theme.alertBox.textColor};
     font-size: ${FONT_MD};
-    border: 2px solid ${ABS_BLACK};
+    border: 2px solid ${props => props.theme.base.border};
 
     transform-origin: top;
 

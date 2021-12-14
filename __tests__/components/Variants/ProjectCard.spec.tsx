@@ -1,10 +1,10 @@
 import * as React from "react";
-import { render, cleanup, screen, fireEvent } from "@testing-library/react";
 import { navigate } from "gatsby";
 
+import { render, cleanup, screen, fireEvent } from "@TestUtils";
 import ProjectCard from "@Variant/ProjectCard/ProjectCard.component";
 import { FlattenedProjectCard } from "@Types/posts";
-import { allIcons } from "../../props";
+import { allIcons } from "@TestProps";
 
 describe("ProjectCard component", () => {
     jest.mock("gatsby");
@@ -137,7 +137,7 @@ describe("ProjectCard component", () => {
         it("should not render either button if there is no repo and no host", async () => {
             render(<ProjectCard item={flattenedProjects[0]} />);
             const buttons = await screen.findAllByRole("button");
-            expect(buttons.length).toEqual(1);
+            expect(buttons.length).toEqual(2);
         });
     });
 
@@ -146,7 +146,7 @@ describe("ProjectCard component", () => {
         const titleOne = await screen.findByText("Technologies Used");
         expect(titleOne.tagName).toEqual("H3");
         const iconsOne = await screen.findAllByRole("img");
-        expect(iconsOne.length).toEqual(2);
+        expect(iconsOne.length).toEqual(3);
 
         cleanup();
 
@@ -154,6 +154,6 @@ describe("ProjectCard component", () => {
         const titleTwo = await screen.findByText("Technologies Used");
         expect(titleTwo.tagName).toEqual("H3");
         const iconsTwo = await screen.findAllByRole("img");
-        expect(iconsTwo.length).toEqual(4);
+        expect(iconsTwo.length).toEqual(5);
     });
 });

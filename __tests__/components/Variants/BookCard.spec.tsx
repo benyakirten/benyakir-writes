@@ -1,11 +1,11 @@
 import * as React from "react";
-import { render, cleanup, screen, fireEvent } from "@testing-library/react";
 import { navigate } from "gatsby";
 
+import { render, cleanup, screen, fireEvent } from "@TestUtils";
 import BookCard from "@Variant/Author/BookCard/BookCard.component";
 import { FlattenedBook } from "@Types/posts";
 
-import { cover } from "../../props";
+import { cover } from "@TestProps";
 
 describe("BookCard component", () => {
     jest.mock("gatsby");
@@ -215,7 +215,8 @@ describe("BookCard component", () => {
 
         it("should render an image of the book cover if it exists", async () => {
             render(<BookCard item={testBooks[1]} />);
-            const cover = await screen.findByRole("img");
+            const images = await screen.findAllByRole("img");
+            const cover = images[1]
             expect(cover.getAttribute("alt")).toEqual("Test book title B");
             const link =
                 cover.parentElement?.parentElement?.parentElement

@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import { CheckboxGroup } from "./Checkbox.style";
-import { CheckboxProps } from "@/types/props";
 
 const Checkbox: React.FC<CheckboxProps> = ({
     label,

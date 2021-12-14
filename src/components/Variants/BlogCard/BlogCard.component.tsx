@@ -9,7 +9,6 @@ import {
     MinorHeading,
     Paragraph,
     Row,
-    SubHeading,
     WpContentDescription,
 } from "@Styles/general-components";
 
@@ -17,8 +16,6 @@ import CustomLink from "@Gen/CustomLink/CustomLink.component";
 
 import { firstWords, titleToKebab } from "@Utils/strings";
 import { getPrettyDate } from "@Utils/dates";
-
-import { BlogCardProps } from "@Types/props";
 
 const BlogCard: React.FC<BlogCardProps> = ({ item }) => {
     const categoryOrTags = item.categories || item.tags

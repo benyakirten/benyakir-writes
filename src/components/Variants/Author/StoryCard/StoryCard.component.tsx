@@ -19,8 +19,6 @@ import {
 import CustomLink from "@Gen/CustomLink/CustomLink.component";
 import Button from "@Gen/Button/Button.component";
 
-import { StoryCardProps } from "@Types/props";
-
 const StoryCard: React.FC<StoryCardProps> = ({ item }) => {
     return (
         <Card>

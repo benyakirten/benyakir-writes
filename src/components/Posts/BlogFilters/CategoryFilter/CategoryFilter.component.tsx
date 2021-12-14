@@ -5,13 +5,12 @@ import DatePicker from "@Input/DatePicker/DatePicker.component";
 import MultipleChoice from "@Input/MultipleChoice/MultipleChoice.component";
 import Foldout from "@Gen/Foldout/Foldout.component";
 
-import { getMultipleChoiceHeight, getValuesForSelected } from "@Utils/filter";
-import useDropdown from "@Hooks/useDropdown";
-
+import useDropdown from "@Hooks/useDropdown.hook";
 import { SubHeading } from "@Styles/general-components";
 
-import { AllBlogFilterProps } from "@Types/props";
-import { hasSomeContent } from "@/utils/search";
+
+import { hasSomeContent } from "@Utils/search";
+import { getValuesForSelected } from "@Utils/filter";
 
 const CategoryFilter: React.FC<AllBlogFilterProps> = ({
     allPosts,
