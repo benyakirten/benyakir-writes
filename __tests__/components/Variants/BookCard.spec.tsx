@@ -2,7 +2,7 @@ import * as React from "react";
 import { navigate } from "gatsby";
 
 import { render, cleanup, screen, fireEvent } from "@TestUtils";
-import BookCard from "@Variant/Author/BookCard/BookCard.component";
+import BookCard from "@/components/Variants/Cards/Author/BookCard/BookCard.component";
 import { FlattenedBook } from "@Types/posts";
 
 import { cover } from "@TestProps";

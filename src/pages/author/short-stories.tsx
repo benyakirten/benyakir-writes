@@ -6,7 +6,7 @@ import { Grouping } from "@Styles/general-components";
 import LeadPage from "@Layout/LeadPage/LeadPage.component";
 import Paginate from "@Layout/Paginate/Paginate.component";
 import StoryFilter from "@Posts/WritingFilters/StoryFilter/StoryFilter.component";
-import StoryCard from "@Variant/Author/StoryCard/StoryCard.component";
+import StoryCard from "@/components/Variants/Cards/Author/StoryCard/StoryCard.component";
 
 import usePagination from "@/hooks/usePagination.hook";
 

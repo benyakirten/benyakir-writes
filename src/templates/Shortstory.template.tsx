@@ -26,6 +26,7 @@ import { formatWpText, rigorousTextFormat } from "@Utils/posts";
 import { firstWords } from "@Utils/strings";
 
 import { WpStory } from "@Types/query";
+import ShortStoryHeader from "@/components/Variants/Headers/ShortStoryHeader.component";
 
 const Story: React.FC<WpStory> = ({ data }) => {
     const story = flattenStory(data.wpShortstory, data.file.publicURL);
@@ -43,87 +44,7 @@ const Story: React.FC<WpStory> = ({ data }) => {
                 />
             </Helmet>
             <LeadHeading>{story.title}</LeadHeading>
-            <GroupingBox>
-                <RowUntilPhone
-                    style={{ flexWrap: "nowrap", alignItems: "start" }}
-                >
-                    <CardSection>
-                        <List>
-                            <LItem>
-                                Published on:{" "}
-                                {getPrettyDate(story.published.date)}
-                            </LItem>
-                            {story.book && (
-                                <>
-                                    <LItem>
-                                        {story.book.relationship} of{" "}
-                                        <CustomLink to={`/book/${story.book.slug}`}>
-                                            {story.book.title}
-                                        </CustomLink>
-                                        :{" "}
-                                        {rigorousTextFormat(story.book.content)}
-                                    </LItem>
-                                </>
-                            )}
-                            {story.project && (
-                                <>
-                                    <LItem>
-                                        Related Project:{" "}
-                                        <CustomLink
-                                            to={`/project/${story.project.slug}`}
-                                        >
-                                            {story.project.title}
-                                        </CustomLink>
-                                        . {story.project.description}
-                                    </LItem>
-                                </>
-                            )}
-                        </List>
-                    </CardSection>
-                    {story.book && (
-                        <Link
-                            to={story.book.slug}
-                            aria-label={story.book.title}
-                        >
-                            {story.book.cover ? (
-                                <CardSection>
-                                    <GatsbyImage
-                                        image={story.book.cover}
-                                        alt={story.book.title}
-                                    />
-                                </CardSection>
-                            ) : (
-                                <CardSection>
-                                    <HoverImage
-                                        publicURL={story.fallbackCover}
-                                        name={story.book!.title}
-                                    />
-                                </CardSection>
-                            )}
-                        </Link>
-                    )}
-                    {story.alternateLinks && (
-                        <CardSection>
-                            <Column>
-                                <SubHeading>Alternate Links</SubHeading>
-                                <List>
-                                    {story.alternateLinks.map((link, idx) => (
-                                        <LItem key={link.name + idx}>
-                                            <Button
-                                                onClick={() =>
-                                                    navigate(link.link)
-                                                }
-                                            >
-                                                On {link.name}
-                                            </Button>
-                                        </LItem>
-                                    ))}
-                                </List>
-                            </Column>
-                        </CardSection>
-                    )}
-                </RowUntilPhone>
-            </GroupingBox>
+            <ShortStoryHeader story={story} />
             <Grouping>
                 <Subtitle>The Story</Subtitle>
                 <WpContent

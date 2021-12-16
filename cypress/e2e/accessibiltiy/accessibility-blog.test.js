@@ -7,13 +7,7 @@ describe("Blog posts accessibility", () => {
 
     it("Has no accessibility violations upon page load", () => {
         cy.checkA11y();
-
-        cy.get('[data-cy=open-sidemenu]').click()
-        cy.wait(1000)
-        
-        cy.get('[data-cy=sidebar-theme-toggle]').click()
-        cy.wait(1000)
-        cy.checkA11y()
+        cy.openAndChangeTheme();
     })
 
     it('Has no accessibility violations when text filter is changed', () => {
@@ -21,12 +15,7 @@ describe("Blog posts accessibility", () => {
         cy.wait(300)
         cy.checkA11y();
 
-        cy.get('[data-cy=open-sidemenu]').click()
-        cy.wait(1000)
-        
-        cy.get('[data-cy=sidebar-theme-toggle]').click()
-        cy.wait(1000)
-        cy.checkA11y()
+        cy.openAndChangeTheme();
     })
 
     it("Has no accessibility violations after browsing through the pagination", () => {
@@ -36,13 +25,7 @@ describe("Blog posts accessibility", () => {
         cy.get('[data-cy=page-flip-left]').eq(0).click()
         cy.checkA11y();
 
-        cy.get('[data-cy=open-sidemenu]').click()
-        cy.wait(1000)
-        
-        cy.get('[data-cy=sidebar-theme-toggle]').click()
-        cy.wait(1000)
-        cy.checkA11y()
-
+        cy.openAndChangeTheme();
     })
 
     it("Has no accessibility violations after the dates are changed", () => {
@@ -50,24 +33,17 @@ describe("Blog posts accessibility", () => {
         cy.wait(1000)
         cy.checkA11y();
 
-        cy.get('[data-cy=open-sidemenu]').click()
-        cy.wait(1000)
-        
-        cy.get('[data-cy=sidebar-theme-toggle]').click()
-        cy.wait(1000)
-        cy.checkA11y()
-
+        cy.openAndChangeTheme();
 
         cy.get("input[type=date]").eq(0).type("2021-04-01")
         cy.checkA11y()
 
+        cy.changeTheme();
+
         cy.get("input[type=date]").eq(1).type("2020-11-01")
         cy.checkA11y()
         
-        cy.get('[data-cy=sidebar-theme-toggle]').click()
-        cy.wait(1000)
-        cy.checkA11y()
-
+        cy.changeTheme();
     })
 
     it("Has no accessibility violations after the category filters are changed", () => {
@@ -75,20 +51,13 @@ describe("Blog posts accessibility", () => {
         cy.wait(1000)
         cy.checkA11y();
 
-        cy.get('[data-cy=open-sidemenu]').click()
-        cy.wait(1000)
-        
-        cy.get('[data-cy=sidebar-theme-toggle]').click()
-        cy.wait(1000)
-        cy.checkA11y()
+        cy.openAndChangeTheme();
 
         cy.get("[data-cy=multiple-choice]").then(() => {
             cy.get("[data-cy=select-reviews]").click()
             cy.checkA11y();
 
-            cy.get('[data-cy=sidebar-theme-toggle]').click()
-            cy.wait(1000)
-            cy.checkA11y()
+            cy.changeTheme();
         })
     })
 
@@ -97,20 +66,13 @@ describe("Blog posts accessibility", () => {
         cy.wait(1000)
         cy.checkA11y();
 
-        cy.get('[data-cy=open-sidemenu]').click()
-        cy.wait(1000)
-        
-        cy.get('[data-cy=sidebar-theme-toggle]').click()
-        cy.wait(1000)
-        cy.checkA11y()
+        cy.openAndChangeTheme();
 
         cy.get("[data-cy=multiple-choice]").then(() => {
             cy.get("[data-cy=select-ide]").click()
             cy.checkA11y();
             
-            cy.get('[data-cy=sidebar-theme-toggle]').click()
-            cy.wait(1000)
-            cy.checkA11y()
+            cy.changeTheme();
         })
     })
 })

@@ -5,13 +5,7 @@ describe("Project template", () => {
         cy.visit("/project/benyakir-writes").get("main").injectAxe();
         cy.checkA11y();
 
-        cy.get('[data-cy=open-sidemenu]').click()
-        cy.wait(1000)
-        
-        cy.get('[data-cy=sidebar-theme-toggle]').click()
-        cy.wait(1000)
-        cy.checkA11y()
-
+        cy.openAndChangeTheme();
     })
 })
 
@@ -20,13 +14,7 @@ describe("Book template", () => {
         cy.visit("/book/delusions-of-form").get("main").injectAxe();
         cy.checkA11y();
 
-        cy.get('[data-cy=open-sidemenu]').click()
-        cy.wait(1000)
-        
-        cy.get('[data-cy=sidebar-theme-toggle]').click()
-        cy.wait(1000)
-        cy.checkA11y()
-
+        cy.openAndChangeTheme();
     })
 })
 
@@ -35,13 +23,7 @@ describe("Shortstory template", () => {
         cy.visit("/story/the-human-error").get("main").injectAxe();
         cy.checkA11y();
 
-        cy.get('[data-cy=open-sidemenu]').click()
-        cy.wait(1000)
-        
-        cy.get('[data-cy=sidebar-theme-toggle]').click()
-        cy.wait(1000)
-        cy.checkA11y()
-
+        cy.openAndChangeTheme();
     }) 
 })
 
@@ -50,13 +32,6 @@ describe("Blog post template",  () => {
         cy.visit("/post/a-weeks-worth-backend-with-graphql-and-django").get("main").injectAxe();
         cy.checkA11y();
 
-        cy.get('[data-cy=open-sidemenu]').click()
-        cy.wait(1000)
-        
-        cy.get('[data-cy=sidebar-theme-toggle]').click()
-        cy.get('[data-cy=open-sidemenu]').click()
-        cy.wait(1000)
-        cy.checkA11y()
-
+        cy.openAndChangeTheme();
     })
 })

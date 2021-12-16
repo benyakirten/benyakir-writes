@@ -5,7 +5,7 @@ import { Grouping } from "@Styles/general-components";
 
 import LeadPage from "@Layout/LeadPage/LeadPage.component";
 import AllFilter from "@Posts/BlogFilters/AllFilter/AllFilter.component";
-import BlogCard from "@Variant/BlogCard/BlogCard.component";
+import BlogCard from "@Variant/Cards/BlogCard/BlogCard.component";
 import Paginate from "@Layout/Paginate/Paginate.component";
 
 import usePagination from "@/hooks/usePagination.hook";

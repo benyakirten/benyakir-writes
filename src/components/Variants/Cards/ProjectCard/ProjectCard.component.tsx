@@ -15,6 +15,8 @@ import Button from "@Gen/Button/Button.component"
 import IconGrid from "@Gen/IconGrid/IconGrid.component"
 import CustomLink from "@Gen/CustomLink/CustomLink.component"
 
+import { ProjectCardProps } from "@Types/props/post-components"
+
 const ProjectCard: React.FC<ProjectCardProps> = ({ item }) => {
     return (
         <Card>

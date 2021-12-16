@@ -8,28 +8,15 @@ describe("Portfolio accessibility", () => {
     it('Has no accessibility violations after loading the page', () => {
         cy.checkA11y();
 
-        cy.get('[data-cy=open-sidemenu]').click()
-        cy.wait(1000)
-        
-        cy.get('[data-cy=sidebar-theme-toggle]').click()
-        cy.wait(1000)
-        cy.checkA11y()
-
+        cy.openAndChangeTheme();
     });
-
 
     it('Has no accessibility violations when the items per filter is changed', () => {
         cy.get("[data-cy=text-input]").type("automata")
         cy.wait(300)
         cy.checkA11y();
 
-        cy.get('[data-cy=open-sidemenu]').click()
-        cy.wait(1000)
-        
-        cy.get('[data-cy=sidebar-theme-toggle]').click()
-        cy.wait(1000)
-        cy.checkA11y()
-
+        cy.openAndChangeTheme();
     })
 
     it("Has no accessibility violations when the date is changed", () => {
@@ -43,11 +30,6 @@ describe("Portfolio accessibility", () => {
         cy.get("input[type=date]").eq(1).type("2020-11-01")
         cy.checkA11y()
 
-        cy.get('[data-cy=open-sidemenu]').click()
-        cy.wait(1000)
-        
-        cy.get('[data-cy=sidebar-theme-toggle]').click()
-        cy.wait(1000)
-        cy.checkA11y()
+        cy.openAndChangeTheme();
     })
 })

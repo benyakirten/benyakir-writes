@@ -2,7 +2,7 @@ import * as React from "react";
 import { navigate } from "gatsby";
 
 import { render, cleanup, screen, fireEvent } from "@TestUtils";
-import StoryCard from "@Variant/Author/StoryCard/StoryCard.component";
+import StoryCard from "@/components/Variants/Cards/Author/StoryCard/StoryCard.component";
 import { FlattenedStory } from "@Types/posts";
 
 import { cover } from "@TestProps";

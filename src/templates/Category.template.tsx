@@ -11,7 +11,7 @@ import LeadPage from "@Layout/LeadPage/LeadPage.component";
 import CustomLink from "@Gen/CustomLink/CustomLink.component";
 import Loading from "@Gen/Loading/Loading.component";
 import CategoryFilter from "@Posts/BlogFilters/CategoryFilter/CategoryFilter.component";
-import BlogCard from "@Variant/BlogCard/BlogCard.component";
+import BlogCard from "@Variant/Cards/BlogCard/BlogCard.component";
 
 import usePagination from "@/hooks/usePagination.hook";
 import { titleToKebab } from "@Utils/strings";

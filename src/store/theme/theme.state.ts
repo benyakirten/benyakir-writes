@@ -161,7 +161,7 @@ export const defaultNightTheme: BaseTheme = {
   },
   icon: {
     default: {
-      background: "#39435b",
+      background: "#111B33",
       textColor: "#D8E3FD"
     },
     hover: {
@@ -179,7 +179,7 @@ export const defaultNightTheme: BaseTheme = {
   button: {
     border: "#e9ecef",
     default: {
-      background: "#485372",
+      background: "#111B33",
       textColor: "#f8f9fa"
     },
     disabled: {
@@ -212,8 +212,7 @@ export const initialState: ThemeState = {
     defaultDayTheme,
     defaultNightTheme
   ],
-  useComputerPreferences: true,
-  prefers: 'night',
-  active: defaultNightTheme,
-  autoLoad: false
+  ignoreComputerPreferences: true,
+  prefers: 'day',
+  active: defaultDayTheme
 }

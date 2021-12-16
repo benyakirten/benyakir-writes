@@ -6,7 +6,7 @@ import { Grouping } from "@Styles/general-components";
 import LeadPage from "@Layout/LeadPage/LeadPage.component";
 import Paginate from "@Layout/Paginate/Paginate.component";
 import BookFilter from "@/components/Posts/WritingFilters/BookFilter/BookFilter.component";
-import BookCard from "@Variant/Author/BookCard/BookCard.component";
+import BookCard from "@/components/Variants/Cards/Author/BookCard/BookCard.component";
 
 import usePagination from "@/hooks/usePagination.hook";
 
