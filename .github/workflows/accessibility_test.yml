@@ -12,4 +12,4 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           start: npm start
-          command: npm run cy:run
+          wait-on: http://localhost:8000
