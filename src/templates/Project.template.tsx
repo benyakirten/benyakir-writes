@@ -1,21 +1,12 @@
 import * as React from "react";
-import { graphql, navigate } from "gatsby";
+import { graphql } from "gatsby";
 import { Helmet } from "react-helmet";
 
 import {
   Grouping,
   LeadHeading,
-  List,
-  LItem,
-  Row,
-  SubHeading,
-  Subtitle,
   WpContent,
 } from "@Styles/general-components";
-
-import Button from "@Gen/Button/Button.component";
-import Loading from "@Gen/Loading/Loading.component";
-import IconGrid from "@Gen/IconGrid/IconGrid.component";
 
 import { getFullTechName, formatProject } from "@Utils/project";
 import { firstWords } from "@Utils/strings";

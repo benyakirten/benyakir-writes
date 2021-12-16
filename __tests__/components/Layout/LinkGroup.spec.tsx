@@ -22,7 +22,7 @@ describe('LinkGroup component', () => {
 
     it('should render a topbar that serves as a link to the entire domain', async () => {
         render(<LinkGroup {...props} />)
-        const topbar = await screen.getByText("TEST-DOMAIN")
+        const topbar = await screen.getByText("Test-domain")
         expect(topbar.tagName).toEqual("A")
         expect(topbar.getAttribute("href")).toEqual("/test-domain")
     })
