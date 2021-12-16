@@ -8,3 +8,7 @@ src/data/searchData.json
 src/data/wp/Author/*.json
 src/data/wp/Posts/*.json
 src/data/wp/Projects/*.json
+
+# Cypress Data
+cypress/videos
+cypress/screenshots

@@ -11,4 +11,5 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-            command: npm run test:e2e
+          start: npm start
+          command: npm run cy:run
