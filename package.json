@@ -15,8 +15,10 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "cy:open": "cypress open",
+    "cy:run": "cypress run",
     "test:unit": "jest",
-    "test:e2e": "start-server-and-test develop http://localhost:8000 cy:open"
+    "test:e2e": "start-server-and-test develop http://localhost:8000 cy:open",
+    "test:e2e:ci": "start-server-and-test develop http://localhost:8000 cy:run"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",

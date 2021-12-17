@@ -89,7 +89,7 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterBlock> = ({
                 </span>
             </HighlighterTopbar>
             {finalTheme ? (
-                <PrismLight language={lang} style={finalTheme}>
+                <PrismLight tabIndex={0} language={lang} style={finalTheme}>
                     {decode(code)}
                 </PrismLight>
             ) : (

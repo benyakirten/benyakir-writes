@@ -111,7 +111,7 @@ describe('Sidebar component', () => {
 
         await act(async () => {
             const links = await screen.findAllByRole("link")
-            expect(links[0].textContent).toEqual("BLOG")
+            expect(links[0].textContent).toEqual("Blog")
             fireEvent.click(links[0])
             expect(invisibleGroup.getAttribute('aria-hidden')).toEqual("false")
         })

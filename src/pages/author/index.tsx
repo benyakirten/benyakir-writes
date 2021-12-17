@@ -5,8 +5,8 @@ import { Grouping, SubHeading } from "@Styles/general-components";
 
 import LeadPage from "@Layout/LeadPage/LeadPage.component";
 import AuthorFilter from "@Posts/WritingFilters/AuthorFilter/AuthorFilter.component";
-import BookCard from "@Variant/Author/BookCard/BookCard.component";
-import StoryCard from "@Variant/Author/StoryCard/StoryCard.component";
+import BookCard from "@/components/Variants/Cards/Author/BookCard/BookCard.component";
+import StoryCard from "@/components/Variants/Cards/Author/StoryCard/StoryCard.component";
 import Paginate from "@Layout/Paginate/Paginate.component";
 
 import usePagination from "@/hooks/usePagination.hook";

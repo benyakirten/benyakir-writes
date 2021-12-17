@@ -101,16 +101,7 @@ describe("project template", () => {
             it("should display the latest update information if the information was successfully retrieved", async () => {
                 render(<Project data={dummyProjects[1].data} />);
                 const updated = await waitFor(() =>
-                    screen.getByText(
-                        new Date("2011-01-26T19:06:43Z").toLocaleString(
-                            "en-US",
-                            {
-                                year: "numeric",
-                                month: "long",
-                                day: "2-digit",
-                            }
-                        )
-                    )
+                    screen.getByText("Latest Update: January 26, 2011")
                 );
                 expect(updated).toBeTruthy();
             });
@@ -123,7 +114,7 @@ describe("project template", () => {
                 });
                 render(<Project data={dummyProjects[1].data} />);
                 const err = await waitFor(() =>
-                    screen.getByText("Unable to fetch data")
+                    screen.getByText("Latest Update: Unable to fetch data")
                 );
                 expect(err).toBeTruthy();
             });
@@ -134,7 +125,7 @@ describe("project template", () => {
                 });
                 render(<Project data={dummyProjects[1].data} />);
                 const err = await waitFor(() =>
-                    screen.getByText("Unable to fetch data")
+                    screen.getByText("Latest Update: Unable to fetch data")
                 );
                 expect(err).toBeTruthy();
             });

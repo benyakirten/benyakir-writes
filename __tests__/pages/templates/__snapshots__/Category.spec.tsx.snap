@@ -5,7 +5,7 @@ exports[`category template should render correctly 1`] = `
   className="sc-bdvvtL eQvckl"
 >
   <nav
-    className="sc-dkPtRN kRVvGr nav-toggle-close"
+    className="sc-dkPtRN iWYBVL nav-toggle-close"
     data-navtoggle="nav-toggle"
     onClick={[Function]}
     open={false}
@@ -16,7 +16,7 @@ exports[`category template should render correctly 1`] = `
       open={false}
     >
       <button
-        className="sc-eCImPb fFYBrW"
+        className="sc-eCImPb fhUfIC"
         data-cy="open-sidemenu"
         onClick={[Function]}
         open={false}
@@ -50,7 +50,7 @@ exports[`category template should render correctly 1`] = `
             </span>
             <a
               active={false}
-              className="sc-fotOHu gekBIy"
+              className="sc-fotOHu iauByG"
               dark={true}
               href="/blog"
               inheritColor={false}
@@ -59,7 +59,7 @@ exports[`category template should render correctly 1`] = `
               small={false}
               tabIndex={-1}
             >
-              BLOG
+              Blog
             </a>
             <div
               aria-hidden={true}
@@ -70,7 +70,7 @@ exports[`category template should render correctly 1`] = `
             >
               <a
                 active={false}
-                className="sc-fotOHu iWgPXt"
+                className="sc-fotOHu RzkGx"
                 dark={true}
                 href="/blog/bens-thoughts/"
                 inheritColor={false}
@@ -84,7 +84,7 @@ exports[`category template should render correctly 1`] = `
               </a>
               <a
                 active={false}
-                className="sc-fotOHu iWgPXt"
+                className="sc-fotOHu RzkGx"
                 dark={true}
                 href="/blog/reviews/"
                 inheritColor={false}
@@ -98,7 +98,7 @@ exports[`category template should render correctly 1`] = `
               </a>
               <a
                 active={false}
-                className="sc-fotOHu iWgPXt"
+                className="sc-fotOHu RzkGx"
                 dark={true}
                 href="/blog/down-south-boulder-road/"
                 inheritColor={false}
@@ -129,7 +129,7 @@ exports[`category template should render correctly 1`] = `
             </span>
             <a
               active={false}
-              className="sc-fotOHu gekBIy"
+              className="sc-fotOHu iauByG"
               dark={true}
               href="/author"
               inheritColor={false}
@@ -138,7 +138,7 @@ exports[`category template should render correctly 1`] = `
               small={false}
               tabIndex={-1}
             >
-              AUTHOR
+              Author
             </a>
             <div
               aria-hidden={true}
@@ -149,7 +149,7 @@ exports[`category template should render correctly 1`] = `
             >
               <a
                 active={false}
-                className="sc-fotOHu iWgPXt"
+                className="sc-fotOHu RzkGx"
                 dark={true}
                 href="/author/books/"
                 inheritColor={false}
@@ -163,7 +163,7 @@ exports[`category template should render correctly 1`] = `
               </a>
               <a
                 active={false}
-                className="sc-fotOHu iWgPXt"
+                className="sc-fotOHu RzkGx"
                 dark={true}
                 href="/author/short-stories/"
                 inheritColor={false}
@@ -179,7 +179,7 @@ exports[`category template should render correctly 1`] = `
           </div>
           <a
             active={false}
-            className="sc-fotOHu dgALqe"
+            className="sc-fotOHu hlQGLq"
             dark={true}
             href="/portfolio"
             inheritColor={false}
@@ -223,7 +223,7 @@ exports[`category template should render correctly 1`] = `
               open={false}
             >
               <div
-                className="sc-eJwWfJ eAWrcB"
+                className="sc-nVkyK hAMgjD"
               >
                 <input
                   autoFocus={false}
@@ -256,7 +256,7 @@ exports[`category template should render correctly 1`] = `
                 }
               >
                 <div
-                  className="sc-nVkyK bXtfwc"
+                  className="sc-hiwPVj eUTucj"
                 >
                   <input
                     aria-labelledby="label-global-search-show-post"
@@ -285,7 +285,7 @@ exports[`category template should render correctly 1`] = `
                   </span>
                 </div>
                 <div
-                  className="sc-nVkyK bXtfwc"
+                  className="sc-hiwPVj eUTucj"
                 >
                   <input
                     aria-labelledby="label-global-search-show-project"
@@ -314,7 +314,7 @@ exports[`category template should render correctly 1`] = `
                   </span>
                 </div>
                 <div
-                  className="sc-nVkyK bXtfwc"
+                  className="sc-hiwPVj eUTucj"
                 >
                   <input
                     aria-labelledby="label-global-search-show-book"
@@ -343,7 +343,7 @@ exports[`category template should render correctly 1`] = `
                   </span>
                 </div>
                 <div
-                  className="sc-nVkyK bXtfwc"
+                  className="sc-hiwPVj eUTucj"
                 >
                   <input
                     aria-labelledby="label-global-search-show-story"
@@ -373,7 +373,7 @@ exports[`category template should render correctly 1`] = `
                 </div>
               </div>
               <div
-                className="sc-iNGGcK jWHpsA"
+                className="sc-jeraig lkjyYb"
               >
                 <div
                   className="sc-ikJyIC clPnan"
@@ -389,9 +389,9 @@ exports[`category template should render correctly 1`] = `
         >
           <a
             active={false}
-            className="sc-fotOHu dgALqe"
+            className="sc-fotOHu hlQGLq"
             dark={true}
-            href="/"
+            href="/about"
             inheritColor={false}
             inline={false}
             limitUnderbar={false}
@@ -399,11 +399,11 @@ exports[`category template should render correctly 1`] = `
             tabIndex={-1}
             underbarSize="12rem"
           >
-            Home
+            About
           </a>
           <a
             active={false}
-            className="sc-fotOHu dgALqe"
+            className="sc-fotOHu hlQGLq"
             dark={true}
             href="/contact"
             inheritColor={false}
@@ -417,7 +417,7 @@ exports[`category template should render correctly 1`] = `
           </a>
           <a
             active={false}
-            className="sc-fotOHu dgALqe"
+            className="sc-fotOHu hlQGLq"
             dark={true}
             href="/privacy"
             inheritColor={false}
@@ -431,9 +431,9 @@ exports[`category template should render correctly 1`] = `
           </a>
           <a
             active={false}
-            className="sc-fotOHu dgALqe"
+            className="sc-fotOHu hlQGLq"
             dark={true}
-            href="/about"
+            href="/"
             inheritColor={false}
             inline={false}
             limitUnderbar={false}
@@ -441,7 +441,7 @@ exports[`category template should render correctly 1`] = `
             tabIndex={-1}
             underbarSize="12rem"
           >
-            About
+            Home
           </a>
         </div>
         <div>
@@ -449,7 +449,7 @@ exports[`category template should render correctly 1`] = `
             className="sc-bkkeKt ewOfWt"
           >
             <input
-              checked={true}
+              checked={false}
               className="sc-ieecCq esPxXi"
               id="active-theme-toggle"
               name="active-theme-toggle"
@@ -457,16 +457,16 @@ exports[`category template should render correctly 1`] = `
               type="checkbox"
             />
             <label
-              className="sc-dJjYzT gCofEa"
+              className="sc-dJjYzT czRWRf"
               data-cy="sidebar-theme-toggle"
               htmlFor="active-theme-toggle"
-              label="Theme: Night"
+              label="Theme: Day"
             />
             <span
               className="sc-hGPBjI hcBlDf"
               onClick={[Function]}
             >
-              Theme: Night
+              Theme: Day
             </span>
           </div>
         </div>
@@ -474,12 +474,12 @@ exports[`category template should render correctly 1`] = `
           className="sc-furwcr gNocVO"
         >
           <span
-            className="sc-pVTFL bEonJn"
+            className="sc-pVTFL fpqpLf"
           >
             © 2021 by Benyakir Horowitz
           </span>
           <span
-            className="sc-pVTFL bEonJn"
+            className="sc-pVTFL fpqpLf"
           >
             All Rights Reserved
           </span>
@@ -491,7 +491,7 @@ exports[`category template should render correctly 1`] = `
         <div
           alt="Benyakir Writes Logo"
           aria-label="Logo"
-          className="sc-dlVxhl VnZfy"
+          className="sc-dlVxhl fLIupa"
           open={false}
           role="img"
         />
@@ -499,7 +499,7 @@ exports[`category template should render correctly 1`] = `
     </div>
   </nav>
   <main
-    className="sc-gsDKAQ gxATvZ"
+    className="sc-gsDKAQ jRUJQC"
   >
     <div>
       <div
@@ -512,26 +512,26 @@ exports[`category template should render correctly 1`] = `
         }
       >
         <div
-          className="sc-clIzBv bCiMcX"
+          className="sc-faUpoM lkAFuX"
         >
           <h1
-            className="sc-llYSUQ gBzaIC"
+            className="sc-llYSUQ geWZQm"
           >
             Category A
           </h1>
           <div
-            className="sc-Galmp hVWPGp"
+            className="sc-fWCJzd jJmzsw"
           >
             <span
-              className="sc-egiyK jcorVI"
+              className="sc-egiyK hdMysw"
               size="2rem"
             />
           </div>
           <div
-            className="sc-faUpoM gdAIfQ"
+            className="sc-Galmp kfyANn"
           >
             <span
-              className="sc-egiyK fZKzuE"
+              className="sc-egiyK ebiFRs"
               size="4rem"
             />
           </div>
@@ -547,7 +547,7 @@ exports[`category template should render correctly 2`] = `
   className="sc-bdvvtL eQvckl"
 >
   <nav
-    className="sc-dkPtRN kRVvGr nav-toggle-close"
+    className="sc-dkPtRN iWYBVL nav-toggle-close"
     data-navtoggle="nav-toggle"
     onClick={[Function]}
     open={false}
@@ -558,7 +558,7 @@ exports[`category template should render correctly 2`] = `
       open={false}
     >
       <button
-        className="sc-eCImPb fFYBrW"
+        className="sc-eCImPb fhUfIC"
         data-cy="open-sidemenu"
         onClick={[Function]}
         open={false}
@@ -592,7 +592,7 @@ exports[`category template should render correctly 2`] = `
             </span>
             <a
               active={false}
-              className="sc-fotOHu gekBIy"
+              className="sc-fotOHu iauByG"
               dark={true}
               href="/blog"
               inheritColor={false}
@@ -601,7 +601,7 @@ exports[`category template should render correctly 2`] = `
               small={false}
               tabIndex={-1}
             >
-              BLOG
+              Blog
             </a>
             <div
               aria-hidden={true}
@@ -612,7 +612,7 @@ exports[`category template should render correctly 2`] = `
             >
               <a
                 active={false}
-                className="sc-fotOHu iWgPXt"
+                className="sc-fotOHu RzkGx"
                 dark={true}
                 href="/blog/bens-thoughts/"
                 inheritColor={false}
@@ -626,7 +626,7 @@ exports[`category template should render correctly 2`] = `
               </a>
               <a
                 active={false}
-                className="sc-fotOHu iWgPXt"
+                className="sc-fotOHu RzkGx"
                 dark={true}
                 href="/blog/reviews/"
                 inheritColor={false}
@@ -640,7 +640,7 @@ exports[`category template should render correctly 2`] = `
               </a>
               <a
                 active={false}
-                className="sc-fotOHu iWgPXt"
+                className="sc-fotOHu RzkGx"
                 dark={true}
                 href="/blog/down-south-boulder-road/"
                 inheritColor={false}
@@ -671,7 +671,7 @@ exports[`category template should render correctly 2`] = `
             </span>
             <a
               active={false}
-              className="sc-fotOHu gekBIy"
+              className="sc-fotOHu iauByG"
               dark={true}
               href="/author"
               inheritColor={false}
@@ -680,7 +680,7 @@ exports[`category template should render correctly 2`] = `
               small={false}
               tabIndex={-1}
             >
-              AUTHOR
+              Author
             </a>
             <div
               aria-hidden={true}
@@ -691,7 +691,7 @@ exports[`category template should render correctly 2`] = `
             >
               <a
                 active={false}
-                className="sc-fotOHu iWgPXt"
+                className="sc-fotOHu RzkGx"
                 dark={true}
                 href="/author/books/"
                 inheritColor={false}
@@ -705,7 +705,7 @@ exports[`category template should render correctly 2`] = `
               </a>
               <a
                 active={false}
-                className="sc-fotOHu iWgPXt"
+                className="sc-fotOHu RzkGx"
                 dark={true}
                 href="/author/short-stories/"
                 inheritColor={false}
@@ -721,7 +721,7 @@ exports[`category template should render correctly 2`] = `
           </div>
           <a
             active={false}
-            className="sc-fotOHu dgALqe"
+            className="sc-fotOHu hlQGLq"
             dark={true}
             href="/portfolio"
             inheritColor={false}
@@ -765,7 +765,7 @@ exports[`category template should render correctly 2`] = `
               open={false}
             >
               <div
-                className="sc-eJwWfJ eAWrcB"
+                className="sc-nVkyK hAMgjD"
               >
                 <input
                   autoFocus={false}
@@ -798,7 +798,7 @@ exports[`category template should render correctly 2`] = `
                 }
               >
                 <div
-                  className="sc-nVkyK bXtfwc"
+                  className="sc-hiwPVj eUTucj"
                 >
                   <input
                     aria-labelledby="label-global-search-show-post"
@@ -827,7 +827,7 @@ exports[`category template should render correctly 2`] = `
                   </span>
                 </div>
                 <div
-                  className="sc-nVkyK bXtfwc"
+                  className="sc-hiwPVj eUTucj"
                 >
                   <input
                     aria-labelledby="label-global-search-show-project"
@@ -856,7 +856,7 @@ exports[`category template should render correctly 2`] = `
                   </span>
                 </div>
                 <div
-                  className="sc-nVkyK bXtfwc"
+                  className="sc-hiwPVj eUTucj"
                 >
                   <input
                     aria-labelledby="label-global-search-show-book"
@@ -885,7 +885,7 @@ exports[`category template should render correctly 2`] = `
                   </span>
                 </div>
                 <div
-                  className="sc-nVkyK bXtfwc"
+                  className="sc-hiwPVj eUTucj"
                 >
                   <input
                     aria-labelledby="label-global-search-show-story"
@@ -915,7 +915,7 @@ exports[`category template should render correctly 2`] = `
                 </div>
               </div>
               <div
-                className="sc-iNGGcK jWHpsA"
+                className="sc-jeraig lkjyYb"
               >
                 <div
                   className="sc-ikJyIC clPnan"
@@ -931,9 +931,9 @@ exports[`category template should render correctly 2`] = `
         >
           <a
             active={false}
-            className="sc-fotOHu dgALqe"
+            className="sc-fotOHu hlQGLq"
             dark={true}
-            href="/"
+            href="/about"
             inheritColor={false}
             inline={false}
             limitUnderbar={false}
@@ -941,11 +941,11 @@ exports[`category template should render correctly 2`] = `
             tabIndex={-1}
             underbarSize="12rem"
           >
-            Home
+            About
           </a>
           <a
             active={false}
-            className="sc-fotOHu dgALqe"
+            className="sc-fotOHu hlQGLq"
             dark={true}
             href="/contact"
             inheritColor={false}
@@ -959,7 +959,7 @@ exports[`category template should render correctly 2`] = `
           </a>
           <a
             active={false}
-            className="sc-fotOHu dgALqe"
+            className="sc-fotOHu hlQGLq"
             dark={true}
             href="/privacy"
             inheritColor={false}
@@ -973,9 +973,9 @@ exports[`category template should render correctly 2`] = `
           </a>
           <a
             active={false}
-            className="sc-fotOHu dgALqe"
+            className="sc-fotOHu hlQGLq"
             dark={true}
-            href="/about"
+            href="/"
             inheritColor={false}
             inline={false}
             limitUnderbar={false}
@@ -983,7 +983,7 @@ exports[`category template should render correctly 2`] = `
             tabIndex={-1}
             underbarSize="12rem"
           >
-            About
+            Home
           </a>
         </div>
         <div>
@@ -991,7 +991,7 @@ exports[`category template should render correctly 2`] = `
             className="sc-bkkeKt ewOfWt"
           >
             <input
-              checked={true}
+              checked={false}
               className="sc-ieecCq esPxXi"
               id="active-theme-toggle"
               name="active-theme-toggle"
@@ -999,16 +999,16 @@ exports[`category template should render correctly 2`] = `
               type="checkbox"
             />
             <label
-              className="sc-dJjYzT gCofEa"
+              className="sc-dJjYzT czRWRf"
               data-cy="sidebar-theme-toggle"
               htmlFor="active-theme-toggle"
-              label="Theme: Night"
+              label="Theme: Day"
             />
             <span
               className="sc-hGPBjI hcBlDf"
               onClick={[Function]}
             >
-              Theme: Night
+              Theme: Day
             </span>
           </div>
         </div>
@@ -1016,12 +1016,12 @@ exports[`category template should render correctly 2`] = `
           className="sc-furwcr gNocVO"
         >
           <span
-            className="sc-pVTFL bEonJn"
+            className="sc-pVTFL fpqpLf"
           >
             © 2021 by Benyakir Horowitz
           </span>
           <span
-            className="sc-pVTFL bEonJn"
+            className="sc-pVTFL fpqpLf"
           >
             All Rights Reserved
           </span>
@@ -1033,7 +1033,7 @@ exports[`category template should render correctly 2`] = `
         <div
           alt="Benyakir Writes Logo"
           aria-label="Logo"
-          className="sc-dlVxhl VnZfy"
+          className="sc-dlVxhl fLIupa"
           open={false}
           role="img"
         />
@@ -1041,7 +1041,7 @@ exports[`category template should render correctly 2`] = `
     </div>
   </nav>
   <main
-    className="sc-gsDKAQ gxATvZ"
+    className="sc-gsDKAQ jRUJQC"
   >
     <div>
       <div
@@ -1054,26 +1054,26 @@ exports[`category template should render correctly 2`] = `
         }
       >
         <div
-          className="sc-clIzBv bCiMcX"
+          className="sc-faUpoM lkAFuX"
         >
           <h1
-            className="sc-llYSUQ gBzaIC"
+            className="sc-llYSUQ geWZQm"
           >
             Category B
           </h1>
           <div
-            className="sc-Galmp hVWPGp"
+            className="sc-fWCJzd jJmzsw"
           >
             <span
-              className="sc-egiyK jcorVI"
+              className="sc-egiyK hdMysw"
               size="2rem"
             />
           </div>
           <div
-            className="sc-faUpoM gdAIfQ"
+            className="sc-Galmp kfyANn"
           >
             <span
-              className="sc-egiyK fZKzuE"
+              className="sc-egiyK ebiFRs"
               size="4rem"
             />
           </div>

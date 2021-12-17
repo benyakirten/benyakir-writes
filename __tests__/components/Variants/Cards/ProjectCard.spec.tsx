@@ -2,7 +2,7 @@ import * as React from "react";
 import { navigate } from "gatsby";
 
 import { render, cleanup, screen, fireEvent } from "@TestUtils";
-import ProjectCard from "@Variant/ProjectCard/ProjectCard.component";
+import ProjectCard from "@Variant/Cards/ProjectCard/ProjectCard.component";
 import { FlattenedProjectCard } from "@Types/posts";
 import { allIcons } from "@TestProps";
 

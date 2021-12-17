@@ -19,6 +19,8 @@ import {
 import Button from "@Gen/Button/Button.component";
 import CustomLink from "@Gen/CustomLink/CustomLink.component";
 
+import { BookCardProps } from "@Types/props/post-components";
+
 const BookCard: React.FC<BookCardProps> = ({ item }) => {
     const coverOrStories = !!item.stories || !!item.cover;
     return (

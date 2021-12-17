@@ -1,12 +1,12 @@
-type FilterProps = {
-  name: string;
-  onSearch: (val: string) => void;
-}
-
 interface InputProps {
   label: string;
   name: string;
   tabIndex?: number;
+}
+
+type FilterProps = {
+  name: string;
+  onSearch: (val: string) => void;
 }
 
 interface TextProps extends InputProps {
@@ -44,4 +44,15 @@ interface ToggleProps extends InputProps {
   value: boolean;
   onToggle: () => void;
   dataCy?: string
+}
+
+interface DragTarget {
+  title: string;
+  value: string;
+}
+
+interface DraggableListProps extends InputProps {
+  onDrag: (index: number) => void;
+  items: string[];
+  targets: DragTarget[]
 }

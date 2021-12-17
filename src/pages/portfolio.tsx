@@ -5,7 +5,7 @@ import { BigParagraph, Grouping } from "@Styles/general-components";
 
 import LeadPage from "@Layout/LeadPage/LeadPage.component";
 import Paginate from "@Layout/Paginate/Paginate.component";
-import ProjectCard from "@Variant/ProjectCard/ProjectCard.component";
+import ProjectCard from "@Variant/Cards/ProjectCard/ProjectCard.component";
 import ProjectFilter from "@Posts/ProjectFilter/ProjectFilter.component";
 
 import usePagination from "@/hooks/usePagination.hook";

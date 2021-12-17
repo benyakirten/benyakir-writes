@@ -1,4 +1,5 @@
-[![Unit Test](https://github.com/benyakirten/benyakir-writes/actions/workflows/unit_test.yml/badge.svg?branch=main)](https://github.com/benyakirten/benyakir-writes/actions/workflows/unit_test.yml)
+[![Unit Tests](https://github.com/benyakirten/benyakir-writes/actions/workflows/unit_test.yml/badge.svg?branch=main)](https://github.com/benyakirten/benyakir-writes/actions/workflows/unit_test.yml)
+[![Accessibility Tests](https://github.com/benyakirten/benyakir-writes/actions/workflows/accessibility_test.yml/badge.svg)](https://github.com/benyakirten/benyakir-writes/actions/workflows/accessibility_test.yml)
 # Table of Contents
 1. [What am I looking at?](#what-am-i-looking-at?)
 2. [How to run the repository](#how-do-i-get-it-working)
@@ -42,57 +43,61 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 
 ## Planned Changes
 
-> Add the showcase pages from benyakiredits.com.
+> Add the showcase pages from benyakiredits.com
 > Add customizable pallets and various options for theme
-> Add E2E tests to GitHub Actions
-> Separate the header on an individual blog post/project/book/story into its own component
-> Fix cypress tests so there's less repetition
 
 ## Changelog
 
-> 9/7/2021: 
->> 1. First deployment
->> 2. Fixed a few issues I didn't notice by running build before deployment, namely that I still needed to use useLocation for the page transitions. Also that I needed a backup for categories that didn't have any posts in them (such as bens-blogs, the overarching category for my regular blog pages).
-> 9/8/2021: Worked on improving media queries for a few components, added a form component that uses Netlify forms and added global search functionality. I created a new hook, useLookup, for use with a hash table for faster search results. I tested it, and the difference, using all 134 blog posts/projects/etc. from my blog? About 2 milliseconds. It is, really, more efficient. It's just that I need to write a few thousand more blog posts before it starts mattering. Oh, and it increases build time from 30ish seconds to 3 minutes. That's why, for now, I haven't fixed the other search functionalities to use the more efficient hash tables. It may come in the future, but I only get 300 free built minutes per month from Netlify, and I like to be pretty far from build time.
-> 9/9/2021: Tried another fix for the contact form, tried to fix the way the underbar exceeded the sidebar on some links
-> 9/10/2021 (1 AM): I promise I'm going to work on testing soon. But for now I found a way to make the search functionality not (too) slow and laggy. During the createPages node process in gatsby-node, the graphql backend is queried, and the items are prepared for search then saved to a JSON file. Then that file is opened and used for the search component. Effectively, the search items are prepared on build, which works out fine because the repo is rebuilt every time a post/etc is added. I kept all the old search functionality in utils/search.ts, though most of the functionality has been remade in gatsby-node.js. One day, I will add the same sort of functionality to the other filters.
-> 9/10/2021 (4 PM): Fonts now preload with use of the gatsby-plugin-preload-fonts. I promise tests are coming soon.
-> 9/11/2021: Fixed a small error on the underbar for the portfolio link and now search items are automatically sorted by date.
-> 9/12/2021: Added a small fix to the foldout height between 900px and 1400px
-> 9/20/2021: A humongous amount of changes and the first set of unit tests.
->> 1. Filter functionality has been fixed in the book and story filters. Dates were previously set incorrectly and any new upper limit would be set to the lower limit and vice versa. This has been fixed.
->> 2. Search functionality now properly uses the useEffect hook so that the search no longer only changes when the search string changes. Now, if there is a search string and one of the categories becomes enabled/disabled, the search will dynamically show the results instead of needing to change the search string
->> 3. The choice input component now properly takes on the checkbox role and has an aria-checked property as well as a label.
->> 4. Added memoization to most components that processed posts (mostly filters)
->> 5. I noticed that the latestUpdate field on my WordPress blog was giving dates as d/m/y instead of m/d/y, which was causing errors.
->> 6. A whole lot of minor fixes I should've written down as I was doing them like random log statements I forgot to delete. Oh, I remembered another one right now. The logo now longer errors out if the static query cannot retrieve the icon.
-> 9/24/2021: A humongous amount of changes:
->> 1. I figured out what the problem was with testing the button component. I just had to let jest run through the timers so that unit test is nwo functioning
->> 2. Filter pages now use pagination with a few options to customize them. It streamlines things, reduces load time and increases accessibility.
->> 3. Made some minor accessibility changes to the sidebar - more changes coming int he future
->> 4. I changed cards to use a monospace font. This way how much space the content is relatively equal per word (minus line breaks)
->> 5. All data for the filters is created during the static build process, much like the global search items. This way they are generated at build time and not whenever the page is loaded. There are a number of additional effeciency I added into this (it was my plan to do it separately, but it worked out this way).
->> 6. The content/excerpt is limited to 150-200 words depending on the category
->> 7. The meta criteria is generated as a hashtable. This limits search time to O(n * m) (instead of of O(m * n * o)), though n is an array of length 1-2 usually. To go with this, the filters now use the hashtable instead of the string to filter. The one disadvantage is that partially completed search strings will now no longer give the results for the full string (such as typing 'ap' instead of 'api'). This, however, I think is worth it because the slight decrease in functionality greatly increases effeciency - words for a programmer to die by.
->> 8. Decreased the debounce timeout for the filter string to search for the items. 600ms felt like it was loading something instead of waiting for the input to be complete. 250ms now gives the user a moment to search.
->> 9. Unit tests have been fixed to work with these new changes.
-> 9/26/2021: Added E2E tests for accessibility and obviously changed a bunch of stuff to increase accessibility. For some reason, this gives a bunch of weird messages, durign the build process, but I have no idea why. I may do more E2E tests, but almost all functionality is covered under the normal tests. I also added the static filter files to .gitignore so they're forcibly generated. Because of this, the file system now generates the appropriate folders if they don't exist already. I also formatted the messages using the reporter given to the method during the build process so they look more similar to the other gatsby messages (I swear this has nothing to do with adding the weird messages).
-> 9/26/2021 (later): Forgot to delete a console log and a few tweaks for smaller screens.
-> 9/27/2021: I thought I was just going to update the text on a few items. Turns out I needed to fix the test suite. To be honest, the unit tests are way more brittle than I thought they would be. I will have to consider how I unit test React components in the future. The accessibility tests found new color contrast errors I had no idea about. I have fixed them, though I'm unsure if it will find more. It all seems functional now.
-> 10/1/2021: Adjusted some styles for media queries. Notably, reduced the font size for phones and made the expanded sidebar smaller.
-> 10/13/2021: Added Travis for CI
-> 10/23/2021: Added some memoization. A lot of extraneous stuff gets painted for reasons I'm not sure yet. I'll have to investigate.
-> 12/5/2021 (pt. 1): Changed the sidebar to become just an icon on mobile when it's closed (to save screen space, inspired by me browsing elixirschool.com). I also updated gatsby to v4.3, not of my volition but because my WP plugin stopped working.
-> 12/5/2021 (pt. 2):  Added github action because Travis CI no longer wants to let me test for free. Also changed the SyntaxHighlighter unit test and now put in a timer to measure how long static generation for search indexing takes.
-> 12/6/2021: Remove travis workflow
-> 12/10/2021: A lot of UI updates and adding day/night/customizable themes
->> 1. The clickable part of the sidebar now should not exceed the sidebar
->> 2. IconGrid is now a grid instead of a flexbox
->> 3. Added a useValidation hook and changed past self-contained validation to use it
->> 4. Project Cards are now divided into two parts with fixed widths
->> 5. The Logo is now a div with a mask of the SVG. That way I can change the fill without having to use an svg tag.
->> 6. Change text inputs and textareas to have a border, not an outline.
->> 7. Pagination now sets all items within it to a certain width instead of cards specifically having that width
->> 8. A lot of color variables have been rendered useless and been replaced by color themes - they will be removed soo 
->> 9. A new day/night toggle is available on the sidebar.
->> 10. To accomplish this, I added redux. For testing, I added a wrapper and removed most snapshots because snapshot testing isn't great in the first place. DownArrow is the only component that still uses it. The wrapper must include the Layout component since it contains the theme settings for the styled components. Long story short, all unit tests that required a certain button or image now have to contend with another button or image.
+*  9/7/2021: 
+> 1. First deployment
+> 2. Fixed a few issues I didn't notice by running build before deployment, namely that I still needed to use useLocation for the page transitions. Also that I needed a backup for categories that didn't have any posts in them (such as bens-blogs, the overarching category for my regular blog pages).
+* 9/8/2021: Worked on improving media queries for a few components, added a form component that uses Netlify forms and added global search functionality. I created a new hook, useLookup, for use with a hash table for faster search results. I tested it, and the difference, using all 134 blog posts/projects/etc. from my blog? About 2 milliseconds. It is, really, more efficient. It's just that I need to write a few thousand more blog posts before it starts mattering. Oh, and it increases build time from 30ish seconds to 3 minutes. That's why, for now, I haven't fixed the other search functionalities to use the more efficient hash tables. It may come in the future, but I only get 300 free built minutes per month from Netlify, and I like to be pretty far from build time.
+* 9/9/2021: Tried another fix for the contact form, tried to fix the way the underbar exceeded the sidebar on some links
+* 9/10/2021 (1 AM): I promise I'm going to work on testing soon. But for now I found a way to make the search functionality not (too) slow and laggy. During the createPages node process in gatsby-node, the graphql backend is queried, and the items are prepared for search then saved to a JSON file. Then that file is opened and used for the search component. Effectively, the search items are prepared on build, which works out fine because the repo is rebuilt every time a post/etc is added. I kept all the old search functionality in utils/search.ts, though most of the functionality has been remade in gatsby-node.js. One day, I will add the same sort of functionality to the other filters.
+* 9/10/2021 (4 PM): Fonts now preload with use of the gatsby-plugin-preload-fonts. I promise tests are coming soon.
+* 9/11/2021: Fixed a small error on the underbar for the portfolio link and now search items are automatically sorted by date.
+* 9/12/2021: Added a small fix to the foldout height between 900px and 1400px
+* 9/20/2021: A humongous amount of changes and the first set of unit tests.
+> 1. Filter functionality has been fixed in the book and story filters. Dates were previously set incorrectly and any new upper limit would be set to the lower limit and vice versa. This has been fixed.
+> 2. Search functionality now properly uses the useEffect hook so that the search no longer only changes when the search string changes. Now, if there is a search string and one of the categories becomes enabled/disabled, the search will dynamically show the results instead of needing to change the search string
+> 3. The choice input component now properly takes on the checkbox role and has an aria-checked property as well as a label.
+> 4. Added memoization to most components that processed posts (mostly filters)
+> 5. I noticed that the latestUpdate field on my WordPress blog was giving dates as d/m/y instead of m/d/y, which was causing errors.
+> 6. A whole lot of minor fixes I should've written down as I was doing them like random log statements I forgot to delete. Oh, I remembered another one right now. The logo now longer errors out if the static query cannot retrieve the icon.
+* 9/24/2021: A humongous amount of changes:
+> 1. I figured out what the problem was with testing the button component. I just had to let jest run through the timers so that unit test is nwo functioning
+> 2. Filter pages now use pagination with a few options to customize them. It streamlines things, reduces load time and increases accessibility.
+> 3. Made some minor accessibility changes to the sidebar - more changes coming int he future
+> 4. I changed cards to use a monospace font. This way how much space the content is relatively equal per word (minus line breaks)
+> 5. All data for the filters is created during the static build process, much like the global search items. This way they are generated at build time and not whenever the page is loaded. There are a number of additional effeciency I added into this (it was my plan to do it separately, but it worked out this way).
+> 6. The content/excerpt is limited to 150-200 words depending on the category
+> 7. The meta criteria is generated as a hashtable. This limits search time to O(n * m) (instead of of O(m * n * o)), though n is an array of length 1-2 usually. To go with this, the filters now use the hashtable instead of the string to filter. The one disadvantage is that partially completed search strings will now no longer give the results for the full string (such as typing 'ap' instead of 'api'). This, however, I think is worth it because the slight decrease in functionality greatly increases effeciency - words for a programmer to die by.
+> 8. Decreased the debounce timeout for the filter string to search for the items. 600ms felt like it was loading something instead of waiting for the input to be complete. 250ms now gives the user a moment to search.
+> 9. Unit tests have been fixed to work with these new changes.
+* 9/26/2021: Added E2E tests for accessibility and obviously changed a bunch of stuff to increase accessibility. For some reason, this gives a bunch of weird messages, durign the build process, but I have no idea why. I may do more E2E tests, but almost all functionality is covered under the normal tests. I also added the static filter files to .gitignore so they're forcibly generated. Because of this, the file system now generates the appropriate folders if they don't exist already. I also formatted the messages using the reporter given to the method during the build process so they look more similar to the other gatsby messages (I swear this has nothing to do with adding the weird messages).
+* 9/26/2021 (later): Forgot to delete a console log and a few tweaks for smaller screens.
+* 9/27/2021: I thought I was just going to update the text on a few items. Turns out I needed to fix the test suite. To be honest, the unit tests are way more brittle than I thought they would be. I will have to consider how I unit test React components in the future. The accessibility tests found new color contrast errors I had no idea about. I have fixed them, though I'm unsure if it will find more. It all seems functional now.
+* 10/1/2021: Adjusted some styles for media queries. Notably, reduced the font size for phones and made the expanded sidebar smaller.
+* 10/13/2021: Added Travis for CI
+* 10/23/2021: Added some memoization. A lot of extraneous stuff gets painted for reasons I'm not sure yet. I'll have to investigate.
+* 12/5/2021 (pt. 1): Changed the sidebar to become just an icon on mobile when it's closed (to save screen space, inspired by me browsing elixirschool.com). I also updated gatsby to v4.3, not of my volition but because my WP plugin stopped working.
+* 12/5/2021 (pt. 2):  Added github action because Travis CI no longer wants to let me test for free. Also changed the SyntaxHighlighter unit test and now put in a timer to measure how long static generation for search indexing takes.
+* 12/6/2021: Remove travis workflow
+* 12/10/2021: A lot of UI updates and adding day/night/customizable themes
+> 1. The clickable part of the sidebar now should not exceed the sidebar
+> 2. IconGrid is now a grid instead of a flexbox
+> 3. Added a useValidation hook and changed past self-contained validation to use it
+> 4. Project Cards are now divided into two parts with fixed widths
+> 5. The Logo is now a div with a mask of the SVG. That way I can change the fill without having to use an svg tag.
+> 6. Change text inputs and textareas to have a border, not an outline.
+> 7. Pagination now sets all items within it to a certain width instead of cards specifically having that width
+> 8. A lot of color variables have been rendered useless and been replaced by color themes - they will be removed soo 
+> 9. A new day/night toggle is available on the sidebar.
+> 10. To accomplish this, I added redux. For testing, I added a wrapper and removed most snapshots because snapshot testing isn't great in the first place. DownArrow is the only component that still uses it. The wrapper must include the Layout component since it contains the theme settings for the styled components. Long story short, all unit tests that required a certain button or image now have to contend with another button or image.
+* 12/14/2021: I've built out a few features from the previous step. To be more exact:
+> 1. GitHub actions run only on pull request, not on push
+> 2. Fixed the readme to not be hot garbage. I can preview the markdown file without uploading it so I have no excuse.
+> 3. Changed the default color theme to day
+> 4. Changed how projects were displayed - they now have a header like posts/books/stories
+> 5. Moved the headers for blog posts/books/stories/projects into their own components.
+> 6. Added custom Cypress commands to cut down slightly on the repetition that was added with the new tests for color themes. I also found out that the syntax highlighter made by prism light needed a tabindex of 0 or something. It never showed up on the accessibility tests before, but I'm always happy to make thiings more accessible.

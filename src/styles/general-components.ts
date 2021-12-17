@@ -318,6 +318,13 @@ export const DisappearOnPhone= styled.div`
     }
 `
 
+export const Box = styled.div`
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+    gap: 1rem;
+`
+
 export const WpContent = styled.div<{ fontSize?: string }>`
     font-size: ${props => props.fontSize ? props.fontSize : FONT_LG};
 

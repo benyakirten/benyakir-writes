@@ -2,7 +2,7 @@ import * as React from "react";
 import { navigate } from "gatsby";
 
 import { render, cleanup, screen } from "@TestUtils";
-import BlogCard from "@Variant/BlogCard/BlogCard.component";
+import BlogCard from "@Variant/Cards/BlogCard/BlogCard.component";
 import { FlattenedBlogPost } from "@Types/posts";
 
 describe("BlogCard component", () => {

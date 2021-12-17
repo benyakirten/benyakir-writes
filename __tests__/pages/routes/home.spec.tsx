@@ -22,7 +22,7 @@ describe('home page', () => {
         render(<IndexPage />)
         const title = await screen.findByText("Welcome to Benyakir Writes")
         const para = title.nextElementSibling
-        expect(para?.tagName).toEqual("P")
+        expect(para?.tagName).toEqual("SECTION")
     })
 
     it('should render a subtitle with another following paragraph', async () => {

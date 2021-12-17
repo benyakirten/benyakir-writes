@@ -29,9 +29,9 @@ describe("blog page", () => {
 
     it("should render a main heading", async () => {
         render(<AuthorPage />);
-        const title = await screen.getByText("Author");
-        expect(title).toBeTruthy();
-        expect(title.tagName).toEqual("H1");
+        const titles = await screen.getAllByText("Author");
+        expect(titles[1]).toBeTruthy();
+        expect(titles[1].tagName).toEqual("H1");
     });
 
     it("should render a story card for every short story", async () => {

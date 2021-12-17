@@ -1,12 +1,9 @@
 interface ThemeState {
   themes: BaseTheme[];
-  useComputerPreferences: boolean;
-  prefers: ColorPreference;
+  ignoreComputerPreferences: boolean;
+  prefers: string;
   active: BaseTheme;
-  autoLoad: boolean;
 }
-
-type ColorPreference = 'day' | 'night';
 
 interface BasicThemeSection {
   background: string;

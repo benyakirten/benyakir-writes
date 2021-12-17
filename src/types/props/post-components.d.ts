@@ -1,3 +1,5 @@
+import { FlattenedBlogPost, FlattenedProject, FlattenedSingleBook, FlattenedSingleStory } from "../posts"
+
 type LeadPageProps = {
   filter: ReactElement;
   title: string;
@@ -57,4 +59,24 @@ type AllBlogFilterProps = {
 type CategoryBlogFilterProps = {
   allPosts: FlattenedBlogPost[]
   onFilter: (posts: FlattenedBlogPost[]) => void;
+}
+
+type BookHeaderProps = {
+  book: FlattenedSingleBook;
+}
+
+type StoryHeaderProps = {
+  story: FlattenedSingleStory;
+}
+
+type ProjectHeaderProps = {
+  project: FlattenedProject;
+  icons: FileNode[];
+  loading: boolean;
+  latestUpdate?: Date;
+  err?: string;
+}
+
+type PostHeaderProps = {
+  post: FlattenedBlogPost;
 }
