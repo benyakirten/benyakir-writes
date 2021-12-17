@@ -7,7 +7,7 @@ describe("Category template", () => {
 
     it("Has no accessibility violations upon page load", () => {
         cy.checkA11y();
-        cy.openAndChangeTheme();
+        cy.changeThemeAndCheck();
     })
 
     it('Has no accessibility violations when text filter is changed', () => {
@@ -15,7 +15,7 @@ describe("Category template", () => {
         cy.wait(300)
         cy.checkA11y();
 
-        cy.openAndChangeTheme();
+        cy.changeThemeAndCheck();
     })
 
     it("Has no accessibility violations after browsing through the pagination", () => {
@@ -25,7 +25,7 @@ describe("Category template", () => {
         cy.get('[data-cy=page-flip-left]').eq(0).click()
         cy.checkA11y();
 
-        cy.openAndChangeTheme();
+        cy.changeThemeAndCheck();
     })
 
     it("Has no accessibility violations after the dates are changed", () => {
@@ -39,7 +39,7 @@ describe("Category template", () => {
         cy.get("input[type=date]").eq(1).type("2020-11-01")
         cy.checkA11y()
 
-        cy.openAndChangeTheme();
+        cy.changeThemeAndCheck();
     })
 
     it("Has no accessibility violations after the tag filters are changed", () => {
@@ -47,14 +47,14 @@ describe("Category template", () => {
         cy.wait(1000)
         cy.checkA11y();
 
-        cy.openAndChangeTheme();
+        cy.changeThemeAndCheck();
 
         cy.get("[data-cy=multiple-choice]").then(() => {
             cy.get("[data-cy=select-ide]").click()
             cy.wait(1000)
             cy.checkA11y();
             
-            cy.changeTheme();
+            cy.changeThemeAndCheck();
         })
     })
 })

@@ -8,7 +8,7 @@ describe("Portfolio accessibility", () => {
     it('Has no accessibility violations after loading the page', () => {
         cy.checkA11y();
 
-        cy.openAndChangeTheme();
+        cy.changeThemeAndCheck();
     });
 
     it('Has no accessibility violations when the items per filter is changed', () => {
@@ -16,7 +16,7 @@ describe("Portfolio accessibility", () => {
         cy.wait(300)
         cy.checkA11y();
 
-        cy.openAndChangeTheme();
+        cy.changeThemeAndCheck();
     })
 
     it("Has no accessibility violations when the date is changed", () => {
@@ -30,6 +30,6 @@ describe("Portfolio accessibility", () => {
         cy.get("input[type=date]").eq(1).type("2020-11-01")
         cy.checkA11y()
 
-        cy.openAndChangeTheme();
+        cy.changeThemeAndCheck();
     })
 })

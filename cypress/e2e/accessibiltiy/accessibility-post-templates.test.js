@@ -5,7 +5,7 @@ describe("Project template", () => {
         cy.visit("/project/benyakir-writes").get("main").injectAxe();
         cy.checkA11y();
 
-        cy.openAndChangeTheme();
+        cy.changeThemeAndCheck();
     })
 })
 
@@ -14,7 +14,7 @@ describe("Book template", () => {
         cy.visit("/book/delusions-of-form").get("main").injectAxe();
         cy.checkA11y();
 
-        cy.openAndChangeTheme();
+        cy.changeThemeAndCheck();
     })
 })
 
@@ -23,7 +23,7 @@ describe("Shortstory template", () => {
         cy.visit("/story/the-human-error").get("main").injectAxe();
         cy.checkA11y();
 
-        cy.openAndChangeTheme();
+        cy.changeThemeAndCheck();
     }) 
 })
 
@@ -32,6 +32,6 @@ describe("Blog post template",  () => {
         cy.visit("/post/a-weeks-worth-backend-with-graphql-and-django").get("main").injectAxe();
         cy.checkA11y();
 
-        cy.openAndChangeTheme();
+        cy.changeThemeAndCheck();
     })
 })
