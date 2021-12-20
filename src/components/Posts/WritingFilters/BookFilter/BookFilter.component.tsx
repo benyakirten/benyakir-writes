@@ -6,14 +6,16 @@ import Filter from "@Input/Filter/Filter.component";
 import DatePicker from "@Input/DatePicker/DatePicker.component";
 import Foldout from "@Gen/Foldout/Foldout.component";
 
-import useDropdown from "@Hooks/useDropdown.hook";
+import useAlternation from "@Hooks/useAlternation.hook";
 import { hasSomeContent } from "@Utils/search";
+
+import { BookFilterProps } from "@Types/props/post-components";
 
 const BookFilter: React.FC<BookFilterProps> = ({
     books,
     onFilter
 }) => {
-    const [dropdownOpen, setDropdown] = useDropdown();
+    const [dropdownOpen, setDropdown] = useAlternation();
 
     const [publishedBefore, setPublishedBefore] = React.useState<Date>(books[0].published.date)
     const [publishedAfter, setPublishedAfter] = React.useState<Date>(books[books.length - 1].published.date)

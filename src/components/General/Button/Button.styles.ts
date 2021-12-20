@@ -2,12 +2,7 @@ import styled from 'styled-components'
 
 import {
     FONT_MD,
-    GRAY_100,
-    SECONDARY_900,
-    BLACK,
-    WHITE,
-    Z_ABOVE,
-    GRAY_800
+    Z_ABOVE
 } from '@StyleVars'
 import { media } from '@/styles/queries'
 

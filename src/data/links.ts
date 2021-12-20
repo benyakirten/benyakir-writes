@@ -10,7 +10,7 @@ export const blogLinks: LinkItem[] = [
 export const authorLinks: LinkItem[] = ["Books", "Short Stories"];
 
 export const generalLinks: LinkItem[] = [
-  // 'theme',
+  'theme',
   'about',
   'contact',
   'privacy',

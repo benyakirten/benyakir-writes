@@ -10,8 +10,6 @@ import {
     TRIANGLES_FOR_CORNER_INDEX
 } from '@Constants'
 
-import { ButtonProps } from '@Types/props'
-
 const Button: React.FC<ButtonProps> = ({
     disabled = false,
     type = 'button',

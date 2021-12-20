@@ -1,0 +1,3 @@
+interface DragState {
+  draggedIndex: number;
+}

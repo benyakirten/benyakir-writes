@@ -5,18 +5,20 @@ import DatePicker from "@Input/DatePicker/DatePicker.component";
 import MultipleChoice from "@Input/MultipleChoice/MultipleChoice.component";
 import Foldout from "@Gen/Foldout/Foldout.component";
 
-import useDropdown from "@Hooks/useDropdown.hook";
+import useAlternation from "@/hooks/useAlternation.hook";
 import { SubHeading } from "@Styles/general-components";
 
 
 import { hasSomeContent } from "@Utils/search";
 import { getValuesForSelected } from "@Utils/filter";
 
+import { AllBlogFilterProps } from "@Types/props/post-components";
+
 const CategoryFilter: React.FC<AllBlogFilterProps> = ({
     allPosts,
     onFilter,
 }) => {
-    const [dropdownOpen, setDropdown] = useDropdown();
+    const [dropdownOpen, setDropdown] = useAlternation();
 
     // Min and day range is based on first and latest repo published
     const [publishedBefore, setPublishedBefore] = React.useState<Date>(

@@ -22,10 +22,13 @@ const PrivacyPage: React.FC = () => {
             <Grouping>
                 <LeadHeading>Privacy Policy</LeadHeading>
                 <BigParagraph>
-                    No data is collected from any website visitor. You can rest
+                    No personal data is collected from any website visitor. You can rest
                     assurred your data will remain with you and will not be
                     shared with anyone for any reason. Mostly because there
-                    isn't anything to share.
+                    isn't anything to share. Theme preferences, if set, will be
+                    stored in local storage, which is inaccessible to anyone outside of
+                    this browser when it visits this website. It can be deleted
+                    at any time.
                 </BigParagraph>
             </Grouping>
             <Grouping>

@@ -15,7 +15,7 @@ import CustomLink from "@Gen/CustomLink/CustomLink.component";
 import Toggle from "@Input/Toggle/Toggle.component";
 import Logo from "./Logo/Logo.component";
 
-import useDropdown from "@Hooks/useDropdown.hook";
+import useAlternation from "@/hooks/useAlternation.hook";
 import Search from "../Search/Search.component";
 
 import { capitalize } from "@Utils/strings";
@@ -26,7 +26,7 @@ import { toggleTimeOfDay } from "@Store/theme/theme.slice";
 import { authorLinks, blogLinks, generalLinks } from "@Data/links";
 
 const Sidebar: React.FC = () => {
-  const [openDropdown, setOpenDropdown] = useDropdown();
+  const [openDropdown, setOpenDropdown] = useAlternation();
   const [opening, setOpening] = React.useState<boolean>(false);
 
   const dispatch = useAppDispatch();

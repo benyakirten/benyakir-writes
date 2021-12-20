@@ -64,3 +64,9 @@ type LinkItem = string | {
 }
 
 type LookupActionType = 'TOGGLE' | 'ACTIVATE' | 'DEACTIVATE'
+
+interface ArrayIndexTransfer {
+    start: number;
+    end: number;
+    position: DraggedOverPosition;
+}

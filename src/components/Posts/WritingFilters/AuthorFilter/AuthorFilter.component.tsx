@@ -7,16 +7,18 @@ import DatePicker from "@Input/DatePicker/DatePicker.component"
 import MultipleChoice from "@Input/MultipleChoice/MultipleChoice.component"
 import Foldout from "@Gen/Foldout/Foldout.component"
 
-import useDropdown from "@Hooks/useDropdown.hook"
+import useAlternation from "@Hooks/useAlternation.hook"
 import { getValuesForSelected } from "@Utils/filter"
 import { hasSomeContent } from "@Utils/search"
+
+import { AuthorFilterProps } from "@Types/props/post-components"
 
 const AuthorFilter: React.FC<AuthorFilterProps> = ({
     allBooks,
     allStories,
     onFilter
 }) => {
-    const [dropdownOpen, setDropdown] = useDropdown()
+    const [dropdownOpen, setDropdown] = useAlternation()
     
     // Min and max date are determined by what's the first book or story published and idem for the latest one published
     const earliestPubDate = React.useMemo(

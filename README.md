@@ -44,7 +44,7 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 ## Planned Changes
 
 > Add the showcase pages from benyakiredits.com
-> Add customizable pallets and various options for theme
+> Add customizable font sizes and allow all items to be moved around.
 
 ## Changelog
 
@@ -94,10 +94,17 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 > 8. A lot of color variables have been rendered useless and been replaced by color themes - they will be removed soo 
 > 9. A new day/night toggle is available on the sidebar.
 > 10. To accomplish this, I added redux. For testing, I added a wrapper and removed most snapshots because snapshot testing isn't great in the first place. DownArrow is the only component that still uses it. The wrapper must include the Layout component since it contains the theme settings for the styled components. Long story short, all unit tests that required a certain button or image now have to contend with another button or image.
-* 12/14/2021: I've built out a few features from the previous step. To be more exact:
+* 12/16/2021: I've built out a few features from the previous step. To be more exact:
+> 1. Fixed the readme to not be hot garbage. I can preview the markdown file without uploading it so I have no excuse.
+> 2. Changed the default color theme to day
+> 3. Changed how projects were displayed - they now have a header like posts/books/stories
+> 4. Moved the headers for blog posts/books/stories/projects into their own components.
+> 5. Added custom Cypress commands to cut down slightly on the repetition that was added with the new tests for color themes. I also found out that the syntax highlighter made by prism light needed a tabindex of 0 or something. It never showed up on the accessibility tests before, but I'm always happy to make thiings more accessible.
+* 12/20/2021: I realized that the night theme had some bad colors in it, so I pushed when the theme page isn't built out. But now, I've done the following.
 > 1. GitHub actions run only on pull request, not on push
-> 2. Fixed the readme to not be hot garbage. I can preview the markdown file without uploading it so I have no excuse.
-> 3. Changed the default color theme to day
-> 4. Changed how projects were displayed - they now have a header like posts/books/stories
-> 5. Moved the headers for blog posts/books/stories/projects into their own components.
-> 6. Added custom Cypress commands to cut down slightly on the repetition that was added with the new tests for color themes. I also found out that the syntax highlighter made by prism light needed a tabindex of 0 or something. It never showed up on the accessibility tests before, but I'm always happy to make thiings more accessible.
+> 2. Fixed one last time I didn't use the new cypress command. This makes the GH Actions Accessibility tests work
+> 3. Added the theme page to the accessibility tests
+> 4. Added the new components to the unit pages
+> 5. Changed the name of useDropdown to useAlternation. This is because it was no longer just used for dropdowns. However, alternation isn't a great name, and toggle fits more, but useToggle is already taken by a hook that could, theoretically, be called useOnOff, but useToggle is a great solution. I'll have to ponder this.
+> 6. Added some drag and drop components because I always need practice with them. Oh yeah, and they were useful here.
+> 7. Still working on theme customization. The plan is that day and night themes are immutable, but all else can be customized. And those choices are stored in local storage. I plan to add a reset button too, which will reinitialize all data with the default settings (day theme, use computer preferences for day/night, clear local storage).

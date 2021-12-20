@@ -47,21 +47,14 @@ describe("Portfolio accessibility", () => {
         cy.wait(1000)
         cy.checkA11y();
 
-        cy.get('[data-cy=open-sidemenu]').click()
-        cy.wait(1000)
-        
-        cy.get('[data-cy=sidebar-theme-toggle]').click()
-        cy.wait(1000)
-        cy.checkA11y()
+        cy.changeThemeAndCheck();
 
         cy.get("[data-cy=multiple-choice]").then(() => {
             cy.get("[data-cy=select-netlify]").eq(0).click()
             cy.wait(1000)
             cy.checkA11y();
             
-            cy.get('[data-cy=sidebar-theme-toggle]').click()
-            cy.wait(1000)
-            cy.checkA11y()
+            cy.changeThemeAndCheck();
         })
     })
 

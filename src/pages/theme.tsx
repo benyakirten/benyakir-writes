@@ -9,14 +9,14 @@ import {
   Box,
 } from "@Styles/general-components";
 import Toggle from "@Input/Toggle/Toggle.component";
+import ThemeCard from "@Variant/Cards/ThemeCard/ThemeCard.component";
 
 import { useAppDispatch, useAppSelector } from "@Store/hooks";
 import { toggleUseComputerPreferences } from "@Store/theme/theme.slice";
 
 const Theme: React.FC = () => {
-  const themeStore = useAppSelector((store) => store.theme);
+  const themeStore = useAppSelector((store) => store.theme)
   const dispatch = useAppDispatch();
-  console.log(themeStore);
   return (
     <>
       <Helmet>
@@ -32,21 +32,15 @@ const Theme: React.FC = () => {
         <SubHeading>General Options</SubHeading>
         <Paragraph>This is a work in progress. I have added this page because I realized I needed to make some UI updates, and I hadn't yet finished with this.</Paragraph>
         <Box>
-          <Paragraph>Ignore Default Color Theme:</Paragraph>
+          <Paragraph>Use Computer Theme Preferences:</Paragraph>
           <Toggle
             label={themeStore.ignoreComputerPreferences ? "Off" : "On"}
             name="theme-ignore-computer-preferences"
             onToggle={() => dispatch(toggleUseComputerPreferences())}
-            value={themeStore.ignoreComputerPreferences}
+            value={!themeStore.ignoreComputerPreferences}
           />
         </Box>
-        {/* <Box>
-          <Paragraph>Preferred Color Theme:</Paragraph>
-          {themeStore.prefers}
-        </Box>
-        <Box>
-          <Paragraph>Set Active Theme:</Paragraph>
-        </Box> */}
+        <ThemeCard />
       </Grouping>
     </>
   );

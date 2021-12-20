@@ -1,4 +1,4 @@
-type DropdownHook = () => [string, (val: string) => void]
+type AlternationHook = () => [string, (val: string) => void]
 
 type LookupHook = (items: BooleanLookup) => [BooleanLookup, React.Dispatch<{
     type: LookupActionType;

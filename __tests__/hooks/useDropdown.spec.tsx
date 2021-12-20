@@ -1,10 +1,10 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react"
 
-import useDropdown from "@Hooks/useDropdown.hook"
+import useAlternation from "@Hooks/useAlternation.hook"
 
 const HookTest: React.FC = () => {
-    const [dropdown, setDropdown] = useDropdown()
+    const [dropdown, setDropdown] = useAlternation()
     return (
         <>
             <button title="setTest1" onClick={() => setDropdown('test1')}>Set Test 1</button>
@@ -14,7 +14,7 @@ const HookTest: React.FC = () => {
     )
 }
 
-describe('useDropdown hook', () => {
+describe('useAlternation hook', () => {
     let buttonOne: HTMLButtonElement;
     let buttonTwo: HTMLButtonElement;
     let output: HTMLDivElement;

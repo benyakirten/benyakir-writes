@@ -45,14 +45,3 @@ interface ToggleProps extends InputProps {
   onToggle: () => void;
   dataCy?: string
 }
-
-interface DragTarget {
-  title: string;
-  value: string;
-}
-
-interface DraggableListProps extends InputProps {
-  onDrag: (index: number) => void;
-  items: string[];
-  targets: DragTarget[]
-}

@@ -55,7 +55,7 @@ const Search: React.FC<SearchProps> = ({ open, onClick }) => {
     return (
         <Foldout
             open={open}
-            topbar={<SubHeading>Search</SubHeading>}
+            topbar={<SubHeading style={{ transition: 'color 0.8s ease' }}>Search</SubHeading>}
             onClick={onClick}
             height={filteredResults.length === 0 ? '25rem' : '32rem'}
         >

@@ -1,14 +1,3 @@
-// FONT_XXS: string;
-// FONT_SM: string;
-// FONT_MD: string;
-// FONT_LG: string;
-// FONT_XL: string;
-// FONT_XXL: string;
-// FONT_XXXL: string;
-// SHADOW_MD: string;
-// SHADOW_LG: string;
-// SIZE_MD: string;
-
 export const defaultDayTheme: BaseTheme = {
   base: {
     name: 'day',

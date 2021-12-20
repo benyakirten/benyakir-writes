@@ -1,15 +1,17 @@
 import * as React from "react"
 
+import { SubHeading} from "@Styles/general-components"
 import Filter from "@Input/Filter/Filter.component"
 import DatePicker from "@Input/DatePicker/DatePicker.component"
 import MultipleChoice from "@Input/MultipleChoice/MultipleChoice.component"
 import Foldout from "@Gen/Foldout/Foldout.component"
 
-import useDropdown from "@Hooks/useDropdown.hook"
+import useAlternation from "@Hooks/useAlternation.hook"
 import { getMultipleChoiceHeight, getValuesForSelected } from "@Utils/filter"
 import { hasSomeContent } from "@Utils/search"
 
-import { SubHeading} from "@Styles/general-components"
+
+import { ProjectsFilterProps } from "@Types/props/post-components"
 
 
 const ProjectFilter: React.FC<ProjectsFilterProps> = ({
@@ -18,7 +20,7 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
     allTechs,
     onFilter
 }) => {
-    const [dropdownOpen, setDropdown] = useDropdown()
+    const [dropdownOpen, setDropdown] = useAlternation()
 
     const [publishedBefore, setPublishedBefore] = React.useState<Date>(allProjects[0].firstReleased.date)
     const [publishedAfter, setPublishedAfter] = React.useState<Date>(allProjects[allProjects.length - 1].firstReleased.date)
