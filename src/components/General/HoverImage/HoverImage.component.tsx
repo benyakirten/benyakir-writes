@@ -2,8 +2,6 @@ import * as React from "react"
 
 import { StyledFigure } from "./HoverImage.styles"
 
-import { HoverImageProps } from "@Types/props"
-
 const HoverImage: React.FC<HoverImageProps> = ({
     publicURL,
     name,

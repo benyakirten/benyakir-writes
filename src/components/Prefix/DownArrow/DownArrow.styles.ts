@@ -4,7 +4,6 @@ import { FONT_XL } from '@StyleVars';
 export const StyledArrow = styled.span<{ open: boolean }>`
     position: absolute;
     left: -1.5rem;
-    top: 0.4rem;
     
     outline: none;
 

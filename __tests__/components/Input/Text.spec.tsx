@@ -1,45 +1,45 @@
 import * as React from "react";
-import 'jest-styled-components'
+import "jest-styled-components";
 
 import { render, cleanup, screen, fireEvent } from "@TestUtils";
-import Text from "@Input/Text/Text.component"
+import { Text } from "@Input";
 
-describe('Text component', () => {
-    const changeSpy = jest.fn()
+describe("Text component", () => {
+  const changeSpy = jest.fn();
 
-    const testProps = {
-        onChange: changeSpy,
-        value: 'test val',
-        label: 'test text',
-        name: 'test-text'
-    }
+  const testProps = {
+    onChange: changeSpy,
+    value: "test val",
+    label: "test text",
+    name: "test-text",
+  };
 
-    beforeEach(changeSpy.mockClear)
+  beforeEach(changeSpy.mockClear);
 
-    afterEach(cleanup)
-    
-    it('should render correctly', () => {
-        expect(() => render(<Text {...testProps} />)).not.toThrow()
-    })
+  afterEach(cleanup);
 
-    it('should render a text input with a value, name and id according to props with an accompanying label with an htmlFor corresponding to the id', async () => {
-        render(<Text {...testProps} />)
-        const input = await screen.findByRole("textbox") as HTMLInputElement
-        expect(input.id).toEqual('test-text')
-        expect(input.getAttribute('name')).toEqual('test-text')
-        expect(input.value).toEqual('test val')
+  it("should render correctly", () => {
+    expect(() => render(<Text {...testProps} />)).not.toThrow();
+  });
 
-        const label = input.nextElementSibling!
-        expect(label.getAttribute('for')).toEqual('test-text')
-        expect(label.textContent).toEqual('test text')
-    })
+  it("should render a text input with a value, name and id according to props with an accompanying label with an htmlFor corresponding to the id", async () => {
+    render(<Text {...testProps} />);
+    const input = (await screen.findByRole("textbox")) as HTMLInputElement;
+    expect(input.id).toEqual("test-text");
+    expect(input.getAttribute("name")).toEqual("test-text");
+    expect(input.value).toEqual("test val");
 
-    it('should call the onChange method whenever there is text input into the input', async () => {
-        render(<Text {...testProps} />)
-        const input = await screen.findByRole("textbox") as HTMLInputElement
+    const label = input.nextElementSibling!;
+    expect(label.getAttribute("for")).toEqual("test-text");
+    expect(label.textContent).toEqual("test text");
+  });
 
-        fireEvent.change(input, { target: { value: 'a new value' } })
-        expect(changeSpy).toHaveBeenCalledTimes(1)
-        expect(changeSpy).toHaveBeenCalledWith('a new value')
-    })
-})
+  it("should call the onChange method whenever there is text input into the input", async () => {
+    render(<Text {...testProps} />);
+    const input = (await screen.findByRole("textbox")) as HTMLInputElement;
+
+    fireEvent.change(input, { target: { value: "a new value" } });
+    expect(changeSpy).toHaveBeenCalledTimes(1);
+    expect(changeSpy).toHaveBeenCalledWith("a new value");
+  });
+});

@@ -3,8 +3,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import { render as rtlRender } from "@testing-library/react";
 import { Provider } from "react-redux";
 
+import { Layout } from "@Layout";
 import themeReducer from "@Store/theme/theme.slice";
-import Layout from "@Layout/Layout.component";
 
 // I'm not this sophisticated - https://redux.js.org/usage/writing-tests
 

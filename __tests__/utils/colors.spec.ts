@@ -42,7 +42,7 @@ describe('convertHexToRGBA', () => {
       'rgba(0, 0, 0, 0)',
       'rgba(0, 0, 0, 1)'
     ]
-  
+
     for (let i = 0; i < correctInputs.length; i++) {
       const { val, op } = correctInputs[i]
       const result = expected[i]
@@ -76,7 +76,7 @@ describe('convertHexToRGBA', () => {
       'rgba(0, 0, 0, 0)',
       'rgba(0, 0, 0, 1)'
     ]
-  
+
     for (let i = 0; i < inputs.length; i++) {
       const { val, op } = inputs[i]
       const result = expected[i]
@@ -141,9 +141,9 @@ describe('convertHexToRGBString', () => {
         blue: 'cc'
       }
     ]
-  
+
     for (let i = 0; i < correctInputs.length; i++) {
-      const val  = correctInputs[i]
+      const val = correctInputs[i]
       const result = expected[i]
       expect(convertHexToRGBString(val)).toEqual(result)
     }
@@ -151,11 +151,11 @@ describe('convertHexToRGBString', () => {
 
   it('will throw errors if the input is incorrectly formatted', () => {
     const badInputs = [
-        '#0000000',
-        '#ab',
-        'abcdef',
-        '       ',
-      ]
+      '#0000000',
+      '#ab',
+      'abcdef',
+      '       ',
+    ]
 
     for (let input of badInputs) {
       expect(() => convertHexToRGBString(input)).toThrow();
@@ -209,9 +209,9 @@ describe('convertRGBStringToRGBNumber', () => {
         blue: 204
       }
     ]
-  
+
     for (let i = 0; i < correctInputs.length; i++) {
-      const val  = correctInputs[i]
+      const val = correctInputs[i]
       const result = expected[i]
       expect(convertRGBStringToRGBNumber(val)).toEqual(result)
     }
@@ -294,9 +294,9 @@ describe('convertRGBNumberToRGBString', () => {
         blue: 'cc'
       }
     ]
-  
+
     for (let i = 0; i < correctInputs.length; i++) {
-      const val  = correctInputs[i]
+      const val = correctInputs[i]
       const result = expected[i]
       expect(convertRGBNumberToRGBString(val)).toEqual(result)
     }
@@ -336,10 +336,10 @@ describe('validateRGBNumbers', () => {
   it('will return true for known correct inputs', () => {
     const correctInputs = [
       [155, 255, 125],
-      [0,0,0],
-      [1,2,3,4,5,5,6,6,7,8,255,255,255,255,21,18]
+      [0, 0, 0],
+      [1, 2, 3, 4, 5, 5, 6, 6, 7, 8, 255, 255, 255, 255, 21, 18]
     ]
-  
+
     for (let input of correctInputs) {
       expect(validateRGBNumbers(...input)).toBe(true)
     }
@@ -350,9 +350,9 @@ describe('validateRGBNumbers', () => {
       [100.1],
       [],
       [275],
-      [100,115,125,255,256],
+      [100, 115, 125, 255, 256],
       [-50],
-      [100,200,100,200,-1]
+      [100, 200, 100, 200, -1]
     ]
 
     for (let input of incorrectInputs) {
@@ -391,9 +391,9 @@ describe('convertHexToRGBNumber', () => {
         blue: 204
       }
     ]
-  
+
     for (let i = 0; i < correctInputs.length; i++) {
-      const val  = correctInputs[i]
+      const val = correctInputs[i]
       const result = expected[i]
       expect(convertHexToRGBNumber(val)).toEqual(result)
     }
@@ -407,9 +407,9 @@ describe('convertHexToRGBNumber', () => {
       '       ',
     ]
 
-  for (let input of badInputs) {
-    expect(() => convertHexToRGBString(input)).toThrow();
-  }
+    for (let input of badInputs) {
+      expect(() => convertHexToRGBString(input)).toThrow();
+    }
   })
 })
 
@@ -444,9 +444,9 @@ describe('convertRGBNumberToHex', () => {
       '#000',
       '#aabbcc'
     ]
-  
+
     for (let i = 0; i < correctInputs.length; i++) {
-      const val  = correctInputs[i]
+      const val = correctInputs[i]
       const result = expected[i]
       expect(convertRGBNumberToHex(val)).toEqual(result)
     }
@@ -506,9 +506,9 @@ describe('changeHex', () => {
       '#1a1a1a',
       '#91d5b3'
     ]
-  
+
     for (let i = 0; i < correctInputs.length; i++) {
-      const val  = correctInputs[i]
+      const val = correctInputs[i]
       const result = expected[i]
       expect(changeHex(val.color, val.percent, val.positive)).toEqual(result)
     }
@@ -534,7 +534,7 @@ describe('changeHex', () => {
     ]
 
     for (let i = 0; i < inputs.length; i++) {
-      const val  = inputs[i]
+      const val = inputs[i]
       const result = expected[i]
       expect(changeHex(val.color, val.percent, val.positive)).toEqual(result)
     }

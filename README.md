@@ -44,7 +44,10 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 ## Planned Changes
 
 > Add the showcase pages from benyakiredits.com
-> Add customizable pallets and various options for theme
+> Add buttons to the theme customization page so they can be used in addition to the drag and drop features
+> Add unit tests and accessibility tests for all the new components/functions/etc - these are: useMultiple, useToggle hooks; dom, other and strings utils; all four headers; all the new theme variant components; the theme page; all the draggable components
+> Add customizable font sizes and allow all items to be moved around
+> Fix spacing in styled components
 
 ## Changelog
 
@@ -94,10 +97,25 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 > 8. A lot of color variables have been rendered useless and been replaced by color themes - they will be removed soo 
 > 9. A new day/night toggle is available on the sidebar.
 > 10. To accomplish this, I added redux. For testing, I added a wrapper and removed most snapshots because snapshot testing isn't great in the first place. DownArrow is the only component that still uses it. The wrapper must include the Layout component since it contains the theme settings for the styled components. Long story short, all unit tests that required a certain button or image now have to contend with another button or image.
-* 12/14/2021: I've built out a few features from the previous step. To be more exact:
+* 12/16/2021: I've built out a few features from the previous step. To be more exact:
+> 1. Fixed the readme to not be hot garbage. I can preview the markdown file without uploading it so I have no excuse.
+> 2. Changed the default color theme to day
+> 3. Changed how projects were displayed - they now have a header like posts/books/stories
+> 4. Moved the headers for blog posts/books/stories/projects into their own components.
+> 5. Added custom Cypress commands to cut down slightly on the repetition that was added with the new tests for color themes. I also found out that the syntax highlighter made by prism light needed a tabindex of 0 or something. It never showed up on the accessibility tests before, but I'm always happy to make thiings more accessible.
+* 12/20/2021: I realized that the night theme had some bad colors in it, so I pushed when the theme page isn't built out. But now, I've done the following.
 > 1. GitHub actions run only on pull request, not on push
-> 2. Fixed the readme to not be hot garbage. I can preview the markdown file without uploading it so I have no excuse.
-> 3. Changed the default color theme to day
-> 4. Changed how projects were displayed - they now have a header like posts/books/stories
-> 5. Moved the headers for blog posts/books/stories/projects into their own components.
-> 6. Added custom Cypress commands to cut down slightly on the repetition that was added with the new tests for color themes. I also found out that the syntax highlighter made by prism light needed a tabindex of 0 or something. It never showed up on the accessibility tests before, but I'm always happy to make thiings more accessible.
+> 2. Fixed one last time I didn't use the new cypress command. This makes the GH Actions Accessibility tests work
+> 3. Changed the name of useDropdown to useAlternation. This is because it was no longer just used for dropdowns. However, alternation isn't a great name, and toggle fits more, but useToggle is already taken by a hook that could, theoretically, be called useOnOff, but useToggle is a great solution. I'll have to ponder this.
+> 4. Added some drag and drop components because I always need practice with them. Oh yeah, and they were useful here.
+* 12/29/2021: Everything's a work in progress.
+> 1. Fixed some stuff so by default the theme should work with your computer color preference.
+> 2. Changed the import path for hooks so they're all just exported from one @Hooks path.
+> 3. It inspired me to do that for all components. It involved a lot of me double checking import paths.
+> 4. I took the opportunity to also make spacing much more consistent in all the components. It should be two spaces everywhere. However, in styled components prettier doesn't automatically register it because it's a template literal. Long story short, it's on my to-do list.
+> 5. Added a useMultiple hook - I added also a useValidation hook on 12/10, I just forgot to mention it in the notes.
+> 6. Add a recursive function to search from a dom node to the body tag if any element has a specific attribute. It's super simple and was needed for at least several months. I just forgot to put it in.
+> 7. Added a max-width to the topbar of the foldout component. It fits much better now.
+> 8. Added a recursive function to flatten a theme into an array of property groups, each with an array of properties, each of which defines an array of accessors (just strings that I use to access the properties on objects) - yeah, the type is string[][][]
+> 9. I figured out reference types in time to figure out how to write a function that accesses and sets nested object properties. Yes, this is a joke, but I wrote an eval function then I was like... wait. My excuse is that it's not the usual code I write because I try to mimic functional programming styles (at least somewhat, I am spoiled by loops and if clauses).
+> 10. So that recursive function is to define a shape of how to access all the  nested properties of a theme so it never needs to be updated (except maybe for looks and stuff). I don't work on things on my portfolio for them to work well or look nice. I do it to push the boundaries of what I know how to do and to implement something I've read about but never really experimented with.

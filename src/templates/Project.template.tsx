@@ -2,11 +2,8 @@ import * as React from "react";
 import { graphql } from "gatsby";
 import { Helmet } from "react-helmet";
 
-import {
-  Grouping,
-  LeadHeading,
-  WpContent,
-} from "@Styles/general-components";
+import { Grouping, LeadHeading, WpContent } from "@Styles/general-components";
+import { ProjectHeader } from "@Variants";
 
 import { getFullTechName, formatProject } from "@Utils/project";
 import { firstWords } from "@Utils/strings";
@@ -14,7 +11,6 @@ import { formatWpText } from "@Utils/posts";
 import { getPrettyDate } from "@Utils/dates";
 
 import { WpProject } from "@Types/query";
-import ProjectHeader from "@/components/Variants/Headers/ProjectHeader.component";
 
 const Project: React.FC<WpProject> = ({ data }) => {
   const project = formatProject(data.wpProject);
@@ -63,7 +59,13 @@ const Project: React.FC<WpProject> = ({ data }) => {
         />
       </Helmet>
       <LeadHeading>{project.title}</LeadHeading>
-      <ProjectHeader project={project} icons={icons} latestUpdate={latestUpdate} loading={loading} err={err} />
+      <ProjectHeader
+        project={project}
+        icons={icons}
+        latestUpdate={latestUpdate}
+        loading={loading}
+        err={err}
+      />
       <Grouping>
         <WpContent dangerouslySetInnerHTML={{ __html: project.content! }} />
       </Grouping>

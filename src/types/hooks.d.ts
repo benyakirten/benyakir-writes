@@ -1,4 +1,4 @@
-type DropdownHook = () => [string, (val: string) => void]
+type AlternationHook = () => [string, (val: string) => void]
 
 type LookupHook = (items: BooleanLookup) => [BooleanLookup, React.Dispatch<{
     type: LookupActionType;
@@ -22,3 +22,5 @@ type ValidationFunction = ValidateNumberFunction | ValidateStringFunction;
 
 type ValidationHook = (valFns: ValidationFunction[], initialValue?: string | number, initialValidity?: boolean) =>
     [string | number, (newVal: string | number) => void, boolean]
+
+type MultipleHook = (allOptions: string[], currentlyOpen?: string[]) => [BooleanLookup, (...alternatables: string[]) => void]

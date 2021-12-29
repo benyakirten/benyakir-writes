@@ -9,7 +9,7 @@ import {
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
 
-import Layout from "@Layout/Layout.component";
+import { Layout } from "@Layout";
 import CategoryTemplate from "@/templates/Category.template";
 
 import store from "@/store";

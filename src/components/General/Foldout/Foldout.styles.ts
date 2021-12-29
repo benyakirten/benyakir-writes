@@ -3,9 +3,13 @@ import styled from 'styled-components';
 import { media } from '@Styles/queries';
 import { multiplyCSSNumber } from '@/utils/strings';
 
-export const FoldoutContainer = styled.div<{ open: boolean }>`
+export const FoldoutContainer = styled.div`
     position: relative;
+`
+
+export const TopbarContainer = styled.div<{ open: boolean }>`
     cursor: ${props => props.open ? 'n-resize' : 's-resize'};
+    max-width: max-content;
 `
 
 export const FoldoutBody = styled.div<{
@@ -17,10 +21,14 @@ export const FoldoutBody = styled.div<{
 }>`
     display: flex;
     flex-direction: column;
+
+    cursor: default;
     
+    height: ${props => props.open ? props.height : '0'};
+
     transform-origin: top;
     transition: all 1s ease;
-    height: ${props => props.open ? props.height : '0'};
+    
     opacity: ${props => props.open ? '1': '0'};
 
     ${media.custom(1160)} {

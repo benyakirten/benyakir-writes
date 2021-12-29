@@ -1,38 +1,50 @@
-import * as React from "react";
-import { Helmet } from "react-helmet";
-import { useLocation } from "@reach/router";
-import { ThemeProvider } from "styled-components";
-import { TransitionGroup, Transition } from "react-transition-group";
+import * as React from "react"
+import { Helmet } from "react-helmet"
+import { useLocation } from "@reach/router"
+import { ThemeProvider } from "styled-components"
+import { TransitionGroup, Transition } from "react-transition-group"
 
-import { GlobalStyles, LayoutContainer, MainContainer } from "./Layout.styles";
+import { GlobalStyles, LayoutContainer, MainContainer } from "./Layout.styles"
+import Sidebar from "./Sidebar/Sidebar.component"
 
-import Sidebar from "./Sidebar/Sidebar.component";
-import { getTransitionStyles, TIMEOUT_500 } from "@Styles/page-transitions";
-import { useAppDispatch, useAppSelector } from "@Store/hooks";
-import { setTheme } from "@Store/theme/theme.slice";
+import { getTransitionStyles, TIMEOUT_500 } from "@Styles/page-transitions"
+import { useAppDispatch, useAppSelector } from "@Store/hooks"
+import { setActiveThemeByName, intializeThemeStore } from "@Store/theme/theme.slice"
 
 const Layout: React.FC = ({ children }) => {
-  const location = useLocation();
-  const theme = useAppSelector(state => state.theme);
-  const dispatch = useAppDispatch();
+  const location = useLocation()
+  const themeStore = useAppSelector(root => root.theme)
+  const dispatch = useAppDispatch()
 
   React.useEffect(() => {
+    const storedComputerPreferences = localStorage.getItem('BWB_ICP') === 'true'
+    let storedThemes = localStorage.getItem('BWB_TS')
+    const storedPreference = localStorage.getItem('BWB_TNP')?.replace(/"/g, '')
+
+    dispatch(intializeThemeStore({
+      computerPreferences: storedComputerPreferences,
+      themes: storedThemes,
+      preference: storedPreference
+    }))
+
     if (window && window.matchMedia) {
-      const darkColorScheme = window.matchMedia('(prefers-color-scheme: dark)');
+      const darkColorScheme = window.matchMedia('(prefers-color-scheme: dark)')
   
       const setThemeByPreference = (e: MediaQueryList) => {
-        dispatch(setTheme(e.matches ? 'night' : 'day'));
+        if (!(storedComputerPreferences)) {
+          dispatch(setActiveThemeByName(e.matches ? 'night' : 'day'))
+        }
       }
   
-      const themePreferenceChange = (e: any) => setThemeByPreference(e.target);
-      darkColorScheme.addEventListener('change', themePreferenceChange);
-      setThemeByPreference(darkColorScheme);
-      () => darkColorScheme.removeEventListener('change', themePreferenceChange);
+      const themePreferenceChange = (e: any) => setThemeByPreference(e.target)
+      darkColorScheme.addEventListener('change', themePreferenceChange)
+      setThemeByPreference(darkColorScheme)
+      return () => darkColorScheme.removeEventListener('change', themePreferenceChange)
     }
-  }, []);
+  }, [])
 
   return (
-    <ThemeProvider theme={theme.active}>
+    <ThemeProvider theme={themeStore.active}>
       <LayoutContainer>
         <Helmet>
           <html lang="en" />
@@ -75,7 +87,7 @@ const Layout: React.FC = ({ children }) => {
         </MainContainer>
       </LayoutContainer>
     </ThemeProvider>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { StyledArrow } from "./DownArrow.styles";
 
-const DownArrow: React.FC<OpenProps> = ({
+const DownArrow: React.FC<DownArrowProps> = ({
     open = false,
     tabIndex = -1,
     onClick = undefined,

@@ -9,9 +9,7 @@ import {
     Grouping,
 } from "@Styles/general-components";
 
-import CustomLink from "@Gen/CustomLink/CustomLink.component";
-import SkewRow from "@Gen/SkewRow/SkewRow.component";
-import HoverImage from "@Gen/HoverImage/HoverImage.component";
+import {CustomLink, SkewRow, HoverImage } from "@Gen";
 
 import { ICONS_TO_LINKS, ICONS_TO_COLORS } from "@Constants";
 

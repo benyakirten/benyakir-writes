@@ -3,6 +3,7 @@ interface ThemeState {
   ignoreComputerPreferences: boolean;
   prefers: string;
   active: BaseTheme;
+  error?: string;
 }
 
 interface BasicThemeSection {
@@ -11,10 +12,10 @@ interface BasicThemeSection {
 }
 
 interface ThemeBase extends BasicThemeSection {
-  name: string;
   border: string;
   shadowColor: string;
   disabled: string;
+  highlighted: string;
 }
 
 interface ThemeSearchBox extends BasicThemeSection {
@@ -97,6 +98,8 @@ interface ThemeSkewRow {
 }
 
 interface BaseTheme {
+  id: string;
+  name: string;
   base: ThemeBase;
   searchBox: ThemeSearchBox;
   sidebar: ThemeSidebar;
@@ -123,3 +126,11 @@ interface FullTheme extends BaseTheme {
   fontTitle: CSSMeasure;
   fontBanner: CSSMeasure;
 }
+
+interface RecursiveControlGroup {
+  [key: string]: string | RecursiveControlGroup
+}
+
+type ThemeAccessors = string[]
+type ThemeGroup = ThemeAccessors[]
+type ThemeGroups = ThemeGroup[]

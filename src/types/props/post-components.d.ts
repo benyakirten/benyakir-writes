@@ -1,4 +1,19 @@
-import { FlattenedBlogPost, FlattenedProject, FlattenedSingleBook, FlattenedSingleStory } from "../posts"
+import BookCard from "@Variant/Cards/Author/BookCard/BookCard.component"
+import StoryCard from "@Variant/Cards/Author/StoryCard/StoryCard.component"
+
+import type {
+  FlattenedBlogPost,
+  FlattenedProject,
+  FlattenedSingleBook,
+  FlattenedSingleStory,
+  FlattenedProjectCard,
+  FlattenedBookCard,
+  FlattenedStoryCard,
+  FlattenedBlogCard,
+  PartiallyFlattenedBlogPost,
+  PartialFlattenedBook,
+  PartialFlattenedStory
+} from "../posts"
 
 type LeadPageProps = {
   filter: ReactElement;
@@ -19,7 +34,7 @@ type ProjectCardProps = {
 type AuthorFilterProps = {
   allBooks: FlattenedBookCard[];
   allStories: FlattenedStoryCard[];
-  onFilter: (books: FlattenedBookCard[], stories: FlattenedStorCard[]) => void;
+  onFilter: (books: FlattenedBookCard[], stories: FlattenedStoryCard[]) => void;
 }
 
 type BookFilterProps = {
@@ -37,7 +52,7 @@ type BookCardProps = {
 }
 
 type StoryCardProps = {
-  item: FlattenedStoryCard
+  item: PartialFlattenedStory
 }
 
 type BlogCardProps = {

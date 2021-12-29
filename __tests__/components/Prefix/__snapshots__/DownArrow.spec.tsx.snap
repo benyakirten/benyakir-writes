@@ -4,7 +4,6 @@ exports[`DownArrow component should render a span with the same onClick as the p
 .c0 {
   position: absolute;
   left: -1.5rem;
-  top: 0.4rem;
   outline: none;
   font-size: 2.4rem;
   -webkit-transition: all 1s ease;
@@ -29,7 +28,6 @@ exports[`DownArrow component should render a span with the same tabIndex as the 
 .c0 {
   position: absolute;
   left: -1.5rem;
-  top: 0.4rem;
   outline: none;
   font-size: 2.4rem;
   -webkit-transition: all 1s ease;
@@ -54,7 +52,6 @@ exports[`DownArrow component should rotate the arrow based on the open prop 1`] 
 .c0 {
   position: absolute;
   left: -1.5rem;
-  top: 0.4rem;
   outline: none;
   font-size: 2.4rem;
   -webkit-transition: all 1s ease;

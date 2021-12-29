@@ -233,7 +233,7 @@ type BlogPostType = {
     }
 }
 
-interface PartiallyFlattenedBlogPost {
+export interface PartiallyFlattenedBlogPost {
     title: string;
     slug: string;
     published: DateInformation;
