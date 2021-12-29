@@ -6,5 +6,8 @@ export const CardContainer = styled.div`
 `
 
 export const CardHalf = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   width: 40%;
 `

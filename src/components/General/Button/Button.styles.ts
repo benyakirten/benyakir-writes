@@ -24,10 +24,6 @@ export const ButtonExterior = styled.button`
 
     overflow: hidden;
 
-    &:not(:last-child) {
-        margin-right: 1rem;
-    }
-
     &:disabled {
         cursor: not-allowed;
         background-color: ${props => props.theme.button.disabled.background};

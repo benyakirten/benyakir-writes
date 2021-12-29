@@ -2,8 +2,8 @@ export const blogLinks: LinkItem[] = [
   "Ben's Thoughts",
   "Reviews",
   {
-      name: "Podcast",
-      link: "Down South Boulder Road",
+    name: "Podcast",
+    link: "Down South Boulder Road",
   },
 ];
 

@@ -7,12 +7,13 @@ import {
   act,
   fireEvent,
 } from "@testing-library/react";
+import { Provider } from "react-redux";
+import { ThemeProvider } from "styled-components";
+
 import searchData from "../../../__mocks__/searchData.json";
 
-import Search from "@Layout/Search/Search.component";
-import { Provider } from "react-redux";
+import {Search} from "@Layout";
 import store from "@/store";
-import { ThemeProvider } from "styled-components";
 
 function getSlug(item: any) {
   return `/${item.type}/${item.slug}`;

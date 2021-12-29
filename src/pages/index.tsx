@@ -7,7 +7,7 @@ import {
   Subtitle,
   Grouping,
 } from "@Styles/general-components";
-import CustomLink from "@Gen/CustomLink/CustomLink.component";
+import { CustomLink } from "@Gen";
 
 const IndexPage: React.FC = () => {
   return (

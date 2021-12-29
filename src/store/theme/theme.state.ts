@@ -1,11 +1,13 @@
 export const defaultDayTheme: BaseTheme = {
+  id: '0',
+  name: 'day',
   base: {
-    name: 'day',
     textColor: '#000000',
     background: '#FFFFFF',
     border: '#39435b',
     shadowColor: '#000000',
-    disabled: '#495057'
+    disabled: '#495057',
+    highlighted: '#FF00FF'
   },
   searchBox: {
     border: "#05491F",
@@ -98,13 +100,15 @@ export const defaultDayTheme: BaseTheme = {
 }
 
 export const defaultNightTheme: BaseTheme = {
+  id: '1',
+  name: 'night',
   base: {
-    name: 'night',
     textColor: '#FFFFFF',
     background: '#111B33',
     border: '#343a40',
     shadowColor: '#FFFFFF',
-    disabled: '#e9ecef'
+    disabled: '#e9ecef',
+    highlighted: '#35F58F'
   },
   searchBox: {
     border: "#e9ecef",
@@ -201,7 +205,8 @@ export const initialState: ThemeState = {
     defaultDayTheme,
     defaultNightTheme
   ],
-  ignoreComputerPreferences: true,
-  prefers: 'day',
-  active: defaultDayTheme
+  ignoreComputerPreferences: false,
+  prefers: '0',
+  active: defaultDayTheme,
+  error: undefined
 }

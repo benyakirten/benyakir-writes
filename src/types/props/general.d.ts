@@ -31,11 +31,15 @@ type LayoutProps = {
 type OpenProps = {
   open?: boolean;
   tabIndex?: number;
-  onClick?: () => void;
   cyId?: string;
 }
 
+type DownArrowProps = OpenProps & {
+  onClick?: (e: React.BaseSyntheticEvent) => void;
+}
+
 type FoldoutProps = OpenProps & {
+  onClick: () => void;
   topbar: ReactElement;
   height?: string;
   heightMultiplierOnPhone?: number;
@@ -48,6 +52,7 @@ type LinkGroupProps = OpenProps & {
   domain: string;
   height?: string;
   links: LinkItem[];
+  onClick: () => void;
 }
 
 type HoverImageProps = {

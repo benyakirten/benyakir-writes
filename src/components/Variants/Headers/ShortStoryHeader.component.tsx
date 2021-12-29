@@ -2,9 +2,7 @@ import * as React from "react";
 import { Link, navigate } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
 
-import Button from "@Gen/Button/Button.component";
-import CustomLink from "@Gen/CustomLink/CustomLink.component";
-import HoverImage from "@Gen/HoverImage/HoverImage.component";
+import { Button, CustomLink, HoverImage } from "@Gen";
 import {
   GroupingBox,
   RowUntilPhone,

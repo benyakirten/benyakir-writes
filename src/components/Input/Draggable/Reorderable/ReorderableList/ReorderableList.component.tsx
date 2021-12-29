@@ -1,32 +1,28 @@
 import * as React from "react"
 
-import { SubHeading } from "@Styles/general-components"
 import { ReorderableColumn, ReorderableContainer } from "./ReorderableList.styles"
 import ReorderableItem from "../ReorderableItem/ReorderableItem.component"
-
-import useAlternation from "@Hooks/useAlternation.hook"
 
 import { ReorderableListProps } from "@Types/props/draggable"
 
 const ReorderableList: React.FC<ReorderableListProps> = ({
   onDrop,
-  items,
-  title,
+  onSelect,
+  selectedItem,
+  items
 }) => {
-  const [selectedItem, setSelectedItem] = useAlternation()
   return (
     <ReorderableColumn>
-      <SubHeading>{title}</SubHeading>
       <ReorderableContainer>
-        {items.map((val, idx) => (
+        {items.map(({ dragValue, value })=> (
           <ReorderableItem
-            key={val}
+            key={dragValue}
             onDrop={onDrop}
-            onSelect={(e) => setSelectedItem(e.toString())}
-            index={idx}
-            selected={selectedItem === idx.toString()}
+            onSelect={onSelect}
+            value={dragValue}
+            selected={selectedItem === dragValue}
           >
-            {val}
+            {value}
           </ReorderableItem>
         ))}
       </ReorderableContainer>

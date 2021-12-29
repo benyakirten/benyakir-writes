@@ -45,3 +45,8 @@ interface ToggleProps extends InputProps {
   onToggle: () => void;
   dataCy?: string
 }
+
+interface ColorPickerProps extends InputProps {
+  value: string;
+  onChange: (newVal: string) => void
+}

@@ -34,43 +34,47 @@ exports[`category template should render correctly 1`] = `
           className="sc-gKclnd ffLas"
         >
           <div
-            className="sc-bqiRlB kHYMCj"
-            onClick={[Function]}
-            open={false}
+            className="sc-fFeiMQ YRrEz"
           >
-            <span
-              className="sc-hBUSln jodxde"
-              data-cy="foldout-bar"
+            <div
+              className="sc-bkkeKt fiUmlP"
               onClick={[Function]}
               open={false}
-              role="button"
-              tabIndex={-1}
             >
-              ↡
-            </span>
-            <a
-              active={false}
-              className="sc-fotOHu iauByG"
-              dark={true}
-              href="/blog"
-              inheritColor={false}
-              inline={false}
-              limitUnderbar={false}
-              small={false}
-              tabIndex={-1}
-            >
-              Blog
-            </a>
+              <span
+                className="sc-dJjYzT cWrHqT"
+                data-cy="foldout-bar"
+                onClick={[Function]}
+                open={false}
+                role="button"
+                tabIndex={-1}
+              >
+                ↡
+              </span>
+              <a
+                active={false}
+                className="sc-hBUSln jYrSr"
+                dark={true}
+                href="/blog"
+                inheritColor={false}
+                inline={false}
+                limitUnderbar={false}
+                small={false}
+                tabIndex={-1}
+              >
+                Blog
+              </a>
+            </div>
             <div
               aria-hidden={true}
-              className="sc-ksdxgE gPpnek"
+              className="sc-ieecCq hboLzq"
               data-navtoggle="no-toggle"
               height="7rem"
               open={false}
             >
               <a
                 active={false}
-                className="sc-fotOHu RzkGx"
+                className="sc-hBUSln ZycME"
                 dark={true}
                 href="/blog/bens-thoughts/"
                 inheritColor={false}
@@ -84,7 +88,7 @@ exports[`category template should render correctly 1`] = `
               </a>
               <a
                 active={false}
-                className="sc-fotOHu RzkGx"
+                className="sc-hBUSln ZycME"
                 dark={true}
                 href="/blog/reviews/"
                 inheritColor={false}
@@ -98,7 +102,7 @@ exports[`category template should render correctly 1`] = `
               </a>
               <a
                 active={false}
-                className="sc-fotOHu RzkGx"
+                className="sc-hBUSln ZycME"
                 dark={true}
                 href="/blog/down-south-boulder-road/"
                 inheritColor={false}
@@ -113,43 +117,47 @@ exports[`category template should render correctly 1`] = `
             </div>
           </div>
           <div
-            className="sc-bqiRlB kHYMCj"
-            onClick={[Function]}
-            open={false}
+            className="sc-fFeiMQ YRrEz"
           >
-            <span
-              className="sc-hBUSln jodxde"
-              data-cy="foldout-bar"
+            <div
+              className="sc-bkkeKt fiUmlP"
               onClick={[Function]}
               open={false}
-              role="button"
-              tabIndex={-1}
             >
-              ↡
-            </span>
-            <a
-              active={false}
-              className="sc-fotOHu iauByG"
-              dark={true}
-              href="/author"
-              inheritColor={false}
-              inline={false}
-              limitUnderbar={false}
-              small={false}
-              tabIndex={-1}
-            >
-              Author
-            </a>
+              <span
+                className="sc-dJjYzT cWrHqT"
+                data-cy="foldout-bar"
+                onClick={[Function]}
+                open={false}
+                role="button"
+                tabIndex={-1}
+              >
+                ↡
+              </span>
+              <a
+                active={false}
+                className="sc-hBUSln jYrSr"
+                dark={true}
+                href="/author"
+                inheritColor={false}
+                inline={false}
+                limitUnderbar={false}
+                small={false}
+                tabIndex={-1}
+              >
+                Author
+              </a>
+            </div>
             <div
               aria-hidden={true}
-              className="sc-ksdxgE gPpnek"
+              className="sc-ieecCq hboLzq"
               data-navtoggle="no-toggle"
               height="4rem"
               open={false}
             >
               <a
                 active={false}
-                className="sc-fotOHu RzkGx"
+                className="sc-hBUSln ZycME"
                 dark={true}
                 href="/author/books/"
                 inheritColor={false}
@@ -163,7 +171,7 @@ exports[`category template should render correctly 1`] = `
               </a>
               <a
                 active={false}
-                className="sc-fotOHu RzkGx"
+                className="sc-hBUSln ZycME"
                 dark={true}
                 href="/author/short-stories/"
                 inheritColor={false}
@@ -179,7 +187,7 @@ exports[`category template should render correctly 1`] = `
           </div>
           <a
             active={false}
-            className="sc-fotOHu hlQGLq"
+            className="sc-hBUSln qSAav"
             dark={true}
             href="/portfolio"
             inheritColor={false}
@@ -196,34 +204,43 @@ exports[`category template should render correctly 1`] = `
           className="sc-gKclnd ffLas"
         >
           <div
-            className="sc-bqiRlB kHYMCj"
-            onClick={[Function]}
-            open={false}
+            className="sc-fFeiMQ YRrEz"
           >
-            <span
-              className="sc-hBUSln jodxde"
-              data-cy="foldout-bar"
+            <div
+              className="sc-bkkeKt fiUmlP"
               onClick={[Function]}
               open={false}
-              role="button"
-              tabIndex={-1}
             >
-              ↡
-            </span>
-            <h3
-              className="sc-giYglK iGMdmM"
-            >
-              Search
-            </h3>
+              <span
+                className="sc-dJjYzT cWrHqT"
+                data-cy="foldout-bar"
+                onClick={[Function]}
+                open={false}
+                role="button"
+                tabIndex={-1}
+              >
+                ↡
+              </span>
+              <h3
+                className="sc-iUKqMP clVTxU"
+                style={
+                  Object {
+                    "transition": "color 0.8s ease",
+                  }
+                }
+              >
+                Search
+              </h3>
+            </div>
             <div
               aria-hidden={true}
-              className="sc-ksdxgE gPpnek"
+              className="sc-ieecCq hboLzq"
               data-navtoggle="no-toggle"
               height="25rem"
               open={false}
             >
               <div
-                className="sc-nVkyK hAMgjD"
+                className="sc-ikJyIC gxGprN"
               >
                 <input
                   autoFocus={false}
@@ -256,7 +273,7 @@ exports[`category template should render correctly 1`] = `
                 }
               >
                 <div
-                  className="sc-hiwPVj eUTucj"
+                  className="sc-kHOZwM cgXxIp"
                 >
                   <input
                     aria-labelledby="label-global-search-show-post"
@@ -285,7 +302,7 @@ exports[`category template should render correctly 1`] = `
                   </span>
                 </div>
                 <div
-                  className="sc-hiwPVj eUTucj"
+                  className="sc-kHOZwM cgXxIp"
                 >
                   <input
                     aria-labelledby="label-global-search-show-project"
@@ -314,7 +331,7 @@ exports[`category template should render correctly 1`] = `
                   </span>
                 </div>
                 <div
-                  className="sc-hiwPVj eUTucj"
+                  className="sc-kHOZwM cgXxIp"
                 >
                   <input
                     aria-labelledby="label-global-search-show-book"
@@ -343,7 +360,7 @@ exports[`category template should render correctly 1`] = `
                   </span>
                 </div>
                 <div
-                  className="sc-hiwPVj eUTucj"
+                  className="sc-kHOZwM cgXxIp"
                 >
                   <input
                     aria-labelledby="label-global-search-show-story"
@@ -373,10 +390,10 @@ exports[`category template should render correctly 1`] = `
                 </div>
               </div>
               <div
-                className="sc-jeraig lkjyYb"
+                className="sc-hOGkXu cWPszP"
               >
                 <div
-                  className="sc-ikJyIC clPnan"
+                  className="sc-jObWnj lgPcxg"
                 >
                   No results yet!
                 </div>
@@ -389,7 +406,21 @@ exports[`category template should render correctly 1`] = `
         >
           <a
             active={false}
-            className="sc-fotOHu hlQGLq"
+            className="sc-hBUSln qSAav"
+            dark={true}
+            href="/theme"
+            inheritColor={false}
+            inline={false}
+            limitUnderbar={false}
+            small={false}
+            tabIndex={-1}
+            underbarSize="12rem"
+          >
+            Theme
+          </a>
+          <a
+            active={false}
+            className="sc-hBUSln qSAav"
             dark={true}
             href="/about"
             inheritColor={false}
@@ -403,7 +434,7 @@ exports[`category template should render correctly 1`] = `
           </a>
           <a
             active={false}
-            className="sc-fotOHu hlQGLq"
+            className="sc-hBUSln qSAav"
             dark={true}
             href="/contact"
             inheritColor={false}
@@ -417,7 +448,7 @@ exports[`category template should render correctly 1`] = `
           </a>
           <a
             active={false}
-            className="sc-fotOHu hlQGLq"
+            className="sc-hBUSln qSAav"
             dark={true}
             href="/privacy"
             inheritColor={false}
@@ -431,7 +462,7 @@ exports[`category template should render correctly 1`] = `
           </a>
           <a
             active={false}
-            className="sc-fotOHu hlQGLq"
+            className="sc-hBUSln qSAav"
             dark={true}
             href="/"
             inheritColor={false}
@@ -446,24 +477,24 @@ exports[`category template should render correctly 1`] = `
         </div>
         <div>
           <div
-            className="sc-bkkeKt ewOfWt"
+            className="sc-iJKOTD dwRKYK"
           >
             <input
               checked={false}
-              className="sc-ieecCq esPxXi"
+              className="sc-giYglK hzIgtN"
               id="active-theme-toggle"
               name="active-theme-toggle"
               onChange={[Function]}
               type="checkbox"
             />
             <label
-              className="sc-dJjYzT czRWRf"
+              className="sc-ezbkAF gsLafF"
               data-cy="sidebar-theme-toggle"
               htmlFor="active-theme-toggle"
               label="Theme: Day"
             />
             <span
-              className="sc-hGPBjI hcBlDf"
+              className="sc-bYoBSM jXWvNt"
               onClick={[Function]}
             >
               Theme: Day
@@ -491,7 +522,7 @@ exports[`category template should render correctly 1`] = `
         <div
           alt="Benyakir Writes Logo"
           aria-label="Logo"
-          className="sc-dlVxhl fLIupa"
+          className="sc-jrQzAO ickAQl"
           open={false}
           role="img"
         />
@@ -512,26 +543,26 @@ exports[`category template should render correctly 1`] = `
         }
       >
         <div
-          className="sc-faUpoM lkAFuX"
+          className="sc-cZMNgc klNyzB"
         >
           <h1
-            className="sc-llYSUQ geWZQm"
+            className="sc-jcFjpl btWiCd"
           >
             Category A
           </h1>
           <div
-            className="sc-fWCJzd jJmzsw"
+            className="sc-jQrDum kJOLHz"
           >
             <span
-              className="sc-egiyK hdMysw"
+              className="sc-iwjdpV ldkGGr"
               size="2rem"
             />
           </div>
           <div
-            className="sc-Galmp kfyANn"
+            className="sc-jUosCB gOmDfy"
           >
             <span
-              className="sc-egiyK ebiFRs"
+              className="sc-iwjdpV jvjgeH"
               size="4rem"
             />
           </div>
@@ -576,43 +607,47 @@ exports[`category template should render correctly 2`] = `
           className="sc-gKclnd ffLas"
         >
           <div
-            className="sc-bqiRlB kHYMCj"
-            onClick={[Function]}
-            open={false}
+            className="sc-fFeiMQ YRrEz"
           >
-            <span
-              className="sc-hBUSln jodxde"
-              data-cy="foldout-bar"
+            <div
+              className="sc-bkkeKt fiUmlP"
               onClick={[Function]}
               open={false}
-              role="button"
-              tabIndex={-1}
             >
-              ↡
-            </span>
-            <a
-              active={false}
-              className="sc-fotOHu iauByG"
-              dark={true}
-              href="/blog"
-              inheritColor={false}
-              inline={false}
-              limitUnderbar={false}
-              small={false}
-              tabIndex={-1}
-            >
-              Blog
-            </a>
+              <span
+                className="sc-dJjYzT cWrHqT"
+                data-cy="foldout-bar"
+                onClick={[Function]}
+                open={false}
+                role="button"
+                tabIndex={-1}
+              >
+                ↡
+              </span>
+              <a
+                active={false}
+                className="sc-hBUSln jYrSr"
+                dark={true}
+                href="/blog"
+                inheritColor={false}
+                inline={false}
+                limitUnderbar={false}
+                small={false}
+                tabIndex={-1}
+              >
+                Blog
+              </a>
+            </div>
             <div
               aria-hidden={true}
-              className="sc-ksdxgE gPpnek"
+              className="sc-ieecCq hboLzq"
               data-navtoggle="no-toggle"
               height="7rem"
               open={false}
             >
               <a
                 active={false}
-                className="sc-fotOHu RzkGx"
+                className="sc-hBUSln ZycME"
                 dark={true}
                 href="/blog/bens-thoughts/"
                 inheritColor={false}
@@ -626,7 +661,7 @@ exports[`category template should render correctly 2`] = `
               </a>
               <a
                 active={false}
-                className="sc-fotOHu RzkGx"
+                className="sc-hBUSln ZycME"
                 dark={true}
                 href="/blog/reviews/"
                 inheritColor={false}
@@ -640,7 +675,7 @@ exports[`category template should render correctly 2`] = `
               </a>
               <a
                 active={false}
-                className="sc-fotOHu RzkGx"
+                className="sc-hBUSln ZycME"
                 dark={true}
                 href="/blog/down-south-boulder-road/"
                 inheritColor={false}
@@ -655,43 +690,47 @@ exports[`category template should render correctly 2`] = `
             </div>
           </div>
           <div
-            className="sc-bqiRlB kHYMCj"
-            onClick={[Function]}
-            open={false}
+            className="sc-fFeiMQ YRrEz"
           >
-            <span
-              className="sc-hBUSln jodxde"
-              data-cy="foldout-bar"
+            <div
+              className="sc-bkkeKt fiUmlP"
               onClick={[Function]}
               open={false}
-              role="button"
-              tabIndex={-1}
             >
-              ↡
-            </span>
-            <a
-              active={false}
-              className="sc-fotOHu iauByG"
-              dark={true}
-              href="/author"
-              inheritColor={false}
-              inline={false}
-              limitUnderbar={false}
-              small={false}
-              tabIndex={-1}
-            >
-              Author
-            </a>
+              <span
+                className="sc-dJjYzT cWrHqT"
+                data-cy="foldout-bar"
+                onClick={[Function]}
+                open={false}
+                role="button"
+                tabIndex={-1}
+              >
+                ↡
+              </span>
+              <a
+                active={false}
+                className="sc-hBUSln jYrSr"
+                dark={true}
+                href="/author"
+                inheritColor={false}
+                inline={false}
+                limitUnderbar={false}
+                small={false}
+                tabIndex={-1}
+              >
+                Author
+              </a>
+            </div>
             <div
               aria-hidden={true}
-              className="sc-ksdxgE gPpnek"
+              className="sc-ieecCq hboLzq"
               data-navtoggle="no-toggle"
               height="4rem"
               open={false}
             >
               <a
                 active={false}
-                className="sc-fotOHu RzkGx"
+                className="sc-hBUSln ZycME"
                 dark={true}
                 href="/author/books/"
                 inheritColor={false}
@@ -705,7 +744,7 @@ exports[`category template should render correctly 2`] = `
               </a>
               <a
                 active={false}
-                className="sc-fotOHu RzkGx"
+                className="sc-hBUSln ZycME"
                 dark={true}
                 href="/author/short-stories/"
                 inheritColor={false}
@@ -721,7 +760,7 @@ exports[`category template should render correctly 2`] = `
           </div>
           <a
             active={false}
-            className="sc-fotOHu hlQGLq"
+            className="sc-hBUSln qSAav"
             dark={true}
             href="/portfolio"
             inheritColor={false}
@@ -738,34 +777,43 @@ exports[`category template should render correctly 2`] = `
           className="sc-gKclnd ffLas"
         >
           <div
-            className="sc-bqiRlB kHYMCj"
-            onClick={[Function]}
-            open={false}
+            className="sc-fFeiMQ YRrEz"
           >
-            <span
-              className="sc-hBUSln jodxde"
-              data-cy="foldout-bar"
+            <div
+              className="sc-bkkeKt fiUmlP"
               onClick={[Function]}
               open={false}
-              role="button"
-              tabIndex={-1}
             >
-              ↡
-            </span>
-            <h3
-              className="sc-giYglK iGMdmM"
-            >
-              Search
-            </h3>
+              <span
+                className="sc-dJjYzT cWrHqT"
+                data-cy="foldout-bar"
+                onClick={[Function]}
+                open={false}
+                role="button"
+                tabIndex={-1}
+              >
+                ↡
+              </span>
+              <h3
+                className="sc-iUKqMP clVTxU"
+                style={
+                  Object {
+                    "transition": "color 0.8s ease",
+                  }
+                }
+              >
+                Search
+              </h3>
+            </div>
             <div
               aria-hidden={true}
-              className="sc-ksdxgE gPpnek"
+              className="sc-ieecCq hboLzq"
               data-navtoggle="no-toggle"
               height="25rem"
               open={false}
             >
               <div
-                className="sc-nVkyK hAMgjD"
+                className="sc-ikJyIC gxGprN"
               >
                 <input
                   autoFocus={false}
@@ -798,7 +846,7 @@ exports[`category template should render correctly 2`] = `
                 }
               >
                 <div
-                  className="sc-hiwPVj eUTucj"
+                  className="sc-kHOZwM cgXxIp"
                 >
                   <input
                     aria-labelledby="label-global-search-show-post"
@@ -827,7 +875,7 @@ exports[`category template should render correctly 2`] = `
                   </span>
                 </div>
                 <div
-                  className="sc-hiwPVj eUTucj"
+                  className="sc-kHOZwM cgXxIp"
                 >
                   <input
                     aria-labelledby="label-global-search-show-project"
@@ -856,7 +904,7 @@ exports[`category template should render correctly 2`] = `
                   </span>
                 </div>
                 <div
-                  className="sc-hiwPVj eUTucj"
+                  className="sc-kHOZwM cgXxIp"
                 >
                   <input
                     aria-labelledby="label-global-search-show-book"
@@ -885,7 +933,7 @@ exports[`category template should render correctly 2`] = `
                   </span>
                 </div>
                 <div
-                  className="sc-hiwPVj eUTucj"
+                  className="sc-kHOZwM cgXxIp"
                 >
                   <input
                     aria-labelledby="label-global-search-show-story"
@@ -915,10 +963,10 @@ exports[`category template should render correctly 2`] = `
                 </div>
               </div>
               <div
-                className="sc-jeraig lkjyYb"
+                className="sc-hOGkXu cWPszP"
               >
                 <div
-                  className="sc-ikJyIC clPnan"
+                  className="sc-jObWnj lgPcxg"
                 >
                   No results yet!
                 </div>
@@ -931,7 +979,21 @@ exports[`category template should render correctly 2`] = `
         >
           <a
             active={false}
-            className="sc-fotOHu hlQGLq"
+            className="sc-hBUSln qSAav"
+            dark={true}
+            href="/theme"
+            inheritColor={false}
+            inline={false}
+            limitUnderbar={false}
+            small={false}
+            tabIndex={-1}
+            underbarSize="12rem"
+          >
+            Theme
+          </a>
+          <a
+            active={false}
+            className="sc-hBUSln qSAav"
             dark={true}
             href="/about"
             inheritColor={false}
@@ -945,7 +1007,7 @@ exports[`category template should render correctly 2`] = `
           </a>
           <a
             active={false}
-            className="sc-fotOHu hlQGLq"
+            className="sc-hBUSln qSAav"
             dark={true}
             href="/contact"
             inheritColor={false}
@@ -959,7 +1021,7 @@ exports[`category template should render correctly 2`] = `
           </a>
           <a
             active={false}
-            className="sc-fotOHu hlQGLq"
+            className="sc-hBUSln qSAav"
             dark={true}
             href="/privacy"
             inheritColor={false}
@@ -973,7 +1035,7 @@ exports[`category template should render correctly 2`] = `
           </a>
           <a
             active={false}
-            className="sc-fotOHu hlQGLq"
+            className="sc-hBUSln qSAav"
             dark={true}
             href="/"
             inheritColor={false}
@@ -988,24 +1050,24 @@ exports[`category template should render correctly 2`] = `
         </div>
         <div>
           <div
-            className="sc-bkkeKt ewOfWt"
+            className="sc-iJKOTD dwRKYK"
           >
             <input
               checked={false}
-              className="sc-ieecCq esPxXi"
+              className="sc-giYglK hzIgtN"
               id="active-theme-toggle"
               name="active-theme-toggle"
               onChange={[Function]}
               type="checkbox"
             />
             <label
-              className="sc-dJjYzT czRWRf"
+              className="sc-ezbkAF gsLafF"
               data-cy="sidebar-theme-toggle"
               htmlFor="active-theme-toggle"
               label="Theme: Day"
             />
             <span
-              className="sc-hGPBjI hcBlDf"
+              className="sc-bYoBSM jXWvNt"
               onClick={[Function]}
             >
               Theme: Day
@@ -1033,7 +1095,7 @@ exports[`category template should render correctly 2`] = `
         <div
           alt="Benyakir Writes Logo"
           aria-label="Logo"
-          className="sc-dlVxhl fLIupa"
+          className="sc-jrQzAO ickAQl"
           open={false}
           role="img"
         />
@@ -1054,26 +1116,26 @@ exports[`category template should render correctly 2`] = `
         }
       >
         <div
-          className="sc-faUpoM lkAFuX"
+          className="sc-cZMNgc klNyzB"
         >
           <h1
-            className="sc-llYSUQ geWZQm"
+            className="sc-jcFjpl btWiCd"
           >
             Category B
           </h1>
           <div
-            className="sc-fWCJzd jJmzsw"
+            className="sc-jQrDum kJOLHz"
           >
             <span
-              className="sc-egiyK hdMysw"
+              className="sc-iwjdpV ldkGGr"
               size="2rem"
             />
           </div>
           <div
-            className="sc-Galmp kfyANn"
+            className="sc-jUosCB gOmDfy"
           >
             <span
-              className="sc-egiyK ebiFRs"
+              className="sc-iwjdpV jvjgeH"
               size="4rem"
             />
           </div>

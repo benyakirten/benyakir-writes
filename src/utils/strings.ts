@@ -1,4 +1,4 @@
-import { CSS_MEASUREMENT_REGEX } from "@Constants";
+import { CSS_MEASUREMENT_REGEX } from "@Constants"
 
 export function titleToKebab(title: string): string {
     // Since this function is only applied in the build phase
@@ -18,7 +18,7 @@ export function titleToKebab(title: string): string {
 export function firstWords(sentence: string, length: number) {
     if (length >= sentence.length) {
         return sentence
-    };
+    }
     const sub = sentence.substring(0, length)
     if (/^\s*$/.test(sub) || sub.length === 0) {
         throw new Error('Sentence section must be longer than 0 and contain letters other than blank spaces')
@@ -26,10 +26,14 @@ export function firstWords(sentence: string, length: number) {
     return sub.replace(/\s\S*$/, '...')
 }
 
-export function multiplyCSSNumber(prop: string, amt: number) {
+export function multiplyCSSNumber(prop: string, amount: number) {
     const match = prop.match(CSS_MEASUREMENT_REGEX)
-    if (!match) return prop;
-    return (+((+match[1] * amt).toFixed(1))).toString() + match[3]
+    if (!match) return prop
+    return (+((+match[1] * amount).toFixed(1))).toString() + match[3]
 }
 
-export const capitalize = (word: string) => `${word[0].toUpperCase()}${word.slice(1)}`
+export const capitalize = (word: string) => word.length > 0 ? `${word[0].toUpperCase()}${word.slice(1)}` : ''
+export const titleCase = (sentence: string | string[]): string => {
+    const _sentence = typeof sentence === 'string' ? sentence.split(" ") : sentence
+    return _sentence.map(word => capitalize(word)).join(" ")
+}

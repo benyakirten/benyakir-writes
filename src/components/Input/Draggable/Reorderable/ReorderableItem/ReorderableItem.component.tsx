@@ -5,26 +5,26 @@ import { IndividualItem } from './ReorderableItem.styles'
 import { DraggedOverPosition } from '@Utils/enums'
 
 import { useAppDispatch, useAppSelector } from '@Store/hooks'
-import { setDraggedIndex } from '@Store/drag/drag.slice'
+import { setDraggedValue } from '@Store/drag/drag.slice'
 
 import { ReorderableItemProps } from '@Types/props/draggable'
 
-const DraggableItem: React.FC<ReorderableItemProps> = ({ children, index, onSelect, selected, onDrop }) => {
+const DraggableItem: React.FC<ReorderableItemProps> = ({ children, value, onSelect, selected, onDrop }) => {
   const [dragged, setDragged] = React.useState(false)
   const [draggedPosition, setDraggedPosition] = React.useState<DraggedOverPosition>(DraggedOverPosition.NONE)
   const dispatch = useAppDispatch()
-  const draggedIndex = useAppSelector(root => root.drag.draggedIndex)
+  const draggedValue = useAppSelector(root => root.drag.draggedValue)
 
   const dragStartHandler = (e: React.DragEvent<HTMLLIElement>) => {
     setDragged(true)
-    e.dataTransfer.setData('item-information', index.toString())
-    dispatch(setDraggedIndex(index))
+    e.dataTransfer.setData('data-value', value)
+    dispatch(setDraggedValue(value))
   }
 
   const dragOverHandler = (e: React.DragEvent<HTMLLIElement> & { target: HTMLElement }) => {
     e.preventDefault()
-    const targetIndex = +e.target.getAttribute('item-information')!
-    if (targetIndex && draggedIndex === +targetIndex) {
+    const targetValue = e.target.getAttribute('data-value')
+    if (targetValue && draggedValue === targetValue) {
       return setDraggedPosition(DraggedOverPosition.NONE)
     }
     const { clientY } = e;
@@ -43,7 +43,7 @@ const DraggableItem: React.FC<ReorderableItemProps> = ({ children, index, onSele
 
   const dropHandler = (e: React.DragEvent<HTMLLIElement> & { target: HTMLElement }) => {
     setDraggedPosition(DraggedOverPosition.NONE)
-    onDrop(draggedIndex, +e.target.getAttribute('item-information')!, draggedPosition)
+    onDrop(draggedValue, e.target.getAttribute('data-value')!, draggedPosition)
   }
 
   const dragEndHandler = () => {
@@ -53,7 +53,7 @@ const DraggableItem: React.FC<ReorderableItemProps> = ({ children, index, onSele
   return (
     <IndividualItem
       draggable
-      onClick={() => onSelect && onSelect(index)}
+      onClick={() => onSelect && onSelect(value)}
       onDragStart={dragStartHandler}
       onDragOver={dragOverHandler}
       onDragLeave={dragLeaveHandler}
@@ -62,7 +62,7 @@ const DraggableItem: React.FC<ReorderableItemProps> = ({ children, index, onSele
       selected={selected}
       draggedPosition={draggedPosition}
       dragged={dragged}
-      data-index={index}
+      data-value={value}
     >
         {children}
     </IndividualItem>

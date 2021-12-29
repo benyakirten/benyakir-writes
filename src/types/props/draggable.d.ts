@@ -1,31 +1,36 @@
 import { DraggedOverPosition } from "@Utils/enums";
 
+interface DraggableItemData {
+  value: string;
+  dragValue: string;
+}
+
 interface ReorderableListProps {
-  onDrop: (start: number, end: number, position: DraggedOverPosition) => void;
-  items: string[];
-  title: string;
+  onDrop: (start: string, end: string, position: DraggedOverPosition) => void;
+  onSelect: (value: string) => void;
+  selectedItem: string;
+  items: DraggableItemData[];
 }
 
 interface ReorderableItemProps {
-  onSelect?: (index: number) => void;
-  onDrag?: (index: number) => void;
-  onDrop: (start: number, end: number, position: DraggedOverPosition) => void;
-  index: number;
+  onSelect?: (value: string) => void;
+  onDrag?: (value: string) => void;
+  onDrop: (start: string, end: string, position: DraggedOverPosition) => void;
+  value: string;
   selected: boolean;
 }
 
 interface DestinationItem {
   title: string;
   content: string;
-  onDrop: (index: number) => void;
+  onDrop: (value: string) => void;
 }
 
 interface DestinationItemProps {
   title: string;
-  onDrop: (index: number) => void;
+  onDrop: (value: string) => void;
 }
 
 interface DestinationListProps {
-  title: string;
   destinations: DestinationItem[];
 }

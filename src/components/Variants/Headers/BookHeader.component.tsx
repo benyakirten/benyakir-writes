@@ -14,9 +14,7 @@ import {
   Row,
   WpContent,
 } from "@Styles/general-components";
-import Button from "@Gen/Button/Button.component";
-import CustomLink from "@Gen/CustomLink/CustomLink.component";
-import HoverImage from "@Gen/HoverImage/HoverImage.component";
+import { Button, CustomLink, HoverImage } from "@Gen";
 
 import { getPrettyDate } from "@Utils/dates";
 

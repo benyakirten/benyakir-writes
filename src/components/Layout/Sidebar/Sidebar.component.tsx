@@ -9,13 +9,13 @@ import {
   LegalBox,
   LegalItem,
 } from "./Sidebar.styles";
-
-import LinkGroup from "../LinkGroup/LinkGroup.component";
-import CustomLink from "@Gen/CustomLink/CustomLink.component";
-import Toggle from "@Input/Toggle/Toggle.component";
 import Logo from "./Logo/Logo.component";
 
-import useAlternation from "@/hooks/useAlternation.hook";
+import { LinkGroup } from "@Layout";
+import { CustomLink } from "@Gen";
+import { Toggle } from "@Input";
+
+import { useAlternation } from "@Hooks";
 import Search from "../Search/Search.component";
 
 import { capitalize } from "@Utils/strings";
@@ -30,7 +30,7 @@ const Sidebar: React.FC = () => {
   const [opening, setOpening] = React.useState<boolean>(false);
 
   const dispatch = useAppDispatch();
-  const activeTheme = useAppSelector((state) => state.theme.active);
+  const activeTheme = useAppSelector((root) => root.theme.active);
 
   React.useEffect(() => {
     if (opening) {
@@ -108,6 +108,7 @@ const Sidebar: React.FC = () => {
           <NavGroup>
             {generalLinks.map((linkItem) => (
               <CustomLink
+                key={typeof linkItem === "string" ? linkItem : linkItem.link}
                 tabIndex={open ? 0 : -1}
                 underbarSize="12rem"
                 to={`/${
@@ -122,9 +123,9 @@ const Sidebar: React.FC = () => {
           </NavGroup>
           <div>
             <Toggle
-              value={activeTheme.base.name === "night"}
+              value={activeTheme.name === "night"}
               onToggle={() => dispatch(toggleTimeOfDay())}
-              label={`Theme: ${capitalize(activeTheme.base.name)}`}
+              label={`Theme: ${capitalize(activeTheme.name)}`}
               name="active-theme-toggle"
               dataCy="sidebar-theme-toggle"
             />

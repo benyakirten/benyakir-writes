@@ -9,17 +9,18 @@ import Sidebar from "./Sidebar/Sidebar.component"
 
 import { getTransitionStyles, TIMEOUT_500 } from "@Styles/page-transitions"
 import { useAppDispatch, useAppSelector } from "@Store/hooks"
-import { setThemeByName, intializeThemeStore } from "@Store/theme/theme.slice"
+import { setActiveThemeByName, intializeThemeStore } from "@Store/theme/theme.slice"
 
 const Layout: React.FC = ({ children }) => {
   const location = useLocation()
-  const themeStore = useAppSelector(state => state.theme)
+  const themeStore = useAppSelector(root => root.theme)
   const dispatch = useAppDispatch()
 
   React.useEffect(() => {
     const storedComputerPreferences = localStorage.getItem('BWB_ICP') === 'true'
     let storedThemes = localStorage.getItem('BWB_TS')
-    const storedPreference = localStorage.getItem('BWB_TNP')
+    const storedPreference = localStorage.getItem('BWB_TNP')?.replace(/"/g, '')
+
     dispatch(intializeThemeStore({
       computerPreferences: storedComputerPreferences,
       themes: storedThemes,
@@ -31,7 +32,7 @@ const Layout: React.FC = ({ children }) => {
   
       const setThemeByPreference = (e: MediaQueryList) => {
         if (!(storedComputerPreferences)) {
-          dispatch(setThemeByName(e.matches ? 'night' : 'day'))
+          dispatch(setActiveThemeByName(e.matches ? 'night' : 'day'))
         }
       }
   

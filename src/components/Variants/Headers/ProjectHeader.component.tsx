@@ -1,6 +1,5 @@
-import * as React from "react"
-import { navigate } from "gatsby"
-
+import * as React from "react";
+import { navigate } from "gatsby";
 
 import {
   CardSection,
@@ -11,14 +10,12 @@ import {
   RowUntilPhone,
   SubHeading,
   Subtitle,
-} from "@Styles/general-components"
-import IconGrid from "@Gen/IconGrid/IconGrid.component"
-import Loading from "@Gen/Loading/Loading.component"
-import Button from "@Gen/Button/Button.component"
+} from "@Styles/general-components";
+import { IconGrid, Loading, Button } from "@Gen";
 
-import { getPrettyDate } from "@Utils/dates"
+import { getPrettyDate } from "@Utils/dates";
 
-import { ProjectHeaderProps } from "@Types/props/post-components"
+import { ProjectHeaderProps } from "@Types/props/post-components";
 
 const ProjectHeader: React.FC<ProjectHeaderProps> = ({
   project,
@@ -30,7 +27,7 @@ const ProjectHeader: React.FC<ProjectHeaderProps> = ({
   return (
     <GroupingBox>
       <RowUntilPhone style={{ flexWrap: "nowrap", alignItems: "start" }}>
-      {((project.hostedOn && project.mainLink) || project.repoLink) && (
+        {((project.hostedOn && project.mainLink) || project.repoLink) && (
           <CardSection>
             <Subtitle>Links</Subtitle>
             <Row style={{ marginBottom: "2rem" }}>
@@ -72,7 +69,7 @@ const ProjectHeader: React.FC<ProjectHeaderProps> = ({
         </CardSection>
       </RowUntilPhone>
     </GroupingBox>
-  )
-}
+  );
+};
 
-export default ProjectHeader
+export default ProjectHeader;

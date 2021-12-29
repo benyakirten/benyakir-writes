@@ -2,8 +2,6 @@ import * as React from 'react'
 
 import { IconCaption, IconContainer, IconImage } from './Icon.styles'
 
-import { IconProps } from '@Types/props'
-
 const Icon: React.FC<IconProps> = ({ icon, height = '3rem' }) => {
     return (
         <IconContainer height={height}>

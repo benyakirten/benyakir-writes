@@ -216,11 +216,11 @@ export const NoLineBreak = styled.span`
 `
 
 export const CardLinkBox = styled.div`
-    margin-top: 1rem;
-
     display: flex;
-
     align-items: center;
+
+    margin-top: 1rem;
+    gap: 1rem;
 
 `
 

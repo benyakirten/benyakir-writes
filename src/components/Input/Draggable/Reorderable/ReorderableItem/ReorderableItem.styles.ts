@@ -5,12 +5,14 @@ import { FONT_MD, SHADOW_SM } from "@Styles/variables"
 import { DraggedOverPosition } from "@Utils/enums"
 
 export const IndividualItem = styled.li<{ selected: boolean, draggedPosition: DraggedOverPosition, dragged: boolean }>`
+  cursor: pointer;
+  
   overflow: auto;
   position: relative;
 
   font-size: ${FONT_MD};
 
-  border: 1px solid ${props => props.selected ? props.theme.base.textColor : props.theme.base.border};
+  border: 2px solid ${props => props.selected ? props.theme.base.highlighted : props.theme.base.border};
   box-shadow: ${SHADOW_SM} ${props => props.theme.base.shadowColor};
 
   background-color: ${props => props.draggedPosition === DraggedOverPosition.NONE ? props.theme.base.background : props.theme.base.textColor};

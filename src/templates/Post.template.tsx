@@ -10,7 +10,7 @@ import { formatBlogPost } from "@Utils/blog";
 import { createBlocks, preprocessWPEntry } from "@Utils/blocks/identify-blocks";
 
 import { WpPost } from "@Types/query";
-import PostHeader from "@/components/Variants/Headers/PostHeader.component";
+import { PostHeader } from "@Variants";
 
 const Post: React.FC<WpPost> = ({ data }) => {
   const entry = preprocessWPEntry(data.wpPost.content!);
