@@ -3,6 +3,13 @@ type LogoProps = {
   open: boolean;
 }
 
+type LogoQuery = {
+  file: {
+    name: string;
+    publicURL: string;
+  }
+}
+
 type SearchProps = {
   open: boolean;
   onClick: () => void;

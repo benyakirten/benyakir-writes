@@ -1,10 +1,10 @@
 import * as React from "react";
 import { graphql, Link, useStaticQuery } from "gatsby";
 
-import { LogoContainer } from "./Logo.styles";
+import { LogoContainer } from "./Logo.styles"
 
 const Logo: React.FC<LogoProps> = ({ opening, open }) => {
-  const data = useStaticQuery(graphql`
+  const data: LogoQuery = useStaticQuery(graphql`
     query {
       file(name: { eq: "Logo" }) {
         publicURL

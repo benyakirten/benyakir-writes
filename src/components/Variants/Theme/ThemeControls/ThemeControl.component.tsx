@@ -1,8 +1,10 @@
 import * as React from "react";
+import { graphql, useStaticQuery } from "gatsby";
 
-import { CardContainer, CardHalf } from "./ThemeControls.styles";
+import { CardContainer, CardHalf, ThemeName } from "./ThemeControls.styles";
+import { FlatBox } from "@Styles/general-components";
 import { ReorderableList, DestinationList } from "@Draggable";
-import { Button } from "@Gen";
+import { Button, IconButton } from "@Gen";
 
 import { useAppDispatch, useAppSelector } from "@Store/hooks";
 import {
@@ -19,14 +21,63 @@ import { DraggedOverPosition } from "@Utils/enums";
 const ThemeControls: React.FC<ThemeControlProps> = ({
   selectedTheme,
   setSelectedTheme,
+  open
 }) => {
+  // Icons all have CC0 License and sourced from svgrepo.com
+  const themeQuery: ThemeIconsQuery = useStaticQuery(graphql`
+    query ThemeQuery($glob: String = "theme/*") {
+      allFile(
+        filter: { relativePath: { glob: $glob } }
+        sort: { fields: name, order: ASC }
+      ) {
+        nodes {
+          name
+          publicURL
+        }
+      }
+    }
+  `);
   const themeStore = useAppSelector((store) => store.theme);
   const themeNames = React.useMemo(
     () =>
-      themeStore.themes.map((theme) => ({
-        dragValue: theme.id,
-        value: theme.name,
-      })),
+      themeStore.themes.map((theme) => {
+        const { nodes } = themeQuery.allFile;
+        return {
+          dragValue: theme.id,
+          value: (
+            <FlatBox style={{ justifyContent: "space-between" }}>
+              <ThemeName>{theme.name}</ThemeName>
+              <FlatBox>
+                <IconButton
+                  alt={nodes[0].name.slice(2)}
+                  onClick={() => dispatch(setThemePreferenceByID(theme.id))}
+                  iconSrc={nodes[0].publicURL}
+                  size="2rem"
+                />
+                <IconButton
+                  alt={nodes[1].name.slice(2)}
+                  onClick={() => dispatch(setActiveThemeByID(theme.id))}
+                  iconSrc={nodes[1].publicURL}
+                  size="2rem"
+                />
+                <IconButton
+                  alt={nodes[2].name.slice(2)}
+                  onClick={() => dispatch(copyThemeByID(theme.id))}
+                  iconSrc={nodes[2].publicURL}
+                  size="2rem"
+                />
+                <IconButton
+                  alt={nodes[3].name.slice(2)}
+                  onClick={() => dispatch(deleteThemeByID(theme.id))}
+                  iconSrc={nodes[3].publicURL}
+                  size="2rem"
+                  disabled={theme.id === "0" || theme.id === "1"}
+                />
+              </FlatBox>
+            </FlatBox>
+          ),
+        };
+      }),
     [themeStore]
   );
   const dropHandler = React.useCallback(
@@ -78,15 +129,16 @@ const ThemeControls: React.FC<ThemeControlProps> = ({
     <CardContainer>
       <CardHalf>
         <ReorderableList
+          cyId="all-themes-list"
           onDrop={dropHandler}
           onSelect={setSelectedTheme}
           selectedItem={selectedTheme}
           items={themeNames}
         />
-        <Button onClick={() => dispatch(createTheme())}>
+        <Button open={open} onClick={() => dispatch(createTheme())}>
           Create New Theme
         </Button>
-        <Button onClick={() => dispatch(resetThemeOptions())}>Reset</Button>
+        <Button open={open} onClick={() => dispatch(resetThemeOptions())}>Reset</Button>
       </CardHalf>
       <CardHalf>
         <DestinationList destinations={destinations} />

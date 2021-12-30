@@ -2,6 +2,7 @@ type ButtonProps = {
   type?: 'submit' | 'button';
   disabled?: boolean;
   onClick?: () => void;
+  open?: boolean;
 }
 
 type LoadingProps = {
@@ -73,4 +74,12 @@ type IconGridProps = {
 type IconProps = {
   height?: string;
   icon: FileNode;
+}
+
+type IconButtonProps = {
+  iconSrc: string;
+  onClick: () => void;
+  size?: string;
+  disabled?: boolean;
+  alt: string;
 }

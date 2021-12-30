@@ -1,7 +1,7 @@
-export { default as BookCard } from './Cards/Author/BookCard/BookCard.component'
-export { default as StoryCard } from './Cards/Author/StoryCard/StoryCard.component'
-export { default as BlogCard } from './Cards/BlogCard/BlogCard.component'
-export { default as ProjectCard } from './Cards/ProjectCard/ProjectCard.component'
+export { default as BookCard } from './Cards/BookCard.component'
+export { default as StoryCard } from './Cards/StoryCard.component'
+export { default as BlogCard } from './Cards/BlogCard.component'
+export { default as ProjectCard } from './Cards/ProjectCard.component'
 
 export { default as BookHeader } from './Headers/BookHeader.component'
 export { default as PostHeader } from './Headers/PostHeader.component'

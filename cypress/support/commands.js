@@ -34,3 +34,11 @@ Cypress.Commands.add('changeThemeAndCheck', () => {
   cy.get('[data-cy=open-sidemenu]').click()
   cy.wait(1000)
 })
+
+Cypress.Commands.add('init', (site) => {
+  cy
+    .visit(site)
+    .get("main")
+    .injectAxe();
+  cy.wait(1000)
+})

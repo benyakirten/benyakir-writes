@@ -45,7 +45,7 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 
 > Add the showcase pages from benyakiredits.com
 > Add buttons to the theme customization page so they can be used in addition to the drag and drop features
-> Add unit tests and accessibility tests for all the new components/functions/etc - these are: useMultiple, useToggle hooks; dom, other and strings utils; all four headers; all the new theme variant components; the theme page; all the draggable components
+> Add unit tests for all the new components/functions/etc - these are: useMultiple, useToggle hooks; dom, other and strings utils; all the new theme variant components; the theme page; all the draggable components - I've decided I won't do unit tests for the headers since all their functionality is tested in the template pages.
 > Add customizable font sizes and allow all items to be moved around
 > Fix spacing in styled components
 
@@ -119,3 +119,9 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 > 8. Added a recursive function to flatten a theme into an array of property groups, each with an array of properties, each of which defines an array of accessors (just strings that I use to access the properties on objects) - yeah, the type is string[][][]
 > 9. I figured out reference types in time to figure out how to write a function that accesses and sets nested object properties. Yes, this is a joke, but I wrote an eval function then I was like... wait. My excuse is that it's not the usual code I write because I try to mimic functional programming styles (at least somewhat, I am spoiled by loops and if clauses).
 > 10. So that recursive function is to define a shape of how to access all the  nested properties of a theme so it never needs to be updated (except maybe for looks and stuff). I don't work on things on my portfolio for them to work well or look nice. I do it to push the boundaries of what I know how to do and to implement something I've read about but never really experimented with.
+* 12/31/2021:
+> 1. Added back in tests on push. I forgot the main reason I did this: so I wouldn't always have to run the tests manually, or that it would run the tests even if I forgot to do them myself.
+> 2. Added an SVGContainer component that uses an SVG as a mask over a DIV. Basically, it was how the logo worked, but now it's a component for SVG items in general.
+> 3. Added in those buttons to the themes so you don't have to drag and drop to interact with them. But you can do that too. Please. Just try it.
+> 4. Added some accessibility tests. What's really annoying is finding the ONE tabbable element that's supposed to be hidden.
+> 5. I'm sorry. I'm not adding unit tests for right now. It's really close to New Year's, and I have to admit I hate writing unit tests., especially for components. I plan on adding them in the coming weeks, but right now I've got interviews and celebrating with my family on my mind.

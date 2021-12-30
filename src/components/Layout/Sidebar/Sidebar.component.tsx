@@ -9,7 +9,7 @@ import {
   LegalBox,
   LegalItem,
 } from "./Sidebar.styles";
-import Logo from "./Logo/Logo.component";
+import Logo from "../Logo/Logo.component";
 
 import { LinkGroup } from "@Layout";
 import { CustomLink } from "@Gen";

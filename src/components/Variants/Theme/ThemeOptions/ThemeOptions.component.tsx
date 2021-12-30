@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Box, Column, Paragraph, SubHeading } from "@Styles/general-components";
+import { BigParagraph, Box, Column, Paragraph, SubHeading } from "@Styles/general-components";
 
 import ModifyTheme from "../ModifyTheme/ModifyTheme.component";
 import ThemeControls from "../ThemeControls/ThemeControl.component";
@@ -35,7 +35,8 @@ const ThemeCard: React.FC = () => {
           open={openMenus["general"]}
           height={generalHeight}
           onClick={() => toggleOpenMenus("general")}
-          topbar={<SubHeading>General Options</SubHeading>}
+          topbar={<BigParagraph>General Options</BigParagraph>}
+          cyId="theme-open-general"
         >
           <Box>
             <Paragraph>Use Computer Theme Preferences:</Paragraph>
@@ -44,9 +45,11 @@ const ThemeCard: React.FC = () => {
               name="theme-ignore-computer-preferences"
               onToggle={() => dispatch(toggleUseComputerPreferences())}
               value={!themeStore.ignoreComputerPreferences}
+              tabIndex={openMenus["general"] ? 0 : -1}
             />
           </Box>
           <ThemeControls
+            open={openMenus["general"]}
             selectedTheme={selectedTheme}
             setSelectedTheme={setSelectedTheme}
           />
@@ -57,9 +60,10 @@ const ThemeCard: React.FC = () => {
           height="auto"
           open={openMenus["modify"]}
           onClick={() => toggleOpenMenus("modify")}
-          topbar={<SubHeading>Modify Theme</SubHeading>}
+          topbar={<BigParagraph>Modify Theme</BigParagraph>}
+          cyId="theme-open-modify"
         >
-          <ModifyTheme selectedTheme={selectedTheme} />
+          <ModifyTheme open={openMenus["modify"]} selectedTheme={selectedTheme} />
         </Foldout>
       </>
     </Column>

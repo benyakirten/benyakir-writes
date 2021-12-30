@@ -3,7 +3,7 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 
 import { fadeIn, slideInLeft, slideInRight } from './animations';
 import { media } from './queries';
-import { BLACK, FAUSTINA, FONT_LG, FONT_MD, FONT_XL, FONT_XXL, FONT_XXXL, SECONDARY_800, SHADOW_MD_BALANCED } from './variables';
+import { BLACK, FAUSTINA, FONT_LG, FONT_MD, FONT_XL, FONT_XXL, FONT_XXXL, SECONDARY_800, SHADOW_MD_BALANCED, SIZE_MD } from './variables';
 import { convertHexToRGBA } from '@Utils/colors';
 
 export const FadeIn = styled.div<{ duration?: string, delay?: string }>`
@@ -323,6 +323,23 @@ export const Box = styled.div`
     align-items: center;
     margin: 1rem 0;
     gap: 1rem;
+`
+
+export const FlatBox = styled(Box)`
+    margin: 0;
+`
+
+// https://stackoverflow.com/questions/24933430/img-src-svg-changing-the-styles-with-css
+
+export const SVGContainer = styled.div<{ src: string, alt: string, size?: string }>`
+    position: relative;
+    left: -1.8rem;
+
+    background-color: ${props => props.theme.base.textColor};
+    mask: url(${props => props.src}) no-repeat center;
+    
+    height: ${props => props.size ?? SIZE_MD};
+    width: ${props => props.size ?? SIZE_MD};
 `
 
 export const WpContent = styled.div<{ fontSize?: string }>`
