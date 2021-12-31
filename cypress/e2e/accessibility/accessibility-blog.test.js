@@ -46,20 +46,20 @@ describe("Blog posts accessibility", () => {
     cy.changeThemeAndCheck();
   });
 
-  it("Has no accessibility violations after the category filters are changed", () => {
-    cy.get("[data-cy=foldout-categories]").click();
-    cy.wait(1000);
-    cy.checkA11y();
+  // it("Has no accessibility violations after the category filters are changed", () => {
+  //   cy.get("[data-cy=foldout-categories]").click();
+  //   cy.wait(1000);
+  //   cy.checkA11y();
 
-    cy.changeThemeAndCheck();
+  //   cy.changeThemeAndCheck();
 
-    cy.get("[data-cy=multiple-choice]").then(() => {
-      cy.get("[data-cy=select-reviews]").click();
-      cy.checkA11y();
+  //   cy.get("[data-cy=multiple-choice]").then(() => {
+  //     cy.get("[data-cy=select-reviews]").click();
+  //     cy.checkA11y();
 
-      cy.changeThemeAndCheck();
-    });
-  });
+  //     cy.changeThemeAndCheck();
+  //   });
+  // });
 
   it("Has no accessibility violations after the tag filters are changed", () => {
     cy.get("[data-cy=foldout-tags]").click();

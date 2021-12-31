@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 
 const useMultiple: MultipleHook = (allOptions, currentlyOpen) => {
   currentlyOpen = currentlyOpen ?? allOptions
-  const open: BooleanLookup = allOptions.reduce((acc, next) => ({ [next]: currentlyOpen!.includes(next), ...acc }), {})
+  const open: BooleanLookup = useMemo(
+    () => allOptions.reduce((acc, next) => ({ [next]: currentlyOpen!.includes(next), ...acc }), {}),
+    [allOptions]
+  )
   const [openOptions, _setOpenOptions] = useState(open)
   const setOpenOptions = (...options: string[]) => {
     _setOpenOptions(current => {

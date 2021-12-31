@@ -45,7 +45,7 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 
 > Add the showcase pages from benyakiredits.com
 > Add buttons to the theme customization page so they can be used in addition to the drag and drop features
-> Add unit tests for all the new components/functions/etc - these are: useMultiple, useToggle hooks; dom, other and strings utils; all the new theme variant components; the theme page; all the draggable components - I've decided I won't do unit tests for the headers since all their functionality is tested in the template pages.
+> Add unit tests for all the new components/functions/etc - these are: all the new theme variant components; the theme page; all the draggable components - I've decided I won't do unit tests for the headers since all their functionality is tested in the template pages.
 > Add customizable font sizes and allow all items to be moved around
 > Fix spacing in styled components
 
@@ -125,3 +125,6 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 > 3. Added in those buttons to the themes so you don't have to drag and drop to interact with them. But you can do that too. Please. Just try it.
 > 4. Added some accessibility tests. What's really annoying is finding the ONE tabbable element that's supposed to be hidden.
 > 5. I'm sorry. I'm not adding unit tests for right now. It's really close to New Year's, and I have to admit I hate writing unit tests., especially for components. I plan on adding them in the coming weeks, but right now I've got interviews and celebrating with my family on my mind.
+* 12/31/2021 (later):
+> 1. I accidentally disabled some accessibility tests. I enabled them. Oh, and I disabled one accessibility test that was failing on pull requests but not pushes and not on my computer. It's on blog pages when I change the category, and I am suspecting that for some reason the GH Action on pull requests isn't building out the data correctly. But I can't figure that one out right now, and so I'll just disable it until I have the time to run a 10 minute check every time I want to see if it's working.
+> 2. I added in unit tests for the hooks and the new utils. If it isn't clear, I usually don't like writing unit tests for components. But it's by far the best way to test certain functionality. The life of a programmer!
