@@ -1,13 +1,13 @@
 import * as React from "react";
 
 import {
+  BigParagraph,
   Box,
   Column,
-  MinorHeading,
   Paragraph,
 } from "@Styles/general-components";
 import { ControlsContainer } from "./ModifyTheme.styles";
-import SettingsGroup from "./SettingsGroup/SettingsGroup.component";
+import SettingsGroup from "./SettingsGroup.component";
 import { Text } from "@Input";
 
 import { useMultiple } from "@Hooks";
@@ -15,7 +15,7 @@ import { useAppSelector, useAppDispatch } from "@Store/hooks";
 import { changeThemeName, flattenedThemeShape } from "@Store/theme/theme.slice";
 import { capitalize } from "@Utils/strings";
 
-const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme }) => {
+const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme, open }) => {
   const dispatch = useAppDispatch();
   const themes = useAppSelector((store) => store.theme.themes);
   const theme = React.useMemo(
@@ -32,11 +32,12 @@ const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme }) => {
     <ControlsContainer>
       {theme ? (
         <>
-          <MinorHeading>Change the properties of {theme.name}:</MinorHeading>
+          <BigParagraph>Change the properties of {theme.name}:</BigParagraph>
           <Box>
             <Paragraph>Name:</Paragraph>
             <Text
               value={theme.name}
+              tabIndex={open ? 0 : -1}
               onChange={(e) =>
                 dispatch(
                   changeThemeName({
@@ -67,7 +68,7 @@ const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme }) => {
           </Column>
         </>
       ) : (
-        <MinorHeading>Select a theme to modify it here</MinorHeading>
+        <BigParagraph>Select a theme to modify it here</BigParagraph>
       )}
     </ControlsContainer>
   );

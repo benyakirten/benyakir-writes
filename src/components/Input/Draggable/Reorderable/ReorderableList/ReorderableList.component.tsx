@@ -9,11 +9,12 @@ const ReorderableList: React.FC<ReorderableListProps> = ({
   onDrop,
   onSelect,
   selectedItem,
-  items
+  items,
+  cyId
 }) => {
   return (
     <ReorderableColumn>
-      <ReorderableContainer>
+      <ReorderableContainer data-cy={cyId}>
         {items.map(({ dragValue, value })=> (
           <ReorderableItem
             key={dragValue}

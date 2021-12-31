@@ -12,11 +12,13 @@ const Toggle: React.FC<ToggleProps> = ({
   value,
   label,
   name,
-  dataCy
+  dataCy,
+  tabIndex
 }) => {
   return (
     <ToggleGroup>
       <ToggleInput
+        tabIndex={tabIndex}
         type="checkbox"
         id={name}
         name={name}

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { MinorHeading } from "@Styles/general-components";
+import { BigParagraph, MinorHeading } from "@Styles/general-components";
 import { Foldout } from "@Gen";
 import { ColorPicker } from "@Input";
 
@@ -22,16 +22,17 @@ const SettingsGroup: React.FC<SettingsGroupProps> = ({
   return (
     <Foldout
       onClick={onOpen}
-      topbar={<MinorHeading>{title}</MinorHeading>}
+      topbar={<BigParagraph>{title}</BigParagraph>}
       open={open}
       height="auto"
     >
       {controls.map((control) => {
-        const name = control.slice(1).join("-");
+        const name = control.join("-");
         const label = titleCase(control.slice(1));
         return (
           <ColorPicker
             key={`${preface}-${name}`}
+            tabIndex={open ? 0 : -1}
             label={label}
             name={name}
             value={getThemeProp(theme, control)}

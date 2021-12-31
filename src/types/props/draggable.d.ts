@@ -1,7 +1,7 @@
 import { DraggedOverPosition } from "@Utils/enums";
 
 interface DraggableItemData {
-  value: string;
+  value: string | JSX.Element;
   dragValue: string;
 }
 
@@ -10,6 +10,7 @@ interface ReorderableListProps {
   onSelect: (value: string) => void;
   selectedItem: string;
   items: DraggableItemData[];
+  cyId?: string;
 }
 
 interface ReorderableItemProps {

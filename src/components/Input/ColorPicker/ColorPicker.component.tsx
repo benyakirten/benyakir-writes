@@ -25,6 +25,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
         name={name}
         id={name}
         value={value}
+        tabIndex={tabIndex}
         onChange={handleChange}
       />
     </Container>
