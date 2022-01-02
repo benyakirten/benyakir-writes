@@ -45,7 +45,7 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 
 > Add the showcase pages from benyakiredits.com
 > Add buttons to the theme customization page so they can be used in addition to the drag and drop features
-> Add unit tests for all the new components/functions/etc - these are: all the new theme variant components; the theme page; all the draggable components - I've decided I won't do unit tests for the headers since all their functionality is tested in the template pages.
+> Add unit tests for all the new components/functions/etc - these are: the theme page and the draggable components that cause events (not the lists) because UI or organizational items aren't that interesting to test, especially with TypeScript already doing most of the testing I would, checking for correct props - the header components and the theme variant components are be tested in the various components
 > Add customizable font sizes and allow all items to be moved around
 > Fix spacing in styled components
 
@@ -128,3 +128,10 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 * 12/31/2021 (later):
 > 1. I accidentally disabled some accessibility tests. I enabled them. Oh, and I disabled one accessibility test that was failing on pull requests but not pushes and not on my computer. It's on blog pages when I change the category, and I am suspecting that for some reason the GH Action on pull requests isn't building out the data correctly. But I can't figure that one out right now, and so I'll just disable it until I have the time to run a 10 minute check every time I want to see if it's working.
 > 2. I added in unit tests for the hooks and the new utils. If it isn't clear, I usually don't like writing unit tests for components. But it's by far the best way to test certain functionality. The life of a programmer!
+* 1/2/2021:
+> 1. Screw it. Only run the GH Actions on push. That way the accessibility tests don't get caught up on some weird thing or other. I'm not going to give GH Actions the satisfaction of failing my accessibility tests arbitrarily.
+> 2. Wow, I forgot to put keys on DestinationItems in the DestinationList. I usually don't mess that up, do I?
+> 3. Uh, I forgot to set the role of IconButton to button. I kinda forgot.
+> 4. I added unit tests for the ReorderableItem and DestinationItem but not the lists of each because the lists are mostly just to render a list of said items. TypeScript tests for almost everything that I would test for.
+> 5. I also added the other unit tests I said I was going to add. It was less work than I thought it would be, but it was basically as tedious as I thought. At least I'm getting good at unit testing React components. That's good, right? Right?
+> 6. A few notes: I didn't test the header components or the individual parts of the theme page. They were just better covered under the tests for the larger pages.

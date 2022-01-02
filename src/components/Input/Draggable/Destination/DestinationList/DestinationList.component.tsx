@@ -9,7 +9,7 @@ const DraggableDestinationList: React.FC<DestinationListProps> = ({ destinations
   return (
     <DestinationColumn>
       {destinations.map(({ title, content, onDrop }) => (
-        <DraggableDestinationItem title={title} onDrop={onDrop}>
+        <DraggableDestinationItem key={title} title={title} onDrop={onDrop}>
           {content}
         </DraggableDestinationItem>
       ))}

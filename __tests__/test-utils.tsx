@@ -5,18 +5,25 @@ import { Provider } from "react-redux";
 
 import { Layout } from "@Layout";
 import themeReducer from "@Store/theme/theme.slice";
+import dragReducer from "@Store/drag/drag.slice";
 
 // I'm not this sophisticated - https://redux.js.org/usage/writing-tests
+
+// This is my addition
+export const mockDispatch = jest.fn()
 
 function render(
   ui: any,
   {
     preloadedState,
-    store = configureStore({ reducer: { theme: themeReducer } }),
+    store = configureStore({
+      reducer: { drag: dragReducer, theme: themeReducer },
+    }),
     ...renderOptions
   } = {} as any
 ) {
   const Wrapper: React.FC = ({ children }) => {
+    store.dispatch = mockDispatch
     return (
       <Provider store={store}>
         <Layout>{children}</Layout>

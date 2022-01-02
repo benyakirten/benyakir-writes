@@ -82,4 +82,5 @@ type IconButtonProps = {
   size?: string;
   disabled?: boolean;
   alt: string;
+  name: string;
 }

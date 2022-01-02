@@ -33,7 +33,7 @@ const DraggableItem: React.FC<ReorderableItemProps> = ({
   ) => {
     e.preventDefault();
     const targetValue = e.target.getAttribute("data-value");
-    if (targetValue && draggedValue === targetValue) {
+    if (!targetValue || draggedValue === targetValue) {
       return setDraggedPosition(DraggedOverPosition.NONE);
     }
     const { clientY } = e;

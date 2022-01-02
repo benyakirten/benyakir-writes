@@ -15,7 +15,6 @@ interface ReorderableListProps {
 
 interface ReorderableItemProps {
   onSelect?: (value: string) => void;
-  onDrag?: (value: string) => void;
   onDrop: (start: string, end: string, position: DraggedOverPosition) => void;
   value: string;
   selected: boolean;
