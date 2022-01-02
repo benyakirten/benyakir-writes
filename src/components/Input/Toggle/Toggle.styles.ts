@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { FONT_MD, SHADOW_MD, SHADOW_MD_LEFT } from '@StyleVars';
-import { convertHexToRGBA } from '@Utils/colors';
+import { FONT_MD } from '@StyleVars';
 
 export const ToggleGroup = styled.div`
   position: relative;

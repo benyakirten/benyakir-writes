@@ -165,4 +165,48 @@ describe('strings util', () => {
       }
     })
   })
+
+  describe('titleCase', () => {
+    it('should capitalize the first word in every word if given a string of space separated words', () => {
+      let expectations: { input: string, result: string }[] = [
+        {
+          input: 'hello there',
+          result: 'Hello There'
+        },
+        {
+          input: '  hi',
+          result: '  Hi'
+        },
+        {
+          input: 'hi  you',
+          result: 'Hi  You'
+        }
+      ]
+
+      for (let expectation of expectations) {
+        expect(strings.titleCase(expectation.input)).toEqual(expectation.result)
+      }
+    })
+
+    it('should capitalize the first word in every word if given an array of strings', () => {
+      let expectations: { input: string[], result: string }[] = [
+        {
+          input: ['hello', 'there'],
+          result: 'Hello There'
+        },
+        {
+          input: ['', '', 'hi'],
+          result: '  Hi'
+        },
+        {
+          input: ['hi', '', '', 'you'],
+          result: 'Hi   You'
+        }
+      ]
+
+      for (let expectation of expectations) {
+        expect(strings.titleCase(expectation.input)).toEqual(expectation.result)
+      }
+    })
+  })
 })

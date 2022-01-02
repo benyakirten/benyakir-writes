@@ -52,24 +52,28 @@ const ThemeControls: React.FC<ThemeControlProps> = ({
                   alt={nodes[0].name.slice(2)}
                   onClick={() => dispatch(setThemePreferenceByID(theme.id))}
                   iconSrc={nodes[0].publicURL}
+                  name={theme.name + "-set-preference"}
                   size="2rem"
                 />
                 <IconButton
                   alt={nodes[1].name.slice(2)}
                   onClick={() => dispatch(setActiveThemeByID(theme.id))}
                   iconSrc={nodes[1].publicURL}
+                  name={theme.name + "-set-active"}
                   size="2rem"
                 />
                 <IconButton
                   alt={nodes[2].name.slice(2)}
                   onClick={() => dispatch(copyThemeByID(theme.id))}
                   iconSrc={nodes[2].publicURL}
+                  name={theme.name + "-copy"}
                   size="2rem"
                 />
                 <IconButton
                   alt={nodes[3].name.slice(2)}
                   onClick={() => dispatch(deleteThemeByID(theme.id))}
                   iconSrc={nodes[3].publicURL}
+                  name={theme.name + "-delete"}
                   size="2rem"
                   disabled={theme.id === "0" || theme.id === "1"}
                 />
