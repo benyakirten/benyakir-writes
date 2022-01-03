@@ -24,6 +24,7 @@ const Toggle: React.FC<ToggleProps> = ({
         name={name}
         checked={value}
         onChange={onToggle}
+        aria-pressed={value}
       />
       <ToggleLabel htmlFor={name} label={label} data-cy={dataCy ?? 'toggle'} />
       <ToggleOutput onClick={onToggle}>{label}</ToggleOutput>

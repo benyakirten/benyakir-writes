@@ -83,4 +83,5 @@ type IconButtonProps = {
   disabled?: boolean;
   alt: string;
   name: string;
+  tabIndex?: number;
 }

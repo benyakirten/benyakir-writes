@@ -135,3 +135,4 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 > 4. I added unit tests for the ReorderableItem and DestinationItem but not the lists of each because the lists are mostly just to render a list of said items. TypeScript tests for almost everything that I would test for.
 > 5. I also added the other unit tests I said I was going to add. It was less work than I thought it would be, but it was basically as tedious as I thought. At least I'm getting good at unit testing React components. That's good, right? Right?
 > 6. A few notes: I didn't test the header components or the individual parts of the theme page. They were just better covered under the tests for the larger pages.
+* 1/3/2021: Added aria-pressed to the toggle component and keydown event handlers for space and enter to the icon button component. I forgot about some aria rules, and I apologize!
