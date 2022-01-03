@@ -2,7 +2,7 @@ type ButtonProps = {
   type?: 'submit' | 'button';
   disabled?: boolean;
   onClick?: () => void;
-  open?: boolean;
+  tabIndex?: number;
 }
 
 type LoadingProps = {
@@ -83,4 +83,5 @@ type IconButtonProps = {
   disabled?: boolean;
   alt: string;
   name: string;
+  tabIndex?: number;
 }

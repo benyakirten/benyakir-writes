@@ -15,7 +15,7 @@ const Button: React.FC<ButtonProps> = ({
   type = "button",
   children,
   onClick = () => {},
-  open = true
+  tabIndex = 0
 }) => {
   const [cornerIdx, setCornerIdx] = React.useState<number>(0);
   function handleMouseover(e: any) {
@@ -30,7 +30,7 @@ const Button: React.FC<ButtonProps> = ({
       disabled={disabled}
       onMouseEnter={handleMouseover}
       onClick={onClick}
-      tabIndex={open ? 0 : -1}
+      tabIndex={tabIndex}
     >
       <div
         style={{
