@@ -480,6 +480,7 @@ exports[`category template should render correctly 1`] = `
             className="sc-Galmp dLWvdG"
           >
             <input
+              aria-pressed={false}
               checked={false}
               className="sc-fWCJzd kVzjjo"
               id="active-theme-toggle"
@@ -1053,6 +1054,7 @@ exports[`category template should render correctly 2`] = `
             className="sc-Galmp dLWvdG"
           >
             <input
+              aria-pressed={false}
               checked={false}
               className="sc-fWCJzd kVzjjo"
               id="active-theme-toggle"
