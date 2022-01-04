@@ -136,3 +136,6 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 > 5. I also added the other unit tests I said I was going to add. It was less work than I thought it would be, but it was basically as tedious as I thought. At least I'm getting good at unit testing React components. That's good, right? Right?
 > 6. A few notes: I didn't test the header components or the individual parts of the theme page. They were just better covered under the tests for the larger pages.
 * 1/3/2021: Added aria-pressed to the toggle component and keydown event handlers for space and enter to the icon button component. I forgot about some aria rules, and I apologize!
+* 1/4/2021:
+> 1. I really forgot the easiest way to swap two items in an array and wrote the code like ES2015 didn't exist. I apologize. I swear I remembered it when I was writing the code, I just forgot why I remembered it and then swiftly forgot about it.
+> 2. I made the theme controls into more components and made the organization more logical. There's more refactoring to be done, but it'll be awhile. I'm taking a break and then working on another project. If you want to know, it'll be a fullstack project. Either it will be one Nuxt project to handle both frontend and backend or SvelteKit and Go or Rust to handle database interactions and web sockets.
