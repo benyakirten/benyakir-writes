@@ -6,7 +6,7 @@ import {
   Column,
   Paragraph,
 } from "@Styles/general-components";
-import { ControlsContainer } from "./ModifyTheme.styles";
+import { ControlsContainer, ThemeAppearance } from "./ModifyTheme.styles";
 import SettingsGroup from "./SettingsGroup.component";
 import { Text } from "@Input";
 
@@ -31,7 +31,7 @@ const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme, open }) => {
   return (
     <ControlsContainer>
       {theme ? (
-        <>
+        <ThemeAppearance>
           <BigParagraph>Change the properties of {theme.name}:</BigParagraph>
           <Box>
             <Paragraph>Name:</Paragraph>
@@ -41,7 +41,7 @@ const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme, open }) => {
               onChange={(e) =>
                 dispatch(
                   changeThemeName({
-                    id: theme.id,
+                    id: theme!.id,
                     newVal: e,
                   })
                 )
@@ -66,7 +66,7 @@ const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme, open }) => {
               );
             })}
           </Column>
-        </>
+        </ThemeAppearance>
       ) : (
         <BigParagraph>Select a theme to modify it here</BigParagraph>
       )}

@@ -6,6 +6,7 @@ interface ModifyThemeProps {
 interface ThemeControlProps extends ModifyThemeProps {
   selectedTheme: string;
   setSelectedTheme: (theme: string) => void;
+  allowsHover: boolean;
 }
 
 interface ThemeIconsQuery {

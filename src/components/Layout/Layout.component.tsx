@@ -7,7 +7,7 @@ import { TransitionGroup, Transition } from "react-transition-group"
 import { GlobalStyles, LayoutContainer, MainContainer } from "./Layout.styles"
 import Sidebar from "./Sidebar/Sidebar.component"
 
-import { getTransitionStyles, TIMEOUT_500 } from "@Styles/page-transitions"
+import { getPageTransitionStyles, TIMEOUT_500 } from "@/styles/transitions"
 import { useAppDispatch, useAppSelector } from "@Store/hooks"
 import { setActiveThemeByName, intializeThemeStore } from "@Store/theme/theme.slice"
 
@@ -76,7 +76,7 @@ const Layout: React.FC = ({ children }) => {
               {(status) => (
                 <div
                   style={{
-                    ...getTransitionStyles(TIMEOUT_500)[status],
+                    ...getPageTransitionStyles(TIMEOUT_500)[status],
                   }}
                 >
                   {children}
