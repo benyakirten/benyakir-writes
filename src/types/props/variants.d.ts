@@ -10,11 +10,26 @@ interface ThemeControlProps extends ModifyThemeProps {
 
 interface ThemeIconsQuery {
   allFile: {
-    nodes: {
-      name: string;
-      publicURL: string;
-    }[]
+    nodes: FileNode[]
   }
+}
+
+interface DraggableThemeListProps {
+  open: boolean;
+  onSelect: (val: string) => void;
+  selectedTheme: string;
+}
+
+interface DraggableThemeProps {
+  nodes: FileNode[]
+  open: boolean;
+  themeName: string;
+  themeId: string;
+}
+
+interface DestinationThemeListProps {
+  setSelectedTheme: (val: string) => void;
+  selectedTheme: string;
 }
 
 interface SettingsGroupProps {

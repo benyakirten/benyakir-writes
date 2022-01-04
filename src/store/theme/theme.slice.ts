@@ -113,16 +113,12 @@ const themeSlice = createSlice({
       if (
         startPosition >= listLength || startPosition < 0 ||
         endPosition >= listLength || endPosition < 0 ||
-        startPosition === endPosition ||
         position === DraggedOverPosition.NONE
       ) {
         state.error = "An error occurred: invalid list movement"
         return
       }
-      const startItem = state.themes[startPosition]
-      const alteredList = [...state.themes.slice(0, startPosition), ...state.themes.slice(startPosition + 1)]
-      alteredList.splice(finalPosition, 0, startItem)
-      state.themes = alteredList
+      [state.themes[startPosition], state.themes[endPosition]] = [state.themes[endPosition], state.themes[startPosition]]
       localStorage.setItem('BWB_TS', JSON.stringify(state.themes))
     },
     copyThemeByID: (state, action: PayloadAction<string>) => {
