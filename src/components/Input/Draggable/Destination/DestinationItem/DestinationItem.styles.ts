@@ -17,6 +17,8 @@ export const ItemTitle = styled.span<{ draggedOver: boolean }>`
   left: 1rem;
   z-index: 1;
 
+  padding: 0 0.5rem;
+
   background-color: ${props => props.draggedOver ? props.theme.base.textColor : props.theme.base.background};
   color: ${props => props.draggedOver ? props.theme.base.background : props.theme.base.textColor};
 

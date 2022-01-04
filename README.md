@@ -139,3 +139,6 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 * 1/4/2021:
 > 1. I really forgot the easiest way to swap two items in an array and wrote the code like ES2015 didn't exist. I apologize. I swear I remembered it when I was writing the code, I just forgot why I remembered it and then swiftly forgot about it.
 > 2. I made the theme controls into more components and made the organization more logical. There's more refactoring to be done, but it'll be awhile. I'm taking a break and then working on another project. If you want to know, it'll be a fullstack project. Either it will be one Nuxt project to handle both frontend and backend or SvelteKit and Go or Rust to handle database interactions and web sockets.
+* 1/4/2021 (later): Okay, I swear I'm done after this.
+> 1. I realized I had forgotten that mobile devices can't drag and drop. So I added a media query to detect it and disable the drop targets on mobile, freeing up screen space.
+> 2. Added a fadein to when a theme is selected for modification.

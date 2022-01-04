@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { BigParagraph, Box, Column, Paragraph, SubHeading } from "@Styles/general-components";
+import { BigParagraph, Box, Column, Paragraph } from "@Styles/general-components";
 
 import ModifyTheme from "../ModifyTheme/ModifyTheme.component";
 import ThemeControls from "../ThemeControls/ThemeControl.component";
@@ -12,17 +12,22 @@ import { toggleUseComputerPreferences } from "@Store/theme/theme.slice";
 import { useAppDispatch, useAppSelector } from "@Store/hooks";
 
 const ThemeCard: React.FC = () => {
+  const allowsHover = window.matchMedia ? window.matchMedia("(any-hover: hover)").matches : true;
   const themeStore = useAppSelector((root) => root.theme);
   const dispatch = useAppDispatch();
   const [selectedTheme, setSelectedTheme] = useAlternation();
   const [openMenus, toggleOpenMenus] = useMultiple(["general", "modify"]);
   const generalHeight = React.useMemo(() => {
-    if (themeStore.themes.length < 5) {
-      return "48rem";
+    const baseHeight = allowsHover ? 48 : 30;
+    if ((allowsHover && themeStore.themes.length < 5) || (!allowsHover && themeStore.themes.length < 4)) {
+      return `${baseHeight}rem`;
     }
-    const themesOverThreshold = themeStore.themes.length - 5;
-    return `${48 + 6 * themesOverThreshold}rem`;
-  }, [themeStore.themes]);
+    const themesOverThreshold = allowsHover
+      ? themeStore.themes.length - 5
+      : themeStore.themes.length - 3;
+    const multiplier = allowsHover ? 6 : 4
+    return `${baseHeight + multiplier * themesOverThreshold}rem`;
+  }, [themeStore.themes, allowsHover]);
   return (
     <Column style={{ gap: "1rem" }}>
       {themeStore.error && (
@@ -52,6 +57,7 @@ const ThemeCard: React.FC = () => {
             open={openMenus["general"]}
             selectedTheme={selectedTheme}
             setSelectedTheme={setSelectedTheme}
+            allowsHover={allowsHover}
           />
         </Foldout>
       </>
