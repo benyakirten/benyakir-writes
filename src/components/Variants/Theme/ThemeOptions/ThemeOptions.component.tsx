@@ -12,7 +12,7 @@ import { toggleUseComputerPreferences } from "@Store/theme/theme.slice";
 import { useAppDispatch, useAppSelector } from "@Store/hooks";
 
 const ThemeCard: React.FC = () => {
-  const allowsHover = window.matchMedia ? window.matchMedia("(any-hover: hover)").matches : true;
+  const allowsHover = window && window.matchMedia ? window.matchMedia("(any-hover: hover)").matches : true;
   const themeStore = useAppSelector((root) => root.theme);
   const dispatch = useAppDispatch();
   const [selectedTheme, setSelectedTheme] = useAlternation();
