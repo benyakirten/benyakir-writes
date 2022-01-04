@@ -12,7 +12,11 @@ import { toggleUseComputerPreferences } from "@Store/theme/theme.slice";
 import { useAppDispatch, useAppSelector } from "@Store/hooks";
 
 const ThemeCard: React.FC = () => {
-  const allowsHover = window && window.matchMedia ? window.matchMedia("(any-hover: hover)").matches : true;
+  const [allowsHover, setAllowsHover] = React.useState<boolean>()
+  React.useEffect(() => {
+    const _allowshover = window.matchMedia ? window.matchMedia("(any-hover: hover)").matches : true;
+    setAllowsHover(_allowshover)
+  }, [])
   const themeStore = useAppSelector((root) => root.theme);
   const dispatch = useAppDispatch();
   const [selectedTheme, setSelectedTheme] = useAlternation();
@@ -57,7 +61,7 @@ const ThemeCard: React.FC = () => {
             open={openMenus["general"]}
             selectedTheme={selectedTheme}
             setSelectedTheme={setSelectedTheme}
-            allowsHover={allowsHover}
+            allowsHover={!!allowsHover}
           />
         </Foldout>
       </>
