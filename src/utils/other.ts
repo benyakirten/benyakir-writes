@@ -23,7 +23,7 @@ export function flattenTheme(theme: BaseTheme): ThemeGroups {
     let controls: string[][] = []
     for (let key in controlGroup) {
       if (typeof controlGroup[key] === 'string') {
-        controls.push([ ...accessors, key ])
+        controls.push([...accessors, key])
       } else {
         const subset = recursiveFlattenControls(controlGroup[key] as RecursiveControlGroup, [...accessors, key])
         controls = controls.concat(subset)
@@ -48,4 +48,11 @@ export function getThemeProp(theme: BaseTheme, accessors: string[]): string {
     prop = prop[key]
   }
   return prop as string;
+}
+
+export function getThemePropRecursive(obj: RecursiveControlGroup, accessors: string[]): string {
+  if (accessors.length > 1) {
+    return getThemePropRecursive(obj[accessors[0]] as RecursiveControlGroup, accessors.slice(1))
+  }
+  return obj[accessors[0]] as string
 }

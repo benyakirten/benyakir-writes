@@ -2,8 +2,8 @@ import * as React from "react";
 
 import { CardContainer, CardHalf } from "./ThemeControls.styles";
 import { Button } from "@Gen";
-import DraggableThemeList from "./DraggableThemeLists/DraggableThemeList.component";
-import DestinationThemeList from "./DraggableThemeLists/DestinationThemeList.component";
+import DraggableThemeList from "./ThemeLists/DraggableList/DraggableThemeList.component";
+import DestinationThemeList from "./ThemeLists/DestinationThemeList/DestinationThemeList.component";
 
 import { useAppDispatch } from "@Store/hooks";
 import { createTheme, resetThemeOptions } from "@Store/theme/theme.slice";
