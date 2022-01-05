@@ -1,11 +1,11 @@
 import * as React from "react";
 
-import { BigParagraph, MinorHeading } from "@Styles/general-components";
+import { BigParagraph } from "@Styles/general-components";
 import { Foldout } from "@Gen";
 import { ColorPicker } from "@Input";
 
 import { titleCase } from "@Utils/strings";
-import { getThemeProp } from "@Utils/other";
+import { getThemePropRecursive } from "@Utils/other";
 
 import { useAppDispatch } from "@Store/hooks";
 import { changePropOnTheme } from "@Store/theme/theme.slice";
@@ -35,7 +35,7 @@ const SettingsGroup: React.FC<SettingsGroupProps> = ({
             tabIndex={open ? 0 : -1}
             label={label}
             name={name}
-            value={getThemeProp(theme, control)}
+            value={getThemePropRecursive(theme as any, control)}
             onChange={(e) =>
               dispatch(
                 changePropOnTheme({ id: theme.id, props: control, newVal: e })

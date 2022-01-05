@@ -17,7 +17,7 @@ import { capitalize } from "@Utils/strings";
 
 const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme, open }) => {
   const dispatch = useAppDispatch();
-  const themes = useAppSelector((store) => store.theme.themes);
+  const themes = useAppSelector(root => root.theme.themes);
   const theme = React.useMemo(
     () => themes.find((theme) => theme.id === selectedTheme),
     [selectedTheme, themes]

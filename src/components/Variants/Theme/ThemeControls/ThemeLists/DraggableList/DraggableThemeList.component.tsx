@@ -23,7 +23,7 @@ const DraggableThemeList: React.FC<DraggableThemeListProps> = ({ open, onSelect,
       }
     }
   `);
-  const themeStore = useAppSelector((store) => store.theme);
+  const themeStore = useAppSelector(root => root.theme);
   const dispatch = useAppDispatch();
   const themeNames = React.useMemo(() =>
     themeStore.themes.map((theme) => {

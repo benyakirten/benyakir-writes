@@ -219,7 +219,7 @@ const themeSlice = createSlice({
     },
     deleteThemeByID: (state, action: PayloadAction<string>) => {
       state.error = undefined
-      if (action.payload === 'day' || action.payload === 'night') {
+      if (action.payload === '0' || action.payload === '1') {
         state.error = "Day and night themes cannot be deleted"
         return
       }
@@ -266,14 +266,22 @@ const themeSlice = createSlice({
         return
       }
 
-      for (let key of props.slice(0, -1)) {
-        if (!accessor[key]) {
-          return
+      function recursiveAccess(obj: RecursiveControlGroup, accessor: string[]): StringLookup | undefined {
+        if (accessor.length = 1) {
+          return obj[accessor[0]] as StringLookup
         }
-        accessor = accessor[key]
+        if (obj[accessor[0]]) {
+          return recursiveAccess(obj[accessor[0]] as RecursiveControlGroup, accessor.slice(1))
+        }
+        return
       }
+      const finalAccessor = recursiveAccess(accessor, props.slice(0, -1))
+      if (!finalAccessor) {
+        return
+      }
+      
       const finalProp = props[props.length - 1]
-      accessor[finalProp] = newVal
+      finalAccessor[finalProp] = newVal
       if (state.active.id === id) {
         state.active = state.themes.find(theme => theme.id === id) ?? state.active
       }
