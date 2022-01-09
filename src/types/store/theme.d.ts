@@ -22,8 +22,10 @@ interface ThemeSearchBox extends BasicThemeSection {
   border: string;
   background: string;
   textColor: string;
-  resultTextColor: string;
-  resultBorderColor: string;
+  result: {
+    textColor: string;
+    border: string;
+  }
 }
 
 interface ThemeSidebar {

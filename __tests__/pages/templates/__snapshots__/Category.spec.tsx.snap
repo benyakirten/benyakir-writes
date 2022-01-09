@@ -11,7 +11,7 @@ exports[`category template should render correctly 1`] = `
     open={false}
   >
     <div
-      className="sc-hKwDye gouPLR nav-toggle-close"
+      className="sc-hKwDye josNYK nav-toggle-close"
       data-navtoggle="nav-toggle"
       open={false}
     >
@@ -585,7 +585,7 @@ exports[`category template should render correctly 2`] = `
     open={false}
   >
     <div
-      className="sc-hKwDye gouPLR nav-toggle-close"
+      className="sc-hKwDye josNYK nav-toggle-close"
       data-navtoggle="nav-toggle"
       open={false}
     >

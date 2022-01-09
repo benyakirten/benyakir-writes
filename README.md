@@ -49,6 +49,9 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 > Add customizable font sizes and allow all items to be moved around
 > Fix spacing in styled components
 
+## Known Bugs (to be fixed)
+* Please tell me if you see a bug. I try to fix them as soon as I see them, even if I said I was taking a break and no longer working on this project.
+
 ## Changelog
 
 *  9/7/2021: 
@@ -146,3 +149,7 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 > 1. I realized it was way better to have the droppable theme options (set as preferred/etc.) as separate components. Yes, it should never have been any other way, and I've fixed it.
 > 2. Whoopsy. It was possible to delete the day and night theme. That's fixed now.
 > 3. In honor of Elixir, I decided to make the nested object accessor functions into recursive functions, meaning getThemeProps of utils/other and changePropOnTheme (okay, because of Redux Toolkit, it's easoer not to use a pure function, but the accessing part is a recursive function).
+* 1/9/2021: I discovered two errors: on large screens, when the sidebar is open the links are still spilling over and that color changes weren't working on nested properties.
+> The first one was super easy to fix. It just involved me moving a little CSS around.
+> The latter one... let me tell you. Did you know that in JavaScript a condition can also be an assignment? For example, if I wrote ```if (accessor.length = 1) { ... }``` then it assigns accessor.length the value of 1? Yeah, so I knew about that, and I even remarked on it. It's a bit like the walrus operator in Python, but you don't even need the walrus. Turns out I wrote that exact line above instead of accessor.length === 1. I feel like an idiot.
+> Oh, I also split up the words some of the theme properties if they were compound words (offColor) so now they display as Off Color (instead of OffColor)

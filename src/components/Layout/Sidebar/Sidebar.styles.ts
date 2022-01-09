@@ -53,9 +53,9 @@ export const SidebarContents = styled.div<{ open: boolean }>`
     left: 2.5rem;
 
     width: ${props => props.open ? 'auto' : '2rem'};
-    max-width: 17%;
+    max-width: 14%;
 
-    ${media.tablet} {
+    ${media.desktop} {
         max-width: 20%;
     }
     
