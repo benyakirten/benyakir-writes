@@ -32,8 +32,8 @@ export const SingleResult = styled.div`
     width: 100%;
 
     font-size: ${FONT_MD};
-    color: ${props => props.theme.searchBox.resultTextColor};
-    border: 1px solid ${props => props.theme.searchBox.resultBorderColor};
+    color: ${props => props.theme.searchBox.result.textColor};
+    border: 1px solid ${props => props.theme.searchBox.result.border};
 
     opacity: 0.85;
 

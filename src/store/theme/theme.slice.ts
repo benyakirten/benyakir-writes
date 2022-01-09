@@ -267,7 +267,7 @@ const themeSlice = createSlice({
       }
 
       function recursiveAccess(obj: RecursiveControlGroup, accessor: string[]): StringLookup | undefined {
-        if (accessor.length = 1) {
+        if (accessor.length === 1) {
           return obj[accessor[0]] as StringLookup
         }
         if (obj[accessor[0]]) {

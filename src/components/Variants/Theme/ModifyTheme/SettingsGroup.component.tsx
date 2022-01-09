@@ -19,6 +19,9 @@ const SettingsGroup: React.FC<SettingsGroupProps> = ({
   theme,
 }) => {
   const dispatch = useAppDispatch();
+  const handleChange = (e: string, control: ThemeAccessors) => {
+    dispatch(changePropOnTheme({ id: theme.id, props: control, newVal: e }));
+  };
   return (
     <Foldout
       onClick={onOpen}
@@ -27,8 +30,8 @@ const SettingsGroup: React.FC<SettingsGroupProps> = ({
       height="auto"
     >
       {controls.map((control) => {
-        const name = control.join("-");
-        const label = titleCase(control.slice(1));
+        const name = control.join("-")
+        const label = titleCase(control.slice(1).flatMap(ctrl => ctrl.split(/(?=[A-Z])/)))
         return (
           <ColorPicker
             key={`${preface}-${name}`}
@@ -36,11 +39,7 @@ const SettingsGroup: React.FC<SettingsGroupProps> = ({
             label={label}
             name={name}
             value={getThemePropRecursive(theme as any, control)}
-            onChange={(e) =>
-              dispatch(
-                changePropOnTheme({ id: theme.id, props: control, newVal: e })
-              )
-            }
+            onChange={(e) => handleChange(e, control)}
           />
         );
       })}

@@ -13,8 +13,10 @@ export const defaultDayTheme: BaseTheme = {
     border: "#05491F",
     background: "#000000",
     textColor: "#D8E3FD",
-    resultTextColor: "#FFFFFF",
-    resultBorderColor: '#FFFFFF'
+    result: {
+      textColor: "#FFFFFF",
+      border: '#FFFFFF'
+    }
   },
   sidebar: {
     primaryColor: "#FDEDC4",
@@ -114,8 +116,10 @@ export const defaultNightTheme: BaseTheme = {
     border: "#e9ecef",
     background: "#000000",
     textColor: "#D8E3FD",
-    resultTextColor: "#FFFFFF",
-    resultBorderColor: "#FFFFFF"
+    result: {
+      textColor: "#FFFFFF",
+      border: "#FFFFFF"
+    }
   },
   sidebar: {
     primaryColor: "#252F47",
