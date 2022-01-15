@@ -50,6 +50,7 @@ export function createMetaForProject(project: PartialFlattenedProject) {
 }
 
 export function getFullTechName(tech: string) {
+  console.log(tech)
   switch (tech.toLowerCase()) {
     case "html":
       return "HTML";
@@ -89,6 +90,8 @@ export function getFullTechName(tech: string) {
       return "Tailwind";
     case "go":
       return "Golang";
+    case "ex":
+      return "Elixir";
     default:
       return tech;
   }
