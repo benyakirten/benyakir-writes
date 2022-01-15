@@ -153,3 +153,4 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 > The first one was super easy to fix. It just involved me moving a little CSS around.
 > The latter one... let me tell you. Did you know that in JavaScript a condition can also be an assignment? For example, if I wrote ```if (accessor.length = 1) { ... }``` then it assigns accessor.length the value of 1? Yeah, so I knew about that, and I even remarked on it. It's a bit like the walrus operator in Python, but you don't even need the walrus. Turns out I wrote that exact line above instead of accessor.length === 1. I feel like an idiot.
 > Oh, I also split up the words some of the theme properties if they were compound words (offColor) so now they display as Off Color (instead of OffColor)
+* 1/15/2021: Added support for the Golang icon, also fixed spacing in some of the utils which were still on 4 spaces/indent.
