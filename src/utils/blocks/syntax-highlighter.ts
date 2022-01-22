@@ -91,6 +91,10 @@ export const getFullLanguage: DecodeLanguage = lang => {
       return 'CSS';
     case 'scss':
       return 'SCSS';
+    case 'erl':
+      return 'Erlang';
+    case 'ex':
+      return 'Elixir';
     default:
       return 'JavaScript';
   }
