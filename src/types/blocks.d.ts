@@ -21,7 +21,7 @@ type BlockComponents = {
 type EncodingFunction = (code: string) => string;
 
 type EnabledTheme = 'darcula' | 'prism' | 'atomDark' | 'materialDark' | 'duotoneSpace' | 'duotoneLight';
-type EnabledLanguage = 'js' | 'jsx' | 'ts' | 'tsx' | 'python' | 'php' | 'graphql' | 'css' | 'scss' | 'erl' | 'ex';
+type EnabledLanguage = 'js' | 'jsx' | 'ts' | 'tsx' | 'python' | 'php' | 'graphql' | 'css' | 'scss' | 'erlang' | 'elixir' | 'go';
 
 type DecodeTheme = (theme: EnabledTheme) => string;
 type DecodeLanguage = (theme: EnabledLanguage) => string;
