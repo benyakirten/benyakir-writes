@@ -187,3 +187,5 @@ One last note: if you run the tests, your terminal will flip out, but all the te
 * 1/15/2022: Added support for the Golang icon, also fixed spacing in some of the utils which were still on 4 spaces/indent.
 
 * 1/22/2022: Added support for Erlang and Elixir in the Syntax Highlighter to make it compatible with the plugin.
+* 1/22/2022 (later): Fixed the Erlang and Elixir support and added Golang support. Did you know that with the Prism syntax highlighter the languages have to have specific names? I thought you could set them to anything... which you can. So why can you set them to incorrect values? Whatever! It's fixed and done now.
+

@@ -28,6 +28,12 @@ export function getPrismLanguage(lang: EnabledLanguage): Promise<any> {
       return import('react-syntax-highlighter/dist/cjs/languages/prism/css').then(l => l.default)
     case 'scss':
       return import('react-syntax-highlighter/dist/cjs/languages/prism/scss').then(l => l.default)
+    case 'erlang':
+      return import('react-syntax-highlighter/dist/cjs/languages/prism/erlang').then(l => l.default)
+    case 'elixir':
+      return import('react-syntax-highlighter/dist/cjs/languages/prism/elixir').then(l => l.default)
+    case 'go':
+      return import('react-syntax-highlighter/dist/cjs/languages/prism/go').then(l => l.default)
     default:
       return import('react-syntax-highlighter/dist/cjs/languages/prism/javascript').then(l => l.default)
   }
@@ -91,10 +97,12 @@ export const getFullLanguage: DecodeLanguage = lang => {
       return 'CSS';
     case 'scss':
       return 'SCSS';
-    case 'erl':
+    case 'erlang':
       return 'Erlang';
-    case 'ex':
+    case 'elixir':
       return 'Elixir';
+    case 'go':
+      return "Golang"
     default:
       return 'JavaScript';
   }
