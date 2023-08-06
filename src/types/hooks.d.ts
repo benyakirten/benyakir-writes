@@ -14,7 +14,7 @@ type PaginationHook = <T>(initialItems: T[]) => {
   setCurrentItems: (_items: T[]) => void;
 }
 
-type ToggleHook = (initialVal?: boolean) => [val: boolean, () => void]
+type ToggleHook = (initialVal?: boolean) => [boolean, () => void]
 
 type ValidateStringFunction<T> = (args: T) => (input: string) => boolean;
 type ValidateNumberFunction<T> = (args: T) => (input: number) => boolean;
