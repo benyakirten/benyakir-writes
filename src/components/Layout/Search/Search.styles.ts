@@ -13,22 +13,23 @@ export const ResultsContainer = styled.div<{ resultLength?: number }>`
     flex-direction: column;
     align-items: center;
 
-    height: ${props => props.resultLength && props.resultLength > 1 ? '13rem' : '6.5rem'};
-
-    width: 60%;
+    max-height: ${props => props.resultLength && props.resultLength > 1 ? '13rem' : '6.5rem'};
     
     border: 2px solid ${props => props.theme.searchBox.border};
     background-color: ${props => props.theme.searchBox.background};
     color: ${props => props.theme.searchBox.textColor};
 
-    transition: height 1s ease;
+    transition: all 400ms ease;
+    ${media.reducedMotion} {
+        transition: all 1ms ease;
+    }
 `
 
 export const SingleResult = styled.div`
     cursor: pointer;
 
     padding: 0.5rem 1rem;
-    height: 6.5rem;
+    max-height: 6.5rem;
     width: 100%;
 
     font-size: ${FONT_MD};

@@ -17,7 +17,7 @@ export const StyledFigure = styled.figure<{ color?: string, size?: string, squar
         border-radius: ${props => props.square ? 'none' : '50%'};
         height: ${props => props.size ? props.size : '10rem'};
         width: ${props => props.size ? props.size : '10rem'};
-        transition: all 0.5s;
+        transition: all 400ms ease;
 
         ${media.phone} {
             margin-right: ${props => props.marginRightOnPhone ? props.marginRightOnPhone : '2rem'};
@@ -29,7 +29,7 @@ export const StyledFigure = styled.figure<{ color?: string, size?: string, squar
     figcaption {
         text-align: center;
         font-size: ${FONT_LG};
-        transition: all 0.5s ease;
+        transition: all 400ms ease;
         color: ${props => props.theme.hoverImage.textColor};
     }
 

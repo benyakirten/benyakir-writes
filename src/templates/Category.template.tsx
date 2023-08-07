@@ -1,18 +1,28 @@
-import * as React from "react";
-import { Helmet } from "react-helmet";
+import * as React from 'react';
 
-import { BigParagraph, Grouping } from "@Styles/general-components";
+import { BigParagraph, Grouping } from '@Styles/general-components';
 
-import { Paginate, LeadPage } from "@Layout";
-import { CustomLink, Loading } from "@Gen";
-import { CategoryFilter } from "@Posts";
-import { BlogCard } from "@Variants";
+import { Paginate, LeadPage } from '@Layout';
+import { CustomLink, Loading } from '@Gen';
+import { CategoryFilter } from '@Posts';
+import { BlogCard } from '@Variants';
 
-import { usePagination } from "@Hooks";
-import { titleToKebab } from "@Utils/strings";
+import { usePagination } from '@Hooks';
+import { titleToKebab } from '@Utils/strings';
 
-import { WpPostByCategory } from "@Types/query";
-import { FlattenedBlogCard } from "@Types/posts";
+import { WpPostByCategory } from '@Types/query';
+import { FlattenedBlogCard } from '@Types/posts';
+
+export const Head: React.FC<WpPostByCategory> = ({ pageContext }) => (
+  <>
+    <title>Benyakir Writes - {pageContext.name}</title>
+    <meta
+      name="description"
+      content={`Browse a list of all blog posts in ${pageContext.name}, ordered by most recent publication to least recent. Users can
+                    filter the blog results by publication date and tags.`}
+    />
+  </>
+);
 
 const CategoryTemplate: React.FC<WpPostByCategory> = ({ pageContext }) => {
   const [loading, setLoading] = React.useState(true);
@@ -28,7 +38,7 @@ const CategoryTemplate: React.FC<WpPostByCategory> = ({ pageContext }) => {
             ...b.published,
             date: new Date(b.published.date),
           },
-        }))
+        })),
       );
       // The loading should come at the end because then the dates will be properly loaded.
       // Even though the category filter has a backup and can handle an empty array, the dates
@@ -47,21 +57,10 @@ const CategoryTemplate: React.FC<WpPostByCategory> = ({ pageContext }) => {
         loading ? (
           <Loading />
         ) : (
-          <CategoryFilter
-            allPosts={catPosts}
-            onFilter={postPagination.setCurrentItems}
-          />
+          <CategoryFilter allPosts={catPosts} onFilter={postPagination.setCurrentItems} />
         )
       }
     >
-      <Helmet>
-        <title>Benyakir Writes - {pageContext.name}</title>
-        <meta
-          name="description"
-          content={`Browse a list of all blog posts in ${pageContext.name}, ordered by most recent publication to least recent. Users can
-                    filter the blog results by publication date and tags.`}
-        />
-      </Helmet>
       {loading ? (
         <Loading size="4rem" />
       ) : (
@@ -71,9 +70,8 @@ const CategoryTemplate: React.FC<WpPostByCategory> = ({ pageContext }) => {
               <Paginate {...postPagination} El={BlogCard} />
             ) : (
               <BigParagraph>
-                There are no posts in the category {pageContext.name}. Maybe you
-                want to check out the general{" "}
-                <CustomLink to="/blog">blog page</CustomLink> instead?
+                There are no posts in the category {pageContext.name}. Maybe you want to check out
+                the general <CustomLink to="/blog">blog page</CustomLink> instead?
               </BigParagraph>
             )}
           </Grouping>

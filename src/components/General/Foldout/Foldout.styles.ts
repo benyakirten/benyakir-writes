@@ -7,8 +7,8 @@ export const FoldoutContainer = styled.div`
     position: relative;
 `
 
-export const TopbarContainer = styled.div<{ open: boolean }>`
-    cursor: ${props => props.open ? 'n-resize' : 's-resize'};
+export const TopbarContainer = styled.div`
+    cursor: pointer;
     max-width: max-content;
 `
 
@@ -27,9 +27,10 @@ export const FoldoutBody = styled.div<{
     height: ${props => props.open ? props.height : '0'};
 
     transform-origin: top;
-    transition: all 1s ease;
+    transform: scaleY(${props => props.open ? '1' : '0.8'});
+    transition: all 400ms ease;
     
-    opacity: ${props => props.open ? '1': '0'};
+    opacity: ${props => props.open ? '1' : '0'};
 
     ${media.custom(1160)} {
         height: ${props => props.open ? multiplyCSSNumber(props.height, props.heightMultiplierOnLarger ? props.heightMultiplierOnLarger : 1) : '0'};

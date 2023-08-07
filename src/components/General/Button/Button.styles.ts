@@ -44,7 +44,7 @@ export const ButtonExterior = styled.button`
 
     span {
         color: ${props => props.theme.button.default.textColor};
-        transition: color 1s ease;
+        transition: color 400ms ease;
 
 
         position: relative;
@@ -60,7 +60,7 @@ export const ButtonExterior = styled.button`
 
         background-color: ${props => props.theme.button.hover.background};
 
-        transition: transform 1s ease;
+        transition: transform 400ms ease;
         transform: scale(0);
     }
 

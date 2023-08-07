@@ -1,29 +1,33 @@
-import * as React from "react";
-import { Helmet } from "react-helmet";
+import * as React from 'react';
 
-import { BigParagraph, Grouping } from "@Styles/general-components";
+import { BigParagraph, Grouping } from '@Styles/general-components';
 
-import { LeadPage, Paginate } from "@Layout";
-import { ProjectCard } from "@Variants";
-import { ProjectFilter } from "@Posts";
-import { CustomLink } from "@Gen";
+import { LeadPage, Paginate } from '@Layout';
+import { ProjectCard } from '@Variants';
+import { ProjectFilter } from '@Posts';
+import { CustomLink } from '@Gen';
 
-import { usePagination } from "@Hooks";
+import { usePagination } from '@Hooks';
 
-import projectsJson from "@WPData/Projects/projects.json";
-import projectsMisc from "@WPData/Projects/misc.json";
+import projectsJson from '@WPData/Projects/projects.json';
+import projectsMisc from '@WPData/Projects/misc.json';
 
-import { FlattenedProjectCard } from "@Types/posts";
+import { FlattenedProjectCard } from '@Types/posts';
+
+export const Head = () => (
+  <>
+    <title>Benyakir Writes - Portfolio</title>
+    <meta
+      name="description"
+      content="A view of all of my completed projects with various details. They can be sorted by a variety of means,
+                    including dynamically-generated criteria such as web hosts and what technologies are used to power them."
+    />
+  </>
+);
 
 const ProjectsPage: React.FC = () => {
-  const allHosts = React.useMemo<string[]>(
-    () => projectsMisc.hosts,
-    [projectsMisc]
-  );
-  const allTechs = React.useMemo<string[]>(
-    () => projectsMisc.longTechs,
-    [projectsMisc]
-  );
+  const allHosts = React.useMemo<string[]>(() => projectsMisc.hosts, [projectsMisc]);
+  const allTechs = React.useMemo<string[]>(() => projectsMisc.longTechs, [projectsMisc]);
 
   // JSON stringify makes a date into a string - so we need to convert it back
   const preparedProjects = React.useMemo<FlattenedProjectCard[]>(
@@ -35,11 +39,10 @@ const ProjectsPage: React.FC = () => {
           date: new Date(p.firstReleased.date),
         },
       })),
-    [projectsJson]
+    [projectsJson],
   );
 
-  const projectPagination =
-    usePagination<FlattenedProjectCard>(preparedProjects);
+  const projectPagination = usePagination<FlattenedProjectCard>(preparedProjects);
 
   return (
     <LeadPage
@@ -53,22 +56,12 @@ const ProjectsPage: React.FC = () => {
         />
       }
     >
-      <Helmet>
-        <title>Benyakir Writes - Portfolio</title>
-        <meta
-          name="description"
-          content="A view of all of my completed projects with various details. They can be sorted by a variety of means,
-                    including dynamically-generated criteria such as web hosts and what technologies are used to power them."
-        />
-      </Helmet>
       <BigParagraph marginVertical="2rem">
-        I am a fullstack engineer with a focus on frontend. I have experience
-        with normal JavaScript as well as Angular, React, Vue, Svelte and their
-        JAMStack equivalents, such as Gatsby and SvelteKit. I use different
-        techniques and technologies for each of my projects so I'm always
-        learning something new and have a wide arsenal of tools available. If
-        you want to hire me for a project, visit the{" "}
-        <CustomLink to="/contact">contact page</CustomLink>.
+        I am a fullstack engineer with a focus on frontend. I have experience with normal JavaScript
+        as well as Angular, React, Vue, Svelte and their JAMStack equivalents, such as Gatsby and
+        SvelteKit. I use different techniques and technologies for each of my projects so I'm always
+        learning something new and have a wide arsenal of tools available. If you want to hire me
+        for a project, visit the <CustomLink to="/contact">contact page</CustomLink>.
       </BigParagraph>
       <Grouping>
         <Paginate {...projectPagination} El={ProjectCard} />

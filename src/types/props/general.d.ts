@@ -24,6 +24,7 @@ type LinkProps = {
   limitUnderbar?: boolean;
   underbarSize?: string;
   tabIndex?: number;
+  wholeLine?: boolean
 }
 type LayoutProps = {
   path: string;

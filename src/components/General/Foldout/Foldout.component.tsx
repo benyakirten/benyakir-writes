@@ -1,17 +1,13 @@
-import * as React from "react";
+import * as React from 'react';
 
-import {
-  FoldoutContainer,
-  FoldoutBody,
-  TopbarContainer,
-} from "./Foldout.styles";
-import { DownArrow } from "@Pre";
+import { FoldoutContainer, FoldoutBody, TopbarContainer } from './Foldout.styles';
+import { DownArrow } from '@Pre';
 
-import { findAttrInElTree } from "@Utils/dom";
+import { findAttrInElTree } from '@Utils/dom';
 
 const Foldout: React.FC<FoldoutProps> = ({
   open = false,
-  height = "4rem",
+  height = '4rem',
   topbar,
   onClick,
   children,
@@ -22,10 +18,10 @@ const Foldout: React.FC<FoldoutProps> = ({
 }) => {
   const handleContainerClick = React.useCallback(
     (e: React.BaseSyntheticEvent) => _handleContainerClick(e),
-    [onClick]
+    [onClick],
   );
   function _handleContainerClick(e: React.BaseSyntheticEvent) {
-    if (findAttrInElTree(e.target, "data-navtoggle", "no-toggle")) {
+    if (findAttrInElTree(e.target, 'data-navtoggle', 'no-toggle')) {
       return;
     }
     onClick && onClick();
@@ -36,12 +32,12 @@ const Foldout: React.FC<FoldoutProps> = ({
   };
   return (
     <FoldoutContainer>
-      <TopbarContainer open={open} onClick={(e) => handleContainerClick(e)}>
+      <TopbarContainer onClick={(e) => handleContainerClick(e)}>
         <DownArrow
           open={open}
           tabIndex={open ? 0 : -1}
           onClick={handleArrowClick}
-          cyId={cyId ? cyId : "foldout-bar"}
+          cyId={cyId ? cyId : 'foldout-bar'}
         />
         {topbar}
       </TopbarContainer>

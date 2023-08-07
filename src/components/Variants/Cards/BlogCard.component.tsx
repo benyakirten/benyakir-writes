@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 import {
   Card,
@@ -10,34 +10,33 @@ import {
   Paragraph,
   Row,
   WpContentDescription,
-} from "@Styles/general-components";
+} from '@Styles/general-components';
 
-import { CustomLink } from "@Gen";
+import { CustomLink } from '@Gen';
 
-import { firstWords, titleToKebab } from "@Utils/strings";
-import { getPrettyDate } from "@Utils/dates";
-import { BlogCardProps } from "@Types/props/post-components";
+import { titleToKebab } from '@Utils/strings';
+import { getPrettyDate } from '@Utils/dates';
+import { BlogCardProps } from '@Types/props/post-components';
+import { TextSection } from './BlogCard.styles';
 
 const BlogCard: React.FC<BlogCardProps> = ({ item }) => {
-  const categoryOrTags = item.categories || item.tags;
+  const hasCategoriesOrTags = item.categories || item.tags;
   return (
-    <Card style={{ height: "18rem" }}>
-      <Row style={{ alignItems: "start" }}>
+    <Card style={{ height: '18rem' }}>
+      <Row style={{ alignItems: 'start' }}>
         <CardSection>
           <Column>
-            <MinorHeading>
-              <CustomLink to={`/post/${item.slug}`}>
-                {firstWords(item.title, 18)}
-              </CustomLink>
-            </MinorHeading>
-            <WpContentDescription
-              fontSize="1.4rem"
-              dangerouslySetInnerHTML={{
-                __html: categoryOrTags
-                  ? firstWords(item.excerpt!, 100)
-                  : item.excerpt!,
-              }}
-            />
+            <TextSection>
+              <MinorHeading>
+                <CustomLink to={`/post/${item.slug}`}>{item.title}</CustomLink>
+              </MinorHeading>
+              <WpContentDescription
+                fontSize="1.4rem"
+                dangerouslySetInnerHTML={{
+                  __html: item.excerpt!,
+                }}
+              />
+            </TextSection>
             <DisappearOnTablet>
               <DisappearOnPhone>
                 <MinorHeading>Posted on</MinorHeading>
@@ -46,18 +45,18 @@ const BlogCard: React.FC<BlogCardProps> = ({ item }) => {
             </DisappearOnTablet>
           </Column>
         </CardSection>
-        {categoryOrTags && (
+        {hasCategoriesOrTags && (
           <DisappearOnTablet>
             <CardSection>
-              <Column style={{ marginLeft: "auto", width: "20rem" }}>
+              <Column style={{ marginLeft: 'auto', width: '20rem' }}>
                 {item.categories && (
                   <>
                     <MinorHeading>
-                      {item.categories.length > 1 ? "Categories" : "Category"}
+                      {item.categories.length > 1 ? 'Categories' : 'Category'}
                     </MinorHeading>
-                    <Paragraph style={{ margin: "0" }}>
+                    <Paragraph style={{ margin: '0' }}>
                       {item.categories.map((cat) => (
-                        <CustomLink to={`/blog/${titleToKebab(cat)}`} key={cat}>
+                        <CustomLink wholeLine to={`/blog/${titleToKebab(cat)}`} key={cat}>
                           {cat}
                         </CustomLink>
                       ))}
@@ -66,12 +65,8 @@ const BlogCard: React.FC<BlogCardProps> = ({ item }) => {
                 )}
                 {item.tags && (
                   <>
-                    <MinorHeading>
-                      {item.tags.length > 1 ? "Tags" : "Tag"}
-                    </MinorHeading>
-                    <Paragraph style={{ margin: "0" }}>
-                      {item.tags.join(", ")}
-                    </Paragraph>
+                    <MinorHeading>{item.tags.length > 1 ? 'Tags' : 'Tag'}</MinorHeading>
+                    <Paragraph style={{ margin: '0' }}>{item.tags.join(', ')}</Paragraph>
                   </>
                 )}
               </Column>
