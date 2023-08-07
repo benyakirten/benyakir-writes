@@ -14,13 +14,13 @@ import {
 
 import { CustomLink } from '@Gen';
 
-import { firstWords, titleToKebab } from '@Utils/strings';
+import { titleToKebab } from '@Utils/strings';
 import { getPrettyDate } from '@Utils/dates';
 import { BlogCardProps } from '@Types/props/post-components';
 import { TextSection } from './BlogCard.styles';
 
 const BlogCard: React.FC<BlogCardProps> = ({ item }) => {
-  const categoryOrTags = item.categories || item.tags;
+  const hasCategoriesOrTags = item.categories || item.tags;
   return (
     <Card style={{ height: '18rem' }}>
       <Row style={{ alignItems: 'start' }}>
@@ -28,12 +28,12 @@ const BlogCard: React.FC<BlogCardProps> = ({ item }) => {
           <Column>
             <TextSection>
               <MinorHeading>
-                <CustomLink to={`/post/${item.slug}`}>{firstWords(item.title, 18)}</CustomLink>
+                <CustomLink to={`/post/${item.slug}`}>{item.title}</CustomLink>
               </MinorHeading>
               <WpContentDescription
                 fontSize="1.4rem"
                 dangerouslySetInnerHTML={{
-                  __html: categoryOrTags ? firstWords(item.excerpt!, 100) : item.excerpt!,
+                  __html: item.excerpt!,
                 }}
               />
             </TextSection>
@@ -45,7 +45,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ item }) => {
             </DisappearOnTablet>
           </Column>
         </CardSection>
-        {categoryOrTags && (
+        {hasCategoriesOrTags && (
           <DisappearOnTablet>
             <CardSection>
               <Column style={{ marginLeft: 'auto', width: '20rem' }}>
@@ -56,7 +56,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ item }) => {
                     </MinorHeading>
                     <Paragraph style={{ margin: '0' }}>
                       {item.categories.map((cat) => (
-                        <CustomLink to={`/blog/${titleToKebab(cat)}`} key={cat}>
+                        <CustomLink wholeLine to={`/blog/${titleToKebab(cat)}`} key={cat}>
                           {cat}
                         </CustomLink>
                       ))}

@@ -1,6 +1,6 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { OutsideLink, StyledLink } from "./CustomLink.styles";
+import { OutsideLink, StyledLink } from './CustomLink.styles';
 
 const CustomLink: React.FC<LinkProps> = ({
   tabIndex = 0,
@@ -14,6 +14,7 @@ const CustomLink: React.FC<LinkProps> = ({
   inline = false,
   limitUnderbar = false,
   underbarSize,
+  wholeLine = false,
 }) => {
   const linkProps = {
     tabIndex,
@@ -24,6 +25,7 @@ const CustomLink: React.FC<LinkProps> = ({
     inheritColor,
     limitUnderbar,
     underbarSize,
+    wholeLine,
   };
   return (
     <>

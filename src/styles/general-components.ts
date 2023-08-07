@@ -204,7 +204,7 @@ export const Column = styled.div`
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 1rem;
 `
 
 export const NoLineBreak = styled.span`
@@ -250,6 +250,7 @@ export const WpContentDescription = styled.div<{ fontSize?: string }>`
     ${media.desktop} {
         font-size: ${FONT_MD};
     }
+    text-overflow: ellipsis;
 
     a:link,
     a:visited {

@@ -13,15 +13,17 @@ export const StyledLink = styled(Link) <{
     dark: boolean,
     small: boolean,
     inline: boolean,
+    wholeLine: boolean,
     limitUnderbar: boolean,
     underbarSize?: string,
     inheritColor?: boolean
 }>`
     position: relative;
     overflow: hidden;
+    text-overflow: ellipsis;
 
     text-decoration: none;
-    display: block;
+    display: ${props => props.wholeLine ? 'block' : 'inline'};
     
     color: ${props => props.inheritColor ? 'inherit' : props.inline ? props.theme.link.inline : props.dark ? props.theme.link.dark : props.theme.link.normal};
     font-size: ${props => props.small ? FONT_LG : 'inherit'};
@@ -68,10 +70,13 @@ export const OutsideLink = styled.a<{
     inline: boolean,
     limitUnderbar: boolean,
     underbarSize?: string,
-    inheritColor?: boolean
+    inheritColor?: boolean,
+    wholeLine?: boolean
 }>`
     position: relative;
     overflow: hidden;
+    text-overflow: ellipsis;
+    display: ${props => props.wholeLine ? 'block' : 'inline'};
 
     transition: color 400ms ease;
     color: ${props => props.inheritColor ? 'inherit' : props.inline ? props.theme.link.inline : props.dark ? props.theme.link.dark : props.theme.link.normal};;
