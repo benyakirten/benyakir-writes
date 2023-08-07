@@ -4,7 +4,6 @@ import { SyntaxHighlighter } from "@Blocks"
 export const SEARCH_TIMEOUT = 250
 
 export const ICONS_TO_LINKS = {
-  Twitter: "https://twitter.com/BenyakirTen",
   Github: "https://github.com/benyakirten",
   Blog: "https://benyakiredits.com"
 }

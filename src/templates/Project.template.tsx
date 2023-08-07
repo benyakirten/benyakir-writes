@@ -1,16 +1,33 @@
-import * as React from "react";
-import { graphql } from "gatsby";
-import { Helmet } from "react-helmet";
+import * as React from 'react';
+import { graphql } from 'gatsby';
 
-import { Grouping, LeadHeading, WpContent } from "@Styles/general-components";
-import { ProjectHeader } from "@Variants";
+import { Grouping, LeadHeading, WpContent } from '@Styles/general-components';
+import { ProjectHeader } from '@Variants';
 
-import { getFullTechName, formatProject } from "@Utils/project";
-import { firstWords } from "@Utils/strings";
-import { formatWpText } from "@Utils/posts";
-import { getPrettyDate } from "@Utils/dates";
+import { getFullTechName, formatProject } from '@Utils/project';
+import { firstWords } from '@Utils/strings';
+import { formatWpText } from '@Utils/posts';
+import { getPrettyDate } from '@Utils/dates';
 
-import { WpProject } from "@Types/query";
+import { WpProject } from '@Types/query';
+
+export const Head: React.FC<WpProject> = ({ data }) => {
+  const project = formatProject(data.wpProject);
+  return (
+    <>
+      <title>{project.title}</title>
+      <meta
+        name="description"
+        content={`${project.title}, created on ${getPrettyDate(
+          project.firstReleased.date,
+        )}, using ${project.longTechnologies.join(', ')}. ${firstWords(
+          formatWpText(project.content!),
+          150,
+        )}`}
+      />
+    </>
+  );
+};
 
 const Project: React.FC<WpProject> = ({ data }) => {
   const project = formatProject(data.wpProject);
@@ -28,36 +45,22 @@ const Project: React.FC<WpProject> = ({ data }) => {
       try {
         const res = await fetch(repo);
         if (!res.ok) {
-          return setErr("Unable to fetch data");
+          return setErr('Unable to fetch data');
         }
         const data = await res.json();
         setLatestUpdate(new Date(data.pushed_at));
       } catch (e) {
-        setErr("Unable to fetch data");
+        setErr('Unable to fetch data');
       } finally {
         setLoading(false);
       }
     }
     if (project.repoLink) {
-      fetchLatestUpdate(
-        project.repoLink.replace("github.com/", "api.github.com/repos/")
-      );
+      fetchLatestUpdate(project.repoLink.replace('github.com/', 'api.github.com/repos/'));
     }
   }, []);
   return (
     <>
-      <Helmet>
-        <title>{project.title}</title>
-        <meta
-          name="description"
-          content={`${project.title}, created on ${getPrettyDate(
-            project.firstReleased.date
-          )}, using ${project.longTechnologies.join(", ")}. ${firstWords(
-            formatWpText(project.content!),
-            150
-          )}`}
-        />
-      </Helmet>
       <LeadHeading>{project.title}</LeadHeading>
       <ProjectHeader
         project={project}

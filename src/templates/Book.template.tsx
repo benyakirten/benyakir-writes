@@ -1,35 +1,36 @@
-import * as React from "react";
-import { graphql } from "gatsby";
-import { Helmet } from "react-helmet";
+import * as React from 'react';
+import { graphql } from 'gatsby';
 
-import {
-  LeadHeading,
-  Grouping,
-  WpContent,
-  Subtitle,
-} from "@Styles/general-components";
+import { LeadHeading, Grouping, WpContent, Subtitle } from '@Styles/general-components';
 
-import { flattenBook } from "@Utils/author";
-import { formatWpText } from "@Utils/posts";
-import { firstWords } from "@Utils/strings";
-import { getPrettyDate } from "@Utils/dates";
+import { flattenBook } from '@Utils/author';
+import { formatWpText } from '@Utils/posts';
+import { firstWords } from '@Utils/strings';
+import { getPrettyDate } from '@Utils/dates';
 
-import { WpBook } from "@Types/query";
-import { BookHeader } from "@Variants";
+import { WpBook } from '@Types/query';
+import { BookHeader } from '@Variants';
+
+export const Head: React.FC<WpBook> = ({ data }) => {
+  const book = flattenBook(data.wpBook, data.file.publicURL);
+  return (
+    <>
+      <title>{book.title}</title>
+      <meta
+        name="description"
+        content={`${book.title}, published on ${getPrettyDate(book.published.date)}: ${firstWords(
+          formatWpText(book.content),
+          100,
+        )}`}
+      />
+    </>
+  );
+};
 
 const Book: React.FC<WpBook> = ({ data }) => {
   const book = flattenBook(data.wpBook, data.file.publicURL);
   return (
     <>
-      <Helmet>
-        <title>{book.title}</title>
-        <meta
-          name="description"
-          content={`${book.title}, published on ${getPrettyDate(
-            book.published.date
-          )}: ${firstWords(formatWpText(book.content), 100)}`}
-        />
-      </Helmet>
       <LeadHeading>{book.title}</LeadHeading>
       <BookHeader book={book} />
       <Grouping>

@@ -1,16 +1,25 @@
-import * as React from "react";
-import { graphql } from "gatsby";
-import { Helmet } from "react-helmet";
+import * as React from 'react';
+import { graphql } from 'gatsby';
 
-import { Grouping, LeadHeading } from "@Styles/general-components";
+import { Grouping, LeadHeading } from '@Styles/general-components';
 
-import { firstWords } from "@Utils/strings";
-import { formatWpText } from "@Utils/posts";
-import { formatBlogPost } from "@Utils/blog";
-import { createBlocks, preprocessWPEntry } from "@Utils/blocks/identify-blocks";
+import { firstWords } from '@Utils/strings';
+import { formatWpText } from '@Utils/posts';
+import { formatBlogPost } from '@Utils/blog';
+import { createBlocks, preprocessWPEntry } from '@Utils/blocks/identify-blocks';
 
-import { WpPost } from "@Types/query";
-import { PostHeader } from "@Variants";
+import { WpPost } from '@Types/query';
+import { PostHeader } from '@Variants';
+
+export const Head: React.FC<WpPost> = ({ data }) => {
+  const post = formatBlogPost(data.wpPost);
+  return (
+    <>
+      <title>Benyakir Writes - {post.title}</title>
+      <meta name="description" content={firstWords(formatWpText(post.excerpt!), 150)} />
+    </>
+  );
+};
 
 const Post: React.FC<WpPost> = ({ data }) => {
   const entry = preprocessWPEntry(data.wpPost.content!);
@@ -19,13 +28,6 @@ const Post: React.FC<WpPost> = ({ data }) => {
 
   return (
     <>
-      <Helmet>
-        <title>Benyakir Writes - {post.title}</title>
-        <meta
-          name="description"
-          content={firstWords(formatWpText(post.excerpt!), 150)}
-        />
-      </Helmet>
       <LeadHeading>{post.title}</LeadHeading>
       <PostHeader post={post} />
       <Grouping>
