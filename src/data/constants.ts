@@ -8,10 +8,6 @@ export const ICONS_TO_LINKS = {
   Blog: "https://benyakiredits.com"
 }
 
-export const ICONS_TO_COLORS = {
-  Twitter: '#fff'
-}
-
 export const KNOWN_BLOCK_CLASSES: BlockComponents = {
   "benyakir-syntax-highlighter": SyntaxHighlighter
 }

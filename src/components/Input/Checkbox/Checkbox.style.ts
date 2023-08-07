@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FONT_LG, FONT_XXL } from '@StyleVars';
+import { FONT_LG, FONT_MD, FONT_XXL } from '@StyleVars';
 
 export const CheckboxGroup = styled.div`
     position: relative;
@@ -19,7 +19,7 @@ export const CheckboxGroup = styled.div`
         position: relative;
         
         height: 2rem;
-        width: 3.5rem;
+        min-width: 3.5rem;
         margin-right: 1rem;
 
         background-color: ${props => props.theme.checkbox.backgroundColor};
@@ -38,13 +38,11 @@ export const CheckboxGroup = styled.div`
         }
         span {
             position: absolute;
-            top: -1.5rem;
+            top: -1rem;
             left: 0.4rem;
 
-            
-
             @supports (-webkit-box-reflect: above) {
-                top: -1rem;
+                top: -1.2rem;
                 left: 0.4rem;
             }
 
@@ -64,6 +62,6 @@ export const CheckboxGroup = styled.div`
     }
     span {
         cursor: pointer;
-        font-size: ${FONT_LG};
+        font-size: ${FONT_MD};
     }
 `

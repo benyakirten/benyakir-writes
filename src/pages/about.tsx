@@ -5,7 +5,7 @@ import { LeadHeading, BigParagraph, Subtitle, Grouping } from '@Styles/general-c
 
 import { CustomLink, SkewRow, HoverImage } from '@Gen';
 
-import { ICONS_TO_LINKS, ICONS_TO_COLORS } from '@Constants';
+import { ICONS_TO_LINKS } from '@Constants';
 
 import { SVGImageQuery } from '@Types/query';
 
@@ -25,9 +25,6 @@ const AboutPage: React.FC<SVGImageQuery> = ({ data }) => {
     url: ICONS_TO_LINKS[n.name as keyof typeof ICONS_TO_LINKS]
       ? ICONS_TO_LINKS[n.name as keyof typeof ICONS_TO_LINKS]
       : '#',
-    color: ICONS_TO_COLORS[n.name as keyof typeof ICONS_TO_COLORS]
-      ? ICONS_TO_COLORS[n.name as keyof typeof ICONS_TO_COLORS]
-      : undefined,
   }));
   return (
     <>

@@ -40,14 +40,6 @@ export const GlobalStyles = createGlobalStyle`
         text-decoration: none;
     }
 
-    .nav-toggle-open {
-        cursor: w-resize;
-    }
-
-    .nav-toggle-close {
-        cursor: e-resize;
-    }
-
     .filterable-card-enter {
         opacity: 0;
         transform: scale(0);

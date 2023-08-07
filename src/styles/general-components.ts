@@ -31,10 +31,7 @@ export const Grouping = styled.section<{ marginVertical?: string }>`
 
 export const GroupingBox = styled.section`
     position: relative;
-
     padding: 1rem;
-    margin-bottom: 4rem;
-    
     box-shadow: ${props => `${SHADOW_MD_BALANCED} ${convertHexToRGBA(props.theme.base.shadowColor, 0.4)}`};
 `
 
@@ -66,7 +63,7 @@ export const LeadHeading = styled.h1`
 
         transform-origin: left;
         transform: scaleX(1) translateY(0);
-        transition: transform 0.5s ease;
+        transition: transform 400ms ease;
 
         ${media.reducedMotion} {
             transform: scaleX(0.9) translateY(-2rem);
@@ -113,8 +110,6 @@ export const MinorHeading = styled.h4`
     font-family: ${FAUSTINA};
     font-size: ${FONT_LG};
 
-    margin-bottom: 0.5rem;
-
     ${media.tablet} {
         margin-bottom 0.5rem;
         font-size: ${FONT_MD};
@@ -130,7 +125,7 @@ export const BigParagraph = styled.p<{ marginRight?: string, marginVertical?: st
 
 export const Paragraph = styled.p`
     font-size: ${FONT_MD};
-    margin: 1rem 0;
+    margin: 0;
 `
 
 export const Centered = styled.div`
@@ -209,6 +204,7 @@ export const Column = styled.div`
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    gap: 0.5rem;
 `
 
 export const NoLineBreak = styled.span`
@@ -276,7 +272,7 @@ export const WpContentDescription = styled.div<{ fontSize?: string }>`
             
             background-color: ${SECONDARY_800};
 
-            transition: transform 0.5s ease;
+            transition: transform 400ms ease;
             transform-origin: left;
             transform: scaleX(0);
         }
@@ -312,7 +308,7 @@ export const DisappearOnTablet = styled.div`
     }
 `
 
-export const DisappearOnPhone= styled.div`
+export const DisappearOnPhone = styled.div`
     ${media.phone} {
         display: none;
     }
@@ -370,7 +366,7 @@ export const WpContent = styled.div<{ fontSize?: string }>`
             
             background-color: ${props => props.theme.base.textColor};
 
-            transition: transform 0.5s ease;
+            transition: transform 400ms ease;
             transform-origin: left;
             transform: scaleX(0);
         }
@@ -430,7 +426,7 @@ export const WpContentInline = styled.span<{ fontSize?: string }>`
             
             background-color: ${props => props.theme.base.textColor};
 
-            transition: transform 0.5s ease;
+            transition: transform 400ms ease;
             transform-origin: left;
             transform: scaleX(0);
         }
@@ -462,6 +458,6 @@ export const WpContentInline = styled.span<{ fontSize?: string }>`
     }
 
     p {
-        margin: 1rem 0;
+        margin: 0.25rem 0;
     }
 `

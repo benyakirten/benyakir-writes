@@ -12,10 +12,10 @@ export const IconContainer = styled.div<{ height: string }>`
     justify-content: center;
     align-items: center;
 
-    height: ${props => multiplyCSSNumber(props.height, 5/3)};
+    height: ${props => multiplyCSSNumber(props.height, 5 / 3)};
 
-    margin-bottom: ${props => multiplyCSSNumber(props.height, 1/6)};
-    margin-right: ${props => multiplyCSSNumber(props.height, 1/3)};
+    margin-bottom: ${props => multiplyCSSNumber(props.height, 1 / 6)};
+    margin-right: ${props => multiplyCSSNumber(props.height, 1 / 3)};
 
     background-color: ${props => props.theme.icon.default.background};
 
@@ -41,8 +41,8 @@ export const IconContainer = styled.div<{ height: string }>`
     &:hover {
         div {
             z-index: ${Z_ABOVE};
-            height: ${props => multiplyCSSNumber(props.height, 10/3)};
-            width: ${props => multiplyCSSNumber(props.height, 10/3)};
+            height: ${props => multiplyCSSNumber(props.height, 10 / 3)};
+            width: ${props => multiplyCSSNumber(props.height, 10 / 3)};
         }
 
         img {
@@ -53,7 +53,7 @@ export const IconContainer = styled.div<{ height: string }>`
         span {
             color: ${props => props.theme.icon.hover.textColor};
             z-index: ${Z_ABOVE};
-            top: ${props => multiplyCSSNumber(props.height, 2/3)};
+            top: ${props => multiplyCSSNumber(props.height, 2 / 3)};
         }
     }
 `

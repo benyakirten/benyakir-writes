@@ -13,13 +13,9 @@ import { convertHexToRGBA } from '@Utils/colors'
 
 export const StyledSidebar = styled.nav<{ open?: boolean }>`
     position: relative;
-
-    align-self: stretch;
     z-index: ${Z_ABOVE};
 
-    min-height: 100vh;
     width: ${props => props.open ? '25rem' : '5rem'};
-    padding: ${props => props.open ? '2rem 1rem 2rem 4rem' : '2rem 1rem'};
     
     font-family: ${FAUSTINA};
     font-size: ${FONT_XXL};
@@ -64,10 +60,6 @@ export const SidebarContents = styled.div<{ open: boolean }>`
         left: ${props => props.open ? '2.5rem' : 'auto'};
     }
 
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-
     transition: all 1s;
 `
 
@@ -98,14 +90,16 @@ export const VisibleGroup = styled.div<{ open: boolean }>`
     transition: all 1s;
     transform: translateX(${props => props.open ? '0' : '-20rem'});
     opacity: ${props => props.open ? '1' : '0'};
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 `
 
 export const NavGroup = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-
-    margin-bottom: 4rem;
 `
 
 export const SubLinks = styled.div<{ open: boolean }>`

@@ -10,12 +10,6 @@ module.exports = {
     },
     testRegex: "(/__tests__/.*(\\.test|spec))\\.(tsx?)$",
     moduleNameMapper: {
-        // "^gatsby-core-utils/(.*)$": `gatsby-core-utils/dist/$1`,
-        // "^gatsby-plugin-utils/(.*)$": [
-        //   `gatsby-plugin-utils/dist/$1`,
-        //   `gatsby-plugin-utils/$1`,
-        // ],
-        // "^gatsby-page-utils/(.*)$": `gatsby-page-utils/dist/$1`,
         "searchData.json": "<rootDir>/__mocks__/searchData.json",
         "all.json": "<rootDir>/__mocks__/all.json",
         "books.json": "<rootDir>/__mocks__/books.json",
