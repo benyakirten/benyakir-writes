@@ -6,9 +6,7 @@ export const blogLinks: LinkItem[] = [
     link: "Down South Boulder Road",
   },
 ];
-
-export const authorLinks: LinkItem[] = ["Books", "Short Stories"];
-
+export const authorLinks: LinkItem[] = ["Books", "Short Stories", "All Projects"];
 export const generalLinks: LinkItem[] = [
   'theme',
   'about',

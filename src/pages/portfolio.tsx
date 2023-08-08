@@ -1,73 +1,7 @@
 import * as React from 'react';
 
-import { BigParagraph, Grouping } from '@Styles/general-components';
-
-import { LeadPage, Paginate } from '@Layout';
-import { ProjectCard } from '@Variants';
-import { ProjectFilter } from '@Posts';
-import { CustomLink } from '@Gen';
-
-import { usePagination } from '@Hooks';
-
-import projectsJson from '@WPData/Projects/projects.json';
-import projectsMisc from '@WPData/Projects/misc.json';
-
-import { FlattenedProjectCard } from '@Types/posts';
-
-export const Head = () => (
-  <>
-    <title>Benyakir Writes - Portfolio</title>
-    <meta
-      name="description"
-      content="A view of all of my completed projects with various details. They can be sorted by a variety of means,
-                    including dynamically-generated criteria such as web hosts and what technologies are used to power them."
-    />
-  </>
-);
-
-const ProjectsPage: React.FC = () => {
-  const allHosts = React.useMemo<string[]>(() => projectsMisc.hosts, [projectsMisc]);
-  const allTechs = React.useMemo<string[]>(() => projectsMisc.longTechs, [projectsMisc]);
-
-  // JSON stringify makes a date into a string - so we need to convert it back
-  const preparedProjects = React.useMemo<FlattenedProjectCard[]>(
-    () =>
-      projectsJson.map((p: FlattenedProjectCard) => ({
-        ...p,
-        firstReleased: {
-          ...p.firstReleased,
-          date: new Date(p.firstReleased.date),
-        },
-      })),
-    [projectsJson],
-  );
-
-  const projectPagination = usePagination<FlattenedProjectCard>(preparedProjects);
-
-  return (
-    <LeadPage
-      title="Projects"
-      filter={
-        <ProjectFilter
-          allProjects={preparedProjects}
-          allHosts={allHosts}
-          allTechs={allTechs}
-          onFilter={projectPagination.setCurrentItems}
-        />
-      }
-    >
-      <BigParagraph marginVertical="2rem">
-        I am a fullstack engineer with a focus on frontend. I have experience with normal JavaScript
-        as well as Angular, React, Vue, Svelte and their JAMStack equivalents, such as Gatsby and
-        SvelteKit. I use different techniques and technologies for each of my projects so I'm always
-        learning something new and have a wide arsenal of tools available. If you want to hire me
-        for a project, visit the <CustomLink to="/contact">contact page</CustomLink>.
-      </BigParagraph>
-      <Grouping>
-        <Paginate {...projectPagination} El={ProjectCard} />
-      </Grouping>
-    </LeadPage>
-  );
+const Portfolio: React.FC = () => {
+  return <div>WIP</div>;
 };
 
-export default ProjectsPage;
+export default Portfolio;

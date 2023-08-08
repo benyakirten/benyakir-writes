@@ -5,7 +5,6 @@ import { CustomLink } from '@Gen';
 
 export const Head = () => (
   <>
-    {' '}
     <title>Benyakir Writes - Home</title>
     <meta
       name="description"

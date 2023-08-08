@@ -84,6 +84,7 @@ const Sidebar: React.FC = () => {
               links={authorLinks}
               open={openDropdown === 'author'}
               onClick={() => setOpenDropdown('author')}
+              height="7rem"
               tabIndex={openDropdown === 'author' ? 0 : -1}
             />
             <CustomLink tabIndex={open ? 0 : -1} to="/portfolio" underbarSize="12rem">
