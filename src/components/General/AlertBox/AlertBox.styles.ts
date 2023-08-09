@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 import { rollOut } from "@Styles/animations"
-import { SUCCESS, ERROR, ABS_WHITE, FONT_MD, ABS_BLACK } from "@StyleVars"
+import { FONT_MD } from "@StyleVars"
 
 export const StyledAlertBox = styled.div<{ success: boolean }>`
     position: relative;
