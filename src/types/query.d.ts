@@ -112,7 +112,7 @@ type GlobalQuery = {
 interface GHIconQuery {
   data: {
     file: {
-      publicUrl: string
+      publicURL: string
     }
   }
 }

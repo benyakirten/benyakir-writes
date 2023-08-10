@@ -6,12 +6,13 @@ import { ProjectGridDatum } from '@Types/portfolio';
 import {
   ProjectFilters,
   RandomizedBackground,
-  Backdrop,
   ProjectGrid,
+  Backdrop,
 } from '@/components/Portfolio';
 
 const Portfolio: React.FC<GHIconQuery> = ({ data }) => {
-  const ghIcon = React.useMemo(() => data.file.publicUrl, [data]);
+  const backdropRef = React.useRef<HTMLDivElement>(null);
+  const ghIcon = React.useMemo(() => data.file.publicURL, [data]);
   const [hovered, setHovered] = React.useState<string | null>(null);
   // TODO: Relocate this to a etter place
   // When they have projects on the wp server then we can use that
@@ -19,10 +20,9 @@ const Portfolio: React.FC<GHIconQuery> = ({ data }) => {
   const projects = React.useMemo<ProjectGridDatum[]>(
     () => [
       {
-        title: 'Mantissa',
-        description:
-          'Chat application frontend using Nuxt. It will use web sockets and the WebCrypto API to allow e2e encryption',
-        technologies: ['vue', 'ws'],
+        title: 'Benyakir Writes',
+        description: "My blog. You're using it right now",
+        technologies: ['react'],
       },
       {
         title: 'Mantissa',
@@ -37,7 +37,7 @@ const Portfolio: React.FC<GHIconQuery> = ({ data }) => {
     <>
       <RandomizedBackground />
       <ProjectFilters />
-      <Backdrop />
+      <Backdrop visible={hovered !== null} />
       <ProjectGrid
         projects={projects}
         ghIcon={ghIcon}

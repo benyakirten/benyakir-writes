@@ -13,55 +13,26 @@ import {
 } from '@/components/Portfolio/Portfolio.styles';
 import { getFullTechName } from '@/utils/project';
 import { ProjectGridData } from '@/types/portfolio';
+import IndividualProject from './IndividualProject.component';
 
-// Chat application frontend using Nuxt. It will use web sockets and the{' '}
-// <CustomLink
-//   to="https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API"
-//   outside
-// >
-//   WebCrypto API
-// </CustomLink>{' '}
-// to facilitate e2e encryption.
-const ProjectGrid: React.FC<ProjectGridData> = ({ projects, ghIcon }) => {
+const ProjectGrid: React.FC<ProjectGridData> = ({
+  projects,
+  ghIcon,
+  handleMouseEnter,
+  handleMouseLeave,
+  hovered,
+}) => {
   const [techs] = React.useState<Set<string>>(new Set(['ws']));
-  function handleProjectMouseEnter(title: string) {
-    // TODO
-  }
-  function handleProjectMouseLeave() {
-    // TODO
-  }
   return (
     <ProjectBoxes>
       {projects.map((project) => (
         <ProjectBox
-          onMouseEnter={() => handleProjectMouseEnter(project.title)}
-          onMouseLeave={() => handleProjectMouseLeave()}
-          hovered
+          key={project.title}
+          onMouseEnter={() => handleMouseEnter(project.title)}
+          onMouseLeave={() => handleMouseLeave()}
+          hovered={hovered === project.title}
         >
-          <ProjectContents>
-            <div>
-              <ProjectTitle>{project.title}</ProjectTitle>
-              <CustomLink outside to="https://www.google.com">
-                <img
-                  style={{ display: 'inline', marginLeft: '0.5rem' }}
-                  alt="GitHub"
-                  src={ghIcon}
-                  height="18px"
-                  width="18px"
-                />
-              </CustomLink>
-            </div>
-            <ProjectDescription>{project.description}</ProjectDescription>
-            <ProjectTechs>
-              <TechBadges>
-                {project.technologies.map((tech) => (
-                  <TechBadge selected={techs.has(tech)} key={tech}>
-                    {getFullTechName(tech)}
-                  </TechBadge>
-                ))}
-              </TechBadges>
-            </ProjectTechs>
-          </ProjectContents>
+          <IndividualProject project={project} ghIcon={ghIcon} techs={techs} />
         </ProjectBox>
       ))}
     </ProjectBoxes>

@@ -1,5 +1,7 @@
+import * as React from 'react';
+
 const ProjectFilters: React.FC = () => {
-  return <div>WIP</div>;
+  return <div />;
 };
 
 export default ProjectFilters;
