@@ -12,3 +12,7 @@ export interface ProjectGridData {
   handleMouseEnter: (title: string) => void
   handleMouseLeave: () => void
 }
+
+export interface SVGSize {
+  size: number
+}

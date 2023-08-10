@@ -1,10 +1,20 @@
 import * as React from 'react';
 
-const Segment2: React.FC = () => {
+import { SVGSize } from '@Types/portfolio';
+import { useAppSelector } from '@Store/hooks';
+import { SVGShapeBase } from './Svgs.styles';
+
+const Segment2: React.FC<SVGSize> = ({ size }) => {
+  const themeStore = useAppSelector((root) => root.theme);
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="200" height="200">
-      <path d="M10 50 C30 10, 70 90, 90 50" fill="none" stroke="#333" stroke-width="2" />
-    </svg>
+    <SVGShapeBase size={size}>
+      <path
+        d="M10 50 C30 10, 70 90, 90 50"
+        fill="none"
+        stroke={themeStore.active.base.textColor}
+        strokeWidth="2"
+      />
+    </SVGShapeBase>
   );
 };
 
