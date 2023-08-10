@@ -97,3 +97,35 @@ export const PortfolioBackdrop = styled.div`
     z-index: ${Z_RAISED};
     background-color: ${ABS_BLACK};
 `
+
+export const TechnologiesContainer = styled.div``
+
+export const TechnologyLabel = styled.label<{ checked: boolean }>`
+    position: relative;
+    cursor: pointer;
+    z-index: ${Z_ABOVE};
+    font-size: ${FONT_MD};
+
+    &::after {
+        content: '';
+
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+        width: 100%;
+        height: 2px;
+
+        background-color: ${props => props.theme.base.textColor};
+
+        transition: color 400ms ease, transform 400ms ease-in-out;
+        transform-origin: left;
+        transform: scaleX(${props => props.checked ? '1' : '0'});
+    }
+`
+export const TechnologyCheckox = styled.input.attrs<{ checked: boolean }>(checked => ({
+    type: "checkbox",
+    checked,
+})) <{ checked: boolean }>`
+    display: none;
+`

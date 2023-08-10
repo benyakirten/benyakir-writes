@@ -21,10 +21,10 @@ type LinkProps = {
   outside?: boolean;
   inheritColor?: boolean;
   inline?: boolean;
-  limitUnderbar?: boolean;
-  underbarSize?: string;
+  limitunderbar?: boolean;
+  underbarsize?: string;
   tabIndex?: number;
-  wholeLine?: boolean
+  wholeline?: boolean
 }
 type LayoutProps = {
   path: string;
