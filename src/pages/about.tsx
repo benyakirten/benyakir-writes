@@ -14,7 +14,7 @@ export const Head = () => (
     <title>Benyakir Writes - About</title>
     <meta
       name="description"
-      content="Learn about why this website exists as well as links to my Github, blog and social media."
+      content="Learn about why this website exists as well as links to my GitHub, blog and social media."
     />
   </>
 );

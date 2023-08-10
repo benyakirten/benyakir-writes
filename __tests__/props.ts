@@ -105,8 +105,8 @@ export const allIcons = [
     "publicURL": "/static/8547810f07786f5f9017515653ec3e3c/Fallback-cover.svg"
   },
   {
-    "name": "Github",
-    "publicURL": "/static/7e704f65dc99baf6eb5d49e9196b3037/Github.svg"
+    "name": "GitHub",
+    "publicURL": "/static/7e704f65dc99baf6eb5d49e9196b3037/GitHub.svg"
   },
   {
     "name": "Blog",

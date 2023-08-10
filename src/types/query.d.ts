@@ -108,3 +108,11 @@ type GlobalQuery = {
     nodes: BlogPostType[]
   }
 }
+
+interface GHIconQuery {
+  data: {
+    file: {
+      publicUrl: string
+    }
+  }
+}
