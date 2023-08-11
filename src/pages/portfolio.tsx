@@ -7,6 +7,7 @@ import {
   ProjectGrid,
   RandomizedBackground,
 } from '@/components/Portfolio';
+import { PortfolioDescription, PortfolioHeader } from '@/components/Portfolio/Portfolio.styles';
 import { useSet } from '@/hooks';
 import { ProjectGridDatum } from '@Types/portfolio';
 import { GHIconQuery } from '@Types/query';
@@ -14,7 +15,7 @@ import { GHIconQuery } from '@Types/query';
 const Portfolio: React.FC<GHIconQuery> = ({ data }) => {
   const ghIcon = React.useMemo(() => data.file.publicURL, [data]);
   const allTechs = React.useMemo(() => ['vue', 'ws', 'react'], []);
-  const [viewedTechs, toggleTech] = useSet();
+  const [viewedTechs, toggleTech] = useSet(allTechs);
   const [hovered, setHovered] = React.useState<string | null>(null);
   // TODO: Relocate this to a etter place
   // When they have projects on the wp server then we can use that
@@ -82,7 +83,14 @@ const Portfolio: React.FC<GHIconQuery> = ({ data }) => {
     <>
       <RandomizedBackground />
       <Backdrop visible={hovered !== null} />
-      <ProjectFilters allTechs={allTechs} viewedTechs={viewedTechs} onToggle={toggleTech} />
+      <PortfolioHeader>
+        <PortfolioDescription>
+          Once upon a time, I studied languages and linguistics. Then I began learning programming
+          on my own. I am now a frontend developer with experience in every step of the process,
+          from design to implementation, from rapid iteration to long-term maintenance.
+        </PortfolioDescription>
+        <ProjectFilters allTechs={allTechs} viewedTechs={viewedTechs} onToggle={toggleTech} />
+      </PortfolioHeader>
       <ProjectGrid
         projects={projects}
         ghIcon={ghIcon}

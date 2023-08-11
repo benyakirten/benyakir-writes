@@ -5,13 +5,13 @@ import { Polygon, Wheel } from './svgs';
 const RandomizedBackground: React.FC = () => {
   return (
     <PortfolioBackground>
-      <div style={{ position: 'absolute', top: '100px', right: '200px' }}>
+      <div style={{ position: 'absolute', top: 'calc(100px + 20%)', right: '200px' }}>
         <Wheel />
       </div>
-      <div style={{ position: 'absolute', top: '50px', left: '20px' }}>
+      <div style={{ position: 'absolute', top: 'calc(50px + 20%)', left: '20px' }}>
         <Wheel />
       </div>
-      <div style={{ position: 'absolute', top: '0px', left: '50px' }}>
+      <div style={{ position: 'absolute', top: 'calc(0px + 20%)', left: '50px' }}>
         <Polygon />
       </div>
     </PortfolioBackground>

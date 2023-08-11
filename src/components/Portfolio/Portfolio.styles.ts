@@ -102,6 +102,7 @@ export const TechnologyLabel = styled.label<{ checked: boolean }>`
     cursor: pointer;
     z-index: ${Z_ABOVE};
     font-size: ${FONT_LG};
+    height: min-content;
 
     &::after {
         content: '';
@@ -116,12 +117,8 @@ export const TechnologyLabel = styled.label<{ checked: boolean }>`
         background-color: ${props => props.theme.base.textColor};
 
         transition: color 400ms ease, transform 400ms ease-in-out;
-        transform-origin: left;
+        transform-origin: ${() => Math.random() > 0.5 ? 'left' : 'right'};
         transform: scaleX(${props => props.checked ? '1' : '0'});
-
-        &:hover {
-            transform: scaleX(1);
-        }
     }
 `
 export const TechnologyCheckox = styled.input.attrs<{ checked: boolean }>(checked => ({
@@ -139,14 +136,34 @@ export const PortfolioBackground = styled.div`
     left: -4rem;
     min-width: 200vw;
     min-height: 200vh;
-    background: ${props => css`linear-gradient(to bottom right, ${props.theme.portfolio.gradient.color1}, ${props.theme.portfolio.gradient.color2} 75%, ${props.theme.portfolio.gradient.color3})`};
+    background: ${props => css`linear-gradient(to bottom right, ${props.theme.base.background} 20%, ${props.theme.portfolio.gradient.color1} 20%, ${props.theme.portfolio.gradient.color2} 75%, ${props.theme.portfolio.gradient.color3})`};
 `
 
 export const FilterContainer = styled.div`
-    background-color: ${props => props.theme.base.background};
     display: flex;
+    justify-content: flex-end;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-bottom: 2rem;
-    padding: 1rem;
+
+    max-width: 40%;
+    
+    background-color: ${props => props.theme.base.background};
+`
+
+export const PortfolioHeader = styled.div`
+    display: flex;
+    gap: 8rem;
+    justify-content: space-between;
+    
+    padding-bottom: 2rem;
+    margin: 2rem 0;
+`
+
+export const PortfolioDescription = styled.p`
+    text-align: left;
+    width: 40%;
+    letter-spacing: 0.2px;
+    line-height: 1.8rem;
+    font-size: ${FONT_MD};
+    z-index: 1;
 `
