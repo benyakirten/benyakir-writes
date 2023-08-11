@@ -1,3 +1,4 @@
+import { media } from "@/styles/queries";
 import { convertHexToRGBA } from "@/utils/colors";
 import { FAUSTINA, FONT_LG, FONT_MD, FONT_SM, FONT_XL, SHADOW_SM, Z_ABOVE, Z_HIGH } from "@Styles/variables";
 import styled, { css } from "styled-components";
@@ -5,6 +6,15 @@ import styled, { css } from "styled-components";
 export const ProjectBoxes = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    ${media.desktop} {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    ${media.tablet} {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    ${media.phone} {
+        grid-template-columns: repeat(1, 1fr);
+    }
     gap: 4rem;
 `
 
@@ -135,12 +145,20 @@ export const FilterContainer = styled.div`
     gap: 0.5rem;
 
     max-width: 40%;
+
+    ${media.phone} {
+        max-width: 100%;
+    }
     
     background-color: ${props => props.theme.base.background};
 `
 
 export const PortfolioHeader = styled.div`
     display: flex;
+    flex-direction: row;
+    ${media.phone} {
+        flex-direction: column;
+    }
     gap: 8rem;
     justify-content: space-between;
     
@@ -151,6 +169,9 @@ export const PortfolioHeader = styled.div`
 export const PortfolioDescription = styled.p`
     text-align: left;
     width: 40%;
+    ${media.phone} {
+        width: 100%;
+    }
     letter-spacing: 0.2px;
     line-height: 1.8rem;
     font-size: ${FONT_MD};

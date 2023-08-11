@@ -672,7 +672,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         reporter.error(`Error creating ${path}: ${e.message}`);
       }
     } else {
-      reporter.info(`${path} already exists, continuing...`);
+      reporter.success(`${path} already exists, continuing...`);
     }
   }
 
