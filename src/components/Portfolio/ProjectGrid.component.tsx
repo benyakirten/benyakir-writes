@@ -1,17 +1,6 @@
 import * as React from 'react';
 
-import { CustomLink } from '@/components/General';
-import {
-  ProjectBox,
-  ProjectContents,
-  ProjectDescription,
-  ProjectTechs,
-  ProjectTitle,
-  TechBadges,
-  TechBadge,
-  ProjectBoxes,
-} from '@/components/Portfolio/Portfolio.styles';
-import { getFullTechName } from '@/utils/project';
+import { ProjectBox, ProjectBoxes } from '@/components/Portfolio/Portfolio.styles';
 import { ProjectGridData } from '@/types/portfolio';
 import IndividualProject from './IndividualProject.component';
 
@@ -21,6 +10,7 @@ const ProjectGrid: React.FC<ProjectGridData> = ({
   handleMouseEnter,
   handleMouseLeave,
   hovered,
+  viewedTechs,
 }) => {
   const [techs] = React.useState<Set<string>>(new Set(['ws']));
   return (

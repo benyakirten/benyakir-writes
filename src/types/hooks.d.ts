@@ -24,3 +24,4 @@ type ValidationHook = (valFns: ValidationFunction[], initialValue?: string | num
   [string | number, (newVal: string | number) => void, boolean]
 
 type MultipleHook = (allOptions: string[], currentlyOpen?: string[]) => [BooleanLookup, (...alternatables: string[]) => void]
+type SetHook = <T>(items: T[]) => [Set<T>, (item: T) => void]

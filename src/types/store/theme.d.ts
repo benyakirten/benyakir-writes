@@ -46,7 +46,7 @@ interface ThemeTextInput extends BasicThemeSection {
   border: string;
 }
 
-interface ThemeFilter extends BasicThemeSection {}
+interface ThemeFilter extends BasicThemeSection { }
 
 interface ThemeCheckbox {
   border: string;
@@ -54,7 +54,7 @@ interface ThemeCheckbox {
   backgroundColor: string;
 }
 
-interface ThemeMultipleChoice extends BasicThemeSection {}
+interface ThemeMultipleChoice extends BasicThemeSection { }
 
 interface ThemeLink {
   normal: string
@@ -99,6 +99,14 @@ interface ThemeSkewRow {
   background: string;
 }
 
+interface ThemePortfolio {
+  gradient: {
+    color1: string
+    color2: string
+    color3: string
+  }
+}
+
 interface BaseTheme {
   id: string;
   name: string;
@@ -117,6 +125,7 @@ interface BaseTheme {
   button: ButtonTheme;
   alertBox: ThemeAlertBox;
   toggle: ThemeToggle;
+  portfolio: ThemePortfolio;
 }
 
 interface FullTheme extends BaseTheme {

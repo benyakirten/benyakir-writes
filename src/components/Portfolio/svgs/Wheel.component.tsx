@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { SVGSize } from '@Types/portfolio';
 import { useAppSelector } from '@Store/hooks';
+import { SVGSize } from '@Types/portfolio';
 import { SVGShapeBase } from './Svgs.styles';
 
 const Wheel: React.FC<SVGSize> = ({ size = 40 }) => {
@@ -34,14 +34,6 @@ const Wheel: React.FC<SVGSize> = ({ size = 40 }) => {
         strokeWidth="2"
       />
 
-      <line
-        x1="27"
-        y1="27"
-        x2="73"
-        y2="73"
-        stroke={themeStore.active.base.textColor}
-        strokeWidth="2"
-      />
       <line
         x1="27"
         y1="73"

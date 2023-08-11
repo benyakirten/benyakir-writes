@@ -1,11 +1,11 @@
-import styled from "styled-components";
-import { ABS_BLACK, FAUSTINA, FONT_MD, FONT_SM, FONT_XL, FONT_XS, PRIMARY_700, SECONDARY_900, SHADOW_SM, Z_ABOVE, Z_BASE, Z_HIGH, Z_RAISED, Z_UNDER } from "@Styles/variables";
+import { convertHexToRGBA } from "@/utils/colors";
+import { FAUSTINA, FONT_MD, FONT_SM, FONT_XL, FONT_XS, SHADOW_SM, Z_ABOVE, Z_HIGH, Z_RAISED } from "@Styles/variables";
+import styled, { css } from "styled-components";
 
 export const ProjectBoxes = styled.div`
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 4rem;
-    padding: 2rem 4rem;
 `
 
 // TODO: Figure out better timing function
@@ -15,15 +15,11 @@ export const ProjectBox = styled.article<{ hovered?: boolean }>`
     border-radius: 4px;
     font-size: ${FONT_SM};
     box-shadow: 0.5px 0.5px 1px 0.5px;
-    background: ${props => {
-        const opacity = props.hovered ? "" : "90"
-        return `linear-gradient(to bottom right, #FEFDF3${opacity}, #FEF8E3${opacity}, #FEF4E1${opacity})`
-    }};
-    transition: transform 250ms ease-in;
-    transform-origin: top;
+    background-color: ${props => `${props.theme.base.background}${props.hovered ? '' : '90'}`};
+    transition: transform 250ms ease-in, background-color 250ms ease-in;
 
     &:hover {
-        transform: scale(1.02);
+        transform: scale(1.04);
     }
 `
 
@@ -32,6 +28,7 @@ export const ProjectContents = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    min-height: 30rem;
     height: 100%;
     gap: 1rem;
 `
@@ -82,7 +79,7 @@ export const TechBadge = styled.span<{ selected: boolean }>`
     text-decoration: ${props => props.selected ? "underline" : "none"};
     border-radius: 1rem;
     border: 1px solid ${props => props.theme.button.border};
-    box-shadow: ${SHADOW_SM};
+    box-shadow: ${props => `${SHADOW_SM} ${convertHexToRGBA(props.theme.base.shadowColor, 0.4)}`};
     padding: 0.5rem 1rem;
 `
 
@@ -95,7 +92,7 @@ export const PortfolioBackdrop = styled.div`
     width: 200vw;
     
     z-index: ${Z_RAISED};
-    background-color: ${ABS_BLACK};
+    background-color: ${props => props.theme.base.shadowColor};
 `
 
 export const TechnologiesContainer = styled.div``
@@ -121,6 +118,10 @@ export const TechnologyLabel = styled.label<{ checked: boolean }>`
         transition: color 400ms ease, transform 400ms ease-in-out;
         transform-origin: left;
         transform: scaleX(${props => props.checked ? '1' : '0'});
+
+        &:hover {
+            transform: scaleX(1);
+        }
     }
 `
 export const TechnologyCheckox = styled.input.attrs<{ checked: boolean }>(checked => ({
@@ -128,4 +129,15 @@ export const TechnologyCheckox = styled.input.attrs<{ checked: boolean }>(checke
     checked,
 })) <{ checked: boolean }>`
     display: none;
+`
+
+export const PortfolioBackground = styled.div`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: -4rem;
+    left: -4rem;
+    min-width: 200vw;
+    min-height: 200vh;
+    background: ${props => css`linear-gradient(to bottom right, ${props.theme.portfolio.gradient.color1}, ${props.theme.portfolio.gradient.color2} 75%, ${props.theme.portfolio.gradient.color3})`};
 `

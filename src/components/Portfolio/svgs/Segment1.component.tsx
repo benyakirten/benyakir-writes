@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import { SVGSize } from '@Types/portfolio';
 import { useAppSelector } from '@Store/hooks';
+import { SVGSize } from '@Types/portfolio';
 import { SVGShapeBase } from './Svgs.styles';
 
-const Segment1: React.FC<SVGSize> = ({ size }) => {
+const Segment1: React.FC<SVGSize> = ({ size = 40 }) => {
   const themeStore = useAppSelector((root) => root.theme);
   return (
     <SVGShapeBase size={size}>

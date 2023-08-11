@@ -1,3 +1,4 @@
+import { rotate } from "@/styles/animations";
 import styled from "styled-components";
 
 export const SVGShapeBase = styled.svg.attrs<{ size: number }>(({ size }) => ({
@@ -6,12 +7,12 @@ export const SVGShapeBase = styled.svg.attrs<{ size: number }>(({ size }) => ({
   width: size,
   height: size,
 })) <{ size: number }>`
-  transition: filter 3s ease, transform 40s ease-in;
+  transition: filter 3s ease, scale 5s ease;
   filter: ${props => `blur(${props.size / 15}px)`};
-  transform: rotate(0deg);
+  animation: ${rotate} 30s infinite linear;
 
   &:hover {
     filter: blur(1px);
-    transform: rotate(7200deg);
+    scale: 1.1;
   }
 `
