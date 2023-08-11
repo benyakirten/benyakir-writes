@@ -1,5 +1,5 @@
 import { convertHexToRGBA } from "@/utils/colors";
-import { FAUSTINA, FONT_MD, FONT_SM, FONT_XL, FONT_XS, SHADOW_SM, Z_ABOVE, Z_HIGH, Z_RAISED } from "@Styles/variables";
+import { FAUSTINA, FONT_LG, FONT_MD, FONT_SM, FONT_XL, FONT_XS, SHADOW_SM, Z_ABOVE, Z_HIGH, Z_RAISED } from "@Styles/variables";
 import styled, { css } from "styled-components";
 
 export const ProjectBoxes = styled.div`
@@ -88,8 +88,8 @@ export const PortfolioBackdrop = styled.div`
     top: -8rem;
     left: -8rem;
     
-    height: 200vh;
-    width: 200vw;
+    height: 2000vh;
+    width: 2000vw;
     
     z-index: ${Z_RAISED};
     background-color: ${props => props.theme.base.shadowColor};
@@ -101,7 +101,7 @@ export const TechnologyLabel = styled.label<{ checked: boolean }>`
     position: relative;
     cursor: pointer;
     z-index: ${Z_ABOVE};
-    font-size: ${FONT_MD};
+    font-size: ${FONT_LG};
 
     &::after {
         content: '';
@@ -140,4 +140,13 @@ export const PortfolioBackground = styled.div`
     min-width: 200vw;
     min-height: 200vh;
     background: ${props => css`linear-gradient(to bottom right, ${props.theme.portfolio.gradient.color1}, ${props.theme.portfolio.gradient.color2} 75%, ${props.theme.portfolio.gradient.color3})`};
+`
+
+export const FilterContainer = styled.div`
+    background-color: ${props => props.theme.base.background};
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
 `
