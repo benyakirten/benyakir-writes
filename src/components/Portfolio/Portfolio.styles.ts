@@ -1,5 +1,5 @@
 import { convertHexToRGBA } from "@/utils/colors";
-import { FAUSTINA, FONT_LG, FONT_MD, FONT_SM, FONT_XL, FONT_XS, SHADOW_SM, Z_ABOVE, Z_HIGH, Z_RAISED } from "@Styles/variables";
+import { FAUSTINA, FONT_LG, FONT_MD, FONT_SM, FONT_XL, SHADOW_SM, Z_ABOVE, Z_HIGH } from "@Styles/variables";
 import styled, { css } from "styled-components";
 
 export const ProjectBoxes = styled.div`
@@ -73,29 +73,18 @@ export const TechBadges = styled.div`
 export const TechBadge = styled.span<{ selected: boolean }>`
     background-color: ${props => props.selected ? props.theme.button.default.textColor : props.theme.button.default.background};
     color: ${props => props.selected ? props.theme.button.default.background : props.theme.button.default.textColor};
-
     transition: background-color 500ms ease, color 250ms ease;
-    font-size: ${FONT_XS};
-    text-decoration: ${props => props.selected ? "underline" : "none"};
-    border-radius: 1rem;
+
     border: 1px solid ${props => props.theme.button.border};
     box-shadow: ${props => `${SHADOW_SM} ${convertHexToRGBA(props.theme.base.shadowColor, 0.4)}`};
+
+    font-size: ${FONT_SM};
+    text-decoration: ${props => props.selected ? "underline" : "none"};
+    text-decoration-thickness: 1px;
+
+    border-radius: 1rem;
     padding: 0.5rem 1rem;
 `
-
-export const PortfolioBackdrop = styled.div`
-    position: absolute;
-    top: -8rem;
-    left: -8rem;
-    
-    height: 2000vh;
-    width: 2000vw;
-    
-    z-index: ${Z_RAISED};
-    background-color: ${props => props.theme.base.shadowColor};
-`
-
-export const TechnologiesContainer = styled.div``
 
 export const TechnologyLabel = styled.label<{ checked: boolean }>`
     position: relative;

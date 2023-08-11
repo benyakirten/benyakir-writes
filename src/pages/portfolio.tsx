@@ -1,12 +1,7 @@
 import { graphql } from 'gatsby';
 import * as React from 'react';
 
-import {
-  Backdrop,
-  ProjectFilters,
-  ProjectGrid,
-  RandomizedBackground,
-} from '@/components/Portfolio';
+import { ProjectFilters, ProjectGrid, RandomizedBackground } from '@/components/Portfolio';
 import { PortfolioDescription, PortfolioHeader } from '@/components/Portfolio/Portfolio.styles';
 import { useSet } from '@/hooks';
 import { ProjectGridDatum } from '@Types/portfolio';
@@ -82,12 +77,12 @@ const Portfolio: React.FC<GHIconQuery> = ({ data }) => {
   return (
     <>
       <RandomizedBackground />
-      <Backdrop visible={hovered !== null} />
       <PortfolioHeader>
         <PortfolioDescription>
           Once upon a time, I studied languages and linguistics. Then I began learning programming
-          on my own. I am now a frontend developer with experience in every step of the process,
-          from design to implementation, from rapid iteration to long-term maintenance.
+          on my own. I am now a <strong>frontend developer</strong> with experience in{' '}
+          <strong>every step of the process</strong>, from design to implementation, from rapid
+          iteration to long-term maintenance, from <strong>concept to creation</strong>.
         </PortfolioDescription>
         <ProjectFilters allTechs={allTechs} viewedTechs={viewedTechs} onToggle={toggleTech} />
       </PortfolioHeader>
