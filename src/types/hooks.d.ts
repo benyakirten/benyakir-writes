@@ -29,4 +29,4 @@ type MultipleHook = (allOptions: string[], currentlyOpen?: string[]) => [Boolean
 type SetHook = <T = string>(items?: T[]) => [Set<T>, (item: T) => void]
 
 type LatestUpdateState = FetchState | Date
-type LatestRepoUpdateHook = (repoLink: string) => LatestUpdateState
+type LatestRepoUpdateHook = (repoLink?: string) => LatestUpdateState

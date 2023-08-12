@@ -41,12 +41,7 @@ const Project: React.FC<WpProject> = ({ data }) => {
   return (
     <>
       <LeadHeading>{project.title}</LeadHeading>
-      <ProjectHeader
-        project={project}
-        icons={icons}
-        latestUpdateState={latestUpdateState}
-        loading={loading}
-      />
+      <ProjectHeader project={project} icons={icons} latestUpdateState={latestUpdateState} />
       <Grouping>
         <WpContent dangerouslySetInnerHTML={{ __html: project.content! }} />
       </Grouping>

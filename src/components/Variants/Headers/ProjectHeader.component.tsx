@@ -1,6 +1,7 @@
-import * as React from "react";
-import { navigate } from "gatsby";
+import { navigate } from 'gatsby';
+import * as React from 'react';
 
+import { Button, IconGrid } from '@Gen';
 import {
   CardSection,
   GroupingBox,
@@ -10,36 +11,26 @@ import {
   RowUntilPhone,
   SubHeading,
   Subtitle,
-} from "@Styles/general-components";
-import { IconGrid, Loading, Button } from "@Gen";
+} from '@Styles/general-components';
+import LatestUpdate from './LatestUpdate.component';
 
-import { getPrettyDate } from "@Utils/dates";
+import { getPrettyDate } from '@Utils/dates';
 
-import { ProjectHeaderProps } from "@Types/props/post-components";
+import { ProjectHeaderProps } from '@Types/props/post-components';
 
-const ProjectHeader: React.FC<ProjectHeaderProps> = ({
-  project,
-  icons,
-  loading,
-  latestUpdate,
-  err,
-}) => {
+const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project, icons, latestUpdateState }) => {
   return (
     <GroupingBox>
-      <RowUntilPhone style={{ flexWrap: "nowrap", alignItems: "start" }}>
+      <RowUntilPhone style={{ flexWrap: 'nowrap', alignItems: 'start' }}>
         {((project.hostedOn && project.mainLink) || project.repoLink) && (
           <CardSection>
             <Subtitle>Links</Subtitle>
-            <Row style={{ marginBottom: "2rem" }}>
+            <Row style={{ marginBottom: '2rem' }}>
               {project.hostedOn && project.mainLink && (
-                <Button onClick={() => navigate(project.mainLink!)}>
-                  On {project.hostedOn}
-                </Button>
+                <Button onClick={() => navigate(project.mainLink!)}>On {project.hostedOn}</Button>
               )}
               {project.repoLink && (
-                <Button onClick={() => navigate(project.repoLink!)}>
-                  On GitHub
-                </Button>
+                <Button onClick={() => navigate(project.repoLink!)}>On GitHub</Button>
               )}
             </Row>
           </CardSection>
@@ -51,19 +42,9 @@ const ProjectHeader: React.FC<ProjectHeaderProps> = ({
         <CardSection>
           <SubHeading>Information</SubHeading>
           <List>
+            <LItem>First Released: {getPrettyDate(project.firstReleased.date)}</LItem>
             <LItem>
-              First Released: {getPrettyDate(project.firstReleased.date)}
-            </LItem>
-            <LItem>
-              Latest Update:{" "}
-              {!!project.latestUpdate &&
-                getPrettyDate(project.latestUpdate.date)}
-              {!project.latestUpdate && loading && <Loading size="1.4rem" />}
-              {!project.latestUpdate &&
-                !loading &&
-                latestUpdate &&
-                getPrettyDate(latestUpdate)}
-              {!project.latestUpdate && !loading && err}
+              <LatestUpdate state={latestUpdateState} />
             </LItem>
           </List>
         </CardSection>

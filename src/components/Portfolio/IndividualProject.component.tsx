@@ -23,9 +23,16 @@ const IndividualProject: React.FC<{
     <ProjectContents>
       <div>
         <ProjectTitle>{project.title}</ProjectTitle>
-        <CustomLink outside to="https://www.google.com">
-          <GitHubIcon ghIcon={ghIcon} />
-        </CustomLink>
+        {project.repoLink && (
+          <CustomLink outside to={project.repoLink}>
+            <GitHubIcon ghIcon={ghIcon} />
+          </CustomLink>
+        )}
+        {project.hostedOn && project.mainLink && (
+          <CustomLink outside to={project.mainLink}>
+            {project.hostedOn}
+          </CustomLink>
+        )}
         <ProjectDescription>{project.description}</ProjectDescription>
       </div>
       <ProjectTechs>

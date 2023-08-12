@@ -13,7 +13,7 @@ export const Head = () => (
     <title>Benyakir Writes - Portfolio</title>
     <meta
       name="description"
-      content="A list of my developer portfolio, including only my best and most up-to-date projects."
+      content="M developer portfolio, including only my best and most up-to-date projects."
     />
   </>
 );
