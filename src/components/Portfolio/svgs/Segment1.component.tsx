@@ -2,19 +2,19 @@ import * as React from 'react';
 
 import { useAppSelector } from '@Store/hooks';
 import { SVGSize } from '@Types/portfolio';
-import { SVGShapeBase } from './Svgs.styles';
+import SVGShape from './SVGShape.component';
 
-const Segment1: React.FC<SVGSize> = ({ size = 40 }) => {
+const Segment1: React.FC<SVGSize> = ({ size }) => {
   const themeStore = useAppSelector((root) => root.theme);
   return (
-    <SVGShapeBase size={size}>
+    <SVGShape size={size}>
       <path
         d="M20,50 C40,10 60,90 80,50 S120,10 140,50 C160,90 180,10 200,50"
         fill="none"
         stroke={themeStore.active.base.textColor}
         strokeWidth="2"
       />
-    </SVGShapeBase>
+    </SVGShape>
   );
 };
 
