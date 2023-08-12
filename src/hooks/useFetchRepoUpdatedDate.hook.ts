@@ -30,7 +30,6 @@ export const useFetchRepoUpdatedDate: LatestRepoUpdateHook = (repoLink?: string)
       const date = new Date(data.pushed_at)
       // Cache results
       updatedDatesCache[repo] = date
-
       setState(date);
     } catch (e) {
       setState(FetchState.ERROR)

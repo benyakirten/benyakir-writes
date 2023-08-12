@@ -1,6 +1,7 @@
 import { navigate } from 'gatsby';
 import * as React from 'react';
 
+import LatestUpdate from '@/components/Portfolio/LatestUpdate.component';
 import { Button, IconGrid } from '@Gen';
 import {
   CardSection,
@@ -12,7 +13,6 @@ import {
   SubHeading,
   Subtitle,
 } from '@Styles/general-components';
-import LatestUpdate from './LatestUpdate.component';
 
 import { getPrettyDate } from '@Utils/dates';
 

@@ -1,6 +1,6 @@
 import { media } from "@/styles/queries";
 import { convertHexToRGBA } from "@/utils/colors";
-import { FAUSTINA, FONT_LG, FONT_MD, FONT_SM, FONT_XL, SHADOW_SM, Z_ABOVE, Z_HIGH } from "@Styles/variables";
+import { FAUSTINA, FONT_LG, FONT_MD, FONT_SM, SHADOW_SM, Z_ABOVE, Z_HIGH } from "@Styles/variables";
 import styled, { css } from "styled-components";
 
 export const ProjectBoxes = styled.div`
@@ -33,6 +33,8 @@ export const ProjectBox = styled.article<{ hovered?: boolean }>`
     }
 `
 
+// TODO: update this to use grid instead of
+// a bunch of flex boxes
 export const ProjectContents = styled.div`
     padding: 0.75rem 1rem;
     display: flex;
@@ -44,7 +46,7 @@ export const ProjectContents = styled.div`
 `
 
 export const ProjectTitle = styled.h3`
-    font-size: ${FONT_XL};
+    font-size: ${FONT_LG};
     letter-spacing: 2px;
     text-decoration: underline;
     font-family: ${FAUSTINA};
@@ -56,10 +58,34 @@ export const ProjectDescription = styled.p`
     font-size: ${FONT_MD};
 `
 
-export const ProjectTechs = styled.div`
+export const ProjectCardTop = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+`
+
+export const TitleContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`
+
+export const TitleDateContainer = styled.div`
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+`
+
+export const ProjectCardBottom = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: start;
+    gap: 0.5rem;
+`
+
+export const ProjectDates = styled.div`
+    display: flex;
+    flex-direction: column;
     gap: 0.5rem;
 `
 

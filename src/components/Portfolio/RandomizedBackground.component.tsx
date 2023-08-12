@@ -3,6 +3,24 @@ import { PortfolioBackground } from './Portfolio.styles';
 import { Polygon, Wheel } from './svgs';
 
 const RandomizedBackground: React.FC = () => {
+  const [size, setSize] = React.useState<{ width: number; height: number }>();
+  React.useEffect(() => {
+    const fn = () => {
+      const main = document.querySelector('main');
+      if (!main) {
+        return;
+      }
+
+      const { width, height } = main.getBoundingClientRect();
+      // console.log(`size set to ${width}, ${height}`);
+      setSize({ width, height });
+    };
+
+    fn();
+    window.addEventListener('resize', fn);
+    return () => window.removeEventListener('resize', fn);
+  }, []);
+
   return (
     <PortfolioBackground>
       <div style={{ position: 'absolute', top: 'calc(100px + 20%)', right: '200px' }}>

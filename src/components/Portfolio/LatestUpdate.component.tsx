@@ -13,7 +13,7 @@ const LoadingItemRenderer: React.FC<{ state: LatestUpdateState }> = ({ state }) 
       }
       switch (state) {
         case FetchState.ERROR:
-          return 'Unknown';
+          return 'Unable to retrieve date';
         case FetchState.LOADING:
           return <Loading size="1.4rem" />;
         default:
