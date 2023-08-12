@@ -97,3 +97,12 @@ export function getFullTechName(tech: string) {
       return tech;
   }
 }
+
+/**
+ * Given an amount of WP content split into paragraphs, take the first paragraph of content
+ * without the html tags
+ */
+export const getFirstParagraphOfContent = (content: string) => {
+  const [firstParagraph] = content.split("</p>")
+  return firstParagraph.replace(/<p>/g, "")
+}

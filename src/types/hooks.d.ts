@@ -1,3 +1,5 @@
+import { FetchState } from "@/hooks";
+
 type AlternationHook = () => [string, (val: string) => void]
 
 type LookupHook = (items: BooleanLookup) => [BooleanLookup, React.Dispatch<{
@@ -25,3 +27,6 @@ type ValidationHook = (valFns: ValidationFunction[], initialValue?: string | num
 
 type MultipleHook = (allOptions: string[], currentlyOpen?: string[]) => [BooleanLookup, (...alternatables: string[]) => void]
 type SetHook = <T = string>(items?: T[]) => [Set<T>, (item: T) => void]
+
+type LatestUpdateState = FetchState | Date
+type LatestRepoUpdateHook = (repoLink: string) => LatestUpdateState

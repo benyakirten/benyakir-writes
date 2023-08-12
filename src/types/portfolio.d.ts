@@ -1,13 +1,15 @@
-import React from "react"
+
 
 export interface ProjectGridDatum {
-  description: string
   title: string
+  description: string
   technologies: string[]
-  ghLink?: string
-  deployedLink?: string
-  ref: React.RefObject<HTMLDivElement>
+  firstReleased: Date
+  mainLink?: string;
+  repoLink?: string;
+  hostedOn?: string;
 }
+
 export interface ProjectGridData {
   projects: ProjectGridDatum[]
   ghIcon: string

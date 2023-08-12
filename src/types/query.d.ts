@@ -1,5 +1,4 @@
-import { IGatsbyImageData } from 'gatsby-plugin-image'
-import { FileNode, ProjectType, BookType, StoryType, SingleBook, SingleStory, BackupImage, BlogPostType } from './posts.d'
+import { BlogPostType, BookType, FileNode, ProjectType, SingleBook, SingleStory, StoryType } from './posts.d'
 
 type WpPost = {
   data: {
@@ -109,10 +108,13 @@ type GlobalQuery = {
   }
 }
 
-interface GHIconQuery {
+interface PortfolioQuery {
   data: {
     file: {
       publicURL: string
+    }
+    allWpProject: {
+      nodes: ProjectType[]
     }
   }
 }

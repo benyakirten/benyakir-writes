@@ -1,19 +1,11 @@
-import BookCard from "@Variant/Cards/Author/BookCard/BookCard.component"
-import StoryCard from "@Variant/Cards/Author/StoryCard/StoryCard.component"
+import BookCard from "@Variant/Cards/Author/BookCard/BookCard.component";
+import StoryCard from "@Variant/Cards/Author/StoryCard/StoryCard.component";
 
 import type {
-  FlattenedBlogPost,
-  FlattenedProject,
-  FlattenedSingleBook,
-  FlattenedSingleStory,
-  FlattenedProjectCard,
-  FlattenedBookCard,
-  FlattenedStoryCard,
-  FlattenedBlogCard,
-  PartiallyFlattenedBlogPost,
-  PartialFlattenedBook,
-  PartialFlattenedStory
-} from "../posts"
+  FlattenedBlogCard, FlattenedBlogPost, FlattenedBookCard, FlattenedProject, FlattenedProjectCard, FlattenedSingleBook,
+  FlattenedSingleStory, FlattenedStoryCard, PartialFlattenedBook,
+  PartialFlattenedStory, PartiallyFlattenedBlogPost
+} from "../posts";
 
 type LeadPageProps = {
   filter: ReactElement;
@@ -87,9 +79,7 @@ type StoryHeaderProps = {
 type ProjectHeaderProps = {
   project: FlattenedProject;
   icons: FileNode[];
-  loading: boolean;
-  latestUpdate?: Date;
-  err?: string;
+  latestUpdateState: 
 }
 
 type PostHeaderProps = {

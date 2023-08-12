@@ -1,16 +1,17 @@
 import * as React from 'react';
 
 import { ProjectGridDatum } from '@/types/portfolio';
+import { getPrettyDate } from '@/utils/dates';
 import { getFullTechName } from '@/utils/project';
 import { CustomLink } from '../General';
 import {
+  GitHubIcon,
   ProjectContents,
-  ProjectTitle,
   ProjectDescription,
   ProjectTechs,
-  TechBadges,
+  ProjectTitle,
   TechBadge,
-  GitHubIcon,
+  TechBadges,
 } from './Portfolio.styles';
 
 const IndividualProject: React.FC<{
@@ -28,6 +29,7 @@ const IndividualProject: React.FC<{
         <ProjectDescription>{project.description}</ProjectDescription>
       </div>
       <ProjectTechs>
+        First Created: {getPrettyDate(project.firstReleased)}
         <TechBadges>
           {project.technologies.map((tech) => (
             <TechBadge selected={techs.has(tech)} key={tech}>

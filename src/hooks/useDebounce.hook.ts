@@ -1,6 +1,7 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react';
 
-import { SEARCH_TIMEOUT } from '@Constants'
+import { DebounceHook } from '@/types/hooks';
+import { SEARCH_TIMEOUT } from '@Constants';
 
 const useDebounce: DebounceHook = (callback: (t: string) => void, initialVal: string = '', timeLimit: number = SEARCH_TIMEOUT) => {
     const memoizedCallback = useCallback(text => callback(text), [callback]);

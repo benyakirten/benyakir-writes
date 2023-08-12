@@ -48,21 +48,19 @@ export const ProjectTitle = styled.h3`
     letter-spacing: 2px;
     text-decoration: underline;
     font-family: ${FAUSTINA};
-    grid-column: 1 / -1;
     display: inline;
 `
 
 export const ProjectDescription = styled.p`
-    grid-column: 1 / -1;
+    text-overflow: ellipsis;
     font-size: ${FONT_MD};
 `
 
 export const ProjectTechs = styled.div`
-    grid-column: 1 / 2;
-`
-
-export const ProjectLinks = styled.div`
-    grid-column: 2 / -1;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 0.5rem;
 `
 
 export const GitHubIcon = styled.img.attrs<{ ghIcon: string }>(({ ghIcon }) => ({
@@ -135,7 +133,7 @@ export const PortfolioBackground = styled.div`
     left: -4rem;
     min-width: 200vw;
     min-height: 200vh;
-    background: ${props => css`linear-gradient(to bottom right, ${props.theme.base.background} 20%, ${props.theme.portfolio.gradient.color1} 20%, ${props.theme.portfolio.gradient.color2} 75%, ${props.theme.portfolio.gradient.color3})`};
+    background: ${props => css`linear-gradient(to bottom, ${props.theme.base.background}, ${props.theme.portfolio.gradient.color1} 10%, ${props.theme.portfolio.gradient.color2} 75%, ${props.theme.portfolio.gradient.color3})`};
 `
 
 export const FilterContainer = styled.div`
