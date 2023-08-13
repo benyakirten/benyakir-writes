@@ -7,7 +7,7 @@ import type {
   PartialFlattenedStory, PartiallyFlattenedBlogPost
 } from "../posts";
 
-type LeadPageProps = {
+type LeadPageProps = ChildrenProp & {
   filter: ReactElement;
   title: string;
 }

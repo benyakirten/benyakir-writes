@@ -4,7 +4,7 @@ interface InputProps {
   tabIndex?: number;
 }
 
-type FilterProps = {
+type FilterProps = ChildrenProp & {
   name: string;
   onSearch: (val: string) => void;
 }

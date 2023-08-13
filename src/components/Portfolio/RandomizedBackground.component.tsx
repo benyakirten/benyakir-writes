@@ -2,7 +2,7 @@ import * as React from 'react';
 import { PortfolioBackground } from './Portfolio.styles';
 import Shapes from './Shapes.component';
 
-const RandomizedBackground: React.FC = ({ children }) => {
+const RandomizedBackground: React.FC<ChildrenProp> = ({ children }) => {
   const [size, setSize] = React.useState<{ width: number; height: number }>({
     width: 0,
     height: 0,

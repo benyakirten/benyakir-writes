@@ -1,7 +1,7 @@
-import * as React from "react";
-import { AntiSkewed, Skewed } from "./SkewRow.styles";
+import * as React from 'react';
+import { AntiSkewed, Skewed } from './SkewRow.styles';
 
-const SkewRow: React.FC = ({ children }) => {
+const SkewRow: React.FC<ChildrenProp> = ({ children }) => {
   return (
     <Skewed>
       <AntiSkewed>{children}</AntiSkewed>

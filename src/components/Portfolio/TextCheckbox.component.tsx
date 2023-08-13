@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { TechnologyCheckox, TechnologyLabel } from './Portfolio.styles';
 
-const TextCheckbox: React.FC<{ checked: boolean; onToggle: () => void }> = ({
-  children,
-  checked,
-  onToggle,
-}) => {
+const TextCheckbox: React.FC<{
+  checked: boolean;
+  onToggle: () => void;
+  children: React.ReactNode;
+}> = ({ children, checked, onToggle }) => {
   return (
     <TechnologyLabel checked={checked}>
       {children}

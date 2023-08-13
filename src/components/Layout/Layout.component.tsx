@@ -28,7 +28,7 @@ export const Head: React.FC = () => (
   </>
 );
 
-const Layout: React.FC = ({ children }) => {
+const Layout: React.FC<ChildrenProp> = ({ children }) => {
   const location = useLocation();
   const themeStore = useAppSelector((root) => root.theme);
   const dispatch = useAppDispatch();
