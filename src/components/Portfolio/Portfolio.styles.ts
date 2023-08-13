@@ -1,7 +1,8 @@
+import styled, { css } from "styled-components";
+
 import { media } from "@/styles/queries";
 import { convertHexToRGBA } from "@/utils/colors";
 import { FAUSTINA, FONT_LG, FONT_MD, FONT_SM, SHADOW_SM, Z_ABOVE, Z_HIGH } from "@Styles/variables";
-import styled, { css } from "styled-components";
 
 export const ProjectBoxes = styled.div`
     display: grid;
@@ -153,10 +154,10 @@ export const TechnologyCheckox = styled.input.attrs<{ checked: boolean }>(checke
 
 export const PortfolioBackground = styled.div`
     position: relative;
-    left: -4rem;
-    padding-left: 4rem;
-    height: calc(auto + 4rem);
-    width: calc(auto + 4rem);
+    padding: 2rem 4rem;
+    ${media.tablet} {
+        padding: 1rem 2rem;
+    }
     background: ${props => css`linear-gradient(to bottom, ${props.theme.base.background} 5%, ${props.theme.portfolio.gradient.color1}, ${props.theme.portfolio.gradient.color2} 75%, ${props.theme.portfolio.gradient.color3})`};
 `
 
@@ -165,27 +166,31 @@ export const FilterContainer = styled.div`
     justify-content: flex-end;
     flex-wrap: wrap;
     gap: 0.5rem;
+    height: min-content;
 
     max-width: 40%;
 
     ${media.phone} {
         max-width: 100%;
     }
-    
-    background-color: ${props => props.theme.base.background};
 `
 
 export const PortfolioHeader = styled.div`
     display: flex;
     flex-direction: row;
+
     ${media.phone} {
         flex-direction: column;
     }
     gap: 8rem;
     justify-content: space-between;
     
-    padding-bottom: 2rem;
     margin: 2rem 0;
+
+    padding: 2rem 4rem;
+    ${media.tablet} {
+        padding: 1rem 2rem;
+    }
 `
 
 export const PortfolioDescription = styled.p`
