@@ -12,16 +12,9 @@ const ProjectGrid: React.FC<ProjectGridData> = ({
   hovered,
   viewedTechs,
 }) => {
-  const filteredProjects = React.useMemo(
-    () =>
-      viewedTechs.size === 0
-        ? projects
-        : projects.filter((project) => project.technologies.some((tech) => viewedTechs.has(tech))),
-    [viewedTechs, projects],
-  );
   return (
     <ProjectBoxes>
-      {filteredProjects.map((project) => (
+      {projects.map((project) => (
         <ProjectBox
           key={project.title}
           onMouseEnter={() => handleMouseEnter(project.title)}

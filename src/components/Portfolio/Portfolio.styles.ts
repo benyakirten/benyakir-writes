@@ -67,7 +67,7 @@ export const ProjectCardTop = styled.div`
 
 export const TitleContainer = styled.div`
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
 `
 
@@ -125,7 +125,7 @@ export const TechnologyLabel = styled.label<{ checked: boolean }>`
     position: relative;
     cursor: pointer;
     z-index: ${Z_ABOVE};
-    font-size: ${FONT_LG};
+    font-size: ${FONT_MD};
     height: min-content;
 
     &::after {
@@ -155,6 +155,7 @@ export const TechnologyCheckox = styled.input.attrs<{ checked: boolean }>(checke
 export const PortfolioBackground = styled.div`
     position: relative;
     padding: 2rem 4rem;
+    min-height: 100vh;
     ${media.tablet} {
         padding: 1rem 2rem;
     }
@@ -168,7 +169,7 @@ export const FilterContainer = styled.div`
     gap: 0.5rem;
     height: min-content;
 
-    max-width: 40%;
+    max-width: 30%;
 
     ${media.phone} {
         max-width: 100%;

@@ -40,11 +40,24 @@ const Portfolio: React.FC<PortfolioQuery> = ({ data }) => {
 
   const allTechs = React.useMemo(
     () => [...new Set(projects.flatMap((project) => project.technologies))],
-    [],
+    [projects],
   );
 
   const [viewedTechs, toggleTech] = useSet(allTechs);
   const [hovered, setHovered] = React.useState<string | null>(null);
+
+  const [_, startTransition] = React.useTransition();
+  const [filteredProjects, setFilteredProjects] = React.useState(projects);
+  React.useEffect(() => {
+    const _filteredProjects =
+      viewedTechs.size === 0
+        ? projects
+        : projects.filter((project) => project.technologies.some((tech) => viewedTechs.has(tech)));
+    startTransition(() => {
+      setFilteredProjects(_filteredProjects);
+    });
+  }, [viewedTechs, projects]);
+
   return (
     <>
       <PortfolioHeader>
@@ -60,7 +73,7 @@ const Portfolio: React.FC<PortfolioQuery> = ({ data }) => {
       </PortfolioHeader>
       <RandomizedBackground>
         <ProjectGrid
-          projects={projects}
+          projects={filteredProjects}
           ghIcon={ghIcon}
           hovered={hovered}
           handleMouseEnter={(title) => setHovered(title)}

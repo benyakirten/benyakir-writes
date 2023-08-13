@@ -44,7 +44,8 @@ const IndividualProject: React.FC<{
             )}
           </TitleDateContainer>
         </TitleContainer>
-        <ProjectDescription>{project.description}</ProjectDescription>
+        {/* Since we're using content directly from WP, we have to set the HTML and trust that the WP server hasn't been hacked */}
+        <ProjectDescription dangerouslySetInnerHTML={{ __html: project.description }} />
       </ProjectCardTop>
       <ProjectCardBottom>
         <ProjectDates>
