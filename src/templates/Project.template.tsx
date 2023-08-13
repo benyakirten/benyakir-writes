@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 import * as React from 'react';
 
-import { Grouping, LeadHeading, WpContent } from '@Styles/general-components';
+import { Grouping, LeadHeading, Page, WpContent } from '@Styles/general-components';
 import { ProjectHeader } from '@Variants';
 
 import { getPrettyDate } from '@Utils/dates';
@@ -36,16 +36,15 @@ const Project: React.FC<WpProject> = ({ data }) => {
     .filter((f) => project.shortTechnologies.includes(f.name))
     .map((f) => ({ ...f, name: getFullTechName(f.name) }));
 
-  const [loading, setLoading] = React.useState<boolean>(false);
   const latestUpdateState = useFetchRepoUpdatedDate(project.repoLink);
   return (
-    <>
+    <Page>
       <LeadHeading>{project.title}</LeadHeading>
       <ProjectHeader project={project} icons={icons} latestUpdateState={latestUpdateState} />
       <Grouping>
         <WpContent dangerouslySetInnerHTML={{ __html: project.content! }} />
       </Grouping>
-    </>
+    </Page>
   );
 };
 

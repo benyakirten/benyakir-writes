@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Grouping } from '@Styles/general-components';
+import { Grouping, Page } from '@Styles/general-components';
 
 import { LeadPage, Paginate } from '@Layout';
 import { StoryFilter } from '@Posts';
@@ -12,7 +12,7 @@ import storiesJson from '@WPData/Author/stories.json';
 
 import { FlattenedStoryCard } from '@Types/posts';
 
-export const Head = () => (
+export const Head: React.FC = () => (
   <>
     <title>Benyakir Writes - Stories</title>
     <meta
@@ -35,14 +35,16 @@ const ShortstoriesPage: React.FC = () => {
   const storyPagination = usePagination<FlattenedStoryCard>(stories);
 
   return (
-    <LeadPage
-      title="Short Stories"
-      filter={<StoryFilter stories={stories} onFilter={storyPagination.setCurrentItems} />}
-    >
-      <Grouping>
-        <Paginate {...storyPagination} El={StoryCard} />
-      </Grouping>
-    </LeadPage>
+    <Page>
+      <LeadPage
+        title="Short Stories"
+        filter={<StoryFilter stories={stories} onFilter={storyPagination.setCurrentItems} />}
+      >
+        <Grouping>
+          <Paginate {...storyPagination} El={StoryCard} />
+        </Grouping>
+      </LeadPage>
+    </Page>
   );
 };
 

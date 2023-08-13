@@ -1,20 +1,20 @@
 import * as React from 'react';
 
-import { BigParagraph, Grouping } from '@Styles/general-components';
+import { BigParagraph, Grouping, Page } from '@Styles/general-components';
 
-import { LeadPage, Paginate } from '@Layout';
-import { ProjectCard } from '@Variants';
-import { ProjectFilter } from '@Posts';
 import { CustomLink } from '@Gen';
+import { LeadPage, Paginate } from '@Layout';
+import { ProjectFilter } from '@Posts';
+import { ProjectCard } from '@Variants';
 
 import { usePagination } from '@Hooks';
 
-import projectsJson from '@WPData/Projects/projects.json';
 import projectsMisc from '@WPData/Projects/misc.json';
+import projectsJson from '@WPData/Projects/projects.json';
 
 import { FlattenedProjectCard } from '@Types/posts';
 
-export const Head = () => (
+export const Head: React.FC = () => (
   <>
     <title>Benyakir Writes - All Projects</title>
     <meta
@@ -45,27 +45,29 @@ const ProjectsPage: React.FC = () => {
   const projectPagination = usePagination<FlattenedProjectCard>(preparedProjects);
 
   return (
-    <LeadPage
-      title="Projects"
-      filter={
-        <ProjectFilter
-          allProjects={preparedProjects}
-          allHosts={allHosts}
-          allTechs={allTechs}
-          onFilter={projectPagination.setCurrentItems}
-        />
-      }
-    >
-      <BigParagraph marginVertical="2rem">
-        This is a page that lists all of my projects on my GitHub page. This includes all of my
-        work, old and new. Please don't use this page to see my latest and more interesting work and
-        only use this page as an easily indexable page. For my latest work, visit my{' '}
-        <CustomLink to="/portfolio">portfolio</CustomLink>.
-      </BigParagraph>
-      <Grouping>
-        <Paginate {...projectPagination} El={ProjectCard} />
-      </Grouping>
-    </LeadPage>
+    <Page>
+      <LeadPage
+        title="Projects"
+        filter={
+          <ProjectFilter
+            allProjects={preparedProjects}
+            allHosts={allHosts}
+            allTechs={allTechs}
+            onFilter={projectPagination.setCurrentItems}
+          />
+        }
+      >
+        <BigParagraph marginVertical="2rem">
+          This is a page that lists all of my projects on my GitHub page. This includes all of my
+          work, old and new. Please don't use this page to see my latest and more interesting work
+          and only use this page as an easily indexable page. For my latest work, visit my{' '}
+          <CustomLink to="/portfolio">portfolio</CustomLink>.
+        </BigParagraph>
+        <Grouping>
+          <Paginate {...projectPagination} El={ProjectCard} />
+        </Grouping>
+      </LeadPage>
+    </Page>
   );
 };
 

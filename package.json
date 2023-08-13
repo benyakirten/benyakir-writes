@@ -45,7 +45,6 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^27.0.1",
-    "@types/react": "^17.0.37",
     "@types/react-syntax-highlighter": "^13.5.2",
     "@types/react-test-renderer": "^17.0.1",
     "@types/react-transition-group": "^4.4.2",

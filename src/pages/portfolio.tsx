@@ -8,7 +8,7 @@ import { useSet } from '@/hooks';
 import { getFirstParagraphOfContent } from '@/utils/project';
 import { PortfolioQuery } from '@Types/query';
 
-export const Head = () => (
+export const Head: React.FC = () => (
   <>
     <title>Benyakir Writes - Portfolio</title>
     <meta
@@ -23,19 +23,18 @@ const Portfolio: React.FC<PortfolioQuery> = ({ data }) => {
 
   // Refactor this to a util
   const projects = React.useMemo(() => {
-    const mappedProjects = data.allWpProject.nodes
-      .map((node) => ({
-        title: node.title,
-        description: getFirstParagraphOfContent(node.content),
-        ...node.project,
-        firstReleased: new Date(node.project.firstReleased),
-        technologies: node.project.technologies.split(', '),
-      }))
-      .filter(
-        (node) =>
-          node.title === 'Benyakir Writes' ||
-          node.firstReleased.valueOf() > new Date('2023-01-01').valueOf(),
-      );
+    const mappedProjects = data.allWpProject.nodes.map((node) => ({
+      title: node.title,
+      description: getFirstParagraphOfContent(node.content),
+      ...node.project,
+      firstReleased: new Date(node.project.firstReleased),
+      technologies: node.project.technologies.split(', '),
+    }));
+    // .filter(
+    //   (node) =>
+    //     node.title === 'Benyakir Writes' ||
+    //     node.firstReleased.valueOf() > new Date('2023-01-01').valueOf(),
+    // );
     return mappedProjects;
   }, [data]);
 
@@ -48,7 +47,6 @@ const Portfolio: React.FC<PortfolioQuery> = ({ data }) => {
   const [hovered, setHovered] = React.useState<string | null>(null);
   return (
     <>
-      <RandomizedBackground />
       <PortfolioHeader>
         <PortfolioDescription>
           Once upon a time, I studied languages and linguistics. Then I began learning programming
@@ -60,14 +58,16 @@ const Portfolio: React.FC<PortfolioQuery> = ({ data }) => {
         </PortfolioDescription>
         <ProjectFilters allTechs={allTechs} viewedTechs={viewedTechs} onToggle={toggleTech} />
       </PortfolioHeader>
-      <ProjectGrid
-        projects={projects}
-        ghIcon={ghIcon}
-        hovered={hovered}
-        handleMouseEnter={(title) => setHovered(title)}
-        handleMouseLeave={() => setHovered(null)}
-        viewedTechs={viewedTechs}
-      />
+      <RandomizedBackground>
+        <ProjectGrid
+          projects={projects}
+          ghIcon={ghIcon}
+          hovered={hovered}
+          handleMouseEnter={(title) => setHovered(title)}
+          handleMouseLeave={() => setHovered(null)}
+          viewedTechs={viewedTechs}
+        />
+      </RandomizedBackground>
     </>
   );
 };

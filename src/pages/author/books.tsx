@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Grouping } from '@Styles/general-components';
+import { Grouping, Page } from '@Styles/general-components';
 
 import { LeadPage, Paginate } from '@Layout';
 import { BookFilter } from '@Posts';
@@ -12,7 +12,7 @@ import booksJson from '@WPData/Author/books.json';
 
 import { FlattenedBookCard } from '@Types/posts';
 
-export const Head = () => (
+export const Head: React.FC = () => (
   <>
     <title>Benyakir Writes - Books</title>
     <meta
@@ -35,14 +35,16 @@ const BooksPage: React.FC = () => {
   const bookPagination = usePagination<FlattenedBookCard>(books);
 
   return (
-    <LeadPage
-      title="Books"
-      filter={<BookFilter books={books} onFilter={bookPagination.setCurrentItems} />}
-    >
-      <Grouping>
-        <Paginate {...bookPagination} El={BookCard} />
-      </Grouping>
-    </LeadPage>
+    <Page>
+      <LeadPage
+        title="Books"
+        filter={<BookFilter books={books} onFilter={bookPagination.setCurrentItems} />}
+      >
+        <Grouping>
+          <Paginate {...bookPagination} El={BookCard} />
+        </Grouping>
+      </LeadPage>
+    </Page>
   );
 };
 

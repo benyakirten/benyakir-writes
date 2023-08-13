@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { PortfolioBackground } from './Portfolio.styles';
-import { Polygon, Wheel } from './svgs';
+import Shapes from './Shapes.component';
 
-const RandomizedBackground: React.FC = () => {
-  const [size, setSize] = React.useState<{ width: number; height: number }>();
+const RandomizedBackground: React.FC = ({ children }) => {
+  const [size, setSize] = React.useState<{ width: number; height: number }>({
+    width: 0,
+    height: 0,
+  });
   React.useEffect(() => {
     const fn = () => {
       const main = document.querySelector('main');
@@ -23,15 +26,8 @@ const RandomizedBackground: React.FC = () => {
 
   return (
     <PortfolioBackground>
-      <div style={{ position: 'absolute', top: 'calc(100px + 20%)', right: '200px' }}>
-        <Wheel />
-      </div>
-      <div style={{ position: 'absolute', top: 'calc(50px + 20%)', left: '20px' }}>
-        <Wheel />
-      </div>
-      <div style={{ position: 'absolute', top: 'calc(0px + 20%)', left: '50px' }}>
-        <Polygon />
-      </div>
+      <Shapes {...size} />
+      {children}
     </PortfolioBackground>
   );
 };

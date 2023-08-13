@@ -152,14 +152,12 @@ export const TechnologyCheckox = styled.input.attrs<{ checked: boolean }>(checke
 `
 
 export const PortfolioBackground = styled.div`
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: -4rem;
+    position: relative;
     left: -4rem;
-    min-width: 200vw;
-    min-height: 200vh;
-    background: ${props => css`linear-gradient(to bottom, ${props.theme.base.background}, ${props.theme.portfolio.gradient.color1} 10%, ${props.theme.portfolio.gradient.color2} 75%, ${props.theme.portfolio.gradient.color3})`};
+    padding-left: 4rem;
+    height: calc(auto + 4rem);
+    width: calc(auto + 4rem);
+    background: ${props => css`linear-gradient(to bottom, ${props.theme.base.background} 5%, ${props.theme.portfolio.gradient.color1}, ${props.theme.portfolio.gradient.color2} 75%, ${props.theme.portfolio.gradient.color3})`};
 `
 
 export const FilterContainer = styled.div`

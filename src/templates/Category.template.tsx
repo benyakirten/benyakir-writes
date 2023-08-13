@@ -1,17 +1,17 @@
 import * as React from 'react';
 
-import { BigParagraph, Grouping } from '@Styles/general-components';
+import { BigParagraph, Grouping, Page } from '@Styles/general-components';
 
-import { Paginate, LeadPage } from '@Layout';
 import { CustomLink, Loading } from '@Gen';
+import { LeadPage, Paginate } from '@Layout';
 import { CategoryFilter } from '@Posts';
 import { BlogCard } from '@Variants';
 
 import { usePagination } from '@Hooks';
 import { titleToKebab } from '@Utils/strings';
 
-import { WpPostByCategory } from '@Types/query';
 import { FlattenedBlogCard } from '@Types/posts';
+import { WpPostByCategory } from '@Types/query';
 
 export const Head: React.FC<WpPostByCategory> = ({ pageContext }) => (
   <>
@@ -51,33 +51,35 @@ const CategoryTemplate: React.FC<WpPostByCategory> = ({ pageContext }) => {
   const postPagination = usePagination<FlattenedBlogCard>(catPosts);
 
   return (
-    <LeadPage
-      title={pageContext.name}
-      filter={
-        loading ? (
-          <Loading />
+    <Page>
+      <LeadPage
+        title={pageContext.name}
+        filter={
+          loading ? (
+            <Loading />
+          ) : (
+            <CategoryFilter allPosts={catPosts} onFilter={postPagination.setCurrentItems} />
+          )
+        }
+      >
+        {loading ? (
+          <Loading size="4rem" />
         ) : (
-          <CategoryFilter allPosts={catPosts} onFilter={postPagination.setCurrentItems} />
-        )
-      }
-    >
-      {loading ? (
-        <Loading size="4rem" />
-      ) : (
-        <>
-          <Grouping>
-            {catPosts.length > 0 ? (
-              <Paginate {...postPagination} El={BlogCard} />
-            ) : (
-              <BigParagraph>
-                There are no posts in the category {pageContext.name}. Maybe you want to check out
-                the general <CustomLink to="/blog">blog page</CustomLink> instead?
-              </BigParagraph>
-            )}
-          </Grouping>
-        </>
-      )}
-    </LeadPage>
+          <>
+            <Grouping>
+              {catPosts.length > 0 ? (
+                <Paginate {...postPagination} El={BlogCard} />
+              ) : (
+                <BigParagraph>
+                  There are no posts in the category {pageContext.name}. Maybe you want to check out
+                  the general <CustomLink to="/blog">blog page</CustomLink> instead?
+                </BigParagraph>
+              )}
+            </Grouping>
+          </>
+        )}
+      </LeadPage>
+    </Page>
   );
 };
 

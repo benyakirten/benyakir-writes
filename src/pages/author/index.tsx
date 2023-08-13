@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Grouping, SubHeading } from '@Styles/general-components';
+import { Grouping, Page, SubHeading } from '@Styles/general-components';
 
 import { LeadPage, Paginate } from '@Layout';
 import { AuthorFilter } from '@Posts';
@@ -13,7 +13,7 @@ import storiesJson from '@WPData/Author/stories.json';
 
 import { FlattenedBookCard, FlattenedStoryCard } from '@Types/posts';
 
-export const Head = () => (
+export const Head: React.FC = () => (
   <>
     <title>Benyakir Writes - Author</title>
     <meta
@@ -52,19 +52,21 @@ const AuthorPage: React.FC = () => {
   }
 
   return (
-    <LeadPage
-      title="Author"
-      filter={<AuthorFilter allBooks={books} allStories={stories} onFilter={handleFilter} />}
-    >
-      <Grouping marginVertical="2rem">
-        <SubHeading>Books</SubHeading>
-        <Paginate {...bookPagination} El={BookCard} />
-      </Grouping>
-      <Grouping marginVertical="2rem">
-        <SubHeading>Short Stories</SubHeading>
-        <Paginate {...storyPagination} El={StoryCard} />
-      </Grouping>
-    </LeadPage>
+    <Page>
+      <LeadPage
+        title="Author"
+        filter={<AuthorFilter allBooks={books} allStories={stories} onFilter={handleFilter} />}
+      >
+        <Grouping marginVertical="2rem">
+          <SubHeading>Books</SubHeading>
+          <Paginate {...bookPagination} El={BookCard} />
+        </Grouping>
+        <Grouping marginVertical="2rem">
+          <SubHeading>Short Stories</SubHeading>
+          <Paginate {...storyPagination} El={StoryCard} />
+        </Grouping>
+      </LeadPage>
+    </Page>
   );
 };
 

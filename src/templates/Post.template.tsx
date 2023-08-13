@@ -1,12 +1,12 @@
-import * as React from 'react';
 import { graphql } from 'gatsby';
+import * as React from 'react';
 
-import { Grouping, LeadHeading } from '@Styles/general-components';
+import { Grouping, LeadHeading, Page } from '@Styles/general-components';
 
-import { firstWords } from '@Utils/strings';
-import { formatWpText } from '@Utils/posts';
-import { formatBlogPost } from '@Utils/blog';
 import { createBlocks, preprocessWPEntry } from '@Utils/blocks/identify-blocks';
+import { formatBlogPost } from '@Utils/blog';
+import { formatWpText } from '@Utils/posts';
+import { firstWords } from '@Utils/strings';
 
 import { WpPost } from '@Types/query';
 import { PostHeader } from '@Variants';
@@ -27,7 +27,7 @@ const Post: React.FC<WpPost> = ({ data }) => {
   const post = formatBlogPost(data.wpPost);
 
   return (
-    <>
+    <Page>
       <LeadHeading>{post.title}</LeadHeading>
       <PostHeader post={post} />
       <Grouping>
@@ -35,7 +35,7 @@ const Post: React.FC<WpPost> = ({ data }) => {
           <div key={idx}>{block}</div>
         ))}
       </Grouping>
-    </>
+    </Page>
   );
 };
 

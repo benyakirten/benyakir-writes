@@ -1,16 +1,16 @@
-import * as React from 'react';
 import { useLocation } from '@reach/router';
+import * as React from 'react';
+import { Transition, TransitionGroup } from 'react-transition-group';
 import { ThemeProvider } from 'styled-components';
-import { TransitionGroup, Transition } from 'react-transition-group';
 
 import { GlobalStyles, LayoutContainer, MainContainer } from './Layout.styles';
 import Sidebar from './Sidebar/Sidebar.component';
 
 import { getPageTransitionStyles, TIMEOUT_500 } from '@/styles/transitions';
 import { useAppDispatch, useAppSelector } from '@Store/hooks';
-import { setActiveThemeByName, intializeThemeStore } from '@Store/theme/theme.slice';
+import { intializeThemeStore, setActiveThemeByName } from '@Store/theme/theme.slice';
 
-export const Head = () => (
+export const Head: React.FC = () => (
   <>
     <html lang="en" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { LeadHeading, Grouping } from '@Styles/general-components';
+import { Grouping, LeadHeading, Page } from '@Styles/general-components';
 import { ThemeOptions } from '@Variants';
 
-export const Head = () => (
+export const Head: React.FC = () => (
   <>
     {' '}
     <title>Benyakir Writes - Themes</title>
@@ -17,12 +17,12 @@ export const Head = () => (
 
 const Theme: React.FC = () => {
   return (
-    <>
+    <Page>
       <LeadHeading>Theme Customization</LeadHeading>
       <Grouping>
         <ThemeOptions />
       </Grouping>
-    </>
+    </Page>
   );
 };
 

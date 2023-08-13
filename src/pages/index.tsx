@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { LeadHeading, BigParagraph, Subtitle, Grouping } from '@Styles/general-components';
 import { CustomLink } from '@Gen';
+import { BigParagraph, Grouping, LeadHeading, Page, Subtitle } from '@Styles/general-components';
 
-export const Head = () => (
+export const Head: React.FC = () => (
   <>
     <title>Benyakir Writes - Home</title>
     <meta
@@ -16,7 +16,7 @@ export const Head = () => (
 
 const IndexPage: React.FC = () => {
   return (
-    <>
+    <Page>
       <LeadHeading>Welcome to Benyakir Writes</LeadHeading>
       <Grouping>
         <BigParagraph>
@@ -48,7 +48,7 @@ const IndexPage: React.FC = () => {
           .
         </BigParagraph>
       </Grouping>
-    </>
+    </Page>
   );
 };
 

@@ -1,15 +1,15 @@
-import * as React from 'react';
 import { graphql } from 'gatsby';
+import * as React from 'react';
 
-import { LeadHeading, BigParagraph, Subtitle, Grouping } from '@Styles/general-components';
+import { BigParagraph, Grouping, LeadHeading, Page, Subtitle } from '@Styles/general-components';
 
-import { CustomLink, SkewRow, HoverImage } from '@Gen';
+import { CustomLink, HoverImage, SkewRow } from '@Gen';
 
 import { ICONS_TO_LINKS } from '@Constants';
 
 import { SVGImageQuery } from '@Types/query';
 
-export const Head = () => (
+export const Head: React.FC = () => (
   <>
     <title>Benyakir Writes - About</title>
     <meta
@@ -27,7 +27,7 @@ const AboutPage: React.FC<SVGImageQuery> = ({ data }) => {
       : '#',
   }));
   return (
-    <>
+    <Page>
       <Grouping>
         <LeadHeading>About</LeadHeading>
         <BigParagraph>
@@ -75,7 +75,7 @@ const AboutPage: React.FC<SVGImageQuery> = ({ data }) => {
           ))}
         </SkewRow>
       </Grouping>
-    </>
+    </Page>
   );
 };
 

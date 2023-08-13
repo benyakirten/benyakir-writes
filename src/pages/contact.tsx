@@ -1,16 +1,16 @@
 import * as React from 'react';
 
-import { ControlGroup, Form, LeadHeading, Paragraph } from '@Styles/general-components';
+import { ControlGroup, Form, LeadHeading, Page, Paragraph } from '@Styles/general-components';
 
+import { AlertBox, Button, CustomLink, Loading } from '@Gen';
 import { Text, TextArea } from '@Input';
-import { Button, Loading, AlertBox, CustomLink } from '@Gen';
 
-import { useValidation } from '@Hooks';
-import { validateByRegex, validateLength } from '@Utils/validation';
-import { encode } from '@Utils/other';
 import { EMAIL_REGEX } from '@Constants';
+import { useValidation } from '@Hooks';
+import { encode } from '@Utils/other';
+import { validateByRegex, validateLength } from '@Utils/validation';
 
-export const Head = () => (
+export const Head: React.FC = () => (
   <>
     <title>Benyakir Writes - Contact</title>
     <meta
@@ -64,7 +64,7 @@ const ContactPage: React.FC = () => {
     }
   };
   return (
-    <>
+    <Page>
       <LeadHeading>Contact</LeadHeading>
       <Paragraph>
         This form is a nice way to contact me. However, if it doesn't work, I urge you to either
@@ -96,7 +96,7 @@ const ContactPage: React.FC = () => {
           {loading ? <Loading size="1.4rem" /> : 'Submit'}
         </Button>
       </Form>
-    </>
+    </Page>
   );
 };
 

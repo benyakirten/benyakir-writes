@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Grouping } from '@Styles/general-components';
+import { Grouping, Page } from '@Styles/general-components';
 
 import { LeadPage, Paginate } from '@Layout';
 import { AllFilter } from '@Posts';
@@ -12,7 +12,7 @@ import postsJson from '@WPData/Posts/all.json';
 
 import { FlattenedBlogCard } from '@Types/posts';
 
-export const Head = () => (
+export const Head: React.FC = () => (
   <>
     <title>Benyakir Writes - Blogs</title>
     <meta
@@ -35,14 +35,16 @@ const BlogPage: React.FC = () => {
   const postPagination = usePagination<FlattenedBlogCard>(posts);
 
   return (
-    <LeadPage
-      title="Blog Posts"
-      filter={<AllFilter allPosts={posts} onFilter={postPagination.setCurrentItems} />}
-    >
-      <Grouping>
-        <Paginate {...postPagination} El={BlogCard} />
-      </Grouping>
-    </LeadPage>
+    <Page>
+      <LeadPage
+        title="Blog Posts"
+        filter={<AllFilter allPosts={posts} onFilter={postPagination.setCurrentItems} />}
+      >
+        <Grouping>
+          <Paginate {...postPagination} El={BlogCard} />
+        </Grouping>
+      </LeadPage>
+    </Page>
   );
 };
 
