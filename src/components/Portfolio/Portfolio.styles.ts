@@ -57,6 +57,12 @@ export const ProjectTitle = styled.h3`
 export const ProjectDescription = styled.p`
     text-overflow: ellipsis;
     font-size: ${FONT_MD};
+
+    a,
+    a:visited {
+        color: ${props => props.theme.base.textColor};
+        text-decoration: underline;
+    }
 `
 
 export const ProjectCardTop = styled.div`
