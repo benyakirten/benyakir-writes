@@ -1,25 +1,20 @@
 import * as React from 'react';
 
-import { Polygon, Segment1, Segment2, Wheel } from './svgs';
+import { SVGPositionData } from '@/utils/portfolio';
+import { PortfolioSVGContainer } from './Portfolio.styles';
 
-const Shapes: React.FC<{ width: number; height: number }> = () => {
+const Shapes: React.FC<{ positions: SVGPositionData[] }> = ({ positions }) => {
+  React.useEffect(() => console.log(positions), [positions]);
+  if (positions.length === 0) {
+    return null;
+  }
   return (
     <>
-      <div style={{ position: 'absolute', top: '200px', right: '200px' }}>
-        <Wheel />
-      </div>
-      <div style={{ position: 'absolute', top: '300px', left: '20px' }}>
-        <Wheel />
-      </div>
-      <div style={{ position: 'absolute', top: '100px', left: '300px' }}>
-        <Polygon />
-      </div>
-      <div style={{ position: 'absolute', top: '200px', left: '300px' }}>
-        <Segment1 />
-      </div>
-      <div style={{ position: 'absolute', top: '400px', left: '300px' }}>
-        <Segment2 />
-      </div>
+      {positions.map(({ Shape, xMovement, yMovement, xPosition, yPosition }) => (
+        <PortfolioSVGContainer xPosition={xPosition} yPosition={yPosition}>
+          <Shape xMovement={xMovement} yMovement={yMovement} />
+        </PortfolioSVGContainer>
+      ))}
     </>
   );
 };

@@ -13,7 +13,7 @@ export const Head: React.FC = () => (
     <title>Benyakir Writes - Portfolio</title>
     <meta
       name="description"
-      content="M developer portfolio, including only my best and most up-to-date projects."
+      content="My developer portfolio, including only my best and most up-to-date projects."
     />
   </>
 );

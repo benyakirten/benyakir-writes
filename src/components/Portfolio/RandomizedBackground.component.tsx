@@ -1,12 +1,11 @@
+import { createDimensionalRepresentation, SVGPositionData } from '@/utils/portfolio';
 import * as React from 'react';
 import { PortfolioBackground } from './Portfolio.styles';
 import Shapes from './Shapes.component';
 
 const RandomizedBackground: React.FC<ChildrenProp> = ({ children }) => {
-  const [size, setSize] = React.useState<{ width: number; height: number }>({
-    width: 0,
-    height: 0,
-  });
+  const [_, startTransition] = React.useTransition();
+  const [positions, setPositions] = React.useState<SVGPositionData[]>();
   React.useEffect(() => {
     const fn = () => {
       const main = document.querySelector('main');
@@ -15,18 +14,18 @@ const RandomizedBackground: React.FC<ChildrenProp> = ({ children }) => {
       }
 
       const { width, height } = main.getBoundingClientRect();
-      // console.log(`size set to ${width}, ${height}`);
-      setSize({ width, height });
+      const newPositions = createDimensionalRepresentation(width, height);
+      startTransition(() => {
+        setPositions(newPositions);
+      });
     };
 
     fn();
-    window.addEventListener('resize', fn);
-    return () => window.removeEventListener('resize', fn);
   }, []);
 
   return (
     <PortfolioBackground>
-      <Shapes {...size} />
+      <Shapes positions={positions ?? []} />
       {children}
     </PortfolioBackground>
   );

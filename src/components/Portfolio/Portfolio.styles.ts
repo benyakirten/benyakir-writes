@@ -211,3 +211,9 @@ export const PortfolioDescription = styled.p`
     font-size: ${FONT_MD};
     z-index: 1;
 `
+
+export const PortfolioSVGContainer = styled.div<{ xPosition: number, yPosition: number }>`
+    position: absolute;
+    top: ${props => props.yPosition}px;
+    left: ${props => props.xPosition}px;
+`

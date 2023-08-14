@@ -19,9 +19,12 @@ export interface ProjectGridData {
   handleMouseLeave: () => void
 }
 
-export interface SVGSize {
-  size?: number
+export interface SVGData {
+  xMovement: number,
+  yMovement: number,
 }
+
+export type SVGShapeData = SVGData & ChildrenProp
 
 export interface ProjectFiltersData {
   allTechs: string[]

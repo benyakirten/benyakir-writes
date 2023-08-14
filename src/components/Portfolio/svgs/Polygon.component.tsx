@@ -1,15 +1,15 @@
 import * as React from 'react';
 
 import { useAppSelector } from '@Store/hooks';
-import { SVGSize } from '@Types/portfolio';
+import { SVGData } from '@Types/portfolio';
 import { generatePolygonPoints } from '@Utils/svgs';
 import SVGShape from './SVGShape.component';
 
-const Polygon: React.FC<SVGSize> = ({ size }) => {
-  const points = React.useMemo(() => generatePolygonPoints(), []);
+const Polygon: React.FC<SVGData> = ({ xMovement, yMovement }) => {
+  const [points] = React.useState(generatePolygonPoints());
   const themeStore = useAppSelector((root) => root.theme);
   return (
-    <SVGShape size={size}>
+    <SVGShape xMovement={xMovement} yMovement={yMovement}>
       <polygon
         points={points}
         fill="none"

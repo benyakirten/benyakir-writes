@@ -1,13 +1,13 @@
 import * as React from 'react';
 
 import { useAppSelector } from '@Store/hooks';
-import { SVGSize } from '@Types/portfolio';
+import { SVGData } from '@Types/portfolio';
 import SVGLine from './SVGLine.component';
 
-const Segment1: React.FC<SVGSize> = ({ size }) => {
+const Segment1: React.FC<SVGData> = ({ xMovement, yMovement }) => {
   const themeStore = useAppSelector((root) => root.theme);
   return (
-    <SVGLine size={size}>
+    <SVGLine xMovement={xMovement} yMovement={yMovement}>
       <path
         d="M20,50 C40,10 60,90 80,50 S120,10 140,50 C160,90 180,10 200,50"
         fill="none"
