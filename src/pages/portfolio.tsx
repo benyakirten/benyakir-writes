@@ -23,18 +23,19 @@ const Portfolio: React.FC<PortfolioQuery> = ({ data }) => {
 
   // Refactor this to a util
   const projects = React.useMemo(() => {
-    const mappedProjects = data.allWpProject.nodes.map((node) => ({
-      title: node.title,
-      description: getFirstParagraphOfContent(node.content),
-      ...node.project,
-      firstReleased: new Date(node.project.firstReleased),
-      technologies: node.project.technologies.split(', '),
-    }));
-    // .filter(
-    //   (node) =>
-    //     node.title === 'Benyakir Writes' ||
-    //     node.firstReleased.valueOf() > new Date('2023-01-01').valueOf(),
-    // );
+    const mappedProjects = data.allWpProject.nodes
+      .map((node) => ({
+        title: node.title,
+        description: getFirstParagraphOfContent(node.content),
+        ...node.project,
+        firstReleased: new Date(node.project.firstReleased),
+        technologies: node.project.technologies.split(', '),
+      }))
+      .filter(
+        (node) =>
+          node.title === 'Benyakir Writes' ||
+          node.firstReleased.valueOf() > new Date('2023-01-01').valueOf(),
+      );
     return mappedProjects;
   }, [data]);
 
@@ -62,11 +63,14 @@ const Portfolio: React.FC<PortfolioQuery> = ({ data }) => {
     <>
       <PortfolioHeader>
         <PortfolioDescription>
-          Once upon a time, I studied languages and linguistics. Then I began learning programming
-          on my own. I am now a <strong>frontend developer</strong> with experience in{' '}
+          My name is <strong>Benyakir Horowitz</strong>. Once upon a time, I studied linguistics and
+          Italian. Then I began learning programming in 2020 during the pandemic. I am now a{' '}
+          <strong>frontend developer</strong> with experience in{' '}
           <strong>every step of the process</strong>, from design to implementation, from rapid
-          iteration to long-term maintenance, from <strong>concept to creation</strong>. If you're
-          looking for all my personal projects, it has been removed to{' '}
+          iteration to long-term maintenance, from <strong>concept to creation</strong>. This page
+          only contains my latest projects I want to showcase. The list is short since I haven't had
+          much opportunity to work on them in awhile, which I hope to change. If you're looking for
+          all my personal projects, it has been moved to{' '}
           <CustomLink to="/author/all-projects">All Projects</CustomLink>.
         </PortfolioDescription>
         <ProjectFilters allTechs={allTechs} viewedTechs={viewedTechs} onToggle={toggleTech} />
