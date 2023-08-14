@@ -1,10 +1,10 @@
+import { GatsbyImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
-import { GatsbyImage } from 'gatsby-plugin-image'
 
+import { convertHexToRGBA } from '@Utils/colors';
 import { fadeIn, slideInLeft, slideInRight } from './animations';
 import { media } from './queries';
 import { BLACK, FAUSTINA, FONT_LG, FONT_MD, FONT_XL, FONT_XXL, FONT_XXXL, SECONDARY_800, SHADOW_MD_BALANCED, SIZE_MD } from './variables';
-import { convertHexToRGBA } from '@Utils/colors';
 
 export const FadeIn = styled.div<{ duration?: string, delay?: string }>`
     opacity: 0;
@@ -460,5 +460,12 @@ export const WpContentInline = styled.span<{ fontSize?: string }>`
 
     p {
         margin: 0.25rem 0;
+    }
+`
+
+export const Page = styled.div`
+    padding: 2rem 4rem;
+    ${media.tablet} {
+        padding: 1rem 2rem;
     }
 `

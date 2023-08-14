@@ -1,14 +1,14 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { Foldout, CustomLink } from "@Gen";
+import { Foldout, CustomLink } from '@Gen';
 
-import { capitalize, titleToKebab } from "@Utils/strings";
+import { capitalize, titleToKebab } from '@Utils/strings';
 
 const LinkGroup: React.FC<LinkGroupProps> = ({
   open = false,
   domain,
   links,
-  height = "4rem",
+  height = '4rem',
   onClick,
   children,
   tabIndex = 0,
@@ -28,12 +28,12 @@ const LinkGroup: React.FC<LinkGroupProps> = ({
       {links.map((l) => (
         <CustomLink
           tabIndex={tabIndex}
-          key={typeof l === "string" ? l : l.name}
+          key={typeof l === 'string' ? l : l.name}
           small
-          underbarSize="70%"
-          to={`/${domain}/${titleToKebab(typeof l === "string" ? l : l.link)}/`}
+          underbarsize="70%"
+          to={`/${domain}/${titleToKebab(typeof l === 'string' ? l : l.link)}/`}
         >
-          {typeof l === "string" ? l : l.name}
+          {typeof l === 'string' ? l : l.name}
         </CustomLink>
       ))}
       {children}

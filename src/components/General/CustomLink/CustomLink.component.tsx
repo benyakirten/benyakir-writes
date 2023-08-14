@@ -12,9 +12,9 @@ const CustomLink: React.FC<LinkProps> = ({
   children,
   outside = false,
   inline = false,
-  limitUnderbar = false,
-  underbarSize,
-  wholeLine = false,
+  limitunderbar = false,
+  underbarsize,
+  wholeline = false,
 }) => {
   const linkProps = {
     tabIndex,
@@ -23,9 +23,9 @@ const CustomLink: React.FC<LinkProps> = ({
     active,
     dark,
     inheritColor,
-    limitUnderbar,
-    underbarSize,
-    wholeLine,
+    limitunderbar,
+    underbarsize,
+    wholeline,
   };
   return (
     <>

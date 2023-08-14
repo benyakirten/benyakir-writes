@@ -84,9 +84,10 @@ const Sidebar: React.FC = () => {
               links={authorLinks}
               open={openDropdown === 'author'}
               onClick={() => setOpenDropdown('author')}
+              height="7rem"
               tabIndex={openDropdown === 'author' ? 0 : -1}
             />
-            <CustomLink tabIndex={open ? 0 : -1} to="/portfolio" underbarSize="12rem">
+            <CustomLink tabIndex={open ? 0 : -1} to="/portfolio" underbarsize="12rem">
               Portfolio
             </CustomLink>
           </NavGroup>
@@ -98,7 +99,7 @@ const Sidebar: React.FC = () => {
               <CustomLink
                 key={typeof linkItem === 'string' ? linkItem : linkItem.link}
                 tabIndex={open ? 0 : -1}
-                underbarSize="12rem"
+                underbarsize="12rem"
                 to={`/${typeof linkItem === 'string' ? linkItem : linkItem.link}`}
               >
                 {capitalize(typeof linkItem === 'string' ? linkItem : linkItem.name)}

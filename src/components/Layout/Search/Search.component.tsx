@@ -3,11 +3,11 @@ import * as React from 'react';
 import { Centered, Column, SubHeading } from '@Styles/general-components';
 import { ResultsContainer, SingleResult } from './Search.styles';
 
-import { Text, Checkbox } from '@Input';
-import { Foldout, CustomLink } from '@Gen';
+import { CustomLink, Foldout, Loading } from '@Gen';
+import { Checkbox, Text } from '@Input';
 
-import { useLookup, useDebounce } from '@Hooks';
-import { firstWords, capitalize } from '@Utils/strings';
+import { useDebounce, useLookup } from '@Hooks';
+import { capitalize, firstWords } from '@Utils/strings';
 
 import data from '@Data/searchData.json';
 
@@ -16,6 +16,7 @@ import { SearchableItem } from '@Types/posts';
 const Search: React.FC<SearchProps> = ({ open, onClick }) => {
   const allResults = React.useMemo<SearchableItem[]>(() => data, [data]);
 
+  const [pending, startTransition] = React.useTransition();
   const [search, setSearch] = useDebounce(filterResults);
   const [filteredResults, setFilteredResults] = React.useState<SearchableItem[]>([]);
 
@@ -37,7 +38,10 @@ const Search: React.FC<SearchProps> = ({ open, onClick }) => {
     const _search = val.toLowerCase().split(' ');
     if (!val) setFilteredResults([]);
     const _results = allResults.filter((r) => showState[r.type] && _search.every((s) => r.meta[s]));
-    setFilteredResults(_results);
+
+    startTransition(() => {
+      setFilteredResults(_results);
+    });
   }
 
   React.useEffect(() => {
@@ -91,7 +95,9 @@ const Search: React.FC<SearchProps> = ({ open, onClick }) => {
         />
       </div>
       <ResultsContainer resultLength={filteredResults.length}>
-        {filteredResults.length === 0 ? (
+        {pending ? (
+          <Loading />
+        ) : filteredResults.length === 0 ? (
           <Centered>No results yet!</Centered>
         ) : (
           <>

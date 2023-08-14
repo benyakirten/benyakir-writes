@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { LeadHeading, BigParagraph, Subtitle, Grouping } from '@Styles/general-components';
+import { BigParagraph, Grouping, LeadHeading, Page, Subtitle } from '@Styles/general-components';
 
-export const Head = () => (
+export const Head: React.FC = () => (
   <>
     <title>Benyakir Writes - Privacy</title>
     <meta
@@ -15,7 +15,7 @@ export const Head = () => (
 
 const PrivacyPage: React.FC = () => {
   return (
-    <>
+    <Page>
       <Grouping>
         <LeadHeading>Privacy Policy</LeadHeading>
         <BigParagraph>
@@ -41,7 +41,7 @@ const PrivacyPage: React.FC = () => {
           information, however, will remain between us.
         </BigParagraph>
       </Grouping>
-    </>
+    </Page>
   );
 };
 

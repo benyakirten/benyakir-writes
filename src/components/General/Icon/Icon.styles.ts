@@ -1,6 +1,4 @@
-import styled from 'styled-components'
-
-import { multiplyCSSNumber } from '@Utils/strings'
+import styled, { css } from 'styled-components'
 
 import { FONT_XS, Z_ABOVE } from '@StyleVars'
 
@@ -12,10 +10,10 @@ export const IconContainer = styled.div<{ height: string }>`
     justify-content: center;
     align-items: center;
 
-    height: ${props => multiplyCSSNumber(props.height, 5 / 3)};
+    height: ${props => css`calc(${props.height} * 5 / 3)`};
 
-    margin-bottom: ${props => multiplyCSSNumber(props.height, 1 / 6)};
-    margin-right: ${props => multiplyCSSNumber(props.height, 1 / 3)};
+    margin-bottom: ${props => css`calc(${props.height} / 6)`};
+    margin-right: ${props => css`calc(${props.height} / 3)`};
 
     background-color: ${props => props.theme.icon.default.background};
 
@@ -41,8 +39,8 @@ export const IconContainer = styled.div<{ height: string }>`
     &:hover {
         div {
             z-index: ${Z_ABOVE};
-            height: ${props => multiplyCSSNumber(props.height, 10 / 3)};
-            width: ${props => multiplyCSSNumber(props.height, 10 / 3)};
+            height: ${props => css`calc(${props.height} * 10 / 3)`};
+            width: ${props => css`calc(${props.height} * 10 / 3)`};
         }
 
         img {
@@ -53,7 +51,7 @@ export const IconContainer = styled.div<{ height: string }>`
         span {
             color: ${props => props.theme.icon.hover.textColor};
             z-index: ${Z_ABOVE};
-            top: ${props => multiplyCSSNumber(props.height, 2 / 3)};
+            top: ${props => css`calc(${props.height} * 2 / 3)`};
         }
     }
 `

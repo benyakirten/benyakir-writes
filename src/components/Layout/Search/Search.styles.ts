@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
-import { FONT_MD } from '@StyleVars'
 import { media } from '@Styles/queries'
+import { FONT_MD } from '@StyleVars'
 
 export const ResultsContainer = styled.div<{ resultLength?: number }>`
     cursor: default;
@@ -12,12 +12,14 @@ export const ResultsContainer = styled.div<{ resultLength?: number }>`
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 90%;
 
     max-height: ${props => props.resultLength && props.resultLength > 1 ? '13rem' : '6.5rem'};
     
     border: 2px solid ${props => props.theme.searchBox.border};
     background-color: ${props => props.theme.searchBox.background};
     color: ${props => props.theme.searchBox.textColor};
+    padding: 0.5rem;
 
     transition: all 400ms ease;
     ${media.reducedMotion} {

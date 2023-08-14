@@ -1,14 +1,15 @@
-import * as React from 'react';
 import { graphql } from 'gatsby';
+import * as React from 'react';
 
-import { Grouping, LeadHeading, WpContent } from '@Styles/general-components';
+import { Grouping, LeadHeading, Page, WpContent } from '@Styles/general-components';
 import { ProjectHeader } from '@Variants';
 
-import { getFullTechName, formatProject } from '@Utils/project';
-import { firstWords } from '@Utils/strings';
-import { formatWpText } from '@Utils/posts';
 import { getPrettyDate } from '@Utils/dates';
+import { formatWpText } from '@Utils/posts';
+import { formatProject, getFullTechName } from '@Utils/project';
+import { firstWords } from '@Utils/strings';
 
+import { useFetchRepoUpdatedDate } from '@/hooks';
 import { WpProject } from '@Types/query';
 
 export const Head: React.FC<WpProject> = ({ data }) => {
@@ -35,44 +36,15 @@ const Project: React.FC<WpProject> = ({ data }) => {
     .filter((f) => project.shortTechnologies.includes(f.name))
     .map((f) => ({ ...f, name: getFullTechName(f.name) }));
 
-  const [latestUpdate, setLatestUpdate] = React.useState<Date>();
-  const [err, setErr] = React.useState<string>();
-  const [loading, setLoading] = React.useState<boolean>(false);
-
-  React.useEffect(() => {
-    async function fetchLatestUpdate(repo: string) {
-      setLoading(true);
-      try {
-        const res = await fetch(repo);
-        if (!res.ok) {
-          return setErr('Unable to fetch data');
-        }
-        const data = await res.json();
-        setLatestUpdate(new Date(data.pushed_at));
-      } catch (e) {
-        setErr('Unable to fetch data');
-      } finally {
-        setLoading(false);
-      }
-    }
-    if (project.repoLink) {
-      fetchLatestUpdate(project.repoLink.replace('github.com/', 'api.github.com/repos/'));
-    }
-  }, []);
+  const latestUpdateState = useFetchRepoUpdatedDate(project.repoLink);
   return (
-    <>
+    <Page>
       <LeadHeading>{project.title}</LeadHeading>
-      <ProjectHeader
-        project={project}
-        icons={icons}
-        latestUpdate={latestUpdate}
-        loading={loading}
-        err={err}
-      />
+      <ProjectHeader project={project} icons={icons} latestUpdateState={latestUpdateState} />
       <Grouping>
         <WpContent dangerouslySetInnerHTML={{ __html: project.content! }} />
       </Grouping>
-    </>
+    </Page>
   );
 };
 

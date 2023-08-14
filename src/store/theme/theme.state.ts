@@ -23,7 +23,7 @@ export const defaultDayTheme: BaseTheme = {
     useGradient: true,
     primaryColorEnd: 70,
     secondaryColor: "#FDF3D8",
-    shadowColor: "#000000" 
+    shadowColor: "#000000"
   },
   paginate: {
     textColor: "#000000",
@@ -98,6 +98,13 @@ export const defaultDayTheme: BaseTheme = {
     offColor: "#993d4d",
     offBackground: '#FDE6B0',
     border: '#000000'
+  },
+  portfolio: {
+    gradient: {
+      color1: "#FEFDF3",
+      color2: "#FEF8E3",
+      color3: "#FEF4E1",
+    }
   }
 }
 
@@ -201,6 +208,13 @@ export const defaultNightTheme: BaseTheme = {
     offColor: "#993d4d",
     offBackground: '#FDE6B0',
     border: '#D8E2FD'
+  },
+  portfolio: {
+    gradient: {
+      color1: "#111B33",
+      color2: "#23314D",
+      color3: "#394860",
+    }
   }
 }
 

@@ -1,12 +1,12 @@
-import * as React from 'react';
 import { graphql } from 'gatsby';
+import * as React from 'react';
 
-import { LeadHeading, Grouping, WpContent, Subtitle } from '@Styles/general-components';
+import { Grouping, LeadHeading, Page, Subtitle, WpContent } from '@Styles/general-components';
 
 import { flattenBook } from '@Utils/author';
+import { getPrettyDate } from '@Utils/dates';
 import { formatWpText } from '@Utils/posts';
 import { firstWords } from '@Utils/strings';
-import { getPrettyDate } from '@Utils/dates';
 
 import { WpBook } from '@Types/query';
 import { BookHeader } from '@Variants';
@@ -30,14 +30,14 @@ export const Head: React.FC<WpBook> = ({ data }) => {
 const Book: React.FC<WpBook> = ({ data }) => {
   const book = flattenBook(data.wpBook, data.file.publicURL);
   return (
-    <>
+    <Page>
       <LeadHeading>{book.title}</LeadHeading>
       <BookHeader book={book} />
       <Grouping>
         <Subtitle>The Book</Subtitle>
         <WpContent dangerouslySetInnerHTML={{ __html: book.content }} />
       </Grouping>
-    </>
+    </Page>
   );
 };
 

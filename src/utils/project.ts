@@ -50,7 +50,6 @@ export function createMetaForProject(project: PartialFlattenedProject) {
 }
 
 export function getFullTechName(tech: string) {
-  console.log(tech)
   switch (tech.toLowerCase()) {
     case "html":
       return "HTML";
@@ -92,7 +91,18 @@ export function getFullTechName(tech: string) {
       return "Golang";
     case "ex":
       return "Elixir";
+    case "ws":
+      return "WebSockets"
     default:
       return tech;
   }
+}
+
+/**
+ * Given an amount of WP content split into paragraphs, take the first paragraph of content
+ * without the html tags
+ */
+export const getFirstParagraphOfContent = (content: string) => {
+  const [firstParagraph] = content.split("</p>")
+  return firstParagraph.replace(/<p>/g, "")
 }

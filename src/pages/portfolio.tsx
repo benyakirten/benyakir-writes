@@ -1,73 +1,111 @@
+import { graphql } from 'gatsby';
 import * as React from 'react';
 
-import { BigParagraph, Grouping } from '@Styles/general-components';
+import { CustomLink } from '@/components/General';
+import { ProjectFilters, ProjectGrid, RandomizedBackground } from '@/components/Portfolio';
+import { PortfolioDescription, PortfolioHeader } from '@/components/Portfolio/Portfolio.styles';
+import { useSet } from '@/hooks';
+import { getFirstParagraphOfContent } from '@/utils/project';
+import { PortfolioQuery } from '@Types/query';
 
-import { LeadPage, Paginate } from '@Layout';
-import { ProjectCard } from '@Variants';
-import { ProjectFilter } from '@Posts';
-import { CustomLink } from '@Gen';
-
-import { usePagination } from '@Hooks';
-
-import projectsJson from '@WPData/Projects/projects.json';
-import projectsMisc from '@WPData/Projects/misc.json';
-
-import { FlattenedProjectCard } from '@Types/posts';
-
-export const Head = () => (
+export const Head: React.FC = () => (
   <>
     <title>Benyakir Writes - Portfolio</title>
     <meta
       name="description"
-      content="A view of all of my completed projects with various details. They can be sorted by a variety of means,
-                    including dynamically-generated criteria such as web hosts and what technologies are used to power them."
+      content="My developer portfolio, including only my best and most up-to-date projects."
     />
   </>
 );
 
-const ProjectsPage: React.FC = () => {
-  const allHosts = React.useMemo<string[]>(() => projectsMisc.hosts, [projectsMisc]);
-  const allTechs = React.useMemo<string[]>(() => projectsMisc.longTechs, [projectsMisc]);
+const Portfolio: React.FC<PortfolioQuery> = ({ data }) => {
+  const ghIcon = data.file.publicURL;
 
-  // JSON stringify makes a date into a string - so we need to convert it back
-  const preparedProjects = React.useMemo<FlattenedProjectCard[]>(
-    () =>
-      projectsJson.map((p: FlattenedProjectCard) => ({
-        ...p,
-        firstReleased: {
-          ...p.firstReleased,
-          date: new Date(p.firstReleased.date),
-        },
-      })),
-    [projectsJson],
+  // Refactor this to a util
+  const projects = React.useMemo(() => {
+    const mappedProjects = data.allWpProject.nodes.map((node) => ({
+      title: node.title,
+      description: getFirstParagraphOfContent(node.content),
+      ...node.project,
+      firstReleased: new Date(node.project.firstReleased),
+      technologies: node.project.technologies.split(', '),
+    }));
+    // .filter(
+    //   (node) =>
+    //     node.title === 'Benyakir Writes' ||
+    //     node.firstReleased.valueOf() > new Date('2023-01-01').valueOf(),
+    // );
+    return mappedProjects;
+  }, [data]);
+
+  const allTechs = React.useMemo(
+    () => [...new Set(projects.flatMap((project) => project.technologies))],
+    [projects],
   );
 
-  const projectPagination = usePagination<FlattenedProjectCard>(preparedProjects);
+  const [viewedTechs, toggleTech] = useSet(allTechs);
+  const [hovered, setHovered] = React.useState<string | null>(null);
+
+  const [_, startTransition] = React.useTransition();
+  const [filteredProjects, setFilteredProjects] = React.useState(projects);
+  React.useEffect(() => {
+    const _filteredProjects =
+      viewedTechs.size === 0
+        ? projects
+        : projects.filter((project) => project.technologies.some((tech) => viewedTechs.has(tech)));
+    startTransition(() => {
+      setFilteredProjects(_filteredProjects);
+    });
+  }, [viewedTechs, projects]);
 
   return (
-    <LeadPage
-      title="Projects"
-      filter={
-        <ProjectFilter
-          allProjects={preparedProjects}
-          allHosts={allHosts}
-          allTechs={allTechs}
-          onFilter={projectPagination.setCurrentItems}
+    <>
+      <PortfolioHeader>
+        <PortfolioDescription>
+          Once upon a time, I studied languages and linguistics. Then I began learning programming
+          on my own. I am now a <strong>frontend developer</strong> with experience in{' '}
+          <strong>every step of the process</strong>, from design to implementation, from rapid
+          iteration to long-term maintenance, from <strong>concept to creation</strong>. If you're
+          looking for all my personal projects, it has been removed to{' '}
+          <CustomLink to="/author/all-projects">All Projects</CustomLink>.
+        </PortfolioDescription>
+        <ProjectFilters allTechs={allTechs} viewedTechs={viewedTechs} onToggle={toggleTech} />
+      </PortfolioHeader>
+      <RandomizedBackground>
+        <ProjectGrid
+          projects={filteredProjects}
+          ghIcon={ghIcon}
+          hovered={hovered}
+          handleMouseEnter={(title) => setHovered(title)}
+          handleMouseLeave={() => setHovered(null)}
+          viewedTechs={viewedTechs}
         />
-      }
-    >
-      <BigParagraph marginVertical="2rem">
-        I am a fullstack engineer with a focus on frontend. I have experience with normal JavaScript
-        as well as Angular, React, Vue, Svelte and their JAMStack equivalents, such as Gatsby and
-        SvelteKit. I use different techniques and technologies for each of my projects so I'm always
-        learning something new and have a wide arsenal of tools available. If you want to hire me
-        for a project, visit the <CustomLink to="/contact">contact page</CustomLink>.
-      </BigParagraph>
-      <Grouping>
-        <Paginate {...projectPagination} El={ProjectCard} />
-      </Grouping>
-    </LeadPage>
+      </RandomizedBackground>
+    </>
   );
 };
 
-export default ProjectsPage;
+export const query = graphql`
+  query MyQuery {
+    file(name: { eq: "Github" }) {
+      publicURL
+    }
+    allWpProject {
+      nodes {
+        project {
+          technologies
+          mainLink
+          repoLink
+          hostedOn
+          firstReleased
+          latestUpdate
+        }
+        title
+        content
+        slug
+      }
+    }
+  }
+`;
+
+export default Portfolio;

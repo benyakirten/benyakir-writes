@@ -1,15 +1,15 @@
-import * as React from 'react';
 import { graphql } from 'gatsby';
+import * as React from 'react';
 
-import { LeadHeading, WpContent, Grouping, Subtitle } from '@Styles/general-components';
+import { Grouping, LeadHeading, Page, Subtitle, WpContent } from '@Styles/general-components';
 
 import { flattenStory } from '@/utils/author';
 import { getPrettyDate } from '@Utils/dates';
 import { formatWpText } from '@Utils/posts';
 import { firstWords } from '@Utils/strings';
 
-import { WpStory } from '@Types/query';
 import ShortStoryHeader from '@/components/Variants/Headers/ShortStoryHeader.component';
+import { WpStory } from '@Types/query';
 
 export const Head: React.FC<WpStory> = ({ data }) => {
   const story = flattenStory(data.wpShortstory, data.file.publicURL);
@@ -29,14 +29,14 @@ export const Head: React.FC<WpStory> = ({ data }) => {
 const Story: React.FC<WpStory> = ({ data }) => {
   const story = flattenStory(data.wpShortstory, data.file.publicURL);
   return (
-    <>
+    <Page>
       <LeadHeading>{story.title}</LeadHeading>
       <ShortStoryHeader story={story} />
       <Grouping>
         <Subtitle>The Story</Subtitle>
         <WpContent dangerouslySetInnerHTML={{ __html: story.content }} />
       </Grouping>
-    </>
+    </Page>
   );
 };
 

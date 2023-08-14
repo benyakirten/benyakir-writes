@@ -56,7 +56,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ item }) => {
                     </MinorHeading>
                     <Paragraph style={{ margin: '0' }}>
                       {item.categories.map((cat) => (
-                        <CustomLink wholeLine to={`/blog/${titleToKebab(cat)}`} key={cat}>
+                        <CustomLink wholeline to={`/blog/${titleToKebab(cat)}`} key={cat}>
                           {cat}
                         </CustomLink>
                       ))}

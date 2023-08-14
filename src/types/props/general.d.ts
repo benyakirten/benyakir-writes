@@ -1,19 +1,24 @@
-type ButtonProps = {
+interface ChildrenProp {
+  children?: React.ReactNode
+}
+
+type ButtonProps = ChildrenProp & {
   type?: 'submit' | 'button';
   disabled?: boolean;
   onClick?: () => void;
   tabIndex?: number;
+  children?: React.ReactNode
 }
 
 type LoadingProps = {
   size?: string;
 }
 
-type AlertBoxProps = {
+type AlertBoxProps = ChildrenProp & {
   success?: boolean;
 }
 
-type LinkProps = {
+type LinkProps = ChildrenProp & {
   to: string;
   active?: boolean;
   dark?: boolean;
@@ -21,10 +26,10 @@ type LinkProps = {
   outside?: boolean;
   inheritColor?: boolean;
   inline?: boolean;
-  limitUnderbar?: boolean;
-  underbarSize?: string;
+  limitunderbar?: boolean;
+  underbarsize?: string;
   tabIndex?: number;
-  wholeLine?: boolean
+  wholeline?: boolean
 }
 type LayoutProps = {
   path: string;
@@ -40,7 +45,7 @@ type DownArrowProps = OpenProps & {
   onClick?: (e: React.BaseSyntheticEvent) => void;
 }
 
-type FoldoutProps = OpenProps & {
+type FoldoutProps = ChildrenProp & OpenProps & {
   onClick: () => void;
   topbar: ReactElement;
   height?: string;
@@ -50,7 +55,7 @@ type FoldoutProps = OpenProps & {
   cyId?: string;
 }
 
-type LinkGroupProps = OpenProps & {
+type LinkGroupProps = OpenProps & ChildrenProp & {
   domain: string;
   height?: string;
   links: LinkItem[];

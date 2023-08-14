@@ -8,7 +8,7 @@ export const HighlighterContainer = styled.div`
 
     display: flex;
     flex-direction: column;
-    box-shadow: box-shadow: ${props => `${SHADOW_MD} ${convertHexToRGBA(props.theme.base.shadowColor, 0.4)}`};;
+    box-shadow: ${props => `${SHADOW_MD} ${convertHexToRGBA(props.theme.base.shadowColor, 0.4)}`};
     padding: 0.5rem 1rem;
     margin: 2rem 0;
 `

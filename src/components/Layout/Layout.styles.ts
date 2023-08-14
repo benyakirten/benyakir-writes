@@ -1,7 +1,7 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
-import { MULISH } from '@StyleVars';
 import { media } from '@Styles/queries';
+import { MULISH } from '@StyleVars';
 
 export const GlobalStyles = createGlobalStyle`
     *,
@@ -78,14 +78,7 @@ export const LayoutContainer = styled.div`
 
 export const MainContainer = styled.main`
     position: relative;
-
     width: 100%;
-    padding: 2rem 4rem;
-    ${media.tablet} {
-        padding: 1rem 2rem;
-    }
-    
     background-color: ${props => props.theme.base.background};
-
     overflow: hidden;
 `;

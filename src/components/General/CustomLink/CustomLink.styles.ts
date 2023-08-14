@@ -13,9 +13,9 @@ export const StyledLink = styled(Link) <{
     dark: boolean,
     small: boolean,
     inline: boolean,
-    wholeLine: boolean,
-    limitUnderbar: boolean,
-    underbarSize?: string,
+    wholeline: boolean,
+    limitunderbar: boolean,
+    underbarsize?: string,
     inheritColor?: boolean
 }>`
     position: relative;
@@ -23,7 +23,7 @@ export const StyledLink = styled(Link) <{
     text-overflow: ellipsis;
 
     text-decoration: none;
-    display: ${props => props.wholeLine ? 'block' : 'inline'};
+    display: ${props => props.wholeline ? 'block' : 'inline'};
     
     color: ${props => props.inheritColor ? 'inherit' : props.inline ? props.theme.link.inline : props.dark ? props.theme.link.dark : props.theme.link.normal};
     font-size: ${props => props.small ? FONT_LG : 'inherit'};
@@ -37,8 +37,8 @@ export const StyledLink = styled(Link) <{
         bottom: 0;
         left: 0;
 
-        width: ${props => props.limitUnderbar ? '90%' : '100%'};
-        ${props => props.underbarSize && `width ${props.underbarSize};`}
+        width: ${props => props.limitunderbar ? '90%' : '100%'};
+        ${props => props.underbarsize && `width ${props.underbarsize};`}
         height: 2px;
 
         background-color: ${props => props.inline ? props.theme.link.inline : props.dark ? props.theme.link.dark : props.theme.link.normal};;
@@ -68,15 +68,15 @@ export const OutsideLink = styled.a<{
     dark: boolean,
     small: boolean,
     inline: boolean,
-    limitUnderbar: boolean,
-    underbarSize?: string,
+    limitunderbar: boolean,
+    underbarsize?: string,
     inheritColor?: boolean,
-    wholeLine?: boolean
+    wholeline?: boolean
 }>`
     position: relative;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: ${props => props.wholeLine ? 'block' : 'inline'};
+    display: ${props => props.wholeline ? 'block' : 'inline'};
 
     transition: color 400ms ease;
     color: ${props => props.inheritColor ? 'inherit' : props.inline ? props.theme.link.inline : props.dark ? props.theme.link.dark : props.theme.link.normal};;
@@ -91,8 +91,8 @@ export const OutsideLink = styled.a<{
         bottom: 0;
         left: 0;
 
-        width: ${props => props.limitUnderbar ? '80%' : '100%'};
-        ${props => props.underbarSize && `width: ${props.underbarSize};`}
+        width: ${props => props.limitunderbar ? '80%' : '100%'};
+        ${props => props.underbarsize && `width: ${props.underbarsize};`}
         height: 2px;
 
         background-color: ${props => props.inline ? props.theme.link.inline : props.dark ? props.theme.link.dark : props.theme.link.normal};;
