@@ -51,48 +51,50 @@ export function createMetaForProject(project: PartialFlattenedProject) {
 
 export function getFullTechName(tech: string) {
   switch (tech.toLowerCase()) {
-    case "html":
-      return "HTML";
-    case "css":
-      return "CSS";
-    case "sass":
-      return "Sass";
-    case "js":
-      return "JavaScript";
-    case "ts":
-      return "TypeScript";
-    case "py":
-      return "Python";
-    case "php":
-      return "PHP";
-    case "wp":
-      return "WordPress";
-    case "ng":
-      return "Angular";
-    case "swift":
-      return "Swift";
-    case "react":
-      return "React";
-    case "vue":
-      return "Vue";
-    case "cs":
-      return "C#";
-    case "unity":
-      return "Unity";
-    case "ml":
-      return "Machine Learning";
-    case "svelte":
-      return "Svelte";
-    case "gql":
-      return "GraphQL";
-    case "tw":
-      return "Tailwind";
-    case "go":
-      return "Golang";
-    case "ex":
-      return "Elixir";
-    case "ws":
-      return "WebSockets"
+    case 'html':
+      return 'HTML';
+    case 'css':
+      return 'CSS';
+    case 'sass':
+      return 'Sass';
+    case 'js':
+      return 'JavaScript';
+    case 'ts':
+      return 'TypeScript';
+    case 'py':
+      return 'Python';
+    case 'php':
+      return 'PHP';
+    case 'wp':
+      return 'WordPress';
+    case 'ng':
+      return 'Angular';
+    case 'swift':
+      return 'Swift';
+    case 'react':
+      return 'React';
+    case 'vue':
+      return 'Vue';
+    case 'cs':
+      return 'C#';
+    case 'unity':
+      return 'Unity';
+    case 'ml':
+      return 'Machine Learning';
+    case 'svelte':
+      return 'Svelte';
+    case 'gql':
+      return 'GraphQL';
+    case 'tw':
+      return 'Tailwind';
+    case 'go':
+      return 'Golang';
+    case 'ex':
+      return 'Elixir';
+    case 'ws':
+      return 'Web Sockets'
+    case "wip":
+      return 'Under Construction'
     default:
       return tech;
   }

@@ -102,7 +102,7 @@ export const getFullLanguage: DecodeLanguage = lang => {
     case 'elixir':
       return 'Elixir';
     case 'go':
-      return "Golang"
+      return 'Golang';
     default:
       return 'JavaScript';
   }
