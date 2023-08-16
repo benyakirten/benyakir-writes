@@ -279,7 +279,7 @@ const themeSlice = createSlice({
       if (!finalAccessor) {
         return
       }
-      
+
       const finalProp = props[props.length - 1]
       finalAccessor[finalProp] = newVal
       if (state.active.id === id) {

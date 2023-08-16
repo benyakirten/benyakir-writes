@@ -115,7 +115,7 @@ export const defaultNightTheme: BaseTheme = {
     textColor: '#FFFFFF',
     background: '#111B33',
     border: '#343a40',
-    shadowColor: '#FFFFFF',
+    shadowColor: '#647DA2',
     disabled: '#e9ecef',
     highlighted: '#35F58F'
   },
