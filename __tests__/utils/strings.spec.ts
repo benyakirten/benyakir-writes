@@ -6,45 +6,44 @@ describe('strings util', () => {
       const expectations = [
         {
           title: 'title',
-          kebab: 'title'
+          kebab: 'title',
         },
         {
           title: 'Title Two',
-          kebab: 'title-two'
+          kebab: 'title-two',
         },
         {
-          title: 'Bob\'s BIG BURGER\'s big STAND\'s burger craze',
-          kebab: 'bobs-big-burgers-big-stands-burger-craze'
+          title: "Bob's BIG BURGER's big STAND's burger craze",
+          kebab: 'bobs-big-burgers-big-stands-burger-craze',
         },
         {
-          title: 'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb',
-          kebab: 'dr-strangelove-or-how-i-learned-to-stop-worrying-and-love-the-bomb'
+          title:
+            'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb',
+          kebab:
+            'dr-strangelove-or-how-i-learned-to-stop-worrying-and-love-the-bomb',
         },
         {
           title: 'tIItle  three',
-          kebab: 'tiitle-three'
+          kebab: 'tiitle-three',
         },
         {
           title: 'tIItle        four',
-          kebab: 'tiitle-four'
+          kebab: 'tiitle-four',
         },
         {
           title: '     tIItle  five    ',
-          kebab: 'tiitle-five'
-        }
+          kebab: 'tiitle-five',
+        },
       ]
       for (let expectation of expectations) {
-        expect(strings.titleToKebab(expectation.title)).toEqual(expectation.kebab)
+        expect(strings.titleToKebab(expectation.title)).toEqual(
+          expectation.kebab
+        )
       }
     })
 
     it('should throw exceptions for bad inputs', () => {
-      const badInput = [
-        '      ',
-        '\'\'\'\'\'',
-        '     \'   \'    \' ',
-        ':  ! @ #  ***'
-      ]
+      const badInput = ['      ', "'''''", "     '   '    ' ", ':  ! @ #  ***']
       for (let input of badInput) {
         expect(() => strings.titleToKebab(input)).toThrow()
       }
@@ -56,27 +55,33 @@ describe('strings util', () => {
         {
           input: {
             sentence: 'a long sentence that goes on and on',
-            cutoff: 18
+            cutoff: 18,
           },
-          result: 'a long sentence...'
+          result: 'a long sentence...',
         },
         {
           input: {
-            sentence: 'An abstract base class serves as the model for the converters',
-            cutoff: 14
+            sentence:
+              'An abstract base class serves as the model for the converters',
+            cutoff: 14,
           },
-          result: 'An abstract...'
+          result: 'An abstract...',
         },
         {
           input: {
             sentence: 'a bb ccc dddd',
-            cutoff: 5
+            cutoff: 5,
           },
-          result: 'a bb...'
+          result: 'a bb...',
         },
       ]
       for (let expectation of expectations) {
-        expect(strings.firstWords(expectation.input.sentence, expectation.input.cutoff)).toEqual(expectation.result)
+        expect(
+          strings.firstWords(
+            expectation.input.sentence,
+            expectation.input.cutoff
+          )
+        ).toEqual(expectation.result)
       }
     })
 
@@ -84,27 +89,26 @@ describe('strings util', () => {
       const expectations = [
         {
           sentence: 'abcdef',
-          cutoff: 6
+          cutoff: 6,
         },
         {
           sentence: 'abc defg',
-          cutoff: 8
+          cutoff: 8,
         },
         {
           sentence: 'a b c d',
-          cutoff: 200
-        }
+          cutoff: 200,
+        },
       ]
       for (let expectation of expectations) {
-        expect(strings.firstWords(expectation.sentence, expectation.cutoff)).toEqual(expectation.sentence)
+        expect(
+          strings.firstWords(expectation.sentence, expectation.cutoff)
+        ).toEqual(expectation.sentence)
       }
     })
 
     it('should throw an error if the substring is only spaces or has a length of 0', () => {
-      const badInputs = [
-        '               e',
-        '               ',
-      ]
+      const badInputs = ['               e', '               ']
       for (let input of badInputs) {
         expect(() => strings.firstWords(input, 8)).toThrow()
       }
@@ -116,28 +120,27 @@ describe('strings util', () => {
       const expectations = [
         {
           input: '10rem',
-          result: '15rem'
+          result: '15rem',
         },
         {
           input: '1.5%',
-          result: '2.3%'
+          result: '2.3%',
         },
         {
           input: '11.8px',
-          result: '17.7px'
-        }
+          result: '17.7px',
+        },
       ]
 
       for (let expectation of expectations) {
-        expect(strings.multiplyCSSNumber(expectation.input, 1.5)).toEqual(expectation.result)
+        expect(strings.multiplyCSSNumber(expectation.input, 1.5)).toEqual(
+          expectation.result
+        )
       }
     })
 
-    it('should return the prop if it doesn\'t match the regex', () => {
-      const badInputs = [
-        'badstring',
-        'rem10',
-      ]
+    it("should return the prop if it doesn't match the regex", () => {
+      const badInputs = ['badstring', 'rem10']
       for (let input of badInputs) {
         expect(strings.multiplyCSSNumber(input, 1)).toEqual(input)
       }
@@ -146,41 +149,43 @@ describe('strings util', () => {
 
   describe('capitalize', () => {
     it('should return the first letter of a string capitalized', () => {
-      let expectations: { input: string, result: string }[] = [
+      let expectations: { input: string; result: string }[] = [
         {
           input: 'hello',
-          result: 'Hello'
+          result: 'Hello',
         },
         {
           input: '  hi',
-          result: '  hi'
+          result: '  hi',
         },
         {
           input: 'hi  ',
-          result: 'Hi  '
-        }
+          result: 'Hi  ',
+        },
       ]
       for (let expectation of expectations) {
-        expect(strings.capitalize(expectation.input)).toEqual(expectation.result)
+        expect(strings.capitalize(expectation.input)).toEqual(
+          expectation.result
+        )
       }
     })
   })
 
   describe('titleCase', () => {
     it('should capitalize the first word in every word if given a string of space separated words', () => {
-      let expectations: { input: string, result: string }[] = [
+      let expectations: { input: string; result: string }[] = [
         {
           input: 'hello there',
-          result: 'Hello There'
+          result: 'Hello There',
         },
         {
           input: '  hi',
-          result: '  Hi'
+          result: '  Hi',
         },
         {
           input: 'hi  you',
-          result: 'Hi  You'
-        }
+          result: 'Hi  You',
+        },
       ]
 
       for (let expectation of expectations) {
@@ -189,19 +194,19 @@ describe('strings util', () => {
     })
 
     it('should capitalize the first word in every word if given an array of strings', () => {
-      let expectations: { input: string[], result: string }[] = [
+      let expectations: { input: string[]; result: string }[] = [
         {
           input: ['hello', 'there'],
-          result: 'Hello There'
+          result: 'Hello There',
         },
         {
           input: ['', '', 'hi'],
-          result: '  Hi'
+          result: '  Hi',
         },
         {
           input: ['hi', '', '', 'you'],
-          result: 'Hi   You'
-        }
+          result: 'Hi   You',
+        },
       ]
 
       for (let expectation of expectations) {

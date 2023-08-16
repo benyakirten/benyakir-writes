@@ -1,21 +1,24 @@
-import * as React from "react"
+import * as React from 'react'
 
-import { ReorderableColumn, ReorderableContainer } from "./ReorderableList.styles"
-import ReorderableItem from "../ReorderableItem/ReorderableItem.component"
+import {
+  ReorderableColumn,
+  ReorderableContainer,
+} from './ReorderableList.styles'
+import ReorderableItem from '../ReorderableItem/ReorderableItem.component'
 
-import { ReorderableListProps } from "@Types/props/draggable"
+import { ReorderableListProps } from '@Types/props/draggable'
 
 const ReorderableList: React.FC<ReorderableListProps> = ({
   onDrop,
   onSelect,
   selectedItem,
   items,
-  cyId
+  cyId,
 }) => {
   return (
     <ReorderableColumn>
       <ReorderableContainer data-cy={cyId}>
-        {items.map(({ dragValue, value })=> (
+        {items.map(({ dragValue, value }) => (
           <ReorderableItem
             key={dragValue}
             onDrop={onDrop}

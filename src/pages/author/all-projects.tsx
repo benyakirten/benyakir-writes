@@ -1,18 +1,18 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import { BigParagraph, Grouping, Page } from '@Styles/general-components';
+import { BigParagraph, Grouping, Page } from '@Styles/general-components'
 
-import { CustomLink } from '@Gen';
-import { LeadPage, Paginate } from '@Layout';
-import { ProjectFilter } from '@Posts';
-import { ProjectCard } from '@Variants';
+import { CustomLink } from '@Gen'
+import { LeadPage, Paginate } from '@Layout'
+import { ProjectFilter } from '@Posts'
+import { ProjectCard } from '@Variants'
 
-import { usePagination } from '@Hooks';
+import { usePagination } from '@Hooks'
 
-import projectsMisc from '@WPData/Projects/misc.json';
-import projectsJson from '@WPData/Projects/projects.json';
+import projectsMisc from '@WPData/Projects/misc.json'
+import projectsJson from '@WPData/Projects/projects.json'
 
-import { FlattenedProjectCard } from '@Types/posts';
+import { FlattenedProjectCard } from '@Types/posts'
 
 export const Head: React.FC = () => (
   <>
@@ -23,11 +23,17 @@ export const Head: React.FC = () => (
                     including dynamically-generated criteria such as web hosts and what technologies are used to power them."
     />
   </>
-);
+)
 
 const ProjectsPage: React.FC = () => {
-  const allHosts = React.useMemo<string[]>(() => projectsMisc.hosts, [projectsMisc]);
-  const allTechs = React.useMemo<string[]>(() => projectsMisc.longTechs, [projectsMisc]);
+  const allHosts = React.useMemo<string[]>(
+    () => projectsMisc.hosts,
+    [projectsMisc]
+  )
+  const allTechs = React.useMemo<string[]>(
+    () => projectsMisc.longTechs,
+    [projectsMisc]
+  )
 
   // JSON stringify makes a date into a string - so we need to convert it back
   const preparedProjects = React.useMemo<FlattenedProjectCard[]>(
@@ -39,10 +45,11 @@ const ProjectsPage: React.FC = () => {
           date: new Date(p.firstReleased.date),
         },
       })),
-    [projectsJson],
-  );
+    [projectsJson]
+  )
 
-  const projectPagination = usePagination<FlattenedProjectCard>(preparedProjects);
+  const projectPagination =
+    usePagination<FlattenedProjectCard>(preparedProjects)
 
   return (
     <Page>
@@ -58,9 +65,10 @@ const ProjectsPage: React.FC = () => {
         }
       >
         <BigParagraph marginVertical="2rem">
-          This is a page that lists all of my projects on my GitHub page. This includes all of my
-          work, old and new. Please don't use this page to see my latest and more interesting work
-          and only use this page as an easily indexable page. For my latest work, visit my{' '}
+          This is a page that lists all of my projects on my GitHub page. This
+          includes all of my work, old and new. Please don't use this page to
+          see my latest and more interesting work and only use this page as an
+          easily indexable page. For my latest work, visit my{' '}
           <CustomLink to="/portfolio">portfolio</CustomLink>.
         </BigParagraph>
         <Grouping>
@@ -68,7 +76,7 @@ const ProjectsPage: React.FC = () => {
         </Grouping>
       </LeadPage>
     </Page>
-  );
-};
+  )
+}
 
-export default ProjectsPage;
+export default ProjectsPage

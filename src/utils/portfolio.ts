@@ -1,12 +1,12 @@
-import { Polygon, Segment1, Segment2, Wheel } from "@/components/Portfolio/svgs"
-import { SVGData } from "@/types/portfolio"
+import { Polygon, Segment1, Segment2, Wheel } from '@/components/Portfolio/svgs'
+import { SVGData } from '@/types/portfolio'
 
 enum SVGShapeType {
   WHEEL,
   POLYGON,
   SEGMENT1,
   SEGMENT2,
-  NONE
+  NONE,
 }
 
 export interface SVGPositionData {
@@ -35,8 +35,14 @@ export const getRandomShape = () => {
 
 const SHAPES_PER_LINE_RATIO = 0.2
 export const getShapesForLine = (size: number) => {
-  const numShapes = Math.min(Math.floor(Math.random() * size), SHAPES_PER_LINE_RATIO * size)
-  const positions: SVGShapeType[] = Array.from({ length: size }, () => SVGShapeType.NONE)
+  const numShapes = Math.min(
+    Math.floor(Math.random() * size),
+    SHAPES_PER_LINE_RATIO * size
+  )
+  const positions: SVGShapeType[] = Array.from(
+    { length: size },
+    () => SVGShapeType.NONE
+  )
   for (let i = 0; i < numShapes; i++) {
     let randomIdx = -1
     while (positions[randomIdx] !== SVGShapeType.NONE) {
@@ -50,21 +56,29 @@ export const getShapesForLine = (size: number) => {
 
 export const createSquareDataFrom2DArray = (shapeArrays: SVGShapeType[][]) => {
   const data: SVGPositionData[] = []
-  for (let verticalIndex = 0; verticalIndex < shapeArrays.length; verticalIndex++) {
+  for (
+    let verticalIndex = 0;
+    verticalIndex < shapeArrays.length;
+    verticalIndex++
+  ) {
     let horizontalArray = shapeArrays[verticalIndex]
-    for (let horizontalIndex = 0; horizontalIndex < horizontalArray.length; horizontalIndex++) {
+    for (
+      let horizontalIndex = 0;
+      horizontalIndex < horizontalArray.length;
+      horizontalIndex++
+    ) {
       let item = horizontalArray[horizontalIndex]
 
       let Shape: React.FC<SVGData>
       switch (item) {
         case SVGShapeType.POLYGON:
-          Shape = Polygon;
+          Shape = Polygon
           break
         case SVGShapeType.SEGMENT1:
-          Shape = Segment1;
+          Shape = Segment1
           break
         case SVGShapeType.SEGMENT2:
-          Shape = Segment2;
+          Shape = Segment2
           break
         case SVGShapeType.WHEEL:
           Shape = Wheel
@@ -83,7 +97,7 @@ export const createSquareDataFrom2DArray = (shapeArrays: SVGShapeType[][]) => {
         yPosition,
         xMovement,
         yMovement,
-        Shape
+        Shape,
       }
 
       data.push(datum)
@@ -93,10 +107,15 @@ export const createSquareDataFrom2DArray = (shapeArrays: SVGShapeType[][]) => {
   return data
 }
 
-export const createDimensionalRepresentation = (width: number, height: number) => {
+export const createDimensionalRepresentation = (
+  width: number,
+  height: number
+) => {
   const widthSquares = Math.floor(width / 100)
   const heightSquares = Math.floor(height / 100)
 
-  const arr = Array.from({ length: heightSquares }, () => getShapesForLine(widthSquares))
+  const arr = Array.from({ length: heightSquares }, () =>
+    getShapesForLine(widthSquares)
+  )
   return createSquareDataFrom2DArray(arr)
 }

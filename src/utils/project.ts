@@ -1,14 +1,22 @@
-import { getTimeFromDateString } from "./dates";
-import { createSearchableString } from './posts';
+import { getTimeFromDateString } from './dates'
+import { createSearchableString } from './posts'
 
-import { FlattenedProject, PartialFlattenedProject, ProjectType } from "@Types/posts";
+import {
+  FlattenedProject,
+  PartialFlattenedProject,
+  ProjectType,
+} from '@Types/posts'
 
 export function formatAllProjects(projects: ProjectType[]): FlattenedProject[] {
-  return projects.map(p => formatProject(p)).sort((a, b) => b.firstReleased.date.getTime() - a.firstReleased.date.getTime());
+  return projects
+    .map((p) => formatProject(p))
+    .sort(
+      (a, b) => b.firstReleased.date.getTime() - a.firstReleased.date.getTime()
+    )
 }
 
 export function formatProject(project: ProjectType): FlattenedProject {
-  const tech = project.project.technologies.split(", ");
+  const tech = project.project.technologies.split(', ')
   const piecemealProject: PartialFlattenedProject = {
     title: project.title,
     slug: project.slug,
@@ -18,16 +26,18 @@ export function formatProject(project: ProjectType): FlattenedProject {
     content: project.content,
     firstReleased: getTimeFromDateString(project.project.firstReleased),
     shortTechnologies: tech,
-    longTechnologies: tech.map(t => getFullTechName(t)),
+    longTechnologies: tech.map((t) => getFullTechName(t)),
   }
   if (project.project.latestUpdate) {
-    piecemealProject.latestUpdate = getTimeFromDateString(project.project.latestUpdate)
+    piecemealProject.latestUpdate = getTimeFromDateString(
+      project.project.latestUpdate
+    )
   }
   const _project: FlattenedProject = {
     ...piecemealProject,
-    meta: createMetaForProject(piecemealProject)
+    meta: createMetaForProject(piecemealProject),
   }
-  return _project;
+  return _project
 }
 
 export function createMetaForProject(project: PartialFlattenedProject) {
@@ -40,63 +50,63 @@ export function createMetaForProject(project: PartialFlattenedProject) {
     project.firstReleased.full,
     project.firstReleased.short,
     ...project.shortTechnologies,
-    ...project.longTechnologies
-  ];
+    ...project.longTechnologies,
+  ]
   if (project.repoLink) {
     data.push('github')
     data.push('repo')
   }
-  return createSearchableString(data.filter(d => !!d))
+  return createSearchableString(data.filter((d) => !!d))
 }
 
 export function getFullTechName(tech: string) {
   switch (tech.toLowerCase()) {
     case 'html':
-      return 'HTML';
+      return 'HTML'
     case 'css':
-      return 'CSS';
+      return 'CSS'
     case 'sass':
-      return 'Sass';
+      return 'Sass'
     case 'js':
-      return 'JavaScript';
+      return 'JavaScript'
     case 'ts':
-      return 'TypeScript';
+      return 'TypeScript'
     case 'py':
-      return 'Python';
+      return 'Python'
     case 'php':
-      return 'PHP';
+      return 'PHP'
     case 'wp':
-      return 'WordPress';
+      return 'WordPress'
     case 'ng':
-      return 'Angular';
+      return 'Angular'
     case 'swift':
-      return 'Swift';
+      return 'Swift'
     case 'react':
-      return 'React';
+      return 'React'
     case 'vue':
-      return 'Vue';
+      return 'Vue'
     case 'cs':
-      return 'C#';
+      return 'C#'
     case 'unity':
-      return 'Unity';
+      return 'Unity'
     case 'ml':
-      return 'Machine Learning';
+      return 'Machine Learning'
     case 'svelte':
-      return 'Svelte';
+      return 'Svelte'
     case 'gql':
-      return 'GraphQL';
+      return 'GraphQL'
     case 'tw':
-      return 'Tailwind';
+      return 'Tailwind'
     case 'go':
-      return 'Golang';
+      return 'Golang'
     case 'ex':
-      return 'Elixir';
+      return 'Elixir'
     case 'ws':
       return 'Web Sockets'
-    case "wip":
+    case 'wip':
       return 'Under Construction'
     default:
-      return tech;
+      return tech
   }
 }
 
@@ -105,6 +115,6 @@ export function getFullTechName(tech: string) {
  * without the html tags
  */
 export const getFirstParagraphOfContent = (content: string) => {
-  const [firstParagraph] = content.split("</p>")
-  return firstParagraph.replace(/<p>/g, "")
+  const [firstParagraph] = content.split('</p>')
+  return firstParagraph.replace(/<p>/g, '')
 }

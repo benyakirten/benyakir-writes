@@ -1,20 +1,20 @@
-import * as React from "react";
-import { render, fireEvent, screen, cleanup } from "@testing-library/react";
+import * as React from 'react'
+import { render, fireEvent, screen, cleanup } from '@testing-library/react'
 
-import * as dom from "@Utils/dom";
+import * as dom from '@Utils/dom'
 
 enum DataPosition {
   CORRECT,
   MISSING,
-  MISPLACED
+  MISPLACED,
 }
 
 const Wrapper: React.FC<{ setup?: DataPosition }> = ({ setup }) => {
-  const [val, setValue] = React.useState<boolean>();
+  const [val, setValue] = React.useState<boolean>()
   const clickHandler = (e: React.BaseSyntheticEvent) => {
-    const newVal = dom.findAttrInElTree(e.target, "data-attr", "value");
-    setValue(newVal);
-  };
+    const newVal = dom.findAttrInElTree(e.target, 'data-attr', 'value')
+    setValue(newVal)
+  }
 
   if (setup === DataPosition.MISPLACED) {
     return (
@@ -39,7 +39,7 @@ const Wrapper: React.FC<{ setup?: DataPosition }> = ({ setup }) => {
           </div>
         </body>
       </html>
-    );
+    )
   } else if (setup === DataPosition.MISSING) {
     return (
       <html>
@@ -63,7 +63,7 @@ const Wrapper: React.FC<{ setup?: DataPosition }> = ({ setup }) => {
           </div>
         </body>
       </html>
-    );
+    )
   } else {
     return (
       <html>
@@ -87,44 +87,44 @@ const Wrapper: React.FC<{ setup?: DataPosition }> = ({ setup }) => {
           </div>
         </body>
       </html>
-    );
+    )
   }
-};
+}
 
-describe("dom util", () => {
-  beforeEach(cleanup);
+describe('dom util', () => {
+  beforeEach(cleanup)
 
-  describe("findAttrInTree", () => {
-    it('should render undefined if the button hasn\'t been clicked yet', async () => {
-      render(<Wrapper />);
-      const output = await screen.findByRole("article");
+  describe('findAttrInTree', () => {
+    it("should render undefined if the button hasn't been clicked yet", async () => {
+      render(<Wrapper />)
+      const output = await screen.findByRole('article')
       expect(output.textContent).toEqual('undefined')
     })
-    it("should return true if it finds any element in a dom tree with the correct attribute with the correct value", async () => {
-      render(<Wrapper />);
-      const button = await screen.findByRole("button");
-      const output = await screen.findByRole("article");
+    it('should return true if it finds any element in a dom tree with the correct attribute with the correct value', async () => {
+      render(<Wrapper />)
+      const button = await screen.findByRole('button')
+      const output = await screen.findByRole('article')
 
-      fireEvent.click(button);
-      expect(output.textContent).toEqual("true");
-    });
+      fireEvent.click(button)
+      expect(output.textContent).toEqual('true')
+    })
 
-    it("should return false if there is an element with the correct attribute with the correct value but it is not in the body", async () => {
-      render(<Wrapper setup={DataPosition.MISPLACED} />);
-      const button = await screen.findByRole("button");
-      const output = await screen.findByRole("article");
+    it('should return false if there is an element with the correct attribute with the correct value but it is not in the body', async () => {
+      render(<Wrapper setup={DataPosition.MISPLACED} />)
+      const button = await screen.findByRole('button')
+      const output = await screen.findByRole('article')
 
-      fireEvent.click(button);
-      expect(output.textContent).toEqual("false");
-    });
+      fireEvent.click(button)
+      expect(output.textContent).toEqual('false')
+    })
 
-    it("should return false if it finds no element in a dom tree with the correct attribute with a correct value", async () => {
-      render(<Wrapper setup={DataPosition.MISSING} />);
-      const button = await screen.findByRole("button");
-      const output = await screen.findByRole("article");
+    it('should return false if it finds no element in a dom tree with the correct attribute with a correct value', async () => {
+      render(<Wrapper setup={DataPosition.MISSING} />)
+      const button = await screen.findByRole('button')
+      const output = await screen.findByRole('article')
 
-      fireEvent.click(button);
-      expect(output.textContent).toEqual("false");
-    });
-  });
-});
+      fireEvent.click(button)
+      expect(output.textContent).toEqual('false')
+    })
+  })
+})

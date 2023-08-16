@@ -1,32 +1,32 @@
-import * as React from "react";
+import * as React from 'react'
 
 import {
   BigParagraph,
   Box,
   Column,
   Paragraph,
-} from "@Styles/general-components";
-import { ControlsContainer, ThemeAppearance } from "./ModifyTheme.styles";
-import SettingsGroup from "./SettingsGroup.component";
-import { Text } from "@Input";
+} from '@Styles/general-components'
+import { ControlsContainer, ThemeAppearance } from './ModifyTheme.styles'
+import SettingsGroup from './SettingsGroup.component'
+import { Text } from '@Input'
 
-import { useMultiple } from "@Hooks";
-import { useAppSelector, useAppDispatch } from "@Store/hooks";
-import { changeThemeName, flattenedThemeShape } from "@Store/theme/theme.slice";
-import { capitalize } from "@Utils/strings";
+import { useMultiple } from '@Hooks'
+import { useAppSelector, useAppDispatch } from '@Store/hooks'
+import { changeThemeName, flattenedThemeShape } from '@Store/theme/theme.slice'
+import { capitalize } from '@Utils/strings'
 
 const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme, open }) => {
-  const dispatch = useAppDispatch();
-  const themes = useAppSelector(root => root.theme.themes);
+  const dispatch = useAppDispatch()
+  const themes = useAppSelector((root) => root.theme.themes)
   const theme = React.useMemo(
     () => themes.find((theme) => theme.id === selectedTheme),
     [selectedTheme, themes]
-  );
+  )
   const groupNames = React.useMemo(
     () => flattenedThemeShape.map((groups) => groups[0][0]),
     [flattenedThemeShape]
-  );
-  const [openGroups, toggleOpenGroups] = useMultiple(groupNames, []);
+  )
+  const [openGroups, toggleOpenGroups] = useMultiple(groupNames, [])
 
   return (
     <ControlsContainer>
@@ -50,9 +50,9 @@ const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme, open }) => {
               label="Name"
             />
           </Box>
-          <Column style={{ gap: "1rem" }}>
+          <Column style={{ gap: '1rem' }}>
             {flattenedThemeShape.map((group) => {
-              const groupName = group[0][0];
+              const groupName = group[0][0]
               return (
                 <SettingsGroup
                   key={groupName}
@@ -63,7 +63,7 @@ const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme, open }) => {
                   open={openGroups[groupName]}
                   onOpen={() => toggleOpenGroups(groupName)}
                 />
-              );
+              )
             })}
           </Column>
         </ThemeAppearance>
@@ -71,7 +71,7 @@ const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme, open }) => {
         <BigParagraph>Select a theme to modify it here</BigParagraph>
       )}
     </ControlsContainer>
-  );
-};
+  )
+}
 
-export default ModifyTheme;
+export default ModifyTheme

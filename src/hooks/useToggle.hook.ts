@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 const useToggle: ToggleHook = (initialVal = false) => {
-  const [val, _toggleVal] = useState(initialVal);
+  const [val, _toggleVal] = useState(initialVal)
   const toggleVal = () => {
-    _toggleVal(current => !current);
+    _toggleVal((current) => !current)
   }
-  return [val, toggleVal];
+  return [val, toggleVal]
 }
 
-export default useToggle;
+export default useToggle

@@ -1,6 +1,6 @@
 import * as project from '@Utils/project'
 
-import { FlattenedProject, ProjectType } from "@Types/posts"
+import { FlattenedProject, ProjectType } from '@Types/posts'
 
 describe('project util', () => {
   const dummyQueries: ProjectType[] = [
@@ -10,8 +10,8 @@ describe('project util', () => {
       slug: 'projectaslug',
       project: {
         technologies: 'py',
-        firstReleased: '09/15/2019'
-      }
+        firstReleased: '09/15/2019',
+      },
     },
     {
       title: 'project title B',
@@ -23,9 +23,9 @@ describe('project util', () => {
         repoLink: 'https://www.github.com/',
         hostedOn: 'Google',
         firstReleased: '10/15/2019',
-        latestUpdate: '11/15/2019'
-      }
-    }
+        latestUpdate: '11/15/2019',
+      },
+    },
   ]
   const flattenedProjects: FlattenedProject[] = [
     {
@@ -39,9 +39,9 @@ describe('project util', () => {
         short: 'SEP',
         full: 'September',
         month: 9,
-        year: 2019
+        year: 2019,
       },
-      meta: 'python py sep september 2019 project content a projectaslug project title a'
+      meta: 'python py sep september 2019 project content a projectaslug project title a',
     },
     {
       title: 'project title B',
@@ -57,23 +57,23 @@ describe('project util', () => {
         short: 'OCT',
         full: 'October',
         month: 10,
-        year: 2019
+        year: 2019,
       },
       latestUpdate: {
         date: new Date('11/15/2019'),
         short: 'NOV',
         full: 'November',
         month: 11,
-        year: 2019
+        year: 2019,
       },
 
-      meta: 'repo github angular graphql ng gql oct october 2019 google project content b projectbslug project title b'
-    }
+      meta: 'repo github angular graphql ng gql oct october 2019 google project content b projectbslug project title b',
+    },
   ]
   describe('createMetaForProject', () => {
     it('should create the meta in a particular way based on the project', () => {
       const projectOne = flattenedProjects[0]
-      const resultOne = project.createMetaForProject(projectOne).split(" ")
+      const resultOne = project.createMetaForProject(projectOne).split(' ')
 
       expect(resultOne.length).toEqual(12)
       expect(resultOne[0]).toEqual(projectOne.longTechnologies[0].toLowerCase())
@@ -81,42 +81,60 @@ describe('project util', () => {
       expect(resultOne[2]).toEqual(projectOne.firstReleased.short.toLowerCase())
       expect(resultOne[3]).toEqual(projectOne.firstReleased.full.toLowerCase())
       expect(resultOne[4]).toEqual(projectOne.firstReleased.year.toString())
-      expect(resultOne.slice(5, 8).join(" ")).toEqual(projectOne.content.toLowerCase())
+      expect(resultOne.slice(5, 8).join(' ')).toEqual(
+        projectOne.content.toLowerCase()
+      )
       expect(resultOne[8]).toEqual(projectOne.slug!.toLowerCase())
-      expect(resultOne.slice(9).join(" ")).toEqual(projectOne.title.toLowerCase())
+      expect(resultOne.slice(9).join(' ')).toEqual(
+        projectOne.title.toLowerCase()
+      )
 
       const projectTwo = flattenedProjects[1]
-      const resultTwo = project.createMetaForProject(projectTwo).split(" ")
+      const resultTwo = project.createMetaForProject(projectTwo).split(' ')
 
       expect(resultTwo.length).toEqual(17)
       expect(resultTwo[0]).toEqual('repo')
       expect(resultTwo[1]).toEqual('github')
       expect(resultTwo[2]).toEqual(projectTwo.longTechnologies[1].toLowerCase())
       expect(resultTwo[3]).toEqual(projectTwo.longTechnologies[0].toLowerCase())
-      expect(resultTwo[4]).toEqual(projectTwo.shortTechnologies[1].toLowerCase())
-      expect(resultTwo[5]).toEqual(projectTwo.shortTechnologies[0].toLowerCase())
+      expect(resultTwo[4]).toEqual(
+        projectTwo.shortTechnologies[1].toLowerCase()
+      )
+      expect(resultTwo[5]).toEqual(
+        projectTwo.shortTechnologies[0].toLowerCase()
+      )
       expect(resultTwo[6]).toEqual(projectTwo.firstReleased.short.toLowerCase())
       expect(resultTwo[7]).toEqual(projectTwo.firstReleased.full.toLowerCase())
       expect(resultTwo[8]).toEqual(projectTwo.firstReleased.year.toString())
       expect(resultTwo[9]).toEqual(projectTwo.hostedOn?.toLowerCase())
-      expect(resultTwo.slice(10, 13).join(" ")).toEqual(projectTwo.content.toLowerCase())
+      expect(resultTwo.slice(10, 13).join(' ')).toEqual(
+        projectTwo.content.toLowerCase()
+      )
       expect(resultTwo[13]).toEqual(projectTwo.slug)
-      expect(resultTwo.slice(14).join(" ")).toEqual(projectTwo.title.toLowerCase())
+      expect(resultTwo.slice(14).join(' ')).toEqual(
+        projectTwo.title.toLowerCase()
+      )
 
       // meta: 'repo github angular graphql ng gql oct october 2019 google project content b projectbslug project title b'
     })
 
     it('should give known results for known inputs', () => {
       for (let flattenedProject of flattenedProjects) {
-        expect(project.createMetaForProject(flattenedProject)).toEqual(flattenedProject.meta)
+        expect(project.createMetaForProject(flattenedProject)).toEqual(
+          flattenedProject.meta
+        )
       }
     })
   })
 
   describe('formatProject', () => {
     it('should give known results for known inputs', () => {
-      expect(project.formatProject(dummyQueries[0])).toEqual(flattenedProjects[0])
-      expect(project.formatProject(dummyQueries[1])).toEqual(flattenedProjects[1])
+      expect(project.formatProject(dummyQueries[0])).toEqual(
+        flattenedProjects[0]
+      )
+      expect(project.formatProject(dummyQueries[1])).toEqual(
+        flattenedProjects[1]
+      )
     })
   })
 

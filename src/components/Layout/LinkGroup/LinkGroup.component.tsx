@@ -1,8 +1,8 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import { Foldout, CustomLink } from '@Gen';
+import { Foldout, CustomLink } from '@Gen'
 
-import { capitalize, titleToKebab } from '@Utils/strings';
+import { capitalize, titleToKebab } from '@Utils/strings'
 
 const LinkGroup: React.FC<LinkGroupProps> = ({
   open = false,
@@ -38,7 +38,7 @@ const LinkGroup: React.FC<LinkGroupProps> = ({
       ))}
       {children}
     </Foldout>
-  );
-};
+  )
+}
 
-export default LinkGroup;
+export default LinkGroup

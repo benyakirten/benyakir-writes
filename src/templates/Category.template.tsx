@@ -1,17 +1,17 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import { BigParagraph, Grouping, Page } from '@Styles/general-components';
+import { BigParagraph, Grouping, Page } from '@Styles/general-components'
 
-import { CustomLink, Loading } from '@Gen';
-import { LeadPage, Paginate } from '@Layout';
-import { CategoryFilter } from '@Posts';
-import { BlogCard } from '@Variants';
+import { CustomLink, Loading } from '@Gen'
+import { LeadPage, Paginate } from '@Layout'
+import { CategoryFilter } from '@Posts'
+import { BlogCard } from '@Variants'
 
-import { usePagination } from '@Hooks';
-import { titleToKebab } from '@Utils/strings';
+import { usePagination } from '@Hooks'
+import { titleToKebab } from '@Utils/strings'
 
-import { FlattenedBlogCard } from '@Types/posts';
-import { WpPostByCategory } from '@Types/query';
+import { FlattenedBlogCard } from '@Types/posts'
+import { WpPostByCategory } from '@Types/query'
 
 export const Head: React.FC<WpPostByCategory> = ({ pageContext }) => (
   <>
@@ -22,14 +22,14 @@ export const Head: React.FC<WpPostByCategory> = ({ pageContext }) => (
                     filter the blog results by publication date and tags.`}
     />
   </>
-);
+)
 
 const CategoryTemplate: React.FC<WpPostByCategory> = ({ pageContext }) => {
-  const [loading, setLoading] = React.useState(true);
-  const [catPosts, setCatPosts] = React.useState<FlattenedBlogCard[]>([]);
+  const [loading, setLoading] = React.useState(true)
+  const [catPosts, setCatPosts] = React.useState<FlattenedBlogCard[]>([])
 
   React.useEffect(() => {
-    const catName = titleToKebab(pageContext.name);
+    const catName = titleToKebab(pageContext.name)
     import(`@WPData/Posts/${catName}.json`).then((posts) => {
       setCatPosts(
         posts.default.map((b: FlattenedBlogCard) => ({
@@ -38,17 +38,17 @@ const CategoryTemplate: React.FC<WpPostByCategory> = ({ pageContext }) => {
             ...b.published,
             date: new Date(b.published.date),
           },
-        })),
-      );
+        }))
+      )
       // The loading should come at the end because then the dates will be properly loaded.
       // Even though the category filter has a backup and can handle an empty array, the dates
       // will be set for a moment to today's date then go to the correct one
       // Or maybe not! Gatsby's static generation might do some magic that I don't understand
-      setLoading(false);
-    });
-  }, []);
+      setLoading(false)
+    })
+  }, [])
 
-  const postPagination = usePagination<FlattenedBlogCard>(catPosts);
+  const postPagination = usePagination<FlattenedBlogCard>(catPosts)
 
   return (
     <Page>
@@ -58,7 +58,10 @@ const CategoryTemplate: React.FC<WpPostByCategory> = ({ pageContext }) => {
           loading ? (
             <Loading />
           ) : (
-            <CategoryFilter allPosts={catPosts} onFilter={postPagination.setCurrentItems} />
+            <CategoryFilter
+              allPosts={catPosts}
+              onFilter={postPagination.setCurrentItems}
+            />
           )
         }
       >
@@ -71,8 +74,9 @@ const CategoryTemplate: React.FC<WpPostByCategory> = ({ pageContext }) => {
                 <Paginate {...postPagination} El={BlogCard} />
               ) : (
                 <BigParagraph>
-                  There are no posts in the category {pageContext.name}. Maybe you want to check out
-                  the general <CustomLink to="/blog">blog page</CustomLink> instead?
+                  There are no posts in the category {pageContext.name}. Maybe
+                  you want to check out the general{' '}
+                  <CustomLink to="/blog">blog page</CustomLink> instead?
                 </BigParagraph>
               )}
             </Grouping>
@@ -80,7 +84,7 @@ const CategoryTemplate: React.FC<WpPostByCategory> = ({ pageContext }) => {
         )}
       </LeadPage>
     </Page>
-  );
-};
+  )
+}
 
-export default CategoryTemplate;
+export default CategoryTemplate

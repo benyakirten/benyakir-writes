@@ -1,6 +1,6 @@
-import * as React from "react";
+import * as React from 'react'
 
-import { TextInputContainer } from "./Text.styles";
+import { TextInputContainer } from './Text.styles'
 
 const Text: React.FC<TextProps> = ({
   label,
@@ -26,11 +26,11 @@ const Text: React.FC<TextProps> = ({
         }}
         tabIndex={tabIndex}
         autoFocus={tabIndex === 0 ? autofocus : false}
-        data-cy={cyId ? cyId : "text-input"}
+        data-cy={cyId ? cyId : 'text-input'}
       />
       <label htmlFor={name}>{label}</label>
     </TextInputContainer>
-  );
-};
+  )
+}
 
-export default Text;
+export default Text

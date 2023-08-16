@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react'
 
 import {
   StyledSidebar,
@@ -8,44 +8,44 @@ import {
   SidebarContents,
   LegalBox,
   LegalItem,
-} from './Sidebar.styles';
-import Logo from '../Logo/Logo.component';
+} from './Sidebar.styles'
+import Logo from '../Logo/Logo.component'
 
-import { LinkGroup } from '@Layout';
-import { CustomLink } from '@Gen';
-import { Toggle } from '@Input';
+import { LinkGroup } from '@Layout'
+import { CustomLink } from '@Gen'
+import { Toggle } from '@Input'
 
-import { useAlternation } from '@Hooks';
-import Search from '../Search/Search.component';
+import { useAlternation } from '@Hooks'
+import Search from '../Search/Search.component'
 
-import { capitalize } from '@Utils/strings';
+import { capitalize } from '@Utils/strings'
 
-import { useAppSelector, useAppDispatch } from '@Store/hooks';
-import { toggleTimeOfDay } from '@Store/theme/theme.slice';
+import { useAppSelector, useAppDispatch } from '@Store/hooks'
+import { toggleTimeOfDay } from '@Store/theme/theme.slice'
 
-import { authorLinks, blogLinks, generalLinks } from '@Data/links';
+import { authorLinks, blogLinks, generalLinks } from '@Data/links'
 
 const Sidebar: React.FC = () => {
-  const [openDropdown, setOpenDropdown] = useAlternation();
-  const [opening, setOpening] = React.useState<boolean>(false);
+  const [openDropdown, setOpenDropdown] = useAlternation()
+  const [opening, setOpening] = React.useState<boolean>(false)
 
-  const dispatch = useAppDispatch();
-  const activeTheme = useAppSelector((root) => root.theme.active);
+  const dispatch = useAppDispatch()
+  const activeTheme = useAppSelector((root) => root.theme.active)
 
   React.useEffect(() => {
     if (opening) {
-      setTimeout(() => setOpening(false), 1000);
+      setTimeout(() => setOpening(false), 1000)
     }
-  }, [opening]);
+  }, [opening])
 
-  const [open, setOpen] = React.useState<boolean>(false);
+  const [open, setOpen] = React.useState<boolean>(false)
   function toggleOpen() {
-    setOpen((state) => !state);
-    setOpening(true);
+    setOpen((state) => !state)
+    setOpening(true)
   }
   function handleNavClick(e: React.BaseSyntheticEvent) {
     if (e.target.getAttribute('data-navtoggle') === 'nav-toggle') {
-      toggleOpen();
+      toggleOpen()
     }
   }
 
@@ -61,7 +61,12 @@ const Sidebar: React.FC = () => {
         data-navtoggle="nav-toggle"
         open={open}
       >
-        <ArrowButton tabIndex={0} open={open} onClick={toggleOpen} data-cy="open-sidemenu">
+        <ArrowButton
+          tabIndex={0}
+          open={open}
+          onClick={toggleOpen}
+          data-cy="open-sidemenu"
+        >
           &larr;
         </ArrowButton>
         <VisibleGroup
@@ -87,12 +92,19 @@ const Sidebar: React.FC = () => {
               height="7rem"
               tabIndex={openDropdown === 'author' ? 0 : -1}
             />
-            <CustomLink tabIndex={open ? 0 : -1} to="/portfolio" underbarsize="12rem">
+            <CustomLink
+              tabIndex={open ? 0 : -1}
+              to="/portfolio"
+              underbarsize="12rem"
+            >
               Portfolio
             </CustomLink>
           </NavGroup>
           <NavGroup>
-            <Search open={openDropdown === 'search'} onClick={() => setOpenDropdown('search')} />
+            <Search
+              open={openDropdown === 'search'}
+              onClick={() => setOpenDropdown('search')}
+            />
           </NavGroup>
           <NavGroup>
             {generalLinks.map((linkItem) => (
@@ -100,9 +112,13 @@ const Sidebar: React.FC = () => {
                 key={typeof linkItem === 'string' ? linkItem : linkItem.link}
                 tabIndex={open ? 0 : -1}
                 underbarsize="12rem"
-                to={`/${typeof linkItem === 'string' ? linkItem : linkItem.link}`}
+                to={`/${
+                  typeof linkItem === 'string' ? linkItem : linkItem.link
+                }`}
               >
-                {capitalize(typeof linkItem === 'string' ? linkItem : linkItem.name)}
+                {capitalize(
+                  typeof linkItem === 'string' ? linkItem : linkItem.name
+                )}
               </CustomLink>
             ))}
           </NavGroup>
@@ -123,7 +139,7 @@ const Sidebar: React.FC = () => {
         <Logo opening={opening} open={open} />
       </SidebarContents>
     </StyledSidebar>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

@@ -10,15 +10,15 @@ export const IconContainer = styled.div<{ height: string }>`
   justify-content: center;
   align-items: center;
 
-  height: ${props => css`calc(${props.height} * 5 / 3)`};
+  height: ${(props) => css`calc(${props.height} * 5 / 3)`};
 
-  margin-bottom: ${props => css`calc(${props.height} / 6)`};
-  margin-right: ${props => css`calc(${props.height} / 3)`};
+  margin-bottom: ${(props) => css`calc(${props.height} / 6)`};
+  margin-right: ${(props) => css`calc(${props.height} / 3)`};
 
-  background-color: ${props => props.theme.icon.default.background};
+  background-color: ${(props) => props.theme.icon.default.background};
 
   transition: all ${TRANSITION_EXTRA_SLOW} ease;
-  
+
   div {
     position: absolute;
     top: 50%;
@@ -29,18 +29,18 @@ export const IconContainer = styled.div<{ height: string }>`
 
     height: 0;
     width: 0;
-    
+
     border-radius: 50%;
-    background-color: ${props => props.theme.icon.hover.background};
-    
+    background-color: ${(props) => props.theme.icon.hover.background};
+
     transition: all ${TRANSITION_EXTRA_SLOW} ease;
   }
 
   &:hover {
     div {
       z-index: ${Z_ABOVE};
-      height: ${props => css`calc(${props.height} * 10 / 3)`};
-      width: ${props => css`calc(${props.height} * 10 / 3)`};
+      height: ${(props) => css`calc(${props.height} * 10 / 3)`};
+      width: ${(props) => css`calc(${props.height} * 10 / 3)`};
     }
 
     img {
@@ -49,28 +49,28 @@ export const IconContainer = styled.div<{ height: string }>`
     }
 
     span {
-      color: ${props => props.theme.icon.hover.textColor};
+      color: ${(props) => props.theme.icon.hover.textColor};
       z-index: ${Z_ABOVE};
-      top: ${props => css`calc(${props.height} * 2 / 3)`};
+      top: ${(props) => css`calc(${props.height} * 2 / 3)`};
     }
   }
 `
 
 export const IconImage = styled.img<{ height: string }>`
-    position: relative;
-    
-    height: ${props => props.height};
-    width: ${props => props.height};
+  position: relative;
 
-    transition: transform ${TRANSITION_EXTRA_SLOW} ease;
+  height: ${(props) => props.height};
+  width: ${(props) => props.height};
+
+  transition: transform ${TRANSITION_EXTRA_SLOW} ease;
 `
 
 export const IconCaption = styled.span`
-    position: relative;
-    top: 0.5rem;
+  position: relative;
+  top: 0.5rem;
 
-    color: ${props => props.theme.icon.default.textColor};
-    font-size: ${FONT_XS};
+  color: ${(props) => props.theme.icon.default.textColor};
+  font-size: ${FONT_XS};
 
-    transition: all ${TRANSITION_EXTRA_SLOW} ease;
+  transition: all ${TRANSITION_EXTRA_SLOW} ease;
 `

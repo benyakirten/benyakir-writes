@@ -1,13 +1,11 @@
-
-
 export interface ProjectGridDatum {
   title: string
   description: string
   technologies: string[]
   firstReleased: Date
-  mainLink?: string;
-  repoLink?: string;
-  hostedOn?: string;
+  mainLink?: string
+  repoLink?: string
+  hostedOn?: string
 }
 
 export interface ProjectGridData {
@@ -19,8 +17,8 @@ export interface ProjectGridData {
 }
 
 export interface SVGData {
-  xMovement: number,
-  yMovement: number,
+  xMovement: number
+  yMovement: number
 }
 
 export type SVGShapeData = SVGData & ChildrenProp

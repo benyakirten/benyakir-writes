@@ -1,5 +1,5 @@
 export const customMediaQuery = (maxWidth: number) =>
-  `@media (max-width: ${maxWidth}px)`;
+  `@media (max-width: ${maxWidth}px)`
 
 export const media = {
   custom: customMediaQuery,
@@ -7,5 +7,5 @@ export const media = {
   tablet: customMediaQuery(768),
   phone: customMediaQuery(576),
   reducedMotion: '@media (prefers-reduced-motion)',
-  noHover: '@media (any-hover: none)'
-};
+  noHover: '@media (any-hover: none)',
+}

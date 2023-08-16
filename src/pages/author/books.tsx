@@ -1,16 +1,16 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import { Grouping, Page } from '@Styles/general-components';
+import { Grouping, Page } from '@Styles/general-components'
 
-import { LeadPage, Paginate } from '@Layout';
-import { BookFilter } from '@Posts';
-import { BookCard } from '@Variants';
+import { LeadPage, Paginate } from '@Layout'
+import { BookFilter } from '@Posts'
+import { BookCard } from '@Variants'
 
-import { usePagination } from '@Hooks';
+import { usePagination } from '@Hooks'
 
-import booksJson from '@WPData/Author/books.json';
+import booksJson from '@WPData/Author/books.json'
 
-import { FlattenedBookCard } from '@Types/posts';
+import { FlattenedBookCard } from '@Types/posts'
 
 export const Head: React.FC = () => (
   <>
@@ -21,7 +21,7 @@ export const Head: React.FC = () => (
             of the books before looking them up individually"
     />
   </>
-);
+)
 
 const BooksPage: React.FC = () => {
   const books = React.useMemo<FlattenedBookCard[]>(
@@ -30,22 +30,24 @@ const BooksPage: React.FC = () => {
         ...b,
         published: { ...b.published, date: new Date(b.published.date) },
       })),
-    [booksJson],
-  );
-  const bookPagination = usePagination<FlattenedBookCard>(books);
+    [booksJson]
+  )
+  const bookPagination = usePagination<FlattenedBookCard>(books)
 
   return (
     <Page>
       <LeadPage
         title="Books"
-        filter={<BookFilter books={books} onFilter={bookPagination.setCurrentItems} />}
+        filter={
+          <BookFilter books={books} onFilter={bookPagination.setCurrentItems} />
+        }
       >
         <Grouping>
           <Paginate {...bookPagination} El={BookCard} />
         </Grouping>
       </LeadPage>
     </Page>
-  );
-};
+  )
+}
 
-export default BooksPage;
+export default BooksPage

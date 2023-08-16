@@ -1,28 +1,28 @@
-import * as React from "react";
+import * as React from 'react'
 
-import { ButtonExterior } from "./Button.styles";
+import { ButtonExterior } from './Button.styles'
 
-import { getFourCorners, getNearestCornerIdx } from "@Utils/coordinates";
+import { getFourCorners, getNearestCornerIdx } from '@Utils/coordinates'
 
 import {
   CORNER_INDEX_TO_POSITIONING,
   TRANSFORM_ORIGIN_FOR_CORNER_INDEX,
   TRIANGLES_FOR_CORNER_INDEX,
-} from "@Constants";
+} from '@Constants'
 
 const Button: React.FC<ButtonProps> = ({
   disabled = false,
-  type = "button",
+  type = 'button',
   children,
   onClick = () => {},
-  tabIndex = 0
+  tabIndex = 0,
 }) => {
-  const [cornerIdx, setCornerIdx] = React.useState<number>(0);
+  const [cornerIdx, setCornerIdx] = React.useState<number>(0)
   function handleMouseover(e: any) {
-    const mouseLoc: Coord = { x: e.clientX, y: e.clientY };
-    const corners: Corners = getFourCorners(e.target.getBoundingClientRect());
-    const _cornerIdx = getNearestCornerIdx(mouseLoc, corners);
-    setCornerIdx(_cornerIdx);
+    const mouseLoc: Coord = { x: e.clientX, y: e.clientY }
+    const corners: Corners = getFourCorners(e.target.getBoundingClientRect())
+    const _cornerIdx = getNearestCornerIdx(mouseLoc, corners)
+    setCornerIdx(_cornerIdx)
   }
   return (
     <ButtonExterior
@@ -41,7 +41,7 @@ const Button: React.FC<ButtonProps> = ({
       />
       <span>{children}</span>
     </ButtonExterior>
-  );
-};
+  )
+}
 
-export default Button;
+export default Button

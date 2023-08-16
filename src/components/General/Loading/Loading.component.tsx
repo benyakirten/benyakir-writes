@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from 'react'
 
-import { LoadingContainer } from "./Loading.styles";
+import { LoadingContainer } from './Loading.styles'
 
-const Loading: React.FC<LoadingProps> = ({ size = "2rem" }) => (
+const Loading: React.FC<LoadingProps> = ({ size = '2rem' }) => (
   <LoadingContainer size={size} />
-);
+)
 
-export default Loading;
+export default Loading

@@ -1,11 +1,11 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import { useAppSelector } from '@Store/hooks';
-import { SVGData } from '@Types/portfolio';
-import SVGLine from './SVGLine.component';
+import { useAppSelector } from '@Store/hooks'
+import { SVGData } from '@Types/portfolio'
+import SVGLine from './SVGLine.component'
 
 const Segment1: React.FC<SVGData> = ({ xMovement, yMovement }) => {
-  const themeStore = useAppSelector((root) => root.theme);
+  const themeStore = useAppSelector((root) => root.theme)
   return (
     <SVGLine xMovement={xMovement} yMovement={yMovement}>
       <path
@@ -15,7 +15,7 @@ const Segment1: React.FC<SVGData> = ({ xMovement, yMovement }) => {
         strokeWidth="2"
       />
     </SVGLine>
-  );
-};
+  )
+}
 
-export default Segment1;
+export default Segment1

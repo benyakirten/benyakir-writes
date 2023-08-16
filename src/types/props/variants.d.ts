@@ -1,12 +1,12 @@
 interface ModifyThemeProps {
-  selectedTheme: string;
-  open: boolean;
+  selectedTheme: string
+  open: boolean
 }
 
 interface ThemeControlProps extends ModifyThemeProps {
-  selectedTheme: string;
-  setSelectedTheme: (theme: string) => void;
-  allowsHover: boolean;
+  selectedTheme: string
+  setSelectedTheme: (theme: string) => void
+  allowsHover: boolean
 }
 
 interface ThemeIconsQuery {
@@ -16,28 +16,28 @@ interface ThemeIconsQuery {
 }
 
 interface DraggableThemeListProps {
-  open: boolean;
-  onSelect: (val: string) => void;
-  selectedTheme: string;
+  open: boolean
+  onSelect: (val: string) => void
+  selectedTheme: string
 }
 
 interface DraggableThemeProps {
   nodes: FileNode[]
-  open: boolean;
-  themeName: string;
-  themeId: string;
+  open: boolean
+  themeName: string
+  themeId: string
 }
 
 interface DestinationThemeListProps {
-  setSelectedTheme: (val: string) => void;
-  selectedTheme: string;
+  setSelectedTheme: (val: string) => void
+  selectedTheme: string
 }
 
 interface SettingsGroupProps {
-  title: string;
-  preface: string;
+  title: string
+  preface: string
   controls: ThemeGroup
-  open: boolean;
-  theme: BaseTheme;
-  onOpen: () => void;
+  open: boolean
+  theme: BaseTheme
+  onOpen: () => void
 }

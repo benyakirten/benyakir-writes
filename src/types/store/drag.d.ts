@@ -1,4 +1,4 @@
 interface DragState {
-  draggedIndex: number;
-  draggedValue: string;
+  draggedIndex: number
+  draggedValue: string
 }

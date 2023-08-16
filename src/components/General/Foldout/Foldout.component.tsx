@@ -1,9 +1,13 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import { FoldoutContainer, FoldoutBody, TopbarContainer } from './Foldout.styles';
-import { DownArrow } from '@Pre';
+import {
+  FoldoutContainer,
+  FoldoutBody,
+  TopbarContainer,
+} from './Foldout.styles'
+import { DownArrow } from '@Pre'
 
-import { findAttrInElTree } from '@Utils/dom';
+import { findAttrInElTree } from '@Utils/dom'
 
 const Foldout: React.FC<FoldoutProps> = ({
   open = false,
@@ -18,18 +22,18 @@ const Foldout: React.FC<FoldoutProps> = ({
 }) => {
   const handleContainerClick = React.useCallback(
     (e: React.BaseSyntheticEvent) => _handleContainerClick(e),
-    [onClick],
-  );
+    [onClick]
+  )
   function _handleContainerClick(e: React.BaseSyntheticEvent) {
     if (findAttrInElTree(e.target, 'data-navtoggle', 'no-toggle')) {
-      return;
+      return
     }
-    onClick && onClick();
+    onClick && onClick()
   }
   const handleArrowClick = (e: React.BaseSyntheticEvent) => {
-    e.stopPropagation();
-    onClick && onClick();
-  };
+    e.stopPropagation()
+    onClick && onClick()
+  }
   return (
     <FoldoutContainer>
       <TopbarContainer onClick={(e) => handleContainerClick(e)}>
@@ -53,7 +57,7 @@ const Foldout: React.FC<FoldoutProps> = ({
         {children}
       </FoldoutBody>
     </FoldoutContainer>
-  );
-};
+  )
+}
 
-export default Foldout;
+export default Foldout

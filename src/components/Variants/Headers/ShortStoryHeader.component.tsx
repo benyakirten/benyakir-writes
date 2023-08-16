@@ -1,8 +1,8 @@
-import * as React from "react";
-import { Link, navigate } from "gatsby";
-import { GatsbyImage } from "gatsby-plugin-image";
+import * as React from 'react'
+import { Link, navigate } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
-import { Button, CustomLink, HoverImage } from "@Gen";
+import { Button, CustomLink, HoverImage } from '@Gen'
 import {
   GroupingBox,
   RowUntilPhone,
@@ -11,24 +11,24 @@ import {
   LItem,
   Column,
   SubHeading,
-} from "@Styles/general-components";
+} from '@Styles/general-components'
 
-import { getPrettyDate } from "@Utils/dates";
-import { rigorousTextFormat } from "@Utils/posts";
+import { getPrettyDate } from '@Utils/dates'
+import { rigorousTextFormat } from '@Utils/posts'
 
-import { StoryHeaderProps } from "@Types/props/post-components";
+import { StoryHeaderProps } from '@Types/props/post-components'
 
 const StoryHeader: React.FC<StoryHeaderProps> = ({ story }) => {
   return (
     <GroupingBox>
-      <RowUntilPhone style={{ flexWrap: "nowrap", alignItems: "start" }}>
+      <RowUntilPhone style={{ flexWrap: 'nowrap', alignItems: 'start' }}>
         <CardSection>
           <List>
             <LItem>Published on: {getPrettyDate(story.published.date)}</LItem>
             {story.book && (
               <>
                 <LItem>
-                  {story.book.relationship} of{" "}
+                  {story.book.relationship} of{' '}
                   <CustomLink to={`/book/${story.book.slug}`}>
                     {story.book.title}
                   </CustomLink>
@@ -39,7 +39,7 @@ const StoryHeader: React.FC<StoryHeaderProps> = ({ story }) => {
             {story.project && (
               <>
                 <LItem>
-                  Related Project:{" "}
+                  Related Project:{' '}
                   <CustomLink to={`/project/${story.project.slug}`}>
                     {story.project.title}
                   </CustomLink>
@@ -83,7 +83,7 @@ const StoryHeader: React.FC<StoryHeaderProps> = ({ story }) => {
         )}
       </RowUntilPhone>
     </GroupingBox>
-  );
-};
+  )
+}
 
-export default StoryHeader;
+export default StoryHeader

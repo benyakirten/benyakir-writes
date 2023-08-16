@@ -12,7 +12,7 @@ describe('dates util', () => {
     })
 
     it('should give known results for known inputs', () => {
-      const datesAndResults: { date: string, result: DateInformation }[] = [
+      const datesAndResults: { date: string; result: DateInformation }[] = [
         {
           date: '09/15/2019',
           result: {
@@ -20,8 +20,8 @@ describe('dates util', () => {
             short: 'SEP',
             full: 'September',
             month: 9,
-            year: 2019
-          }
+            year: 2019,
+          },
         },
         {
           date: '01/31/2030',
@@ -30,8 +30,8 @@ describe('dates util', () => {
             short: 'JAN',
             full: 'January',
             month: 1,
-            year: 2030
-          }
+            year: 2030,
+          },
         },
         {
           date: '11/01/1833',
@@ -40,8 +40,8 @@ describe('dates util', () => {
             short: 'NOV',
             full: 'November',
             month: 11,
-            year: 1833
-          }
+            year: 1833,
+          },
         },
         {
           date: '05/30/1954',
@@ -50,8 +50,8 @@ describe('dates util', () => {
             short: 'MAY',
             full: 'May',
             month: 5,
-            year: 1954
-          }
+            year: 1954,
+          },
         },
         {
           date: '08/10/2000',
@@ -60,8 +60,8 @@ describe('dates util', () => {
             short: 'AUG',
             full: 'August',
             month: 8,
-            year: 2000
-          }
+            year: 2000,
+          },
         },
       ]
       for (let item of datesAndResults) {
@@ -94,7 +94,7 @@ describe('dates util', () => {
     })
 
     it('should give known results for known inputs', () => {
-      const datesAndResults: { date: string, result: DateInformation }[] = [
+      const datesAndResults: { date: string; result: DateInformation }[] = [
         {
           date: '2019/09/15',
           result: {
@@ -102,8 +102,8 @@ describe('dates util', () => {
             short: 'SEP',
             full: 'September',
             month: 9,
-            year: 2019
-          }
+            year: 2019,
+          },
         },
         {
           date: '2030/01/31',
@@ -112,8 +112,8 @@ describe('dates util', () => {
             short: 'JAN',
             full: 'January',
             month: 1,
-            year: 2030
-          }
+            year: 2030,
+          },
         },
         {
           date: '1833/11/01',
@@ -122,8 +122,8 @@ describe('dates util', () => {
             short: 'NOV',
             full: 'November',
             month: 11,
-            year: 1833
-          }
+            year: 1833,
+          },
         },
         {
           date: '1954/05/30',
@@ -132,8 +132,8 @@ describe('dates util', () => {
             short: 'MAY',
             full: 'May',
             month: 5,
-            year: 1954
-          }
+            year: 1954,
+          },
         },
         {
           date: '2000/08/10',
@@ -142,8 +142,8 @@ describe('dates util', () => {
             short: 'AUG',
             full: 'August',
             month: 8,
-            year: 2000
-          }
+            year: 2000,
+          },
         },
       ]
       for (let item of datesAndResults) {

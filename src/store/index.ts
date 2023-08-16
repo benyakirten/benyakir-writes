@@ -13,9 +13,10 @@ if (process.env.NODE_ENV === 'development') {
 const store = configureStore({
   reducer: {
     theme: themeReducer,
-    drag: dragReducer
+    drag: dragReducer,
   },
-  middleware: (getDefaultMiddleWare) => getDefaultMiddleWare().concat(...otherMiddleware)
+  middleware: (getDefaultMiddleWare) =>
+    getDefaultMiddleWare().concat(...otherMiddleware),
 })
 
 export default store

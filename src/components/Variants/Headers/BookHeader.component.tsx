@@ -1,6 +1,6 @@
-import * as React from "react";
-import { GatsbyImage } from "gatsby-plugin-image";
-import { navigate } from "gatsby";
+import * as React from 'react'
+import { GatsbyImage } from 'gatsby-plugin-image'
+import { navigate } from 'gatsby'
 
 import {
   GroupingBox,
@@ -13,17 +13,17 @@ import {
   BigParagraph,
   Row,
   WpContent,
-} from "@Styles/general-components";
-import { Button, CustomLink, HoverImage } from "@Gen";
+} from '@Styles/general-components'
+import { Button, CustomLink, HoverImage } from '@Gen'
 
-import { getPrettyDate } from "@Utils/dates";
+import { getPrettyDate } from '@Utils/dates'
 
-import { BookHeaderProps } from "@Types/props/post-components";
+import { BookHeaderProps } from '@Types/props/post-components'
 
 const BookHeader: React.FC<BookHeaderProps> = ({ book }) => {
   return (
     <GroupingBox>
-      <RowUntilPhone style={{ flexWrap: "nowrap", alignItems: "start" }}>
+      <RowUntilPhone style={{ flexWrap: 'nowrap', alignItems: 'start' }}>
         {book.cover ? (
           <CardSection>
             <GatsbyImage image={book.cover} alt={book.title} />
@@ -105,7 +105,7 @@ const BookHeader: React.FC<BookHeaderProps> = ({ book }) => {
         </CardDoubleSection>
       </RowUntilPhone>
     </GroupingBox>
-  );
-};
+  )
+}
 
-export default BookHeader;
+export default BookHeader

@@ -1,7 +1,7 @@
-import styled from "styled-components"
+import styled from 'styled-components'
 
-import { FONT_MD, SHADOW_MD } from "@StyleVars"
-import { convertHexToRGBA } from "@Utils/colors"
+import { FONT_MD, SHADOW_MD } from '@StyleVars'
+import { convertHexToRGBA } from '@Utils/colors'
 
 export const Container = styled.div`
   display: flex;
@@ -14,5 +14,6 @@ export const Label = styled.label`
 `
 
 export const ColorInput = styled.input`
-  box-shadow: ${props => `${SHADOW_MD} ${convertHexToRGBA(props.theme.sidebar.shadowColor, 0.4)}`};
+  box-shadow: ${(props) =>
+    `${SHADOW_MD} ${convertHexToRGBA(props.theme.sidebar.shadowColor, 0.4)}`};
 `

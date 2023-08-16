@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import * as React from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
 
-import { ReorderableList } from '@Draggable';
-import DraggableTheme from './DraggableTheme/DraggableTheme.component';
+import { ReorderableList } from '@Draggable'
+import DraggableTheme from './DraggableTheme/DraggableTheme.component'
 
-import { useAppSelector, useAppDispatch } from '@Store/hooks';
-import { reorderThemes } from '@Store/theme/theme.slice';
-import { DraggedOverPosition } from '@Utils/enums';
+import { useAppSelector, useAppDispatch } from '@Store/hooks'
+import { reorderThemes } from '@Store/theme/theme.slice'
+import { DraggedOverPosition } from '@Utils/enums'
 
 const DraggableThemeList: React.FC<DraggableThemeListProps> = ({
   open,
@@ -23,23 +23,28 @@ const DraggableThemeList: React.FC<DraggableThemeListProps> = ({
         }
       }
     }
-  `);
+  `)
 
-  const themeStore = useAppSelector((root) => root.theme);
-  const dispatch = useAppDispatch();
+  const themeStore = useAppSelector((root) => root.theme)
+  const dispatch = useAppDispatch()
   const themeNames = React.useMemo(
     () =>
       themeStore.themes.map((theme) => {
-        const { nodes } = themeQuery.allFile;
+        const { nodes } = themeQuery.allFile
         return {
           dragValue: theme.id,
           value: (
-            <DraggableTheme nodes={nodes} themeId={theme.id} themeName={theme.name} open={open} />
+            <DraggableTheme
+              nodes={nodes}
+              themeId={theme.id}
+              themeName={theme.name}
+              open={open}
+            />
           ),
-        };
+        }
       }),
-    [themeStore, open],
-  );
+    [themeStore, open]
+  )
 
   const dropHandler = React.useCallback(
     (start: string, end: string, position: DraggedOverPosition) => {
@@ -48,11 +53,11 @@ const DraggableThemeList: React.FC<DraggableThemeListProps> = ({
           start,
           end,
           position,
-        }),
-      );
+        })
+      )
     },
-    [],
-  );
+    []
+  )
 
   return (
     <ReorderableList
@@ -62,7 +67,7 @@ const DraggableThemeList: React.FC<DraggableThemeListProps> = ({
       selectedItem={selectedTheme}
       items={themeNames}
     />
-  );
-};
+  )
+}
 
-export default DraggableThemeList;
+export default DraggableThemeList

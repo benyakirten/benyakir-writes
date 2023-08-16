@@ -1,77 +1,72 @@
 import styled from 'styled-components'
 
 import { media } from '@/styles/queries'
-import {
-  FONT_MD,
-  TRANSITION_NORMAL,
-  Z_ABOVE
-} from '@StyleVars'
+import { FONT_MD, TRANSITION_NORMAL, Z_ABOVE } from '@StyleVars'
 
 export const ButtonExterior = styled.button`
-    cursor: pointer;
+  cursor: pointer;
 
-    position: relative;
-    
-    padding: 1rem;
+  position: relative;
 
-    ${media.tablet} {
-        padding: 0.5rem;
-    }
+  padding: 1rem;
 
-    min-width: 7rem;
-    
-    border: 2px solid ${props => props.theme.button.border};
-    background-color: ${props => props.theme.button.default.background};
+  ${media.tablet} {
+    padding: 0.5rem;
+  }
 
-    overflow: hidden;
+  min-width: 7rem;
 
-    &:disabled {
-        cursor: not-allowed;
-        background-color: ${props => props.theme.button.disabled.background};
+  border: 2px solid ${(props) => props.theme.button.border};
+  background-color: ${(props) => props.theme.button.default.background};
 
-        span {
-            color: ${props => props.theme.button.disabled.textColor};
-        }
+  overflow: hidden;
 
-        &:hover {
-            span {
-                color: ${props => props.theme.button.disabled.textColor};
-            }
-            div {
-                transform: scale(0) !important;
-            }
-        }
-    }
+  &:disabled {
+    cursor: not-allowed;
+    background-color: ${(props) => props.theme.button.disabled.background};
 
     span {
-        color: ${props => props.theme.button.default.textColor};
-        transition: color ${TRANSITION_NORMAL} ease;
-
-
-        position: relative;
-        font-size: ${FONT_MD};
-        z-index: ${Z_ABOVE};
-    }
-
-    div {
-        position: absolute;
-
-        height: 200%;
-        width: 200%;
-
-        background-color: ${props => props.theme.button.hover.background};
-
-        transition: transform ${TRANSITION_NORMAL} ease;
-        transform: scale(0);
+      color: ${(props) => props.theme.button.disabled.textColor};
     }
 
     &:hover {
-        span {
-            color: ${props => props.theme.button.hover.textColor};
-        }
-
-        div {
-            transform: scale(1);
-        }
+      span {
+        color: ${(props) => props.theme.button.disabled.textColor};
+      }
+      div {
+        transform: scale(0) !important;
+      }
     }
+  }
+
+  span {
+    color: ${(props) => props.theme.button.default.textColor};
+    transition: color ${TRANSITION_NORMAL} ease;
+
+    position: relative;
+    font-size: ${FONT_MD};
+    z-index: ${Z_ABOVE};
+  }
+
+  div {
+    position: absolute;
+
+    height: 200%;
+    width: 200%;
+
+    background-color: ${(props) => props.theme.button.hover.background};
+
+    transition: transform ${TRANSITION_NORMAL} ease;
+    transform: scale(0);
+  }
+
+  &:hover {
+    span {
+      color: ${(props) => props.theme.button.hover.textColor};
+    }
+
+    div {
+      transform: scale(1);
+    }
+  }
 `

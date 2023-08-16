@@ -1,13 +1,18 @@
-import { getBlogPostDateInformation } from "./dates";
-import { createSearchableString } from "./posts";
+import { getBlogPostDateInformation } from './dates'
+import { createSearchableString } from './posts'
 
-import { BlogPostType, FlattenedBlogPost, PartiallyFlattenedBlogPost } from "@Types/posts";
+import {
+  BlogPostType,
+  FlattenedBlogPost,
+  PartiallyFlattenedBlogPost,
+} from '@Types/posts'
 
-export const formatAllBlogPosts = (posts: BlogPostType[]): FlattenedBlogPost[] => (
+export const formatAllBlogPosts = (
+  posts: BlogPostType[]
+): FlattenedBlogPost[] =>
   posts
-    .map(p => formatBlogPost(p))
+    .map((p) => formatBlogPost(p))
     .sort((a, b) => b.published.date.getTime() - a.published.date.getTime())
-)
 
 export function formatBlogPost(post: BlogPostType): FlattenedBlogPost {
   const data: PartiallyFlattenedBlogPost = {
@@ -16,16 +21,17 @@ export function formatBlogPost(post: BlogPostType): FlattenedBlogPost {
     excerpt: post.excerpt,
     content: post.content,
     published: getBlogPostDateInformation(post.date),
-    categories: post.categories.nodes && post.categories.nodes.map(n => n.name),
-    tags: post.tags.nodes && post.tags.nodes.map(n => n.name)
+    categories:
+      post.categories.nodes && post.categories.nodes.map((n) => n.name),
+    tags: post.tags.nodes && post.tags.nodes.map((n) => n.name),
   }
 
   const flattenedPost: FlattenedBlogPost = {
     ...data,
-    meta: createMetaForPost(data)
+    meta: createMetaForPost(data),
   }
 
-  return flattenedPost;
+  return flattenedPost
 }
 
 export function createMetaForPost(post: PartiallyFlattenedBlogPost) {

@@ -1,13 +1,19 @@
-import { graphql } from 'gatsby';
-import * as React from 'react';
+import { graphql } from 'gatsby'
+import * as React from 'react'
 
-import { BigParagraph, Grouping, LeadHeading, Page, Subtitle } from '@Styles/general-components';
+import {
+  BigParagraph,
+  Grouping,
+  LeadHeading,
+  Page,
+  Subtitle,
+} from '@Styles/general-components'
 
-import { CustomLink, HoverImage, SkewRow } from '@Gen';
+import { CustomLink, HoverImage, SkewRow } from '@Gen'
 
-import { ICONS_TO_LINKS } from '@Constants';
+import { ICONS_TO_LINKS } from '@Constants'
 
-import { SVGImageQuery } from '@Types/query';
+import { SVGImageQuery } from '@Types/query'
 
 export const Head: React.FC = () => (
   <>
@@ -17,7 +23,7 @@ export const Head: React.FC = () => (
       content="Learn about why this website exists as well as links to my GitHub, blog and social media."
     />
   </>
-);
+)
 
 const AboutPage: React.FC<SVGImageQuery> = ({ data }) => {
   const images = data.allFile.nodes.map((n) => ({
@@ -25,14 +31,15 @@ const AboutPage: React.FC<SVGImageQuery> = ({ data }) => {
     url: ICONS_TO_LINKS[n.name as keyof typeof ICONS_TO_LINKS]
       ? ICONS_TO_LINKS[n.name as keyof typeof ICONS_TO_LINKS]
       : '#',
-  }));
+  }))
   return (
     <Page>
       <Grouping>
         <LeadHeading>About</LeadHeading>
         <BigParagraph>
-          This is a site that has, more or less, the same functionality as my blog I imagine that
-          you're asking why this page exists when a normal version can be found at{' '}
+          This is a site that has, more or less, the same functionality as my
+          blog I imagine that you're asking why this page exists when a normal
+          version can be found at{' '}
           <CustomLink outside inline to="https://benyakiredits.com">
             benyakiredits.com
           </CustomLink>
@@ -46,25 +53,28 @@ const AboutPage: React.FC<SVGImageQuery> = ({ data }) => {
           <CustomLink outside inline to="https://www.gatsbyjs.com">
             GatsbyJS
           </CustomLink>
-          . It may not mean much to you, but there are a few reasons why this is valuable. Gatsby
-          uses React, which is a single page application. Normally, when you visit a website, your
-          computer sends a request to a server that processes the request then sends information
-          back. On my WordPress blog, every time you visit a new page, the server processes the
-          request, generates the page based on the pages and posts then sends back information.
-          React, on the other hand, doesn't do this. Your computer sends only one request. It sends
-          back one package that contains everything. Gatsby is a little addition that has a few
-          extra features to allow search engine optimization and the use of GraphQL.
+          . It may not mean much to you, but there are a few reasons why this is
+          valuable. Gatsby uses React, which is a single page application.
+          Normally, when you visit a website, your computer sends a request to a
+          server that processes the request then sends information back. On my
+          WordPress blog, every time you visit a new page, the server processes
+          the request, generates the page based on the pages and posts then
+          sends back information. React, on the other hand, doesn't do this.
+          Your computer sends only one request. It sends back one package that
+          contains everything. Gatsby is a little addition that has a few extra
+          features to allow search engine optimization and the use of GraphQL.
         </BigParagraph>
       </Grouping>
       <Grouping>
         <Subtitle>Some Examples</Subtitle>
         <BigParagraph>
-          First thing you can notice is that each section zooms out and does something instead of
-          having to load an entirely new page. Also the sidebar stays open no matter what page you
-          visit. This is possible because of React. Or, rather, it's facilitated by React. It
-          wouldn't be easy with just WordPress, and having a second site with its own routing and
-          data management makes it easier. Gatsby makes that a cinch in a bunch of complicated ways
-          I don't want to explain right now.
+          First thing you can notice is that each section zooms out and does
+          something instead of having to load an entirely new page. Also the
+          sidebar stays open no matter what page you visit. This is possible
+          because of React. Or, rather, it's facilitated by React. It wouldn't
+          be easy with just WordPress, and having a second site with its own
+          routing and data management makes it easier. Gatsby makes that a cinch
+          in a bunch of complicated ways I don't want to explain right now.
         </BigParagraph>
       </Grouping>
       <Grouping>
@@ -76,8 +86,8 @@ const AboutPage: React.FC<SVGImageQuery> = ({ data }) => {
         </SkewRow>
       </Grouping>
     </Page>
-  );
-};
+  )
+}
 
 export const query = graphql`
   query MyQuery {
@@ -88,6 +98,6 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
-export default AboutPage;
+export default AboutPage

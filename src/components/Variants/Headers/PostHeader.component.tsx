@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react'
 
 import {
   GroupingBox,
@@ -6,22 +6,22 @@ import {
   Column,
   BigParagraph,
   Paragraph,
-} from "@Styles/general-components";
+} from '@Styles/general-components'
 
-import { getPrettyDate } from "@Utils/dates";
+import { getPrettyDate } from '@Utils/dates'
 
-import { PostHeaderProps } from "@Types/props/post-components";
+import { PostHeaderProps } from '@Types/props/post-components'
 
 const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
   return (
     <GroupingBox>
-      <Row style={{ justifyContent: "space-between" }}>
+      <Row style={{ justifyContent: 'space-between' }}>
         {post.categories && (
           <Column>
             <BigParagraph>
-              {post.categories.length > 1 ? "Categories" : "Category"}
+              {post.categories.length > 1 ? 'Categories' : 'Category'}
             </BigParagraph>
-            <Paragraph>{post.categories.join(", ")}</Paragraph>
+            <Paragraph>{post.categories.join(', ')}</Paragraph>
           </Column>
         )}
         {post.tags && (
@@ -29,9 +29,9 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
             {post.tags.length > 0 && (
               <>
                 <BigParagraph>
-                  {post.tags.length > 1 ? "Tags" : "Tag"}
+                  {post.tags.length > 1 ? 'Tags' : 'Tag'}
                 </BigParagraph>
-                <Paragraph>{post.tags.join(", ")}</Paragraph>
+                <Paragraph>{post.tags.join(', ')}</Paragraph>
               </>
             )}
           </Column>
@@ -42,7 +42,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post }) => {
         </Column>
       </Row>
     </GroupingBox>
-  );
-};
+  )
+}
 
-export default PostHeader;
+export default PostHeader

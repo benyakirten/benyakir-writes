@@ -1,5 +1,5 @@
-import { FONT_MD, TRANSITION_SLOW } from '@StyleVars';
-import styled from 'styled-components';
+import { FONT_MD, TRANSITION_SLOW } from '@StyleVars'
+import styled from 'styled-components'
 
 export const ToggleGroup = styled.div`
   position: relative;
@@ -12,21 +12,21 @@ export const ToggleGroup = styled.div`
 export const ToggleInput = styled.input`
   display: none;
   position: relative;
-   
+
   &:checked + label {
-    background-color: ${props => props.theme.toggle.onBackground};
+    background-color: ${(props) => props.theme.toggle.onBackground};
 
     &::after {
-      background-color: ${props => props.theme.toggle.onColor};
+      background-color: ${(props) => props.theme.toggle.onColor};
       left: calc(100% - 1.8rem);
     }
   }
 
   & + label {
-    background-color: ${props => props.theme.toggle.offBackground};
+    background-color: ${(props) => props.theme.toggle.offBackground};
 
     &::after {
-      background-color: ${props => props.theme.toggle.offColor};
+      background-color: ${(props) => props.theme.toggle.offColor};
       left: 0;
     }
   }
@@ -38,14 +38,14 @@ export const ToggleLabel = styled.label<{ label: string }>`
   position: relative;
 
   border-radius: 2rem;
-  border: 2px solid ${props => props.theme.toggle.border};
+  border: 2px solid ${(props) => props.theme.toggle.border};
   height: 2.2rem;
   width: 6rem;
 
   transition: all ${TRANSITION_SLOW} ease;
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     width: 1.8rem;
     height: 1.8rem;

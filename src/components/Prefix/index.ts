@@ -1,1 +1,1 @@
-export { default as DownArrow } from "./DownArrow/DownArrow.component"
+export { default as DownArrow } from './DownArrow/DownArrow.component'

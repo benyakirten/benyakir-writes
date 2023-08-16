@@ -1,14 +1,14 @@
-import * as React from "react";
-import { PrismLight } from "react-syntax-highlighter";
+import * as React from 'react'
+import { PrismLight } from 'react-syntax-highlighter'
 
 import {
   HighlighterContainer,
   HighlighterTopbar,
   LoadingBackground,
   LoadingContainer,
-} from "./SyntaxHighlighter.styles";
+} from './SyntaxHighlighter.styles'
 
-import { Loading } from "@Gen";
+import { Loading } from '@Gen'
 
 import {
   getPrismLanguage,
@@ -17,48 +17,48 @@ import {
   getFullLanguage,
   getFullTheme,
   ENABLED_THEMES,
-} from "@Utils/blocks/syntax-highlighter";
+} from '@Utils/blocks/syntax-highlighter'
 
 const SyntaxHighlighter: React.FC<SyntaxHighlighterBlock> = ({
   lang,
   code,
-  theme = "darcula",
+  theme = 'darcula',
 }) => {
-  const [initialized, setInitialized] = React.useState<boolean>(false);
-  const [finalTheme, setFinalTheme] = React.useState<any>();
-  const [loading, setLoading] = React.useState<boolean>(true);
-  const [showTheme, setShowTheme] = React.useState<EnabledTheme>(theme);
+  const [initialized, setInitialized] = React.useState<boolean>(false)
+  const [finalTheme, setFinalTheme] = React.useState<any>()
+  const [loading, setLoading] = React.useState<boolean>(true)
+  const [showTheme, setShowTheme] = React.useState<EnabledTheme>(theme)
 
   async function fetchTheme() {
-    const _theme = await getPrismTheme(showTheme);
-    setFinalTheme(_theme);
+    const _theme = await getPrismTheme(showTheme)
+    setFinalTheme(_theme)
   }
 
   async function fetchLang() {
-    const _lang = await getPrismLanguage(lang);
-    PrismLight.registerLanguage(lang, _lang);
+    const _lang = await getPrismLanguage(lang)
+    PrismLight.registerLanguage(lang, _lang)
   }
 
   React.useEffect(() => {
     async function intialize() {
-      await fetchLang();
-      await fetchTheme();
-      setLoading(false);
-      setInitialized(true);
+      await fetchLang()
+      await fetchTheme()
+      setLoading(false)
+      setInitialized(true)
     }
-    intialize();
-  }, []);
+    intialize()
+  }, [])
 
   React.useEffect(() => {
     async function changeTheme() {
-      setLoading(true);
-      await fetchTheme();
-      setLoading(false);
+      setLoading(true)
+      await fetchTheme()
+      setLoading(false)
     }
-    if (initialized) changeTheme();
-  }, [showTheme]);
+    if (initialized) changeTheme()
+  }, [showTheme])
 
-  const randId = Math.random().toString();
+  const randId = Math.random().toString()
   return (
     <HighlighterContainer>
       {loading && (
@@ -94,7 +94,7 @@ const SyntaxHighlighter: React.FC<SyntaxHighlighterBlock> = ({
         <div>{decode(code)}</div>
       )}
     </HighlighterContainer>
-  );
-};
+  )
+}
 
-export default SyntaxHighlighter;
+export default SyntaxHighlighter

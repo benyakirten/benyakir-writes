@@ -5,7 +5,9 @@ import { DestinationColumn } from './DestinationList.styles'
 
 import { DestinationListProps } from '@Types/props/draggable'
 
-const DraggableDestinationList: React.FC<DestinationListProps> = ({ destinations }) => {
+const DraggableDestinationList: React.FC<DestinationListProps> = ({
+  destinations,
+}) => {
   return (
     <DestinationColumn>
       {destinations.map(({ title, content, onDrop }) => (

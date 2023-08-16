@@ -1,57 +1,66 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import { Centered, Column, SubHeading } from '@Styles/general-components';
-import { ResultsContainer, SingleResult } from './Search.styles';
+import { Centered, Column, SubHeading } from '@Styles/general-components'
+import { ResultsContainer, SingleResult } from './Search.styles'
 
-import { CustomLink, Foldout, Loading } from '@Gen';
-import { Checkbox, Text } from '@Input';
+import { CustomLink, Foldout, Loading } from '@Gen'
+import { Checkbox, Text } from '@Input'
 
-import { useDebounce, useLookup } from '@Hooks';
-import { capitalize, firstWords } from '@Utils/strings';
+import { useDebounce, useLookup } from '@Hooks'
+import { capitalize, firstWords } from '@Utils/strings'
 
-import data from '@Data/searchData.json';
+import data from '@Data/searchData.json'
 
-import { SearchableItem } from '@Types/posts';
+import { SearchableItem } from '@Types/posts'
 
 const Search: React.FC<SearchProps> = ({ open, onClick }) => {
-  const allResults = React.useMemo<SearchableItem[]>(() => data, [data]);
+  const allResults = React.useMemo<SearchableItem[]>(() => data, [data])
 
-  const [pending, startTransition] = React.useTransition();
-  const [search, setSearch] = useDebounce(filterResults);
-  const [filteredResults, setFilteredResults] = React.useState<SearchableItem[]>([]);
+  const [pending, startTransition] = React.useTransition()
+  const [search, setSearch] = useDebounce(filterResults)
+  const [filteredResults, setFilteredResults] = React.useState<
+    SearchableItem[]
+  >([])
 
   const [showState, showDispatch] = useLookup({
     post: true,
     project: true,
     book: true,
     story: true,
-  });
+  })
 
-  const togglePostType = (postType: string) => showDispatch({ type: 'TOGGLE', payload: postType });
+  const togglePostType = (postType: string) =>
+    showDispatch({ type: 'TOGGLE', payload: postType })
 
   function filterResults(val: string) {
     // This is unnecessary for the component to function,
     // but it causes the component not to re-render on initial render
     // It really annoys me
-    if (filteredResults.length === 0 && !val) return;
+    if (filteredResults.length === 0 && !val) return
 
-    const _search = val.toLowerCase().split(' ');
-    if (!val) setFilteredResults([]);
-    const _results = allResults.filter((r) => showState[r.type] && _search.every((s) => r.meta[s]));
+    const _search = val.toLowerCase().split(' ')
+    if (!val) setFilteredResults([])
+    const _results = allResults.filter(
+      (r) => showState[r.type] && _search.every((s) => r.meta[s])
+    )
 
     startTransition(() => {
-      setFilteredResults(_results);
-    });
+      setFilteredResults(_results)
+    })
   }
 
   React.useEffect(() => {
-    filterResults(search);
-  }, [showState]);
+    filterResults(search)
+  }, [showState])
 
   return (
     <Foldout
       open={open}
-      topbar={<SubHeading style={{ transition: 'color 0.8s ease' }}>Search</SubHeading>}
+      topbar={
+        <SubHeading style={{ transition: 'color 0.8s ease' }}>
+          Search
+        </SubHeading>
+      }
       onClick={onClick}
       height="min-content"
     >
@@ -119,7 +128,7 @@ const Search: React.FC<SearchProps> = ({ open, onClick }) => {
         )}
       </ResultsContainer>
     </Foldout>
-  );
-};
+  )
+}
 
-export default Search;
+export default Search

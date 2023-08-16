@@ -76,7 +76,7 @@ type StoryHeaderProps = {
   story: FlattenedSingleStory;
 }
 
-type ProjectHeaderProps = {
+interface ProjectHeaderProps {
   project: FlattenedProject;
   icons: FileNode[];
   latestUpdateState: 

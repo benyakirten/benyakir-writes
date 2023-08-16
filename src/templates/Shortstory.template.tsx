@@ -1,33 +1,41 @@
-import { graphql } from 'gatsby';
-import * as React from 'react';
+import { graphql } from 'gatsby'
+import * as React from 'react'
 
-import { Grouping, LeadHeading, Page, Subtitle, WpContent } from '@Styles/general-components';
+import {
+  Grouping,
+  LeadHeading,
+  Page,
+  Subtitle,
+  WpContent,
+} from '@Styles/general-components'
 
-import { flattenStory } from '@/utils/author';
-import { getPrettyDate } from '@Utils/dates';
-import { formatWpText } from '@Utils/posts';
-import { firstWords } from '@Utils/strings';
+import { flattenStory } from '@/utils/author'
+import { getPrettyDate } from '@Utils/dates'
+import { formatWpText } from '@Utils/posts'
+import { firstWords } from '@Utils/strings'
 
-import ShortStoryHeader from '@/components/Variants/Headers/ShortStoryHeader.component';
-import { WpStory } from '@Types/query';
+import ShortStoryHeader from '@/components/Variants/Headers/ShortStoryHeader.component'
+import { WpStory } from '@Types/query'
 
 export const Head: React.FC<WpStory> = ({ data }) => {
-  const story = flattenStory(data.wpShortstory, data.file.publicURL);
+  const story = flattenStory(data.wpShortstory, data.file.publicURL)
   return (
     <>
       <title>{story.title}</title>
       <meta
         name="description"
-        content={`${story.title}, published on ${getPrettyDate(story.published.date)}${
+        content={`${story.title}, published on ${getPrettyDate(
+          story.published.date
+        )}${
           story.book ? `, related to ${story.book.title}` : null
         }: ${firstWords(formatWpText(story.content), 100)}`}
       />
     </>
-  );
-};
+  )
+}
 
 const Story: React.FC<WpStory> = ({ data }) => {
-  const story = flattenStory(data.wpShortstory, data.file.publicURL);
+  const story = flattenStory(data.wpShortstory, data.file.publicURL)
   return (
     <Page>
       <LeadHeading>{story.title}</LeadHeading>
@@ -37,8 +45,8 @@ const Story: React.FC<WpStory> = ({ data }) => {
         <WpContent dangerouslySetInnerHTML={{ __html: story.content }} />
       </Grouping>
     </Page>
-  );
-};
+  )
+}
 
 export const query = graphql`
   query ($id: String) {
@@ -80,6 +88,6 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
-export default Story;
+export default Story

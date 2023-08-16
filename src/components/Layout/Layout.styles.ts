@@ -1,7 +1,7 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components'
 
-import { media } from '@Styles/queries';
-import { MULISH, TRANSITION_NORMAL } from '@StyleVars';
+import { media } from '@Styles/queries'
+import { MULISH, TRANSITION_NORMAL } from '@StyleVars'
 
 export const GlobalStyles = createGlobalStyle`
   *,
@@ -32,8 +32,8 @@ export const GlobalStyles = createGlobalStyle`
   body {
     box-sizing: border-box;
     font-family: ${MULISH};
-    color: ${props => props.theme.base.textColor};
-    background-color: ${props => props.theme.base.background};
+    color: ${(props) => props.theme.base.textColor};
+    background-color: ${(props) => props.theme.base.background};
   }
 
   a {
@@ -79,6 +79,6 @@ export const LayoutContainer = styled.div`
 export const MainContainer = styled.main`
   position: relative;
   width: 100%;
-  background-color: ${props => props.theme.base.background};
+  background-color: ${(props) => props.theme.base.background};
   overflow: hidden;
-`;
+`

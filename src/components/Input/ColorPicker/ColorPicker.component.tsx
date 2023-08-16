@@ -1,8 +1,8 @@
-import * as React from "react";
+import * as React from 'react'
 
-import { ColorInput, Container, Label } from "./ColorPicker.styles";
+import { ColorInput, Container, Label } from './ColorPicker.styles'
 
-import { COLOR_REGEX } from "@Constants";
+import { COLOR_REGEX } from '@Constants'
 
 const ColorPicker: React.FC<ColorPickerProps> = ({
   name,
@@ -29,7 +29,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
         onChange={handleChange}
       />
     </Container>
-  );
-};
+  )
+}
 
-export default ColorPicker;
+export default ColorPicker

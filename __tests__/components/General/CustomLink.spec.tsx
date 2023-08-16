@@ -1,28 +1,28 @@
-import * as React from "react";
+import * as React from 'react'
 
-import { cleanup, render, screen } from "@TestUtils";
-import { CustomLink } from "@Gen";
+import { cleanup, render, screen } from '@TestUtils'
+import { CustomLink } from '@Gen'
 
-describe("CustomLink component", () => {
+describe('CustomLink component', () => {
   beforeEach(() => {
-    jest.useFakeTimers();
-  });
+    jest.useFakeTimers()
+  })
 
   afterEach(() => {
-    jest.runOnlyPendingTimers();
-    jest.useRealTimers();
-    cleanup();
-  });
+    jest.runOnlyPendingTimers()
+    jest.useRealTimers()
+    cleanup()
+  })
 
-  it("should render properly", () => {
-    expect(() => render(<CustomLink to="dummyroute" />)).not.toThrow();
-  });
+  it('should render properly', () => {
+    expect(() => render(<CustomLink to="dummyroute" />)).not.toThrow()
+  })
 
-  it("should pass the to property as an href to the link element", async () => {
-    render(<CustomLink to="testroute" />);
-    const links = await screen.getAllByRole("link");
-    expect(links[1].getAttribute("href")).toEqual("testroute");
-  });
+  it('should pass the to property as an href to the link element', async () => {
+    render(<CustomLink to="testroute" />)
+    const links = await screen.getAllByRole('link')
+    expect(links[1].getAttribute('href')).toEqual('testroute')
+  })
 
   // This test does not work. I do not know why
   // The getComputedStyle gets the link's styles, not the :after element
@@ -37,4 +37,4 @@ describe("CustomLink component", () => {
   //         expect(getComputedStyle(link, ':after').transform).toEqual("scale(1)")
   //     })
   // })
-});
+})

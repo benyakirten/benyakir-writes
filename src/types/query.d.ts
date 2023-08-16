@@ -1,4 +1,12 @@
-import { BlogPostType, BookType, FileNode, ProjectType, SingleBook, SingleStory, StoryType } from './posts.d'
+import {
+  BlogPostType,
+  BookType,
+  FileNode,
+  ProjectType,
+  SingleBook,
+  SingleStory,
+  StoryType,
+} from './posts.d'
 
 type WpPost = {
   data: {
@@ -16,17 +24,17 @@ type AllWpPost = {
 
 type WpPostByCategory = {
   pageContext: {
-    name: string;
+    name: string
   }
 }
 
 type WpAuthor = {
   data: {
     allWpBook: {
-      nodes: BookType[];
+      nodes: BookType[]
     }
     allWpShortstory: {
-      nodes: StoryType[];
+      nodes: StoryType[]
     }
   }
 }
@@ -34,7 +42,7 @@ type WpAuthor = {
 type WpAllBooks = {
   data: {
     allWpBook: {
-      nodes: BookType[];
+      nodes: BookType[]
     }
   }
 }
@@ -42,16 +50,16 @@ type WpAllBooks = {
 type WpAllStories = {
   data: {
     allWpShortstory: {
-      nodes: StoryType[];
+      nodes: StoryType[]
     }
   }
 }
 
 type WpBook = {
   data: {
-    wpBook: SingleBook,
+    wpBook: SingleBook
     file: {
-      publicURL: string;
+      publicURL: string
     }
   }
 }
@@ -60,7 +68,7 @@ type WpStory = {
   data: {
     wpShortstory: SingleStory
     file: {
-      publicURL: string;
+      publicURL: string
     }
   }
 }
@@ -77,7 +85,7 @@ type WpProject = {
 type SVGImageQuery = {
   data: {
     allFile: {
-      nodes: FileNode[];
+      nodes: FileNode[]
     }
   }
 }
@@ -95,13 +103,13 @@ type ProjectsQuery = {
 
 type GlobalQuery = {
   allWpBook: {
-    nodes: BookType[];
+    nodes: BookType[]
   }
   allWpProject: {
     nodes: ProjectType[]
   }
   allWpShortstory: {
-    nodes: StoryType[];
+    nodes: StoryType[]
   }
   allWpPost: {
     nodes: BlogPostType[]

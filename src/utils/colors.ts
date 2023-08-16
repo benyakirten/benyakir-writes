@@ -1,36 +1,36 @@
-import { keepWithinRange } from "./numbers";
-import { validateRange } from "./validation";
+import { keepWithinRange } from './numbers'
+import { validateRange } from './validation'
 
 export function convertHexToRGBA(color: string, opacity: number = 0.4) {
-  const parsedColors = convertHexToRGBNumber(color);
-  return `rgba(${parsedColors.red}, ${parsedColors.green}, ${parsedColors.blue}, ${+opacity.toFixed(2)})`
+  const parsedColors = convertHexToRGBNumber(color)
+  return `rgba(${parsedColors.red}, ${parsedColors.green}, ${
+    parsedColors.blue
+  }, ${+opacity.toFixed(2)})`
 }
 
 function parseAndCheck(..._colors: string[]) {
-  const parsedColors = _colors.map(c => parseInt(c, 16));
+  const parsedColors = _colors.map((c) => parseInt(c, 16))
   for (let parsedColor of parsedColors) {
-    if (
-      isNaN(parsedColor) ||
-      parsedColor < 0 ||
-      parsedColor > 255
-    ) {
+    if (isNaN(parsedColor) || parsedColor < 0 || parsedColor > 255) {
       throw new Error('Hex string is unable to be parsed as a color')
     }
   }
-  return parsedColors;
+  return parsedColors
 }
 
 function checkIfHexValid(color: string) {
   if (color[0] !== '#' || !(color.length === 4 || color.length === 7)) {
-    throw new Error('Hex string must consist of # followed by three or six numbers')
+    throw new Error(
+      'Hex string must consist of # followed by three or six numbers'
+    )
   }
 }
 
 export function convertHexToRGBString(color: string): RGBString {
-  checkIfHexValid(color);
+  checkIfHexValid(color)
   let red = '',
-      green = '',
-      blue = ''
+    green = '',
+    blue = ''
   if (color.length === 4) {
     red = `${color[1]}${color[1]}`
     green = `${color[2]}${color[2]}`
@@ -41,12 +41,12 @@ export function convertHexToRGBString(color: string): RGBString {
     green = color.slice(3, 5)
     blue = color.slice(5, 7)
   }
-  parseAndCheck(red, blue, green);
+  parseAndCheck(red, blue, green)
 
   return {
     red,
     green,
-    blue
+    blue,
   }
 }
 
@@ -55,40 +55,45 @@ export function convertRGBStringToRGBNumber(color: RGBString): RGBNumber {
   const green = parseInt(color.green, 16)
   const blue = parseInt(color.blue, 16)
   if (
-    isNaN(red) || isNaN(green) || isNaN(blue) ||
-    red > 255 || red < 0 ||
-    blue > 255 || blue < 0 ||
-    green > 255 || green < 0
+    isNaN(red) ||
+    isNaN(green) ||
+    isNaN(blue) ||
+    red > 255 ||
+    red < 0 ||
+    blue > 255 ||
+    blue < 0 ||
+    green > 255 ||
+    green < 0
   ) {
     throw new Error('RGB Color String cannot be parsed')
   }
   return {
     red,
     green,
-    blue
+    blue,
   }
 }
 
 export function convertRGBNumberToRGBString(color: RGBNumber): RGBString {
-  const { red, green, blue } = color;
+  const { red, green, blue } = color
   if (!validateRGBNumbers(red, blue, green)) {
     throw new Error('Unable to validate color values')
   }
   function getValues(...colors: number[]) {
     const finalColors = []
     for (let color of colors) {
-      let colorVal = color.toString(16);
-      colorVal = colorVal.length === 1 ? colorVal + colorVal : colorVal;
+      let colorVal = color.toString(16)
+      colorVal = colorVal.length === 1 ? colorVal + colorVal : colorVal
       finalColors.push(colorVal)
     }
-    return finalColors;
+    return finalColors
   }
   const [redVal, greenVal, blueVal] = getValues(red, green, blue)
 
   return {
     red: redVal,
     green: greenVal,
-    blue: blueVal
+    blue: blueVal,
   }
 }
 
@@ -97,17 +102,17 @@ export function validateRGBNumbers(...colors: number[]) {
   const validateRGB = validateRange({ min: 0, max: 255, step: 1 })
   for (let color of colors) {
     if (!validateRGB(color)) {
-      return false;
+      return false
     }
   }
-  return true;
+  return true
 }
 
 export function convertHexToRGBNumber(color: string): RGBNumber {
-  checkIfHexValid(color);
+  checkIfHexValid(color)
   let red = '',
-      green = '',
-      blue = ''
+    green = '',
+    blue = ''
   if (color.length === 4) {
     red = `${color[1]}${color[1]}`
     green = `${color[2]}${color[2]}`
@@ -118,46 +123,50 @@ export function convertHexToRGBNumber(color: string): RGBNumber {
     green = color.slice(3, 5)
     blue = color.slice(5, 7)
   }
-  const [parsedRed, parsedGreen, parsedBlue] = parseAndCheck(red, green, blue);
+  const [parsedRed, parsedGreen, parsedBlue] = parseAndCheck(red, green, blue)
   return {
     red: parsedRed,
     green: parsedGreen,
-    blue: parsedBlue
+    blue: parsedBlue,
   }
 }
 
 export function convertRGBNumberToHex(color: RGBNumber): string {
-  const { red, green, blue } = color;
+  const { red, green, blue } = color
   if (!validateRGBNumbers(red, blue, green)) {
     throw new Error('Unable to validate color values')
   }
   return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`
 }
 
-export function changeHex(color: string, percent: number, positive: boolean = true): string {
-  checkIfHexValid(color);
-  const convertedColor = convertHexToRGBNumber(color);
-  const changeAmount = Math.round(keepWithinRange(255 * percent / 100));
+export function changeHex(
+  color: string,
+  percent: number,
+  positive: boolean = true
+): string {
+  checkIfHexValid(color)
+  const convertedColor = convertHexToRGBNumber(color)
+  const changeAmount = Math.round(keepWithinRange((255 * percent) / 100))
   if (positive) {
     const changedRGB: RGBNumber = {
       red: keepWithinRange(convertedColor.red + changeAmount),
       green: keepWithinRange(convertedColor.blue + changeAmount),
-      blue: keepWithinRange(convertedColor.green + changeAmount)
+      blue: keepWithinRange(convertedColor.green + changeAmount),
     }
-    return convertRGBNumberToHex(changedRGB);
+    return convertRGBNumberToHex(changedRGB)
   }
   const changedRGB: RGBNumber = {
     red: keepWithinRange(convertedColor.red - changeAmount),
     green: keepWithinRange(convertedColor.blue - changeAmount),
-    blue: keepWithinRange(convertedColor.green - changeAmount)
+    blue: keepWithinRange(convertedColor.green - changeAmount),
   }
-  return convertRGBNumberToHex(changedRGB);
+  return convertRGBNumberToHex(changedRGB)
 }
 
 export function lighten(color: string, percent: number): string {
-  return changeHex(color, percent);
+  return changeHex(color, percent)
 }
 
 export function darken(color: string, percent: number): string {
-  return changeHex(color, percent, false);
+  return changeHex(color, percent, false)
 }

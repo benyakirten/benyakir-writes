@@ -1,11 +1,11 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import { useAppSelector } from '@Store/hooks';
-import { SVGData } from '@Types/portfolio';
-import SVGShape from './SVGShape.component';
+import { useAppSelector } from '@Store/hooks'
+import { SVGData } from '@Types/portfolio'
+import SVGShape from './SVGShape.component'
 
 const Wheel: React.FC<SVGData> = ({ xMovement, yMovement }) => {
-  const themeStore = useAppSelector((root) => root.theme);
+  const themeStore = useAppSelector((root) => root.theme)
   return (
     <SVGShape xMovement={xMovement} yMovement={yMovement}>
       <circle
@@ -43,6 +43,6 @@ const Wheel: React.FC<SVGData> = ({ xMovement, yMovement }) => {
         strokeWidth="2"
       />
     </SVGShape>
-  );
-};
-export default Wheel;
+  )
+}
+export default Wheel
