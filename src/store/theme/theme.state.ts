@@ -5,7 +5,7 @@ export const defaultDayTheme: BaseTheme = {
     textColor: '#000000',
     background: '#FFFFFF',
     border: '#39435b',
-    shadowColor: '#000000',
+    shadowColor: '#9b825d',
     disabled: '#495057',
     highlighted: '#FF00FF'
   },

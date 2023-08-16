@@ -1,7 +1,7 @@
-import * as React from "react";
-import { graphql, Link, useStaticQuery } from "gatsby";
+import { graphql, Link, useStaticQuery } from 'gatsby'
+import * as React from 'react'
 
-import { LogoContainer } from "./Logo.styles"
+import { LogoContainer } from './Logo.styles'
 
 const Logo: React.FC<LogoProps> = ({ opening, open }) => {
   const data: LogoQuery = useStaticQuery(graphql`
@@ -10,7 +10,8 @@ const Logo: React.FC<LogoProps> = ({ opening, open }) => {
         publicURL
       }
     }
-  `);
+  `)
+
   return (
     <Link to="/">
       <LogoContainer
@@ -22,7 +23,7 @@ const Logo: React.FC<LogoProps> = ({ opening, open }) => {
         aria-label="Logo"
       />
     </Link>
-  );
-};
+  )
+}
 
-export default Logo;
+export default Logo

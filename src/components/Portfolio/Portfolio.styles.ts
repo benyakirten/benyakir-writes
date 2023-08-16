@@ -5,33 +5,32 @@ import { convertHexToRGBA } from "@/utils/colors";
 import { FAUSTINA, FONT_LG, FONT_MD, FONT_SM, SHADOW_SM, Z_ABOVE, Z_HIGH } from "@Styles/variables";
 
 export const ProjectBoxes = styled.div`
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    ${media.desktop} {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    ${media.tablet} {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    ${media.phone} {
-        grid-template-columns: repeat(1, 1fr);
-    }
-    gap: 4rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  ${media.desktop} {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  ${media.tablet} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  ${media.phone} {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  gap: 4rem;
 `
 
-// TODO: Figure out better timing function
 export const ProjectBox = styled.article<{ hovered?: boolean }>`
-    position: relative;
-    z-index: ${props => props.hovered ? Z_HIGH : Z_ABOVE};
-    border-radius: 4px;
-    font-size: ${FONT_SM};
-    box-shadow: 0.5px 0.5px 1px 0.5px;
-    background-color: ${props => `${props.theme.base.background}${props.hovered ? '' : '90'}`};
-    transition: transform 250ms ease-in, background-color 250ms ease-in;
-
-    &:hover {
-        transform: scale(1.04);
-    }
+  position: relative;
+  z-index: ${props => props.hovered ? Z_HIGH : Z_ABOVE};
+  border-radius: 4px;
+  font-size: ${FONT_SM};
+  box-shadow: 0.5px 0.5px 1px 0.5px;
+  background-color: ${props => `${props.theme.base.background}${props.hovered ? '' : '99'}`};
+  transition: transform 50ms ease-in, background-color 50ms ease-in;
+  
+  &:hover {
+    transform: scale(3);
+  }
 `
 
 // TODO: update this to use grid instead of
@@ -97,10 +96,10 @@ export const ProjectDates = styled.div`
 `
 
 export const GitHubIcon = styled.img.attrs<{ ghIcon: string }>(({ ghIcon }) => ({
-    alt: "GitHub Link",
-    src: ghIcon,
-    height: "18px",
-    width: "18px",
+  alt: "GitHub Link",
+  src: ghIcon,
+  height: "18px",
+  width: "18px",
 })) <{ ghIcon: string }>`
     display: inline;
     margin-left: 0.5rem;
@@ -114,14 +113,10 @@ export const TechBadges = styled.div`
 export const TechBadge = styled.span<{ selected: boolean }>`
     background-color: ${props => props.selected ? props.theme.button.default.textColor : props.theme.button.default.background};
     color: ${props => props.selected ? props.theme.button.default.background : props.theme.button.default.textColor};
-    transition: background-color 500ms ease, color 250ms ease;
+    transition: background-color 150ms ease, color 150ms ease;
 
     border: 1px solid ${props => props.theme.button.border};
     box-shadow: ${props => `${SHADOW_SM} ${convertHexToRGBA(props.theme.base.shadowColor, 0.4)}`};
-
-    font-size: ${FONT_SM};
-    text-decoration: ${props => props.selected ? "underline" : "none"};
-    text-decoration-thickness: 1px;
 
     border-radius: 1rem;
     padding: 0.5rem 1rem;
@@ -133,27 +128,10 @@ export const TechnologyLabel = styled.label<{ checked: boolean }>`
     z-index: ${Z_ABOVE};
     font-size: ${FONT_MD};
     height: min-content;
-
-    &::after {
-        content: '';
-
-        position: absolute;
-        bottom: 0;
-        left: 0;
-
-        width: 100%;
-        height: 2px;
-
-        background-color: ${props => props.theme.base.textColor};
-
-        transition: color 400ms ease, transform 400ms ease-in-out;
-        transform-origin: ${() => Math.random() > 0.5 ? 'left' : 'right'};
-        transform: scaleX(${props => props.checked ? '1' : '0'});
-    }
 `
 export const TechnologyCheckox = styled.input.attrs<{ checked: boolean }>(checked => ({
-    type: "checkbox",
-    checked,
+  type: "checkbox",
+  checked,
 })) <{ checked: boolean }>`
     display: none;
 `
@@ -169,51 +147,56 @@ export const PortfolioBackground = styled.div`
 `
 
 export const FilterContainer = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    height: min-content;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  height: min-content;
 
-    max-width: 30%;
+  max-width: 30%;
 
-    ${media.phone} {
-        max-width: 100%;
-    }
+  ${media.phone} {
+    max-width: 100%;
+  }
 `
 
 export const PortfolioHeader = styled.div`
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 
-    ${media.phone} {
-        flex-direction: column;
-    }
-    gap: 8rem;
-    justify-content: space-between;
-    
-    margin: 2rem 0;
+  ${media.phone} {
+    flex-direction: column;
+  }
+  gap: 8rem;
+  justify-content: space-between;
+  
+  margin: 2rem 0;
 
-    padding: 2rem 4rem;
-    ${media.tablet} {
-        padding: 1rem 2rem;
-    }
+  padding: 2rem 4rem;
+  ${media.tablet} {
+    padding: 1rem 2rem;
+  }
 `
 
 export const PortfolioDescription = styled.p`
-    text-align: left;
-    width: 40%;
-    ${media.phone} {
-        width: 100%;
-    }
-    letter-spacing: 0.2px;
-    line-height: 1.8rem;
-    font-size: ${FONT_MD};
-    z-index: 1;
+  text-align: left;
+  width: 40%;
+  ${media.phone} {
+    width: 100%;
+  }
+  line-height: 1.8rem;
+  font-size: ${FONT_MD};
+  z-index: 1;
 `
 
 export const PortfolioSVGContainer = styled.div<{ xPosition: number, yPosition: number }>`
-    position: absolute;
-    top: ${props => props.yPosition}px;
-    left: ${props => props.xPosition}px;
+  position: absolute;
+  top: ${props => props.yPosition}px;
+  left: ${props => props.xPosition}px;
+`
+
+export const ProjectLink = styled.a`
+  color: inherit;
+  text-decoration: none;
+  display: contents;
 `

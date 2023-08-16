@@ -6,7 +6,7 @@ import { ProjectFilters, ProjectGrid, RandomizedBackground } from '@/components/
 import { PortfolioDescription, PortfolioHeader } from '@/components/Portfolio/Portfolio.styles';
 import { useSet } from '@/hooks';
 import { getFirstParagraphOfContent } from '@/utils/project';
-import { PortfolioQuery } from '@Types/query';
+import { ProjectsQuery } from '@Types/query';
 
 export const Head: React.FC = () => (
   <>
@@ -18,9 +18,7 @@ export const Head: React.FC = () => (
   </>
 );
 
-const Portfolio: React.FC<PortfolioQuery> = ({ data }) => {
-  const ghIcon = data.file.publicURL;
-
+const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
   // Refactor this to a util
   const projects = React.useMemo(() => {
     const mappedProjects = data.allWpProject.nodes
@@ -78,7 +76,6 @@ const Portfolio: React.FC<PortfolioQuery> = ({ data }) => {
       <RandomizedBackground>
         <ProjectGrid
           projects={filteredProjects}
-          ghIcon={ghIcon}
           hovered={hovered}
           handleMouseEnter={(title) => setHovered(title)}
           handleMouseLeave={() => setHovered(null)}
@@ -91,9 +88,6 @@ const Portfolio: React.FC<PortfolioQuery> = ({ data }) => {
 
 export const query = graphql`
   query MyQuery {
-    file(name: { eq: "Github" }) {
-      publicURL
-    }
     allWpProject {
       nodes {
         project {
