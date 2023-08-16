@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { convertHexToRGBA } from '@Utils/colors';
 import { fadeIn, slideInLeft, slideInRight } from './animations';
 import { media } from './queries';
-import { BLACK, FAUSTINA, FONT_LG, FONT_MD, FONT_XL, FONT_XXL, FONT_XXXL, SECONDARY_800, SHADOW_MD_BALANCED, SIZE_MD } from './variables';
+import { BLACK, FAUSTINA, FONT_LG, FONT_MD, FONT_XL, FONT_XXL, FONT_XXXL, SECONDARY_800, SHADOW_MD_BALANCED, SIZE_MD, TRANSITION_EXTRA_SLOW, TRANSITION_NORMAL, TRANSITION_SLOW } from './variables';
 
 export const FadeIn = styled.div<{ duration?: string, delay?: string }>`
     opacity: 0;
@@ -47,7 +47,6 @@ export const LeadHeading = styled.h1`
     ${media.phone} {
         font-size: ${FONT_XXL};
     }
-    letter-spacing: 2px;
     
     &::after {
         content: '';
@@ -63,7 +62,7 @@ export const LeadHeading = styled.h1`
 
         transform-origin: left;
         transform: scaleX(1) translateY(0);
-        transition: transform 400ms ease;
+        transition: transform ${TRANSITION_NORMAL} ease;
 
         ${media.reducedMotion} {
             transform: scaleX(0.9) translateY(-2rem);
@@ -230,9 +229,9 @@ export const HoverableContainer = styled.div<{ height?: number, width?: number }
 `
 
 export const HoverableGatsbyImage = styled(GatsbyImage)`
-    transition: transform 6s;
+    transition: transform calc(2 * ${TRANSITION_EXTRA_SLOW});
     &:hover {
-        transform: scale(1.3);
+        transform: scale(1.2);
     }
 `
 
@@ -273,7 +272,7 @@ export const WpContentDescription = styled.div<{ fontSize?: string }>`
             
             background-color: ${SECONDARY_800};
 
-            transition: transform 400ms ease;
+            transition: transform ${TRANSITION_NORMAL} ease;
             transform-origin: left;
             transform: scaleX(0);
         }
@@ -296,7 +295,7 @@ export const Form = styled.form`
     gap: 1rem;
     align-items: start;
 
-    transition: all 1s ease;
+    transition: all ${TRANSITION_SLOW} ease;
 `
 
 export const ControlGroup = styled.div`
@@ -367,7 +366,7 @@ export const WpContent = styled.div<{ fontSize?: string }>`
             
             background-color: ${props => props.theme.base.textColor};
 
-            transition: transform 400ms ease;
+            transition: transform ${TRANSITION_NORMAL} ease;
             transform-origin: left;
             transform: scaleX(0);
         }
@@ -427,7 +426,7 @@ export const WpContentInline = styled.span<{ fontSize?: string }>`
             
             background-color: ${props => props.theme.base.textColor};
 
-            transition: transform 400ms ease;
+            transition: transform ${TRANSITION_NORMAL} ease;
             transform-origin: left;
             transform: scaleX(0);
         }

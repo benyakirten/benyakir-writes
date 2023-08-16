@@ -6,7 +6,10 @@ import { ThemeProvider } from 'styled-components'
 import { GlobalStyles, LayoutContainer, MainContainer } from './Layout.styles'
 import Sidebar from './Sidebar/Sidebar.component'
 
-import { getPageTransitionStyles, TIMEOUT_500 } from '@/styles/transitions'
+import {
+  getPageTransitionStyles,
+  PAGE_TRANSITION_DURATION,
+} from '@/styles/transitions'
 import { useAppDispatch, useAppSelector } from '@Store/hooks'
 import {
   intializeThemeStore,
@@ -76,15 +79,17 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
             <Transition
               key={location.pathname}
               timeout={{
-                enter: TIMEOUT_500,
-                exit: TIMEOUT_500,
+                enter: PAGE_TRANSITION_DURATION,
+                exit: PAGE_TRANSITION_DURATION,
               }}
               unmountOnExit
             >
               {(status) => (
                 <div
                   style={{
-                    ...getPageTransitionStyles(TIMEOUT_500)[status],
+                    ...getPageTransitionStyles(PAGE_TRANSITION_DURATION)[
+                      status
+                    ],
                   }}
                 >
                   {children}

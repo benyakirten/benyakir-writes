@@ -16,36 +16,12 @@ export const Skewed = styled.section<{ width?: string }>`
     border: 2px solid ${props => props.theme.base.border};
     background-color: ${props => props.theme.skewRow.background};
     
-    transition: transform 15s ease;
     transform: skew(-25deg);
 
     ${media.phone} {
         transform: skew(0deg);
         min-width: 20rem;
         margin: 0;
-    }
-    
-    &:hover {
-        transform: skew(25deg);
-
-        ${media.phone} {
-            transform: skew(0deg);
-        }
-
-        ${media.reducedMotion} {
-            transform: skew(0deg);
-        }
-        div {
-            transform: skew(-25deg);
-
-            ${media.phone} {
-                transform: skew(0deg);
-            }
-
-            ${media.reducedMotion} {
-                transform: skew(0deg);
-            }
-        }
     }
 `
 
@@ -60,7 +36,6 @@ export const AntiSkewed = styled.div`
     width: 100%;
 
     transform: skew(25deg);
-    transition: transform 15s ease;
 
     ${media.phone} {
         transform: skew(0deg);

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import { media } from '@Styles/queries'
-import { FONT_LG, Z_BASE, Z_UNDER } from '@StyleVars'
+import { FONT_LG, TRANSITION_SLOW, Z_BASE, Z_UNDER } from '@StyleVars'
 
 export const ChoiceContainer = styled.div<{ checked: boolean, hidden: boolean }>`
     position: relative;
@@ -30,10 +30,10 @@ export const ChoiceContainer = styled.div<{ checked: boolean, hidden: boolean }>
 
     border-radius: 2px;
 
-    background-color: ${props => props.checked ? props.theme.multipleChoice.textColor: props.theme.multipleChoice.background};
-    color: ${props => props.checked ?  props.theme.multipleChoice.background : props.theme.multipleChoice.textColor};
+    background-color: ${props => props.checked ? props.theme.multipleChoice.textColor : props.theme.multipleChoice.background};
+    color: ${props => props.checked ? props.theme.multipleChoice.background : props.theme.multipleChoice.textColor};
 
     font-size: ${FONT_LG};
 
-    transition: all 0.8s;
+    transition: all ${TRANSITION_SLOW};
 `

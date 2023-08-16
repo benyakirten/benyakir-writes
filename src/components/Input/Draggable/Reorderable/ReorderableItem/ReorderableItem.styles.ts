@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-import { FONT_MD, SHADOW_SM } from "@Styles/variables"
+import { FONT_MD, SHADOW_SM, TRANSITION_NORMAL } from "@Styles/variables"
 
 import { DraggedOverPosition } from "@Utils/enums"
 
@@ -21,7 +21,7 @@ export const IndividualItem = styled.li<{ selected: boolean, draggedPosition: Dr
   padding: ${props => props.dragged ? '0.5rem' : '1.5rem 0.5rem'};
 
   margin: ${props => {
-    switch(props.draggedPosition) {
+    switch (props.draggedPosition) {
       case DraggedOverPosition.NORTH:
         return '3rem 0 0 0'
       case DraggedOverPosition.SOUTH:
@@ -31,5 +31,5 @@ export const IndividualItem = styled.li<{ selected: boolean, draggedPosition: Dr
     }
   }};
 
-  transition: all 1s ease;
+  transition: all ${TRANSITION_NORMAL} ease;
 `

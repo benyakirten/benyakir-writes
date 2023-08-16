@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import { FONT_LG } from '@StyleVars';
 import { media } from '@Styles/queries';
+import { FONT_LG, TRANSITION_NORMAL } from '@StyleVars';
 import { multiplyCSSNumber } from '@Utils/strings';
 
 export const StyledFigure = styled.figure<{ color?: string, size?: string, square?: boolean, marginRightOnPhone?: string }>`
@@ -17,7 +17,7 @@ export const StyledFigure = styled.figure<{ color?: string, size?: string, squar
         border-radius: ${props => props.square ? 'none' : '50%'};
         height: ${props => props.size ? props.size : '10rem'};
         width: ${props => props.size ? props.size : '10rem'};
-        transition: all 400ms ease;
+        transition: all ${TRANSITION_NORMAL} ease;
 
         ${media.phone} {
             margin-right: ${props => props.marginRightOnPhone ? props.marginRightOnPhone : '2rem'};
@@ -29,7 +29,7 @@ export const StyledFigure = styled.figure<{ color?: string, size?: string, squar
     figcaption {
         text-align: center;
         font-size: ${FONT_LG};
-        transition: all 400ms ease;
+        transition: all ${TRANSITION_NORMAL} ease;
         color: ${props => props.theme.hoverImage.textColor};
     }
 

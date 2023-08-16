@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import { media } from '@Styles/queries'
-import { FONT_MD } from '@StyleVars'
+import { FONT_MD, TRANSITION_NORMAL } from '@StyleVars'
 
 export const ResultsContainer = styled.div<{ resultLength?: number }>`
     cursor: default;
@@ -21,7 +21,7 @@ export const ResultsContainer = styled.div<{ resultLength?: number }>`
     color: ${props => props.theme.searchBox.textColor};
     padding: 0.5rem;
 
-    transition: all 400ms ease;
+    transition: all ${TRANSITION_NORMAL} ease;
     ${media.reducedMotion} {
         transition: all 1ms ease;
     }
@@ -44,7 +44,7 @@ export const SingleResult = styled.div`
         opacity: 1;
     }
 
-    transition: opacity 0.4s ease;
+    transition: opacity ${TRANSITION_NORMAL} ease;
 
     &:hover {
         opacity: 1;

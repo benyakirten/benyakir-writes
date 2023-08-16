@@ -1,5 +1,6 @@
 import styled from "styled-components"
 
+import { TRANSITION_EXTRA_SLOW } from "@/styles/variables"
 import { SVGContainer } from "@Styles/general-components"
 
 export const StyledIconButton = styled(SVGContainer) <{ disabled: boolean }>`
@@ -8,5 +9,5 @@ export const StyledIconButton = styled(SVGContainer) <{ disabled: boolean }>`
     opacity: ${props => props.disabled ? '0.4' : '1'};
   }
 
-  transition: all 1s ease;
+  transition: all ${TRANSITION_EXTRA_SLOW} ease;
 `

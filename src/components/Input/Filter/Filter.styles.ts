@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { SHADOW_MD_BALANCED } from '@StyleVars';
+import { SHADOW_MD_BALANCED, TRANSITION_NORMAL } from '@StyleVars';
 import { convertHexToRGBA } from '@Utils/colors';
 
 export const FilterContainer = styled.aside`
@@ -16,7 +16,7 @@ export const FilterContainer = styled.aside`
 
     box-shadow: ${props => `${SHADOW_MD_BALANCED} ${convertHexToRGBA(props.theme.base.shadowColor, 0.4)}`};
 
-    transition: all 1s ease;
+    transition: all ${TRANSITION_NORMAL} ease;
 
     input[type=text] {
         margin-bottom: 1.5rem;

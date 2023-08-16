@@ -1,5 +1,5 @@
+import { FONT_MD, FONT_XXL, TRANSITION_NORMAL } from '@StyleVars';
 import styled from 'styled-components';
-import { FONT_LG, FONT_MD, FONT_XXL } from '@StyleVars';
 
 export const CheckboxGroup = styled.div`
     position: relative;
@@ -25,8 +25,7 @@ export const CheckboxGroup = styled.div`
         background-color: ${props => props.theme.checkbox.backgroundColor};
         outline: 3px solid ${props => props.theme.checkbox.border};
 
-        transition: all 0.4s;
-        transition: transform 0.4s;
+        transition: all ${TRANSITION_NORMAL}, transform ${TRANSITION_NORMAL};
         transform-origin: left;
 
         &:hover {
@@ -51,7 +50,7 @@ export const CheckboxGroup = styled.div`
             font-size: ${FONT_XXL};
             font-weight: bold;
             
-            transition: all 0.4s;
+            transition: all ${TRANSITION_NORMAL};
             transform: scale(0.2);
             opacity: 0;
         }

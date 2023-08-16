@@ -1,5 +1,5 @@
+import { FONT_MD, TRANSITION_SLOW } from '@StyleVars';
 import styled from 'styled-components';
-import { FONT_MD } from '@StyleVars';
 
 export const ToggleGroup = styled.div`
   position: relative;
@@ -42,7 +42,7 @@ export const ToggleLabel = styled.label<{ label: string }>`
   height: 2.2rem;
   width: 6rem;
 
-  transition: all 0.8s ease;
+  transition: all ${TRANSITION_SLOW} ease;
 
   &::after {
     content: "";
@@ -51,7 +51,7 @@ export const ToggleLabel = styled.label<{ label: string }>`
     height: 1.8rem;
     border-radius: 50%;
 
-    transition: all 0.8s ease;
+    transition: all ${TRANSITION_SLOW} ease;
   }
 `
 

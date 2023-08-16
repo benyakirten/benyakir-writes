@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 import { media } from "@/styles/queries";
 import { convertHexToRGBA } from "@/utils/colors";
-import { FAUSTINA, FONT_LG, FONT_MD, FONT_SM, SHADOW_SM, Z_ABOVE, Z_HIGH } from "@Styles/variables";
+import { FAUSTINA, FONT_LG, FONT_MD, FONT_SM, SHADOW_SM, TRANSITION_FAST, TRANSITION_NORMAL, Z_ABOVE, Z_HIGH } from "@Styles/variables";
 
 export const ProjectBoxes = styled.div`
   display: grid;
@@ -24,12 +24,12 @@ export const ProjectBox = styled.article<{ hovered?: boolean }>`
   z-index: ${props => props.hovered ? Z_HIGH : Z_ABOVE};
   border-radius: 4px;
   font-size: ${FONT_SM};
-  box-shadow: 0.5px 0.5px 1px 0.5px;
+  box-shadow: 2px 1px 8px 2px ${props => props.theme.base.shadowColor}60;
   background-color: ${props => `${props.theme.base.background}${props.hovered ? '' : '99'}`};
-  transition: transform 50ms ease-in, background-color 50ms ease-in;
+  transition: transform ${TRANSITION_FAST} ease-in, background-color ${TRANSITION_FAST} ease-in;
   
   &:hover {
-    transform: scale(3);
+    transform: scale(1.04);
   }
 `
 
@@ -47,7 +47,6 @@ export const ProjectContents = styled.div`
 
 export const ProjectTitle = styled.h3`
     font-size: ${FONT_LG};
-    letter-spacing: 2px;
     text-decoration: underline;
     font-family: ${FAUSTINA};
     display: inline;
@@ -113,7 +112,7 @@ export const TechBadges = styled.div`
 export const TechBadge = styled.span<{ selected: boolean }>`
     background-color: ${props => props.selected ? props.theme.button.default.textColor : props.theme.button.default.background};
     color: ${props => props.selected ? props.theme.button.default.background : props.theme.button.default.textColor};
-    transition: background-color 150ms ease, color 150ms ease;
+    transition: background-color ${TRANSITION_NORMAL} ease, color ${TRANSITION_NORMAL} ease;
 
     border: 1px solid ${props => props.theme.button.border};
     box-shadow: ${props => `${SHADOW_SM} ${convertHexToRGBA(props.theme.base.shadowColor, 0.4)}`};

@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-import { FONT_MD, MULISH } from "@StyleVars"
+import { FONT_MD, MULISH, TRANSITION_NORMAL } from "@StyleVars"
 
 export const ItemContainer = styled.li`
   position: relative;
@@ -25,7 +25,7 @@ export const ItemTitle = styled.span<{ draggedOver: boolean }>`
   font-family: ${MULISH};
   font-size: ${FONT_MD};
   
-  transition: all 1s ease;
+  transition: all ${TRANSITION_NORMAL} ease;
 `
 
 export const ItemContent = styled.p<{ draggedOver: boolean }>`
@@ -37,5 +37,5 @@ export const ItemContent = styled.p<{ draggedOver: boolean }>`
   background-color: ${props => props.draggedOver ? props.theme.base.textColor : props.theme.base.background};
   color: ${props => props.draggedOver ? props.theme.base.background : props.theme.base.textColor};
 
-  transition: all 1s ease;
+  transition: all ${TRANSITION_NORMAL} ease;
 `

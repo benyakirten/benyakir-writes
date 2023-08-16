@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
-import { ABS_BLACK, FONT_LG, FONT_XS, GRAY_400 } from "@StyleVars"
 import { media } from "@Styles/queries"
+import { FONT_LG, FONT_XS, TRANSITION_NORMAL } from "@StyleVars"
 
 export const TextInputContainer = styled.div`
     position: relative;
@@ -16,7 +16,7 @@ export const TextInputContainer = styled.div`
         color: ${props => props.theme.textInput.textColor};
         font-size: ${FONT_LG};
 
-        transition: all 1s ease;
+        transition: all ${TRANSITION_NORMAL} ease;
     }
 
     input {

@@ -1,7 +1,7 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
 import { media } from '@Styles/queries';
-import { MULISH } from '@StyleVars';
+import { MULISH, TRANSITION_NORMAL } from '@StyleVars';
 
 export const GlobalStyles = createGlobalStyle`
   *,
@@ -48,7 +48,7 @@ export const GlobalStyles = createGlobalStyle`
     opacity: 1;
     transform: scale(1);
     transform-origin: left;
-    transition: all 800ms;
+    transition: all ${TRANSITION_NORMAL};
   }
   .filterable-card-exit {
     opacity: 1;
@@ -58,7 +58,7 @@ export const GlobalStyles = createGlobalStyle`
     opacity: 0;
     transform: scale(0);
     transform-origin: left;
-    transition: all 800ms;
+    transition: all ${TRANSITION_NORMAL};
   }
 
   @keyframes rotate {

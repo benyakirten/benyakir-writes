@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { FONT_LG, FONT_XXS, MULISH } from '@StyleVars'
+import { FONT_LG, FONT_XXS, MULISH, TRANSITION_SLOW } from '@StyleVars'
 
 export const TextAreaContainer = styled.div`
     position: relative;
@@ -38,6 +38,6 @@ export const TextAreaContainer = styled.div`
         color: ${props => props.theme.textInput.textColor};
         font-size: ${FONT_LG};
 
-        transition: all 1s ease;
+        transition: all ${TRANSITION_SLOW} ease;
     }
 `

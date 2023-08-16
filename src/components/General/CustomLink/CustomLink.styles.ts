@@ -1,22 +1,21 @@
-import styled from 'styled-components';
 import { Link } from 'gatsby';
+import styled from 'styled-components';
 
-import {
-    FONT_MD,
-    FONT_LG,
-} from '@StyleVars';
 import { media } from '@Styles/queries';
+import {
+  FONT_LG, FONT_MD, TRANSITION_NORMAL
+} from '@StyleVars';
 
 
 export const StyledLink = styled(Link) <{
-    active: boolean,
-    dark: boolean,
-    small: boolean,
-    inline: boolean,
-    wholeline: boolean,
-    limitunderbar: boolean,
-    underbarsize?: string,
-    inheritColor?: boolean
+  active: boolean,
+  dark: boolean,
+  small: boolean,
+  inline: boolean,
+  wholeline: boolean,
+  limitunderbar: boolean,
+  underbarsize?: string,
+  inheritColor?: boolean
 }>`
     position: relative;
     overflow: hidden;
@@ -28,7 +27,7 @@ export const StyledLink = styled(Link) <{
     color: ${props => props.inheritColor ? 'inherit' : props.inline ? props.theme.link.inline : props.dark ? props.theme.link.dark : props.theme.link.normal};
     font-size: ${props => props.small ? FONT_LG : 'inherit'};
 
-    transition: color 400ms ease;
+    transition: color ${TRANSITION_NORMAL} ease;
 
     &::after {
         content: '';
@@ -43,7 +42,7 @@ export const StyledLink = styled(Link) <{
 
         background-color: ${props => props.inline ? props.theme.link.inline : props.dark ? props.theme.link.dark : props.theme.link.normal};;
 
-        transition: color 400ms ease, transform 400ms ease-in-out;
+        transition: color ${TRANSITION_NORMAL} ease, transform ${TRANSITION_NORMAL} ease-in-out;
         transform-origin: left;
         transform: scaleX(${props => props.active ? '1' : '0'});
     }
@@ -64,21 +63,21 @@ export const StyledLink = styled(Link) <{
 `
 
 export const OutsideLink = styled.a<{
-    active: boolean,
-    dark: boolean,
-    small: boolean,
-    inline: boolean,
-    limitunderbar: boolean,
-    underbarsize?: string,
-    inheritColor?: boolean,
-    wholeline?: boolean
+  active: boolean,
+  dark: boolean,
+  small: boolean,
+  inline: boolean,
+  limitunderbar: boolean,
+  underbarsize?: string,
+  inheritColor?: boolean,
+  wholeline?: boolean
 }>`
     position: relative;
     overflow: hidden;
     text-overflow: ellipsis;
     display: ${props => props.wholeline ? 'block' : 'inline'};
 
-    transition: color 400ms ease;
+    transition: color ${TRANSITION_NORMAL} ease;
     color: ${props => props.inheritColor ? 'inherit' : props.inline ? props.theme.link.inline : props.dark ? props.theme.link.dark : props.theme.link.normal};;
     
     text-decoration: none;
@@ -97,7 +96,7 @@ export const OutsideLink = styled.a<{
 
         background-color: ${props => props.inline ? props.theme.link.inline : props.dark ? props.theme.link.dark : props.theme.link.normal};;
 
-        transition: color 400ms ease, transform 400ms ease-in-out;
+        transition: color ${TRANSITION_NORMAL} ease, transform ${TRANSITION_NORMAL} ease-in-out;
         transform-origin: left;
         transform: scaleX(${props => props.active ? '1' : '0'});
     }

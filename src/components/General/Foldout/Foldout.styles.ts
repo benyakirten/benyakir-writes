@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
-import { media } from '@Styles/queries';
+import { TRANSITION_NORMAL } from '@/styles/variables';
 import { multiplyCSSNumber } from '@/utils/strings';
+import { media } from '@Styles/queries';
 
 export const FoldoutContainer = styled.div`
     position: relative;
@@ -13,37 +14,37 @@ export const TopbarContainer = styled.div`
 `
 
 export const FoldoutBody = styled.div<{
-    open: boolean,
-    height: string,
-    heightMultiplierOnPhone?: number,
-    heightMultiplierOnTablet?: number,
-    heightMultiplierOnLarger?: number
+  open: boolean,
+  height: string,
+  heightMultiplierOnPhone?: number,
+  heightMultiplierOnTablet?: number,
+  heightMultiplierOnLarger?: number
 }>`
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    cursor: default;
-    
-    height: ${props => props.open ? props.height : '0'};
+  cursor: default;
+  
+  height: ${props => props.open ? props.height : '0'};
 
-    transform-origin: top;
-    transform: scaleY(${props => props.open ? '1' : '0.8'});
-    transition: all 400ms ease;
-    
-    opacity: ${props => props.open ? '1' : '0'};
+  transform-origin: top;
+  transform: scaleY(${props => props.open ? '1' : '0.8'});
+  transition: all ${TRANSITION_NORMAL} ease;
+  
+  opacity: ${props => props.open ? '1' : '0'};
 
-    ${media.custom(1160)} {
-        height: ${props => props.open ? multiplyCSSNumber(props.height, props.heightMultiplierOnLarger ? props.heightMultiplierOnLarger : 1) : '0'};
-    }
+  ${media.custom(1160)} {
+    height: ${props => props.open ? multiplyCSSNumber(props.height, props.heightMultiplierOnLarger ? props.heightMultiplierOnLarger : 1) : '0'};
+  }
 
-    ${media.desktop} {
-        height: ${props => props.open ? multiplyCSSNumber(props.height, props.heightMultiplierOnTablet ? props.heightMultiplierOnTablet : 1) : '0'};
-    }
-    ${media.phone} {
-        height: ${props => props.open ? multiplyCSSNumber(props.height, props.heightMultiplierOnPhone ? props.heightMultiplierOnPhone : 1.2) : '0'};
-    }
+  ${media.desktop} {
+    height: ${props => props.open ? multiplyCSSNumber(props.height, props.heightMultiplierOnTablet ? props.heightMultiplierOnTablet : 1) : '0'};
+  }
+  ${media.phone} {
+    height: ${props => props.open ? multiplyCSSNumber(props.height, props.heightMultiplierOnPhone ? props.heightMultiplierOnPhone : 1.2) : '0'};
+  }
 
-    ${media.reducedMotion} {
-        transition: all 0.01s ease !important;
-    }
+  ${media.reducedMotion} {
+    transition: all 1ms ease !important;
+  }
 `
