@@ -27,4 +27,5 @@ export interface ProjectFiltersData {
   allTechs: string[]
   viewedTechs: Set<string>
   onToggle: (tech: string) => void
+  onToggleTentativeTech: (tech: string) => void
 }

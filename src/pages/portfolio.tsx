@@ -8,7 +8,6 @@ import {
   RandomizedBackground,
 } from '@/components/Portfolio'
 import {
-  Backdrop,
   PortfolioDescription,
   PortfolioHeader,
 } from '@/components/Portfolio/Portfolio.styles'
@@ -48,8 +47,14 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
     () => [...new Set(projects.flatMap((project) => project.technologies))],
     [projects]
   )
+  const [tentativeTechs, toggleTentativeTech] = useSet()
+  const [filteredTechs, toggleTech] = useSet()
+  const [viewedTechs, setViewedTechs] = React.useState<Set<string>>(new Set())
+  React.useEffect(() => {
+    const techs = new Set([...filteredTechs, ...tentativeTechs])
+    setViewedTechs(techs)
+  }, [tentativeTechs, filteredTechs])
 
-  const [viewedTechs, toggleTech] = useSet()
   const [hovered, setHovered] = React.useState<string | null>(null)
 
   const [highlightedProjectTitles, setHighlightedProjectTitles] =
@@ -71,14 +76,8 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
       setHighlightedProjectTitles(highlightedTitles)
     })
   }, [hovered, viewedTechs, projects])
-
-  React.useEffect(
-    () => console.log(highlightedProjectTitles),
-    [highlightedProjectTitles]
-  )
   return (
     <>
-      {highlightedProjectTitles.size > 0 && <Backdrop />}
       <PortfolioHeader>
         <PortfolioDescription>
           My name is <strong>Benyakir Horowitz</strong>. Once upon a time, I
@@ -98,6 +97,7 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
           allTechs={allTechs}
           viewedTechs={viewedTechs}
           onToggle={toggleTech}
+          onToggleTentativeTech={toggleTentativeTech}
         />
       </PortfolioHeader>
       <RandomizedBackground>

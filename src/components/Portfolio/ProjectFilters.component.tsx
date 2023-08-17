@@ -9,6 +9,7 @@ const ProjectFilters: React.FC<ProjectFiltersData> = ({
   allTechs,
   viewedTechs,
   onToggle,
+  onToggleTentativeTech,
 }) => {
   return (
     <FilterContainer>
@@ -17,6 +18,8 @@ const ProjectFilters: React.FC<ProjectFiltersData> = ({
           key={tech}
           checked={viewedTechs.has(tech)}
           onToggle={() => onToggle(tech)}
+          onMouseEnter={() => onToggleTentativeTech(tech)}
+          onMouseLeave={() => onToggleTentativeTech(tech)}
         >
           {getFullTechName(tech)}
         </TextCheckbox>

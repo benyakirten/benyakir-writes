@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { media } from '@/styles/queries'
 import { convertHexToRGBA } from '@/utils/colors'
@@ -8,11 +8,7 @@ import {
   FONT_MD,
   FONT_SM,
   SHADOW_SM,
-  TRANSITION_FAST,
-  TRANSITION_NORMAL,
-  TRANSITION_SLOW,
-  Z_ABOVE,
-  Z_HIGH
+  TRANSITION_FAST, TRANSITION_NORMAL, Z_ABOVE
 } from '@Styles/variables'
 
 export const ProjectBoxes = styled.div`
@@ -29,16 +25,16 @@ export const ProjectBoxes = styled.div`
 
 export const ProjectBox = styled.article<{ highlighted?: boolean }>`
   position: relative;
-  z-index: ${(props) => (props.highlighted ? Z_HIGH : Z_ABOVE)};
+  z-index: ${Z_ABOVE};
   border-radius: 4px;
   font-size: ${FONT_SM};
   box-shadow: 2px 1px 8px 2px ${(props) => props.theme.base.shadowColor}60;
   padding: 1rem;
   
   background-color: ${(props) =>
-    `${props.theme.base.background}${props.highlighted ? '99' : ''}`};
-  scale: ${props => props.highlighted ? '1.04' : '1'};
+    `${props.theme.base.background}${props.highlighted ? '' : '99'}`};
   transition: scale ${TRANSITION_FAST} ease-in, background-color ${TRANSITION_FAST} ease-in;
+  scale: ${props => props.highlighted ? "1.04" : "1"};
 `
 
 // TODO: update this to use grid instead of
@@ -140,11 +136,22 @@ export const TechBadge = styled.span<{ selected: boolean }>`
 `
 
 export const TechnologyLabel = styled.label<{ checked: boolean }>`
-  position: relative;
+  background-color: ${(props) =>
+    props.checked
+      ? props.theme.button.default.textColor
+      : props.theme.button.default.background};
+  color: ${(props) =>
+    props.checked
+      ? props.theme.button.default.background
+      : props.theme.button.default.textColor};
   cursor: pointer;
-  z-index: ${Z_ABOVE};
   font-size: ${FONT_MD};
-  height: min-content;
+  outline: ${props => props.checked ? css`1px solid ${(props) => props.theme.button.border}` : 'none'};
+  box-shadow: ${props => props.checked ? css`${(props) =>
+    `${SHADOW_SM} ${convertHexToRGBA(props.theme.base.shadowColor, 0.4)}`}` : 'none'};
+
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
 `
 export const TechnologyCheckox = styled.input.attrs<{ checked: boolean }>(
   (checked) => ({
@@ -222,24 +229,4 @@ export const ProjectLink = styled.a`
   color: inherit;
   text-decoration: none;
   display: contents;
-`
-
-const backdropFadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 0.2;
-  }
-`
-
-export const Backdrop = styled.div`
-  position: absolute;
-  z-index: ${Z_ABOVE};
-  top: 0;
-  left: 0;
-  height: 1000vh;
-  width: 1000vh;
-  background-color: ${props => props.theme.base.background};
-  animation: ${backdropFadeIn} ${TRANSITION_SLOW} ease-in forwards;
 `
