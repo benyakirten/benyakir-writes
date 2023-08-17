@@ -5,7 +5,7 @@ import {
   ProjectType,
   SingleBook,
   SingleStory,
-  StoryType,
+  StoryType
 } from './posts.d'
 
 type WpPost = {
@@ -90,13 +90,20 @@ type SVGImageQuery = {
   }
 }
 
+// TODO: Make this type better/remove unused publicURL field
+type ProjectImageData = FileNode & {
+  childImageSharp: {
+    gatsbyImageData: IGatsbyImageData
+  }
+}
+
 type ProjectsQuery = {
   data: {
     allWpProject: {
       nodes: ProjectType[]
     }
     allFile: {
-      nodes: FileNode[]
+      nodes: ProjectImageData[]
     }
   }
 }

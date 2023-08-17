@@ -1,3 +1,5 @@
+import { ProjectImageData } from "./query"
+
 export interface ProjectGridDatum {
   title: string
   description: string
@@ -6,6 +8,7 @@ export interface ProjectGridDatum {
   mainLink?: string
   repoLink?: string
   hostedOn?: string
+  image?: ProjectImageData
 }
 
 export interface ProjectGridData {

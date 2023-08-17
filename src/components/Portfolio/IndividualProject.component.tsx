@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import LatestUpdate from '@/components/Portfolio/LatestUpdate.component'
 import { useFetchRepoUpdatedDate } from '@/hooks'
+import { Row } from '@/styles/general-components'
 import { ProjectGridDatum } from '@/types/portfolio'
 import { getPrettyDate } from '@/utils/dates'
 import { getFullTechName } from '@/utils/project'
@@ -11,6 +12,7 @@ import {
   ProjectContents,
   ProjectDates,
   ProjectDescription,
+  ProjectImage,
   ProjectTitle,
   TechBadge,
   TechBadges,
@@ -29,9 +31,17 @@ const IndividualProject: React.FC<{
           <ProjectTitle>{project.title}</ProjectTitle>
         </TitleContainer>
         {/* Since we're using content directly from WP, we have to set the HTML and trust that the WP server hasn't been hacked */}
-        <ProjectDescription
-          dangerouslySetInnerHTML={{ __html: project.description }}
-        />
+        <Row>
+          {project.image && (
+            <ProjectImage
+              image={project.image.childImageSharp.gatsbyImageData}
+              alt={project.image.name}
+            />
+          )}
+          <ProjectDescription
+            dangerouslySetInnerHTML={{ __html: project.description }}
+          />
+        </Row>
       </ProjectCardTop>
       <ProjectCardBottom>
         <ProjectDates>

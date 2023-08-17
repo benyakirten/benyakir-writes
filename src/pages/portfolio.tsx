@@ -12,6 +12,7 @@ import {
   PortfolioHeader,
 } from '@/components/Portfolio/Portfolio.styles'
 import { useSet } from '@/hooks'
+import { ProjectGridDatum } from '@/types/portfolio'
 import { getFirstParagraphOfContent } from '@/utils/project'
 import { ProjectsQuery } from '@Types/query'
 
@@ -26,19 +27,24 @@ export const Head: React.FC = () => (
 )
 
 const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
-  const projects = React.useMemo(() => {
-    const mappedProjects = data.allWpProject.nodes.map((node) => ({
-      title: node.title,
-      description: getFirstParagraphOfContent(node.content),
-      ...node.project,
-      firstReleased: new Date(node.project.firstReleased),
-      technologies: node.project.technologies.split(', '),
-    }))
-    // .filter(
-    //   (node) =>
-    //     node.title === 'Benyakir Writes' ||
-    //     node.firstReleased.valueOf() > new Date('2023-01-01').valueOf()
-    // )
+  const projects = React.useMemo<ProjectGridDatum[]>(() => {
+    const mappedProjects = data.allWpProject.nodes
+      .map((node) => ({
+        title: node.title,
+        description: getFirstParagraphOfContent(node.content),
+        ...node.project,
+        firstReleased: new Date(node.project.firstReleased),
+        technologies: node.project.technologies.split(', '),
+        image: data.allFile.nodes.find(
+          (imageNode) =>
+            imageNode.name.toLowerCase() === node.title.toLowerCase()
+        ),
+      }))
+      .filter(
+        (node) =>
+          node.title === 'Benyakir Writes' ||
+          node.firstReleased.valueOf() > new Date('2023-01-01').valueOf()
+      )
     return mappedProjects
   }, [data])
 
@@ -128,6 +134,15 @@ export const query = graphql`
         title
         content
         slug
+      }
+    }
+    allFile(filter: { relativePath: { regex: "^/projects/" } }) {
+      nodes {
+        publicURL
+        name
+        childImageSharp {
+          gatsbyImageData(height: 300, formats: [AVIF, WEBP, AUTO])
+        }
       }
     }
   }

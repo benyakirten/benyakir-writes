@@ -10,6 +10,7 @@ import {
   SHADOW_SM,
   TRANSITION_FAST, TRANSITION_NORMAL, Z_ABOVE
 } from '@Styles/variables'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 export const ProjectBoxes = styled.div`
   display: grid;
@@ -56,9 +57,14 @@ export const ProjectTitle = styled.h3`
   display: inline;
 `
 
+export const ProjectImage = styled(GatsbyImage)`
+  margin-bottom: 0.5rem;
+`
+
 export const ProjectDescription = styled.p`
   text-overflow: ellipsis;
   font-size: ${FONT_MD};
+  flex-grow: 1;
 
   a,
   a:visited {
