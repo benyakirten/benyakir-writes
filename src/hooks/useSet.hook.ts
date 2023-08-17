@@ -1,5 +1,7 @@
 import * as React from 'react'
 
+import { SetHook } from '@Types/hooks'
+
 const useSet: SetHook = <T = string>(allItems: T[] = []) => {
   const [set, _setSet] = React.useState(new Set(allItems))
   const setSet = (...items: T[]) =>

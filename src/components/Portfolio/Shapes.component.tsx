@@ -4,7 +4,6 @@ import { SVGPositionData } from '@/utils/portfolio'
 import { PortfolioSVGContainer } from './Portfolio.styles'
 
 const Shapes: React.FC<{ positions: SVGPositionData[] }> = ({ positions }) => {
-  React.useEffect(() => console.log(positions), [positions])
   if (positions.length === 0) {
     return null
   }

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 
 import { media } from '@/styles/queries'
 import { convertHexToRGBA } from '@/utils/colors'
@@ -10,39 +10,35 @@ import {
   SHADOW_SM,
   TRANSITION_FAST,
   TRANSITION_NORMAL,
+  TRANSITION_SLOW,
   Z_ABOVE,
-  Z_HIGH,
+  Z_HIGH
 } from '@Styles/variables'
 
 export const ProjectBoxes = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, minmax(30%, 1fr));
   ${media.desktop} {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  ${media.tablet} {
     grid-template-columns: repeat(2, 1fr);
   }
-  ${media.phone} {
+  ${media.tablet} {
     grid-template-columns: repeat(1, 1fr);
   }
   gap: 4rem;
 `
 
-export const ProjectBox = styled.article<{ hovered?: boolean }>`
+export const ProjectBox = styled.article<{ highlighted?: boolean }>`
   position: relative;
-  z-index: ${(props) => (props.hovered ? Z_HIGH : Z_ABOVE)};
+  z-index: ${(props) => (props.highlighted ? Z_HIGH : Z_ABOVE)};
   border-radius: 4px;
   font-size: ${FONT_SM};
   box-shadow: 2px 1px 8px 2px ${(props) => props.theme.base.shadowColor}60;
+  padding: 1rem;
+  
   background-color: ${(props) =>
-    `${props.theme.base.background}${props.hovered ? '' : '99'}`};
-  transition: transform ${TRANSITION_FAST} ease-in,
-    background-color ${TRANSITION_FAST} ease-in;
-
-  &:hover {
-    transform: scale(1.04);
-  }
+    `${props.theme.base.background}${props.highlighted ? '99' : ''}`};
+  scale: ${props => props.highlighted ? '1.04' : '1'};
+  transition: scale ${TRANSITION_FAST} ease-in, background-color ${TRANSITION_FAST} ease-in;
 `
 
 // TODO: update this to use grid instead of
@@ -113,7 +109,7 @@ export const GitHubIcon = styled.img.attrs<{ ghIcon: string }>(
     height: '18px',
     width: '18px',
   })
-)<{ ghIcon: string }>`
+) <{ ghIcon: string }>`
   display: inline;
   margin-left: 0.5rem;
 `
@@ -155,7 +151,7 @@ export const TechnologyCheckox = styled.input.attrs<{ checked: boolean }>(
     type: 'checkbox',
     checked,
   })
-)<{ checked: boolean }>`
+) <{ checked: boolean }>`
   display: none;
 `
 
@@ -226,4 +222,24 @@ export const ProjectLink = styled.a`
   color: inherit;
   text-decoration: none;
   display: contents;
+`
+
+const backdropFadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.2;
+  }
+`
+
+export const Backdrop = styled.div`
+  position: absolute;
+  z-index: ${Z_ABOVE};
+  top: 0;
+  left: 0;
+  height: 1000vh;
+  width: 1000vh;
+  background-color: ${props => props.theme.base.background};
+  animation: ${backdropFadeIn} ${TRANSITION_SLOW} ease-in forwards;
 `

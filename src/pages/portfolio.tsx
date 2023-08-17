@@ -8,6 +8,7 @@ import {
   RandomizedBackground,
 } from '@/components/Portfolio'
 import {
+  Backdrop,
   PortfolioDescription,
   PortfolioHeader,
 } from '@/components/Portfolio/Portfolio.styles'
@@ -26,34 +27,58 @@ export const Head: React.FC = () => (
 )
 
 const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
-  // Refactor this to a util
   const projects = React.useMemo(() => {
-    const mappedProjects = data.allWpProject.nodes
-      .map((node) => ({
-        title: node.title,
-        description: getFirstParagraphOfContent(node.content),
-        ...node.project,
-        firstReleased: new Date(node.project.firstReleased),
-        technologies: node.project.technologies.split(', '),
-      }))
-      .filter(
-        (node) =>
-          node.title === 'Benyakir Writes' ||
-          node.firstReleased.valueOf() > new Date('2023-01-01').valueOf()
-      )
+    const mappedProjects = data.allWpProject.nodes.map((node) => ({
+      title: node.title,
+      description: getFirstParagraphOfContent(node.content),
+      ...node.project,
+      firstReleased: new Date(node.project.firstReleased),
+      technologies: node.project.technologies.split(', '),
+    }))
+    // .filter(
+    //   (node) =>
+    //     node.title === 'Benyakir Writes' ||
+    //     node.firstReleased.valueOf() > new Date('2023-01-01').valueOf()
+    // )
     return mappedProjects
   }, [data])
 
+  const [_, startTransition] = React.useTransition()
   const allTechs = React.useMemo(
     () => [...new Set(projects.flatMap((project) => project.technologies))],
     [projects]
   )
 
-  const [viewedTechs, toggleTech] = useSet(allTechs)
+  const [viewedTechs, toggleTech] = useSet()
   const [hovered, setHovered] = React.useState<string | null>(null)
 
+  const [highlightedProjectTitles, setHighlightedProjectTitles] =
+    React.useState<Set<string>>(new Set())
+
+  React.useEffect(() => {
+    const highlightedTitles = new Set<string>()
+    if (hovered) {
+      highlightedTitles.add(hovered)
+    } else if (viewedTechs.size > 0) {
+      for (const project of projects) {
+        if (project.technologies.some((tech) => viewedTechs.has(tech))) {
+          highlightedTitles.add(project.title)
+        }
+      }
+    }
+
+    startTransition(() => {
+      setHighlightedProjectTitles(highlightedTitles)
+    })
+  }, [hovered, viewedTechs, projects])
+
+  React.useEffect(
+    () => console.log(highlightedProjectTitles),
+    [highlightedProjectTitles]
+  )
   return (
     <>
+      {highlightedProjectTitles.size > 0 && <Backdrop />}
       <PortfolioHeader>
         <PortfolioDescription>
           My name is <strong>Benyakir Horowitz</strong>. Once upon a time, I
@@ -78,7 +103,7 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
       <RandomizedBackground>
         <ProjectGrid
           projects={projects}
-          hovered={hovered}
+          highlightedProjectTitles={highlightedProjectTitles}
           handleMouseEnter={(title) => setHovered(title)}
           handleMouseLeave={() => setHovered(null)}
           viewedTechs={viewedTechs}

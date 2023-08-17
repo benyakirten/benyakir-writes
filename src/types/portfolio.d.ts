@@ -10,7 +10,7 @@ export interface ProjectGridDatum {
 
 export interface ProjectGridData {
   projects: ProjectGridDatum[]
-  hovered: string | null
+  highlightedProjectTitles: Set<string>
   viewedTechs: Set<string>
   handleMouseEnter: (title: string) => void
   handleMouseLeave: () => void
