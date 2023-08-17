@@ -1,8 +1,9 @@
+import { GatsbyImage } from 'gatsby-plugin-image'
 import * as React from 'react'
 
 import LatestUpdate from '@/components/Portfolio/LatestUpdate.component'
 import { useFetchRepoUpdatedDate } from '@/hooks'
-import { Row } from '@/styles/general-components'
+import { Column } from '@/styles/general-components'
 import { ProjectGridDatum } from '@/types/portfolio'
 import { getPrettyDate } from '@/utils/dates'
 import { getFullTechName } from '@/utils/project'
@@ -12,7 +13,6 @@ import {
   ProjectContents,
   ProjectDates,
   ProjectDescription,
-  ProjectImage,
   ProjectTitle,
   TechBadge,
   TechBadges,
@@ -31,9 +31,9 @@ const IndividualProject: React.FC<{
           <ProjectTitle>{project.title}</ProjectTitle>
         </TitleContainer>
         {/* Since we're using content directly from WP, we have to set the HTML and trust that the WP server hasn't been hacked */}
-        <Row>
+        <Column style={{ gap: '0.5rem' }}>
           {project.image && (
-            <ProjectImage
+            <GatsbyImage
               image={project.image.childImageSharp.gatsbyImageData}
               alt={project.image.name}
             />
@@ -41,7 +41,7 @@ const IndividualProject: React.FC<{
           <ProjectDescription
             dangerouslySetInnerHTML={{ __html: project.description }}
           />
-        </Row>
+        </Column>
       </ProjectCardTop>
       <ProjectCardBottom>
         <ProjectDates>

@@ -10,7 +10,6 @@ import {
   SHADOW_SM,
   TRANSITION_FAST, TRANSITION_NORMAL, Z_ABOVE
 } from '@Styles/variables'
-import { GatsbyImage } from 'gatsby-plugin-image'
 
 export const ProjectBoxes = styled.div`
   display: grid;
@@ -55,10 +54,6 @@ export const ProjectTitle = styled.h3`
   text-decoration: underline;
   font-family: ${FAUSTINA};
   display: inline;
-`
-
-export const ProjectImage = styled(GatsbyImage)`
-  margin-bottom: 0.5rem;
 `
 
 export const ProjectDescription = styled.p`
@@ -142,6 +137,7 @@ export const TechBadge = styled.span<{ selected: boolean }>`
 `
 
 export const TechnologyLabel = styled.label<{ checked: boolean }>`
+  position: relative;
   background-color: ${(props) =>
     props.checked
       ? props.theme.button.default.textColor
@@ -152,13 +148,21 @@ export const TechnologyLabel = styled.label<{ checked: boolean }>`
       : props.theme.button.default.textColor};
   cursor: pointer;
   font-size: ${FONT_MD};
-  outline: ${props => props.checked ? css`1px solid ${(props) => props.theme.button.border}` : 'none'};
   box-shadow: ${props => props.checked ? css`${(props) =>
     `${SHADOW_SM} ${convertHexToRGBA(props.theme.base.shadowColor, 0.4)}`}` : 'none'};
 
   border-radius: 1rem;
   padding: 0.5rem 1rem;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    // Hack to get around border moving the dom rectangle on certain browsers by 1px and an outline not folloiwng border-raidus
+    box-shadow: ${props => props.checked ? css`0px 0px 0px 1px inset ${(props) => props.theme.button.border}` : 'none'};
+  }
 `
+
 export const TechnologyCheckox = styled.input.attrs<{ checked: boolean }>(
   (checked) => ({
     type: 'checkbox',

@@ -11,7 +11,11 @@ const Shapes: React.FC<{ positions: SVGPositionData[] }> = ({ positions }) => {
     <>
       {positions.map(
         ({ Shape, xMovement, yMovement, xPosition, yPosition }) => (
-          <PortfolioSVGContainer xPosition={xPosition} yPosition={yPosition}>
+          <PortfolioSVGContainer
+            key={`${xPosition},${yPosition}`}
+            xPosition={xPosition}
+            yPosition={yPosition}
+          >
             <Shape xMovement={xMovement} yMovement={yMovement} />
           </PortfolioSVGContainer>
         )
