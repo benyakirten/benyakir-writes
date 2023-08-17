@@ -1,17 +1,27 @@
-import * as React from 'react';
-import { TechnologyCheckox, TechnologyLabel } from './Portfolio.styles';
+import * as React from 'react'
+import { TechnologyCheckox, TechnologyLabel } from './Portfolio.styles'
 
 const TextCheckbox: React.FC<{
-  checked: boolean;
-  onToggle: () => void;
-  children: React.ReactNode;
-}> = ({ children, checked, onToggle }) => {
+  checked: boolean
+  onToggle: () => void
+  onMouseEnter: () => void
+  onMouseLeave: () => void
+  children: React.ReactNode
+}> = ({ children, checked, onToggle, onMouseEnter, onMouseLeave }) => {
   return (
-    <TechnologyLabel checked={checked}>
+    <TechnologyLabel
+      checked={checked}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       {children}
-      <TechnologyCheckox type="checkbox" checked={checked} onChange={onToggle} />
+      <TechnologyCheckox
+        type="checkbox"
+        checked={checked}
+        onChange={onToggle}
+      />
     </TechnologyLabel>
-  );
-};
+  )
+}
 
-export default TextCheckbox;
+export default TextCheckbox

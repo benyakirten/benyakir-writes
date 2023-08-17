@@ -1,61 +1,55 @@
-import React from "react";
-import {
-  cleanup,
-  render,
-  screen,
-  fireEvent,
-  act,
-} from "@testing-library/react";
-import { Provider } from "react-redux";
-import renderer from "react-test-renderer";
+import React from 'react'
+import { cleanup, render, screen, fireEvent, act } from '@testing-library/react'
+import { Provider } from 'react-redux'
+import renderer from 'react-test-renderer'
 
-import { Layout } from "@Layout";
-import CategoryTemplate from "@/templates/Category.template";
+import { Layout } from '@Layout'
+import CategoryTemplate from '@/templates/Category.template'
 
-import store from "@/store";
+import store from '@/store'
 
 const Wrapper: React.FC = ({ children }) => {
   return (
     <Provider store={store}>
       <Layout>{children}</Layout>
     </Provider>
-  );
-};
+  )
+}
 
 // Because the component loads json file based on a dynamic URL
 // The component causes a re-render when the loading is done
 // Until I can find a workaround, this renders @testing-library/react unable to perform its tests
-describe("category template", () => {
+describe('category template', () => {
   const testData = [
     {
       pageContext: {
-        name: "Category A",
+        name: 'Category A',
       },
     },
     {
       pageContext: {
-        name: "Category B",
+        name: 'Category B',
       },
     },
-  ];
+  ]
   beforeEach(() => {
-    jest.useFakeTimers();
-  });
+    jest.useFakeTimers()
+  })
 
   afterEach(() => {
-    jest.runOnlyPendingTimers();
-    jest.useRealTimers();
-  });
+    jest.runOnlyPendingTimers()
+    jest.useRealTimers()
+  })
 
-  it("should render correctly", () => {
+  it('should render correctly', () => {
     const catOne = renderer
       .create(
         <Wrapper>
           <CategoryTemplate {...testData[0]} />
         </Wrapper>
       )
-      .toJSON();
-    expect(catOne).toMatchSnapshot();
+      .toJSON()
+    expect(catOne).toMatchSnapshot()
 
     const catTwo = renderer
       .create(
@@ -63,9 +57,9 @@ describe("category template", () => {
           <CategoryTemplate {...testData[1]} />
         </Wrapper>
       )
-      .toJSON();
-    expect(catTwo).toMatchSnapshot();
-  });
+      .toJSON()
+    expect(catTwo).toMatchSnapshot()
+  })
 
   // it('should render a header with the category name if it exists', async () => {
   //     render(<CategoryTemplate {...testData[0]} />)
@@ -101,4 +95,4 @@ describe("category template", () => {
   //         expect(posts.length).toEqual(2)
   //     })
   // })
-});
+})

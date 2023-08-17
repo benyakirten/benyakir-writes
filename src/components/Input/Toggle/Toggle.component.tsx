@@ -1,11 +1,11 @@
-import * as React from "react";
+import * as React from 'react'
 
 import {
   ToggleGroup,
   ToggleInput,
   ToggleLabel,
-  ToggleOutput
-} from "./Toggle.styles";
+  ToggleOutput,
+} from './Toggle.styles'
 
 const Toggle: React.FC<ToggleProps> = ({
   onToggle,
@@ -13,7 +13,7 @@ const Toggle: React.FC<ToggleProps> = ({
   label,
   name,
   dataCy,
-  tabIndex
+  tabIndex,
 }) => {
   return (
     <ToggleGroup>
@@ -29,7 +29,7 @@ const Toggle: React.FC<ToggleProps> = ({
       <ToggleLabel htmlFor={name} label={label} data-cy={dataCy ?? 'toggle'} />
       <ToggleOutput onClick={onToggle}>{label}</ToggleOutput>
     </ToggleGroup>
-  );
-};
+  )
+}
 
-export default Toggle;
+export default Toggle

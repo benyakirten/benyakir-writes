@@ -1,17 +1,17 @@
-import * as React from "react";
+import * as React from 'react'
 
-import { FilterContainer } from "./Filter.styles";
-import { Subtitle } from "@Styles/general-components";
-import { Text } from "@Input";
+import { FilterContainer } from './Filter.styles'
+import { Subtitle } from '@Styles/general-components'
+import { Text } from '@Input'
 
-import { useDebounce } from "@Hooks";
+import { useDebounce } from '@Hooks'
 
 const Filter: React.FC<FilterProps> = ({ name, onSearch, children }) => {
-  const [search, setSearch] = useDebounce(onSearch);
+  const [search, setSearch] = useDebounce(onSearch)
 
   return (
     <FilterContainer>
-      <Subtitle>Filter{" " + name}</Subtitle>
+      <Subtitle>Filter{' ' + name}</Subtitle>
       <Text
         value={search}
         onChange={setSearch}
@@ -21,7 +21,7 @@ const Filter: React.FC<FilterProps> = ({ name, onSearch, children }) => {
       />
       {children}
     </FilterContainer>
-  );
-};
+  )
+}
 
-export default Filter;
+export default Filter

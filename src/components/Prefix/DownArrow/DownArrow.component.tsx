@@ -1,6 +1,6 @@
-import * as React from "react";
+import * as React from 'react'
 
-import { StyledArrow } from "./DownArrow.styles";
+import { StyledArrow } from './DownArrow.styles'
 
 const DownArrow: React.FC<DownArrowProps> = ({
   open = false,
@@ -14,11 +14,11 @@ const DownArrow: React.FC<DownArrowProps> = ({
       open={open}
       tabIndex={tabIndex}
       onClick={onClick}
-      data-cy={cyId ? cyId : "submenu-open"}
+      data-cy={cyId ? cyId : 'submenu-open'}
     >
       &#8609;
     </StyledArrow>
-  );
-};
+  )
+}
 
-export default DownArrow;
+export default DownArrow

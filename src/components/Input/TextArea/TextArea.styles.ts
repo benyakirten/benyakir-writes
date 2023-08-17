@@ -1,43 +1,43 @@
 import styled from 'styled-components'
 
-import { FONT_LG, FONT_XXS, MULISH } from '@StyleVars'
+import { FONT_LG, FONT_XXS, MULISH, TRANSITION_SLOW } from '@StyleVars'
 
 export const TextAreaContainer = styled.div`
-    position: relative;
+  position: relative;
 
-    textarea {
-        resize: both;
+  textarea {
+    resize: both;
 
-        width: 100%;
-        height: 100%;
+    width: 100%;
+    height: 100%;
 
-        padding: 1.2rem 0.5rem;
+    padding: 1.2rem 0.5rem;
 
-        font-size: ${FONT_LG};
-        font-family: ${MULISH};
-        
-        color: ${props => props.theme.textInput.textColor};
-        background-color: ${props => props.theme.textInput.background};
-        border: 2px solid ${props => props.theme.textInput.border};
+    font-size: ${FONT_LG};
+    font-family: ${MULISH};
 
-        &:hover + label,
-        &:focus + label,
-        &:not(:placeholder-shown) + label {
-            top: 0.5rem;
-            font-size: ${FONT_XXS};
-        }
+    color: ${(props) => props.theme.textInput.textColor};
+    background-color: ${(props) => props.theme.textInput.background};
+    border: 2px solid ${(props) => props.theme.textInput.border};
+
+    &:hover + label,
+    &:focus + label,
+    &:not(:placeholder-shown) + label {
+      top: 0.5rem;
+      font-size: ${FONT_XXS};
     }
+  }
 
-    label {
-        position: absolute;
-        top: 1.2rem;
-        left: 0.75rem;
+  label {
+    position: absolute;
+    top: 1.2rem;
+    left: 0.75rem;
 
-        cursor: text;
+    cursor: text;
 
-        color: ${props => props.theme.textInput.textColor};
-        font-size: ${FONT_LG};
+    color: ${(props) => props.theme.textInput.textColor};
+    font-size: ${FONT_LG};
 
-        transition: all 1s ease;
-    }
+    transition: all ${TRANSITION_SLOW} ease;
+  }
 `

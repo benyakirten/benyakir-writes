@@ -1,50 +1,33 @@
-import { keepWithinRange } from "@Utils/numbers";
+import { keepWithinRange } from '@Utils/numbers'
 
 describe('keepWithinRange', () => {
   it('should return numbers that are between the min and max without changing them', () => {
     const min = 0
     const max = 100
-    const inputs = [
-      10,
-      20,
-      30,
-      99,
-      1,
-      0.00001,
-      99.99999
-    ]
+    const inputs = [10, 20, 30, 99, 1, 0.00001, 99.99999]
 
     for (let input of inputs) {
-      expect(keepWithinRange(input, min, max)).toEqual(input);
+      expect(keepWithinRange(input, min, max)).toEqual(input)
     }
   })
 
   it('should return numbers above the max as the max', () => {
     const min = 0
     const max = 100
-    const inputs = [
-      100.1,
-      2000,
-      10e10,
-      Infinity
-    ]
+    const inputs = [100.1, 2000, 10e10, Infinity]
 
     for (let input of inputs) {
-      expect(keepWithinRange(input, min, max)).toEqual(max);
+      expect(keepWithinRange(input, min, max)).toEqual(max)
     }
   })
 
   it('should return numbers below the minimum as the minimum', () => {
     const min = 0
     const max = 100
-    const inputs = [
-      -0.000001,
-      -10e10,
-      -Infinity
-    ]
+    const inputs = [-0.000001, -10e10, -Infinity]
 
     for (let input of inputs) {
-      expect(keepWithinRange(input, min, max)).toEqual(min);
+      expect(keepWithinRange(input, min, max)).toEqual(min)
     }
   })
 })

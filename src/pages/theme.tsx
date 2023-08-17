@@ -1,7 +1,7 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import { Grouping, LeadHeading, Page } from '@Styles/general-components';
-import { ThemeOptions } from '@Variants';
+import { Grouping, LeadHeading, Page } from '@Styles/general-components'
+import { ThemeOptions } from '@Variants'
 
 export const Head: React.FC = () => (
   <>
@@ -13,7 +13,7 @@ export const Head: React.FC = () => (
     Optionally, they can save anything local storage and set it as the default."
     />
   </>
-);
+)
 
 const Theme: React.FC = () => {
   return (
@@ -23,7 +23,7 @@ const Theme: React.FC = () => {
         <ThemeOptions />
       </Grouping>
     </Page>
-  );
-};
+  )
+}
 
-export default Theme;
+export default Theme

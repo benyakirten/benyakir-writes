@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react'
 
-import { cleanup, render, screen, fireEvent } from "@TestUtils";
-import { DestinationItem } from "@Draggable"
+import { cleanup, render, screen, fireEvent } from '@TestUtils'
+import { DestinationItem } from '@Draggable'
 
-describe("DestinationItem component", () => {
+describe('DestinationItem component', () => {
   const dropSpy = jest.fn()
 
   beforeEach(cleanup)
@@ -11,7 +11,7 @@ describe("DestinationItem component", () => {
 
   const props = {
     title: 'test title',
-    onDrop: dropSpy
+    onDrop: dropSpy,
   }
 
   it('should render correctly', () => {
@@ -20,11 +20,11 @@ describe("DestinationItem component", () => {
 
   it('should call the onDrop method with the data-value attribute of the dropped item when it receives a drop event', async () => {
     render(<DestinationItem {...props} />)
-    const item = await screen.findByRole("listitem")
+    const item = await screen.findByRole('listitem')
     fireEvent.drop(item, {
       dataTransfer: {
-        getData: jest.fn(_ => 'test-value')
-      }
+        getData: jest.fn((_) => 'test-value'),
+      },
     })
 
     expect(dropSpy).toHaveBeenCalled()

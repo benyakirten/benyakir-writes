@@ -1,16 +1,16 @@
-import * as React from "react";
+import * as React from 'react'
 
-import { render, screen, cleanup, fireEvent } from "@TestUtils";
+import { render, screen, cleanup, fireEvent } from '@TestUtils'
 
-import { IconButton } from "@Gen";
+import { IconButton } from '@Gen'
 
-describe("IconButton component", () => {
+describe('IconButton component', () => {
   const clickSpy = jest.fn()
 
   const props: IconButtonProps = {
-    iconSrc: "test/path",
-    alt: "test alt",
-    onClick: clickSpy
+    iconSrc: 'test/path',
+    alt: 'test alt',
+    onClick: clickSpy,
   }
 
   beforeEach(cleanup)
@@ -23,7 +23,7 @@ describe("IconButton component", () => {
   it('should call the onClick method if it is clicked', async () => {
     render(<IconButton {...props} />)
 
-    const buttons = await screen.findAllByRole("button")
+    const buttons = await screen.findAllByRole('button')
     const iconButton = buttons[buttons.length - 1]
     fireEvent.click(iconButton)
 
@@ -33,7 +33,7 @@ describe("IconButton component", () => {
   it('should not call the onClick method if the button is disabled even if it is clicked', async () => {
     render(<IconButton {...props} disabled />)
 
-    const buttons = await screen.findAllByRole("button")
+    const buttons = await screen.findAllByRole('button')
     const iconButton = buttons[buttons.length - 1]
     fireEvent.click(iconButton)
 

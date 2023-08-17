@@ -1,8 +1,8 @@
-import * as React from "react";
+import * as React from 'react'
 
-import { ChoiceContainer } from "./Choice.styles";
+import { ChoiceContainer } from './Choice.styles'
 
-import { titleToKebab } from "@Utils/strings";
+import { titleToKebab } from '@Utils/strings'
 
 const Choice: React.FC<ChoiceProps> = ({
   label,
@@ -10,7 +10,7 @@ const Choice: React.FC<ChoiceProps> = ({
   value,
   tabIndex = 0,
 }) => {
-  const _onSelect = React.useCallback(() => onSelect(label), [onSelect, label]);
+  const _onSelect = React.useCallback(() => onSelect(label), [onSelect, label])
   return (
     <ChoiceContainer
       role="checkbox"
@@ -22,11 +22,11 @@ const Choice: React.FC<ChoiceProps> = ({
       aria-labelledby={`${label}-label`}
       data-cy={`select-${titleToKebab(label)}`}
     >
-      <span style={{ height: tabIndex < 0 ? 0 : "auto" }} id={`${label}-label`}>
+      <span style={{ height: tabIndex < 0 ? 0 : 'auto' }} id={`${label}-label`}>
         {label}
       </span>
     </ChoiceContainer>
-  );
-};
+  )
+}
 
-export default Choice;
+export default Choice

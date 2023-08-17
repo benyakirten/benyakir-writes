@@ -88,3 +88,9 @@ export const Z_RAISED = 2
 export const Z_ABOVE = 1
 export const Z_BASE = 0
 export const Z_UNDER = -1
+
+// TRANSITION TIMING
+export const TRANSITION_FAST = '100ms'
+export const TRANSITION_NORMAL = '200ms'
+export const TRANSITION_SLOW = '300ms'
+export const TRANSITION_EXTRA_SLOW = '500ms'

@@ -1,50 +1,50 @@
-import * as React from "react";
+import * as React from 'react'
 
-import { cleanup, render, screen, act, fireEvent } from "@TestUtils";
-import BooksPage from "@/pages/author/books";
+import { cleanup, render, screen, act, fireEvent } from '@TestUtils'
+import BooksPage from '@/pages/author/books'
 
-describe("books page", () => {
-  jest.mock("gatsby");
+describe('books page', () => {
+  jest.mock('gatsby')
 
   beforeEach(() => {
-    jest.useFakeTimers();
-  });
+    jest.useFakeTimers()
+  })
 
   afterEach(() => {
-    jest.runOnlyPendingTimers();
-    jest.useRealTimers();
-    cleanup();
-  });
+    jest.runOnlyPendingTimers()
+    jest.useRealTimers()
+    cleanup()
+  })
 
-  it("should render correctly", () => {
-    expect(() => render(<BooksPage />));
-  });
+  it('should render correctly', () => {
+    expect(() => render(<BooksPage />))
+  })
 
-  it("should render a main heading", async () => {
-    render(<BooksPage />);
-    const bookTitles = await screen.getAllByText("Books");
-    const title = bookTitles[1];
-    expect(title).toBeTruthy();
-    expect(title.tagName).toEqual("H1");
-  });
+  it('should render a main heading', async () => {
+    render(<BooksPage />)
+    const bookTitles = await screen.getAllByText('Books')
+    const title = bookTitles[1]
+    expect(title).toBeTruthy()
+    expect(title.tagName).toEqual('H1')
+  })
 
-  it("should render a story card for every short story", async () => {
-    render(<BooksPage />);
-    const cards = await screen.findAllByRole("article");
-    expect(cards.length).toEqual(2);
-  });
+  it('should render a story card for every short story', async () => {
+    render(<BooksPage />)
+    const cards = await screen.findAllByRole('article')
+    expect(cards.length).toEqual(2)
+  })
 
-  it("should render only the filtered items if a filter is applied", async () => {
-    render(<BooksPage />);
+  it('should render only the filtered items if a filter is applied', async () => {
+    render(<BooksPage />)
 
     await act(async () => {
-      const input = await screen.findAllByRole("textbox");
-      fireEvent.change(input[0], { target: { value: "september" } });
+      const input = await screen.findAllByRole('textbox')
+      fireEvent.change(input[0], { target: { value: 'september' } })
 
-      jest.runAllTimers();
+      jest.runAllTimers()
 
-      const cards = await screen.findAllByRole("article");
-      expect(cards.length).toEqual(1);
-    });
-  });
-});
+      const cards = await screen.findAllByRole('article')
+      expect(cards.length).toEqual(1)
+    })
+  })
+})

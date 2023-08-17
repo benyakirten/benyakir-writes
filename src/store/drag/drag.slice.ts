@@ -17,15 +17,15 @@ const dragSlice = createSlice({
     },
     resetDraggedIndex: (state) => {
       state.draggedIndex = -1
-    }
-  }
+    },
+  },
 })
 
 export const {
   setDraggedValue,
   resetDraggedValue,
   setDraggedIndex,
-  resetDraggedIndex
+  resetDraggedIndex,
 } = dragSlice.actions
 
 export default dragSlice.reducer

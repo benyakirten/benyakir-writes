@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from 'react'
 
-import { MainContents, PageContainer, SideArea } from "./LeadPage.styles";
-import { LeadHeading } from "@Styles/general-components";
+import { MainContents, PageContainer, SideArea } from './LeadPage.styles'
+import { LeadHeading } from '@Styles/general-components'
 
-import { LeadPageProps } from "@Types/props/post-components";
+import { LeadPageProps } from '@Types/props/post-components'
 
 const LeadPage: React.FC<LeadPageProps> = ({ title, children, filter }) => {
   return (
@@ -12,7 +12,7 @@ const LeadPage: React.FC<LeadPageProps> = ({ title, children, filter }) => {
       <SideArea>{filter}</SideArea>
       <MainContents>{children}</MainContents>
     </PageContainer>
-  );
-};
+  )
+}
 
-export default LeadPage;
+export default LeadPage

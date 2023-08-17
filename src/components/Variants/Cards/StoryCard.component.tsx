@@ -1,5 +1,5 @@
-import * as React from "react";
-import { Link, navigate } from "gatsby";
+import * as React from 'react'
+import { Link, navigate } from 'gatsby'
 
 import {
   Card,
@@ -13,16 +13,16 @@ import {
   Row,
   SubHeading,
   WpContentDescription,
-} from "@Styles/general-components";
+} from '@Styles/general-components'
 
-import { Button, CustomLink } from "@Gen";
+import { Button, CustomLink } from '@Gen'
 
-import { StoryCardProps } from "@Types/props/post-components";
+import { StoryCardProps } from '@Types/props/post-components'
 
 const StoryCard: React.FC<StoryCardProps> = ({ item }) => {
   return (
     <Card>
-      <Row style={{ alignItems: "stretch" }}>
+      <Row style={{ alignItems: 'stretch' }}>
         <CardSection>
           <SubHeading noUnderline>
             <CustomLink to={`/story/${item.slug}`}>{item.title}</CustomLink>
@@ -76,7 +76,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ item }) => {
         )}
       </Row>
     </Card>
-  );
-};
+  )
+}
 
-export default StoryCard;
+export default StoryCard

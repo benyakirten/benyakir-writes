@@ -1,5 +1,5 @@
-import * as React from "react";
-import { navigate } from "gatsby";
+import * as React from 'react'
+import { navigate } from 'gatsby'
 
 import {
   Card,
@@ -9,17 +9,17 @@ import {
   Row,
   SubHeading,
   WpContentDescription,
-} from "@Styles/general-components";
+} from '@Styles/general-components'
 
-import { Button, IconGrid, CustomLink } from "@Gen";
+import { Button, IconGrid, CustomLink } from '@Gen'
 
-import { ProjectCardProps } from "@Types/props/post-components";
+import { ProjectCardProps } from '@Types/props/post-components'
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ item }) => {
   return (
     <Card>
-      <Row style={{ alignItems: "stretch" }}>
-        <CardSection style={{ width: "60%" }}>
+      <Row style={{ alignItems: 'stretch' }}>
+        <CardSection style={{ width: '60%' }}>
           <SubHeading noUnderline>
             <CustomLink to={`/project/${item.slug}`}>{item.title}</CustomLink>
           </SubHeading>
@@ -53,7 +53,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ item }) => {
         </CardSection>
       </Row>
     </Card>
-  );
-};
+  )
+}
 
-export default ProjectCard;
+export default ProjectCard

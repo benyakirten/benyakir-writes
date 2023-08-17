@@ -1,14 +1,20 @@
-import { useLocation } from '@reach/router';
-import * as React from 'react';
-import { Transition, TransitionGroup } from 'react-transition-group';
-import { ThemeProvider } from 'styled-components';
+import { useLocation } from '@reach/router'
+import * as React from 'react'
+import { Transition, TransitionGroup } from 'react-transition-group'
+import { ThemeProvider } from 'styled-components'
 
-import { GlobalStyles, LayoutContainer, MainContainer } from './Layout.styles';
-import Sidebar from './Sidebar/Sidebar.component';
+import { GlobalStyles, LayoutContainer, MainContainer } from './Layout.styles'
+import Sidebar from './Sidebar/Sidebar.component'
 
-import { getPageTransitionStyles, TIMEOUT_500 } from '@/styles/transitions';
-import { useAppDispatch, useAppSelector } from '@Store/hooks';
-import { intializeThemeStore, setActiveThemeByName } from '@Store/theme/theme.slice';
+import {
+  getPageTransitionStyles,
+  PAGE_TRANSITION_DURATION,
+} from '@/styles/transitions'
+import { useAppDispatch, useAppSelector } from '@Store/hooks'
+import {
+  intializeThemeStore,
+  setActiveThemeByName,
+} from '@Store/theme/theme.slice'
 
 export const Head: React.FC = () => (
   <>
@@ -26,41 +32,42 @@ export const Head: React.FC = () => (
               Or check out his blog posts, reviews of books or podcast episodes.."
     />
   </>
-);
+)
 
 const Layout: React.FC<ChildrenProp> = ({ children }) => {
-  const location = useLocation();
-  const themeStore = useAppSelector((root) => root.theme);
-  const dispatch = useAppDispatch();
+  const location = useLocation()
+  const themeStore = useAppSelector((root) => root.theme)
+  const dispatch = useAppDispatch()
 
   React.useEffect(() => {
-    const storedComputerPreferences = localStorage.getItem('BWB_ICP') === 'true';
-    let storedThemes = localStorage.getItem('BWB_TS');
-    const storedPreference = localStorage.getItem('BWB_TNP')?.replace(/"/g, '');
+    const storedComputerPreferences = localStorage.getItem('BWB_ICP') === 'true'
+    let storedThemes = localStorage.getItem('BWB_TS')
+    const storedPreference = localStorage.getItem('BWB_TNP')?.replace(/"/g, '')
 
     dispatch(
       intializeThemeStore({
         computerPreferences: storedComputerPreferences,
         themes: storedThemes,
         preference: storedPreference,
-      }),
-    );
+      })
+    )
 
     if (window && window.matchMedia) {
-      const darkColorScheme = window.matchMedia('(prefers-color-scheme: dark)');
+      const darkColorScheme = window.matchMedia('(prefers-color-scheme: dark)')
 
       const setThemeByPreference = (e: MediaQueryList) => {
         if (!storedComputerPreferences) {
-          dispatch(setActiveThemeByName(e.matches ? 'night' : 'day'));
+          dispatch(setActiveThemeByName(e.matches ? 'night' : 'day'))
         }
-      };
+      }
 
-      const themePreferenceChange = (e: any) => setThemeByPreference(e.target);
-      darkColorScheme.addEventListener('change', themePreferenceChange);
-      setThemeByPreference(darkColorScheme);
-      return () => darkColorScheme.removeEventListener('change', themePreferenceChange);
+      const themePreferenceChange = (e: any) => setThemeByPreference(e.target)
+      darkColorScheme.addEventListener('change', themePreferenceChange)
+      setThemeByPreference(darkColorScheme)
+      return () =>
+        darkColorScheme.removeEventListener('change', themePreferenceChange)
     }
-  }, []);
+  }, [])
 
   return (
     <ThemeProvider theme={themeStore.active}>
@@ -72,15 +79,17 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
             <Transition
               key={location.pathname}
               timeout={{
-                enter: TIMEOUT_500,
-                exit: TIMEOUT_500,
+                enter: PAGE_TRANSITION_DURATION,
+                exit: PAGE_TRANSITION_DURATION,
               }}
               unmountOnExit
             >
               {(status) => (
                 <div
                   style={{
-                    ...getPageTransitionStyles(TIMEOUT_500)[status],
+                    ...getPageTransitionStyles(PAGE_TRANSITION_DURATION)[
+                      status
+                    ],
                   }}
                 >
                   {children}
@@ -91,7 +100,7 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
         </MainContainer>
       </LayoutContainer>
     </ThemeProvider>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

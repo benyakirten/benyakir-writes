@@ -1,5 +1,5 @@
-import styled from "styled-components"
-import { media } from "@/styles/queries"
+import styled from 'styled-components'
+import { media } from '@/styles/queries'
 
 export const CardContainer = styled.div`
   display: flex;

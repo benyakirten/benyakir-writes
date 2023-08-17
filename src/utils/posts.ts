@@ -1,5 +1,13 @@
 export function createSearchableString(arr: (string | number | undefined)[]) {
-  return (arr.reduce((acc, next) => next === 0 || next ? `${formatWpText(next.toString().toLowerCase())} ${acc}` : `${acc}`, '') as string).trim()
+  return (
+    arr.reduce(
+      (acc, next) =>
+        next === 0 || next
+          ? `${formatWpText(next.toString().toLowerCase())} ${acc}`
+          : `${acc}`,
+      ''
+    ) as string
+  ).trim()
 }
 
 export function formatWpText(text: string) {
@@ -30,6 +38,10 @@ export function rigorousTextFormat(text: string) {
     .replace(/\!/g, '')
 }
 
-export const createMetaForObject = (item: object) => createSearchableString(Object.values(item).filter(v => !!v))
+export const createMetaForObject = (item: object) =>
+  createSearchableString(Object.values(item).filter((v) => !!v))
 
-export const createLookupMeta = (meta: string) => rigorousTextFormat(meta).split(/[-\s]/).reduce((acc, next) => next ? ({ ...acc, [next]: true }) : acc, {})
+export const createLookupMeta = (meta: string) =>
+  rigorousTextFormat(meta)
+    .split(/[-\s]/)
+    .reduce((acc, next) => (next ? { ...acc, [next]: true } : acc), {})

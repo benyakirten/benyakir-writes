@@ -1,13 +1,13 @@
-import * as React from 'react';
+import { GatsbyImage } from 'gatsby-plugin-image'
+import * as React from 'react'
 
-import LatestUpdate from '@/components/Portfolio/LatestUpdate.component';
-import { useFetchRepoUpdatedDate } from '@/hooks';
-import { ProjectGridDatum } from '@/types/portfolio';
-import { getPrettyDate } from '@/utils/dates';
-import { getFullTechName } from '@/utils/project';
-import { CustomLink } from '../General';
+import LatestUpdate from '@/components/Portfolio/LatestUpdate.component'
+import { useFetchRepoUpdatedDate } from '@/hooks'
+import { Column } from '@/styles/general-components'
+import { ProjectGridDatum } from '@/types/portfolio'
+import { getPrettyDate } from '@/utils/dates'
+import { getFullTechName } from '@/utils/project'
 import {
-  GitHubIcon,
   ProjectCardBottom,
   ProjectCardTop,
   ProjectContents,
@@ -17,35 +17,31 @@ import {
   TechBadge,
   TechBadges,
   TitleContainer,
-  TitleDateContainer,
-} from './Portfolio.styles';
+} from './Portfolio.styles'
 
 const IndividualProject: React.FC<{
-  project: ProjectGridDatum;
-  ghIcon: string;
-  techs: Set<string>;
-}> = ({ project, ghIcon, techs }) => {
-  const latestUpdateState = useFetchRepoUpdatedDate(project.repoLink);
+  project: ProjectGridDatum
+  techs: Set<string>
+}> = ({ project, techs }) => {
+  const latestUpdateState = useFetchRepoUpdatedDate(project.repoLink)
   return (
     <ProjectContents>
       <ProjectCardTop>
         <TitleContainer>
           <ProjectTitle>{project.title}</ProjectTitle>
-          <TitleDateContainer>
-            {project.repoLink && (
-              <CustomLink underbarsize="0px" outside to={project.repoLink}>
-                <GitHubIcon ghIcon={ghIcon} />
-              </CustomLink>
-            )}
-            {project.hostedOn && project.mainLink && (
-              <CustomLink outside to={project.mainLink}>
-                {project.hostedOn}
-              </CustomLink>
-            )}
-          </TitleDateContainer>
         </TitleContainer>
         {/* Since we're using content directly from WP, we have to set the HTML and trust that the WP server hasn't been hacked */}
-        <ProjectDescription dangerouslySetInnerHTML={{ __html: project.description }} />
+        <Column style={{ gap: '0.5rem' }}>
+          {project.image && (
+            <GatsbyImage
+              image={project.image.childImageSharp.gatsbyImageData}
+              alt={project.image.name}
+            />
+          )}
+          <ProjectDescription
+            dangerouslySetInnerHTML={{ __html: project.description }}
+          />
+        </Column>
       </ProjectCardTop>
       <ProjectCardBottom>
         <ProjectDates>
@@ -61,7 +57,7 @@ const IndividualProject: React.FC<{
         </TechBadges>
       </ProjectCardBottom>
     </ProjectContents>
-  );
-};
+  )
+}
 
-export default IndividualProject;
+export default IndividualProject

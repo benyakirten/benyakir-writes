@@ -1,4 +1,8 @@
-export function findAttrInElTree(el: HTMLElement, attr: string, val: string | boolean): boolean {
+export function findAttrInElTree(
+  el: HTMLElement,
+  attr: string,
+  val: string | boolean
+): boolean {
   const attrHasValue = el.getAttribute(attr) === val
   if (attrHasValue) {
     return true

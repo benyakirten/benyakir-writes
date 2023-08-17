@@ -1,5 +1,5 @@
-import * as React from "react";
-import { Link, navigate } from "gatsby";
+import * as React from 'react'
+import { Link, navigate } from 'gatsby'
 
 import {
   Card,
@@ -14,17 +14,17 @@ import {
   WpContentDescription,
   HoverableContainer,
   HoverableGatsbyImage,
-} from "@Styles/general-components";
+} from '@Styles/general-components'
 
-import { Button, CustomLink } from "@Gen";
+import { Button, CustomLink } from '@Gen'
 
-import { BookCardProps } from "@Types/props/post-components";
+import { BookCardProps } from '@Types/props/post-components'
 
 const BookCard: React.FC<BookCardProps> = ({ item }) => {
-  const coverOrStories = !!item.stories || !!item.cover;
+  const coverOrStories = !!item.stories || !!item.cover
   return (
     <Card>
-      <Row style={{ alignItems: "stretch" }}>
+      <Row style={{ alignItems: 'stretch' }}>
         <CardDoubleSection>
           <SubHeading noUnderline>
             <CustomLink to={`/book/${item.slug}`}>{item.title}</CustomLink>
@@ -69,8 +69,8 @@ const BookCard: React.FC<BookCardProps> = ({ item }) => {
               ) : (
                 <Column>
                   <SubHeading>
-                    Related Short{" "}
-                    {item.stories!.length > 1 ? "Stories" : "Story"}
+                    Related Short{' '}
+                    {item.stories!.length > 1 ? 'Stories' : 'Story'}
                   </SubHeading>
                   {item.stories!.map((s, idx) => (
                     <Paragraph key={s.title + idx}>
@@ -84,7 +84,7 @@ const BookCard: React.FC<BookCardProps> = ({ item }) => {
         )}
       </Row>
     </Card>
-  );
-};
+  )
+}
 
-export default BookCard;
+export default BookCard

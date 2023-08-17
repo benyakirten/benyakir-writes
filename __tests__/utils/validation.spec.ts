@@ -1,48 +1,37 @@
-import { COLOR_REGEX } from '@Constants';
+import { COLOR_REGEX } from '@Constants'
 import {
   validateByRegex,
   validateLength,
   validateRange,
-  validate
+  validate,
 } from '@Utils/validation'
 
 describe('validateByRegex', () => {
   it('should return a function', () => {
-    const res = validateByRegex(/any/);
+    const res = validateByRegex(/any/)
     expect(typeof res).toEqual('function')
   })
 
   it('should return a function that returns true for proper input', () => {
-    const correctInputs = [
-      '#abc',
-      '#123',
-      '#456123'
-    ];
+    const correctInputs = ['#abc', '#123', '#456123']
     const res = validateByRegex(COLOR_REGEX)
     for (let input of correctInputs) {
-      expect(res(input)).toEqual(true);
+      expect(res(input)).toEqual(true)
     }
   })
 
   it('should return a function that returns false for improper input', () => {
-    const badInputs = [
-      '#efg',
-      '#',
-      '#1234567',
-      '       ',
-      ' ',
-      '!!!'
-    ];
+    const badInputs = ['#efg', '#', '#1234567', '       ', ' ', '!!!']
     const res = validateByRegex(COLOR_REGEX)
     for (let input of badInputs) {
-      expect(res(input)).toEqual(false);
+      expect(res(input)).toEqual(false)
     }
   })
 })
 
 describe('validateLength', () => {
   it('should return a function', () => {
-    const res = validateLength({});
+    const res = validateLength({})
     expect(typeof res).toEqual('function')
   })
 
@@ -51,18 +40,13 @@ describe('validateLength', () => {
       'abcde',
       'abcdefefefefefefefefefefefef',
       '                       ',
-      '     '
+      '     ',
     ]
 
-    const incorrectInputsMin = [
-      'abcd',
-      '    ',
-      '',
-      '1'
-    ]
+    const incorrectInputsMin = ['abcd', '    ', '', '1']
 
     const resMin = validateLength({
-      min: 5
+      min: 5,
     })
 
     for (let input of correctInputsMin) {
@@ -75,20 +59,16 @@ describe('validateLength', () => {
   })
 
   it('should return a function with just a max that returns true or false for correct or incorrect inputs', () => {
-    const correctInputsMax = [
-      '',
-      ' ',
-      '123456789'
-    ]
+    const correctInputsMax = ['', ' ', '123456789']
 
     const incorrectInputsMax = [
       '12345612094910240',
       '                  ',
-      '          asf asf as fa sf'
+      '          asf asf as fa sf',
     ]
 
     const resMax = validateLength({
-      max: 10
+      max: 10,
     })
 
     for (let input of correctInputsMax) {
@@ -101,21 +81,11 @@ describe('validateLength', () => {
   })
 
   it('should return a function with just an exact length that returns true or false with for correct or incorrect inputs', () => {
-    const correctInputsExact = [
-      'ab',
-      '  ',
-      'a ',
-      ' a'
-    ]
+    const correctInputsExact = ['ab', '  ', 'a ', ' a']
 
-    const incorrectInputsExact = [
-      ' ',
-      '',
-      '   ',
-      'abcdef'
-    ]
+    const incorrectInputsExact = [' ', '', '   ', 'abcdef']
     const resExact = validateLength({
-      exact: 2
+      exact: 2,
     })
 
     for (let input of correctInputsExact) {
@@ -130,18 +100,9 @@ describe('validateLength', () => {
   it('should return a function that allows for multiple exact lengths if exact is an array of numbers', () => {
     const res = validateLength({ exact: [4, 7] })
 
-    const correctInputs = [
-      "abcd",
-      "#abc",
-      "#abcdef",
-    ]
+    const correctInputs = ['abcd', '#abc', '#abcdef']
 
-    const incorrectInputs = [
-      "abc",
-      "abcde",
-      "abcdef",
-      "abcdefgh",
-    ]
+    const incorrectInputs = ['abc', 'abcde', 'abcdef', 'abcdefgh']
 
     for (let input of correctInputs) {
       expect(res(input)).toBe(true)
@@ -153,21 +114,12 @@ describe('validateLength', () => {
   })
 
   it('should return a function with both a min and max length that returns true or false with for correct or incorrect inputs', () => {
-    const correctInputsMinMax = [
-      'ab',
-      '   ',
-      'abc ',
-      ' abcd'
-    ]
+    const correctInputsMinMax = ['ab', '   ', 'abc ', ' abcd']
 
-    const incorrectInputsMinMax = [
-      ' ',
-      '',
-      'abcdef'
-    ]
+    const incorrectInputsMinMax = [' ', '', 'abcdef']
     const resMinMax = validateLength({
       min: 2,
-      max: 5
+      max: 5,
     })
 
     for (let input of correctInputsMinMax) {
@@ -180,25 +132,14 @@ describe('validateLength', () => {
   })
 
   it('should return a function with all three propertiesthat returns true or false with for correct or incorrect inputs', () => {
-    const correctInputsAll = [
-      'abcd',
-      '    ',
-      'abc ',
-      ' abc'
-    ]
+    const correctInputsAll = ['abcd', '    ', 'abc ', ' abc']
 
-    const incorrectInputsAll = [
-      ' ',
-      '',
-      'abcdef',
-      'ab',
-      'abcde'
-    ]
+    const incorrectInputsAll = [' ', '', 'abcdef', 'ab', 'abcde']
 
     const resAll = validateLength({
       min: 2,
       max: 5,
-      exact: 4
+      exact: 4,
     })
 
     for (let input of correctInputsAll) {
@@ -218,12 +159,7 @@ describe('validateRange', () => {
   })
 
   it('should return a function that returns true for inputs that are <= the max', () => {
-    const validInputs = [
-      2,
-      3,
-      5,
-      1
-    ]
+    const validInputs = [2, 3, 5, 1]
 
     const res = validateRange({ min: 1, max: 5, step: 1 })
 
@@ -242,12 +178,7 @@ describe('validateRange', () => {
   })
 
   it('should return a function that returns false for inputs that are not <= the max of the range', () => {
-    const invalidInputs = [
-      6,
-      7,
-      10e10,
-      Infinity
-    ]
+    const invalidInputs = [6, 7, 10e10, Infinity]
 
     const res = validateRange({ min: 1, max: 5, step: 1 })
 
@@ -257,12 +188,7 @@ describe('validateRange', () => {
   })
 
   it('should return a funciton that returns false if the values are not >= the minimum of the range', () => {
-    const invalidInputs = [
-      0,
-      0.9999,
-      -10e10,
-      -Infinity
-    ]
+    const invalidInputs = [0, 0.9999, -10e10, -Infinity]
 
     const res = validateRange({ min: 1, max: 5, step: 1 })
 
@@ -287,13 +213,13 @@ describe('validate', () => {
     const valid = validate(5, [
       validateRange({ min: 1, max: 5, step: 1 }),
       validateRange({ min: 1, max: 5, step: 1 }),
-      validateRange({ min: 1, max: 5, step: 1 })
+      validateRange({ min: 1, max: 5, step: 1 }),
     ])
-    expect(valid).toBe(true);
+    expect(valid).toBe(true)
 
     const validTwo = validate('hello', [
       validateByRegex(/hello/),
-      validateLength({ exact: 5 })
+      validateLength({ exact: 5 }),
     ])
 
     expect(validTwo).toBe(true)
@@ -307,15 +233,10 @@ describe('validate', () => {
   it('should return true for correct inputs', () => {
     const validationFunctions = [
       validateByRegex(COLOR_REGEX),
-      validateLength({ exact: [4, 7] })
+      validateLength({ exact: [4, 7] }),
     ]
 
-    const correctInputs = [
-      '#abcdef',
-      '#abc',
-      '#def',
-      '#123456'
-    ]
+    const correctInputs = ['#abcdef', '#abc', '#def', '#123456']
 
     for (let input of correctInputs) {
       expect(validate(input, validationFunctions)).toBe(true)
@@ -325,7 +246,7 @@ describe('validate', () => {
   it('should return false for incorrect inputs', () => {
     const validationFunctions = [
       validateByRegex(COLOR_REGEX),
-      validateLength({ exact: [4, 7] })
+      validateLength({ exact: [4, 7] }),
     ]
 
     const incorrectInputs = [
@@ -335,7 +256,7 @@ describe('validate', () => {
       '#l23',
       'abcd',
       '    ',
-      '       '
+      '       ',
     ]
 
     for (let input of incorrectInputs) {

@@ -9,4 +9,3 @@ export { default as ProjectHeader } from './Headers/ProjectHeader.component'
 export { default as ShortStoryHeader } from './Headers/ShortStoryHeader.component'
 
 export { default as ThemeOptions } from './Theme/ThemeOptions/ThemeOptions.component'
-

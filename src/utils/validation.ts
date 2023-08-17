@@ -1,19 +1,21 @@
 export const validateRange: ValidateNumberFunction<{
-  min: number,
-  max: number,
+  min: number
+  max: number
   step: number
-}> = ({ min, max, step }) => (
-  (val: number) => val >= min && val <= max && val % step === 0
-)
+}> =
+  ({ min, max, step }) =>
+  (val: number) =>
+    val >= min && val <= max && val % step === 0
 
-export const validateByRegex: ValidateStringFunction<RegExp> = (regex: RegExp) => (input: string) =>
-  regex.test(input)
+export const validateByRegex: ValidateStringFunction<RegExp> =
+  (regex: RegExp) => (input: string) =>
+    regex.test(input)
 
-export const validateLength: ValidateStringFunction<{ min?: number, max?: number, exact?: number | number[] }> = ({
-  min = -1,
-  max = -1,
-  exact = -1
-}) => {
+export const validateLength: ValidateStringFunction<{
+  min?: number
+  max?: number
+  exact?: number | number[]
+}> = ({ min = -1, max = -1, exact = -1 }) => {
   return (val: string) => {
     if (min > -1 && val.length < min) {
       return false
@@ -37,7 +39,10 @@ export const validateLength: ValidateStringFunction<{ min?: number, max?: number
   }
 }
 
-export function validate (newVal: string | number, valFns: ValidationFunction[]) {
+export function validate(
+  newVal: string | number,
+  valFns: ValidationFunction[]
+) {
   for (let fn of valFns) {
     if (!fn(newVal)) {
       return false

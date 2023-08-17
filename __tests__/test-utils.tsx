@@ -1,11 +1,11 @@
-import React from "react";
-import { configureStore } from "@reduxjs/toolkit";
-import { render as rtlRender } from "@testing-library/react";
-import { Provider } from "react-redux";
+import React from 'react'
+import { configureStore } from '@reduxjs/toolkit'
+import { render as rtlRender } from '@testing-library/react'
+import { Provider } from 'react-redux'
 
-import { Layout } from "@Layout";
-import themeReducer from "@Store/theme/theme.slice";
-import dragReducer from "@Store/drag/drag.slice";
+import { Layout } from '@Layout'
+import themeReducer from '@Store/theme/theme.slice'
+import dragReducer from '@Store/drag/drag.slice'
 
 // I'm not this sophisticated - https://redux.js.org/usage/writing-tests
 
@@ -28,12 +28,12 @@ function render(
       <Provider store={store}>
         <Layout>{children}</Layout>
       </Provider>
-    );
-  };
-  return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
+    )
+  }
+  return rtlRender(ui, { wrapper: Wrapper, ...renderOptions })
 }
 
 // re-export everything
-export * from "@testing-library/react";
+export * from '@testing-library/react'
 // override render method
-export { render };
+export { render }

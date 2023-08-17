@@ -1,14 +1,14 @@
-import styled from 'styled-components';
-import { FONT_LG } from '@StyleVars';
+import { FONT_LG, TRANSITION_SLOW } from '@StyleVars'
+import styled from 'styled-components'
 
 export const StyledArrow = styled.span<{ open: boolean }>`
-    position: absolute;
-    left: -1.5rem;
-    
-    outline: none;
+  position: absolute;
+  left: -1.5rem;
 
-    font-size: ${FONT_LG};
+  outline: none;
 
-    transition: all 1s ease;
-    transform: rotate(${props => props.open ? '180' : '0'}deg);
+  font-size: ${FONT_LG};
+
+  transition: all ${TRANSITION_SLOW} ease;
+  transform: rotate(${(props) => (props.open ? '180' : '0')}deg);
 `

@@ -1,10 +1,10 @@
-import * as React from "react";
+import * as React from 'react'
 
-import { Row } from "@Styles/general-components";
+import { Row } from '@Styles/general-components'
 
-import Choice from "./Choice/Choice.component";
+import Choice from './Choice/Choice.component'
 
-import { Z_BASE, Z_UNDER } from "@StyleVars";
+import { Z_BASE, Z_UNDER } from '@StyleVars'
 
 const MultipleChoice: React.FC<MultipleChoiceProps> = ({
   choices,
@@ -16,13 +16,13 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = ({
       choices.map((c) =>
         c.value === val ? { ...c, selected: !c.selected } : c
       )
-    );
+    )
   }
   return (
     <Row
       style={{
         zIndex: tabIndex < 0 ? Z_UNDER : Z_BASE,
-        height: tabIndex < 0 ? 0 : "auto",
+        height: tabIndex < 0 ? 0 : 'auto',
       }}
       data-cy="multiple-choice"
     >
@@ -36,7 +36,7 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = ({
         />
       ))}
     </Row>
-  );
-};
+  )
+}
 
-export default MultipleChoice;
+export default MultipleChoice

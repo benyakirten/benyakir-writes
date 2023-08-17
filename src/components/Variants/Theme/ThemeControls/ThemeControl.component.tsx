@@ -1,20 +1,20 @@
-import * as React from "react";
+import * as React from 'react'
 
-import { CardContainer, CardHalf } from "./ThemeControls.styles";
-import { Button } from "@Gen";
-import DraggableThemeList from "./ThemeLists/DraggableList/DraggableThemeList.component";
-import DestinationThemeList from "./ThemeLists/DestinationThemeList/DestinationThemeList.component";
+import { CardContainer, CardHalf } from './ThemeControls.styles'
+import { Button } from '@Gen'
+import DraggableThemeList from './ThemeLists/DraggableList/DraggableThemeList.component'
+import DestinationThemeList from './ThemeLists/DestinationThemeList/DestinationThemeList.component'
 
-import { useAppDispatch } from "@Store/hooks";
-import { createTheme, resetThemeOptions } from "@Store/theme/theme.slice";
+import { useAppDispatch } from '@Store/hooks'
+import { createTheme, resetThemeOptions } from '@Store/theme/theme.slice'
 
 const ThemeControls: React.FC<ThemeControlProps> = ({
   selectedTheme,
   setSelectedTheme,
   open,
-  allowsHover
+  allowsHover,
 }) => {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
   return (
     <CardContainer>
       <CardHalf>
@@ -45,7 +45,7 @@ const ThemeControls: React.FC<ThemeControlProps> = ({
         </CardHalf>
       )}
     </CardContainer>
-  );
-};
+  )
+}
 
-export default ThemeControls;
+export default ThemeControls

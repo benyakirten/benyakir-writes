@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from 'react'
 
-import { Text } from "@Input";
+import { Text } from '@Input'
 
-import { Row } from "@Styles/general-components";
-import { PageFlip, PageNumber } from "./PaginateMenu.styles";
+import { Row } from '@Styles/general-components'
+import { PageFlip, PageNumber } from './PaginateMenu.styles'
 
 const PaginateMenu: React.FC<PaginateMenuProps> = ({
   currentPage,
@@ -15,18 +15,18 @@ const PaginateMenu: React.FC<PaginateMenuProps> = ({
   disableRight,
   name,
 }) => {
-  const randId = Math.random().toString();
-  const doNothing = () => {};
+  const randId = Math.random().toString()
+  const doNothing = () => {}
   const adjustLimit = (newLimit: string) => {
-    const lim = +newLimit;
+    const lim = +newLimit
     if (isFinite(lim) && lim > 0 && lim % 1 === 0) {
-      setLimit(lim);
+      setLimit(lim)
     }
-  };
-  const enableRightButton = currentPage < maxPages && !disableRight;
+  }
+  const enableRightButton = currentPage < maxPages && !disableRight
   return (
-    <Row style={{ justifyContent: "space-between" }}>
-      <Row style={{ margin: "2rem 0" }}>
+    <Row style={{ justifyContent: 'space-between' }}>
+      <Row style={{ margin: '2rem 0' }}>
         <PageFlip
           disabled={currentPage === 0}
           onClick={currentPage === 0 ? doNothing : onLeft}
@@ -54,7 +54,7 @@ const PaginateMenu: React.FC<PaginateMenuProps> = ({
         cyId="adjust-items-per-page"
       />
     </Row>
-  );
-};
+  )
+}
 
-export default PaginateMenu;
+export default PaginateMenu

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react'
 
 import {
   Card,
@@ -10,17 +10,17 @@ import {
   Paragraph,
   Row,
   WpContentDescription,
-} from '@Styles/general-components';
+} from '@Styles/general-components'
 
-import { CustomLink } from '@Gen';
+import { CustomLink } from '@Gen'
 
-import { titleToKebab } from '@Utils/strings';
-import { getPrettyDate } from '@Utils/dates';
-import { BlogCardProps } from '@Types/props/post-components';
-import { TextSection } from './BlogCard.styles';
+import { titleToKebab } from '@Utils/strings'
+import { getPrettyDate } from '@Utils/dates'
+import { BlogCardProps } from '@Types/props/post-components'
+import { TextSection } from './BlogCard.styles'
 
 const BlogCard: React.FC<BlogCardProps> = ({ item }) => {
-  const hasCategoriesOrTags = item.categories || item.tags;
+  const hasCategoriesOrTags = item.categories || item.tags
   return (
     <Card style={{ height: '18rem' }}>
       <Row style={{ alignItems: 'start' }}>
@@ -56,7 +56,11 @@ const BlogCard: React.FC<BlogCardProps> = ({ item }) => {
                     </MinorHeading>
                     <Paragraph style={{ margin: '0' }}>
                       {item.categories.map((cat) => (
-                        <CustomLink wholeline to={`/blog/${titleToKebab(cat)}`} key={cat}>
+                        <CustomLink
+                          wholeline
+                          to={`/blog/${titleToKebab(cat)}`}
+                          key={cat}
+                        >
                           {cat}
                         </CustomLink>
                       ))}
@@ -65,8 +69,12 @@ const BlogCard: React.FC<BlogCardProps> = ({ item }) => {
                 )}
                 {item.tags && (
                   <>
-                    <MinorHeading>{item.tags.length > 1 ? 'Tags' : 'Tag'}</MinorHeading>
-                    <Paragraph style={{ margin: '0' }}>{item.tags.join(', ')}</Paragraph>
+                    <MinorHeading>
+                      {item.tags.length > 1 ? 'Tags' : 'Tag'}
+                    </MinorHeading>
+                    <Paragraph style={{ margin: '0' }}>
+                      {item.tags.join(', ')}
+                    </Paragraph>
                   </>
                 )}
               </Column>
@@ -75,7 +83,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ item }) => {
         )}
       </Row>
     </Card>
-  );
-};
+  )
+}
 
-export default BlogCard;
+export default BlogCard
