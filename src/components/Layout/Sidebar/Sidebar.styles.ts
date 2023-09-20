@@ -9,18 +9,26 @@ import {
   SHADOW_MD,
   TRANSITION_FAST,
   TRANSITION_NORMAL,
+  TRANSITION_SLOW,
   Z_ABOVE,
+  Z_RAISED,
 } from '@StyleVars'
 import { convertHexToRGBA } from '@Utils/colors'
 
 export const StyledSidebar = styled.nav<{ open?: boolean }>`
-  position: relative;
-  z-index: ${Z_ABOVE};
+  position: fixed;
+  z-index: ${Z_RAISED};
 
-  width: ${(props) => (props.open ? '25rem' : '5rem')};
+  width: 25rem;
+  height: 100vh;
+  overflow: auto;
+
+  transform: translateX(${(props) => (props.open ? '0%' : '-80%')});
 
   font-family: ${FAUSTINA};
   font-size: ${FONT_XXL};
+
+  background-color: red;
 
   background-image: ${(props) => `linear-gradient(
     to right,
@@ -31,48 +39,24 @@ export const StyledSidebar = styled.nav<{ open?: boolean }>`
   box-shadow: ${(props) =>
     `${SHADOW_MD} ${convertHexToRGBA(props.theme.sidebar.shadowColor, 0.4)}`};
 
-  transition: all ${TRANSITION_NORMAL};
-
-  ${media.phone} {
-    min-height: ${(props) => (props.open ? '100vh' : '5rem')};
-    border-bottom: ${(props) =>
-      props.open ? 'none' : `2px solid ${props.theme.base.border}`};
-    border-top: ${(props) =>
-      props.open ? 'none' : `2px solid ${props.theme.base.border}`};
-
-    min-height: ${(props) => (props.open ? '100vh' : '5rem')};
-    padding: 1rem 2rem;
-
-    position: ${(props) => (props.open ? 'relative' : 'fixed')};
-    bottom: ${(props) => (props.open ? 'auto' : '5rem')};
-  }
+  transition: transform ${TRANSITION_SLOW};
 `
 
 export const SidebarContents = styled.div<{ open: boolean }>`
-  position: fixed;
+  position: relative;
   top: 1rem;
   left: 2.5rem;
+  padding-right: 2rem;
 
-  width: ${(props) => (props.open ? 'auto' : '2rem')};
-  max-width: 14%;
-
-  ${media.desktop} {
-    max-width: 20%;
-  }
-
-  ${media.phone} {
-    top: ${(props) => (props.open ? '1rem' : 'auto')};
-    left: ${(props) => (props.open ? '2.5rem' : 'auto')};
-  }
-
-  transition: all ${TRANSITION_NORMAL};
+  transform: translateX(${(props) => (props.open ? '0' : '-100%')});
 `
 
 export const ArrowButton = styled.button<{ open: boolean }>`
   cursor: pointer;
 
   position: relative;
-  left: -1.5rem;
+  left: 1rem;
+  top: 1rem;
 
   background: none;
   border: none;
@@ -87,14 +71,12 @@ export const ArrowButton = styled.button<{ open: boolean }>`
 
   color: ${(props) => props.theme.base.textColor};
 
-  transition: all ${TRANSITION_NORMAL} ease;
-  transform: rotate(${(props) => (props.open ? '0' : '180')}deg)
-    translateX(${(props) => (props.open ? '0' : '0')});
+  transition: all ${TRANSITION_SLOW} ease;
+  rotate: ${(props) => (props.open ? '180' : '0')}deg;
+  translate: ${(props) => (props.open ? '0' : '20')}rem 0;
 `
 
 export const VisibleGroup = styled.div<{ open: boolean }>`
-  transition: all ${TRANSITION_NORMAL}, opacity 1ms;
-  transform: translateX(${(props) => (props.open ? '0' : '-20rem')});
   opacity: ${(props) => (props.open ? '1' : '0')};
 
   display: flex;
@@ -115,7 +97,7 @@ export const SubLinks = styled.div<{ open: boolean }>`
   margin-left: 1rem;
 
   transform-origin: top;
-  transition: all ${TRANSITION_NORMAL} ease;
+  transition: all ${TRANSITION_SLOW} ease;
   height: ${(props) => (props.open ? '5rem' : '0')};
   opacity: ${(props) => (props.open ? '1' : '0')};
 `
@@ -127,7 +109,7 @@ export const LegalBox = styled.div`
   flex-direction: column;
 
   height: 4rem;
-  margin: 2rem 0;
+  margin: 2rem 4rem;
   min-width: 4rem;
 
   transition: opacity ${TRANSITION_FAST} ease;
@@ -136,4 +118,16 @@ export const LegalBox = styled.div`
 export const LegalItem = styled.span`
   font-size: ${FONT_SM};
   color: ${(props) => props.theme.base.textColor};
+`
+
+export const SidebarBackdrop = styled.div<{ open: boolean }>`
+  display: ${(props) => (props.open ? 'block' : 'none')};
+
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  z-index: ${Z_ABOVE};
+
+  backdrop-filter: blur(${(props) => (props.open ? '4' : '0')}px);
+  transition: backdrop-filter ${TRANSITION_NORMAL} ease;
 `

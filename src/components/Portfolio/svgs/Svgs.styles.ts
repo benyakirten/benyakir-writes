@@ -44,5 +44,10 @@ export const SVGShapeBase = styled.svg.attrs<{
   &:hover {
     filter: blur(1px);
     scale: 1.1;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: filter 3s ease !important;
+      scale: 1;
+    }
   }
 `

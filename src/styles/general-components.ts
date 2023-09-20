@@ -364,7 +364,6 @@ export const SVGContainer = styled.div<{
   size?: string
 }>`
   position: relative;
-  left: -1.8rem;
 
   background-color: ${(props) => props.theme.base.textColor};
   mask: url(${(props) => props.src}) no-repeat center;
@@ -500,6 +499,6 @@ export const WpContentInline = styled.span<{ fontSize?: string }>`
 export const Page = styled.div`
   padding: 2rem 4rem;
   ${media.tablet} {
-    padding: 1rem 2rem;
+    padding: 1rem 4rem;
   }
 `

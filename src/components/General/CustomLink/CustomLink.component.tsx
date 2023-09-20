@@ -1,6 +1,8 @@
 import * as React from 'react'
 
 import { OutsideLink, StyledLink } from './CustomLink.styles'
+import { useAppDispatch } from '@/store/hooks'
+import { setSidebarState } from '@/store/sidebar/sidebar.slice'
 
 const CustomLink: React.FC<LinkProps> = ({
   tabIndex = 0,
@@ -15,7 +17,11 @@ const CustomLink: React.FC<LinkProps> = ({
   limitunderbar = false,
   underbarsize,
   wholeline = false,
+  onClick,
 }) => {
+  const dispatch = useAppDispatch()
+  onClick ??= () => dispatch(setSidebarState(false))
+
   const linkProps = {
     tabIndex,
     inline,
@@ -30,11 +36,17 @@ const CustomLink: React.FC<LinkProps> = ({
   return (
     <>
       {outside ? (
-        <OutsideLink {...linkProps} href={to}>
+        <OutsideLink
+          onClick={onClick}
+          {...linkProps}
+          target="_blank"
+          rel="noopener noreferrer"
+          href={to}
+        >
           {children}
         </OutsideLink>
       ) : (
-        <StyledLink {...linkProps} to={to}>
+        <StyledLink onClick={onClick} {...linkProps} to={to}>
           {children}
         </StyledLink>
       )}

@@ -25,8 +25,8 @@ exports.onCreateWebpackConfig = ({ actions }) => {
         "@StyleVars": path.resolve(__dirname, "src/styles/variables.ts"),
         "@Animations": path.resolve(__dirname, "src/styles/animations.ts"),
         "@Utils": path.resolve(__dirname, "src/utils"),
-        "@Images": path.resolve(__dirname, "src/images"),
-        "@Tech": path.resolve(__dirname, "src/images/tech"),
+        "@Images": path.resolve(__dirname, "src/files/images"),
+        "@Tech": path.resolve(__dirname, "src/files/images/tech"),
         "@Constants": path.resolve(__dirname, "src/data/constants.ts"),
         "@Hooks": path.resolve(__dirname, "src/hooks/index.ts"),
         "@Data": path.resolve(__dirname, "src/data"),
@@ -402,6 +402,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         return "Golang";
       case "ex":
         return "Elixir";
+      case "wip":
+        return "Work In Progress";
+      case "ws":
+        return "WebSockets"
       default:
         return tech;
     }

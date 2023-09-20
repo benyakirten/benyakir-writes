@@ -1,7 +1,13 @@
 import styled from 'styled-components'
 
 import { media } from '@/styles/queries'
-import { FONT_MD, TRANSITION_NORMAL, Z_ABOVE } from '@StyleVars'
+import {
+  FONT_MD,
+  TRANSITION_EXTRA_SLOW,
+  TRANSITION_NORMAL,
+  TRANSITION_SLOW,
+  Z_ABOVE,
+} from '@StyleVars'
 
 export const ButtonExterior = styled.button`
   cursor: pointer;
@@ -41,7 +47,7 @@ export const ButtonExterior = styled.button`
 
   span {
     color: ${(props) => props.theme.button.default.textColor};
-    transition: color ${TRANSITION_NORMAL} ease;
+    transition: color ${TRANSITION_SLOW} ease;
 
     position: relative;
     font-size: ${FONT_MD};
@@ -56,7 +62,7 @@ export const ButtonExterior = styled.button`
 
     background-color: ${(props) => props.theme.button.hover.background};
 
-    transition: transform ${TRANSITION_NORMAL} ease;
+    transition: transform ${TRANSITION_SLOW} ease;
     transform: scale(0);
   }
 

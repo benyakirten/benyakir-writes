@@ -79,6 +79,7 @@ export const LayoutContainer = styled.div`
 export const MainContainer = styled.main`
   position: relative;
   width: 100%;
+  margin-left: 4rem;
   background-color: ${(props) => props.theme.base.background};
   overflow: hidden;
 `

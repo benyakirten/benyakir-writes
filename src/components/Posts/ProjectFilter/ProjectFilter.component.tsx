@@ -4,8 +4,7 @@ import { SubHeading } from '@Styles/general-components'
 import { Filter, DatePicker, MultipleChoice } from '@Input'
 import { Foldout } from '@Gen'
 
-import { useAlternation } from '@Hooks'
-import { getMultipleChoiceHeight, getValuesForSelected } from '@Utils/filter'
+import { useAlternation, useMultiSelect } from '@Hooks'
 import { hasSomeContent } from '@Utils/search'
 
 import { ProjectsFilterProps } from '@Types/props/post-components'
@@ -27,51 +26,42 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
 
   const [filterWords, setFilterWords] = React.useState<string[]>([])
 
-  const [hostChoices, setHostChoices] = React.useState<PotentialChoice[]>(
-    allHosts.map((p) => ({
-      value: p as string,
-      selected: false,
-    }))
+  const hosts = React.useMemo(
+    () => allHosts.map((host) => ({ label: host, value: host })),
+    allHosts
   )
-
-  const [techChoices, setTechChoices] = React.useState<PotentialChoice[]>(
-    allTechs.map((t) => ({
-      value: t,
-      selected: false,
-    }))
+  const techs = React.useMemo(
+    () => allTechs.map((tech) => ({ label: tech, value: tech })),
+    allTechs
   )
+  const [hostChoices, setHostChoices] = useMultiSelect()
+  const [techChoices, setTechChoices, filterByTechChoices] = useMultiSelect()
 
   React.useEffect(() => {
-    // Consult previous commits to compare this with previous forms
     let _projects = allProjects
       .filter(
         (p) => p.firstReleased.date.getTime() <= publishedBefore.getTime()
       )
       .filter((p) => p.firstReleased.date.getTime() >= publishedAfter.getTime())
 
-    // The main change here is the change of every projects' meta from a string to a hashtable
-    // This decreases the complexity from O(n + m + o) to O(n + m)
-    // n is the number of projects and the largest element of the three
-    // m is the number of filter words (usually 1 or 2)
-    // o used to be the indexing of a string but is now constant time because it's looking up values in a hashtable
     if (hasSomeContent(filterWords)) {
       _projects = _projects.filter((p) =>
         filterWords.every((w) => p.meta[w] || p.meta[w.toLowerCase()])
       )
     }
 
-    if (techChoices.some((t) => t.selected)) {
-      const _techs = getValuesForSelected(techChoices)
-      _projects = _projects.filter((p) =>
-        _techs.every((t) => p.longTechnologies.includes(t))
+    if (hostChoices.size > 0) {
+      _projects = _projects.filter((project) =>
+        hostChoices.has(project.hostedOn ?? '')
       )
     }
-    if (hostChoices.some((h) => h.selected)) {
-      const _hosts = getValuesForSelected(hostChoices)
-      _projects = _projects
-        .filter((p) => !!p.hostedOn)
-        .filter((p) => _hosts.every((h) => p.hostedOn!.includes(h)))
-    }
+
+    console.log(_projects)
+    _projects = filterByTechChoices(
+      _projects,
+      (project) => project.longTechnologies
+    )
+
     onFilter(_projects)
   }, [publishedBefore, publishedAfter, filterWords, techChoices, hostChoices])
 
@@ -112,14 +102,14 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
         topbar={<SubHeading>Filter by host</SubHeading>}
         open={dropdownOpen === 'host'}
         onClick={() => setDropdown('host')}
-        height={getMultipleChoiceHeight(hostChoices)}
+        height="20rem"
         heightMultiplierOnPhone={3}
         heightMultiplierOnTablet={1.6}
         cyId="foldout-host"
       >
         <MultipleChoice
           tabIndex={dropdownOpen === 'host' ? 0 : -1}
-          choices={hostChoices}
+          choices={hosts}
           onSelect={setHostChoices}
         />
       </Foldout>
@@ -127,11 +117,11 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
         topbar={<SubHeading>Filter by technology</SubHeading>}
         open={dropdownOpen === 'tech'}
         onClick={() => setDropdown('tech')}
-        height="auto"
+        height="20rem"
         cyId="foldout-tech"
       >
         <MultipleChoice
-          choices={techChoices}
+          choices={techs}
           onSelect={setTechChoices}
           tabIndex={dropdownOpen === 'tech' ? 0 : -1}
         />

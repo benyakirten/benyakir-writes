@@ -24,10 +24,13 @@ const ThemeCard: React.FC = () => {
       : true
     setAllowsHover(_allowshover)
   }, [])
+
   const themeStore = useAppSelector((root) => root.theme)
   const dispatch = useAppDispatch()
+
   const [selectedTheme, setSelectedTheme] = useAlternation()
   const [openMenus, toggleOpenMenus] = useMultiple(['general', 'modify'])
+
   const generalHeight = React.useMemo(() => {
     const baseHeight = allowsHover ? 48 : 30
     if (
@@ -42,6 +45,7 @@ const ThemeCard: React.FC = () => {
     const multiplier = allowsHover ? 6 : 4
     return `${baseHeight + multiplier * themesOverThreshold}rem`
   }, [themeStore.themes, allowsHover])
+
   return (
     <Column style={{ gap: '1rem' }}>
       {themeStore.error && (

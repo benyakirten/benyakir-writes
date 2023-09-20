@@ -1,15 +1,13 @@
-export const createLookupFromChoices = (
-  choices: PotentialChoice[]
-): BooleanLookup =>
-  choices
-    .filter((c) => c.selected)
-    .reduce((acc, next) => ({ ...acc, [next.value]: true }), {})
-
-export const getValuesForSelected = (choices: PotentialChoice[]): string[] =>
-  choices.filter((c) => c.selected).map((c) => c.value)
-
-export const getMultipleChoiceHeight = (choices: PotentialChoice[]) => {
-  return choices.length < 5
-    ? '5.4rem'
-    : Math.ceil(choices.length / 4) * 6.4 + 'rem'
-}
+export const createChoiceSet = <T extends object, U extends keyof T>(
+  items: T[],
+  key: T[U] extends string[] | null ? U : never
+) =>
+  [...new Set(items.flatMap((item) => item[key] as string[] | null))].reduce<
+    { label: string; value: string }[]
+  >((acc, next) => {
+    if (!next) {
+      return acc
+    }
+    acc.push({ label: next, value: next })
+    return acc
+  }, [])

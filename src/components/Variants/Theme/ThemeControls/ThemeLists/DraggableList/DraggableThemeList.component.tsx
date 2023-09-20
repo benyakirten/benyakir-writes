@@ -15,7 +15,7 @@ const DraggableThemeList: React.FC<DraggableThemeListProps> = ({
 }) => {
   // Icons sourced from svgrepo.com and all have CC0 License
   const themeQuery: ThemeIconsQuery = useStaticQuery(graphql`
-    query ThemeQuery($glob: String = "theme/*") {
+    query ThemeQuery($glob: String = "images/theme/*") {
       allFile(filter: { relativePath: { glob: $glob } }, sort: { name: ASC }) {
         nodes {
           name
