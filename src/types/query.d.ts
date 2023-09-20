@@ -105,6 +105,10 @@ type ProjectsQuery = {
     allFile: {
       nodes: ProjectImageData[]
     }
+    file: {
+      name: string
+      publicURL: string
+    }
   }
 }
 

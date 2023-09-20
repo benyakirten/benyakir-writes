@@ -8,7 +8,7 @@ const LinkOrNot: React.FC<{ link?: string; children: React.ReactNode }> = ({
   if (link) {
     return <ProjectLink href={link}>{children}</ProjectLink>
   }
-  return <>{children}</>
+  return children
 }
 
 export default LinkOrNot

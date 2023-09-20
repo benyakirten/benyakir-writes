@@ -31,7 +31,7 @@ const IndividualProject: React.FC<{
           <ProjectTitle>{project.title}</ProjectTitle>
         </TitleContainer>
         {/* Since we're using content directly from WP, we have to set the HTML and trust that the WP server hasn't been hacked */}
-        <Column style={{ gap: '0.5rem' }}>
+        <Column style={{ gap: '1.5rem' }}>
           {project.image && (
             <GatsbyImage
               image={project.image.childImageSharp.gatsbyImageData}

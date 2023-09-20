@@ -30,6 +30,7 @@ type LinkProps = ChildrenProp & {
   underbarsize?: string
   tabIndex?: number
   wholeline?: boolean
+  onClick?: () => void
 }
 type LayoutProps = {
   path: string

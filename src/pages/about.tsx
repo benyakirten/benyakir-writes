@@ -91,7 +91,7 @@ const AboutPage: React.FC<SVGImageQuery> = ({ data }) => {
 
 export const query = graphql`
   query MyQuery {
-    allFile(filter: { relativePath: { regex: "/^social/[a-zA-Z]+.svg$/" } }) {
+    allFile(filter: { relativePath: { regex: "/^images/social/[a-zA-Z]+.svg$/" } }) {
       nodes {
         publicURL
         name

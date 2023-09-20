@@ -7,18 +7,18 @@ import {
   FONT_LG,
   FONT_MD,
   FONT_SM,
+  FONT_XL,
   SHADOW_SM,
-  TRANSITION_FAST, TRANSITION_NORMAL, Z_ABOVE
+  TRANSITION_FAST,
+  TRANSITION_NORMAL,
+  Z_ABOVE,
 } from '@Styles/variables'
 
 export const ProjectBoxes = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, minmax(30%, 1fr));
-  ${media.desktop} {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  grid-template-columns: repeat(2, minmax(30%, 1fr));
   ${media.tablet} {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: unset;
   }
   gap: 4rem;
 `
@@ -30,11 +30,12 @@ export const ProjectBox = styled.article<{ highlighted?: boolean }>`
   font-size: ${FONT_SM};
   box-shadow: 2px 1px 8px 2px ${(props) => props.theme.base.shadowColor}60;
   padding: 1rem;
-  
+
   background-color: ${(props) =>
     `${props.theme.base.background}${props.highlighted ? '' : '99'}`};
-  transition: scale ${TRANSITION_FAST} ease-in, background-color ${TRANSITION_FAST} ease-in;
-  scale: ${props => props.highlighted ? "1.04" : "1"};
+  transition: scale ${TRANSITION_FAST} ease-in,
+    background-color ${TRANSITION_FAST} ease-in;
+  scale: ${(props) => (props.highlighted ? '1.04' : '1')};
 `
 
 // TODO: update this to use grid instead of
@@ -60,6 +61,10 @@ export const ProjectDescription = styled.p`
   text-overflow: ellipsis;
   font-size: ${FONT_MD};
   flex-grow: 1;
+
+  ${media.phone} {
+    font-size: ${FONT_LG};
+  }
 
   a,
   a:visited {
@@ -106,13 +111,14 @@ export const GitHubIcon = styled.img.attrs<{ ghIcon: string }>(
     height: '18px',
     width: '18px',
   })
-) <{ ghIcon: string }>`
+)<{ ghIcon: string }>`
   display: inline;
   margin-left: 0.5rem;
 `
 
 export const TechBadges = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
 `
 
@@ -148,8 +154,17 @@ export const TechnologyLabel = styled.label<{ checked: boolean }>`
       : props.theme.button.default.textColor};
   cursor: pointer;
   font-size: ${FONT_MD};
-  box-shadow: ${props => props.checked ? css`${(props) =>
-    `${SHADOW_SM} ${convertHexToRGBA(props.theme.base.shadowColor, 0.4)}`}` : 'none'};
+  border: 1px solid ${(props) => props.theme.checkbox.border};
+  box-shadow: ${(props) =>
+    props.checked
+      ? css`
+          ${(props) =>
+            `${SHADOW_SM} ${convertHexToRGBA(
+              props.theme.base.shadowColor,
+              0.4
+            )}`}
+        `
+      : 'none'};
 
   border-radius: 1rem;
   padding: 0.5rem 1rem;
@@ -159,7 +174,10 @@ export const TechnologyLabel = styled.label<{ checked: boolean }>`
     top: 0;
     left: 0;
     // Hack to get around border moving the dom rectangle on certain browsers by 1px and an outline not folloiwng border-raidus
-    box-shadow: ${props => props.checked ? css`0px 0px 0px 1px inset ${(props) => props.theme.button.border}` : 'none'};
+    box-shadow: ${(props) =>
+      props.checked
+        ? css`0px 0px 0px 1px inset ${(props) => props.theme.button.border}`
+        : 'none'};
   }
 `
 
@@ -168,7 +186,7 @@ export const TechnologyCheckox = styled.input.attrs<{ checked: boolean }>(
     type: 'checkbox',
     checked,
   })
-) <{ checked: boolean }>`
+)<{ checked: boolean }>`
   display: none;
 `
 

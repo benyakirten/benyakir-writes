@@ -15,6 +15,7 @@ const CustomLink: React.FC<LinkProps> = ({
   limitunderbar = false,
   underbarsize,
   wholeline = false,
+  onClick,
 }) => {
   const linkProps = {
     tabIndex,
@@ -30,11 +31,11 @@ const CustomLink: React.FC<LinkProps> = ({
   return (
     <>
       {outside ? (
-        <OutsideLink {...linkProps} href={to}>
+        <OutsideLink onClick={onClick} {...linkProps} href={to}>
           {children}
         </OutsideLink>
       ) : (
-        <StyledLink {...linkProps} to={to}>
+        <StyledLink onClick={onClick} {...linkProps} to={to}>
           {children}
         </StyledLink>
       )}
