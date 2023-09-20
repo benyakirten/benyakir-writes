@@ -16,6 +16,7 @@ import { ProjectGridDatum } from '@/types/portfolio'
 import { getFirstParagraphOfContent } from '@/utils/project'
 import { ProjectsQuery } from '@Types/query'
 import { downloadFile } from '@/utils/dom'
+import { Page } from '@/styles/general-components'
 
 export const Head: React.FC = () => (
   <>
@@ -86,7 +87,7 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
   }, [hovered, viewedTechs, projects])
 
   return (
-    <>
+    <Page>
       <PortfolioHeader>
         <PortfolioDescription>
           My name is Benyakir Horowitz{' '}
@@ -125,7 +126,7 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
           viewedTechs={viewedTechs}
         />
       </RandomizedBackground>
-    </>
+    </Page>
   )
 }
 

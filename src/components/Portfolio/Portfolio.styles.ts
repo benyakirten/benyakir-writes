@@ -7,7 +7,6 @@ import {
   FONT_LG,
   FONT_MD,
   FONT_SM,
-  FONT_XL,
   SHADOW_SM,
   TRANSITION_FAST,
   TRANSITION_NORMAL,
@@ -192,11 +191,8 @@ export const TechnologyCheckox = styled.input.attrs<{ checked: boolean }>(
 
 export const PortfolioBackground = styled.div`
   position: relative;
-  padding: 2rem 4rem;
+  padding-block: 2rem;
   min-height: 100vh;
-  ${media.tablet} {
-    padding: 1rem 2rem;
-  }
   background: ${(props) =>
     css`linear-gradient(to bottom, ${props.theme.base.background} 5%, ${props.theme.portfolio.gradient.color1}, ${props.theme.portfolio.gradient.color2} 75%, ${props.theme.portfolio.gradient.color3})`};
 `
@@ -219,18 +215,18 @@ export const PortfolioHeader = styled.div`
   display: flex;
   flex-direction: row;
 
+  gap: 8rem;
+
   ${media.phone} {
     flex-direction: column;
+    gap: 4rem;
   }
-  gap: 8rem;
+
   justify-content: space-between;
 
   margin: 2rem 0;
 
-  padding: 2rem 4rem;
-  ${media.tablet} {
-    padding: 1rem 2rem;
-  }
+  padding-block: 2rem;
 `
 
 export const PortfolioDescription = styled.p`

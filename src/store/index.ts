@@ -3,6 +3,7 @@ import * as Redux from 'redux'
 
 import dragReducer from './drag/drag.slice'
 import themeReducer from './theme/theme.slice'
+import sidebarReducer from './sidebar/sidebar.slice'
 
 const otherMiddleware: Redux.Middleware[] = []
 
@@ -14,6 +15,7 @@ const store = configureStore({
   reducer: {
     theme: themeReducer,
     drag: dragReducer,
+    sidebar: sidebarReducer,
   },
   middleware: (getDefaultMiddleWare) =>
     getDefaultMiddleWare().concat(...otherMiddleware),

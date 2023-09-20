@@ -500,6 +500,6 @@ export const WpContentInline = styled.span<{ fontSize?: string }>`
 export const Page = styled.div`
   padding: 2rem 4rem;
   ${media.tablet} {
-    padding: 1rem 2rem;
+    padding: 1rem 4rem;
   }
 `
