@@ -4,10 +4,10 @@ import { SubHeading } from '@Styles/general-components'
 import { Filter, DatePicker, MultipleChoice } from '@Input'
 import { Foldout } from '@Gen'
 
-import { useAlternation } from '@Hooks'
+import { useAlternation, useMultiSelect } from '@Hooks'
 
 import { hasSomeContent } from '@Utils/search'
-import { getValuesForSelected } from '@Utils/filter'
+import { createChoiceSet } from '@Utils/filter'
 
 import { AllBlogFilterProps } from '@Types/props/post-components'
 
@@ -33,12 +33,9 @@ const CategoryFilter: React.FC<AllBlogFilterProps> = ({
     () => [...new Set(allPosts.flatMap((p) => p.tags!).filter((t) => !!t))],
     allPosts
   )
-  const [tagChoices, setTagChoices] = React.useState<PotentialChoice[]>(
-    _tags.map((t) => ({
-      value: t,
-      selected: false,
-    }))
-  )
+
+  const tags = React.useMemo(() => createChoiceSet(allPosts, 'tags'), allPosts)
+  const [tagChoices, setTagChoices, filterByTags] = useMultiSelect()
 
   React.useEffect(() => {
     let _posts = allPosts
@@ -51,12 +48,7 @@ const CategoryFilter: React.FC<AllBlogFilterProps> = ({
       )
     }
 
-    if (tagChoices.some((t) => t.selected)) {
-      const _ts = getValuesForSelected(tagChoices)
-      _posts = _posts.filter((p) =>
-        _ts.every((t) => p.tags && p.tags.includes(t))
-      )
-    }
+    _posts = filterByTags(_posts, (post) => post.tags)
 
     onFilter(_posts)
   }, [publishedBefore, publishedAfter, filterWords, tagChoices])
@@ -99,12 +91,12 @@ const CategoryFilter: React.FC<AllBlogFilterProps> = ({
           topbar={<SubHeading>Filter by tags</SubHeading>}
           open={dropdownOpen === 'tags'}
           onClick={() => setDropdown('tags')}
-          height="auto"
+          height="20rem"
           cyId="foldout-tags"
         >
           <MultipleChoice
             tabIndex={dropdownOpen === 'tags' ? 0 : -1}
-            choices={tagChoices}
+            choices={tags}
             onSelect={setTagChoices}
           />
         </Foldout>

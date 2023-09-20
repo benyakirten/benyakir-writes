@@ -43,3 +43,14 @@ type SetHook = <T = string>(items?: T[]) => [Set<T>, (item: T) => void]
 
 type LatestUpdateState = FetchState | Date
 type LatestRepoUpdateHook = (repoLink?: string) => LatestUpdateState
+
+type MultiSelectHook = (
+  defaultValue?: string[]
+) => [
+  Set<string>,
+  (choices: PotentialChoice[]) => void,
+  <T extends object, U extends keyof T>(
+    items: T[],
+    getter: (item: T) => string[] | null
+  ) => T[]
+]

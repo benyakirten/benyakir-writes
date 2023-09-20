@@ -4,11 +4,10 @@ import { SubHeading } from '@Styles/general-components'
 import { Filter, DatePicker, MultipleChoice } from '@Input'
 import { Foldout } from '@Gen'
 
-import { useAlternation } from '@Hooks'
+import { useAlternation, useMultiSelect } from '@Hooks'
 
-import { getMultipleChoiceHeight, getValuesForSelected } from '@Utils/filter'
+import { createChoiceSet } from '@Utils/filter'
 import { hasSomeContent } from '@Utils/search'
-import { multiplyCSSNumber } from '@Utils/strings'
 
 import { AllBlogFilterProps } from '@Types/props/post-components'
 
@@ -25,31 +24,15 @@ const AllFilter: React.FC<AllBlogFilterProps> = ({ allPosts, onFilter }) => {
 
   const [filterWords, setFilterWords] = React.useState<string[]>([])
 
-  const _categories = React.useMemo(
-    () => [
-      ...new Set(allPosts.flatMap((p) => p.categories!).filter((c) => !!c)),
-    ],
+  const categories = React.useMemo(
+    () => createChoiceSet(allPosts, 'categories'),
     allPosts
   )
-  const [categoryChoices, setCategoryChoices] = React.useState<
-    PotentialChoice[]
-  >(
-    _categories.map((p) => ({
-      value: p,
-      selected: false,
-    }))
-  )
+  const tags = React.useMemo(() => createChoiceSet(allPosts, 'tags'), allPosts)
 
-  const _tags = React.useMemo(
-    () => [...new Set(allPosts.flatMap((p) => p.tags!).filter((t) => !!t))],
-    allPosts
-  )
-  const [tagChoices, setTagChoices] = React.useState<PotentialChoice[]>(
-    _tags.map((t) => ({
-      value: t,
-      selected: false,
-    }))
-  )
+  const [categoryChoices, setCategoryChoices, filterByCategories] =
+    useMultiSelect()
+  const [tagChoices, setTagChoices, filterByTags] = useMultiSelect()
 
   React.useEffect(() => {
     let _posts = allPosts
@@ -62,19 +45,8 @@ const AllFilter: React.FC<AllBlogFilterProps> = ({ allPosts, onFilter }) => {
       )
     }
 
-    if (categoryChoices.some((c) => c.selected)) {
-      const _cats = getValuesForSelected(categoryChoices)
-      _posts = _posts.filter((p) =>
-        _cats.every((c) => p.categories && p.categories.includes(c))
-      )
-    }
-
-    if (tagChoices.some((t) => t.selected)) {
-      const _ts = getValuesForSelected(tagChoices)
-      _posts = _posts.filter((p) =>
-        _ts.every((t) => p.tags && p.tags.includes(t))
-      )
-    }
+    _posts = filterByCategories(_posts, (post) => post.categories)
+    _posts = filterByTags(_posts, (post) => post.tags)
 
     onFilter(_posts)
   }, [
@@ -122,17 +94,12 @@ const AllFilter: React.FC<AllBlogFilterProps> = ({ allPosts, onFilter }) => {
         topbar={<SubHeading>Filter by category</SubHeading>}
         open={dropdownOpen === 'category'}
         onClick={() => setDropdown('category')}
-        height={multiplyCSSNumber(
-          getMultipleChoiceHeight(categoryChoices),
-          1.4
-        )}
-        heightMultiplierOnPhone={2.4}
-        heightMultiplierOnTablet={2}
+        height="20rem"
         cyId="foldout-categories"
       >
         <MultipleChoice
           tabIndex={dropdownOpen === 'category' ? 0 : -1}
-          choices={categoryChoices}
+          choices={categories}
           onSelect={setCategoryChoices}
         />
       </Foldout>
@@ -140,12 +107,12 @@ const AllFilter: React.FC<AllBlogFilterProps> = ({ allPosts, onFilter }) => {
         topbar={<SubHeading>Filter by tags</SubHeading>}
         open={dropdownOpen === 'tags'}
         onClick={() => setDropdown('tags')}
-        height="auto"
+        height="20rem"
         cyId="foldout-tags"
       >
         <MultipleChoice
           tabIndex={dropdownOpen === 'tags' ? 0 : -1}
-          choices={tagChoices}
+          choices={tags}
           onSelect={setTagChoices}
         />
       </Foldout>

@@ -402,6 +402,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         return "Golang";
       case "ex":
         return "Elixir";
+      case "wip":
+        return "Work In Progress";
+      case "ws":
+        return "WebSockets"
       default:
         return tech;
     }

@@ -59,7 +59,7 @@ type DateInformation = FullMonth & {
 
 type PotentialChoice = {
   value: string
-  selected: boolean
+  label: string
 }
 
 type Coord = {

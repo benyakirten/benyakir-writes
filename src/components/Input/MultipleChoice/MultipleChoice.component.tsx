@@ -1,41 +1,50 @@
 import * as React from 'react'
 
-import { Row } from '@Styles/general-components'
+import { FONT_MD } from '@StyleVars'
 
-import Choice from './Choice/Choice.component'
-
-import { Z_BASE, Z_UNDER } from '@StyleVars'
+import Select from 'react-select'
 
 const MultipleChoice: React.FC<MultipleChoiceProps> = ({
   choices,
   onSelect,
   tabIndex = 0,
 }) => {
-  function toggle(val: string) {
-    onSelect(
-      choices.map((c) =>
-        c.value === val ? { ...c, selected: !c.selected } : c
-      )
-    )
-  }
   return (
-    <Row
-      style={{
-        zIndex: tabIndex < 0 ? Z_UNDER : Z_BASE,
-        height: tabIndex < 0 ? 0 : 'auto',
+    <Select
+      isMulti
+      options={choices}
+      menuIsOpen={true}
+      tabIndex={tabIndex}
+      onChange={(val) => onSelect(val as PotentialChoice[])}
+      styles={{
+        menuList: (base) => ({
+          ...base,
+          height: '14rem',
+        }),
+        option: (base) => ({
+          ...base,
+          color: '#000',
+          fontSize: FONT_MD,
+          textTransform: 'capitalize',
+        }),
+        multiValue: (base) => ({
+          ...base,
+          padding: '0.4rem',
+          backgroundColor: '#ccc',
+          display: 'flex',
+          alignItems: 'center',
+          fontSize: FONT_MD,
+        }),
+        multiValueRemove: (base) => ({
+          ...base,
+          padding: '0.2rem',
+          ':hover': {
+            backgroundColor: '#444',
+            transition: 'background-color 200ms ease',
+          },
+        }),
       }}
-      data-cy="multiple-choice"
-    >
-      {choices.map((c) => (
-        <Choice
-          key={c.value}
-          tabIndex={tabIndex}
-          value={c.selected}
-          label={c.value}
-          onSelect={toggle}
-        />
-      ))}
-    </Row>
+    />
   )
 }
 

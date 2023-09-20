@@ -5,8 +5,7 @@ import { SubHeading } from '@Styles/general-components'
 import { Filter, DatePicker, MultipleChoice } from '@Input'
 import { Foldout } from '@Gen'
 
-import { useAlternation } from '@Hooks'
-import { getValuesForSelected } from '@Utils/filter'
+import { useAlternation, useMultiSelect } from '@Hooks'
 import { hasSomeContent } from '@Utils/search'
 
 import { AuthorFilterProps } from '@Types/props/post-components'
@@ -44,12 +43,11 @@ const AuthorFilter: React.FC<AuthorFilterProps> = ({
   )
 
   const [filterWords, setFilterWords] = React.useState<string[]>([])
-  const [bookChoices, setBookChoices] = React.useState<PotentialChoice[]>(
-    allBooks.map((b) => ({
-      value: b.title,
-      selected: false,
-    }))
+  const books = React.useMemo(
+    () => allBooks.map((book) => ({ value: book.title, label: book.title })),
+    allBooks
   )
+  const [bookChoices, setBookChoices, filterBookChoices] = useMultiSelect()
 
   React.useEffect(() => {
     let filteredBooks = allBooks
@@ -69,13 +67,12 @@ const AuthorFilter: React.FC<AuthorFilterProps> = ({
       )
     }
 
-    if (bookChoices.some((b) => b.selected)) {
-      const _bookChoices = getValuesForSelected(bookChoices)
-      filteredBooks = filteredBooks.filter((b) =>
-        _bookChoices.some((c) => c === b.title)
+    if (bookChoices.size > 0) {
+      filteredBooks = filteredBooks.filter((book) =>
+        bookChoices.has(book.title)
       )
-      filteredStories = filteredStories.filter((s) =>
-        _bookChoices.some((c) => c === s.book?.title)
+      filteredStories = filteredStories.filter(
+        (story) => story.book && bookChoices.has(story.book.title)
       )
     }
 
@@ -119,11 +116,11 @@ const AuthorFilter: React.FC<AuthorFilterProps> = ({
         topbar={<SubHeading>Filter by book</SubHeading>}
         open={dropdownOpen === 'book'}
         onClick={() => setDropdown('book')}
-        height="auto"
+        height="20rem"
         cyId="foldout-book"
       >
         <MultipleChoice
-          choices={bookChoices}
+          choices={books}
           onSelect={setBookChoices}
           tabIndex={dropdownOpen === 'book' ? 0 : -1}
         />
