@@ -90,14 +90,18 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
     <Page>
       <PortfolioHeader>
         <PortfolioDescription>
-          My name is Benyakir Horowitz{' '}
+          My name is Benyakir Horowitz (click{' '}
           <CustomLink
             to="#"
             onClick={() => downloadFile(data.file.publicURL, data.file.name)}
           >
-            (click here for my resume)
+            here for my resume
+          </CustomLink>{' '}
+          and{' '}
+          <CustomLink to="https://github.com/benyakirten" outside>
+            here for my GitHub profile
           </CustomLink>
-          . Once upon a time, I studied linguistics and Italian. Then I began
+          ). Once upon a time, I studied linguistics and Italian. Then I began
           learning programming in 2020 during the pandemic. I am now a{' '}
           <strong>frontend developer</strong> with experience in{' '}
           <strong>every step of the process</strong>, from design to

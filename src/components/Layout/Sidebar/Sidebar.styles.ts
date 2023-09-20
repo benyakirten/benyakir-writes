@@ -72,8 +72,8 @@ export const ArrowButton = styled.button<{ open: boolean }>`
   color: ${(props) => props.theme.base.textColor};
 
   transition: all ${TRANSITION_SLOW} ease;
-  transform: rotate(${(props) => (props.open ? '0' : '180')}deg)
-    translateX(${(props) => (props.open ? '0' : '-25')}rem);
+  rotate: ${(props) => (props.open ? '180' : '0')}deg;
+  translate: ${(props) => (props.open ? '0' : '20')}rem 0;
 `
 
 export const VisibleGroup = styled.div<{ open: boolean }>`

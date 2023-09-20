@@ -364,7 +364,6 @@ export const SVGContainer = styled.div<{
   size?: string
 }>`
   position: relative;
-  left: -1.8rem;
 
   background-color: ${(props) => props.theme.base.textColor};
   mask: url(${(props) => props.src}) no-repeat center;
