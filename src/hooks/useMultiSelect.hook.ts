@@ -7,8 +7,6 @@ const useMultiSelect: MultiSelectHook = (defaultValue?: string[]) => {
     _setSet(new Set(items.map((item) => item.value)))
 
   const filterItems = <T>(items: T[], getter: (item: T) => string[] | null) => {
-    console.log(set.size)
-    console.log('HERE')
     if (set.size === 0) {
       return items
     }
