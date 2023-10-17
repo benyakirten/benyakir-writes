@@ -56,7 +56,6 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
       )
     }
 
-    console.log(_projects)
     _projects = filterByTechChoices(
       _projects,
       (project) => project.longTechnologies
