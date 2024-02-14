@@ -103,7 +103,7 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
           </CustomLink>
           ). Once upon a time, I studied linguistics and Italian. Then I began
           learning programming in 2020 during the pandemic. I am now a{' '}
-          <strong>frontend developer</strong> with experience in{' '}
+          <strong>fullstack developer</strong> with experience in{' '}
           <strong>every step of the process</strong>, from design to
           implementation, from rapid iteration to long-term maintenance, from{' '}
           <strong>concept to creation</strong>. This page only contains my
