@@ -56,6 +56,7 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
     () => [...new Set(projects.flatMap((project) => project.technologies))],
     [projects]
   )
+
   const [tentativeTechs, toggleTentativeTech] = useSet()
   const [filteredTechs, toggleTech] = useSet()
   const [viewedTechs, setViewedTechs] = React.useState<Set<string>>(new Set())
