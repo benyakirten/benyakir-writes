@@ -103,6 +103,8 @@ export function getFullTechName(tech: string) {
       return 'Elixir'
     case 'ws':
       return 'Web Sockets'
+    case 'rs':
+      return 'Rust'
     case 'wip':
       return 'Under Construction'
     default:
