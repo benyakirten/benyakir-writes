@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-import { rollOut } from '@Styles/animations'
-import { FONT_MD } from '@StyleVars'
+import { FONT_MD } from "@StyleVars";
+import { rollOut } from "@Styles/animations";
 
 export const StyledAlertBox = styled.div<{ success: boolean }>`
   position: relative;
@@ -13,9 +13,9 @@ export const StyledAlertBox = styled.div<{ success: boolean }>`
   padding: 2rem 3rem;
 
   background-color: ${(props) =>
-    props.success
-      ? props.theme.alertBox.alert.success
-      : props.theme.alertBox.alert.error};
+		props.success
+			? props.theme.alertBox.alert.success
+			: props.theme.alertBox.alert.error};
   color: ${(props) => props.theme.alertBox.textColor};
   font-size: ${FONT_MD};
   border: 2px solid ${(props) => props.theme.base.border};
@@ -23,4 +23,4 @@ export const StyledAlertBox = styled.div<{ success: boolean }>`
   transform-origin: top;
 
   animation: ${rollOut} 1s ease forwards;
-`
+`;

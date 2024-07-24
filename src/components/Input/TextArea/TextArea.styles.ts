@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-import { FONT_LG, FONT_XXS, MULISH, TRANSITION_SLOW } from '@StyleVars'
+import { FONT_LG, FONT_XXS, MULISH, TRANSITION_SLOW } from "@StyleVars";
 
 export const TextAreaContainer = styled.div`
   position: relative;
@@ -40,4 +40,4 @@ export const TextAreaContainer = styled.div`
 
     transition: all ${TRANSITION_SLOW} ease;
   }
-`
+`;

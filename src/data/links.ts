@@ -1,23 +1,23 @@
 export const blogLinks: LinkItem[] = [
-  "Ben's Thoughts",
-  'Reviews',
-  {
-    name: 'Podcast',
-    link: 'Down South Boulder Road',
-  },
-]
+	"Ben's Thoughts",
+	"Reviews",
+	{
+		name: "Podcast",
+		link: "Down South Boulder Road",
+	},
+];
 export const authorLinks: LinkItem[] = [
-  'Books',
-  'Short Stories',
-  'All Projects',
-]
+	"Books",
+	"Short Stories",
+	"All Projects",
+];
 export const generalLinks: LinkItem[] = [
-  'theme',
-  'about',
-  'contact',
-  'privacy',
-  {
-    name: 'home',
-    link: '',
-  },
-]
+	"theme",
+	"about",
+	"contact",
+	"privacy",
+	{
+		name: "home",
+		link: "",
+	},
+];

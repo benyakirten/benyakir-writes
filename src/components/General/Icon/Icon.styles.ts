@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from "styled-components";
 
-import { FONT_XS, TRANSITION_EXTRA_SLOW, Z_ABOVE } from '@StyleVars'
+import { FONT_XS, TRANSITION_EXTRA_SLOW, Z_ABOVE } from "@StyleVars";
 
 export const IconContainer = styled.div<{ height: string }>`
   position: relative;
@@ -54,7 +54,7 @@ export const IconContainer = styled.div<{ height: string }>`
       top: ${(props) => css`calc(${props.height} * 2 / 3)`};
     }
   }
-`
+`;
 
 export const IconImage = styled.img<{ height: string }>`
   position: relative;
@@ -63,7 +63,7 @@ export const IconImage = styled.img<{ height: string }>`
   width: ${(props) => props.height};
 
   transition: transform ${TRANSITION_EXTRA_SLOW} ease;
-`
+`;
 
 export const IconCaption = styled.span`
   position: relative;
@@ -73,4 +73,4 @@ export const IconCaption = styled.span`
   font-size: ${FONT_XS};
 
   transition: all ${TRANSITION_EXTRA_SLOW} ease;
-`
+`;

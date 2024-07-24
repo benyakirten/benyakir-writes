@@ -1,56 +1,57 @@
-import * as React from 'react'
+import * as React from "react";
 
-import { Grouping, Page } from '@Styles/general-components'
+import { Grouping, Page } from "@Styles/general-components";
 
-import { LeadPage, Paginate } from '@Layout'
-import { AllFilter } from '@Posts'
-import { BlogCard } from '@Variants'
+import { LeadPage, Paginate } from "@Layout";
+import { AllFilter } from "@Posts";
+import { BlogCard } from "@Variants";
 
-import usePagination from '@/hooks/usePagination.hook'
+import usePagination from "@/hooks/usePagination.hook";
 
-import postsJson from '@WPData/Posts/all.json'
+import postsJson from "@WPData/Posts/all.json";
 
-import { FlattenedBlogCard } from '@Types/posts'
+import type { FlattenedBlogCard } from "@Types/posts";
 
 export const Head: React.FC = () => (
-  <>
-    <title>Benyakir Writes - Blogs</title>
-    <meta
-      name="description"
-      content="Browse a list of all my blog posts ordered by most recent publication to least recent. Users can
+	<>
+		<title>Benyakir Writes - Blogs</title>
+		<meta
+			name="description"
+			content="Browse a list of all my blog posts ordered by most recent publication to least recent. Users can
             filter the blog results by publication date, category and tags."
-    />
-  </>
-)
+		/>
+	</>
+);
 
 const BlogPage: React.FC = () => {
-  const posts = React.useMemo(
-    () =>
-      postsJson.map((b: FlattenedBlogCard) => ({
-        ...b,
-        published: { ...b.published, date: new Date(b.published.date) },
-      })),
-    [postsJson]
-  )
-  const postPagination = usePagination<FlattenedBlogCard>(posts)
+	const posts = React.useMemo(
+		() =>
+			// @ts-ignore
+			postsJson.map((b: FlattenedBlogCard) => ({
+				...b,
+				published: { ...b.published, date: new Date(b.published.date) },
+			})),
+		[],
+	);
+	const postPagination = usePagination<FlattenedBlogCard>(posts);
 
-  return (
-    <Page>
-      <LeadPage
-        title="Blog Posts"
-        filter={
-          <AllFilter
-            allPosts={posts}
-            onFilter={postPagination.setCurrentItems}
-          />
-        }
-      >
-        <Grouping>
-          <Paginate {...postPagination} El={BlogCard} />
-        </Grouping>
-      </LeadPage>
-    </Page>
-  )
-}
+	return (
+		<Page>
+			<LeadPage
+				title="Blog Posts"
+				filter={
+					<AllFilter
+						allPosts={posts}
+						onFilter={postPagination.setCurrentItems}
+					/>
+				}
+			>
+				<Grouping>
+					<Paginate {...postPagination} El={BlogCard} />
+				</Grouping>
+			</LeadPage>
+		</Page>
+	);
+};
 
-export default BlogPage
+export default BlogPage;

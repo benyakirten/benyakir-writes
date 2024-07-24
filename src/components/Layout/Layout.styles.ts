@@ -1,7 +1,7 @@
-import styled, { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from "styled-components";
 
-import { media } from '@Styles/queries'
-import { MULISH, TRANSITION_NORMAL } from '@StyleVars'
+import { MULISH, TRANSITION_NORMAL } from "@StyleVars";
+import { media } from "@Styles/queries";
 
 export const GlobalStyles = createGlobalStyle`
   *,
@@ -69,12 +69,12 @@ export const GlobalStyles = createGlobalStyle`
       transform: rotate(-90deg);
     }
   }
-`
+`;
 
 export const LayoutContainer = styled.div`
   display: flex;
   min-height: 100vh;
-`
+`;
 
 export const MainContainer = styled.main`
   position: relative;
@@ -82,4 +82,4 @@ export const MainContainer = styled.main`
   margin-left: 4rem;
   background-color: ${(props) => props.theme.base.background};
   overflow: hidden;
-`
+`;

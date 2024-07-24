@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-import { FONT_LG, SHADOW_MD, Z_ABOVE, Z_RAISED } from '@StyleVars'
-import { convertHexToRGBA } from '@Utils/colors'
+import { FONT_LG, SHADOW_MD, Z_ABOVE, Z_RAISED } from "@StyleVars";
+import { convertHexToRGBA } from "@Utils/colors";
 
 export const HighlighterContainer = styled.div`
   position: relative;
@@ -9,10 +9,10 @@ export const HighlighterContainer = styled.div`
   display: flex;
   flex-direction: column;
   box-shadow: ${(props) =>
-    `${SHADOW_MD} ${convertHexToRGBA(props.theme.base.shadowColor, 0.4)}`};
+		`${SHADOW_MD} ${convertHexToRGBA(props.theme.base.shadowColor, 0.4)}`};
   padding: 0.5rem 1rem;
   margin: 2rem 0;
-`
+`;
 
 export const HighlighterTopbar = styled.div`
   display: flex;
@@ -20,7 +20,7 @@ export const HighlighterTopbar = styled.div`
   align-items: center;
 
   font-size: ${FONT_LG};
-`
+`;
 
 export const LoadingBackground = styled.div`
   position: absolute;
@@ -31,7 +31,7 @@ export const LoadingBackground = styled.div`
 
   z-index: ${Z_ABOVE};
   background-color: rgba(255, 255, 255, 0.6);
-`
+`;
 
 export const LoadingContainer = styled.div`
   position: absolute;
@@ -40,4 +40,4 @@ export const LoadingContainer = styled.div`
   transform: translate(-50%, -50%);
 
   z-index: ${Z_RAISED};
-`
+`;

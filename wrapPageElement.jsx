@@ -1,16 +1,14 @@
-import React from 'react';
-import { Provider } from 'react-redux';
+import React from "react";
+import { Provider } from "react-redux";
 
-import store from './src/store';
+import store from "./src/store";
 
-import Layout from './src/components/Layout/Layout.component';
+import Layout from "./src/components/Layout/Layout.component";
 
 export const wrapPageElement = ({ element, props }) => (
-    <Layout {...props}>{element}</Layout>
-)
+	<Layout {...props}>{element}</Layout>
+);
 
 export const wrapRootElement = ({ element }) => (
-    <Provider store={store}>
-        {element}
-    </Provider>
-)
+	<Provider store={store}>{element}</Provider>
+);

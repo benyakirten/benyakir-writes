@@ -1,8 +1,8 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-import { media } from '@Styles/queries'
-import { SHADOW_LG } from '@StyleVars'
-import { convertHexToRGBA } from '@Utils/colors'
+import { SHADOW_LG } from "@StyleVars";
+import { media } from "@Styles/queries";
+import { convertHexToRGBA } from "@Utils/colors";
 
 export const Skewed = styled.section<{ width?: string }>`
   display: flex;
@@ -13,7 +13,7 @@ export const Skewed = styled.section<{ width?: string }>`
   padding: 2rem 3rem;
 
   box-shadow: ${(props) =>
-    `${SHADOW_LG} ${convertHexToRGBA(props.theme.base.shadowColor, 0.4)}`};
+		`${SHADOW_LG} ${convertHexToRGBA(props.theme.base.shadowColor, 0.4)}`};
   border: 2px solid ${(props) => props.theme.base.border};
   background-color: ${(props) => props.theme.skewRow.background};
 
@@ -24,7 +24,7 @@ export const Skewed = styled.section<{ width?: string }>`
     min-width: 20rem;
     margin: 0;
   }
-`
+`;
 
 export const AntiSkewed = styled.div`
   display: flex;
@@ -45,4 +45,4 @@ export const AntiSkewed = styled.div`
   ${media.reducedMotion} {
     transform: skew(0deg);
   }
-`
+`;

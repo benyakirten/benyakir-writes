@@ -1,50 +1,50 @@
-import { graphql } from 'gatsby'
-import * as React from 'react'
+import { graphql } from "gatsby";
+import type * as React from "react";
 
 import {
-  Grouping,
-  LeadHeading,
-  Page,
-  Subtitle,
-  WpContent,
-} from '@Styles/general-components'
+	Grouping,
+	LeadHeading,
+	Page,
+	Subtitle,
+	WpContent,
+} from "@Styles/general-components";
 
-import { flattenBook } from '@Utils/author'
-import { getPrettyDate } from '@Utils/dates'
-import { formatWpText } from '@Utils/posts'
-import { firstWords } from '@Utils/strings'
+import { flattenBook } from "@Utils/author";
+import { getPrettyDate } from "@Utils/dates";
+import { formatWpText } from "@Utils/posts";
+import { firstWords } from "@Utils/strings";
 
-import { WpBook } from '@Types/query'
-import { BookHeader } from '@Variants'
+import type { WpBook } from "@Types/query";
+import { BookHeader } from "@Variants";
 
 export const Head: React.FC<WpBook> = ({ data }) => {
-  const book = flattenBook(data.wpBook, data.file.publicURL)
-  return (
-    <>
-      <title>{book.title}</title>
-      <meta
-        name="description"
-        content={`${book.title}, published on ${getPrettyDate(
-          book.published.date
-        )}: ${firstWords(formatWpText(book.content), 100)}`}
-      />
-    </>
-  )
-}
+	const book = flattenBook(data.wpBook, data.file.publicURL);
+	return (
+		<>
+			<title>{book.title}</title>
+			<meta
+				name="description"
+				content={`${book.title}, published on ${getPrettyDate(
+					book.published.date,
+				)}: ${firstWords(formatWpText(book.content), 100)}`}
+			/>
+		</>
+	);
+};
 
 const Book: React.FC<WpBook> = ({ data }) => {
-  const book = flattenBook(data.wpBook, data.file.publicURL)
-  return (
-    <Page>
-      <LeadHeading>{book.title}</LeadHeading>
-      <BookHeader book={book} />
-      <Grouping>
-        <Subtitle>The Book</Subtitle>
-        <WpContent dangerouslySetInnerHTML={{ __html: book.content }} />
-      </Grouping>
-    </Page>
-  )
-}
+	const book = flattenBook(data.wpBook, data.file.publicURL);
+	return (
+		<Page>
+			<LeadHeading>{book.title}</LeadHeading>
+			<BookHeader book={book} />
+			<Grouping>
+				<Subtitle>The Book</Subtitle>
+				<WpContent dangerouslySetInnerHTML={{ __html: book.content }} />
+			</Grouping>
+		</Page>
+	);
+};
 
 export const query = graphql`
   query ($id: String) {
@@ -86,6 +86,6 @@ export const query = graphql`
       publicURL
     }
   }
-`
+`;
 
-export default Book
+export default Book;

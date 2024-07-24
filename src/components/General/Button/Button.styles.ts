@@ -1,13 +1,13 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-import { media } from '@/styles/queries'
+import { media } from "@/styles/queries";
 import {
-  FONT_MD,
-  TRANSITION_EXTRA_SLOW,
-  TRANSITION_NORMAL,
-  TRANSITION_SLOW,
-  Z_ABOVE,
-} from '@StyleVars'
+	FONT_MD,
+	TRANSITION_EXTRA_SLOW,
+	TRANSITION_NORMAL,
+	TRANSITION_SLOW,
+	Z_ABOVE,
+} from "@StyleVars";
 
 export const ButtonExterior = styled.button`
   cursor: pointer;
@@ -75,4 +75,4 @@ export const ButtonExterior = styled.button`
       transform: scale(1);
     }
   }
-`
+`;

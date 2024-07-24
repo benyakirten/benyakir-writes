@@ -1,5 +1,5 @@
-import { media } from '@/styles/queries'
-import styled from 'styled-components'
+import { media } from "@/styles/queries";
+import styled from "styled-components";
 
 export const StyledBox = styled.div`
   position: relative;
@@ -18,4 +18,4 @@ export const StyledBox = styled.div`
   ${media.phone} {
     padding: 0;
   }
-`
+`;

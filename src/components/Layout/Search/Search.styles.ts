@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-import { media } from '@Styles/queries'
-import { FONT_MD, TRANSITION_NORMAL } from '@StyleVars'
+import { FONT_MD, TRANSITION_NORMAL } from "@StyleVars";
+import { media } from "@Styles/queries";
 
 export const ResultsContainer = styled.div<{ resultLength?: number }>`
   cursor: default;
@@ -15,7 +15,7 @@ export const ResultsContainer = styled.div<{ resultLength?: number }>`
   width: 90%;
 
   max-height: ${(props) =>
-    props.resultLength && props.resultLength > 1 ? '13rem' : '6.5rem'};
+		props.resultLength && props.resultLength > 1 ? "13rem" : "6.5rem"};
 
   border: 2px solid ${(props) => props.theme.searchBox.border};
   background-color: ${(props) => props.theme.searchBox.background};
@@ -26,7 +26,7 @@ export const ResultsContainer = styled.div<{ resultLength?: number }>`
   ${media.reducedMotion} {
     transition: all 1ms ease;
   }
-`
+`;
 
 export const SingleResult = styled.div`
   cursor: pointer;
@@ -50,4 +50,4 @@ export const SingleResult = styled.div`
   &:hover {
     opacity: 1;
   }
-`
+`;

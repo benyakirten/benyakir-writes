@@ -1,5 +1,5 @@
-import { FONT_MD, TRANSITION_SLOW } from '@StyleVars'
-import styled from 'styled-components'
+import { FONT_MD, TRANSITION_SLOW } from "@StyleVars";
+import styled from "styled-components";
 
 export const ToggleGroup = styled.div`
   position: relative;
@@ -7,7 +7,7 @@ export const ToggleGroup = styled.div`
   display: flex;
   align-items: center;
   height: 2.2rem;
-`
+`;
 
 export const ToggleInput = styled.input`
   display: none;
@@ -30,7 +30,7 @@ export const ToggleInput = styled.input`
       left: 0;
     }
   }
-`
+`;
 
 export const ToggleLabel = styled.label<{ label: string }>`
   cursor: pointer;
@@ -53,10 +53,10 @@ export const ToggleLabel = styled.label<{ label: string }>`
 
     transition: all ${TRANSITION_SLOW} ease;
   }
-`
+`;
 
 export const ToggleOutput = styled.span`
   cursor: pointer;
   font-size: ${FONT_MD};
   margin-left: 1rem;
-`
+`;

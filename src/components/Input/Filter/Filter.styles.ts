@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-import { SHADOW_MD_BALANCED, TRANSITION_NORMAL } from '@StyleVars'
-import { convertHexToRGBA } from '@Utils/colors'
+import { SHADOW_MD_BALANCED, TRANSITION_NORMAL } from "@StyleVars";
+import { convertHexToRGBA } from "@Utils/colors";
 
 export const FilterContainer = styled.aside`
   display: flex;
@@ -15,10 +15,10 @@ export const FilterContainer = styled.aside`
   color: ${(props) => props.theme.filter.textColor};
 
   box-shadow: ${(props) =>
-    `${SHADOW_MD_BALANCED} ${convertHexToRGBA(
-      props.theme.base.shadowColor,
-      0.4
-    )}`};
+		`${SHADOW_MD_BALANCED} ${convertHexToRGBA(
+			props.theme.base.shadowColor,
+			0.4,
+		)}`};
 
   transition: all ${TRANSITION_NORMAL} ease;
 
@@ -26,4 +26,4 @@ export const FilterContainer = styled.aside`
     margin-bottom: 1.5rem;
     width: 50%;
   }
-`
+`;

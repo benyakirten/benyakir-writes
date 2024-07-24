@@ -1,9 +1,9 @@
-import styled, { css, keyframes } from 'styled-components'
+import styled, { css, keyframes } from "styled-components";
 
 const createShapeAnimation = (
-  xMovement: number = 5,
-  yMovement: number = 2,
-  initialRotation: number = 0
+	xMovement = 5,
+	yMovement = 2,
+	initialRotation = 0,
 ) => keyframes`
   from {
     rotate: ${initialRotation}deg;
@@ -13,32 +13,32 @@ const createShapeAnimation = (
     rotate: -360deg;
     translate: ${xMovement}rem ${yMovement}rem;
   }
-`
+`;
 
 export const SVGShapeBase = styled.svg.attrs<{
-  size: number
-  xMovement?: number
-  yMovement?: number
+	size: number;
+	xMovement?: number;
+	yMovement?: number;
 }>(({ size }) => ({
-  xmlns: 'http://www.w3.org/2000/svg',
-  viewBox: '0 0 100 100',
-  width: size,
-  height: size,
+	xmlns: "http://www.w3.org/2000/svg",
+	viewBox: "0 0 100 100",
+	width: size,
+	height: size,
 }))<{
-  size: number
-  xMovement?: number
-  yMovement?: number
-  rotation?: number
+	size: number;
+	xMovement?: number;
+	yMovement?: number;
+	rotation?: number;
 }>`
   transition: filter 3s ease, scale 5s ease;
   filter: ${(props) => `blur(${props.size / 15}px)`};
   animation: ${(props) =>
-    css`
+		css`
       ${createShapeAnimation(
-        props.xMovement,
-        props.yMovement,
-        props.rotation ?? 0
-      )} 30s infinite alternate linear
+				props.xMovement,
+				props.yMovement,
+				props.rotation ?? 0,
+			)} 30s infinite alternate linear
     `};
 
   &:hover {
@@ -50,4 +50,4 @@ export const SVGShapeBase = styled.svg.attrs<{
       scale: 1;
     }
   }
-`
+`;

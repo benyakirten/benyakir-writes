@@ -1,5 +1,5 @@
-import { FONT_MD, FONT_XXL, TRANSITION_NORMAL } from '@StyleVars'
-import styled from 'styled-components'
+import { FONT_MD, FONT_XXL, TRANSITION_NORMAL } from "@StyleVars";
+import styled from "styled-components";
 
 export const CheckboxGroup = styled.div`
   position: relative;
@@ -63,4 +63,4 @@ export const CheckboxGroup = styled.div`
     cursor: pointer;
     font-size: ${FONT_MD};
   }
-`
+`;

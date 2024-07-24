@@ -1,16 +1,16 @@
-import * as React from 'react'
+import type * as React from "react";
 
-import { SVGShapeData } from '@/types/portfolio'
-import { SVGShapeBase } from './Svgs.styles'
+import type { SVGShapeData } from "@/types/portfolio";
+import { SVGShapeBase } from "./Svgs.styles";
 
 const SVGShape: React.FC<SVGShapeData> = ({
-  xMovement,
-  yMovement,
-  children,
+	xMovement,
+	yMovement,
+	children,
 }) => (
-  <SVGShapeBase size={40} xMovement={xMovement} yMovement={yMovement}>
-    {children}
-  </SVGShapeBase>
-)
+	<SVGShapeBase size={40} xMovement={xMovement} yMovement={yMovement}>
+		{children}
+	</SVGShapeBase>
+);
 
-export default SVGShape
+export default SVGShape;

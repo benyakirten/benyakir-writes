@@ -1,14 +1,14 @@
-import * as React from 'react'
+import * as React from "react";
 
-import { cleanup, render } from '@TestUtils'
-import { LeadPage } from '@Layout'
+import { LeadPage } from "@Layout";
+import { cleanup, render } from "@TestUtils";
 
-describe('LeadPage component', () => {
-  afterEach(cleanup)
+describe("LeadPage component", () => {
+	afterEach(cleanup);
 
-  it('should render correctly', () => {
-    expect(() =>
-      render(<LeadPage title="test title" filter={<div />} />)
-    ).not.toThrow()
-  })
-})
+	it("should render correctly", () => {
+		expect(() =>
+			render(<LeadPage title="test title" filter={<div />} />),
+		).not.toThrow();
+	});
+});

@@ -1,10 +1,10 @@
-import styled from 'styled-components'
-import { media } from '@/styles/queries'
+import { media } from "@/styles/queries";
+import styled from "styled-components";
 
 export const CardContainer = styled.div`
   display: flex;
   gap: 10%;
-`
+`;
 
 export const CardHalf = styled.div`
   display: flex;
@@ -15,4 +15,4 @@ export const CardHalf = styled.div`
   ${media.noHover} {
     width: 90%;
   }
-`
+`;

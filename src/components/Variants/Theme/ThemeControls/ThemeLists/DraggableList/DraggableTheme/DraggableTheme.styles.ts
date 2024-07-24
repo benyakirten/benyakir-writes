@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-import { media } from '@Styles/queries'
+import { media } from "@Styles/queries";
 
 export const ThemeName = styled.span`
   max-width: 55%;
@@ -12,4 +12,4 @@ export const ThemeName = styled.span`
   }
 
   overflow-x: auto;
-`
+`;

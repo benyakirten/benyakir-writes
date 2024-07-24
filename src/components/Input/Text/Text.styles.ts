@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-import { media } from '@Styles/queries'
-import { FONT_LG, FONT_XS, TRANSITION_NORMAL } from '@StyleVars'
+import { FONT_LG, FONT_XS, TRANSITION_NORMAL } from "@StyleVars";
+import { media } from "@Styles/queries";
 
 export const TextInputContainer = styled.div`
   position: relative;
@@ -38,4 +38,4 @@ export const TextInputContainer = styled.div`
       font-size: ${FONT_XS};
     }
   }
-`
+`;
