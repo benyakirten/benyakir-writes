@@ -13,7 +13,6 @@ type TextProps = InputProps & {
 	value: string;
 	onChange: (newText: string) => void;
 	width?: string;
-	autofocus?: boolean;
 	cyId?: string;
 };
 

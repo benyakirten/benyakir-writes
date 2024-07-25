@@ -1,3 +1,3 @@
 module.exports = {
-	useLocation: jest.fn(() => ({ pathname: Math.random().toString() })),
+	useLocation: vi.fn(() => ({ pathname: Math.random().toString() })),
 };

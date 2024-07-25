@@ -21,8 +21,8 @@ export function formatBlogPost(post: BlogPostType): FlattenedBlogPost {
 		excerpt: post.excerpt,
 		content: post.content,
 		published: getBlogPostDateInformation(post.date),
-		categories: post.categories.nodes?.map((n) => n.name) ?? [],
-		tags: post.tags.nodes?.map((n) => n.name) ?? [],
+		categories: post.categories.nodes?.map((n) => n.name) ?? null,
+		tags: post.tags.nodes?.map((n) => n.name) ?? null,
 	};
 
 	const flattenedPost: FlattenedBlogPost = {

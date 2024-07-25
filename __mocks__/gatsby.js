@@ -1,9 +1,9 @@
 const React = require("react");
-const gatsby = jest.requireActual("gatsby");
+const gatsby = vi.requireActual("gatsby");
 
 module.exports = {
 	...gatsby,
-	graphql: jest.fn(),
+	graphql: vi.fn(),
 	Link: jest
 		.fn()
 		.mockImplementation(
@@ -23,13 +23,13 @@ module.exports = {
 					href: to,
 				}),
 		),
-	Slice: jest.fn().mockImplementation(({ alias, ...rest }) =>
+	Slice: vi.fn().mockImplementation(({ alias, ...rest }) =>
 		React.createElement("div", {
 			...rest,
 			"data-test-slice-alias": alias,
 		}),
 	),
-	StaticQuery: jest.fn(),
-	useStaticQuery: jest.fn(),
-	navigate: jest.fn(),
+	StaticQuery: vi.fn(),
+	useStaticQuery: vi.fn(),
+	navigate: vi.fn(),
 };

@@ -25,6 +25,7 @@ const useMultiple: MultipleHook = (allOptions, currentlyOpen) => {
 			return state;
 		});
 	};
+
 	return [openOptions, setOpenOptions];
 };
 

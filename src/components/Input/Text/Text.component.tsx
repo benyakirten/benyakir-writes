@@ -9,7 +9,6 @@ const Text: React.FC<TextProps> = ({
 	value,
 	width,
 	tabIndex = 0,
-	autofocus = false,
 	cyId,
 }) => {
 	return (

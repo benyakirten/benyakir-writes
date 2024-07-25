@@ -3,10 +3,10 @@ export function findAttrInElTree(
 	attr: string,
 	val: string | boolean,
 ): boolean {
-	const attrHasValue = el.getAttribute(attr) === val;
+	const hasAttr = el.hasAttribute(attr);
 
-	if (!attrHasValue) {
-		return false;
+	if (hasAttr) {
+		return el.getAttribute(attr) === val;
 	}
 
 	if (!el.parentElement || el.parentElement.tagName === "BODY") {

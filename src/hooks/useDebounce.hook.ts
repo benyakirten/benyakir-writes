@@ -8,26 +8,18 @@ const useDebounce: DebounceHook = (
 	initialVal = "",
 	timeLimit: number = SEARCH_TIMEOUT,
 ) => {
-	const memoizedCallback = useCallback(
-		(text: string) => callback(text),
-		[callback],
-	);
-	const [timer, setTimer] = useState<NodeJS.Timeout>();
-	const [text, setText] = useState(initialVal);
-
+	const [value, setValue] = useState(initialVal);
 	useEffect(() => {
-		if (!text) {
-			memoizedCallback("");
-		}
-		if (timer) {
-			clearTimeout(timer);
-			setTimer(undefined);
-		}
-		const timeout = setTimeout(() => memoizedCallback(text), timeLimit);
-		setTimer(timeout);
-	}, [text, memoizedCallback, timeLimit, timer]);
+		const timeout = setTimeout(() => {
+			callback(value);
+		}, timeLimit);
 
-	return [text, setText];
+		return () => {
+			clearTimeout(timeout);
+		};
+	}, [callback, timeLimit, value]);
+
+	return [value, setValue];
 };
 
 export default useDebounce;

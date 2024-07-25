@@ -61,8 +61,11 @@ export function findBlock<T extends BaseBlock>(
 // it ends up in 2 pieces, the pre and the current piece.
 // In turn, each of those have to be examined
 export function preprocessWPEntry(content: string) {
-	const initialBlock = createDefaultBlock(content);
-	let finalResults: (DefaultBlock | BaseBlock)[] = [initialBlock];
+	let finalResults: (DefaultBlock | BaseBlock)[] = [
+		createDefaultBlock(content),
+	];
+
+	console.log(finalResults);
 	for (const BLOCK_CLASS of Object.keys(KNOWN_BLOCK_CLASSES)) {
 		for (let i = 0; i < finalResults.length; i++) {
 			// We only want to process these items if they're strings or default blocks

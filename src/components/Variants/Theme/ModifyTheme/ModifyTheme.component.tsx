@@ -26,7 +26,7 @@ const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme, open }) => {
 		() => flattenedThemeShape.map((groups) => groups[0][0]),
 		[],
 	);
-	const [openGroups, toggleOpenGroups] = useMultiple(groupNames, []);
+	const [openGroups, toggleOpenGroups] = useMultiple(groupNames);
 
 	return (
 		<ControlsContainer>

@@ -4,8 +4,8 @@ import type { LookupHook } from "@/types/hooks";
 
 const useLookup: LookupHook = (items: BooleanLookup) => {
 	function reducer(
+		state: BooleanLookup,
 		action: { type: LookupActionType; payload: string },
-		state: BooleanLookup = items,
 	) {
 		switch (action.type) {
 			case "ACTIVATE":
@@ -28,7 +28,6 @@ const useLookup: LookupHook = (items: BooleanLookup) => {
 		}
 	}
 
-	// @ts-ignore - TODO: Fix this
 	const [state, dispatch] = useReducer(reducer, items);
 	return [state, dispatch];
 };
