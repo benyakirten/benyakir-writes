@@ -12,7 +12,6 @@ import type { BookFilterProps } from "@Types/props/post-components";
 import { capitalize } from "@/utils/strings";
 
 const BookFilter: React.FC<BookFilterProps> = ({ books, onFilter }) => {
-	const onFilterCb = React.useCallback(onFilter, []);
 	const [dropdownOpen, setDropdown] = useAlternation();
 
 	const [publishedBefore, setPublishedBefore] = React.useState<Date>(
@@ -37,8 +36,8 @@ const BookFilter: React.FC<BookFilterProps> = ({ books, onFilter }) => {
 			);
 		}
 
-		onFilterCb(filteredBooks);
-	}, [publishedBefore, publishedAfter, filterWords, books, onFilterCb]);
+		onFilter(filteredBooks);
+	}, [publishedBefore, publishedAfter, filterWords, books, onFilter]);
 
 	function setSearchString(filterString: string) {
 		// This first line is redundant because there are already checks for empty strings

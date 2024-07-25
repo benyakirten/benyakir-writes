@@ -8,30 +8,15 @@ const useDebounce: DebounceHook = (
 	initialVal = "",
 	timeLimit = SEARCH_TIMEOUT,
 ) => {
-	const memoizedCallback = useCallback(
-		(text: string) => callback(text),
-		[callback],
-	);
-	const [timer, setTimer] = useState<NodeJS.Timeout>();
 	const [text, setText] = useState(initialVal);
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	// biome-ignore lint/correctness/useExhaustiveDependencies: TODO: Figure out why adding callback to the dependency array causes an infinite loop
 	useEffect(() => {
-		const clearTimer = () => timer && clearTimeout(timer);
-		if (!text) {
-			memoizedCallback("");
-			return clearTimer();
-		}
+		const time = text ? timeLimit : 0;
+		const timeout = setTimeout(() => callback(text), time);
 
-		if (timer) {
-			clearTimer();
-		}
-
-		const timeout = setTimeout(() => memoizedCallback(text), timeLimit);
-		setTimer(timeout);
-
-		return clearTimer;
-	}, [text]);
+		return () => clearTimeout(timeout);
+	}, [text, timeLimit]);
 
 	return [text, setText];
 };
