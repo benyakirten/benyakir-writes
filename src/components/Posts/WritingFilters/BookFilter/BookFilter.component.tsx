@@ -39,17 +39,8 @@ const BookFilter: React.FC<BookFilterProps> = ({ books, onFilter }) => {
 		onFilter(filteredBooks);
 	}, [publishedBefore, publishedAfter, filterWords, books, onFilter]);
 
-	function setSearchString(filterString: string) {
-		// This first line is redundant because there are already checks for empty strings
-		// However, testing fails otherwise because the useDebounce hook will
-		// cause an internal state change as the component is rendering
-		// This line prevents that state change and allows the tests to work
-		if (!filterString && !hasSomeContent(filterWords)) return;
-		setFilterWords(filterString ? filterString.split(" ") : [""]);
-	}
-
 	return (
-		<Filter name="books" onSearch={setSearchString}>
+		<Filter name="books" onSearch={(val) => setFilterWords(val.split(" "))}>
 			<Foldout
 				topbar={<SubHeading>Filter by date</SubHeading>}
 				open={dropdownOpen === "date"}
