@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 
 import { LeadHeading } from "@Styles/general-components";
 import { MainContents, PageContainer, SideArea } from "./LeadPage.styles";

@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 
 import { Button } from "@Gen";
 import { CardContainer, CardHalf } from "./ThemeControls.styles";

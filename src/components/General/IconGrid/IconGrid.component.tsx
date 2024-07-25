@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 
 import { Icon } from "@Gen";
 import { StyledBox } from "./IconGrid.styles";

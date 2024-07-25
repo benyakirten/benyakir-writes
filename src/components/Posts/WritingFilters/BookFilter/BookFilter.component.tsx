@@ -11,6 +11,8 @@ import { hasSomeContent } from "@Utils/search";
 import type { BookFilterProps } from "@Types/props/post-components";
 
 const BookFilter: React.FC<BookFilterProps> = ({ books, onFilter }) => {
+	const memoizedBooks = React.useMemo(() => books, [books]);
+	const memoizedFilterCb = React.useCallback(onFilter, []);
 	const [dropdownOpen, setDropdown] = useAlternation();
 
 	const [publishedBefore, setPublishedBefore] = React.useState<Date>(
@@ -23,7 +25,7 @@ const BookFilter: React.FC<BookFilterProps> = ({ books, onFilter }) => {
 	const [filterWords, setFilterWords] = React.useState<string[]>([]);
 
 	React.useEffect(() => {
-		let filteredBooks = books
+		let filteredBooks = memoizedBooks
 			.filter((b) => b.published.date.getTime() <= publishedBefore.getTime())
 			.filter((b) => b.published.date.getTime() >= publishedAfter.getTime());
 
@@ -33,8 +35,14 @@ const BookFilter: React.FC<BookFilterProps> = ({ books, onFilter }) => {
 			);
 		}
 
-		onFilter(filteredBooks);
-	}, [publishedBefore, publishedAfter, filterWords, books, onFilter]);
+		memoizedFilterCb(filteredBooks);
+	}, [
+		publishedBefore,
+		publishedAfter,
+		filterWords,
+		memoizedBooks,
+		memoizedFilterCb,
+	]);
 
 	function setSearchString(filterString: string) {
 		// This first line is redundant because there are already checks for empty strings

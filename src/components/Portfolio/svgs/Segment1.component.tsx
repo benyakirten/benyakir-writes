@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 
 import { useAppSelector } from "@Store/hooks";
 import type { SVGData } from "@Types/portfolio";

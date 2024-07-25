@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import { TechnologyCheckox, TechnologyLabel } from "./Portfolio.styles";
 
 const TextCheckbox: React.FC<{

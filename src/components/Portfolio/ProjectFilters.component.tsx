@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 
 import { getFullTechName } from "@/utils/project";
 import type { ProjectFiltersData } from "@Types/portfolio";

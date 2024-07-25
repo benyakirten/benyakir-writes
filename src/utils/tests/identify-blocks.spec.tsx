@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import { vi } from "vitest";
 
 import { WpContent } from "@/styles/general-components";

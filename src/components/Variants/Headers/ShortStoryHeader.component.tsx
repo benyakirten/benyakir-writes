@@ -1,6 +1,6 @@
 import { Link, navigate } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
-import type * as React from "react";
+import * as React from "react";
 
 import { Button, CustomLink, HoverImage } from "@Gen";
 import {

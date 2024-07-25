@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 
 import type { SVGShapeData } from "@/types/portfolio";
 import { SVGShapeBase } from "./Svgs.styles";

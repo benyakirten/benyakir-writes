@@ -9,15 +9,20 @@ const useDebounce: DebounceHook = (
 	timeLimit: number = SEARCH_TIMEOUT,
 ) => {
 	const [value, setValue] = useState(initialVal);
+	const cb = useCallback((t: string) => callback(t), [callback]);
 	useEffect(() => {
+		if (!value) {
+			return;
+		}
+
 		const timeout = setTimeout(() => {
-			callback(value);
+			cb(value);
 		}, timeLimit);
 
 		return () => {
 			clearTimeout(timeout);
 		};
-	}, [callback, timeLimit, value]);
+	}, [cb, timeLimit, value]);
 
 	return [value, setValue];
 };

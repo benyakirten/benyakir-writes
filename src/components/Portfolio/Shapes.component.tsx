@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 
 import type { SVGPositionData } from "@/utils/portfolio";
 import { PortfolioSVGContainer } from "./Portfolio.styles";

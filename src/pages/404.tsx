@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 
 import { CustomLink } from "@Gen";
 import { BigParagraph, LeadHeading, Page } from "@Styles/general-components";

@@ -1,5 +1,5 @@
 import { Link, navigate } from "gatsby";
-import type * as React from "react";
+import * as React from "react";
 
 import {
 	Card,

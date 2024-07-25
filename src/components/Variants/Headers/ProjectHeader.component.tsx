@@ -1,5 +1,5 @@
 import { navigate } from "gatsby";
-import type * as React from "react";
+import * as React from "react";
 
 import LatestUpdate from "@/components/Portfolio/LatestUpdate.component";
 import { Button, IconGrid } from "@Gen";

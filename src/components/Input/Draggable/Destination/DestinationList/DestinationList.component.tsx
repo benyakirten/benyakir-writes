@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 
 import DraggableDestinationItem from "../DestinationItem/DestinationItem.component";
 import { DestinationColumn } from "./DestinationList.styles";

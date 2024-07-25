@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 
 import { Text } from "@Input";
 import { Subtitle } from "@Styles/general-components";
@@ -17,7 +17,6 @@ const Filter: React.FC<FilterProps> = ({ name, onSearch, children }) => {
 				onChange={setSearch}
 				label="Search"
 				name={`${name}-filter-search`}
-				autofocus
 			/>
 			{children}
 		</FilterContainer>

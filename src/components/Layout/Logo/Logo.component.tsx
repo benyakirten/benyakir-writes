@@ -1,5 +1,5 @@
 import { Link, graphql, useStaticQuery } from "gatsby";
-import type * as React from "react";
+import * as React from "react";
 
 import { LogoContainer } from "./Logo.styles";
 

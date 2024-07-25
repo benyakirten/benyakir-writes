@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 
 import { useAppDispatch } from "@/store/hooks";
 import { setSidebarState } from "@/store/sidebar/sidebar.slice";

@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 
 import { IconButton } from "@Gen";
 import { FlatBox } from "@Styles/general-components";

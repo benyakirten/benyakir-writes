@@ -1,5 +1,5 @@
 import { GatsbyImage } from "gatsby-plugin-image";
-import type * as React from "react";
+import * as React from "react";
 
 import LatestUpdate from "@/components/Portfolio/LatestUpdate.component";
 import { useFetchRepoUpdatedDate } from "@/hooks";
