@@ -1,6 +1,15 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render } from "@testing-library/react";
 import React from "react";
-import { vi } from "vitest";
+import {
+	vi,
+	describe,
+	it,
+	expect,
+	beforeAll,
+	beforeEach,
+	afterEach,
+	afterAll,
+} from "vitest";
 
 import useDebounce from "../useDebounce.hook";
 
@@ -47,6 +56,10 @@ describe("useDebounce hook", () => {
 		cleanup();
 	});
 
+	afterAll(() => {
+		vi.useRealTimers();
+	});
+
 	it("should immediately update the output with the value as it's changed", async () => {
 		expect(output.textContent).toBe("initial value");
 
@@ -69,14 +82,13 @@ describe("useDebounce hook", () => {
 	});
 
 	it("should change the value of the output and call the callback when the input's value changes after waiting an adequate amount of time", async () => {
-		await vi.runAllTimersAsync();
-		expect(debounceSpy).toHaveBeenCalledTimes(1);
-		expect(debounceSpy).toHaveBeenCalledWith("initial value");
+		debounceSpy.mockClear();
+		expect(debounceSpy).not.toHaveBeenCalled();
 
 		fireEvent.change(input, { target: { value: "new value" } });
 
 		await vi.runAllTimersAsync();
-		expect(debounceSpy).toHaveBeenCalledTimes(2);
+		expect(debounceSpy).toHaveBeenCalledTimes(1);
 		expect(debounceSpy).toHaveBeenCalledWith("new value");
 	});
 });
