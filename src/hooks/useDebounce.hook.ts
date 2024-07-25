@@ -13,7 +13,6 @@ const useDebounce: DebounceHook = (
 
 	const setText = useCallback(
 		(value: string) => {
-			console.log("Setting text to: ", value);
 			_setText(value);
 
 			if (timer) {

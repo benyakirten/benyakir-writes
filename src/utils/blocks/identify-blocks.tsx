@@ -31,6 +31,7 @@ export function findBlock<T extends BaseBlock>(
 	const finalEntries: (DefaultBlock | T)[] = [
 		createDefaultBlock(splitContent[0]),
 	];
+
 	for (const potentialBlock of splitContent.slice(1)) {
 		const closingIndex = potentialBlock.indexOf(END_DIV_STRING);
 		if (closingIndex === -1) return [createDefaultBlock(content)]; // This shouldn't be possible
@@ -61,11 +62,8 @@ export function findBlock<T extends BaseBlock>(
 // it ends up in 2 pieces, the pre and the current piece.
 // In turn, each of those have to be examined
 export function preprocessWPEntry(content: string) {
-	let finalResults: (DefaultBlock | BaseBlock)[] = [
-		createDefaultBlock(content),
-	];
-
-	console.log(finalResults);
+	const initialBlock = createDefaultBlock(content);
+	let finalResults: (DefaultBlock | BaseBlock)[] = [initialBlock];
 	for (const BLOCK_CLASS of Object.keys(KNOWN_BLOCK_CLASSES)) {
 		for (let i = 0; i < finalResults.length; i++) {
 			// We only want to process these items if they're strings or default blocks
@@ -94,7 +92,7 @@ export function preprocessWPEntry(content: string) {
 				// This removes all empty default blocks that would enter otherwise if there are two
 				// custom blocks right in a row
 				finalResults = finalResults.filter(
-					(r) => r.type === "default" && !r.content,
+					(r) => !(r.type === "default" && !r.content),
 				);
 			}
 		}

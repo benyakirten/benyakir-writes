@@ -6,9 +6,9 @@ const usePagination: PaginationHook = <T>(initialItems: T[]) => {
 	const [currentPage, setCurrentPage] = useState(0);
 	const [currentItems, _setCurrentItems] = useState(initialItems);
 
-	const setCurrentItems = useCallback((_items: T[]) => {
+	const setCurrentItems = useCallback((items: T[]) => {
 		setCurrentPage(0);
-		_setCurrentItems(_items);
+		_setCurrentItems(items);
 	}, []);
 
 	return {

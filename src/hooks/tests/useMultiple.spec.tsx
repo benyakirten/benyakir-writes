@@ -105,10 +105,6 @@ describe("useMultiple hook", () => {
 		fireEvent.change(input, { target: { value: "second third" } });
 		fireEvent.click(button);
 		expect(ul.children.length).toEqual(3);
-		console.log("HERE");
-		console.log(ul.children[0].textContent);
-		console.log(ul.children[1].textContent);
-		console.log(ul.children[2].textContent);
 		expect(ul.children[0].textContent).toEqual("first");
 		expect(ul.children[1].textContent).toEqual("second");
 		expect(ul.children[2].textContent).toEqual("third");
