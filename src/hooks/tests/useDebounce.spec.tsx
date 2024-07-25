@@ -1,6 +1,6 @@
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 import { vi } from "vitest";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 
 import useDebounce from "../useDebounce.hook";
 
