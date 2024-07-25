@@ -6,25 +6,34 @@ import { SEARCH_TIMEOUT } from "@Constants";
 const useDebounce: DebounceHook = (
 	callback: (t: string) => void,
 	initialVal = "",
-	timeLimit: number = SEARCH_TIMEOUT,
+	timeLimit = SEARCH_TIMEOUT,
 ) => {
-	const [value, setValue] = useState(initialVal);
-	const cb = useCallback((t: string) => callback(t), [callback]);
+	const memoizedCallback = useCallback(
+		(text: string) => callback(text),
+		[callback],
+	);
+	const [timer, setTimer] = useState<NodeJS.Timeout>();
+	const [text, setText] = useState(initialVal);
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
-		if (!value) {
-			return;
+		const clearTimer = () => timer && clearTimeout(timer);
+		if (!text) {
+			memoizedCallback("");
+			return clearTimer();
 		}
 
-		const timeout = setTimeout(() => {
-			cb(value);
-		}, timeLimit);
+		if (timer) {
+			clearTimer();
+		}
 
-		return () => {
-			clearTimeout(timeout);
-		};
-	}, [cb, timeLimit, value]);
+		const timeout = setTimeout(() => memoizedCallback(text), timeLimit);
+		setTimer(timeout);
 
-	return [value, setValue];
+		return clearTimer;
+	}, [text]);
+
+	return [text, setText];
 };
 
 export default useDebounce;

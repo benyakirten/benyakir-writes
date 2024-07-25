@@ -9,10 +9,10 @@ import { useAlternation } from "@Hooks";
 import { hasSomeContent } from "@Utils/search";
 
 import type { BookFilterProps } from "@Types/props/post-components";
+import { capitalize } from "@/utils/strings";
 
 const BookFilter: React.FC<BookFilterProps> = ({ books, onFilter }) => {
-	const memoizedBooks = React.useMemo(() => books, [books]);
-	const memoizedFilterCb = React.useCallback(onFilter, []);
+	const onFilterCb = React.useCallback(onFilter, []);
 	const [dropdownOpen, setDropdown] = useAlternation();
 
 	const [publishedBefore, setPublishedBefore] = React.useState<Date>(
@@ -25,24 +25,20 @@ const BookFilter: React.FC<BookFilterProps> = ({ books, onFilter }) => {
 	const [filterWords, setFilterWords] = React.useState<string[]>([]);
 
 	React.useEffect(() => {
-		let filteredBooks = memoizedBooks
+		let filteredBooks = books
 			.filter((b) => b.published.date.getTime() <= publishedBefore.getTime())
 			.filter((b) => b.published.date.getTime() >= publishedAfter.getTime());
 
 		if (hasSomeContent(filterWords)) {
 			filteredBooks = filteredBooks.filter((b) =>
-				filterWords.every((w) => b.meta[w] || b.meta[w.toLowerCase()]),
+				filterWords.every(
+					(w) => b.meta[w] || b.meta[w.toLowerCase()] || b.meta[capitalize(w)],
+				),
 			);
 		}
 
-		memoizedFilterCb(filteredBooks);
-	}, [
-		publishedBefore,
-		publishedAfter,
-		filterWords,
-		memoizedBooks,
-		memoizedFilterCb,
-	]);
+		onFilterCb(filteredBooks);
+	}, [publishedBefore, publishedAfter, filterWords, books, onFilterCb]);
 
 	function setSearchString(filterString: string) {
 		// This first line is redundant because there are already checks for empty strings
