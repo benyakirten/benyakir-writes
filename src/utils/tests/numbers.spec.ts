@@ -1,4 +1,6 @@
-import { keepWithinRange } from "@Utils/numbers";
+import { describe, it, expect } from "vitest";
+
+import { keepWithinRange } from "@/utils/numbers";
 
 describe("keepWithinRange", () => {
 	it("should return numbers that are between the min and max without changing them", () => {

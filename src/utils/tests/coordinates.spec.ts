@@ -1,4 +1,6 @@
-import * as coordinates from "@Utils/coordinates";
+import { describe, it, expect } from "vitest";
+
+import * as coordinates from "@/utils/coordinates";
 
 describe("coordinates util", () => {
 	describe("getFourCorners", () => {

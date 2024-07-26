@@ -1,10 +1,12 @@
+import { describe, it, expect } from "vitest";
+
 import { COLOR_REGEX } from "@Constants";
 import {
 	validate,
 	validateByRegex,
 	validateLength,
 	validateRange,
-} from "@Utils/validation";
+} from "@/utils/validation";
 
 describe("validateByRegex", () => {
 	it("should return a function", () => {

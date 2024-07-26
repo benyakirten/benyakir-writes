@@ -1,7 +1,8 @@
+import { describe, it, expect, beforeEach } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import * as React from "react";
 
-import * as dom from "@Utils/dom";
+import * as dom from "@/utils/dom";
 
 enum DataPosition {
 	CORRECT = 0,

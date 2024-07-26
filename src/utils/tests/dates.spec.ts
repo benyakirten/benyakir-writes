@@ -1,4 +1,6 @@
-import * as date from "@Utils/dates";
+import { describe, it, expect } from "vitest";
+
+import * as date from "@/utils/dates";
 
 describe("dates util", () => {
 	describe("getTimeFromDateString", () => {

@@ -1,4 +1,6 @@
-import * as strings from "@Utils/strings";
+import { describe, it, expect } from "vitest";
+
+import * as strings from "@/utils/strings";
 
 describe("strings util", () => {
 	describe("titleToKebab", () => {

@@ -1,3 +1,5 @@
+import { describe, it, expect } from "vitest";
+
 import {
 	changeHex,
 	convertHexToRGBA,
@@ -9,7 +11,7 @@ import {
 	darken,
 	lighten,
 	validateRGBNumbers,
-} from "@Utils/colors";
+} from "@/utils/colors";
 
 describe("convertHexToRGBA", () => {
 	it("will give known outputs for known inputs", () => {

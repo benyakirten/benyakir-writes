@@ -1,4 +1,6 @@
-import * as posts from "@Utils/posts";
+import { describe, it, expect } from "vitest";
+
+import * as posts from "@/utils/posts";
 
 describe("posts util", () => {
 	describe("formatWpText", () => {

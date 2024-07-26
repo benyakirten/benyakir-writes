@@ -1,6 +1,6 @@
-import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
-import { describe, beforeEach, it, expect } from "vitest";
+import { fireEvent, render, screen, cleanup } from "@testing-library/react";
+import { describe, beforeEach, it, expect, afterEach } from "vitest";
 
 import useAlternation from "../useAlternation.hook";
 
@@ -34,10 +34,12 @@ describe("useAlternation hook", () => {
 
 	beforeEach(async () => {
 		render(React.createElement(HookTest));
-		buttonOne = (await screen.findByTitle("setTest1")) as HTMLButtonElement;
-		buttonTwo = (await screen.findByTitle("setTest2")) as HTMLButtonElement;
-		output = (await screen.findByTitle("output")) as HTMLDivElement;
+		buttonOne = await screen.findByTitle("setTest1");
+		buttonTwo = await screen.findByTitle("setTest2");
+		output = await screen.findByTitle("output");
 	});
+
+	afterEach(cleanup);
 
 	it("should change its value to the specified value when setDropdown is called", () => {
 		expect(output.textContent).toEqual("");

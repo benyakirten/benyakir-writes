@@ -1,3 +1,5 @@
+import { describe, it, expect } from "vitest";
+
 import { defaultDayTheme } from "@/store/theme/theme.state";
 import * as other from "@/utils/other";
 
