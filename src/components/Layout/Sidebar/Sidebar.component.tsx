@@ -32,7 +32,7 @@ const Sidebar: React.FC = () => {
 	const generalLinks: LinkItem[] = [
 		"portfolio",
 		"blog",
-		"books",
+		"author",
 		"theme",
 		"contact",
 		{
@@ -48,15 +48,10 @@ const Sidebar: React.FC = () => {
 	const open = useAppSelector((root) => root.sidebar.open);
 	const activeTheme = useAppSelector((root) => root.theme.active);
 
-	React.useEffect(() => {
-		if (opening) {
-			setTimeout(() => setOpening(false), 1000);
-		}
-	}, [opening]);
-
 	function toggleOpen() {
 		dispatch(toggleSidebarState());
 		setOpening(true);
+		setTimeout(() => setOpening(false), 1000);
 	}
 
 	function handleNavClick(e: React.BaseSyntheticEvent) {
@@ -129,7 +124,7 @@ const Sidebar: React.FC = () => {
 							/>
 						</div>
 						<LegalBox>
-							<LegalItem>&copy; 2021-2023 by Benyakir Horowitz</LegalItem>
+							<LegalItem>&copy; 2021-2024 by Benyakir Horowitz</LegalItem>
 							<LegalItem>All Rights Reserved</LegalItem>
 						</LegalBox>
 					</VisibleGroup>

@@ -8,17 +8,17 @@ import { DatePicker, Filter } from "@Input";
 import { useAlternation } from "@Hooks";
 import { hasSomeContent } from "@Utils/search";
 
-import type { BookFilterProps } from "@Types/props/post-components";
-import { FlattenedBookCard } from "@/types/posts";
+import type { AuthorFilterProps } from "@Types/props/post-components";
+import { AuthoredItemCard } from "@/types/posts";
 
-const BookFilter: React.FC<BookFilterProps> = ({ books, onFilter }) => {
+const AuthorFilter: React.FC<AuthorFilterProps> = ({ items, onFilter }) => {
 	const [dropdownOpen, setDropdown] = useAlternation();
 
 	const [publishedBefore, setPublishedBefore] = React.useState<Date>(
-		books[0].published.date,
+		items[0].published.date,
 	);
 	const [publishedAfter, setPublishedAfter] = React.useState<Date>(
-		books[books.length - 1].published.date,
+		items[items.length - 1].published.date,
 	);
 
 	const [filterWords, setFilterWords] = React.useState<string[]>([]);
@@ -27,22 +27,22 @@ const BookFilter: React.FC<BookFilterProps> = ({ books, onFilter }) => {
 		publishedBefore: Date,
 		publishedAfter: Date,
 		filterWords: string[],
-		books: FlattenedBookCard[],
-		onFilter: (stories: FlattenedBookCard[]) => void,
+		items: AuthoredItemCard[],
+		onFilter: (stories: AuthoredItemCard[]) => void,
 	) {
-		let filteredBooks = books
+		let filteredItems = items
 			.filter((b) => b.published.date.getTime() <= publishedBefore.getTime())
 			.filter((b) => b.published.date.getTime() >= publishedAfter.getTime());
 
 		if (hasSomeContent(filterWords)) {
-			filteredBooks = filteredBooks.filter((b) =>
+			filteredItems = filteredItems.filter((b) =>
 				filterWords.every((w) => b.meta[w] || b.meta[w.toLowerCase()]),
 			);
 		}
 
-		onFilter(filteredBooks);
+		onFilter(filteredItems);
 	}
-	filterBooks(publishedBefore, publishedAfter, filterWords, books, onFilter);
+	filterBooks(publishedBefore, publishedAfter, filterWords, items, onFilter);
 
 	return (
 		<Filter name="books" onSearch={(val) => setFilterWords(val.split(" "))}>
@@ -72,4 +72,4 @@ const BookFilter: React.FC<BookFilterProps> = ({ books, onFilter }) => {
 	);
 };
 
-export default BookFilter;
+export default AuthorFilter;

@@ -4,11 +4,12 @@ import { Foldout } from "@Gen";
 import { DatePicker, Filter, MultipleChoice } from "@Input";
 import { SubHeading } from "@Styles/general-components";
 
-import { useAlternation, useMultiSelect } from "@Hooks";
-import { hasSomeContent } from "@Utils/search";
+import { useAlternation, useMultiSelect } from "@/hooks";
+import { hasSomeContent } from "@/utils/search";
 
-import type { ProjectsFilterProps } from "@Types/props/post-components";
+import type { ProjectsFilterProps } from "@/types/props/post-components";
 import { FlattenedProjectCard } from "@/types/posts";
+import { MultiSelectHookFilterFunction } from "@/types/hooks";
 
 const ProjectFilter: React.FC<ProjectsFilterProps> = ({
 	allProjects,
@@ -45,10 +46,7 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
 		filterWords: string[],
 		hostChoices: Set<string>,
 		projects: FlattenedProjectCard[],
-		filterByTechChoices: <T extends object, U extends keyof T>(
-			items: T[],
-			getter: (item: T) => string[] | null,
-		) => T[],
+		filterByTechChoices: MultiSelectHookFilterFunction,
 		onFilter: (projects: FlattenedProjectCard[]) => void,
 	) {
 		let filteredProjects = projects

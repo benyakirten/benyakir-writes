@@ -3,6 +3,7 @@ import type StoryCard from "@Variant/Cards/Author/StoryCard/StoryCard.component"
 import type { LatestUpdateState } from "../hooks";
 
 import type {
+	AuthoredItemCard,
 	FlattenedBlogCard,
 	FlattenedBlogPost,
 	FlattenedBookCard,
@@ -33,14 +34,8 @@ type ProjectCardProps = {
 };
 
 type AuthorFilterProps = {
-	allBooks: FlattenedBookCard[];
-	allStories: FlattenedStoryCard[];
-	onFilter: (books: FlattenedBookCard[], stories: FlattenedStoryCard[]) => void;
-};
-
-type BookFilterProps = {
-	books: FlattenedBookCard[];
-	onFilter: (stories: FlattenedBookCard[]) => void;
+	items: AuthoredItemCard[];
+	onFilter: (items: AuthoredItemCard[]) => void;
 };
 
 type StoryFilterProps = {

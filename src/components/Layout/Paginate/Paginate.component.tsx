@@ -4,13 +4,14 @@ import { Column } from "@Styles/general-components";
 import { NoResults, PaginateColumn } from "./Paginate.styles";
 
 import PaginateMenu from "./PaginateMenu/PaginateMenu.component";
+import { PaginatableItem, PaginateProps } from "@/types/props/layout";
 
-const Paginate: React.FC<PaginateProps> = ({
+function Paginate<T extends PaginatableItem>({
 	items,
 	El,
 	currentPage,
 	onPageChange,
-}) => {
+}: PaginateProps<T>) {
 	const [itemsPerPage, setItemsPerPage] = React.useState(4);
 	const maxPages = React.useMemo(
 		() => Math.floor(items.length / itemsPerPage),
@@ -41,6 +42,27 @@ const Paginate: React.FC<PaginateProps> = ({
 		[currentPage, onPageChange],
 	);
 
+	const RenderableContent =
+		items.length > 0
+			? items
+					.slice(
+						itemsPerPage * currentPage,
+						currentPage < maxPages
+							? itemsPerPage * (currentPage + 1)
+							: items.length,
+					)
+					.map((i) => {
+						const Comp = typeof El === "function" ? El(i) : El;
+						console.log("RENDERING ITEM");
+						console.log(typeof El);
+						return <Comp key={i.slug || i.title} item={i} />;
+					})
+			: [
+					<NoResults key="no-items">
+						No items matching that query found
+					</NoResults>,
+				];
+
 	const paginateMenuProps = React.useMemo(
 		() => ({
 			maxPages,
@@ -65,23 +87,10 @@ const Paginate: React.FC<PaginateProps> = ({
 	return (
 		<PaginateColumn>
 			<PaginateMenu {...paginateMenuProps} name="top" />
-			<Column style={{ margin: "1rem 0" }}>
-				{items.length > 0 ? (
-					items
-						.slice(
-							itemsPerPage * currentPage,
-							currentPage < maxPages
-								? itemsPerPage * (currentPage + 1)
-								: items.length,
-						)
-						.map((i) => <El key={i.slug || i.title} item={i} />)
-				) : (
-					<NoResults>No items matching that query found</NoResults>
-				)}
-			</Column>
+			<Column style={{ margin: "1rem 0" }}>{RenderableContent}</Column>
 			<PaginateMenu {...paginateMenuProps} name="bottom" />
 		</PaginateColumn>
 	);
-};
+}
 
 export default Paginate;

@@ -70,6 +70,8 @@ type FlattenedBook = PartialFlattenedBook & {
 	meta: string;
 };
 
+type AuthoredItemCard = FlattenedBookCard | FlattenedStoryCard;
+
 type FlattenedBookCard = PartialFlattenedBook & {
 	meta: BooleanLookup;
 };

@@ -102,7 +102,6 @@ const ContactPage: React.FC = () => {
 						label="Email"
 						value={email.toString()}
 						onChange={setEmail}
-						autofocus
 					/>
 				</ControlGroup>
 				<ControlGroup>

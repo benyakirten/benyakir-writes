@@ -1,3 +1,5 @@
+import type { Element } from "react";
+
 type LogoProps = {
 	opening: boolean;
 	open: boolean;
@@ -15,11 +17,13 @@ type SearchProps = {
 	onClick: () => void;
 };
 
-type PaginateProps = {
+type PaginatableItem = { slug?: string; title: string };
+
+// TODO: Figure out how to type this with generic components
+type PaginateProps<T extends PaginatableItem> = {
 	currentPage: number;
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	items: any[];
-	El: React.Element;
+	items: T[];
+	El: Element | ((item: T) => Element);
 	onPageChange: (n: number) => void;
 };
 

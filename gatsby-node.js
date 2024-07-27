@@ -107,9 +107,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const shortStoryTemplate = require.resolve(
     "./src/templates/Shortstory.template.tsx"
   );
-  const categoryTemplate = require.resolve(
-    "./src/templates/Category.template.tsx"
-  );
 
   if (allWpPost.nodes.length) {
     allWpPost.nodes.map((post) => {
@@ -147,16 +144,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         path: `story/${story.slug}`,
         component: shortStoryTemplate,
         context: story,
-      });
-    });
-  }
-
-  if (allWpCategory.nodes.length) {
-    allWpCategory.nodes.map((cat) => {
-      actions.createPage({
-        path: `blog/${titleToKebab(cat.name)}`,
-        component: categoryTemplate,
-        context: cat,
       });
     });
   }
