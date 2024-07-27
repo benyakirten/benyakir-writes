@@ -8,6 +8,7 @@ import { useAlternation, useMultiSelect } from "@Hooks";
 import { hasSomeContent } from "@Utils/search";
 
 import type { ProjectsFilterProps } from "@Types/props/post-components";
+import { FlattenedProjectCard } from "@/types/posts";
 
 const ProjectFilter: React.FC<ProjectsFilterProps> = ({
 	allProjects,
@@ -34,11 +35,23 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
 		() => allTechs.map((tech) => ({ label: tech, value: tech })),
 		[allTechs],
 	);
+
 	const [hostChoices, setHostChoices] = useMultiSelect();
 	const [_, setTechChoices, filterByTechChoices] = useMultiSelect();
 
-	React.useEffect(() => {
-		let _projects = allProjects
+	function filterProjects(
+		publishedBefore: Date,
+		publishedAfter: Date,
+		filterWords: string[],
+		hostChoices: Set<string>,
+		projects: FlattenedProjectCard[],
+		filterByTechChoices: <T extends object, U extends keyof T>(
+			items: T[],
+			getter: (item: T) => string[] | null,
+		) => T[],
+		onFilter: (projects: FlattenedProjectCard[]) => void,
+	) {
+		let filteredProjects = projects
 			.filter(
 				(p) => p.firstReleased.date.getTime() <= publishedBefore.getTime(),
 			)
@@ -47,24 +60,26 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
 			);
 
 		if (hasSomeContent(filterWords)) {
-			_projects = _projects.filter((p) =>
+			filteredProjects = filteredProjects.filter((p) =>
 				filterWords.every((w) => p.meta[w] || p.meta[w.toLowerCase()]),
 			);
 		}
 
 		if (hostChoices.size > 0) {
-			_projects = _projects.filter((project) =>
+			filteredProjects = filteredProjects.filter((project) =>
 				hostChoices.has(project.hostedOn ?? ""),
 			);
 		}
 
-		_projects = filterByTechChoices(
-			_projects,
+		filteredProjects = filterByTechChoices(
+			filteredProjects,
 			(project) => project.longTechnologies,
 		);
 
-		onFilter(_projects);
-	}, [
+		onFilter(filteredProjects);
+	}
+
+	filterProjects(
 		publishedBefore,
 		publishedAfter,
 		filterWords,
@@ -72,19 +87,10 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
 		allProjects,
 		filterByTechChoices,
 		onFilter,
-	]);
-
-	function setSearchString(filterString: string) {
-		// This line is redundant because there are already checks for empty strings
-		// However, testing fails otherwise because the useDebounce hook will
-		// cause an internal state change as the component is rendering
-		// This line prevents that state change and allows the tests to work
-		if (!filterString && !hasSomeContent(filterWords)) return;
-		setFilterWords(filterString ? filterString.split(" ") : [""]);
-	}
+	);
 
 	return (
-		<Filter name="projects" onSearch={setSearchString}>
+		<Filter name="projects" onSearch={(val) => setFilterWords(val.split(" "))}>
 			<Foldout
 				topbar={<SubHeading>Filter by date</SubHeading>}
 				open={dropdownOpen === "date"}

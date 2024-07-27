@@ -46,7 +46,7 @@ export const createLookupMeta = (meta: string) =>
 		.split(/[-\s]/)
 		.reduce<Record<string, true>>((acc, next) => {
 			if (next) {
-				acc[next] = true;
+				acc[next.replace(/\b\w:\b/g, "").toLowerCase()] = true;
 			}
 
 			return acc;

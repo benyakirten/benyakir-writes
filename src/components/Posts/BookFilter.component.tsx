@@ -9,7 +9,7 @@ import { useAlternation } from "@Hooks";
 import { hasSomeContent } from "@Utils/search";
 
 import type { BookFilterProps } from "@Types/props/post-components";
-import { capitalize } from "@/utils/strings";
+import { FlattenedBookCard } from "@/types/posts";
 
 const BookFilter: React.FC<BookFilterProps> = ({ books, onFilter }) => {
 	const [dropdownOpen, setDropdown] = useAlternation();
@@ -23,21 +23,26 @@ const BookFilter: React.FC<BookFilterProps> = ({ books, onFilter }) => {
 
 	const [filterWords, setFilterWords] = React.useState<string[]>([]);
 
-	React.useEffect(() => {
+	function filterBooks(
+		publishedBefore: Date,
+		publishedAfter: Date,
+		filterWords: string[],
+		books: FlattenedBookCard[],
+		onFilter: (stories: FlattenedBookCard[]) => void,
+	) {
 		let filteredBooks = books
 			.filter((b) => b.published.date.getTime() <= publishedBefore.getTime())
 			.filter((b) => b.published.date.getTime() >= publishedAfter.getTime());
 
 		if (hasSomeContent(filterWords)) {
 			filteredBooks = filteredBooks.filter((b) =>
-				filterWords.every(
-					(w) => b.meta[w] || b.meta[w.toLowerCase()] || b.meta[capitalize(w)],
-				),
+				filterWords.every((w) => b.meta[w] || b.meta[w.toLowerCase()]),
 			);
 		}
 
 		onFilter(filteredBooks);
-	}, [publishedBefore, publishedAfter, filterWords, books, onFilter]);
+	}
+	filterBooks(publishedBefore, publishedAfter, filterWords, books, onFilter);
 
 	return (
 		<Filter name="books" onSearch={(val) => setFilterWords(val.split(" "))}>

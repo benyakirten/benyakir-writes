@@ -14,7 +14,6 @@ import {
 
 import { CustomLink } from "@Gen";
 import { Toggle } from "@Input";
-import { LinkGroup } from "@Layout";
 
 import { useAlternation } from "@Hooks";
 import Search from "../Search/Search.component";
@@ -28,9 +27,20 @@ import {
 	setSidebarState,
 	toggleSidebarState,
 } from "@/store/sidebar/sidebar.slice";
-import { authorLinks, blogLinks, generalLinks } from "@Data/links";
 
 const Sidebar: React.FC = () => {
+	const generalLinks: LinkItem[] = [
+		"portfolio",
+		"blog",
+		"books",
+		"theme",
+		"contact",
+		{
+			name: "home",
+			link: "",
+		},
+	];
+
 	const [openDropdown, setOpenDropdown] = useAlternation();
 	const [opening, setOpening] = React.useState<boolean>(false);
 
@@ -72,6 +82,7 @@ const Sidebar: React.FC = () => {
 					open={open}
 					onClick={toggleOpen}
 					data-cy="open-sidemenu"
+					aria-label={open ? "Close Sidebar" : "Open Sidebar"}
 				>
 					&larr;
 				</ArrowButton>
@@ -86,31 +97,6 @@ const Sidebar: React.FC = () => {
 						aria-hidden={!open}
 						open={open}
 					>
-						<NavGroup>
-							<LinkGroup
-								domain="blog"
-								links={blogLinks}
-								open={openDropdown === "blog"}
-								onClick={() => setOpenDropdown("blog")}
-								height="7rem"
-								tabIndex={openDropdown === "blog" ? 0 : -1}
-							/>
-							<LinkGroup
-								domain="author"
-								links={authorLinks}
-								open={openDropdown === "author"}
-								onClick={() => setOpenDropdown("author")}
-								height="7rem"
-								tabIndex={openDropdown === "author" ? 0 : -1}
-							/>
-							<CustomLink
-								tabIndex={open ? 0 : -1}
-								to="/portfolio"
-								underbarsize="12rem"
-							>
-								Portfolio
-							</CustomLink>
-						</NavGroup>
 						<NavGroup>
 							<Search
 								open={openDropdown === "search"}

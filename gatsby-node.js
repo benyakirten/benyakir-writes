@@ -447,7 +447,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   function generateLookup(arr) {
     return arr.reduce((acc, next) => {
-      acc[formatText(next.toString())] = true;
+      acc[formatText(next.toString().toLowerCase())] = true;
       return acc;
     }, {});
   }

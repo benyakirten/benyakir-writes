@@ -3,7 +3,7 @@ import * as React from "react";
 import { Grouping, Page } from "@Styles/general-components";
 
 import { LeadPage, Paginate } from "@Layout";
-import { AllFilter } from "@Posts";
+import { BlogFilter } from "@Posts";
 import { BlogCard } from "@Variants";
 
 import usePagination from "@/hooks/usePagination.hook";
@@ -40,7 +40,7 @@ const BlogPage: React.FC = () => {
 			<LeadPage
 				title="Blog Posts"
 				filter={
-					<AllFilter
+					<BlogFilter
 						allPosts={posts}
 						onFilter={postPagination.setCurrentItems}
 					/>
