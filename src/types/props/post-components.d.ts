@@ -62,7 +62,7 @@ type HalfProps = {
 	El: BookCard | StoryCard;
 };
 
-type AllBlogFilterProps = {
+type BlogFilterProps = {
 	allPosts: FlattenedBlogCard[];
 	onFilter: (posts: FlattenedBlogCard[]) => void;
 };

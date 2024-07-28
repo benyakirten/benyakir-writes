@@ -9,9 +9,10 @@ import { useAlternation, useMultiSelect } from "@Hooks";
 import { createChoiceSet } from "@Utils/filter";
 import { hasSomeContent } from "@Utils/search";
 
-import type { AllBlogFilterProps } from "@Types/props/post-components";
+import type { BlogFilterProps } from "@Types/props/post-components";
+import { FlattenedBlogCard } from "@/types/posts";
 
-const BlogFilter: React.FC<AllBlogFilterProps> = ({ allPosts, onFilter }) => {
+const BlogFilter: React.FC<BlogFilterProps> = ({ allPosts, onFilter }) => {
 	const [dropdownOpen, setDropdown] = useAlternation();
 
 	// Min and day range is based on first and latest repo published
@@ -33,26 +34,43 @@ const BlogFilter: React.FC<AllBlogFilterProps> = ({ allPosts, onFilter }) => {
 		[allPosts],
 	);
 
-	const [categoryChoices, setCategoryChoices, filterByCategories] =
-		useMultiSelect();
-	const [tagChoices, setTagChoices, filterByTags] = useMultiSelect();
+	const [_, setCategoryChoices, filterByCategories] = useMultiSelect();
+	const [_2, setTagChoices, filterByTags] = useMultiSelect();
 
-	React.useEffect(() => {
-		let _posts = allPosts
+	function filterBlogPosts(
+		publishedBefore: Date,
+		publishedAfter: Date,
+		filterWords: string[],
+		onFilter: (posts: FlattenedBlogCard[]) => void,
+		allPosts: FlattenedBlogCard[],
+		filterByCategories: (
+			posts: FlattenedBlogCard[],
+			filter: (post: FlattenedBlogCard) => string[],
+		) => FlattenedBlogCard[],
+		filterByTags: (
+			posts: FlattenedBlogCard[],
+			filter: (post: FlattenedBlogCard) => string[],
+		) => FlattenedBlogCard[],
+	) {
+		let filteredPosts = allPosts
 			.filter((p) => p.published.date.getTime() <= publishedBefore.getTime())
 			.filter((p) => p.published.date.getTime() >= publishedAfter.getTime());
 
 		if (hasSomeContent(filterWords)) {
-			_posts = _posts.filter((p) =>
+			filteredPosts = filteredPosts.filter((p) =>
 				filterWords.every((w) => p.meta[w] || p.meta[w.toLowerCase()]),
 			);
 		}
 
-		_posts = filterByCategories(_posts, (post) => post.categories);
-		_posts = filterByTags(_posts, (post) => post.tags);
+		filteredPosts = filterByCategories(
+			filteredPosts,
+			(post) => post.categories ?? [""],
+		);
+		filteredPosts = filterByTags(filteredPosts, (post) => post.tags ?? [""]);
 
-		onFilter(_posts);
-	}, [
+		onFilter(filteredPosts);
+	}
+	filterBlogPosts(
 		publishedBefore,
 		publishedAfter,
 		filterWords,
@@ -60,19 +78,10 @@ const BlogFilter: React.FC<AllBlogFilterProps> = ({ allPosts, onFilter }) => {
 		allPosts,
 		filterByCategories,
 		filterByTags,
-	]);
-
-	function setSearchString(filterString: string) {
-		// This line is redundant because there are already checks for empty strings
-		// However, testing fails otherwise because the useDebounce hook will
-		// cause an internal state change as the component is rendering
-		// This line prevents that state change and allows the tests to work
-		if (!filterString && !hasSomeContent(filterWords)) return;
-		setFilterWords(filterString ? filterString.split(" ") : [""]);
-	}
+	);
 
 	return (
-		<Filter name="projects" onSearch={setSearchString}>
+		<Filter name="projects" onSearch={(val) => setFilterWords(val.split(" "))}>
 			<Foldout
 				topbar={<SubHeading>Filter by date</SubHeading>}
 				open={dropdownOpen === "date"}
