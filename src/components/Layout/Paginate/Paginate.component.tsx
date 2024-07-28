@@ -14,12 +14,12 @@ function Paginate<T extends PaginatableItem>({
 }: PaginateProps<T>) {
 	const [itemsPerPage, setItemsPerPage] = React.useState(4);
 	const maxPages = React.useMemo(
-		() => Math.floor(items.length / itemsPerPage),
+		() => Math.ceil(items.length / itemsPerPage),
 		[items, itemsPerPage],
 	);
 
 	const adjustItemsPerPage = React.useCallback(
-		() => (perPage: number) => {
+		(perPage: number) => {
 			if (perPage <= items.length) {
 				onPageChange(0);
 				setItemsPerPage(perPage);
