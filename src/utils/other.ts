@@ -71,3 +71,50 @@ export function getThemePropRecursive(
 	}
 	return obj[accessors[0]] as string;
 }
+
+export function deepEquals<T>(a: T, b: T): boolean {
+	if (a === null) {
+		return b === null;
+	}
+
+	if (b === null) {
+		return a === null;
+	}
+
+	if (typeof a !== typeof b) {
+		return false;
+	}
+
+	if (Array.isArray(a) && Array.isArray(b)) {
+		for (let i = 0; i < a.length; i++) {
+			if (!deepEquals(a[i], b[i])) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	if (typeof a === "object" && typeof b === "object") {
+		const aKeys = Object.keys(a);
+		const bKeys = Object.keys(b);
+
+		if (aKeys.length !== bKeys.length) {
+			return false;
+		}
+
+		for (const key of aKeys) {
+			if (key in b === false) {
+				return false;
+			}
+
+			if (!deepEquals(a[key as keyof T], b[key as keyof T])) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	return a === b;
+}

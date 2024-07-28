@@ -15,13 +15,14 @@ import { FlattenedBlogCard } from "@/types/posts";
 const BlogFilter: React.FC<BlogFilterProps> = ({ allPosts, onFilter }) => {
 	const [dropdownOpen, setDropdown] = useAlternation();
 
-	// Min and day range is based on first and latest repo published
 	const [publishedBefore, setPublishedBefore] = React.useState<Date>(
 		allPosts[0].published.date,
 	);
 	const [publishedAfter, setPublishedAfter] = React.useState<Date>(
 		allPosts[allPosts.length - 1].published.date,
 	);
+
+	const posts = React.useMemo(() => allPosts, [allPosts]);
 
 	const [filterWords, setFilterWords] = React.useState<string[]>([]);
 
@@ -69,16 +70,21 @@ const BlogFilter: React.FC<BlogFilterProps> = ({ allPosts, onFilter }) => {
 		filteredPosts = filterByTags(filteredPosts, (post) => post.tags ?? [""]);
 
 		onFilter(filteredPosts);
+
+		console.log("HERE!");
 	}
+
 	filterBlogPosts(
 		publishedBefore,
 		publishedAfter,
 		filterWords,
 		onFilter,
-		allPosts,
+		posts,
 		filterByCategories,
 		filterByTags,
 	);
+
+	console.log("RENDERED");
 
 	return (
 		<Filter name="projects" onSearch={(val) => setFilterWords(val.split(" "))}>

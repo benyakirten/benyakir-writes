@@ -7,7 +7,10 @@ const useMultiSelect: MultiSelectHook = (defaultValue?: string[]) => {
 	const setSet = (items: PotentialChoice[]) =>
 		_setSet(new Set(items.map((item) => item.value)));
 
-	const filterItems = <T>(items: T[], getter: (item: T) => string[] | null) => {
+	const _filterItems = <T>(
+		items: T[],
+		getter: (item: T) => string[] | null,
+	) => {
 		if (set.size === 0) {
 			return items;
 		}
@@ -28,6 +31,8 @@ const useMultiSelect: MultiSelectHook = (defaultValue?: string[]) => {
 			return true;
 		});
 	};
+
+	const filterItems = React.useCallback(_filterItems, []);
 
 	return [set, setSet, filterItems];
 };

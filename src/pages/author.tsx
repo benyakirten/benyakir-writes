@@ -60,7 +60,7 @@ const AuthorPage: React.FC = () => {
 	return (
 		<Page>
 			<LeadPage
-				title="Books"
+				title="Books and Stories"
 				filter={
 					<AuthorFilter
 						items={items}

@@ -33,21 +33,17 @@ const BlogPage: React.FC = () => {
 			})),
 		[],
 	);
-	const postPagination = usePagination<FlattenedBlogCard>(posts);
+	const { setCurrentItems, items, currentPage, onPageChange } =
+		usePagination<FlattenedBlogCard>(posts);
 
 	return (
 		<Page>
 			<LeadPage
 				title="Blog Posts"
-				filter={
-					<BlogFilter
-						allPosts={posts}
-						onFilter={postPagination.setCurrentItems}
-					/>
-				}
+				filter={<BlogFilter allPosts={posts} onFilter={setCurrentItems} />}
 			>
 				<Grouping>
-					<Paginate {...postPagination} El={BlogCard} />
+					{/* <Paginate {...postPagination} El={BlogCard} /> */}
 				</Grouping>
 			</LeadPage>
 		</Page>

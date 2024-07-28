@@ -1,5 +1,5 @@
-import { useLocation } from "@reach/router";
 import * as React from "react";
+import { useLocation } from "@reach/router";
 import { Transition, TransitionGroup } from "react-transition-group";
 import { ThemeProvider } from "styled-components";
 
