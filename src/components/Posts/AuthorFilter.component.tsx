@@ -10,6 +10,7 @@ import { hasSomeContent } from "@Utils/search";
 
 import type { AuthorFilterProps } from "@Types/props/post-components";
 import { AuthoredItemCard } from "@/types/posts";
+import { deepEquals } from "@/utils/other";
 
 const AuthorFilter: React.FC<AuthorFilterProps> = ({ items, onFilter }) => {
 	const [dropdownOpen, setDropdown] = useAlternation();
@@ -38,6 +39,10 @@ const AuthorFilter: React.FC<AuthorFilterProps> = ({ items, onFilter }) => {
 			filteredItems = filteredItems.filter((b) =>
 				filterWords.every((w) => b.meta[w] || b.meta[w.toLowerCase()]),
 			);
+		}
+
+		if (deepEquals(filteredItems, items)) {
+			return;
 		}
 
 		onFilter(filteredItems);

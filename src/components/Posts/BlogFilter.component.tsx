@@ -70,8 +70,6 @@ const BlogFilter: React.FC<BlogFilterProps> = ({ allPosts, onFilter }) => {
 		filteredPosts = filterByTags(filteredPosts, (post) => post.tags ?? [""]);
 
 		onFilter(filteredPosts);
-
-		console.log("HERE!");
 	}
 
 	filterBlogPosts(
