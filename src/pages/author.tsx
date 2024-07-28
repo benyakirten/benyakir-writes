@@ -27,6 +27,13 @@ export const Head: React.FC = () => (
 	</>
 );
 
+const AuthorCard: React.FC<{ item: AuthoredItemCard }> = ({ item }) => {
+	if ("book" in item) {
+		return <StoryCard item={item} />;
+	}
+	return <BookCard item={item} />;
+};
+
 const AuthorPage: React.FC = () => {
 	const items = React.useMemo<AuthoredItemCard[]>(() => {
 		// @ts-ignore
@@ -47,7 +54,6 @@ const AuthorPage: React.FC = () => {
 
 		return items;
 	}, []);
-	console.log("RENDERED");
 
 	const itemPagination = usePagination<AuthoredItemCard>(items);
 
@@ -63,12 +69,7 @@ const AuthorPage: React.FC = () => {
 				}
 			>
 				<Grouping>
-					<Paginate
-						{...itemPagination}
-						El={(item: AuthoredItemCard) =>
-							"book" in item ? StoryCard : BookCard
-						}
-					/>
+					<Paginate {...itemPagination} El={AuthorCard} />
 				</Grouping>
 			</LeadPage>
 		</Page>

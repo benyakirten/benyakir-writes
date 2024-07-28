@@ -28,19 +28,20 @@ import {
 	toggleSidebarState,
 } from "@/store/sidebar/sidebar.slice";
 
-const Sidebar: React.FC = () => {
-	const generalLinks: LinkItem[] = [
-		"portfolio",
-		"blog",
-		"author",
-		"theme",
-		"contact",
-		{
-			name: "home",
-			link: "",
-		},
-	];
+const generalLinks: LinkItem[] = [
+	"portfolio",
+	"blog",
+	"author",
+	"projects",
+	"theme",
+	"contact",
+	{
+		name: "home",
+		link: "",
+	},
+];
 
+const Sidebar: React.FC = () => {
 	const [openDropdown, setOpenDropdown] = useAlternation();
 	const [opening, setOpening] = React.useState<boolean>(false);
 

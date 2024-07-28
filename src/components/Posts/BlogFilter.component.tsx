@@ -11,7 +11,7 @@ import { hasSomeContent } from "@Utils/search";
 
 import type { AllBlogFilterProps } from "@Types/props/post-components";
 
-const AllFilter: React.FC<AllBlogFilterProps> = ({ allPosts, onFilter }) => {
+const BlogFilter: React.FC<AllBlogFilterProps> = ({ allPosts, onFilter }) => {
 	const [dropdownOpen, setDropdown] = useAlternation();
 
 	// Min and day range is based on first and latest repo published
@@ -125,4 +125,4 @@ const AllFilter: React.FC<AllBlogFilterProps> = ({ allPosts, onFilter }) => {
 	);
 };
 
-export default AllFilter;
+export default BlogFilter;

@@ -19,11 +19,10 @@ type SearchProps = {
 
 type PaginatableItem = { slug?: string; title: string };
 
-// TODO: Figure out how to type this with generic components
 type PaginateProps<T extends PaginatableItem> = {
 	currentPage: number;
 	items: T[];
-	El: Element | ((item: T) => Element);
+	El: React.FC<{ item: T }>;
 	onPageChange: (n: number) => void;
 };
 

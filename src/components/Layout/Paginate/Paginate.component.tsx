@@ -19,13 +19,13 @@ function Paginate<T extends PaginatableItem>({
 	);
 
 	const adjustItemsPerPage = React.useCallback(
-		(perPage: number) => {
+		() => (perPage: number) => {
 			if (perPage <= items.length) {
 				onPageChange(0);
 				setItemsPerPage(perPage);
 			}
 		},
-		[onPageChange, items],
+		[items, onPageChange],
 	);
 
 	const secondCriteria = (currentPage + 1) * itemsPerPage >= items.length;
@@ -35,33 +35,12 @@ function Paginate<T extends PaginatableItem>({
 			currentPage < maxPages &&
 			!secondCriteria &&
 			onPageChange(currentPage + 1),
-		[currentPage, maxPages, onPageChange, secondCriteria],
+		[currentPage, maxPages, secondCriteria, onPageChange],
 	);
 	const lastPage = React.useCallback(
 		() => currentPage > 0 && onPageChange(currentPage - 1),
 		[currentPage, onPageChange],
 	);
-
-	const RenderableContent =
-		items.length > 0
-			? items
-					.slice(
-						itemsPerPage * currentPage,
-						currentPage < maxPages
-							? itemsPerPage * (currentPage + 1)
-							: items.length,
-					)
-					.map((i) => {
-						const Comp = typeof El === "function" ? El(i) : El;
-						console.log("RENDERING ITEM");
-						console.log(typeof El);
-						return <Comp key={i.slug || i.title} item={i} />;
-					})
-			: [
-					<NoResults key="no-items">
-						No items matching that query found
-					</NoResults>,
-				];
 
 	const paginateMenuProps = React.useMemo(
 		() => ({
@@ -76,18 +55,31 @@ function Paginate<T extends PaginatableItem>({
 		[
 			maxPages,
 			currentPage,
+			itemsPerPage,
+			secondCriteria,
+			adjustItemsPerPage,
 			lastPage,
 			nextPage,
-			itemsPerPage,
-			adjustItemsPerPage,
-			secondCriteria,
 		],
 	);
 
 	return (
 		<PaginateColumn>
 			<PaginateMenu {...paginateMenuProps} name="top" />
-			<Column style={{ margin: "1rem 0" }}>{RenderableContent}</Column>
+			<Column style={{ margin: "1rem 0" }}>
+				{items.length > 0 ? (
+					items
+						.slice(
+							itemsPerPage * currentPage,
+							currentPage < maxPages
+								? itemsPerPage * (currentPage + 1)
+								: items.length,
+						)
+						.map((i) => <El key={i.slug || i.title} item={i} />)
+				) : (
+					<NoResults>No items matching that query found</NoResults>
+				)}
+			</Column>
 			<PaginateMenu {...paginateMenuProps} name="bottom" />
 		</PaginateColumn>
 	);
