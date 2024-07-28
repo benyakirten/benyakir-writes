@@ -16,6 +16,7 @@ import type {
 	FlattenedStoryCard,
 	AuthoredItemCard,
 } from "@Types/posts";
+import { hasSomeContent } from "@/utils/search";
 
 export const Head: React.FC = () => (
 	<>
@@ -48,14 +49,61 @@ const AuthorPage: React.FC = () => {
 			published: { ...s.published, date: new Date(s.published.date) },
 		}));
 
-		const items = [...books, ...stories].sort(
-			(a, b) => a.published.date.valueOf() - b.published.date.valueOf(),
+		return [...books, ...stories].sort(
+			(a, b) => b.published.date.valueOf() - a.published.date.valueOf(),
 		);
-
-		return items;
 	}, []);
 
 	const itemPagination = usePagination<AuthoredItemCard>(items);
+
+	const [publishedBefore, setPublishedBefore] = React.useState<Date>(
+		items[0].published.date,
+	);
+	const [publishedAfter, setPublishedAfter] = React.useState<Date>(
+		items[items.length - 1].published.date,
+	);
+
+	const [filterWords, setFilterWords] = React.useState<string[]>([]);
+
+	function changePublishedBefore(val: Date) {
+		setPublishedBefore(val);
+		triggerFilter({ newPublishedBefore: val });
+	}
+
+	function changePublishedAfter(val: Date) {
+		setPublishedAfter(val);
+		triggerFilter({ newPublishedAfter: val });
+	}
+
+	function changeFilterWords(words: string[]) {
+		setFilterWords(words);
+		triggerFilter({ newFilterWords: words });
+	}
+
+	function triggerFilter({
+		newPublishedBefore,
+		newPublishedAfter,
+		newFilterWords,
+	}: {
+		newPublishedBefore?: Date;
+		newPublishedAfter?: Date;
+		newFilterWords?: string[];
+	}) {
+		const _publishedBefore = newPublishedBefore || publishedBefore;
+		const _publishedAfter = newPublishedAfter || publishedAfter;
+		const _filterWords = newFilterWords || filterWords;
+		let filteredItems = items
+			.filter((b) => b.published.date.getTime() <= _publishedBefore.getTime())
+			.filter((b) => b.published.date.getTime() >= _publishedAfter.getTime());
+
+		if (hasSomeContent(_filterWords)) {
+			filteredItems = filteredItems.filter((b) =>
+				_filterWords.every((w) => b.meta[w] || b.meta[w.toLowerCase()]),
+			);
+		}
+
+		itemPagination.setCurrentItems(filteredItems);
+	}
 
 	return (
 		<Page>
@@ -63,8 +111,12 @@ const AuthorPage: React.FC = () => {
 				title="Books and Stories"
 				filter={
 					<AuthorFilter
-						items={items}
-						onFilter={itemPagination.setCurrentItems}
+						publishedBefore={publishedBefore}
+						publishedAfter={publishedAfter}
+						filterWords={filterWords}
+						changePublishedBefore={changePublishedBefore}
+						changePublishedAfter={changePublishedAfter}
+						changeFilterWords={changeFilterWords}
 					/>
 				}
 			>

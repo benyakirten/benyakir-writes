@@ -34,13 +34,12 @@ type ProjectCardProps = {
 };
 
 type AuthorFilterProps = {
-	items: AuthoredItemCard[];
-	onFilter: (items: AuthoredItemCard[]) => void;
-};
-
-type StoryFilterProps = {
-	stories: FlattenedStoryCard[];
-	onFilter: (stories: FlattenedStoryCard[]) => void;
+	publishedBefore: Date;
+	publishedAfter: Date;
+	filterWords: string[];
+	changePublishedBefore: (date: Date) => void;
+	changePublishedAfter: (date: Date) => void;
+	changeFilterWords: (words: string[]) => void;
 };
 
 type BookCardProps = {

@@ -86,6 +86,10 @@ export function deepEquals<T>(a: T, b: T): boolean {
 	}
 
 	if (Array.isArray(a) && Array.isArray(b)) {
+		if (a.length !== b.length) {
+			return false;
+		}
+
 		for (let i = 0; i < a.length; i++) {
 			if (!deepEquals(a[i], b[i])) {
 				return false;

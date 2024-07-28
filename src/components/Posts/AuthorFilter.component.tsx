@@ -9,48 +9,18 @@ import { useAlternation } from "@Hooks";
 import { hasSomeContent } from "@Utils/search";
 
 import type { AuthorFilterProps } from "@Types/props/post-components";
-import { AuthoredItemCard } from "@/types/posts";
-import { deepEquals } from "@/utils/other";
 
-const AuthorFilter: React.FC<AuthorFilterProps> = ({ items, onFilter }) => {
+const AuthorFilter: React.FC<AuthorFilterProps> = ({
+	publishedBefore,
+	publishedAfter,
+	changePublishedAfter,
+	changePublishedBefore,
+	changeFilterWords,
+}) => {
 	const [dropdownOpen, setDropdown] = useAlternation();
 
-	const [publishedBefore, setPublishedBefore] = React.useState<Date>(
-		items[0].published.date,
-	);
-	const [publishedAfter, setPublishedAfter] = React.useState<Date>(
-		items[items.length - 1].published.date,
-	);
-
-	const [filterWords, setFilterWords] = React.useState<string[]>([]);
-
-	function filterBooks(
-		publishedBefore: Date,
-		publishedAfter: Date,
-		filterWords: string[],
-		items: AuthoredItemCard[],
-		onFilter: (stories: AuthoredItemCard[]) => void,
-	) {
-		let filteredItems = items
-			.filter((b) => b.published.date.getTime() <= publishedBefore.getTime())
-			.filter((b) => b.published.date.getTime() >= publishedAfter.getTime());
-
-		if (hasSomeContent(filterWords)) {
-			filteredItems = filteredItems.filter((b) =>
-				filterWords.every((w) => b.meta[w] || b.meta[w.toLowerCase()]),
-			);
-		}
-
-		if (deepEquals(filteredItems, items)) {
-			return;
-		}
-
-		onFilter(filteredItems);
-	}
-	filterBooks(publishedBefore, publishedAfter, filterWords, items, onFilter);
-
 	return (
-		<Filter name="books" onSearch={(val) => setFilterWords(val.split(" "))}>
+		<Filter name="books" onSearch={(val) => changeFilterWords(val.split(" "))}>
 			<Foldout
 				topbar={<SubHeading>Filter by date</SubHeading>}
 				open={dropdownOpen === "date"}
@@ -62,14 +32,14 @@ const AuthorFilter: React.FC<AuthorFilterProps> = ({ items, onFilter }) => {
 					name="book-published-before"
 					value={publishedBefore}
 					label="Published before"
-					onChange={setPublishedBefore}
+					onChange={changePublishedBefore}
 					tabIndex={dropdownOpen === "date" ? 0 : -1}
 				/>
 				<DatePicker
 					name="book-published-after"
 					value={publishedAfter}
 					label="Published after"
-					onChange={setPublishedAfter}
+					onChange={changePublishedAfter}
 					tabIndex={dropdownOpen === "date" ? 0 : -1}
 				/>
 			</Foldout>
