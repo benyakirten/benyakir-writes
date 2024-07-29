@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 import type { LatestRepoUpdateHook, LatestUpdateState } from "@/types/hooks";
 
@@ -8,18 +8,19 @@ export enum FetchState {
 	NONE = 2,
 }
 
-const updatedDatesCache: Record<string, Date> = {};
-
+const cache: Map<string, Date> = new Map();
 export const useFetchRepoUpdatedDate: LatestRepoUpdateHook = (
 	repoLink?: string,
 ) => {
 	const [state, setState] = useState<LatestUpdateState>(FetchState.LOADING);
-	const controller = useMemo(() => new AbortController(), []);
 
 	useEffect(() => {
+		const controller = new AbortController();
+
 		async function fetchLatestUpdate(repo: string) {
-			if (updatedDatesCache[repo]) {
-				setState(updatedDatesCache[repo]);
+			const cached = cache.get(repo);
+			if (cached) {
+				setState(cached);
 				return;
 			}
 
@@ -27,13 +28,13 @@ export const useFetchRepoUpdatedDate: LatestRepoUpdateHook = (
 			try {
 				const res = await fetch(repo, { signal: controller.signal });
 				if (!res.ok) {
-					throw new Error();
+					throw new Error(res.statusText);
 				}
-				const data = await res.json();
 
+				const data = await res.json();
 				const date = new Date(data.pushed_at);
-				// Cache results
-				updatedDatesCache[repo] = date;
+
+				cache.set(repo, date);
 				setState(date);
 			} catch (e) {
 				setState(FetchState.ERROR);
@@ -49,7 +50,7 @@ export const useFetchRepoUpdatedDate: LatestRepoUpdateHook = (
 		}
 
 		return () => controller.abort();
-	}, [repoLink, controller]);
+	}, [repoLink]);
 
 	return state;
 };
