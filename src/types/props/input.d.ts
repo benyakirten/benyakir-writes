@@ -26,7 +26,7 @@ type DateProps = InputProps & {
 	onChange: (date: Date) => void;
 };
 
-type s = {
+type ChoiceProps = {
 	tabIndex?: number;
 	label: string;
 	value: boolean;

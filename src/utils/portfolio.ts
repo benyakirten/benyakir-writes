@@ -14,7 +14,7 @@ enum SVGShapeType {
 	NONE = 4,
 }
 
-export type a = {
+export type SVGPositionData = {
 	Shape: React.FC<SVGData>;
 	xPosition: number;
 	yPosition: number;
