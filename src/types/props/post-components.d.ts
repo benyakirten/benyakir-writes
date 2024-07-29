@@ -61,14 +61,17 @@ type HalfProps = {
 	El: BookCard | StoryCard;
 };
 
-type BlogFilterProps = {
-	allPosts: FlattenedBlogCard[];
-	onFilter: (posts: FlattenedBlogCard[]) => void;
-};
-
-type CategoryBlogFilterProps = {
-	allPosts: FlattenedBlogPost[];
-	onFilter: (posts: FlattenedBlogPost[]) => void;
+type BlogFilterProps = AuthorFilterProps & {
+	categories: {
+		label: string;
+		value: string;
+	}[];
+	changeCategories: (choices: PotentialChoice[]) => void;
+	tags: {
+		label: string;
+		value: string;
+	}[];
+	changeTags: (choices: PotentialChoice[]) => void;
 };
 
 type BookHeaderProps = {

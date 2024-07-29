@@ -3,15 +3,16 @@ import * as React from "react";
 import type { MultiSelectHook } from "@/types/hooks";
 
 const useMultiSelect: MultiSelectHook = (defaultValue?: string[]) => {
-	const [set, _setSet] = React.useState(new Set<string>(defaultValue));
-	const setSet = (items: PotentialChoice[]) =>
-		_setSet(new Set(items.map((item) => item.value)));
+	const [set, setSet] = React.useState(new Set<string>(defaultValue));
 
-	const _filterItems = <T>(
+	const filterItems = <T>(
+		choices: Set<string>,
 		items: T[],
 		getter: (item: T) => string[] | null,
 	) => {
-		if (set.size === 0) {
+		setSet(choices);
+
+		if (choices.size === 0) {
 			return items;
 		}
 
@@ -22,8 +23,8 @@ const useMultiSelect: MultiSelectHook = (defaultValue?: string[]) => {
 			}
 
 			const valueSet = new Set(value);
-			for (const setItem of set) {
-				if (!valueSet.has(setItem)) {
+			for (const choice of choices) {
+				if (!valueSet.has(choice)) {
 					return false;
 				}
 			}
@@ -32,9 +33,7 @@ const useMultiSelect: MultiSelectHook = (defaultValue?: string[]) => {
 		});
 	};
 
-	const filterItems = React.useCallback(_filterItems, []);
-
-	return [set, setSet, filterItems];
+	return [set, filterItems];
 };
 
 export default useMultiSelect;

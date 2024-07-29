@@ -45,13 +45,10 @@ type LatestUpdateState = FetchState | Date;
 type LatestRepoUpdateHook = (repoLink?: string) => LatestUpdateState;
 
 type MultiSelectHookFilterFunction = <T extends object>(
+	choices: Set<string>,
 	items: T[],
 	getter: (item: T) => string[] | null,
 ) => T[];
 type MultiSelectHook = (
 	defaultValue?: string[],
-) => [
-	Set<string>,
-	(choices: PotentialChoice[]) => void,
-	MultiSelectHookFilterFunction,
-];
+) => [Set<string>, MultiSelectHookFilterFunction];
