@@ -22,11 +22,11 @@ type LeadPageProps = ChildrenProp & {
 	title: string;
 };
 
-type ProjectsFilterProps = {
-	allProjects: FlattenedProjectCard[];
-	allHosts: string[];
-	allTechs: string[];
-	onFilter: (projects: FlattenedProjectCard[]) => void;
+type ProjectsFilterProps = AuthorFilterProps & {
+	hosts: PotentialChoice[];
+	changeHosts: (choices: PotentialChoice[]) => void;
+	techs: PotentialChoice[];
+	changeTechs: (choices: PotentialChoice[]) => void;
 };
 
 type ProjectCardProps = {
@@ -36,7 +36,6 @@ type ProjectCardProps = {
 type AuthorFilterProps = {
 	publishedBefore: Date;
 	publishedAfter: Date;
-	filterWords: string[];
 	changePublishedBefore: (date: Date) => void;
 	changePublishedAfter: (date: Date) => void;
 	changeFilterWords: (words: string[]) => void;
@@ -62,15 +61,9 @@ type HalfProps = {
 };
 
 type BlogFilterProps = AuthorFilterProps & {
-	categories: {
-		label: string;
-		value: string;
-	}[];
+	categories: PotentialChoice[];
 	changeCategories: (choices: PotentialChoice[]) => void;
-	tags: {
-		label: string;
-		value: string;
-	}[];
+	tags: PotentialChoice[];
 	changeTags: (choices: PotentialChoice[]) => void;
 };
 

@@ -113,7 +113,6 @@ const AuthorPage: React.FC = () => {
 					<AuthorFilter
 						publishedBefore={publishedBefore}
 						publishedAfter={publishedAfter}
-						filterWords={filterWords}
 						changePublishedBefore={changePublishedBefore}
 						changePublishedAfter={changePublishedAfter}
 						changeFilterWords={changeFilterWords}

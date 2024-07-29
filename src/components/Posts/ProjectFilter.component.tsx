@@ -4,91 +4,28 @@ import { Foldout } from "@Gen";
 import { DatePicker, Filter, MultipleChoice } from "@Input";
 import { SubHeading } from "@Styles/general-components";
 
-import { useAlternation, useMultiSelect } from "@/hooks";
-import { hasSomeContent } from "@/utils/search";
+import { useAlternation } from "@/hooks";
 
 import type { ProjectsFilterProps } from "@/types/props/post-components";
-import { FlattenedProjectCard } from "@/types/posts";
-import { MultiSelectHookFilterFunction } from "@/types/hooks";
 
 const ProjectFilter: React.FC<ProjectsFilterProps> = ({
-	allProjects,
-	allHosts,
-	allTechs,
-	onFilter,
+	publishedBefore,
+	publishedAfter,
+	hosts,
+	techs,
+	changePublishedBefore,
+	changePublishedAfter,
+	changeFilterWords,
+	changeHosts,
+	changeTechs,
 }) => {
 	const [dropdownOpen, setDropdown] = useAlternation();
 
-	const [publishedBefore, setPublishedBefore] = React.useState<Date>(
-		allProjects[0].firstReleased.date,
-	);
-	const [publishedAfter, setPublishedAfter] = React.useState<Date>(
-		allProjects[allProjects.length - 1].firstReleased.date,
-	);
-
-	const [filterWords, setFilterWords] = React.useState<string[]>([]);
-
-	const hosts = React.useMemo(
-		() => allHosts.map((host) => ({ label: host, value: host })),
-		[allHosts],
-	);
-	const techs = React.useMemo(
-		() => allTechs.map((tech) => ({ label: tech, value: tech })),
-		[allTechs],
-	);
-
-	const [hostChoices, setHostChoices] = useMultiSelect();
-	const [_, setTechChoices, filterByTechChoices] = useMultiSelect();
-
-	function filterProjects(
-		publishedBefore: Date,
-		publishedAfter: Date,
-		filterWords: string[],
-		hostChoices: Set<string>,
-		projects: FlattenedProjectCard[],
-		filterByTechChoices: MultiSelectHookFilterFunction,
-		onFilter: (projects: FlattenedProjectCard[]) => void,
-	) {
-		let filteredProjects = projects
-			.filter(
-				(p) => p.firstReleased.date.getTime() <= publishedBefore.getTime(),
-			)
-			.filter(
-				(p) => p.firstReleased.date.getTime() >= publishedAfter.getTime(),
-			);
-
-		if (hasSomeContent(filterWords)) {
-			filteredProjects = filteredProjects.filter((p) =>
-				filterWords.every((w) => p.meta[w] || p.meta[w.toLowerCase()]),
-			);
-		}
-
-		if (hostChoices.size > 0) {
-			filteredProjects = filteredProjects.filter((project) =>
-				hostChoices.has(project.hostedOn ?? ""),
-			);
-		}
-
-		filteredProjects = filterByTechChoices(
-			filteredProjects,
-			(project) => project.longTechnologies,
-		);
-
-		onFilter(filteredProjects);
-	}
-
-	filterProjects(
-		publishedBefore,
-		publishedAfter,
-		filterWords,
-		hostChoices,
-		allProjects,
-		filterByTechChoices,
-		onFilter,
-	);
-
 	return (
-		<Filter name="projects" onSearch={(val) => setFilterWords(val.split(" "))}>
+		<Filter
+			name="projects"
+			onSearch={(val) => changeFilterWords(val.split(" "))}
+		>
 			<Foldout
 				topbar={<SubHeading>Filter by date</SubHeading>}
 				open={dropdownOpen === "date"}
@@ -100,14 +37,14 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
 					name="proect-published-before"
 					value={publishedBefore}
 					label="Published before"
-					onChange={setPublishedBefore}
+					onChange={changePublishedBefore}
 					tabIndex={dropdownOpen === "date" ? 0 : -1}
 				/>
 				<DatePicker
 					name="project-published-after"
 					value={publishedAfter}
 					label="Published after"
-					onChange={setPublishedAfter}
+					onChange={changePublishedAfter}
 					tabIndex={dropdownOpen === "date" ? 0 : -1}
 				/>
 			</Foldout>
@@ -123,7 +60,7 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
 				<MultipleChoice
 					tabIndex={dropdownOpen === "host" ? 0 : -1}
 					choices={hosts}
-					onSelect={setHostChoices}
+					onSelect={changeHosts}
 				/>
 			</Foldout>
 			<Foldout
@@ -135,7 +72,7 @@ const ProjectFilter: React.FC<ProjectsFilterProps> = ({
 			>
 				<MultipleChoice
 					choices={techs}
-					onSelect={setTechChoices}
+					onSelect={changeTechs}
 					tabIndex={dropdownOpen === "tech" ? 0 : -1}
 				/>
 			</Foldout>

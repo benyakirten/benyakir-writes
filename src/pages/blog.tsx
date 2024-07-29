@@ -8,7 +8,7 @@ import { BlogCard } from "@Variants";
 import usePagination from "@/hooks/usePagination.hook";
 import postsJson from "@WPData/Posts/all.json";
 import type { FlattenedBlogCard } from "@/types/posts";
-import { useAlternation, useMultiSelect } from "@/hooks";
+import { useMultiSelect } from "@/hooks";
 import { createChoiceSet } from "@/utils/filter";
 import { hasSomeContent } from "@/utils/search";
 
@@ -65,7 +65,7 @@ const BlogPage: React.FC = () => {
 		newFilterWords?: string[];
 		newCategories?: Set<string>;
 		newTags?: Set<string>;
-	} = {}) {
+	}) {
 		const _publishedBefore = newPublishedBefore ?? publishedBefore;
 		const _publishedAfter = newPublishedAfter ?? publishedAfter;
 		const _filterWords = newFilterWords ?? filterWords;
@@ -129,7 +129,6 @@ const BlogPage: React.FC = () => {
 					<BlogFilter
 						publishedBefore={publishedBefore}
 						publishedAfter={publishedAfter}
-						filterWords={filterWords}
 						categories={categories}
 						tags={tags}
 						changePublishedBefore={changePublishedBefore}

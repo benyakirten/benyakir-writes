@@ -6,7 +6,6 @@ import { Foldout } from "@Gen";
 import { DatePicker, Filter } from "@Input";
 
 import { useAlternation } from "@Hooks";
-import { hasSomeContent } from "@Utils/search";
 
 import type { AuthorFilterProps } from "@Types/props/post-components";
 
