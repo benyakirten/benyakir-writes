@@ -23,8 +23,6 @@ const useMultiSelect: MultiSelectHook = (defaultValue?: string[]) => {
 			}
 
 			const valueSet = new Set(value);
-			console.log(valueSet);
-			console.log(choices);
 			for (const choice of choices) {
 				if (!valueSet.has(choice)) {
 					return false;
