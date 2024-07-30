@@ -151,7 +151,10 @@ const ProjectsPage: React.FC = () => {
 				}
 			>
 				<Grouping>
-					<Paginate {...projectPagination} El={ProjectCard} />
+					<Paginate<FlattenedProjectCard>
+						{...projectPagination}
+						El={ProjectCard}
+					/>
 				</Grouping>
 			</LeadPage>
 		</Page>

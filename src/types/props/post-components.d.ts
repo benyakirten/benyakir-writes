@@ -50,7 +50,7 @@ type StoryCardProps = {
 };
 
 type BlogCardProps = {
-	item: PartiallyFlattenedBlogPost;
+	item: FlattenedBlogCard;
 };
 
 type HalfProps = {

@@ -140,7 +140,7 @@ const BlogPage: React.FC = () => {
 				}
 			>
 				<Grouping>
-					<Paginate {...postPagination} El={BlogCard} />
+					<Paginate<FlattenedBlogCard> {...postPagination} El={BlogCard} />
 				</Grouping>
 			</LeadPage>
 		</Page>

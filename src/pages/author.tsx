@@ -120,7 +120,7 @@ const AuthorPage: React.FC = () => {
 				}
 			>
 				<Grouping>
-					<Paginate {...itemPagination} El={AuthorCard} />
+					<Paginate<AuthoredItemCard> {...itemPagination} El={AuthorCard} />
 				</Grouping>
 			</LeadPage>
 		</Page>
