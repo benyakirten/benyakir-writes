@@ -41,6 +41,53 @@ const Sidebar: React.FC = () => {
 		return location.pathname.includes(`/${link}/`);
 	}
 
+	const navLinks = [
+		{
+			name: "portfolio",
+			link: "/portfolio",
+			ref: portfolioRef,
+			isActive: isActive("portfolio"),
+		},
+		{
+			name: "blog",
+			link: "/blog",
+			ref: blogRef,
+			isActive: isActive("blog"),
+		},
+		{
+			name: "author",
+			link: "/author",
+			ref: authorRef,
+			isActive: isActive("author"),
+		},
+		{
+			name: "projects",
+			link: "/projects",
+			ref: projectsRef,
+			isActive: isActive("projects"),
+		},
+		{
+			name: "theme",
+			link: "/theme",
+			ref: themeRef,
+			isActive: isActive("theme"),
+		},
+		{
+			name: "contact",
+			link: "/contact",
+			ref: contactRef,
+			isActive: isActive("contact"),
+		},
+		{
+			name: "home",
+			link: "/",
+			ref: homeRef,
+			isActive: location.pathname === "/",
+		},
+	];
+
+	const activeLinkRef = navLinks.find((link) => link.isActive && link.ref);
+
 	const [opening, setOpening] = React.useState<boolean>(false);
 
 	const dispatch = useAppDispatch();
@@ -92,73 +139,18 @@ const Sidebar: React.FC = () => {
 						open={open}
 					>
 						<NavGroup>
-							<ActiveIndicator
-								refs={[
-									portfolioRef,
-									blogRef,
-									authorRef,
-									projectsRef,
-									themeRef,
-									contactRef,
-									homeRef,
-								]}
-							/>
-							<NavLink
-								active={isActive("portfolio")}
-								tabIndex={open ? 0 : -1}
-								to="/portfolio"
-								ref={portfolioRef}
-							>
-								Portfolio
-							</NavLink>
-							<NavLink
-								active={isActive("blog")}
-								tabIndex={open ? 0 : -1}
-								to="/blog"
-								ref={blogRef}
-							>
-								Blog
-							</NavLink>
-							<NavLink
-								active={isActive("author")}
-								tabIndex={open ? 0 : -1}
-								to="/author"
-								ref={authorRef}
-							>
-								Author
-							</NavLink>
-							<NavLink
-								active={isActive("projects")}
-								tabIndex={open ? 0 : -1}
-								to="/projects"
-								ref={projectsRef}
-							>
-								Projects
-							</NavLink>
-							<NavLink
-								active={isActive("theme")}
-								tabIndex={open ? 0 : -1}
-								to="/theme"
-								ref={themeRef}
-							>
-								Theme
-							</NavLink>
-							<NavLink
-								active={isActive("contact")}
-								tabIndex={open ? 0 : -1}
-								to="/contact"
-								ref={contactRef}
-							>
-								Contact
-							</NavLink>
-							<NavLink
-								active={location.pathname === "/"}
-								tabIndex={open ? 0 : -1}
-								to="/"
-								ref={homeRef}
-							>
-								Home
-							</NavLink>
+							<ActiveIndicator activeLinkRef={activeLinkRef?.ref} />
+							{navLinks.map((link) => (
+								<NavLink
+									key={link.name}
+									active={link.isActive}
+									tabIndex={open ? 0 : -1}
+									to={link.link}
+									ref={link.ref}
+								>
+									{link.name}
+								</NavLink>
+							))}
 						</NavGroup>
 						<div>
 							<Toggle

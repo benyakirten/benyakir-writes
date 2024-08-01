@@ -41,7 +41,7 @@ type NavLinkProps = ChildrenProp & {
 };
 
 type ActiveIndicatorProps = {
-	refs: React.RefObject<HTMLElement>[];
+	activeLinkRef: React.RefObject<HTMLElement> | undefined;
 };
 
 type LayoutProps = {
