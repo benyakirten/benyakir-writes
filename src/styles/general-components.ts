@@ -6,7 +6,7 @@ import { fadeIn, slideInLeft, slideInRight } from "./animations";
 import { media } from "./queries";
 import {
 	BLACK,
-	FAUSTINA,
+	SERIF_FONT,
 	FONT_LG,
 	FONT_MD,
 	FONT_XL,
@@ -23,7 +23,7 @@ import {
 export const FadeIn = styled.div<{ duration?: string; delay?: string }>`
   opacity: 0;
   animation: ${fadeIn}
-    ${(props) => (props.duration ? props.duration : "1600ms")}
+    ${(props) => (props.duration ? props.duration : TRANSITION_NORMAL)}
     ${(props) => (props.delay ? props.delay : "0ms")} ease forwards;
 `;
 
@@ -31,7 +31,7 @@ export const SlideInLeft = styled.div<{ duration?: string; delay?: string }>`
   opacity: 0;
   transform: translateX(-40vw);
   animation: ${slideInLeft}
-    ${(props) => (props.duration ? props.duration : "4s")}
+    ${(props) => (props.duration ? props.duration : TRANSITION_EXTRA_SLOW)}
     ${(props) => (props.delay ? props.delay : "0ms")} ease forwards;
 `;
 
@@ -39,7 +39,7 @@ export const SlideInRight = styled.div<{ duration?: string; delay?: string }>`
   opacity: 0;
   transform: translateX(40vw);
   animation: ${slideInRight}
-    ${(props) => (props.duration ? props.duration : "4s")}
+    ${(props) => (props.duration ? props.duration : TRANSITION_EXTRA_SLOW)}
     ${(props) => (props.delay ? props.delay : "0ms")} ease forwards;
 `;
 
@@ -66,7 +66,7 @@ export const LeadHeading = styled.h1`
   padding-bottom: 1rem;
   margin-bottom: 1rem;
 
-  font-family: ${FAUSTINA};
+  font-family: ${SERIF_FONT};
   font-size: ${FONT_XXXL};
 
   ${media.phone} {
@@ -102,7 +102,7 @@ export const LeadHeading = styled.h1`
 `;
 
 export const Subtitle = styled.h2<{ noUnderline?: boolean }>`
-    font-family: ${FAUSTINA};
+    font-family: ${SERIF_FONT};
     font-size: ${FONT_XXL};
 
     ${media.phone} {
@@ -119,7 +119,7 @@ export const Subtitle = styled.h2<{ noUnderline?: boolean }>`
 `;
 
 export const SubHeading = styled.h3<{ noUnderline?: boolean }>`
-  font-family: ${FAUSTINA};
+  font-family: ${SERIF_FONT};
   font-size: ${FONT_XL};
   text-decoration: ${(props) => (props.noUnderline ? "none" : "underline")};
 
@@ -131,7 +131,7 @@ export const SubHeading = styled.h3<{ noUnderline?: boolean }>`
 `;
 
 export const MinorHeading = styled.h4`
-    font-family: ${FAUSTINA};
+    font-family: ${SERIF_FONT};
     font-size: ${FONT_LG};
 
     ${media.tablet} {
@@ -422,7 +422,7 @@ export const WpContent = styled.div<{ fontSize?: string }>`
   h4,
   h5,
   h6 {
-    font-family: ${FAUSTINA};
+    font-family: ${SERIF_FONT};
     margin: 2rem 0;
   }
 
@@ -482,7 +482,7 @@ export const WpContentInline = styled.span<{ fontSize?: string }>`
   h4,
   h5,
   h6 {
-    font-family: ${FAUSTINA};
+    font-family: ${SERIF_FONT};
     margin: 2rem 0;
   }
 

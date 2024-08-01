@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import {
-	FAUSTINA,
+	SERIF_FONT,
 	FONT_SM,
 	FONT_XL,
 	FONT_XXL,
@@ -11,6 +11,7 @@ import {
 	TRANSITION_SLOW,
 	Z_ABOVE,
 	Z_RAISED,
+	SIZE_SM,
 } from "@StyleVars";
 import { media } from "@Styles/queries";
 import { convertHexToRGBA } from "@Utils/colors";
@@ -25,7 +26,7 @@ export const StyledSidebar = styled.nav<{ open?: boolean }>`
 
   transform: translateX(${(props) => (props.open ? "0%" : "-80%")});
 
-  font-family: ${FAUSTINA};
+  font-family: ${SERIF_FONT};
   font-size: ${FONT_XXL};
 
   background-color: red;
@@ -86,8 +87,10 @@ export const VisibleGroup = styled.div<{ open: boolean }>`
 
 export const NavGroup = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: space-around;
+  gap: ${SIZE_SM};
 `;
 
 export const SubLinks = styled.div<{ open: boolean }>`

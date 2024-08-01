@@ -1,6 +1,6 @@
 import styled, { createGlobalStyle } from "styled-components";
 
-import { MULISH, TRANSITION_NORMAL } from "@StyleVars";
+import { SANS_SERIF_FONT, TRANSITION_NORMAL } from "@StyleVars";
 import { media } from "@Styles/queries";
 
 export const GlobalStyles = createGlobalStyle`
@@ -20,20 +20,15 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
-  html {
-    font-size: 62.5%;
-    
-    ${media.phone} {
-      font-size: 45%;
-    }
-  }
-
-
   body {
     box-sizing: border-box;
-    font-family: ${MULISH};
-    color: ${(props) => props.theme.base.textColor};
-    background-color: ${(props) => props.theme.base.background};
+    font-family: ${SANS_SERIF_FONT};
+    color: ${(props) =>
+			// @ts-ignore
+			props.theme.base.textColor};
+    background-color: ${(props) =>
+			// @ts-ignore
+			props.theme.base.background};
   }
 
   a {

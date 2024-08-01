@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useLocation } from "@reach/router";
 
 import Logo from "../Logo/Logo.component";
 import {
@@ -12,11 +13,7 @@ import {
 	VisibleGroup,
 } from "./Sidebar.styles";
 
-import { CustomLink } from "@Gen";
 import { Toggle } from "@Input";
-
-import { useAlternation } from "@Hooks";
-import Search from "../Search/Search.component";
 
 import { capitalize } from "@Utils/strings";
 
@@ -27,22 +24,23 @@ import {
 	setSidebarState,
 	toggleSidebarState,
 } from "@/store/sidebar/sidebar.slice";
-
-const generalLinks: LinkItem[] = [
-	"portfolio",
-	"blog",
-	"author",
-	"projects",
-	"theme",
-	"contact",
-	{
-		name: "home",
-		link: "",
-	},
-];
+import { NavLink, ActiveIndicator } from "./components";
 
 const Sidebar: React.FC = () => {
-	const [openDropdown, setOpenDropdown] = useAlternation();
+	const portfolioRef = React.useRef<HTMLElement>(null);
+	const blogRef = React.useRef<HTMLElement>(null);
+	const authorRef = React.useRef<HTMLElement>(null);
+	const projectsRef = React.useRef<HTMLElement>(null);
+	const themeRef = React.useRef<HTMLElement>(null);
+	const contactRef = React.useRef<HTMLElement>(null);
+	const homeRef = React.useRef<HTMLElement>(null);
+
+	const location = useLocation();
+
+	function isActive(link: string) {
+		return location.pathname.includes(`/${link}/`);
+	}
+
 	const [opening, setOpening] = React.useState<boolean>(false);
 
 	const dispatch = useAppDispatch();
@@ -52,7 +50,7 @@ const Sidebar: React.FC = () => {
 	function toggleOpen() {
 		dispatch(toggleSidebarState());
 		setOpening(true);
-		setTimeout(() => setOpening(false), 1000);
+		setTimeout(() => setOpening(false), 300);
 	}
 
 	function handleNavClick(e: React.BaseSyntheticEvent) {
@@ -94,26 +92,73 @@ const Sidebar: React.FC = () => {
 						open={open}
 					>
 						<NavGroup>
-							<Search
-								open={openDropdown === "search"}
-								onClick={() => setOpenDropdown("search")}
+							<ActiveIndicator
+								refs={[
+									portfolioRef,
+									blogRef,
+									authorRef,
+									projectsRef,
+									themeRef,
+									contactRef,
+									homeRef,
+								]}
 							/>
-						</NavGroup>
-						<NavGroup>
-							{generalLinks.map((linkItem) => (
-								<CustomLink
-									key={typeof linkItem === "string" ? linkItem : linkItem.link}
-									tabIndex={open ? 0 : -1}
-									underbarsize="12rem"
-									to={`/${
-										typeof linkItem === "string" ? linkItem : linkItem.link
-									}`}
-								>
-									{capitalize(
-										typeof linkItem === "string" ? linkItem : linkItem.name,
-									)}
-								</CustomLink>
-							))}
+							<NavLink
+								active={isActive("portfolio")}
+								tabIndex={open ? 0 : -1}
+								to="/portfolio"
+								ref={portfolioRef}
+							>
+								Portfolio
+							</NavLink>
+							<NavLink
+								active={isActive("blog")}
+								tabIndex={open ? 0 : -1}
+								to="/blog"
+								ref={blogRef}
+							>
+								Blog
+							</NavLink>
+							<NavLink
+								active={isActive("author")}
+								tabIndex={open ? 0 : -1}
+								to="/author"
+								ref={authorRef}
+							>
+								Author
+							</NavLink>
+							<NavLink
+								active={isActive("projects")}
+								tabIndex={open ? 0 : -1}
+								to="/projects"
+								ref={projectsRef}
+							>
+								Projects
+							</NavLink>
+							<NavLink
+								active={isActive("theme")}
+								tabIndex={open ? 0 : -1}
+								to="/theme"
+								ref={themeRef}
+							>
+								Theme
+							</NavLink>
+							<NavLink
+								active={isActive("contact")}
+								tabIndex={open ? 0 : -1}
+								to="/contact"
+								ref={contactRef}
+							>
+								Contact
+							</NavLink>
+							<NavLink
+								active={location.pathname === "/"}
+								tabIndex={open ? 0 : -1}
+								to="/"
+								ref={homeRef}
+							>
+								Home
+							</NavLink>
 						</NavGroup>
 						<div>
 							<Toggle

@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { media } from "@/styles/queries";
 import { convertHexToRGBA } from "@/utils/colors";
 import {
-	FAUSTINA,
+	SERIF_FONT,
 	FONT_LG,
 	FONT_MD,
 	FONT_SM,
@@ -52,7 +52,7 @@ export const ProjectContents = styled.div`
 export const ProjectTitle = styled.h3`
   font-size: ${FONT_LG};
   text-decoration: underline;
-  font-family: ${FAUSTINA};
+  font-family: ${SERIF_FONT};
   display: inline;
 `;
 

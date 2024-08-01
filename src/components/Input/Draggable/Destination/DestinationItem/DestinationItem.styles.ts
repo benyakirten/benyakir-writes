@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { FONT_MD, MULISH, TRANSITION_NORMAL } from "@StyleVars";
+import { FONT_MD, SANS_SERIF_FONT, TRANSITION_NORMAL } from "@StyleVars";
 
 export const ItemContainer = styled.li`
   position: relative;
@@ -28,7 +28,7 @@ export const ItemTitle = styled.span<{ draggedOver: boolean }>`
 			? props.theme.base.background
 			: props.theme.base.textColor};
 
-  font-family: ${MULISH};
+  font-family: ${SANS_SERIF_FONT};
   font-size: ${FONT_MD};
 
   transition: all ${TRANSITION_NORMAL} ease;

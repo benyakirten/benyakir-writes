@@ -22,7 +22,7 @@ export const Head: React.FC = () => (
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Faustina&family=Mulish&display=swap"
+			href="https://fonts.googleapis.com/css2?family=SERIF_FONT&family=SANS_SERIF_FONT&display=swap"
 			rel="stylesheet"
 		/>
 		<title>Benyakir Writes</title>

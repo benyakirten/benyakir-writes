@@ -32,6 +32,18 @@ type LinkProps = ChildrenProp & {
 	wholeline?: boolean;
 	onClick?: () => void;
 };
+
+type NavLinkProps = ChildrenProp & {
+	to: string;
+	active: boolean;
+	tabIndex: number;
+	onClick?: () => void;
+};
+
+type ActiveIndicatorProps = {
+	refs: React.RefObject<HTMLElement>[];
+};
+
 type LayoutProps = {
 	path: string;
 };

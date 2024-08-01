@@ -1,12 +1,12 @@
 // FONT FAMILY
-export const FAUSTINA = "'Faustina', serif";
-export const MULISH = "'Mulish', sans-serif";
+export const SERIF_FONT = "'SERIF_FONT', serif";
+export const SANS_SERIF_FONT = "'SANS_SERIF_FONT', sans-serif";
 
 // FONT SIZE
-export const FONT_XXXL = "6rem";
-export const FONT_XXL = "3rem";
-export const FONT_XL = "2.4rem";
-export const FONT_LG = "1.8rem";
+export const FONT_XXXL = "3rem";
+export const FONT_XXL = "2.2rem";
+export const FONT_XL = "1.8rem";
+export const FONT_LG = "1.6rem";
 export const FONT_MD = "1.4rem";
 export const FONT_SM = "1.2rem";
 export const FONT_XS = "1rem";
@@ -52,30 +52,30 @@ export const SUCCESS = "#44764d";
 export const ERROR = "#993d4d";
 
 // SIZE
-export const SIZE_XL = "8rem";
-export const SIZE_LG = "4rem";
-export const SIZE_MD = "3rem";
-export const SIZE_SM = "1.2rem";
+export const SIZE_XL = "3rem";
+export const SIZE_LG = "2.4rem";
+export const SIZE_MD = "1.6rem";
+export const SIZE_SM = "0.8rem";
 
 // PADDING/MARGIN
-export const HORIZONTAL_XL = "0 6rem";
-export const HORIZONTAL_LG = "0 4rem";
-export const HORIZONTAL_MD = "0 2.4rem";
-export const HORIZONTAL_SM = "0 1.6rem";
+export const HORIZONTAL_XL = "0 3rem";
+export const HORIZONTAL_LG = "0 2.4rem";
+export const HORIZONTAL_MD = "0 1.6rem";
+export const HORIZONTAL_SM = "0 1.2rem";
 
-export const VERTICAL_XL = "6rem 0";
-export const VERTICAL_LG = "4rem 0";
-export const VERTICAL_MD = "2.4rem 0";
-export const VERTICAL_SM = "1.6rem 0";
+export const VERTICAL_XL = "3rem 0";
+export const VERTICAL_LG = "2,4rem 0";
+export const VERTICAL_MD = "1.6rem 0";
+export const VERTICAL_SM = "1.2rem 0";
 
-export const BOTH_XL = "4rem 6rem";
-export const BOTH_LG = "3rem 4rem";
-export const BOTH_MD = "1.8rem 2.4rem";
-export const BOTH_SM = "1rem 1.6rem";
+export const BOTH_XL = "2.4rem 3rem";
+export const BOTH_LG = "2rem 2.4rem";
+export const BOTH_MD = "1.4rem 1.6rem";
+export const BOTH_SM = "0.6rem 1rem";
 
 // BORDER SHADOW
-export const SHADOW_XL = "0 2rem 4rem";
-export const SHADOW_LG = "0 0.5rem 1rem";
+export const SHADOW_XL = "0 1.6rem 2.4rem";
+export const SHADOW_LG = "0 0.3rem 0.6rem";
 export const SHADOW_MD = "3px 2px 4px";
 export const SHADOW_MD_BALANCED = "0px 2px 4px";
 export const SHADOW_SM = "0 1px 2px";

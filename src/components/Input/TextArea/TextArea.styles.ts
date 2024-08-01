@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
-import { FONT_LG, FONT_XXS, MULISH, TRANSITION_SLOW } from "@StyleVars";
+import {
+	FONT_LG,
+	FONT_XXS,
+	SANS_SERIF_FONT,
+	TRANSITION_SLOW,
+} from "@StyleVars";
 
 export const TextAreaContainer = styled.div`
   position: relative;
@@ -14,7 +19,7 @@ export const TextAreaContainer = styled.div`
     padding: 1.2rem 0.5rem;
 
     font-size: ${FONT_LG};
-    font-family: ${MULISH};
+    font-family: ${SANS_SERIF_FONT};
 
     color: ${(props) => props.theme.textInput.textColor};
     background-color: ${(props) => props.theme.textInput.background};
