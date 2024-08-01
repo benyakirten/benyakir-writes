@@ -37,7 +37,6 @@ type NavLinkProps = ChildrenProp & {
 	to: string;
 	active: boolean;
 	tabIndex: number;
-	onClick?: () => void;
 };
 
 type ActiveIndicatorProps = {

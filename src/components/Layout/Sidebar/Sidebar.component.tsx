@@ -43,43 +43,43 @@ const Sidebar: React.FC = () => {
 
 	const navLinks = [
 		{
-			name: "portfolio",
+			name: "Portfolio",
 			link: "/portfolio",
 			ref: portfolioRef,
 			isActive: isActive("portfolio"),
 		},
 		{
-			name: "blog",
+			name: "Blog",
 			link: "/blog",
 			ref: blogRef,
 			isActive: isActive("blog"),
 		},
 		{
-			name: "author",
+			name: "Author",
 			link: "/author",
 			ref: authorRef,
 			isActive: isActive("author"),
 		},
 		{
-			name: "projects",
+			name: "Projects",
 			link: "/projects",
 			ref: projectsRef,
 			isActive: isActive("projects"),
 		},
 		{
-			name: "theme",
+			name: "Theme",
 			link: "/theme",
 			ref: themeRef,
 			isActive: isActive("theme"),
 		},
 		{
-			name: "contact",
+			name: "Contact",
 			link: "/contact",
 			ref: contactRef,
 			isActive: isActive("contact"),
 		},
 		{
-			name: "home",
+			name: "Home",
 			link: "/",
 			ref: homeRef,
 			isActive: location.pathname === "/",

@@ -5,9 +5,16 @@ import { setSidebarState } from "@/store/sidebar/sidebar.slice";
 import { StyledNavLink } from "./NavLink.styles";
 
 const NavLink = React.forwardRef<HTMLElement, NavLinkProps>(
-	({ tabIndex, active, children, onClick, to }, ref) => {
+	({ tabIndex, active, children, to }, ref) => {
 		const dispatch = useAppDispatch();
-		// onClick ??= () => dispatch(setSidebarState(false));
+		const reducedMotionActive = window.matchMedia(
+			"(prefers-reduced-motion: reduce)",
+		).matches;
+		const onClick = () =>
+			setTimeout(
+				() => dispatch(setSidebarState(false)),
+				reducedMotionActive ? 0 : 200,
+			);
 
 		return (
 			<StyledNavLink
