@@ -57,12 +57,14 @@ export const SIZE_XL = "3rem";
 export const SIZE_LG = "2.4rem";
 export const SIZE_MD = "1.6rem";
 export const SIZE_SM = "0.8rem";
+export const SIZE_XS = "0.4rem";
 
 // PADDING/MARGIN
 export const HORIZONTAL_XL = "0 3rem";
 export const HORIZONTAL_LG = "0 2.4rem";
 export const HORIZONTAL_MD = "0 1.6rem";
 export const HORIZONTAL_SM = "0 1.2rem";
+export const HORIZONTAL_XS = "0 0.6rem";
 
 export const VERTICAL_XL = "3rem 0";
 export const VERTICAL_LG = "2,4rem 0";
@@ -83,7 +85,8 @@ export const SHADOW_SM = "0 1px 2px";
 export const SHADOW_UP = "-2px -3px 1.2rem -2px rgba(0,0,0,0.75)";
 
 // Z INDEX
-export const Z_SEARCH = 5;
+export const Z_SEARCH = 6;
+export const Z_SEARCH_BACKDROP = 6;
 export const Z_TOP = 4;
 export const Z_HIGH = 3;
 export const Z_RAISED = 2;

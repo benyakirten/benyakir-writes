@@ -5,7 +5,6 @@ import { ThemeProvider } from "styled-components";
 
 import { GlobalStyles, LayoutContainer, MainContainer } from "./Layout.styles";
 import Sidebar from "./Sidebar/Sidebar.component";
-
 import {
 	PAGE_TRANSITION_DURATION,
 	getPageTransitionStyles,
@@ -15,6 +14,8 @@ import {
 	intializeThemeStore,
 	setActiveThemeByName,
 } from "@Store/theme/theme.slice";
+import Search from "./NewSearch";
+import { isInputFocused } from "@/utils/dom";
 
 export const Head: React.FC = () => (
 	<>
@@ -36,8 +37,31 @@ export const Head: React.FC = () => (
 
 const Layout: React.FC<ChildrenProp> = ({ children }) => {
 	const location = useLocation();
+	const modalRef = React.useRef<HTMLDialogElement>(null);
+
 	const themeStore = useAppSelector((root) => root.theme);
 	const dispatch = useAppDispatch();
+
+	React.useEffect(() => {
+		modalRef.current?.showModal();
+	});
+
+	React.useEffect(() => {
+		const handler = (e: KeyboardEvent) => {
+			if (isInputFocused()) {
+				return;
+			}
+
+			if ((e.ctrlKey || e.metaKey) && e.key === "/") {
+				modalRef.current?.showModal();
+			} else if (e.key === "Escape") {
+				modalRef.current?.close();
+			}
+		};
+
+		document.addEventListener("keydown", handler);
+		return () => document.removeEventListener("keydown", handler);
+	});
 
 	React.useEffect(() => {
 		const storedComputerPreferences =
@@ -75,6 +99,7 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 		<ThemeProvider theme={themeStore.active}>
 			<LayoutContainer>
 				<GlobalStyles />
+				<Search ref={modalRef} />
 				<Sidebar />
 				<MainContainer>
 					<TransitionGroup>

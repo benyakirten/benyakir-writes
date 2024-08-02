@@ -25,3 +25,16 @@ export function downloadFile(href: string, name: string) {
 	link.click();
 	document.body.removeChild(link);
 }
+
+export function isInputFocused(): boolean {
+	const el = document.activeElement;
+	if (!el) {
+		return false;
+	}
+
+	return (
+		el instanceof HTMLInputElement ||
+		el instanceof HTMLTextAreaElement ||
+		Boolean((el as HTMLElement).isContentEditable)
+	);
+}

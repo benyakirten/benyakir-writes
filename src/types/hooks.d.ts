@@ -52,3 +52,11 @@ type MultiSelectHookFilterFunction = <T extends object>(
 type MultiSelectHook = (
 	defaultValue?: string[],
 ) => [Set<string>, MultiSelectHookFilterFunction];
+
+type EventListenerHook<K extends keyof WindowEventMap> = (
+	event: K,
+	handler: WindowEventMap[K],
+	options?: AddEventListenerOptions & {
+		element?: HTMLElement | Window;
+	},
+) => void;
