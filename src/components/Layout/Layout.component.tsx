@@ -46,6 +46,9 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 		modalRef.current?.showModal();
 	});
 
+	const closeModal = () => modalRef.current?.close();
+	const openModal = () => modalRef.current?.showModal();
+
 	React.useEffect(() => {
 		const handler = (e: KeyboardEvent) => {
 			if (isInputFocused()) {
@@ -53,9 +56,9 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 			}
 
 			if ((e.ctrlKey || e.metaKey) && e.key === "/") {
-				modalRef.current?.showModal();
+				openModal();
 			} else if (e.key === "Escape") {
-				modalRef.current?.close();
+				closeModal();
 			}
 		};
 
@@ -99,7 +102,7 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 		<ThemeProvider theme={themeStore.active}>
 			<LayoutContainer>
 				<GlobalStyles />
-				<Search ref={modalRef} />
+				<Search ref={modalRef} onClose={closeModal} />
 				<Sidebar />
 				<MainContainer>
 					<TransitionGroup>

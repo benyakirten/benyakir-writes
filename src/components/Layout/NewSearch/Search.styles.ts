@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import {
 	FONT_LG,
-	HORIZONTAL_XS,
+	SIZE_LG,
 	SIZE_MD,
 	SIZE_SM,
 	SIZE_XXL,
@@ -21,7 +21,7 @@ export const SearchModal = styled.dialog`
         transform: translate(-50%, -50%);
         
         display: flex;
-        width: 50%;
+        width: 70%;
         height: ${SIZE_XXL};
         gap: ${SIZE_SM};
         border-radius: ${SIZE_MD};
@@ -45,4 +45,18 @@ export const SearchInput = styled.input`
     outline: none;
     font-size: ${FONT_LG};
     flex: 1;
+`;
+
+export const SearchIconContainer = styled.div`
+    display: grid;
+    place-items: center;
+    width: ${SIZE_LG};
+`;
+
+export const CloseButton = styled.button`
+    width: ${SIZE_LG};
+    appearance: none;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
 `;
