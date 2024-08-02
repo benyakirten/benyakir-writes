@@ -52,6 +52,7 @@ export const SUCCESS = "#44764d";
 export const ERROR = "#993d4d";
 
 // SIZE
+export const SIZE_XXL = "4rem";
 export const SIZE_XL = "3rem";
 export const SIZE_LG = "2.4rem";
 export const SIZE_MD = "1.6rem";
@@ -82,6 +83,7 @@ export const SHADOW_SM = "0 1px 2px";
 export const SHADOW_UP = "-2px -3px 1.2rem -2px rgba(0,0,0,0.75)";
 
 // Z INDEX
+export const Z_SEARCH = 5;
 export const Z_TOP = 4;
 export const Z_HIGH = 3;
 export const Z_RAISED = 2;

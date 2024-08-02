@@ -1,9 +1,5 @@
-import {
-	FONT_LG,
-	TRANSITION_EXTRA_SLOW,
-	TRANSITION_FAST,
-	TRANSITION_NORMAL,
-} from "@/styles/variables";
+import { FONT_LG, TRANSITION_NORMAL } from "@/styles/variables";
+import { convertHexToRGBA } from "@/utils/colors";
 import styled from "styled-components";
 
 export const StyledActiveIndicator = styled.div<{ top: number }>`
@@ -12,8 +8,18 @@ export const StyledActiveIndicator = styled.div<{ top: number }>`
     top: ${({ top }) => top}px;
 
     height: ${FONT_LG};
-    width: 10%;
+    width: 12%;
     transition: top ${TRANSITION_NORMAL} ease-in-out;
 
-    background-color: ${(props) => props.theme.link.dark};
+    background: ${(props) => createLinearGradient(props.theme.link.dark)};
 `;
+
+// TODO: Make this better once we have redone theme colors.
+function createLinearGradient(color: string): string {
+	const startColor = convertHexToRGBA(color, 0);
+	const intermediateColor = convertHexToRGBA(color, 0.3);
+	const endColor = convertHexToRGBA(color, 1);
+
+	const gradient = `linear-gradient(to right, ${startColor} 0%, ${intermediateColor} 70%, ${endColor} 100%)`;
+	return gradient;
+}
