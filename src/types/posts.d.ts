@@ -28,7 +28,7 @@ type PartialFlattenedProject = PostType & {
 };
 
 type FlattenedProject = PartialFlattenedProject & {
-	meta: string;
+	meta: Record<string, true>;
 };
 
 type FlattenedProjectCard = PartialFlattenedProject & {
@@ -67,7 +67,7 @@ type PartialFlattenedBook = PostType & {
 };
 
 type FlattenedBook = PartialFlattenedBook & {
-	meta: string;
+	meta: Record<string, true>;
 };
 
 type AuthoredItemCard = FlattenedBookCard | FlattenedStoryCard;
@@ -113,7 +113,7 @@ type PartialFlattenedStory = PostType & {
 };
 
 type FlattenedStory = PartialFlattenedStory & {
-	meta: string;
+	meta: Record<string, true>;
 };
 
 type SingleBook = {
@@ -260,7 +260,7 @@ export type PartiallyFlattenedBlogPost = {
 };
 
 type FlattenedBlogPost = PartiallyFlattenedBlogPost & {
-	meta: string;
+	meta: Record<string, true>;
 };
 
 type FlattenedBlogCard = PartiallyFlattenedBlogPost & {

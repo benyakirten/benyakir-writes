@@ -3,10 +3,12 @@ import React from "react";
 import { SearchResultsContainer } from "./Search.styles";
 import { SearchResultsProps } from "./types";
 
-const SearchResults: React.FC<SearchResultsProps> = ({ results }) => {
-	if (results.length === 0) {
+const SearchResults: React.FC<SearchResultsProps> = ({ results, onClose }) => {
+	if (results === null) {
 		return null;
 	}
+
+	console.log(results);
 
 	// TODO
 	return (

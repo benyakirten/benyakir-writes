@@ -1,10 +1,9 @@
 import React from "react";
 
-import data from "@Data/searchData.json";
 import { SearchModal } from "./Search.styles";
 import SearchBar from "./SearchBar.component";
 import SearchResults from "./SearchResults.component";
-import { pageSearch, SearchProps, SearchResult } from "./types";
+import { pageSearch, SearchProps, SearchResultItems } from "./types";
 
 const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 	({ onClose }, ref) => {
@@ -14,37 +13,23 @@ const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 			}
 		};
 
-		const [results, setResults] = React.useState<SearchResult[]>([]);
+		const [results, setResults] = React.useState<SearchResultItems | null>(
+			null,
+		);
 
 		const onSearch = React.useCallback((query: string) => {
 			if (!query) {
-				setResults([]);
+				setResults(null);
 				return;
 			}
 
-			const search = query.toLowerCase().split(" ");
-			const dataResults = data.filter(
-				// @ts-ignore
-				(datum) => search.some((word) => datum.meta[word]),
-			);
-
-			const pageResults = pageSearch.filter((page) =>
-				search.some(
-					(word) =>
-						page.title.toLowerCase().includes(word) ||
-						page.description.toLowerCase().includes(word),
-				),
-			);
-
-			// @ts-ignore
-			const allResult: SearchResult[] = dataResults.concat(pageResults);
-			setResults(allResult);
+			// TODO: Search logic
 		}, []);
 		return (
 			// @ts-ignore
 			<SearchModal ref={ref} onClick={handleClick}>
 				<SearchBar onSearch={onSearch} onClose={onClose} />
-				<SearchResults results={results} />
+				<SearchResults results={results} onClose={onClose} />
 			</SearchModal>
 		);
 	},
