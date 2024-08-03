@@ -17,14 +17,12 @@ import type {
 	AuthoredItemCard,
 } from "@Types/posts";
 import { hasSomeContent } from "@/utils/search";
+import { authorDescription } from "@/data/pages";
 
 export const Head: React.FC = () => (
 	<>
 		<title>Benyakir Writes - Author</title>
-		<meta
-			name="description"
-			content="A view of all of my published books and short stories. They can be filtered by keyword or date of publication.."
-		/>
+		<meta name="description" content={authorDescription} />
 	</>
 );
 

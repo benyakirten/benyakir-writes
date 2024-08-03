@@ -39,10 +39,6 @@ type NavLinkProps = ChildrenProp & {
 	tabIndex: number;
 };
 
-type SearchProps = {
-	onClose: () => void;
-};
-
 type ActiveIndicatorProps = {
 	activeLinkRef: React.RefObject<HTMLElement> | undefined;
 };

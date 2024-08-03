@@ -35,6 +35,10 @@ export const GlobalStyles = createGlobalStyle`
     text-decoration: none;
   }
 
+  ul {
+    list-style: none;
+  }
+
   .filterable-card-enter {
     opacity: 0;
     transform: scale(0);

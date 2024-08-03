@@ -11,15 +11,12 @@ import type { FlattenedBlogCard } from "@/types/posts";
 import { useMultiSelect } from "@/hooks";
 import { createChoiceSet } from "@/utils/filter";
 import { hasSomeContent } from "@/utils/search";
+import { blogDescription } from "@/data/pages";
 
 export const Head: React.FC = () => (
 	<>
 		<title>Benyakir Writes - Blogs</title>
-		<meta
-			name="description"
-			content="Browse a list of all my blog posts ordered by most recent publication to least recent. Users can
-            filter the blog results by publication date, category and tags."
-		/>
+		<meta name="description" content={blogDescription} />
 	</>
 );
 

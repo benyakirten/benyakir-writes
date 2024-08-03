@@ -13,14 +13,12 @@ import projectsJson from "@WPData/Projects/projects.json";
 
 import { FlattenedProjectCard } from "@Types/posts";
 import { hasSomeContent } from "@/utils/search";
+import { projectsDescription } from "@/data/pages";
 
 export const Head: React.FC = () => (
 	<>
 		<title>Benyakir Writes - Projects</title>
-		<meta
-			name="description"
-			content="A view of all of my completed projects with various details from when I first started to learn programming."
-		/>
+		<meta name="description" content={projectsDescription} />
 	</>
 );
 

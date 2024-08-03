@@ -15,14 +15,12 @@ import { EMAIL_REGEX } from "@Constants";
 import { useValidation } from "@Hooks";
 import { encode } from "@Utils/other";
 import { validateByRegex, validateLength } from "@Utils/validation";
+import { contactDescription } from "@/data/pages";
 
 export const Head: React.FC = () => (
 	<>
 		<title>Benyakir Writes - Contact</title>
-		<meta
-			name="description"
-			content="Write me a message and contact me, either to see if I can help you, about my writing or anything else."
-		/>
+		<meta name="description" content={contactDescription} />
 	</>
 );
 

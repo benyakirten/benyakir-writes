@@ -8,15 +8,12 @@ import {
 	Page,
 	Subtitle,
 } from "@Styles/general-components";
+import { homeDescription } from "@/data/pages";
 
 export const Head: React.FC = () => (
 	<>
 		<title>Benyakir Writes - Home</title>
-		<meta
-			name="description"
-			content="Benyakir Writes is a portal to my latest work. Learn about the latest books, projects and short stories I've written.
-            Or check out my blog posts, reviews of books or podcast episodes."
-		/>
+		<meta name="description" content={homeDescription} />
 	</>
 );
 

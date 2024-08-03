@@ -2,16 +2,12 @@ import * as React from "react";
 
 import { Grouping, LeadHeading, Page } from "@Styles/general-components";
 import { ThemeOptions } from "@Variants";
+import { themeDescription } from "@/data/pages";
 
 export const Head: React.FC = () => (
 	<>
-		{" "}
 		<title>Benyakir Writes - Themes</title>
-		<meta
-			name="description"
-			content="Visitors can set a color theme or customize their own.
-    Optionally, they can save anything local storage and set it as the default."
-		/>
+		<meta name="description" content={themeDescription} />
 	</>
 );
 

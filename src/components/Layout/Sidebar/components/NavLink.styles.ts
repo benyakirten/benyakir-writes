@@ -33,7 +33,7 @@ export const StyledNavLink = styled(Link)<{
     transform-origin: center;
   }
 
-  &:hover {
+  &:hover, &:focus {
     color: ${(props) => props.theme.link.hoverColor};
     &::before {
       scale: 1 1;

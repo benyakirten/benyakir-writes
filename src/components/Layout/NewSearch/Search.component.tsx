@@ -1,12 +1,10 @@
 import React from "react";
 
-import {
-	CloseButton,
-	SearchIconContainer,
-	SearchInput,
-	SearchModal,
-} from "./Search.styles";
-import { CloseIcon, SearchIcon } from "@/components/Icons";
+import data from "@Data/searchData.json";
+import { SearchModal } from "./Search.styles";
+import SearchBar from "./SearchBar.component";
+import SearchResults from "./SearchResults.component";
+import { pageSearch, SearchProps, SearchResult } from "./types";
 
 const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 	({ onClose }, ref) => {
@@ -15,16 +13,38 @@ const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 				onClose();
 			}
 		};
+
+		const [results, setResults] = React.useState<SearchResult[]>([]);
+
+		const onSearch = React.useCallback((query: string) => {
+			if (!query) {
+				setResults([]);
+				return;
+			}
+
+			const search = query.toLowerCase().split(" ");
+			const dataResults = data.filter(
+				// @ts-ignore
+				(datum) => search.some((word) => datum.meta[word]),
+			);
+
+			const pageResults = pageSearch.filter((page) =>
+				search.some(
+					(word) =>
+						page.title.toLowerCase().includes(word) ||
+						page.description.toLowerCase().includes(word),
+				),
+			);
+
+			// @ts-ignore
+			const allResult: SearchResult[] = dataResults.concat(pageResults);
+			setResults(allResult);
+		}, []);
 		return (
 			// @ts-ignore
 			<SearchModal ref={ref} onClick={handleClick}>
-				<SearchIconContainer>
-					<SearchIcon />
-				</SearchIconContainer>
-				<SearchInput placeholder="Search" />
-				<CloseButton aria-label="Close Modal" type="button" onClick={onClose}>
-					<CloseIcon />
-				</CloseButton>
+				<SearchBar onSearch={onSearch} onClose={onClose} />
+				<SearchResults results={results} />
 			</SearchModal>
 		);
 	},

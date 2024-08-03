@@ -16,6 +16,7 @@ import {
 } from "@Store/theme/theme.slice";
 import Search from "./NewSearch";
 import { isInputFocused } from "@/utils/dom";
+import { setSidebarState } from "@/store/sidebar/sidebar.slice";
 
 export const Head: React.FC = () => (
 	<>
@@ -58,7 +59,11 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 			if ((e.ctrlKey || e.metaKey) && e.key === "/") {
 				openModal();
 			} else if (e.key === "Escape") {
-				closeModal();
+				if (modalRef.current?.open) {
+					closeModal();
+				} else {
+					dispatch(setSidebarState(false));
+				}
 			}
 		};
 

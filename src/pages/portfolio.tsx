@@ -17,14 +17,12 @@ import type { ProjectGridDatum } from "@/types/portfolio";
 import { downloadFile } from "@/utils/dom";
 import { getFirstParagraphOfContent } from "@/utils/project";
 import type { ProjectsQuery } from "@Types/query";
+import { portfolioDescription } from "@/data/pages";
 
 export const Head: React.FC = () => (
 	<>
 		<title>Benyakir Writes - Portfolio</title>
-		<meta
-			name="description"
-			content="My developer portfolio, including only my best and most up-to-date projects."
-		/>
+		<meta name="description" content={portfolioDescription} />
 	</>
 );
 

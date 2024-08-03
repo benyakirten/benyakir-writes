@@ -12,6 +12,7 @@ import { capitalize, firstWords } from "@Utils/strings";
 import data from "@Data/searchData.json";
 
 import type { SearchableItem } from "@Types/posts";
+import { SearchProps } from "@/types/props/layout";
 
 const Search: React.FC<SearchProps> = ({ open, onClick }) => {
 	// @ts-ignore
