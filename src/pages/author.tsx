@@ -8,16 +8,9 @@ import { BookCard, StoryCard } from "@Variants";
 
 import { usePagination } from "@Hooks";
 
-import booksJson from "@WPData/Author/books.json";
-import storiesJson from "@WPData/Author/stories.json";
-
-import type {
-	FlattenedBookCard,
-	FlattenedStoryCard,
-	AuthoredItemCard,
-} from "@Types/posts";
+import type { AuthoredItemCard } from "@Types/posts";
 import { hasSomeContent } from "@/utils/search";
-import { authorDescription } from "@/data/pages";
+import { authorDescription, books, stories } from "@/data/search";
 
 export const Head: React.FC = () => (
 	<>
@@ -35,18 +28,6 @@ const AuthorCard: React.FC<{ item: AuthoredItemCard }> = ({ item }) => {
 
 const AuthorPage: React.FC = () => {
 	const items = React.useMemo<AuthoredItemCard[]>(() => {
-		// @ts-ignore
-		const books = booksJson.map((b: FlattenedBookCard) => ({
-			...b,
-			published: { ...b.published, date: new Date(b.published.date) },
-		}));
-
-		// @ts-ignore
-		const stories = storiesJson.map((s: FlattenedStoryCard) => ({
-			...s,
-			published: { ...s.published, date: new Date(s.published.date) },
-		}));
-
 		return [...books, ...stories].sort(
 			(a, b) => b.published.date.valueOf() - a.published.date.valueOf(),
 		);

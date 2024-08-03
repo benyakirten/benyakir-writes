@@ -9,11 +9,10 @@ import { ProjectCard } from "@Variants";
 import { useMultiSelect, usePagination } from "@Hooks";
 
 import projectsMisc from "@WPData/Projects/misc.json";
-import projectsJson from "@WPData/Projects/projects.json";
 
 import { FlattenedProjectCard } from "@Types/posts";
 import { hasSomeContent } from "@/utils/search";
-import { projectsDescription } from "@/data/pages";
+import { projects, projectsDescription } from "@/data/search";
 
 export const Head: React.FC = () => (
 	<>
@@ -23,19 +22,6 @@ export const Head: React.FC = () => (
 );
 
 const ProjectsPage: React.FC = () => {
-	const projects = React.useMemo<FlattenedProjectCard[]>(
-		() =>
-			// @ts-ignore
-			projectsJson.map((p: FlattenedProjectCard) => ({
-				...p,
-				firstReleased: {
-					...p.firstReleased,
-					date: new Date(p.firstReleased.date),
-				},
-			})),
-		[],
-	);
-
 	const projectPagination = usePagination<FlattenedProjectCard>(projects);
 
 	const [publishedBefore, setPublishedBefore] = React.useState<Date>(

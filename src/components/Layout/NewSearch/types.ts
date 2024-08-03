@@ -1,17 +1,9 @@
-import {
-	blogDescription,
-	contactDescription,
-	homeDescription,
-	portfolioDescription,
-	projectsDescription,
-	themeDescription,
-	authorDescription,
-} from "@/data/pages";
+import { PageResult } from "@/data/search";
 import {
 	FlattenedStory,
 	FlattenedBlogPost,
 	FlattenedBook,
-	FlattenedProject,
+	FlattenedProjectCard,
 } from "@/types/posts";
 
 export type SearchProps = {
@@ -30,52 +22,8 @@ export type SearchResultsProps = {
 
 export type SearchResultItems = {
 	books: FlattenedBook[];
-	projects: FlattenedProject[];
+	projects: FlattenedProjectCard[];
 	posts: FlattenedBlogPost[];
 	stories: FlattenedStory[];
 	pages: PageResult[];
 };
-
-type PageResult = {
-	title: string;
-	slug: string;
-	description: string;
-};
-
-export const pageSearch: PageResult[] = [
-	{
-		title: "Blog",
-		slug: "/blog",
-		description: blogDescription,
-	},
-	{
-		title: "Contact",
-		slug: "/contact",
-		description: contactDescription,
-	},
-	{
-		title: "Home",
-		slug: "/",
-		description: homeDescription,
-	},
-	{
-		title: "Portfolio",
-		slug: "/portfolio",
-		description: portfolioDescription,
-	},
-	{
-		title: "Projects",
-		slug: "/projects",
-		description: projectsDescription,
-	},
-	{
-		title: "Theme",
-		slug: "/theme",
-		description: themeDescription,
-	},
-	{
-		title: "Author",
-		slug: "/author",
-		description: authorDescription,
-	},
-] as const;

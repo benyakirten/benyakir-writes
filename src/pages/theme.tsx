@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Grouping, LeadHeading, Page } from "@Styles/general-components";
 import { ThemeOptions } from "@Variants";
-import { themeDescription } from "@/data/pages";
+import { themeDescription } from "@/data/search";
 
 export const Head: React.FC = () => (
 	<>

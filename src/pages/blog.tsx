@@ -6,12 +6,11 @@ import { LeadPage, Paginate } from "@Layout";
 import { BlogFilter } from "@Posts";
 import { BlogCard } from "@Variants";
 import usePagination from "@/hooks/usePagination.hook";
-import postsJson from "@WPData/Posts/all.json";
 import type { FlattenedBlogCard } from "@/types/posts";
 import { useMultiSelect } from "@/hooks";
 import { createChoiceSet } from "@/utils/filter";
 import { hasSomeContent } from "@/utils/search";
-import { blogDescription } from "@/data/pages";
+import { blogDescription, posts } from "@/data/search";
 
 export const Head: React.FC = () => (
 	<>
@@ -21,15 +20,6 @@ export const Head: React.FC = () => (
 );
 
 const BlogPage: React.FC = () => {
-	const posts = React.useMemo(
-		() =>
-			// @ts-ignore
-			postsJson.map((b: FlattenedBlogCard) => ({
-				...b,
-				published: { ...b.published, date: new Date(b.published.date) },
-			})),
-		[],
-	);
 	const postPagination = usePagination<FlattenedBlogCard>(posts);
 
 	const [publishedBefore, setPublishedBefore] = React.useState<Date>(
@@ -43,9 +33,9 @@ const BlogPage: React.FC = () => {
 
 	const categories = React.useMemo(
 		() => createChoiceSet(posts, "categories"),
-		[posts],
+		[],
 	);
-	const tags = React.useMemo(() => createChoiceSet(posts, "tags"), [posts]);
+	const tags = React.useMemo(() => createChoiceSet(posts, "tags"), []);
 
 	const [activeCategories, filterByCategories] = useMultiSelect();
 	const [activeTags, filterByTags] = useMultiSelect();

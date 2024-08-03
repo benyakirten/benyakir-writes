@@ -8,7 +8,7 @@ import {
 	Page,
 	Subtitle,
 } from "@Styles/general-components";
-import { homeDescription } from "@/data/pages";
+import { homeDescription } from "@/data/search";
 
 export const Head: React.FC = () => (
 	<>

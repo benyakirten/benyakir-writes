@@ -17,7 +17,7 @@ import type { ProjectGridDatum } from "@/types/portfolio";
 import { downloadFile } from "@/utils/dom";
 import { getFirstParagraphOfContent } from "@/utils/project";
 import type { ProjectsQuery } from "@Types/query";
-import { portfolioDescription } from "@/data/pages";
+import { portfolioDescription } from "@/data/search";
 
 export const Head: React.FC = () => (
 	<>

@@ -15,7 +15,7 @@ import { EMAIL_REGEX } from "@Constants";
 import { useValidation } from "@Hooks";
 import { encode } from "@Utils/other";
 import { validateByRegex, validateLength } from "@Utils/validation";
-import { contactDescription } from "@/data/pages";
+import { contactDescription } from "@/data/search";
 
 export const Head: React.FC = () => (
 	<>
