@@ -2,9 +2,15 @@ import styled from "styled-components";
 
 import {
 	FONT_LG,
+	FONT_SM,
+	HORIZONTAL_SM,
+	HORIZONTAL_XS,
+	SANS_SERIF_FONT,
 	SIZE_MD,
 	SIZE_SM,
 	SIZE_XXL,
+	VERTICAL_SM,
+	Z_ABOVE,
 	Z_SEARCH,
 } from "@/styles/variables";
 
@@ -66,8 +72,33 @@ export const CloseButton = styled.button`
 `;
 
 export const SearchResultsContainer = styled.ul`
-    width: 100%;
-    padding: ${SIZE_SM};
     display: grid;
     gap: ${SIZE_SM};
+
+    width: 100%;
+    margin-top: ${SIZE_SM};
+`;
+
+export const StyledSearchResultGroup = styled.li<{ title: string }>`
+    position: relative;
+
+    display: grid;
+    gap: ${SIZE_SM};
+
+    border-top: 2px solid #000;
+    padding: ${SIZE_SM};
+
+    &::after {
+        content: "${(props) => props.title}";
+        position: absolute;
+        top: calc(-${SIZE_SM} + 2px);
+        left: ${SIZE_SM};
+        z-index: ${Z_ABOVE};
+
+        font-family: ${SANS_SERIF_FONT};
+        font-size: ${FONT_SM};
+
+        background-color: ${(props) => props.theme.base.background};
+        padding: ${HORIZONTAL_XS};
+    }
 `;

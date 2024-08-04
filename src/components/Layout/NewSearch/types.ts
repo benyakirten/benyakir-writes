@@ -1,9 +1,9 @@
-import { PageResult } from "@/data/search";
+import { PageSearch } from "@/data/search";
 import {
-	FlattenedStory,
-	FlattenedBlogPost,
-	FlattenedBook,
+	FlattenedBlogCard,
+	FlattenedBookCard,
 	FlattenedProjectCard,
+	FlattenedStoryCard,
 } from "@/types/posts";
 
 export type SearchProps = {
@@ -21,9 +21,9 @@ export type SearchResultsProps = {
 };
 
 export type SearchResultItems = {
-	books: FlattenedBook[];
+	books: FlattenedBookCard[];
 	projects: FlattenedProjectCard[];
-	posts: FlattenedBlogPost[];
-	stories: FlattenedStory[];
-	pages: PageResult[];
+	posts: FlattenedBlogCard[];
+	stories: FlattenedStoryCard[];
+	pages: PageSearch[];
 };

@@ -4,11 +4,10 @@ import rawProjects from "./wp/Projects/projects.json";
 import rawPosts from "./wp/Posts/all.json";
 
 import {
-	FlattenedBlogPost,
-	FlattenedBook,
-	FlattenedProject,
+	FlattenedBlogCard,
+	FlattenedBookCard,
 	FlattenedProjectCard,
-	FlattenedStory,
+	FlattenedStoryCard,
 } from "@/types/posts";
 
 export const blogDescription =
@@ -32,15 +31,17 @@ export const themeDescription =
 export const authorDescription =
 	"A view of all of my published books and short stories. They can be filtered by keyword or date of publication.";
 
-// @ts-ignore
-export const books: FlattenedBook[] = rawBooks.map((book: FlattenedBook) => {
-	book.published.date = new Date(book.published.date);
-	return book;
-});
-
-export const stories: FlattenedStory[] = rawStories.map(
+export const books: FlattenedBookCard[] = rawBooks.map(
 	// @ts-ignore
-	(story: FlattenedStory) => {
+	(book: FlattenedBookCard) => {
+		book.published.date = new Date(book.published.date);
+		return book;
+	},
+);
+
+export const stories: FlattenedStoryCard[] = rawStories.map(
+	// @ts-ignore
+	(story: FlattenedStoryCard) => {
 		story.published.date = new Date(story.published.date);
 		return story;
 	},
@@ -48,30 +49,27 @@ export const stories: FlattenedStory[] = rawStories.map(
 
 export const projects: FlattenedProjectCard[] = rawProjects.map(
 	// @ts-ignore
-	(p: FlattenedProjectCard) => ({
-		...p,
-		firstReleased: {
-			...p.firstReleased,
-			date: new Date(p.firstReleased.date),
-		},
-	}),
+	(p: FlattenedProjectCard) => {
+		p.firstReleased.date = new Date(p.firstReleased.date);
+		return p;
+	},
 );
 
-export const posts: FlattenedBlogPost[] = rawPosts.map(
+export const posts: FlattenedBlogCard[] = rawPosts.map(
 	// @ts-ignore
-	(b: FlattenedBlogPost) => ({
-		...b,
-		published: { ...b.published, date: new Date(b.published.date) },
-	}),
+	(b: FlattenedBlogCard) => {
+		b.published.date = new Date(b.published.date);
+		return b;
+	},
 );
 
-export type PageResult = {
+export type PageSearch = {
 	title: string;
 	slug: string;
 	description: string;
 };
 
-export const pageSearch: PageResult[] = [
+export const pageSearch: PageSearch[] = [
 	{
 		title: "Blog",
 		slug: "/blog",

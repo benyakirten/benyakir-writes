@@ -6,7 +6,7 @@ import SearchResults from "./SearchResults.component";
 import { SearchProps, SearchResultItems } from "./types";
 import { search } from "./search";
 
-const results: SearchResultItems = {
+const sample: SearchResultItems = {
 	books: [
 		{
 			slug: "delusions-of-form",
@@ -1183,7 +1183,7 @@ const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 		};
 
 		const [results, setResults] = React.useState<SearchResultItems | null>(
-			null,
+			sample,
 		);
 
 		const onSearch = React.useCallback((query: string) => {

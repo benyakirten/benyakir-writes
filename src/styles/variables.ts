@@ -1,6 +1,6 @@
 // FONT FAMILY
-export const SERIF_FONT = "'SERIF_FONT', serif";
-export const SANS_SERIF_FONT = "'SANS_SERIF_FONT', sans-serif";
+export const SERIF_FONT = "'Faustina', serif";
+export const SANS_SERIF_FONT = "'Mulish', sans-serif";
 
 // FONT SIZE
 export const FONT_XXXL = "3rem";
@@ -63,13 +63,13 @@ export const SIZE_XS = "0.4rem";
 export const HORIZONTAL_XL = "0 3rem";
 export const HORIZONTAL_LG = "0 2.4rem";
 export const HORIZONTAL_MD = "0 1.6rem";
-export const HORIZONTAL_SM = "0 1.2rem";
-export const HORIZONTAL_XS = "0 0.6rem";
+export const HORIZONTAL_SM = "0 0.8rem";
+export const HORIZONTAL_XS = "0 0.4rem";
 
 export const VERTICAL_XL = "3rem 0";
-export const VERTICAL_LG = "2,4rem 0";
+export const VERTICAL_LG = "2.4rem 0";
 export const VERTICAL_MD = "1.6rem 0";
-export const VERTICAL_SM = "1.2rem 0";
+export const VERTICAL_SM = "0.8rem 0";
 
 export const BOTH_XL = "2.4rem 3rem";
 export const BOTH_LG = "2rem 2.4rem";
