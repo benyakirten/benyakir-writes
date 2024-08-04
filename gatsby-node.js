@@ -439,7 +439,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     }, {});
   }
 
-  function formatProject(project, hashedIcons) {
+  function formatProject(project, convertedIcons) {
     const tech = project.project.technologies.split(", ");
     const piecemealProject = {
       title: project.title,
@@ -457,7 +457,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         project.project.latestUpdate
       );
     }
-    piecemealProject.icons = getIconsForProject(piecemealProject, hashedIcons);
+    piecemealProject.icons = getIconsForProject(
+      piecemealProject,
+      convertedIcons
+    );
     return {
       ...piecemealProject,
       meta: generateProjectMeta(piecemealProject),
@@ -482,20 +485,23 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return Array.from(new Set(nonUniqueHosts));
   }
 
-  function hashUsedIcons(allIcons, allShortTechs) {
+  function getUsedIcons(allIcons, allShortTechs) {
     return allIcons
       .filter((f) => allShortTechs.includes(f.name))
-      .map((f) => ({ ...f, name: getFullTechName(f.name) }))
+      .map((f) => {
+        f.name = getFullTechName(f.name);
+        return f;
+      })
       .reduce((acc, next) => {
-        acc[next.name] = next.publicUrl;
+        acc[next.name] = next.publicURL;
         return acc;
       }, {});
   }
 
-  function getIconsForProject(project, hashedIcons) {
+  function getIconsForProject(project, convertedIcons) {
     return project.longTechnologies.map((t) => ({
       name: t,
-      publicURL: hashedIcons[t],
+      publicURL: convertedIcons[t],
     }));
   }
 
@@ -774,10 +780,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const shortTechs = getAllUsedShortTechs(projects);
   const longTechs = getAllUsedTechnologies(shortTechs);
   const icons = searchQuery.data.allFile.nodes;
-  const usedIcons = hashUsedIcons(icons, shortTechs);
+  const convertedIcons = getUsedIcons(icons, shortTechs);
 
   const formattedProjects = projects
-    .map((p) => formatProject(p, usedIcons))
+    .map((p) => formatProject(p, convertedIcons))
     .sort(
       (a, b) => b.firstReleased.date.getTime() - a.firstReleased.date.getTime()
     );
@@ -789,7 +795,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     JSON.stringify({
       longTechs,
       shortTechs,
-      usedIcons,
+      convertedIcons,
       hosts: allHosts,
     }),
     "utf-8",
