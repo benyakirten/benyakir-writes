@@ -1171,6 +1171,18 @@ const sample: SearchResultItems = {
 			description:
 				"Get an overview of my latest creations. As a fluent speaker of Italian, former writer, editor and current fullstack dev, I have a lot to share.",
 		},
+		{
+			title: "Contact",
+			slug: "/",
+			description:
+				"Get an overview of my latest creations. As a fluent speaker of Italian, former writer, editor and current fullstack dev, I have a lot to share.",
+		},
+		{
+			title: "Projects",
+			slug: "/",
+			description:
+				"Get an overview of my latest creations. As a fluent speaker of Italian, former writer, editor and current fullstack dev, I have a lot to share.",
+		},
 	],
 };
 

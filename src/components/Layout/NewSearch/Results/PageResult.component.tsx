@@ -11,7 +11,7 @@ const PageResult: React.FC<{
 	return (
 		<ResultContainer role="link" onClick={() => onView(page.slug)}>
 			<ItemTitle>{page.title}</ItemTitle>
-			<p>{truncate(page.description, 100)}</p>
+			<p>{page.description}</p>
 		</ResultContainer>
 	);
 };

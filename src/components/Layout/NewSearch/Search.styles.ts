@@ -8,6 +8,7 @@ import {
 	SIZE_MD,
 	SIZE_SM,
 	SIZE_XXL,
+	VERTICAL_MD,
 	Z_ABOVE,
 	Z_SEARCH,
 } from "@/styles/variables";
@@ -79,9 +80,6 @@ export const SearchResultsContainer = styled.ul`
 
 export const StyledSearchResultGroup = styled.li<{ title: string }>`
     position: relative;
-
-    display: grid;
-    gap: ${SIZE_SM};
 
     border-top: 2px solid #000;
     padding: ${SIZE_SM};
