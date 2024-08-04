@@ -419,7 +419,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       .replace(/\!/g, "");
   }
 
-  function firstWords(sentence, length) {
+  function truncate(sentence, length) {
     if (length >= sentence.length) {
       return sentence;
     }
@@ -447,7 +447,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       mainLink: project.project.mainLink,
       hostedOn: project.project.hostedOn,
       repoLink: project.project.repoLink,
-      content: firstWords(project.content, 100),
+      content: truncate(project.content, 100),
       firstReleased: getTimeFromDateString(project.project.firstReleased),
       shortTechnologies: tech,
       longTechnologies: tech.map((t) => getFullTechName(t)),
@@ -521,7 +521,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     const _story = {
       slug: story.slug,
       title: story.title,
-      content: firstWords(formatText(story.content), 170),
+      content: truncate(formatText(story.content), 170),
       published: getTimeFromDateString(story.shortStory.publishedOn),
       book: !story.shortStory.relatedBook
         ? null
@@ -529,7 +529,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             title: story.shortStory.relatedBook.title,
             slug: story.shortStory.relatedBook.slug,
             content: formatText(
-              firstWords(story.shortStory.relatedBook.content, 50)
+              truncate(story.shortStory.relatedBook.content, 50)
             ),
             relationship: story.shortStory.relationshipToBook
               ? story.shortStory.relationshipToBook
@@ -580,7 +580,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       slug: book.slug,
       title: book.title,
       published: getTimeFromDateString(book.book.publishedOn),
-      content: firstWords(book.content, 170),
+      content: truncate(book.content, 170),
       cover: book.book.cover
         ? book.book.cover.localFile.childImageSharp.gatsbyImageData
         : null,
@@ -623,7 +623,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     const data = {
       title: post.title,
       slug: post.slug,
-      excerpt: firstWords(formatText(post.excerpt), 150),
+      excerpt: truncate(formatText(post.excerpt), 150),
       content: formatText(post.content),
       published: getBlogPostDateInformation(post.date),
       categories: post.categories.nodes?.map((n) => n.name),

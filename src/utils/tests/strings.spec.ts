@@ -51,7 +51,7 @@ describe("strings util", () => {
 			}
 		});
 	});
-	describe("firstWords", () => {
+	describe("truncate", () => {
 		it("should give known results for known inputs", () => {
 			const expectations = [
 				{
@@ -79,7 +79,7 @@ describe("strings util", () => {
 			];
 			for (const expectation of expectations) {
 				expect(
-					strings.firstWords(
+					strings.truncate(
 						expectation.input.sentence,
 						expectation.input.cutoff,
 					),
@@ -104,7 +104,7 @@ describe("strings util", () => {
 			];
 			for (const expectation of expectations) {
 				expect(
-					strings.firstWords(expectation.sentence, expectation.cutoff),
+					strings.truncate(expectation.sentence, expectation.cutoff),
 				).toEqual(expectation.sentence);
 			}
 		});
@@ -112,7 +112,7 @@ describe("strings util", () => {
 		it("should throw an error if the substring is only spaces or has a length of 0", () => {
 			const badInputs = ["               e", "               "];
 			for (const input of badInputs) {
-				expect(() => strings.firstWords(input, 8)).toThrow();
+				expect(() => strings.truncate(input, 8)).toThrow();
 			}
 		});
 	});

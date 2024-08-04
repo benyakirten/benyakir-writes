@@ -3,13 +3,11 @@ import styled from "styled-components";
 import {
 	FONT_LG,
 	FONT_SM,
-	HORIZONTAL_SM,
 	HORIZONTAL_XS,
 	SANS_SERIF_FONT,
 	SIZE_MD,
 	SIZE_SM,
 	SIZE_XXL,
-	VERTICAL_SM,
 	Z_ABOVE,
 	Z_SEARCH,
 } from "@/styles/variables";

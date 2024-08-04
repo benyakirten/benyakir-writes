@@ -268,7 +268,6 @@ export const HoverableGatsbyImage = styled(GatsbyImage)`
 
 export const List = styled.ul`
   font-size: ${FONT_MD};
-  list-style: none;
 `;
 
 export const LItem = styled.li`

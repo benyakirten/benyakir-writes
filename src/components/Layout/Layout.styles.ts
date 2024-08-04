@@ -31,6 +31,11 @@ export const GlobalStyles = createGlobalStyle`
 			props.theme.base.background};
   }
 
+  button {
+      all: unset;
+      cursor: pointer;
+  }
+
   a {
     text-decoration: none;
   }

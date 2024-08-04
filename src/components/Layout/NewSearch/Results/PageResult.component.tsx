@@ -1,12 +1,18 @@
 import React from "react";
 
 import { PageSearch } from "@/data/search";
+import { truncate } from "@/utils/strings";
+import { ItemTitle, ResultContainer } from "./Result.styles";
 
-const PageResult: React.FC<{ page: PageSearch }> = ({ page }) => {
+const PageResult: React.FC<{
+	page: PageSearch;
+	onView: (slug: string) => void;
+}> = ({ page, onView }) => {
 	return (
-		<div>
-			<h2>{page.title}</h2>
-		</div>
+		<ResultContainer role="link" onClick={() => onView(page.slug)}>
+			<ItemTitle>{page.title}</ItemTitle>
+			<p>{truncate(page.description, 100)}</p>
+		</ResultContainer>
 	);
 };
 

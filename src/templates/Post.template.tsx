@@ -6,7 +6,7 @@ import { Grouping, LeadHeading, Page } from "@Styles/general-components";
 import { createBlocks, preprocessWPEntry } from "@Utils/blocks/identify-blocks";
 import { formatBlogPost } from "@Utils/blog";
 import { formatWpText } from "@Utils/posts";
-import { firstWords } from "@Utils/strings";
+import { truncate } from "@Utils/strings";
 
 import type { WpPost } from "@Types/query";
 import { PostHeader } from "@Variants";
@@ -18,7 +18,7 @@ export const Head: React.FC<WpPost> = ({ data }) => {
 			<title>Benyakir Writes - {post.title}</title>
 			<meta
 				name="description"
-				content={firstWords(formatWpText(post.excerpt ?? ""), 150)}
+				content={truncate(formatWpText(post.excerpt ?? ""), 150)}
 			/>
 		</>
 	);

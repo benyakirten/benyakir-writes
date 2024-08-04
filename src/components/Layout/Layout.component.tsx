@@ -43,10 +43,6 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 	const themeStore = useAppSelector((root) => root.theme);
 	const dispatch = useAppDispatch();
 
-	React.useEffect(() => {
-		modalRef.current?.showModal();
-	});
-
 	const closeModal = () => modalRef.current?.close();
 	const openModal = () => modalRef.current?.showModal();
 

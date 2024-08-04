@@ -12,7 +12,7 @@ import {
 import { flattenBook } from "@Utils/author";
 import { getPrettyDate } from "@Utils/dates";
 import { formatWpText } from "@Utils/posts";
-import { firstWords } from "@Utils/strings";
+import { truncate } from "@Utils/strings";
 
 import type { WpBook } from "@Types/query";
 import { BookHeader } from "@Variants";
@@ -26,7 +26,7 @@ export const Head: React.FC<WpBook> = ({ data }) => {
 				name="description"
 				content={`${book.title}, published on ${getPrettyDate(
 					book.published.date,
-				)}: ${firstWords(formatWpText(book.content), 100)}`}
+				)}: ${truncate(formatWpText(book.content), 100)}`}
 			/>
 		</>
 	);

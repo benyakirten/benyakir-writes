@@ -12,7 +12,7 @@ import {
 import { flattenStory } from "@/utils/author";
 import { getPrettyDate } from "@Utils/dates";
 import { formatWpText } from "@Utils/posts";
-import { firstWords } from "@Utils/strings";
+import { truncate } from "@Utils/strings";
 
 import ShortStoryHeader from "@/components/Variants/Headers/ShortStoryHeader.component";
 import type { WpStory } from "@Types/query";
@@ -28,7 +28,7 @@ export const Head: React.FC<WpStory> = ({ data }) => {
 					story.published.date,
 				)}${
 					story.book ? `, related to ${story.book.title}` : null
-				}: ${firstWords(formatWpText(story.content), 100)}`}
+				}: ${truncate(formatWpText(story.content), 100)}`}
 			/>
 		</>
 	);

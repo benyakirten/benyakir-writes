@@ -12,7 +12,7 @@ import { ProjectHeader } from "@Variants";
 import { getPrettyDate } from "@Utils/dates";
 import { formatWpText } from "@Utils/posts";
 import { formatProject, getFullTechName } from "@Utils/project";
-import { firstWords } from "@Utils/strings";
+import { truncate } from "@Utils/strings";
 
 import { useFetchRepoUpdatedDate } from "@/hooks";
 import type { WpProject } from "@Types/query";
@@ -26,7 +26,7 @@ export const Head: React.FC<WpProject> = ({ data }) => {
 				name="description"
 				content={`${project.title}, created on ${getPrettyDate(
 					project.firstReleased.date,
-				)}, using ${project.longTechnologies.join(", ")}. ${firstWords(
+				)}, using ${project.longTechnologies.join(", ")}. ${truncate(
 					formatWpText(project.content),
 					150,
 				)}`}

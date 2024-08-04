@@ -1,4 +1,5 @@
 import React from "react";
+import { navigate } from "gatsby";
 
 import {
 	SearchResultsContainer,
@@ -19,11 +20,16 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onClose }) => {
 		return null;
 	}
 
+	function handleView(slug: string) {
+		onClose();
+		navigate(slug);
+	}
+
 	const pageResults =
 		results.pages.length === 0 ? null : (
 			<StyledSearchResultGroup title="Pages">
 				{results.pages.map((page) => (
-					<PageResult key={page.slug} page={page} />
+					<PageResult onView={handleView} key={page.slug} page={page} />
 				))}
 			</StyledSearchResultGroup>
 		);
@@ -32,7 +38,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onClose }) => {
 		results.books.length === 0 ? null : (
 			<StyledSearchResultGroup title="Books">
 				{results.books.map((book) => (
-					<BookResult key={book.slug} book={book} />
+					<BookResult onView={handleView} key={book.slug} book={book} />
 				))}
 			</StyledSearchResultGroup>
 		);
@@ -41,7 +47,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onClose }) => {
 		results.stories.length === 0 ? null : (
 			<StyledSearchResultGroup title="Books">
 				{results.stories.map((story) => (
-					<StoryResult key={story.slug} story={story} />
+					<StoryResult onView={handleView} key={story.slug} story={story} />
 				))}
 			</StyledSearchResultGroup>
 		);
@@ -50,7 +56,11 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onClose }) => {
 		results.projects.length === 0 ? null : (
 			<StyledSearchResultGroup title="Projects">
 				{results.projects.map((project) => (
-					<ProjectResult key={project.slug} project={project} />
+					<ProjectResult
+						onView={handleView}
+						key={project.slug}
+						project={project}
+					/>
 				))}
 			</StyledSearchResultGroup>
 		);
@@ -59,7 +69,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onClose }) => {
 		results.posts.length === 0 ? null : (
 			<StyledSearchResultGroup title="Blog Posts">
 				{results.posts.map((post) => (
-					<PostResult key={post.slug} post={post} />
+					<PostResult onView={handleView} key={post.slug} post={post} />
 				))}
 			</StyledSearchResultGroup>
 		);

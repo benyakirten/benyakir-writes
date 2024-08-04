@@ -1169,7 +1169,7 @@ const sample: SearchResultItems = {
 			title: "Home",
 			slug: "/",
 			description:
-				"Benyakir Writes is a portal to my latest work. See my programming portfolio. Learn about the latest books, projects and short stories I've written. Or check out my blog posts, reviews of books or podcast episodes.",
+				"Get an overview of my latest creations. As a fluent speaker of Italian, former writer, editor and current fullstack dev, I have a lot to share.",
 		},
 	],
 };

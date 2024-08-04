@@ -1,6 +1,6 @@
 import { getTimeFromDateString } from "./dates";
 import { createSearchableString } from "./posts";
-import { firstWords } from "./strings";
+import { truncate } from "./strings";
 
 import type {
 	BookType,
@@ -86,7 +86,7 @@ export const formatStory = (story: StoryType): FlattenedStory => {
 			: {
 					title: story.shortStory.relatedBook.title,
 					slug: story.shortStory.relatedBook.slug,
-					content: firstWords(story.shortStory.relatedBook.content, 250),
+					content: truncate(story.shortStory.relatedBook.content, 250),
 					relationship: story.shortStory.relationshipToBook
 						? story.shortStory.relationshipToBook
 						: "Related story",
@@ -144,7 +144,7 @@ export const flattenBook = (
 		stories: book.book.relatedStories
 			? book.book.relatedStories.map((s) => ({
 					...s,
-					content: firstWords(s.content, 100),
+					content: truncate(s.content, 100),
 				}))
 			: null,
 		cover: book.book.cover
@@ -188,7 +188,7 @@ export const flattenStory = (
 			? null
 			: {
 					title: story.shortStory.relatedBook.title,
-					content: firstWords(story.shortStory.relatedBook.content, 150),
+					content: truncate(story.shortStory.relatedBook.content, 150),
 					slug: story.shortStory.relatedBook.slug,
 					relationship: story.shortStory.relationshipToBook
 						? story.shortStory.relationshipToBook

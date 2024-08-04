@@ -17,7 +17,7 @@ export const contactDescription =
 	"Write me a message and contact me, either to see if my abilities fit your needs, want to chat about books or just want to chat.";
 
 export const homeDescription =
-	"Benyakir Writes is a portal to my latest work. See my programming portfolio. Learn about the latest books, projects and short stories I've written. Or check out my blog posts, reviews of books or podcast episodes.";
+	"Get an overview of my latest creations. As a fluent speaker of Italian, former writer, editor and current fullstack dev, I have a lot to share.";
 
 export const portfolioDescription =
 	"My developer portfolio, including only my best and most up-to-date projects.";

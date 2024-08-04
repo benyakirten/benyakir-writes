@@ -7,7 +7,7 @@ import { CustomLink, Foldout, Loading } from "@Gen";
 import { Checkbox, Text } from "@Input";
 
 import { useDebounce, useLookup } from "@Hooks";
-import { capitalize, firstWords } from "@Utils/strings";
+import { capitalize, truncate } from "@Utils/strings";
 
 import data from "@Data/searchData.json";
 
@@ -123,7 +123,7 @@ const Search: React.FC<SearchProps> = ({ open, onClick }) => {
 											justifyContent: "space-between",
 										}}
 									>
-										<span>{firstWords(r.title, 18)}</span>
+										<span>{truncate(r.title, 18)}</span>
 										<span>{capitalize(r.type)}</span>
 									</Column>
 								</CustomLink>

@@ -17,7 +17,7 @@ export function titleToKebab(title: string): string {
 	return _title.join("-");
 }
 
-export function firstWords(sentence: string, length: number) {
+export function truncate(sentence: string, length: number) {
 	if (length >= sentence.length) {
 		return sentence;
 	}
