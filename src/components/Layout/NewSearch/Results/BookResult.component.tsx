@@ -1,15 +1,43 @@
 import React from "react";
+import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 
 import { FlattenedBookCard } from "@/types/posts";
+import {
+	ResultContainer,
+	InnerContainer,
+	ContentContainer,
+	TitleContainer,
+	SlubTitle,
+	ItemTitle,
+	BookCoverContainer,
+} from "./Result.styles";
+import { getPrettyDate } from "@/utils/dates";
+import { WpContentDescription } from "@/styles/general-components";
 
 const BookResult: React.FC<{
 	book: FlattenedBookCard;
 	onView: (slug: string) => void;
 }> = ({ book, onView }) => {
 	return (
-		<div>
-			<h2>{book.title}</h2>
-		</div>
+		<ResultContainer role="link" onClick={() => onView(book.slug ?? "")}>
+			<InnerContainer>
+				<ContentContainer relativeSize={4}>
+					<TitleContainer>
+						<ItemTitle>{book.title}</ItemTitle>
+						<SlubTitle>{getPrettyDate(book.published.date)}</SlubTitle>
+					</TitleContainer>
+					<WpContentDescription
+						fontSize="1rem"
+						dangerouslySetInnerHTML={{ __html: book.content }}
+					/>
+				</ContentContainer>
+				{book.snapshotCover && (
+					<BookCoverContainer>
+						<GatsbyImage image={book.snapshotCover} alt={book.title} />
+					</BookCoverContainer>
+				)}
+			</InnerContainer>
+		</ResultContainer>
 	);
 };
 

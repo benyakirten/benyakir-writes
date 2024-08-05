@@ -36,7 +36,21 @@ type FlattenedProjectCard = PartialFlattenedProject & {
 	meta: BooleanLookup;
 };
 
+type BookCover = {
+	id: string;
+	book: {
+		cover: null | {
+			localFile: {
+				childImageSharp: {
+					gatsbyImageData: IGatsbyImageData;
+				};
+			};
+		};
+	};
+};
+
 type BookType = PostType & {
+	id: string;
 	book: {
 		relatedProjectDesc?: string;
 		purchaseLinks: string;
@@ -59,6 +73,7 @@ type PartialFlattenedBook = PostType & {
 	published: DateInformation;
 	purchaseLinks: NamedLink[];
 	stories: null | TitleWithSlug[];
+	snapshotCover: null | IGatsbyImageData;
 	project:
 		| null
 		| (TitleWithSlug & {
@@ -86,8 +101,10 @@ type StoryType = PostType & {
 		relatedBook:
 			| null
 			| (TitleWithSlug & {
+					id: string;
 					content: string;
 					book: {
+						snapshotCover: null | IGatsbyImageData;
 						cover: null | {
 							localFile: {
 								childImageSharp: {
@@ -109,6 +126,7 @@ type PartialFlattenedStory = PostType & {
 				content: string;
 				relationship: string;
 				cover: null | IGatsbyImageData;
+				snapshotCover: null | IGatsbyImageData;
 		  });
 };
 

@@ -11,7 +11,7 @@ import {
 	TitleContainer,
 } from "./Result.styles";
 import ProjectTech from "./ProjectTech.component";
-import { SIZE_SM, SIZE_XS } from "@/styles/variables";
+import { SIZE_XS } from "@/styles/variables";
 import { WpContentDescription } from "@/styles/general-components";
 import { getPrettyDate } from "@/utils/dates";
 

@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 import {
-	FONT_SM,
 	FONT_XS,
 	SANS_SERIF_FONT,
 	SIZE_MD,

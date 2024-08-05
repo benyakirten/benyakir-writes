@@ -52,10 +52,6 @@ export function search(query: string): SearchResultItems | null {
 		),
 	);
 
-	// Searching seems to take on the order of 2-3ms on a good computer.
-	// Until it reaches something like 200+ms then it doesn't really need to be
-	// optimized. However, if we need to, we could offload it to a web worker,
-	// maybe using partytown.
 	return {
 		books: bookResults,
 		projects: projectResults,

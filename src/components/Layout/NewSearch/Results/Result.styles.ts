@@ -39,8 +39,8 @@ export const InnerContainer = styled.div`
 	gap: ${SIZE_SM};
 `;
 
-export const ContentContainer = styled.div`
-	flex: 2;
+export const ContentContainer = styled.div<{ relativeSize?: number }>`
+	flex: ${(props) => props.relativeSize ?? 2};
 	display: grid;
 	gap: ${SIZE_XS};
 `;
@@ -53,5 +53,12 @@ export const TitleContainer = styled.div`
 
 export const SlubTitle = styled.span`
 	font-size: 0.9rem;
+	font-weight: bold;
 	text-transform: uppercase;
+`;
+
+export const BookCoverContainer = styled.div`
+	display: flex;
+	justify-content: center;
+    flex: 1;
 `;

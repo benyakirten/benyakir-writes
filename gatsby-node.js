@@ -150,8 +150,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const searchQuery = await graphql(`
     query {
-      allWpBook {
+      books: allWpBook {
         nodes {
+          id
           slug
           title
           content
@@ -181,6 +182,20 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           }
         }
       }
+      snapshotCovers: allWpBook {
+        nodes {
+          id
+          book {
+            cover {
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(formats: [AUTO, AVIF, WEBP], height: 100)
+                }
+              }
+            }
+          }
+        }
+      }
       allWpShortstory {
         nodes {
           title
@@ -190,6 +205,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             publishedOn
             relatedBook {
               ... on WpBook {
+                id
                 title
                 content
                 slug
@@ -523,15 +539,19 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return generateLookup(data.filter((d) => !!d));
   }
 
-  function formatStory(story) {
+  /**
+   *
+   * @param {Story} story
+   * @param {BookCover[]} bookSnapshotCovers
+   */
+  function formatStory(story, bookSnapshotCovers) {
     const _story = {
       slug: story.slug,
       title: story.title,
       content: truncate(formatText(story.content), 170),
       published: getTimeFromDateString(story.shortStory.publishedOn),
-      book: !story.shortStory.relatedBook
-        ? null
-        : {
+      book: story.shortStory.relatedBook
+        ? {
             title: story.shortStory.relatedBook.title,
             slug: story.shortStory.relatedBook.slug,
             content: formatText(
@@ -540,11 +560,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             relationship: story.shortStory.relationshipToBook
               ? story.shortStory.relationshipToBook
               : "Related story",
+            snapshotCover: bookSnapshotCovers.find(
+              (b) => b.id === story.shortStory.relatedBook.id
+            )?.book.cover?.localFile.childImageSharp.gatsbyImageData,
             cover: story.shortStory.relatedBook.book?.cover
               ? story.shortStory.relatedBook.book.cover.localFile
                   .childImageSharp.gatsbyImageData
               : null,
-          },
+          }
+        : null,
     };
     const flattenedStory = {
       ..._story,
@@ -572,7 +596,13 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return generateLookup(data.filter((d) => !!d));
   }
 
-  function formatBook(book) {
+  /**
+   *
+   * @param {Book} book
+   * @param {BookCover[]} bookSnapshotCovers
+   * @returns
+   */
+  function formatBook(book, bookSnapshotCovers) {
     const links = book.book.purchaseLinks.split(", ");
     const linkNames = book.book.purchaseLinksNames.split(", ");
     const purchaseLinks = [];
@@ -590,6 +620,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       cover: book.book.cover
         ? book.book.cover.localFile.childImageSharp.gatsbyImageData
         : null,
+      snapshotCover: bookSnapshotCovers.find((b) => b.id === book.id)?.book
+        .cover?.localFile.childImageSharp.gatsbyImageData,
       stories: book.book.relatedStories,
       project: !book.book.relatedProject
         ? null
@@ -679,9 +711,18 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   await checkAndCreateFolder("./src/data/wp/Posts");
 
   const bookStartTime = Date.now();
-  const books = searchQuery.data.allWpBook.nodes;
+
+  /** @typedef {import('./src/types/posts').BookType} Book */
+
+  /** @type {Book[]} */
+  const books = searchQuery.data.books.nodes;
+
+  /** @typedef {import('./src/types/posts').BookCover} BookCover */
+
+  /** @type {BookCover[]} */
+  const bookSnapshotCovers = searchQuery.data.snapshotCovers.nodes;
   const formattedBooks = books
-    .map((b) => formatBook(b))
+    .map((b) => formatBook(b, bookSnapshotCovers))
     .sort((a, b) => b.published.date.getTime() - a.published.date.getTime());
 
   function getTimeDiff(start) {
@@ -707,9 +748,13 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   );
 
   const storyStartTime = Date.now();
+
+  /** @typedef {import("./src/types/posts").StoryType} Story */
+
+  /** @type {Story[]} */
   const stories = searchQuery.data.allWpShortstory.nodes;
   const formattedStories = stories
-    .map((s) => formatStory(s))
+    .map((s) => formatStory(s, bookSnapshotCovers))
     .sort((a, b) => b.published.date.getTime() - a.published.date.getTime());
 
   fs.writeFile(
