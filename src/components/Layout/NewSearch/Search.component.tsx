@@ -5,6 +5,11 @@ import SearchBar from "./SearchBar.component";
 import SearchResults from "./SearchResults.component";
 import { SearchProps, SearchResultItems } from "./types";
 import { search } from "./search";
+import {
+	blogDescription,
+	contactDescription,
+	homeDescription,
+} from "@/data/search";
 
 const sample: SearchResultItems = {
 	books: [
@@ -1272,7 +1277,23 @@ const sample: SearchResultItems = {
 			},
 		},
 	],
-	pages: [],
+	pages: [
+		{
+			title: "Blog",
+			slug: "/blog",
+			description: blogDescription,
+		},
+		{
+			title: "Contact",
+			slug: "/contact",
+			description: contactDescription,
+		},
+		{
+			title: "Home",
+			slug: "/",
+			description: homeDescription,
+		},
+	],
 };
 
 const Search = React.forwardRef<HTMLDialogElement, SearchProps>(

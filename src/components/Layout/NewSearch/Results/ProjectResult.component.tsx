@@ -2,21 +2,18 @@ import React from "react";
 import styled from "styled-components";
 
 import { FlattenedProjectCard } from "@/types/posts";
-import { ItemTitle, ResultContainer } from "./Result.styles";
+import {
+	ContentContainer,
+	InnerContainer,
+	ItemTitle,
+	ResultContainer,
+	SlubTitle,
+	TitleContainer,
+} from "./Result.styles";
 import ProjectTech from "./ProjectTech.component";
 import { SIZE_SM, SIZE_XS } from "@/styles/variables";
 import { WpContentDescription } from "@/styles/general-components";
-
-const InnerContainer = styled.div`
-	display: flex;
-	width: 100%;
-	height: 100%;
-	gap: ${SIZE_SM};
-`;
-
-const ContentContainer = styled.div`
-	flex: 2;
-`;
+import { getPrettyDate } from "@/utils/dates";
 
 const TechContainer = styled.div`
 	flex: 1;
@@ -33,7 +30,10 @@ const ProjectResult: React.FC<{
 		<ResultContainer role="link" onClick={() => onView(project.slug ?? "")}>
 			<InnerContainer>
 				<ContentContainer>
-					<ItemTitle>{project.title}</ItemTitle>
+					<TitleContainer>
+						<ItemTitle>{project.title}</ItemTitle>
+						<SlubTitle>{getPrettyDate(project.firstReleased.date)}</SlubTitle>
+					</TitleContainer>
 					<WpContentDescription
 						fontSize="1rem"
 						dangerouslySetInnerHTML={{ __html: project.content }}

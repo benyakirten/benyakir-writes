@@ -1,8 +1,7 @@
 import React from "react";
 
 import { PageSearch } from "@/data/search";
-import { truncate } from "@/utils/strings";
-import { ItemTitle, ResultContainer } from "./Result.styles";
+import { ContentContainer, ItemTitle, ResultContainer } from "./Result.styles";
 
 const PageResult: React.FC<{
 	page: PageSearch;
@@ -10,8 +9,10 @@ const PageResult: React.FC<{
 }> = ({ page, onView }) => {
 	return (
 		<ResultContainer role="link" onClick={() => onView(page.slug)}>
-			<ItemTitle>{page.title}</ItemTitle>
-			<p>{page.description}</p>
+			<ContentContainer>
+				<ItemTitle>{page.title}</ItemTitle>
+				<p>{page.description}</p>
+			</ContentContainer>
 		</ResultContainer>
 	);
 };
