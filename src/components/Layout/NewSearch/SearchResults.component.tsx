@@ -45,7 +45,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onClose }) => {
 
 	const storyResults =
 		results.stories.length === 0 ? null : (
-			<StyledSearchResultGroup title="Books">
+			<StyledSearchResultGroup title="Stories">
 				{results.stories.map((story) => (
 					<StoryResult onView={handleView} key={story.slug} story={story} />
 				))}

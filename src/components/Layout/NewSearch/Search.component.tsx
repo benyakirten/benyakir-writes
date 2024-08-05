@@ -120,7 +120,115 @@ const sample: SearchResultItems = {
 			},
 		},
 	],
-	projects: [],
+	projects: [
+		{
+			title: "Chat App",
+			slug: "chat-app-frontend",
+			mainLink: "https://splendorous-conkies-5f20c5.netlify.app",
+			hostedOn: "Netlify",
+			repoLink: "https://github.com/benyakirten/chat-app",
+			content:
+				'\n<p class="">A chat app built with Nuxt/Vue 3 that utilizes WebSockets with e2e encryption. With a...',
+			firstReleased: {
+				year: 2023,
+				month: 9,
+				full: "September",
+				short: "SEP",
+				date: new Date("2023-09-19T22:00:00.000Z"),
+			},
+			shortTechnologies: ["vue", "ts", "ws"],
+			longTechnologies: ["Vue", "TypeScript", "WebSockets"],
+			icons: [
+				{
+					name: "Vue",
+					publicURL: "/static/c81c62f225ecdc0951c2df809337162c/vue.svg",
+				},
+				{
+					name: "TypeScript",
+					publicURL: "/static/2eb4c65b355636c2f2989307858a80b1/ts.svg",
+				},
+				{
+					name: "WebSockets",
+					publicURL: "/static/f9ded644e416a6887ca94865033481b1/ws.svg",
+				},
+			],
+			meta: {
+				"3": true,
+				"2023": true,
+				chat: true,
+				app: true,
+				netlify: true,
+				a: true,
+				built: true,
+				with: true,
+				"nuxt/vue": true,
+				that: true,
+				utilizes: true,
+				websockets: true,
+				e2e: true,
+				encryption: true,
+				september: true,
+				sep: true,
+				vue: true,
+				ts: true,
+				ws: true,
+				typescript: true,
+				github: true,
+				repo: true,
+			},
+		},
+		{
+			title: "Recovering Grandeur",
+			slug: "recovering-grandeur",
+			mainLink: "https://www.recovering-grandeur.com",
+			hostedOn: "Netlify",
+			repoLink: "https://github.com/benyakirten/recovering-grandeur",
+			content:
+				"\n<p>A Vue-powered frontend for the fictional hospital Recovering Grandeur. It is a Single Page...",
+			firstReleased: {
+				year: 2021,
+				month: 7,
+				full: "July",
+				short: "JUL",
+				date: new Date("2021-07-18T22:00:00.000Z"),
+			},
+			shortTechnologies: ["sass", "vue"],
+			longTechnologies: ["Sass", "Vue"],
+			icons: [
+				{
+					name: "Sass",
+					publicURL: "/static/a3e78eb9ddecd7f0e9e7a89fabc992a2/sass.svg",
+				},
+				{
+					name: "Vue",
+					publicURL: "/static/c81c62f225ecdc0951c2df809337162c/vue.svg",
+				},
+			],
+			meta: {
+				"2021": true,
+				recovering: true,
+				grandeur: true,
+				netlify: true,
+				a: true,
+				"vue-powered": true,
+				frontend: true,
+				for: true,
+				the: true,
+				fictional: true,
+				hospital: true,
+				it: true,
+				is: true,
+				single: true,
+				page: true,
+				july: true,
+				jul: true,
+				sass: true,
+				vue: true,
+				github: true,
+				repo: true,
+			},
+		},
+	],
 	posts: [],
 	stories: [
 		{
@@ -1164,26 +1272,7 @@ const sample: SearchResultItems = {
 			},
 		},
 	],
-	pages: [
-		{
-			title: "Home",
-			slug: "/",
-			description:
-				"Get an overview of my latest creations. As a fluent speaker of Italian, former writer, editor and current fullstack dev, I have a lot to share.",
-		},
-		{
-			title: "Contact",
-			slug: "/",
-			description:
-				"Get an overview of my latest creations. As a fluent speaker of Italian, former writer, editor and current fullstack dev, I have a lot to share.",
-		},
-		{
-			title: "Projects",
-			slug: "/",
-			description:
-				"Get an overview of my latest creations. As a fluent speaker of Italian, former writer, editor and current fullstack dev, I have a lot to share.",
-		},
-	],
+	pages: [],
 };
 
 const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
