@@ -1,6 +1,7 @@
 import { SearchResultItems } from "./types";
 import { books, pageSearch, posts, projects, stories } from "@/data/search";
 
+// TODO: Make this into API function
 export function search(query: string): SearchResultItems | null {
 	if (!query) {
 		return null;

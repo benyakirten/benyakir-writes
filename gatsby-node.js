@@ -432,7 +432,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       .replace(/\(/g, "")
       .replace(/\./g, "")
       .replace(/\?/g, "")
-      .replace(/\!/g, "");
+      .replace(/\!/g, "")
+      .replace(/:/g, "")
+      .replace(/'/g, "");
   }
 
   function truncate(sentence, length) {
@@ -668,9 +670,19 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       tags: post.tags.nodes?.map((n) => n.name),
     };
 
+    const metadataCats = data.categories?.reduce((acc, next) => {
+      const cat = next.toLowerCase().split(" ");
+      return acc.concat(cat);
+    }, []);
+
+    const metaData = structuredClone(data);
+    if (metadataCats) {
+      metaData.categories = metadataCats;
+    }
+
     const flattenedPost = {
       ...data,
-      meta: generatePostMeta(data),
+      meta: generatePostMeta(metaData),
     };
 
     return flattenedPost;

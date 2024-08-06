@@ -20,6 +20,8 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onClose }) => {
 		return null;
 	}
 
+	console.log(results.posts);
+
 	function handleView(slug: string) {
 		onClose();
 		navigate(slug);
