@@ -7,14 +7,6 @@ import type {
 	ProjectType,
 } from "@Types/posts";
 
-export function formatAllProjects(projects: ProjectType[]): FlattenedProject[] {
-	return projects
-		.map((p) => formatProject(p))
-		.sort(
-			(a, b) => b.firstReleased.date.getTime() - a.firstReleased.date.getTime(),
-		);
-}
-
 export function formatProject(project: ProjectType): FlattenedProject {
 	const tech = project.project.technologies.split(", ");
 	const piecemealProject: PartialFlattenedProject = {
@@ -35,28 +27,9 @@ export function formatProject(project: ProjectType): FlattenedProject {
 	}
 	const _project: FlattenedProject = {
 		...piecemealProject,
-		meta: createMetaForProject(piecemealProject),
+		meta: {},
 	};
 	return _project;
-}
-
-export function createMetaForProject(project: PartialFlattenedProject) {
-	const data = [
-		project.title,
-		project.slug,
-		project.content,
-		project.hostedOn,
-		project.firstReleased.year,
-		project.firstReleased.full,
-		project.firstReleased.short,
-		...project.shortTechnologies,
-		...project.longTechnologies,
-	];
-	if (project.repoLink) {
-		data.push("github");
-		data.push("repo");
-	}
-	return createSearchableString(data.filter((d) => !!d));
 }
 
 export function getFullTechName(tech: string) {

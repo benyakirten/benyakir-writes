@@ -11,10 +11,11 @@ import {
 	InnerContainer,
 	TagPill,
 } from "./Result.styles";
-import { determineTitle } from "@/utils/blog";
+import { getActiveCategory } from "@/utils/blog";
 import { getPrettyDate } from "@/utils/dates";
 import { FONT_SM, SANS_SERIF_FONT, SIZE_SM } from "@/styles/variables";
 import { WpContentDescription } from "@/styles/general-components";
+import { truncate } from "@/utils/strings";
 
 const PostTitleContainer = styled.div`
 	display: grid;
@@ -46,7 +47,7 @@ const PostResult: React.FC<{
 	post: FlattenedBlogCard;
 	onView: (slug: string) => void;
 }> = ({ post, onView }) => {
-	const [title, subTitle, primaryCategory] = determineTitle(post);
+	const activeCategory = getActiveCategory(post.categories);
 	const tags = post.tags?.slice(0, MAX_TAGS) ?? [];
 	const otherTags = post.tags ? post.tags.length - MAX_TAGS : 0;
 	return (
@@ -55,8 +56,7 @@ const PostResult: React.FC<{
 				<ContentContainer relativeSize={3}>
 					<TitleContainer>
 						<PostTitleContainer>
-							<ItemTitle>{title}</ItemTitle>
-							{subTitle && <PostTitleSubtitle>{subTitle}</PostTitleSubtitle>}
+							<ItemTitle>{truncate(post.title, 30)}</ItemTitle>
 						</PostTitleContainer>
 						<SlubTitle>{getPrettyDate(post.published.date)}</SlubTitle>
 					</TitleContainer>
@@ -68,7 +68,7 @@ const PostResult: React.FC<{
 					/>
 				</ContentContainer>
 				<MetadataContainer>
-					<CategoryContainer>{primaryCategory}</CategoryContainer>
+					<CategoryContainer>{activeCategory}</CategoryContainer>
 					<TagContainer>
 						{tags.map((tag) => (
 							<TagPill key={tag}>{tag}</TagPill>
