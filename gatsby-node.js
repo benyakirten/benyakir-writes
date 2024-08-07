@@ -450,9 +450,17 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return sub.replace(/\s\S*$/, "...");
   }
 
+  /** @type {Record<string, number>} */
+  const allPossibleLookups = {};
+
   function generateLookup(arr) {
     return arr.reduce((acc, next) => {
-      acc[formatText(next.toString().toLowerCase())] = true;
+      if (next) {
+        const count = allPossibleLookups[next] || 0;
+        allPossibleLookups[next] = count + 1;
+      }
+
+      acc[formatText(next?.toString().toLowerCase())] = true;
       return acc;
     }, {});
   }
@@ -950,6 +958,19 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             allStartTime
           )} seconds.`
         );
+      }
+    }
+  );
+
+  fs.writeFile(
+    "./src/data/wp/lookups.json",
+    JSON.stringify(allPossibleLookups),
+    "utf-8",
+    (err) => {
+      if (err) {
+        reporter.error(`Error writing all lookup data! ${err}`);
+      } else {
+        reporter.success("Success writing general lookup data!");
       }
     }
   );
