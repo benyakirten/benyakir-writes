@@ -37,65 +37,65 @@ export class Trie {
 		node.weight = count;
 	}
 
+	private startWith(prefix: string): TrieNode | null {
+		if (prefix === "") {
+			return null;
+		}
+
+		let node = this.root;
+		for (let i = 0; i < prefix.length; i++) {
+			const char = prefix[i];
+			const childNode = node.children.get(char);
+			if (!childNode) {
+				return null;
+			}
+
+			node = childNode;
+		}
+
+		return node;
+	}
+
 	// Returns all possible nodes that can be formed from the given prefix
 	private dfs(
 		prefix: string,
-		node = this.root,
-		results: CompletionOption[] = [],
-	): CompletionOption[] | null {
-		let allResults = results;
-		if (node.weight !== null) {
-			results.push({ word: prefix, weight: node.weight });
+		node: TrieNode,
+		first = true,
+	): CompletionOption[] {
+		const options: CompletionOption[] = [];
+		if (!first && node.weight !== null) {
+			options.push({ word: prefix, weight: node.weight });
 		}
 
 		for (const [char, childNode] of node.children) {
-			const options = this.dfs(prefix + char, childNode, allResults);
-			if (options) {
-				allResults = allResults.concat(options);
-			}
+			const childPrefix = prefix + char;
+			options.push(...this.dfs(childPrefix, childNode, false));
 		}
 
-		return allResults;
+		return options;
 	}
 
-	suggest(prefix: string): string[] | null {
-		const options = this.dfs(prefix);
+	suggest(prefix: string): CompletionOption[] | null {
+		const headNode = this.startWith(prefix);
+		if (!headNode) {
+			return null;
+		}
+
+		const options = this.dfs(prefix, headNode);
 		if (!options || options.length === 0) {
 			return null;
 		}
 
-		return options
-			.sort((a, b) => {
-				if (a.weight === null) {
-					return 1;
-				}
-
-				if (b.weight === null) {
-					return -1;
-				}
-
-				return b.weight - a.weight;
-			})
-			.map((option) => option.word);
-	}
-
-	findBest(options: CompletionOption[]): string | null {
-		if (options.length === 0) {
-			return null;
-		}
-
-		const bestOption = options.reduce<CompletionOption>((acc, option) => {
-			if (option.weight === null) {
-				return acc;
+		return options.sort((a, b) => {
+			if (a.weight === null) {
+				return 1;
 			}
 
-			if (acc.weight === null || option.weight > acc.weight) {
-				return option;
+			if (b.weight === null) {
+				return -1;
 			}
 
-			return acc;
-		}, options[0]);
-
-		return bestOption.word;
+			return b.weight - a.weight;
+		});
 	}
 }
