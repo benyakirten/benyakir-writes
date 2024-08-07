@@ -14,7 +14,7 @@ export class TrieNode {
 
 export type CompletionOption = { word: string; weight: number };
 export class Trie {
-	private root: TrieNode;
+	root: TrieNode;
 
 	constructor(words: [string, number][] = []) {
 		this.root = new TrieNode();
@@ -27,35 +27,14 @@ export class Trie {
 		let node = this.root;
 		for (let i = 0; i < word.length; i++) {
 			const char = word[i];
+			const childNode = node.children.get(char) ?? new TrieNode();
 			if (!node.children.has(char)) {
-				node.children.set(char, new TrieNode());
+				node.children.set(char, childNode);
 			}
 
-			const childNode = node.children.get(char);
-			if (!childNode) {
-				throw new Error("childNode is undefined");
-			}
 			node = childNode;
 		}
 		node.weight = count;
-	}
-
-	search(word: string): TrieNode | null {
-		let node = this.root;
-		for (let i = 0; i < word.length; i++) {
-			const char = word[i];
-			if (!node.children.has(char)) {
-				return null;
-			}
-
-			const childNode = node.children.get(char);
-			if (!childNode) {
-				throw new Error("childNode is undefined");
-			}
-			node = childNode;
-		}
-
-		return node;
 	}
 
 	// Returns all possible nodes that can be formed from the given prefix
@@ -100,27 +79,23 @@ export class Trie {
 			.map((option) => option.word);
 	}
 
-	suggestBest(prefix: string): string | null {
-		const options = this.dfs(prefix);
-		if (!options || options.length === 0) {
+	findBest(options: CompletionOption[]): string | null {
+		if (options.length === 0) {
 			return null;
 		}
 
-		const nodeWithHighestCount = options.reduce<CompletionOption>(
-			(acc, option) => {
-				if (option.weight === null) {
-					return acc;
-				}
-
-				if (acc.weight === null || option.weight > acc.weight) {
-					return option;
-				}
-
+		const bestOption = options.reduce<CompletionOption>((acc, option) => {
+			if (option.weight === null) {
 				return acc;
-			},
-			options[0],
-		);
+			}
 
-		return nodeWithHighestCount.word;
+			if (acc.weight === null || option.weight > acc.weight) {
+				return option;
+			}
+
+			return acc;
+		}, options[0]);
+
+		return bestOption.word;
 	}
 }

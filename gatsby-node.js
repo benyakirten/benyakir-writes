@@ -455,12 +455,13 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   function generateLookup(arr) {
     return arr.reduce((acc, next) => {
-      if (next) {
-        const count = allPossibleLookups[next] || 0;
-        allPossibleLookups[next] = count + 1;
+      const lookup = formatText(next?.toString().toLowerCase());
+      if (lookup && /\w/.test(lookup)) {
+        const count = allPossibleLookups[lookup] || 0;
+        allPossibleLookups[lookup] = count + 1;
       }
 
-      acc[formatText(next?.toString().toLowerCase())] = true;
+      acc[lookup] = true;
       return acc;
     }, {});
   }

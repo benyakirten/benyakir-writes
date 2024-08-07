@@ -2,6 +2,7 @@ import rawBooks from "./wp/Author/books.json";
 import rawStories from "./wp/Author/stories.json";
 import rawProjects from "./wp/Projects/projects.json";
 import rawPosts from "./wp/Posts/all.json";
+import lookups from "./wp/lookups.json";
 
 import {
 	FlattenedBlogCard,
@@ -9,6 +10,7 @@ import {
 	FlattenedProjectCard,
 	FlattenedStoryCard,
 } from "@/types/posts";
+import { Trie } from "@/utils/search";
 
 export const blogDescription =
 	"Browse a list of all my blog posts ordered by most recent publication to least recent. Users can filter the blog results by publication date, category and tags.";
@@ -106,3 +108,5 @@ export const pageSearch: PageSearch[] = [
 		description: authorDescription,
 	},
 ] as const;
+
+export const autocomplete = new Trie(Object.entries(lookups));
