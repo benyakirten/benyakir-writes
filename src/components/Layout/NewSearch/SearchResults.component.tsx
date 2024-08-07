@@ -1,10 +1,7 @@
 import React from "react";
 import { navigate } from "gatsby";
+import styled from "styled-components";
 
-import {
-	SearchResultsContainer,
-	StyledSearchResultGroup,
-} from "./Search.styles";
 import { SearchResultsProps } from "./types";
 import {
 	BookResult,
@@ -14,8 +11,52 @@ import {
 	ProjectResult,
 	StoryResult,
 } from "./Results";
+import {
+	SIZE_SM,
+	Z_ABOVE,
+	SANS_SERIF_FONT,
+	FONT_SM,
+	HORIZONTAL_XS,
+} from "@/styles/variables";
 
-const SearchResults: React.FC<SearchResultsProps> = ({ results, onClose }) => {
+const SearchResultsContainer = styled.ul`
+    display: grid;
+    gap: ${SIZE_SM};
+
+    width: 100%;
+    max-height: 35vh;
+    padding-top: ${SIZE_SM};
+
+    overflow-y: auto;
+`;
+
+const StyledSearchResultGroup = styled.li<{ title: string }>`
+    position: relative;
+
+    border-top: 2px solid #000;
+    padding: ${SIZE_SM};
+
+    &::after {
+        content: "${(props) => props.title}";
+        position: absolute;
+        top: calc(-${SIZE_SM} + 2px);
+        left: ${SIZE_SM};
+        z-index: ${Z_ABOVE};
+
+        font-family: ${SANS_SERIF_FONT};
+        font-size: ${FONT_SM};
+
+        background-color: ${(props) => props.theme.base.background};
+        padding: ${HORIZONTAL_XS};
+    }
+`;
+
+const SearchResults: React.FC<SearchResultsProps> = ({
+	results,
+	alternatives,
+	onClose,
+	onSetQuery,
+}) => {
 	if (results === null) {
 		return null;
 	}
@@ -80,7 +121,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onClose }) => {
 		storyResults === null &&
 		bookResults === null &&
 		pageResults === null ? (
-			<EmptyResults />
+			<EmptyResults alternatives={alternatives} onSelect={onSetQuery} />
 		) : (
 			<>
 				{pageResults}

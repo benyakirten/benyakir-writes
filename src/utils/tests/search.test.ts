@@ -5,15 +5,35 @@ import { Trie } from "../search";
 describe("Trie", () => {
 	let trie: Trie;
 
-	beforeEach(() => {
-		trie = new Trie([
-			["apples", 5],
-			["apply", 4],
-			["banana", 3],
-		]);
+	describe("insert", () => {
+		beforeEach(() => {
+			trie = new Trie();
+		});
+
+		it("should add the word with the weight to the trie", () => {
+			trie.insert("apples", 5);
+			trie.insert("apply", 4);
+			trie.insert("banana", 3);
+
+			expect(trie.words).toEqual(["apples", "apply", "banana"]);
+			expect(trie.suggest("apple")).toEqual([
+				{
+					word: "apples",
+					weight: 5,
+				},
+			]);
+		});
 	});
 
 	describe("suggest", () => {
+		beforeEach(() => {
+			trie = new Trie([
+				["apples", 5],
+				["apply", 4],
+				["banana", 3],
+			]);
+		});
+
 		it("should suggest words based on prefix", () => {
 			expect(trie.suggest("a")).toEqual([
 				{

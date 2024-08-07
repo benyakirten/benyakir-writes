@@ -11,13 +11,17 @@ export type SearchProps = {
 };
 
 export type SearchBarProps = {
+	suggestions: string[];
+	search: string;
 	onClose: () => void;
-	onSearch: (query: string) => void;
+	setSearch: (val: string) => void;
 };
 
 export type SearchResultsProps = {
 	onClose: () => void;
+	onSetQuery: (query: string) => void;
 	results: SearchResultItems | null;
+	alternatives: string[];
 };
 
 export type SearchResultItems = {

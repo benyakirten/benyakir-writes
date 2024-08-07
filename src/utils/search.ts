@@ -14,7 +14,8 @@ export class TrieNode {
 
 export type CompletionOption = { word: string; weight: number };
 export class Trie {
-	root: TrieNode;
+	private root: TrieNode;
+	public words: string[] = [];
 
 	constructor(words: [string, number][] = []) {
 		this.root = new TrieNode();
@@ -24,6 +25,8 @@ export class Trie {
 	}
 
 	insert(word: string, count: number): void {
+		this.words.push(word);
+
 		let node = this.root;
 		for (let i = 0; i < word.length; i++) {
 			const char = word[i];
@@ -98,4 +101,22 @@ export class Trie {
 			return b.weight - a.weight;
 		});
 	}
+}
+
+const NUM_SUGGESTIONS = 3;
+export function getRandomSuggestions(trie: Trie): string[] {
+	const { words } = trie;
+	if (words.length <= NUM_SUGGESTIONS) {
+		return [...words];
+	}
+
+	const indices: number[] = [];
+	while (indices.length < NUM_SUGGESTIONS) {
+		const index = Math.floor(Math.random() * words.length);
+		if (!indices.includes(index)) {
+			indices.push(index);
+		}
+	}
+
+	return indices.map((i) => words[i]);
 }
