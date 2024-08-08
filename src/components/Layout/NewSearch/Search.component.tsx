@@ -42,6 +42,7 @@ const SearchModal = styled.dialog`
 
 const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 	({ onClose }, ref) => {
+		const [showResultCount, setShowResultCount] = React.useState(false);
 		const handleClick = (e: React.MouseEvent<HTMLDialogElement>) => {
 			if (e.target === e.currentTarget) {
 				onClose();
@@ -66,6 +67,7 @@ const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 		const setQuery = (query: string) => {
 			_setQuery(query);
 			if (query === "") {
+				setShowResultCount(false);
 				setSuggestions([]);
 				setSearchAutocomplete([]);
 				return;
@@ -84,11 +86,22 @@ const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 
 			setSearchAutocomplete(allSuggestions);
 			setSuggestions(allSuggestions);
+			setShowResultCount(true);
 		};
+
+		const numResults = results
+			? results.books.length +
+				results.stories.length +
+				results.posts.length +
+				results.projects.length +
+				results.pages.length
+			: 0;
 
 		return (
 			<SearchModal ref={ref} onClick={handleClick}>
 				<SearchBar
+					showResultCount={showResultCount}
+					numResults={numResults}
 					suggestions={searchAutocomplete}
 					search={query}
 					setSearch={setQuery}

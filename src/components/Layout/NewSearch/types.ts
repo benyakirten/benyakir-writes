@@ -13,6 +13,8 @@ export type SearchProps = {
 export type SearchBarProps = {
 	suggestions: string[];
 	search: string;
+	numResults: number;
+	showResultCount: boolean;
 	onClose: () => void;
 	setSearch: (val: string) => void;
 };

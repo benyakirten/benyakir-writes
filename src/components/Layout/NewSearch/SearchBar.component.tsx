@@ -3,7 +3,14 @@ import styled from "styled-components";
 
 import { SearchIcon, CloseIcon } from "@/components/Icons";
 import { SearchBarProps } from "./types";
-import { SIZE_XXL, SIZE_SM, FONT_LG, SIZE_MD } from "@/styles/variables";
+import {
+	SIZE_XXL,
+	SIZE_SM,
+	FONT_LG,
+	SIZE_MD,
+	FONT_XS,
+	FONT_XXS,
+} from "@/styles/variables";
 
 const StyledSearchBar = styled.div`
     display: flex;
@@ -16,8 +23,16 @@ const StyledSearchBar = styled.div`
 const SearchInput = styled.input`
     border: 0;
     outline: none;
-    font-size: ${FONT_LG};
-    flex: 1;
+	width: 50%;
+	font-size: ${FONT_LG};
+	flex-grow: 1;
+`;
+
+const SearchCount = styled.span`
+	font-size: ${FONT_XS};
+	text-transform: uppercase;
+	opacity: 0.8;
+	align-self: center;
 `;
 
 const SearchIconContainer = styled.label`
@@ -46,6 +61,8 @@ const SearchSuggestions: React.FC<{ suggestions: string[]; id: string }> = ({
 );
 
 const SearchBar: React.FC<SearchBarProps> = ({
+	showResultCount,
+	numResults,
 	suggestions,
 	search,
 	onClose,
@@ -65,6 +82,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
 				aria-label="Search"
 				list="search-suggestions"
 			/>
+			{showResultCount && search !== "" && (
+				<SearchCount>
+					{numResults} result
+					{numResults === 1 ? "" : "s"}
+				</SearchCount>
+			)}
 			<SearchSuggestions suggestions={suggestions} id="search-suggestions" />
 			<CloseButton aria-label="Close Modal" type="button" onClick={onClose}>
 				<CloseIcon />
