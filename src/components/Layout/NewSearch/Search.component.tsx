@@ -14,15 +14,15 @@ const SearchModal = styled.dialog`
     display: none;
     
     position: fixed;
-    top: 40%;
-    left: 50%;
+    top: 30%;
+    left: 53%;
     z-index: ${Z_SEARCH};
 
-    transform: translate(-50%, -40%);
     border-radius: ${SIZE_MD};
-    width: 70%;
-	max-height: 40vh;
+    width: 50%;
 	overflow: auto;
+
+	transform: translateX(-50%);
 
     &[open] {
         display: block;
