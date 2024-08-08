@@ -16,8 +16,12 @@ const UnderlinableItem = styled.div<{ display?: string }>`
 
 	transition: background-size 0.3s;
 
-	&:hover {
+	&:hover, &:focus-within {
 		background-size: 100% 2px;
+	}
+
+	&:focus-within {
+		outline: 1px solid ${(props) => props.theme.link.dark};
 	}
 
     ${media.noHover} {

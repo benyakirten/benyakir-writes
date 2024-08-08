@@ -9,7 +9,6 @@ import {
 	FONT_LG,
 	SIZE_MD,
 	FONT_XS,
-	FONT_XXS,
 } from "@/styles/variables";
 
 const StyledSearchBar = styled.div`

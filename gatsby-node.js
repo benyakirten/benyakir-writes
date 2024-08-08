@@ -434,7 +434,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       .replace(/\?/g, "")
       .replace(/\!/g, "")
       .replace(/:/g, "")
-      .replace(/'/g, "");
+      .replace(/'/g, "")
+      .replace(/”“/g, "");
   }
 
   function truncate(sentence, length) {
@@ -453,15 +454,30 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   /** @type {Record<string, number>} */
   const allPossibleLookups = {};
 
+  /**
+   *
+   * @param {string[]} arr
+   * @returns {Record<string, true>}
+   */
   function generateLookup(arr) {
-    return arr.reduce((acc, next) => {
-      const lookup = formatText(next?.toString().toLowerCase());
-      if (lookup && /\w/.test(lookup)) {
-        const count = allPossibleLookups[lookup] || 0;
-        allPossibleLookups[lookup] = count + 1;
+    return arr.reduce((/** @type {Record<string, true>} */ acc, next) => {
+      /** @type {string | undefined} */
+      const datum = next?.toString().toLowerCase();
+
+      if (!datum) {
+        return acc;
       }
 
-      acc[lookup] = true;
+      /** @type {string[]} */
+      const lookup = formatText(datum).split(" ");
+
+      for (const item of lookup) {
+        acc[item] = true;
+
+        const count = allPossibleLookups[item] || 0;
+        allPossibleLookups[item] = count + 1;
+      }
+
       return acc;
     }, {});
   }
