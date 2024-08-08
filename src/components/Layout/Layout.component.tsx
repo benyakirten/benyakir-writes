@@ -46,6 +46,8 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 	const closeModal = () => modalRef.current?.close();
 	const openModal = () => modalRef.current?.showModal();
 
+	React.useEffect(() => openModal(), []);
+
 	React.useEffect(() => {
 		const handler = (e: KeyboardEvent) => {
 			if (isInputFocused()) {

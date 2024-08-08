@@ -78,11 +78,6 @@ export const pageSearch: PageSearch[] = [
 		description: blogDescription,
 	},
 	{
-		title: "Contact",
-		slug: "/contact",
-		description: contactDescription,
-	},
-	{
 		title: "Home",
 		slug: "/",
 		description: homeDescription,
@@ -110,3 +105,30 @@ export const pageSearch: PageSearch[] = [
 ] as const;
 
 export const autocomplete = new Trie(Object.entries(lookups));
+
+function getItemDate(
+	item:
+		| FlattenedBlogCard
+		| FlattenedBookCard
+		| FlattenedProjectCard
+		| FlattenedStoryCard,
+): Date {
+	if ("published" in item) {
+		return item.published.date;
+	}
+
+	if ("firstReleased" in item) {
+		return item.firstReleased.date;
+	}
+
+	return new Date(0);
+}
+
+export const latestTenItems = [...books, ...stories, ...projects, ...posts]
+	.sort((a, b) => {
+		const aDate = getItemDate(a);
+		const bDate = getItemDate(b);
+
+		return bDate.valueOf() - aDate.valueOf();
+	})
+	.slice(0, 10);

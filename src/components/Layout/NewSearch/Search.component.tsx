@@ -8,36 +8,37 @@ import { search } from "./search";
 import { useDebounce } from "@/hooks";
 import { autocomplete } from "@/data/search";
 import { getRandomSuggestions } from "@/utils/search";
-import { Z_SEARCH, SIZE_MD, TRANSITION_SLOW } from "@/styles/variables";
+import { Z_SEARCH, SIZE_MD } from "@/styles/variables";
+import { media } from "@/styles/queries";
 
 const SearchModal = styled.dialog`
-    display: none;
-    
     position: fixed;
     top: 30%;
-    left: 53%;
+    left: 50%;
     z-index: ${Z_SEARCH};
 
     border-radius: ${SIZE_MD};
     width: 50%;
-	overflow: auto;
+	overflow: hidden;
 
 	transform: translateX(-50%);
-
-    &[open] {
-        display: block;
-    }
     
     &::backdrop {
-        background-color: rgba(0, 0, 0, 0);
-        backdrop-filter: blur(0px);
-        transition: all ${TRANSITION_SLOW} ease;
-    }
-    
-    &[open]::backdrop {
+		height: 200vh;
         background-color: rgba(0, 0, 0, 0.2);
         backdrop-filter: blur(4px);
     }
+
+	${media.desktop} {
+		width: 70%;
+	}
+
+	${media.tablet} {
+		width: 80%;
+	}
+
+	${media.phone} {
+		width: 90%;
 `;
 
 const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
