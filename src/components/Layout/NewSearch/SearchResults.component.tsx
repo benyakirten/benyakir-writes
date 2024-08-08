@@ -24,10 +24,12 @@ const SearchResultsContainer = styled.ul`
     gap: ${SIZE_SM};
 
     width: 100%;
-    max-height: 35vh;
+    max-height: 45vh;
     padding-top: ${SIZE_SM};
 
     overflow-y: auto;
+	scroll-snap-type: block;
+	scroll-margin: 0.2rem;
 `;
 
 const StyledSearchResultGroup = styled.li<{ title: string }>`

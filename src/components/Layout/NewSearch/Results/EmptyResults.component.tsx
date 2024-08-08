@@ -1,16 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-import { FONT_MD, FONT_SM, SIZE_SM, SIZE_XS } from "@/styles/variables";
+import { FONT_LG, FONT_MD, FONT_SM, SIZE_SM } from "@/styles/variables";
 
 const EmptyContainer = styled.div`
     padding: ${SIZE_SM};
-	font-size: ${FONT_SM};
-	line-height: ${FONT_MD};
-`;
-
-const PossibleSearchItem = styled.div`
-	display: inline;
+	font-size: ${FONT_MD};
+	line-height: ${FONT_LG};
 `;
 
 const PossibleSearch = styled.button`
@@ -39,12 +35,12 @@ const EmptyResults: React.FC<{
 			<p>
 				No results found. Did you mean:{" "}
 				{alternatives.map((alternative, i) => (
-					<PossibleSearchItem key={alternative}>
+					<span key={alternative}>
 						<PossibleSearch onClick={() => onSelect(alternative)}>
 							{alternative}
 						</PossibleSearch>
-						<span>{i < alternatives.length - 1 ? ",  " : " "}</span>
-					</PossibleSearchItem>
+						<span>{i < alternatives.length - 1 ? ",  " : ""}</span>
+					</span>
 				))}
 			</p>
 		</EmptyContainer>

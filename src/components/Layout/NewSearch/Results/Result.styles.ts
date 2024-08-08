@@ -48,7 +48,7 @@ export const ContentContainer = styled.div<{ relativeSize?: number }>`
 
 export const TitleContainer = styled.div`
 	display: flex;
-	align-items: center;
+	gap: ${SIZE_XS};
 	justify-content: space-between;
 `;
 

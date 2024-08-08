@@ -103,7 +103,7 @@ export class Trie {
 	}
 }
 
-const NUM_SUGGESTIONS = 3;
+const NUM_SUGGESTIONS = 5;
 export function getRandomSuggestions(trie: Trie): string[] {
 	const { words } = trie;
 	if (words.length <= NUM_SUGGESTIONS) {
