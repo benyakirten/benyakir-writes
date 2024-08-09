@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 import {
 	SIZE_SM,
@@ -19,9 +19,17 @@ const StyledSearchResultGroup = styled.li`
     min-height: ${SIZE_MD};
 `;
 
-const TopBar = styled.div`
-    border-top: 2px solid ${(props) => props.theme.base.textColor};
+const TopBar = styled.button`
+    display: block;
     position: relative;
+    pointer: cursor;
+
+    width: 100%;
+    border-top: 2px solid ${(props) => props.theme.base.textColor};
+
+    &:focus-within {
+        outline: 2px solid ${(props) => props.theme.base.textColor};
+    }
 `;
 
 const GroupLabel = styled.h3`
@@ -38,7 +46,7 @@ const GroupLabel = styled.h3`
     padding: ${HORIZONTAL_XS};
 `;
 
-const ToggleVisibilityButton = styled.button`
+const ToggleVisibilityButton = styled.div`
     position: absolute;
     top: calc(-${SIZE_SM} + 2px);
     right: ${SIZE_SM};
@@ -70,19 +78,32 @@ const SearchResultGroup: React.FC<SearchResultGroupProps> = ({
 	children,
 }) => {
 	const [open, toggleOpen] = useToggle(true);
+	const theme = useTheme() as BaseTheme;
+	const collapsibleId = `collapsible-${title}`;
+	const topbarId = `topbar-${title}`;
 	return (
 		<StyledSearchResultGroup>
-			<TopBar>
-				<GroupLabel>{title}</GroupLabel>
-				<ToggleVisibilityButton
+			<h3>
+				<TopBar
+					aria-expanded={open}
 					aria-label={`${open ? "Hide" : "Show"} Group`}
+					aria-controls={collapsibleId}
 					onClick={toggleOpen}
+					id={topbarId}
 				>
-					<EyeIcon height="1.5rem" bgColor="#000" />
-					<EyeBar open={open} />
-				</ToggleVisibilityButton>
-			</TopBar>
-			<InnerSearchResults aria-hidden={!open} open={open}>
+					<GroupLabel>{title}</GroupLabel>
+					<ToggleVisibilityButton>
+						<EyeIcon height="1.5rem" bgColor={theme.base.textColor} />
+						<EyeBar open={open} />
+					</ToggleVisibilityButton>
+				</TopBar>
+			</h3>
+			<InnerSearchResults
+				id={collapsibleId}
+				role="region"
+				aria-labelledby={topbarId}
+				open={open}
+			>
 				{children}
 			</InnerSearchResults>
 		</StyledSearchResultGroup>

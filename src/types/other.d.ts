@@ -10,7 +10,7 @@ declare module "*.css" {
 	export = classNames;
 }
 
-// https://nyxo.app/tips-for-using-typescript-with-styled-components
+// https://styled-components.com/docs/api#typescript
 declare module "styled-components" {
 	export type DefaultTheme = BaseTheme;
 }
