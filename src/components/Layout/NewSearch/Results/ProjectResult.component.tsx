@@ -32,7 +32,10 @@ const ProjectResult: React.FC<{
 	const firstIcons = project.icons.slice(0, 2);
 	const otherIcons = project.icons.length - MAX_TECHS;
 	return (
-		<ResultContainer role="link" onClick={() => onView(project.slug ?? "")}>
+		<ResultContainer
+			role="link"
+			onClick={() => onView(`/project/${project.slug}`)}
+		>
 			<InnerContainer>
 				<ContentContainer>
 					<TitleContainer>

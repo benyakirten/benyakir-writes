@@ -19,7 +19,6 @@ const SearchModal = styled.dialog`
 
     border-radius: ${SIZE_MD};
     width: 50%;
-	overflow: hidden;
 
 	transform: translateX(-50%);
     

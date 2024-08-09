@@ -19,7 +19,7 @@ const BookResult: React.FC<{
 	onView: (slug: string) => void;
 }> = ({ book, onView }) => {
 	return (
-		<ResultContainer role="link" onClick={() => onView(book.slug ?? "")}>
+		<ResultContainer role="link" onClick={() => onView(`/book/${book.slug}`)}>
 			<InnerContainer>
 				<ContentContainer>
 					<TitleContainer>

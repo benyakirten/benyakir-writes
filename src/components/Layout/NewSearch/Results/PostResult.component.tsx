@@ -49,7 +49,7 @@ const PostResult: React.FC<{
 	const tags = post.tags?.slice(0, MAX_TAGS) ?? [];
 	const otherTags = post.tags ? post.tags.length - MAX_TAGS : 0;
 	return (
-		<ResultContainer role="link" onClick={() => onView(post.slug)}>
+		<ResultContainer role="link" onClick={() => onView(`/post/${post.slug}`)}>
 			<InnerContainer>
 				<ContentContainer>
 					<TitleContainer>

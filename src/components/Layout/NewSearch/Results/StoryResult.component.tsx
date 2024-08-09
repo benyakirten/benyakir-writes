@@ -14,7 +14,6 @@ import {
 	SlubTitle,
 	BookCoverContainer,
 } from "./Result.styles";
-import { SIZE_XS } from "@/styles/variables";
 
 const SubtitleText = styled.p`
 	text-align: right;
@@ -28,7 +27,7 @@ const PostStory: React.FC<{
 	const subtitle =
 		relatedBook && `${relatedBook.relationship} to ${relatedBook.title}`;
 	return (
-		<ResultContainer role="link" onClick={() => onView(story.slug ?? "")}>
+		<ResultContainer role="link" onClick={() => onView(`/story/${story.slug}`)}>
 			<InnerContainer>
 				<ContentContainer>
 					<TitleContainer>
