@@ -30,7 +30,7 @@ const PostStory: React.FC<{
 	return (
 		<ResultContainer role="link" onClick={() => onView(story.slug ?? "")}>
 			<InnerContainer>
-				<ContentContainer relativeSize={4}>
+				<ContentContainer>
 					<TitleContainer>
 						<ItemTitle>{story.title}</ItemTitle>
 						<SlubTitle>{getPrettyDate(story.published.date)}</SlubTitle>

@@ -13,7 +13,7 @@ import {
 } from "./Result.styles";
 import { getActiveCategory } from "@/utils/blog";
 import { getPrettyDate } from "@/utils/dates";
-import { FONT_SM, SANS_SERIF_FONT, SIZE_SM } from "@/styles/variables";
+import { FONT_SM, SANS_SERIF_FONT, SIZE_SM, SIZE_XS } from "@/styles/variables";
 import { WpContentDescription } from "@/styles/general-components";
 import { truncate } from "@/utils/strings";
 
@@ -25,11 +25,9 @@ const PostTitleContainer = styled.div`
 
 const MetadataContainer = styled.div`
 	flex: 1;
-	display: grid;
-`;
-
-const PostTitleSubtitle = styled.span`
-	font-size: ${FONT_SM};
+	display: flex;
+	flex-direction: column;
+	gap: ${SIZE_XS};
 `;
 
 const CategoryContainer = styled.p`
@@ -41,7 +39,7 @@ const TagContainer = styled.div`
 	gap: 2px;
 `;
 
-const MAX_TAGS = 4;
+const MAX_TAGS = 2;
 
 const PostResult: React.FC<{
 	post: FlattenedBlogCard;
@@ -53,7 +51,7 @@ const PostResult: React.FC<{
 	return (
 		<ResultContainer role="link" onClick={() => onView(post.slug)}>
 			<InnerContainer>
-				<ContentContainer relativeSize={3}>
+				<ContentContainer>
 					<TitleContainer>
 						<PostTitleContainer>
 							<ItemTitle>{truncate(post.title, 30)}</ItemTitle>

@@ -33,3 +33,7 @@ export type SearchResultItems = {
 	stories: FlattenedStoryCard[];
 	pages: PageSearch[];
 };
+
+export type SearchResultGroupProps = ChildrenProp & {
+	title: string;
+};

@@ -40,8 +40,8 @@ export const InnerContainer = styled.div`
 	gap: ${SIZE_SM};
 `;
 
-export const ContentContainer = styled.div<{ relativeSize?: number }>`
-	flex: ${(props) => props.relativeSize ?? 2};
+export const ContentContainer = styled.div`
+	flex: 3;
 	display: grid;
 	gap: ${SIZE_XS};
 `;

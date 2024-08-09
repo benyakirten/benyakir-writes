@@ -9,7 +9,9 @@ import {
 	FONT_LG,
 	SIZE_MD,
 	FONT_XS,
+	FONT_XXS,
 } from "@/styles/variables";
+import { media } from "@/styles/queries";
 
 const StyledSearchBar = styled.div`
     display: flex;
@@ -32,6 +34,10 @@ const SearchCount = styled.span`
 	text-transform: uppercase;
 	opacity: 0.8;
 	align-self: center;
+	width: max-content;
+	${media.phone} {
+		display: none;
+	}
 `;
 
 const SearchIconContainer = styled.label`

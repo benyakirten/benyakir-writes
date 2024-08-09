@@ -18,6 +18,7 @@ import {
 	FONT_SM,
 	HORIZONTAL_XS,
 } from "@/styles/variables";
+import SearchResultGroup from "./SearchResultGroup.component";
 
 const SearchResultsContainer = styled.ul`
     display: grid;
@@ -30,27 +31,6 @@ const SearchResultsContainer = styled.ul`
     overflow-y: auto;
 	scroll-snap-type: block;
 	scroll-margin: 0.2rem;
-`;
-
-const StyledSearchResultGroup = styled.li<{ title: string }>`
-    position: relative;
-
-    border-top: 2px solid #000;
-    padding: ${SIZE_SM};
-
-    &::after {
-        content: "${(props) => props.title}";
-        position: absolute;
-        top: calc(-${SIZE_SM} + 2px);
-        left: ${SIZE_SM};
-        z-index: ${Z_ABOVE};
-
-        font-family: ${SANS_SERIF_FONT};
-        font-size: ${FONT_SM};
-
-        background-color: ${(props) => props.theme.base.background};
-        padding: ${HORIZONTAL_XS};
-    }
 `;
 
 const SearchResults: React.FC<SearchResultsProps> = ({
@@ -70,34 +50,34 @@ const SearchResults: React.FC<SearchResultsProps> = ({
 
 	const pageResults =
 		results.pages.length === 0 ? null : (
-			<StyledSearchResultGroup title="Pages">
+			<SearchResultGroup title="Pages">
 				{results.pages.map((page) => (
 					<PageResult onView={handleView} key={page.slug} page={page} />
 				))}
-			</StyledSearchResultGroup>
+			</SearchResultGroup>
 		);
 
 	const bookResults =
 		results.books.length === 0 ? null : (
-			<StyledSearchResultGroup title="Books">
+			<SearchResultGroup title="Books">
 				{results.books.map((book) => (
 					<BookResult onView={handleView} key={book.slug} book={book} />
 				))}
-			</StyledSearchResultGroup>
+			</SearchResultGroup>
 		);
 
 	const storyResults =
 		results.stories.length === 0 ? null : (
-			<StyledSearchResultGroup title="Stories">
+			<SearchResultGroup title="Stories">
 				{results.stories.map((story) => (
 					<StoryResult onView={handleView} key={story.slug} story={story} />
 				))}
-			</StyledSearchResultGroup>
+			</SearchResultGroup>
 		);
 
 	const projectResults =
 		results.projects.length === 0 ? null : (
-			<StyledSearchResultGroup title="Projects">
+			<SearchResultGroup title="Projects">
 				{results.projects.map((project) => (
 					<ProjectResult
 						onView={handleView}
@@ -105,16 +85,16 @@ const SearchResults: React.FC<SearchResultsProps> = ({
 						project={project}
 					/>
 				))}
-			</StyledSearchResultGroup>
+			</SearchResultGroup>
 		);
 
 	const postResults =
 		results.posts.length === 0 ? null : (
-			<StyledSearchResultGroup title="Blog Posts">
+			<SearchResultGroup title="Blog Posts">
 				{results.posts.map((post) => (
 					<PostResult onView={handleView} key={post.slug} post={post} />
 				))}
-			</StyledSearchResultGroup>
+			</SearchResultGroup>
 		);
 
 	const contents =

@@ -29,6 +29,8 @@ export const StyledSidebar = styled.nav<{ open?: boolean }>`
   font-family: ${SERIF_FONT};
   font-size: ${FONT_XXL};
 
+  user-select: none;
+
   background-color: red;
 
   background-image: ${(props) => `linear-gradient(

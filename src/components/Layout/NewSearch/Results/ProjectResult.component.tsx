@@ -8,6 +8,7 @@ import {
 	ItemTitle,
 	ResultContainer,
 	SlubTitle,
+	TagPill,
 	TitleContainer,
 } from "./Result.styles";
 import ProjectTech from "./ProjectTech.component";
@@ -22,10 +23,14 @@ const TechContainer = styled.div`
 	flex-wrap: wrap;
 `;
 
+const MAX_TECHS = 2;
+
 const ProjectResult: React.FC<{
 	project: FlattenedProjectCard;
 	onView: (slug: string) => void;
 }> = ({ project, onView }) => {
+	const firstIcons = project.icons.slice(0, 2);
+	const otherIcons = project.icons.length - MAX_TECHS;
 	return (
 		<ResultContainer role="link" onClick={() => onView(project.slug ?? "")}>
 			<InnerContainer>
@@ -40,9 +45,14 @@ const ProjectResult: React.FC<{
 					/>
 				</ContentContainer>
 				<TechContainer>
-					{project.icons.map((i) => (
+					{firstIcons.map((i) => (
 						<ProjectTech key={i.name} tech={i.name} publicURL={i.publicURL} />
 					))}
+					{otherIcons > 0 && (
+						<TagPill>
+							{otherIcons} other{otherIcons > 1 && "s"}
+						</TagPill>
+					)}
 				</TechContainer>
 			</InnerContainer>
 		</ResultContainer>

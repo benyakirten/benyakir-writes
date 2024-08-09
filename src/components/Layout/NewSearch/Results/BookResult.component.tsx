@@ -21,7 +21,7 @@ const BookResult: React.FC<{
 	return (
 		<ResultContainer role="link" onClick={() => onView(book.slug ?? "")}>
 			<InnerContainer>
-				<ContentContainer relativeSize={4}>
+				<ContentContainer>
 					<TitleContainer>
 						<ItemTitle>{book.title}</ItemTitle>
 						<SlubTitle>{getPrettyDate(book.published.date)}</SlubTitle>

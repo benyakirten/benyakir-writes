@@ -152,15 +152,13 @@ const Sidebar: React.FC = () => {
 								</NavLink>
 							))}
 						</NavGroup>
-						<div>
-							<Toggle
-								value={activeTheme.name === "night"}
-								onToggle={() => dispatch(toggleTimeOfDay())}
-								label={`Theme: ${capitalize(activeTheme.name)}`}
-								name="active-theme-toggle"
-								dataCy="sidebar-theme-toggle"
-							/>
-						</div>
+						<Toggle
+							value={activeTheme.name === "night"}
+							onToggle={() => dispatch(toggleTimeOfDay())}
+							label={`Theme: ${capitalize(activeTheme.name)}`}
+							name="active-theme-toggle"
+							dataCy="sidebar-theme-toggle"
+						/>
 						<LegalBox>
 							<LegalItem>&copy; 2021-2024 by Benyakir Horowitz</LegalItem>
 							<LegalItem>All Rights Reserved</LegalItem>
