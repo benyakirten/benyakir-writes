@@ -81,6 +81,7 @@ const SearchResultGroup: React.FC<SearchResultGroupProps> = ({
 	const theme = useTheme() as BaseTheme;
 	const collapsibleId = `collapsible-${title}`;
 	const topbarId = `topbar-${title}`;
+
 	return (
 		<StyledSearchResultGroup>
 			<h3>

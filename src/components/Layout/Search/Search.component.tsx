@@ -1,139 +1,121 @@
-import * as React from "react";
+import React from "react";
+import styled from "styled-components";
 
-import { Centered, Column, SubHeading } from "@Styles/general-components";
-import { ResultsContainer, SingleResult } from "./Search.styles";
+import SearchBar from "./SearchBar.component";
+import SearchResults from "./SearchResults.component";
+import { SearchProps, SearchResultItems } from "./types";
+import { search } from "./search";
+import { useDebounce } from "@/hooks";
+import { autocomplete } from "@/data/search";
+import { getRandomSuggestions } from "@/utils/search";
+import { Z_SEARCH, SIZE_MD } from "@/styles/variables";
+import { media } from "@/styles/queries";
 
-import { CustomLink, Foldout, Loading } from "@Gen";
-import { Checkbox, Text } from "@Input";
+const SearchModal = styled.dialog`
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    z-index: ${Z_SEARCH};
 
-import { useDebounce, useLookup } from "@Hooks";
-import { capitalize, truncate } from "@Utils/strings";
+    border-radius: ${SIZE_MD};
+    width: 50%;
 
-import data from "@Data/searchData.json";
+	transform: translateX(-50%);
+    
+    &::backdrop {
+		height: 200vh;
+        background-color: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(4px);
+    }
 
-import type { SearchableItem } from "@Types/posts";
-import { SearchProps } from "@/types/props/layout";
+	${media.desktop} {
+		width: 70%;
+	}
 
-const Search: React.FC<SearchProps> = ({ open, onClick }) => {
-	// @ts-ignore
-	const allResults = React.useMemo<SearchableItem[]>(() => data, []);
+	${media.tablet} {
+		width: 80%;
+	}
 
-	const [pending, startTransition] = React.useTransition();
-	const [filteredResults, setFilteredResults] = React.useState<
-		SearchableItem[]
-	>([]);
+	${media.phone} {
+		width: 90%;
+`;
 
-	const [showState, showDispatch] = useLookup({
-		post: true,
-		project: true,
-		book: true,
-		story: true,
-	});
-
-	const filterResults = React.useCallback(
-		(val: string) => {
-			// This is unnecessary for the component to function,
-			// but it causes the component not to re-render on initial render
-			// It really annoys me
-			if (filteredResults.length === 0 && !val) return;
-
-			const _search = val.toLowerCase().split(" ");
-			if (!val) setFilteredResults([]);
-			const _results = allResults.filter(
-				(r) => showState[r.type] && _search.every((s) => r.meta[s]),
-			);
-
-			startTransition(() => {
-				setFilteredResults(_results);
-			});
-		},
-		[allResults, filteredResults, showState],
-	);
-	const [search, setSearch] = useDebounce(filterResults);
-
-	const togglePostType = (postType: string) =>
-		showDispatch({ type: "TOGGLE", payload: postType });
-
-	React.useEffect(() => {
-		showState && filterResults(search);
-	}, [showState, filterResults, search]);
-
-	return (
-		<Foldout
-			open={open}
-			topbar={
-				<SubHeading style={{ transition: "color 0.8s ease" }}>
-					Search
-				</SubHeading>
+const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
+	({ onClose }, ref) => {
+		const [showResultCount, setShowResultCount] = React.useState(false);
+		const handleClick = (e: React.MouseEvent<HTMLDialogElement>) => {
+			if (e.target === e.currentTarget) {
+				onClose();
 			}
-			onClick={onClick}
-			height="min-content"
-		>
-			<Text
-				value={search}
-				onChange={setSearch}
-				label="Search"
-				name="global-search"
-				width="90%"
-				tabIndex={open ? 0 : -1}
-				cyId="search-text-input"
-			/>
-			<div style={{ marginLeft: "2px", marginTop: "1rem" }}>
-				<Checkbox
-					value={!!showState.post}
-					onToggle={() => togglePostType("post")}
-					label="Show Posts"
-					name="global-search-show-post"
-					tabIndex={open ? 0 : -1}
+		};
+
+		const [results, setResults] = React.useState<SearchResultItems | null>(
+			null,
+		);
+
+		const onSearch = React.useCallback((query: string) => {
+			const results = search(query);
+			setResults(results);
+		}, []);
+
+		const [suggestions, setSuggestions] = React.useState<string[]>([]);
+		const [searchAutocomplete, setSearchAutocomplete] = React.useState<
+			string[]
+		>([]);
+		const [query, _setQuery] = useDebounce(onSearch);
+
+		const setQuery = (query: string) => {
+			_setQuery(query);
+			if (query === "") {
+				setShowResultCount(false);
+				setSuggestions([]);
+				setSearchAutocomplete([]);
+				return;
+			}
+
+			const suggestions = autocomplete.suggest(query);
+			if (suggestions === null || suggestions.length === 0) {
+				setSearchAutocomplete([]);
+
+				const randomSuggestions = getRandomSuggestions(autocomplete);
+				setSuggestions(randomSuggestions);
+
+				return;
+			}
+			const allSuggestions = suggestions.map((s) => s.word);
+
+			setSearchAutocomplete(allSuggestions);
+			setSuggestions(allSuggestions);
+			setShowResultCount(true);
+		};
+
+		const numResults = results
+			? results.books.length +
+				results.stories.length +
+				results.posts.length +
+				results.projects.length +
+				results.pages.length
+			: 0;
+
+		return (
+			<SearchModal ref={ref} onClick={handleClick}>
+				<SearchBar
+					showResultCount={showResultCount}
+					numResults={numResults}
+					suggestions={searchAutocomplete}
+					search={query}
+					setSearch={setQuery}
+					onClose={onClose}
 				/>
-				<Checkbox
-					value={!!showState.project}
-					onToggle={() => togglePostType("project")}
-					label="Show Projects"
-					name="global-search-show-project"
-					tabIndex={open ? 0 : -1}
+				<SearchResults
+					results={results}
+					onClose={onClose}
+					onSetQuery={setQuery}
+					alternatives={suggestions}
 				/>
-				<Checkbox
-					value={!!showState.book}
-					onToggle={() => togglePostType("book")}
-					label="Show Books"
-					name="global-search-show-book"
-					tabIndex={open ? 0 : -1}
-				/>
-				<Checkbox
-					value={!!showState.story}
-					onToggle={() => togglePostType("story")}
-					label="Show Stories"
-					name="global-search-show-story"
-					tabIndex={open ? 0 : -1}
-				/>
-			</div>
-			<ResultsContainer resultLength={filteredResults.length}>
-				{pending ? (
-					<Loading />
-				) : filteredResults.length === 0 ? (
-					<Centered>No results yet!</Centered>
-				) : (
-					<>
-						{filteredResults.map((r, idx) => (
-							<SingleResult data-navtoggle="no-toggle" key={`${r.slug}-${idx}`}>
-								<CustomLink inheritColor={true} to={`/${r.type}/${r.slug}`}>
-									<Column
-										style={{
-											justifyContent: "space-between",
-										}}
-									>
-										<span>{truncate(r.title, 18)}</span>
-										<span>{capitalize(r.type)}</span>
-									</Column>
-								</CustomLink>
-							</SingleResult>
-						))}
-					</>
-				)}
-			</ResultsContainer>
-		</Foldout>
-	);
-};
+			</SearchModal>
+		);
+	},
+);
 
 export default Search;

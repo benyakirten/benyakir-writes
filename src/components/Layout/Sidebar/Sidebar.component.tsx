@@ -25,8 +25,9 @@ import {
 	toggleSidebarState,
 } from "@/store/sidebar/sidebar.slice";
 import { NavLink, ActiveIndicator } from "./components";
+import OpenSearchButton from "./components/OpenSearchButton.component";
 
-const Sidebar: React.FC = () => {
+const Sidebar: React.FC<{ onSearch: () => void }> = ({ onSearch }) => {
 	const portfolioRef = React.useRef<HTMLElement>(null);
 	const blogRef = React.useRef<HTMLElement>(null);
 	const authorRef = React.useRef<HTMLElement>(null);
@@ -152,6 +153,7 @@ const Sidebar: React.FC = () => {
 								</NavLink>
 							))}
 						</NavGroup>
+						<OpenSearchButton onSearch={onSearch} />
 						<Toggle
 							value={activeTheme.name === "night"}
 							onToggle={() => dispatch(toggleTimeOfDay())}

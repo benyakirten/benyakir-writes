@@ -7,6 +7,8 @@ const UnderlinableItem = styled.div<{ display?: string }>`
 
 	color: ${(props) => props.theme.link.dark};
 
+	width: min-content;
+
 	background-color: transparent;
 	background-image: linear-gradient(${(props) => props.theme.link.dark}, ${(props) => props.theme.link.dark});
 	background-repeat: no-repeat;

@@ -11,13 +11,7 @@ import {
 	ProjectResult,
 	StoryResult,
 } from "./Results";
-import {
-	SIZE_SM,
-	Z_ABOVE,
-	SANS_SERIF_FONT,
-	FONT_SM,
-	HORIZONTAL_XS,
-} from "@/styles/variables";
+import { SIZE_SM } from "@/styles/variables";
 import SearchResultGroup from "./SearchResultGroup.component";
 
 const SearchResultsContainer = styled.ul`

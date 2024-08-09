@@ -14,7 +14,7 @@ import {
 	intializeThemeStore,
 	setActiveThemeByName,
 } from "@Store/theme/theme.slice";
-import Search from "./NewSearch";
+import Search from "./Search";
 import { isInputFocused } from "@/utils/dom";
 import { setSidebarState } from "@/store/sidebar/sidebar.slice";
 
@@ -104,7 +104,7 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 			<LayoutContainer>
 				<GlobalStyles />
 				<Search ref={modalRef} onClose={closeModal} />
-				<Sidebar />
+				<Sidebar onSearch={openModal} />
 				<MainContainer>
 					<TransitionGroup>
 						<Transition
