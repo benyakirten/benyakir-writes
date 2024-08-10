@@ -60,3 +60,11 @@ type EventListenerHook<K extends keyof WindowEventMap> = (
 		element?: HTMLElement | Window;
 	},
 ) => void;
+
+type FlyoutHook = (
+	initialState?: boolean,
+) => [
+	boolean,
+	React.Dispatch<React.SetStateAction<boolean>>,
+	React.Dispatch<React.SetStateAction<boolean>>,
+];

@@ -1,4 +1,4 @@
-import { SIZE_MD } from "@/styles/variables";
+import { BOTH_SM, SIZE_MD, SIZE_SM, SIZE_XS } from "@/styles/variables";
 import styled from "styled-components";
 
 export const FilterPill = styled.div`
@@ -9,17 +9,46 @@ export const FilterPill = styled.div`
 
     & > * {
         border-right: 1px solid ${(props) => props.theme.base.border};
+        padding: ${BOTH_SM};
+        padding: ${SIZE_XS};
         &:last-child {
             border-right: none;
         }
     }
 `;
 
-export const FilterNameButton = styled.button`
-    `;
+export const FilterPillButton = styled.button`
+    display: flex;
+    align-items: center;
+    position: relative;
+    border: 1px solid ${(props) => props.theme.base.border};
 
-export const FilterContentButton = styled.button``;
+    border-radius: ${SIZE_MD};
+
+    & > * {
+        border-right: 1px solid ${(props) => props.theme.base.border};
+        padding: ${SIZE_XS};
+        &:last-child {
+            border-right: none;
+        }
+    }
+`;
+
+export const IconContainer = styled.div`
+    display: grid;
+    place-items: center;
+    height: 1.5rem;
+    width: 1.5rem;
+`;
+
+export const FilterButton = styled.button`
+    padding: ${BOTH_SM};
+`;
+
+export const FilterContentButton = styled.button`
+    padding: ${BOTH_SM};
+`;
 
 export const FilterModifierButton = styled.button`
-    border-left: 1px solid ${(props) => props.theme.base.border};
+    padding: ${BOTH_SM};
 `;

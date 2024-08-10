@@ -9,6 +9,7 @@ import {
 	Subtitle,
 } from "@Styles/general-components";
 import { homeDescription } from "@/data/search";
+import { NewFilter } from "@/components/Filters";
 
 export const Head: React.FC = () => (
 	<>
@@ -21,6 +22,54 @@ const IndexPage: React.FC = () => {
 	return (
 		<Page>
 			<LeadHeading>Welcome to Benyakir Writes</LeadHeading>
+			<Grouping>
+				<BigParagraph>
+					Hello stranger or welcome back. Struggling to find a better term, I
+					call this website an outlet. As an author, I write about the oncoming
+					future and how us humans face the chaos of our own making. As a
+					programmer, I participate in it and embrace the wonders that our
+					modernity can provide. Plus, it's not that hard to make something that
+					looks halfway decent--let's not talk about mobile right now, okay?
+					Sidebars are great on a tablet or desktop, but they are dangerous and
+					need to be carefully managed on mobile.
+				</BigParagraph>
+			</Grouping>
+			<Grouping>
+				<Subtitle>To get started, click on the bar to the left.</Subtitle>
+				<BigParagraph>
+					Inside you'll find the nav menu. From there you can read articles from
+					my blog, about me as an author or as a programmer and web designer.
+					Also you can unfold each subsection and directly access what you want
+					to see.
+				</BigParagraph>
+			</Grouping>
+			<Grouping>
+				<BigParagraph>
+					Hello stranger or welcome back. Struggling to find a better term, I
+					call this website an outlet. As an author, I write about the oncoming
+					future and how us humans face the chaos of our own making. As a
+					programmer, I participate in it and embrace the wonders that our
+					modernity can provide. Plus, it's not that hard to make something that
+					looks halfway decent--let's not talk about mobile right now, okay?
+					Sidebars are great on a tablet or desktop, but they are dangerous and
+					need to be carefully managed on mobile.
+				</BigParagraph>
+			</Grouping>
+			<Grouping>
+				<NewFilter
+					onCreate={(val) => console.log(val)}
+					options={["Option 1", "Option 2", "Option 3"]}
+				/>
+			</Grouping>
+			<Grouping>
+				<Subtitle>To get started, click on the bar to the left.</Subtitle>
+				<BigParagraph>
+					Inside you'll find the nav menu. From there you can read articles from
+					my blog, about me as an author or as a programmer and web designer.
+					Also you can unfold each subsection and directly access what you want
+					to see.
+				</BigParagraph>
+			</Grouping>
 			<Grouping>
 				<BigParagraph>
 					Hello stranger or welcome back. Struggling to find a better term, I
