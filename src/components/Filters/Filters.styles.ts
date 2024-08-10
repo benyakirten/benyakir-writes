@@ -1,4 +1,4 @@
-import { BOTH_SM, SIZE_MD, SIZE_SM, SIZE_XS } from "@/styles/variables";
+import { BOTH_SM, SIZE_MD, SIZE_XS } from "@/styles/variables";
 import styled from "styled-components";
 
 export const FilterPill = styled.div`
@@ -32,6 +32,11 @@ export const FilterPillButton = styled.button`
             border-right: none;
         }
     }
+
+    &:focus {
+		outline: 1px solid ${(props) => props.theme.base.border};
+		outline-offset: 1px;
+	}
 `;
 
 export const IconContainer = styled.div`

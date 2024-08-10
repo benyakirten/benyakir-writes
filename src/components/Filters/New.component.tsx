@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { AddIcon } from "../Icons";
 import { useFlyout } from "@/hooks/useFlyout.hook";
 import { SIZE_SM, Z_RAISED } from "@/styles/variables";
+import { Button } from "../General";
 
 const NewFilterText = styled.div`
     flex-grow: 1;
@@ -33,9 +34,7 @@ const FilterMenu = styled.ul<{ pointUpwards: boolean }>`
 	}
 `;
 
-const FilterOption = styled.button`
-
-`;
+// TODO: Add most of these to the flyout hook
 
 const NewFilter: React.FC<NewFilterProps> = ({ onCreate, options }) => {
 	const shouldMenuOpenTop = React.useCallback(() => {
@@ -63,7 +62,6 @@ const NewFilter: React.FC<NewFilterProps> = ({ onCreate, options }) => {
 
 	const selectItem = (option: string) => {
 		setLightOpen(false);
-		setHardOpen(false);
 		onCreate(option);
 	};
 
@@ -76,7 +74,9 @@ const NewFilter: React.FC<NewFilterProps> = ({ onCreate, options }) => {
 		>
 			<FilterMenu pointUpwards={menuOpenTop} aria-expanded={menuOpen}>
 				{options.map((option) => (
-					<li key={option}>{option}</li>
+					<li key={option}>
+						<Button onClick={() => selectItem(option)}>{option}</Button>
+					</li>
 				))}
 			</FilterMenu>
 			<IconContainer>

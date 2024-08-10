@@ -66,7 +66,7 @@ export const ButtonExterior = styled.button`
     transform: scale(0);
   }
 
-  &:hover {
+  &:hover, &:focus {
     span {
       color: ${(props) => props.theme.button.hover.textColor};
     }

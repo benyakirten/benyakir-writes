@@ -7,5 +7,9 @@ export const useFlyout: FlyoutHook = (initialState = false) => {
 	const [hardOpen, setHardOpen] = React.useState(initialState);
 
 	const isOpen = hardOpen || lightOpen;
+	console.log("REP");
+	console.log(hardOpen);
+	console.log(lightOpen);
+	console.log(isOpen);
 	return [isOpen, setLightOpen, setHardOpen];
 };
