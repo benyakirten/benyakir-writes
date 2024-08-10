@@ -9,7 +9,7 @@ import {
 	Subtitle,
 } from "@Styles/general-components";
 import { homeDescription } from "@/data/search";
-import { NewFilter } from "@/components/Filters";
+import { Filter } from "@/components/Filters";
 
 export const Head: React.FC = () => (
 	<>
@@ -56,12 +56,6 @@ const IndexPage: React.FC = () => {
 				</BigParagraph>
 			</Grouping>
 			<Grouping>
-				<NewFilter
-					onCreate={(val) => console.log(val)}
-					options={["Option 1", "Option 2", "Option 3"]}
-				/>
-			</Grouping>
-			<Grouping>
 				<Subtitle>To get started, click on the bar to the left.</Subtitle>
 				<BigParagraph>
 					Inside you'll find the nav menu. From there you can read articles from
@@ -82,6 +76,24 @@ const IndexPage: React.FC = () => {
 					need to be carefully managed on mobile.
 				</BigParagraph>
 			</Grouping>
+			<Filter
+				options={["Publish Date", "Keywords"]}
+				onCreate={(id) => console.log(id)}
+				onModify={(id, keywords) => console.log(id, keywords)}
+				onRemove={(id) => console.log(id)}
+				filters={[
+					{
+						id: "Date",
+						before: new Date(),
+						after: new Date(),
+					},
+					{
+						id: "Keywords",
+						currentKeywords: ["test"],
+						allKeywords: ["test", "test2"],
+					},
+				]}
+			/>
 			<Grouping>
 				<Subtitle>To get started, click on the bar to the left.</Subtitle>
 				<BigParagraph>

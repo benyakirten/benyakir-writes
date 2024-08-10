@@ -102,3 +102,34 @@ export function getMonth(month: number): FullMonth {
 			};
 	}
 }
+
+export function convertDatePickerValueToDate(value: string): Date {
+	const month = value.slice(5, 7);
+	const day = value.slice(8, 10);
+	const year = value.slice(0, 4);
+
+	if (Number.isNaN(+month) || Number.isNaN(+day) || Number.isNaN(+year)) {
+		return new Date("invalid");
+	}
+
+	return new Date(`${month}/${day}/${year}`);
+}
+
+export function convertDateToDatePickerValue(value: Date): string {
+	const validatedValue =
+		Number.isNaN(value.getMinutes()) ||
+		Number.isNaN(value.getDate()) ||
+		Number.isNaN(value.getFullYear())
+			? new Date(0)
+			: value;
+
+	// getMonth returns a 0-indexed month, so we need to add 1 to it.
+	const month = (validatedValue.getMonth() + 1).toString();
+	const date = validatedValue.getDate().toString();
+	const convertedDate = `${validatedValue.getFullYear()}-${month.padStart(
+		2,
+		"0",
+	)}-${date.padStart(2, "0")}`;
+
+	return convertedDate;
+}

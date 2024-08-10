@@ -2,7 +2,7 @@ import React from "react";
 
 import { FlyoutHook } from "@/types/hooks";
 
-export const useFlyout: FlyoutHook = (menuRef, initialState = false) => {
+export const useFlyout: FlyoutHook = (menuRef) => {
 	const shouldMenuOpenTop = React.useCallback(() => {
 		const windowHeight = window.innerHeight;
 		const buttonTop = menuRef.current?.getBoundingClientRect().top || 0;
@@ -24,7 +24,7 @@ export const useFlyout: FlyoutHook = (menuRef, initialState = false) => {
 	}, [shouldMenuOpenTop]);
 
 	const [lightOpen, setLightOpen] = React.useState(false);
-	const [hardOpen, setHardOpen] = React.useState(initialState);
+	const [hardOpen, setHardOpen] = React.useState(false);
 
 	const isOpen = hardOpen || lightOpen;
 	return [menuOpenTop, isOpen, setLightOpen, setHardOpen];

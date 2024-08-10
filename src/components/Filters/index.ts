@@ -1,1 +1,1 @@
-export { default as NewFilter } from "./New.component";
+export { default as Filter } from "./Filter.component";

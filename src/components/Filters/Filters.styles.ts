@@ -10,6 +10,8 @@ import styled from "styled-components";
 export const FilterPill = styled.div`
     display: flex;
     align-items: center;
+    position: relative;
+    border: 1px solid ${(props) => props.theme.base.border};
 
     border-radius: ${SIZE_MD};
 
@@ -76,13 +78,9 @@ export const FilterMenu = styled.ul<{ pointUpwards: boolean }>`
 `;
 
 export const FilterButton = styled.button`
-    padding: ${BOTH_SM};
-`;
-
-export const FilterContentButton = styled.button`
-    padding: ${BOTH_SM};
-`;
-
-export const FilterModifierButton = styled.button`
-    padding: ${BOTH_SM};
+    flex-grow: 1;
+    &:focus {
+		outline: 1px solid ${(props) => props.theme.base.border};
+		outline-offset: 1px;
+	}
 `;
