@@ -62,8 +62,10 @@ type EventListenerHook<K extends keyof WindowEventMap> = (
 ) => void;
 
 type FlyoutHook = (
+	menuRef: React.RefObject<HTMLElement>,
 	initialState?: boolean,
 ) => [
+	boolean,
 	boolean,
 	React.Dispatch<React.SetStateAction<boolean>>,
 	React.Dispatch<React.SetStateAction<boolean>>,
