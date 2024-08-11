@@ -1,12 +1,12 @@
+import { SIZE_XS } from "@/styles/variables";
 import styled from "styled-components";
 
 export const DateContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0.5rem 0;
+  gap: ${SIZE_XS};
 `;
 
 export const DateInput = styled.input`
-  margin-top: 0.5rem;
-  width: 50%;
+  width: 100%;
 `;

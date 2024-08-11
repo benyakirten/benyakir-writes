@@ -4,6 +4,7 @@ import {
 	FilterButton,
 	FilterMenu,
 	FilterPill,
+	SimpleFilterButton,
 } from "./components/Filters.styles";
 import { CloseIcon } from "../Icons";
 import { getPrettyDate } from "@/utils/dates";
@@ -26,6 +27,17 @@ const DateFilter: React.FC<DateFilterProps> = ({
 	const [afterOpenTop, afterOpen, setAfterSoftOpen, setAfterHardOpen] =
 		useFlyout(afterRef);
 
+	function modifyDate(time: "before" | "after", value: Date) {
+		if (time === "before") {
+			setBeforeSoftOpen(false);
+			setBeforeHardOpen(false);
+		} else {
+			setAfterSoftOpen(false);
+			setAfterHardOpen(false);
+		}
+
+		onModify(time, value);
+	}
 	return (
 		<FilterPill>
 			<FilterButton type="button" onClick={onRemove}>
@@ -34,21 +46,31 @@ const DateFilter: React.FC<DateFilterProps> = ({
 				</IconContainer>
 			</FilterButton>
 			<FilterText>{label}</FilterText>
-			<FilterButton
-				type="button"
-				onMouseEnter={() => setBeforeSoftOpen(true)}
-				onMouseLeave={() => setBeforeSoftOpen(false)}
-				onClick={() => setBeforeHardOpen((val) => !val)}
-			>
-				<FilterText>Before {getPrettyDate(before)}</FilterText>
-			</FilterButton>
 			<FilterMenu pointUpwards={beforeOpenTop} aria-expanded={beforeOpen}>
 				<li>
 					<DatePicker
 						label={`${label} Before`}
 						name="date-before"
 						value={before}
-						onChange={(val) => onModify("before", val)}
+						onChange={(val) => modifyDate("before", val)}
+					/>
+				</li>
+			</FilterMenu>
+			<FilterButton
+				type="button"
+				onMouseEnter={() => setBeforeSoftOpen(true)}
+				onMouseLeave={() => setBeforeSoftOpen(false)}
+				onClick={() => setBeforeHardOpen((val) => !val)}
+			>
+				<SimpleFilterButton>Before {getPrettyDate(before)}</SimpleFilterButton>
+			</FilterButton>
+			<FilterMenu pointUpwards={afterOpenTop} aria-expanded={afterOpen}>
+				<li>
+					<DatePicker
+						label={`${label} After`}
+						name="date-after"
+						value={after}
+						onChange={(val) => modifyDate("after", val)}
 					/>
 				</li>
 			</FilterMenu>
@@ -58,18 +80,8 @@ const DateFilter: React.FC<DateFilterProps> = ({
 				onMouseLeave={() => setAfterSoftOpen(false)}
 				onClick={() => setAfterHardOpen((val) => !val)}
 			>
-				<FilterText>After {getPrettyDate(after)}</FilterText>
+				<SimpleFilterButton>After {getPrettyDate(after)}</SimpleFilterButton>
 			</FilterButton>
-			<FilterMenu pointUpwards={afterOpenTop} aria-expanded={afterOpen}>
-				<li>
-					<DatePicker
-						label={`${label} After`}
-						name="date-after"
-						value={after}
-						onChange={(val) => onModify("after", val)}
-					/>
-				</li>
-			</FilterMenu>
 		</FilterPill>
 	);
 };

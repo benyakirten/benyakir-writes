@@ -56,8 +56,20 @@ export const FilterMenu = styled.ul<{ pointUpwards: boolean }>`
 `;
 
 export const FilterButton = styled.button`
+	height: 100%;
     flex-grow: 1;
     &:focus {
+		outline: 1px solid ${(props) => props.theme.base.border};
+		outline-offset: 1px;
+	}
+`;
+
+export const SimpleFilterButton = styled.button`
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+	padding: ${SIZE_XS};
+	&:focus {
 		outline: 1px solid ${(props) => props.theme.base.border};
 		outline-offset: 1px;
 	}

@@ -3,7 +3,12 @@ import React from "react";
 import { styled } from "styled-components";
 
 const StyledFilterButton = styled.div`
-    
+    height: 100%;
+    flex-grow: 1;
+    &:focus {
+		outline: 1px solid ${(props) => props.theme.base.border};
+		outline-offset: 1px;
+	}
 `;
 
 const InnerFilterButton = styled.button`

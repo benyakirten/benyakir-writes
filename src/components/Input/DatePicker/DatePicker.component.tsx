@@ -15,6 +15,7 @@ const DatePicker: React.FC<DateProps> = ({
 }) => {
 	const convertedDate = convertDateToDatePickerValue(value);
 	const handleChange = (e: React.BaseSyntheticEvent) => {
+		e.stopPropagation();
 		const date = convertDatePickerValueToDate(e.target.value);
 		onChange(date);
 	};
