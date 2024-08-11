@@ -6,29 +6,32 @@ type NewFilterProps = {
 type FilterProps = {
 	onCreate: (id: string) => void;
 	onRemove: (id: string) => void;
-	onModify:
-		| ((id: string, keywords: string[]) => void)
-		| ((time: "before" | "after", value: Date) => void);
+	onModifyDate: (time: "before" | "after", value: Date) => void;
+	onModifyKeywords: (id: string, keywords: string[]) => void;
 	options: string[];
 	filters: ItemFilter[];
 };
 
-type DateFilterProps = {
+type DateFilterProps = DateFilter & {
 	onModify: (time: "before" | "after", value: Date) => void;
-	before: Date;
-	after: Date;
+	onRemove: () => void;
+};
+
+type KeywordFilterProps = KeywordFilter & {
+	onModify: (id: string, keywords: string[]) => void;
+	onRemove: () => void;
 };
 
 type ItemFilter = DateFilter | KeywordFilter;
 
 type DateFilter = {
-	id: "Date";
+	label: string;
 	before: Date;
 	after: Date;
 };
 
 type KeywordFilter = {
-	id: string;
+	label: string;
 	currentKeywords: string[];
 	allKeywords: string[];
 };

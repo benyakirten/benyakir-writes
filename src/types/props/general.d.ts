@@ -5,7 +5,7 @@ type ChildrenProp = {
 type ButtonProps = ChildrenProp & {
 	type?: "submit" | "button";
 	disabled?: boolean;
-	onClick?: () => void;
+	onClick?: React.MouseEventHandler<HTMLButtonElement>;
 	tabIndex?: number;
 	children?: React.ReactNode;
 };

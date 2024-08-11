@@ -1,13 +1,7 @@
 import styled from "styled-components";
 
 import { media } from "@/styles/queries";
-import {
-	FONT_MD,
-	TRANSITION_EXTRA_SLOW,
-	TRANSITION_NORMAL,
-	TRANSITION_SLOW,
-	Z_ABOVE,
-} from "@StyleVars";
+import { FONT_MD, TRANSITION_SLOW, Z_ABOVE } from "@StyleVars";
 
 export const ButtonExterior = styled.button`
   cursor: pointer;
@@ -28,7 +22,7 @@ export const ButtonExterior = styled.button`
   overflow: hidden;
 
   &:disabled {
-    cursor: not-allowed;
+    cursor: default;
     background-color: ${(props) => props.theme.button.disabled.background};
 
     span {

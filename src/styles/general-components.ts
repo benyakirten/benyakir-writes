@@ -496,6 +496,11 @@ export const WpContentInline = styled.span<{ fontSize?: string }>`
 `;
 
 export const Page = styled.div`
+  overflow-y: auto;
+  height: 100vh;
+`;
+
+export const PageContents = styled.div`
   padding: 2rem 4rem;
   ${media.tablet} {
     padding: 1rem 4rem;

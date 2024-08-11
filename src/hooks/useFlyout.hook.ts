@@ -23,9 +23,9 @@ export const useFlyout: FlyoutHook = (menuRef) => {
 		};
 	}, [shouldMenuOpenTop]);
 
-	const [lightOpen, setLightOpen] = React.useState(false);
+	const [lightOpen, setSoftOpen] = React.useState(false);
 	const [hardOpen, setHardOpen] = React.useState(false);
 
 	const isOpen = hardOpen || lightOpen;
-	return [menuOpenTop, isOpen, setLightOpen, setHardOpen];
+	return [menuOpenTop, isOpen, setSoftOpen, setHardOpen];
 };

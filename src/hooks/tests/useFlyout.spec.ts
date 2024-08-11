@@ -60,7 +60,7 @@ describe("useFlyout", () => {
 		expect(result.current[1]).toBe(false);
 
 		act(() => {
-			result.current[2](true); // setLightOpen(true)
+			result.current[2](true); // setSoftOpen(true)
 		});
 
 		expect(result.current[1]).toBe(true);
@@ -77,7 +77,7 @@ describe("useFlyout", () => {
 		const { result } = renderHook(() => useFlyout(menuRef));
 
 		act(() => {
-			result.current[2](true); // setLightOpen(true)
+			result.current[2](true); // setSoftOpen(true)
 		});
 
 		expect(result.current[1]).toBe(true);
