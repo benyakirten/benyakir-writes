@@ -12,6 +12,9 @@ type FilterProps = {
 	filters: ItemFilter[];
 };
 
+type FilterButtonProps = ChildrenProp &
+	React.ButtonHTMLAttributes<HTMLButtonElement>;
+
 type DateFilterProps = DateFilter & {
 	onModify: (time: "before" | "after", value: Date) => void;
 	onRemove: () => void;

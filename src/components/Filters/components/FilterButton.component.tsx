@@ -14,20 +14,17 @@ const InnerFilterButton = styled.button`
     height: 100%;
 `;
 
-const FilterButton: React.FC<
-	ChildrenProp & { onClick: React.MouseEventHandler }
-> = ({ onClick, children }) => {
+const FilterButton: React.FC<FilterButtonProps> = ({
+	children,
+	...buttonProps
+}) => {
 	return (
 		<StyledFilterButton>
-			<InnerFilterButton
-				type="button"
-				onClick={(e) => {
-					e.stopPropagation();
-					onClick(e);
-				}}
-			>
+			<InnerFilterButton type="button" {...buttonProps}>
 				{children}
 			</InnerFilterButton>
 		</StyledFilterButton>
 	);
 };
+
+export default FilterButton;
