@@ -23,10 +23,6 @@ export const FilterPillButton = styled.button`
 
     border-radius: ${SIZE_MD};
 
-    & > *:not(:last-child) {
-        border-right: 1px solid ${(props) => props.theme.base.border};
-    }
-
     &:focus {
 		outline: 1px solid ${(props) => props.theme.base.border};
 		outline-offset: 1px;
