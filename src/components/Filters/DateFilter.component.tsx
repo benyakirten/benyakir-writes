@@ -1,16 +1,12 @@
 import { useFlyout } from "@/hooks/useFlyout.hook";
 import React from "react";
-import {
-	FilterButton,
-	FilterMenu,
-	FilterPill,
-	SimpleFilterButton,
-} from "./components/Filters.styles";
+import { FilterMenu, FilterPill } from "./components/Filters.styles";
 import { CloseIcon } from "../Icons";
 import { getPrettyDate } from "@/utils/dates";
 import FilterText from "./components/FilterText.component";
 import IconContainer from "./components/IconContainer.component";
 import { DatePicker } from "../Input";
+import FilterButton from "./components/FilterButton.component";
 
 const DateFilter: React.FC<DateFilterProps> = ({
 	onModify,
@@ -38,9 +34,14 @@ const DateFilter: React.FC<DateFilterProps> = ({
 
 		onModify(time, value);
 	}
+
 	return (
 		<FilterPill>
-			<FilterButton type="button" onClick={onRemove}>
+			<FilterButton
+				borderRadiusCorners={{ topLeft: "2rem", bottomLeft: "2rem" }}
+				type="button"
+				onClick={onRemove}
+			>
 				<IconContainer>
 					<CloseIcon />
 				</IconContainer>
@@ -57,12 +58,12 @@ const DateFilter: React.FC<DateFilterProps> = ({
 				</li>
 			</FilterMenu>
 			<FilterButton
-				type="button"
+				filledIn={beforeOpen}
 				onMouseEnter={() => setBeforeSoftOpen(true)}
 				onMouseLeave={() => setBeforeSoftOpen(false)}
 				onClick={() => setBeforeHardOpen((val) => !val)}
 			>
-				<SimpleFilterButton>Before {getPrettyDate(before)}</SimpleFilterButton>
+				Before {getPrettyDate(before)}
 			</FilterButton>
 			<FilterMenu pointUpwards={afterOpenTop} aria-expanded={afterOpen}>
 				<li>
@@ -75,12 +76,13 @@ const DateFilter: React.FC<DateFilterProps> = ({
 				</li>
 			</FilterMenu>
 			<FilterButton
-				type="button"
+				borderRadiusCorners={{ topRight: "2rem", bottomRight: "2rem" }}
+				filledIn={afterOpen}
 				onMouseEnter={() => setAfterSoftOpen(true)}
 				onMouseLeave={() => setAfterSoftOpen(false)}
 				onClick={() => setAfterHardOpen((val) => !val)}
 			>
-				<SimpleFilterButton>After {getPrettyDate(after)}</SimpleFilterButton>
+				After {getPrettyDate(after)}
 			</FilterButton>
 		</FilterPill>
 	);

@@ -1,5 +1,6 @@
-import { SIZE_MD, SIZE_SM, SIZE_XS, Z_RAISED } from "@/styles/variables";
 import styled from "styled-components";
+
+import { SIZE_MD, SIZE_SM, Z_RAISED } from "@/styles/variables";
 
 export const FilterPill = styled.div`
     display: flex;
@@ -52,25 +53,5 @@ export const FilterMenu = styled.ul<{ pointUpwards: boolean }>`
 		display: flex;
 		flex-direction: column;
 		gap: ${SIZE_SM};
-	}
-`;
-
-export const FilterButton = styled.button`
-	height: 100%;
-    flex-grow: 1;
-    &:focus {
-		outline: 1px solid ${(props) => props.theme.base.border};
-		outline-offset: 1px;
-	}
-`;
-
-export const SimpleFilterButton = styled.button`
-	flex-grow: 1;
-	display: flex;
-	align-items: center;
-	padding: ${SIZE_XS};
-	&:focus {
-		outline: 1px solid ${(props) => props.theme.base.border};
-		outline-offset: 1px;
 	}
 `;

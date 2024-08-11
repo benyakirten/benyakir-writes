@@ -48,7 +48,7 @@ export const ButtonExterior = styled.button`
     z-index: ${Z_ABOVE};
   }
 
-  div {
+  div[data-fill-in] {
     position: absolute;
 
     height: 200%;

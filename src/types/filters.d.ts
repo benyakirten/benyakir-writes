@@ -12,8 +12,18 @@ type FilterProps = {
 	filters: ItemFilter[];
 };
 
+type BorderRadiusCorners = {
+	topLeft?: string;
+	topRight?: string;
+	bottomLeft?: string;
+	bottomRight?: string;
+};
+
 type FilterButtonProps = ChildrenProp &
-	React.ButtonHTMLAttributes<HTMLButtonElement>;
+	React.ButtonHTMLAttributes<HTMLButtonElement> & {
+		borderRadiusCorners?: BorderRadiusCorners;
+		filledIn?: boolean;
+	};
 
 type DateFilterProps = DateFilter & {
 	onModify: (time: "before" | "after", value: Date) => void;
@@ -22,6 +32,12 @@ type DateFilterProps = DateFilter & {
 
 type KeywordFilterProps = KeywordFilter & {
 	onModify: (id: string, keywords: string[]) => void;
+	onRemove: () => void;
+};
+
+type SearchFilterProps = SearchFilter & {
+	onSearch: (id: string, search: string) => void;
+	onChangeType: (id: string, type: SearchType) => void;
 	onRemove: () => void;
 };
 
@@ -37,4 +53,11 @@ type KeywordFilter = {
 	label: string;
 	currentKeywords: string[];
 	allKeywords: string[];
+};
+
+type SearchType = "any" | "all";
+type SearchFilter = {
+	id: string;
+	type: SearchType;
+	search: string;
 };

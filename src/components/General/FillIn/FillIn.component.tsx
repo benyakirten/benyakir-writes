@@ -1,22 +1,19 @@
-import * as React from "react";
+import React from "react";
 
-import { ButtonExterior } from "./Button.styles";
-
-import { getFourCorners, getNearestCornerIdx } from "@Utils/coordinates";
-
+import { getFourCorners, getNearestCornerIdx } from "@/utils/coordinates";
 import {
 	CORNER_INDEX_TO_POSITIONING,
 	TRANSFORM_ORIGIN_FOR_CORNER_INDEX,
 	TRIANGLES_FOR_CORNER_INDEX,
-} from "@Constants";
+} from "@/data/constants";
+import { FillInExterior } from "./FillIn.styles";
 
-const Button: React.FC<ButtonProps> = ({
-	disabled = false,
-	type = "button",
-	children,
-	onClick = () => {},
-	tabIndex = 0,
-}) => {
+const FillIn: React.FC<
+	ChildrenProp & {
+		borderRadiusCorners?: BorderRadiusCorners;
+		filledIn?: boolean;
+	}
+> = ({ children, borderRadiusCorners = {}, filledIn }) => {
 	const [cornerIdx, setCornerIdx] = React.useState<number>(0);
 
 	const handleMouseover: React.MouseEventHandler = (e) => {
@@ -30,12 +27,10 @@ const Button: React.FC<ButtonProps> = ({
 	};
 
 	return (
-		<ButtonExterior
-			type={type}
-			disabled={disabled}
+		<FillInExterior
+			data-force-fill-in={filledIn || false}
+			borderRadiusCorners={borderRadiusCorners}
 			onMouseEnter={handleMouseover}
-			onClick={onClick}
-			tabIndex={tabIndex}
 		>
 			<div
 				data-fill-in
@@ -46,8 +41,8 @@ const Button: React.FC<ButtonProps> = ({
 				}}
 			/>
 			<span>{children}</span>
-		</ButtonExterior>
+		</FillInExterior>
 	);
 };
 
-export default Button;
+export default FillIn;
