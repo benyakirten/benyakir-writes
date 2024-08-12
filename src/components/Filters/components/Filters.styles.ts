@@ -16,7 +16,7 @@ export const FilterPillButton = styled.button`
 	}
 `;
 
-export const FilterMenu = styled.ul<{ pointUpwards: boolean }>`
+export const FilterMenu = styled.ul<{ pointUpwards: boolean; height?: string }>`
 	display: none;
 	z-index: ${Z_RAISED};
 
@@ -25,7 +25,7 @@ export const FilterMenu = styled.ul<{ pointUpwards: boolean }>`
 	${(props) => (props.pointUpwards ? "bottom: calc(100% + 2px);" : "top: calc(100% + 2px);")}
 
 	min-width: calc(90% - ${SIZE_SM});
-	height: max-content;
+	height: ${(props) => props.height ?? "max-content"};
 
 	background-color: ${(props) => props.theme.base.background};
 	padding: ${SIZE_SM};

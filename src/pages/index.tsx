@@ -40,10 +40,25 @@ const IndexPage: React.FC = () => {
 
 	function handleKeywords() {
 		const label = "Keywords";
-		const currentKeywords = [{ label: "Test1", value: "test1" }];
+		const currentKeywords = [
+			{ label: "Test1", value: "test1" },
+			{ label: "Test2", value: "test2" },
+			{ label: "Test3", value: "test3" },
+			{ label: "Test4", value: "test4" },
+		];
 		const allKeywords = [
 			{ label: "Test1", value: "test1" },
 			{ label: "Test2", value: "Test2" },
+			{ label: "Test3", value: "test3" },
+			{ label: "Test4", value: "Test4" },
+			{ label: "Test5", value: "test5" },
+			{ label: "Test6", value: "Test6" },
+			{ label: "Test7", value: "test7" },
+			{ label: "Test8", value: "Test8" },
+			{ label: "Test9", value: "test9" },
+			{ label: "Test10", value: "Test10" },
+			{ label: "Test11", value: "test11" },
+			{ label: "Test21", value: "Test12" },
 		];
 		const id = "keywords";
 		const type = "all";

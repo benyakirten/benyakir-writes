@@ -20,7 +20,9 @@ const KeywordFilter: React.FC<KeywordFilterProps> = ({
 	allKeywords,
 	currentKeywords,
 }) => {
-	const displayedKeywords = currentKeywords.slice(0, MAX_KEYWORDS);
+	const displayedKeywords = currentKeywords
+		.slice(0, MAX_KEYWORDS)
+		.map((k) => k.label);
 	const otherKeywordCount = currentKeywords.length - MAX_KEYWORDS;
 
 	const menuRef = React.useRef<HTMLDivElement>(null);
@@ -39,6 +41,13 @@ const KeywordFilter: React.FC<KeywordFilterProps> = ({
 			>
 				{type}
 			</FilterButton>
+			<FilterMenu
+				height="13rem"
+				pointUpwards={keywordsOpenTop}
+				aria-expanded={keywordsOpen}
+			>
+				<MultipleChoice choices={allKeywords} onSelect={onModify} />
+			</FilterMenu>
 			<FilterButton
 				borderRadiusCorners={{ topRight: "2rem", bottomRight: "2rem" }}
 				filledIn={keywordsOpen}
@@ -49,9 +58,6 @@ const KeywordFilter: React.FC<KeywordFilterProps> = ({
 				{displayedKeywords.join(", ")}
 				{otherKeywordCount > 0 && `, ${otherKeywordCount} others`}
 			</FilterButton>
-			<FilterMenu pointUpwards={keywordsOpenTop} aria-expanded={keywordsOpen}>
-				<MultipleChoice choices={allKeywords} onSelect={onModify} />
-			</FilterMenu>
 		</FilterPill>
 	);
 };

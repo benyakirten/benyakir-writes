@@ -7,7 +7,7 @@ type FilterProps = {
 	onCreate: (id: string) => void;
 	onRemove: (id: string) => void;
 	onModifyDate: (time: "before" | "after", value: Date) => void;
-	onModifyKeywords: (id: string, keywords: PotentialChoice[]) => void;
+	onModifyKeywords: (id: string, keywords: readonly PotentialChoice[]) => void;
 	onModifyWordFilterType: (id: string, type: WordFilterType) => void;
 	onModifySearch: (id: string, search: string) => void;
 	options: string[];
@@ -16,7 +16,7 @@ type FilterProps = {
 
 type MultipleChoiceInputProps = {
 	choices: PotentialChoice[];
-	onSelect: (choices: PotentialChoice[]) => void;
+	onSelect: (choices: readonly PotentialChoice[]) => void;
 };
 
 type BorderRadiusCorners = {
@@ -43,7 +43,7 @@ type DateFilterProps = DateFilter & {
 };
 
 type KeywordFilterProps = KeywordFilter & {
-	onModify: (keywords: PotentialChoice[]) => void;
+	onModify: (keywords: readonly PotentialChoice[]) => void;
 	onChangeType: (type: WordFilterType) => void;
 	onRemove: () => void;
 };

@@ -22,7 +22,7 @@ const FilterBar = styled.div`
 const FilterComponent: React.FC<{
 	filter: ItemFilter;
 	onModifyDate: (time: "before" | "after", value: Date) => void;
-	onModifyKeywords: (id: string, keywords: PotentialChoice[]) => void;
+	onModifyKeywords: (id: string, keywords: readonly PotentialChoice[]) => void;
 	onModifyWordFilterType: (id: string, type: WordFilterType) => void;
 	onModifySearch: (id: string, search: string) => void;
 	onRemove: (id: string) => void;
