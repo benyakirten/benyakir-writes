@@ -9,8 +9,7 @@ import {
 } from "../components";
 import { useFlyout } from "@/hooks/useFlyout.hook";
 import { AddIcon } from "@/components/Icons";
-import { Button } from "@/components/General";
-import { TRANSITION_SLOW } from "@/styles/variables";
+import { SIZE_SM, TRANSITION_SLOW } from "@/styles/variables";
 import { FillIn } from "@/components/General";
 
 const InnerContainer = styled.div`
@@ -25,6 +24,11 @@ const InnerContainer = styled.div`
 	&:hover > *:last-child {
 		border-left: 1px solid ${(props) => props.theme.base.background};
 	}
+`;
+
+const OptionButton = styled.button`
+	padding: ${SIZE_SM};
+	white-space: nowrap;
 `;
 
 const NewFilter: React.FC<NewFilterProps> = ({ onCreate, options }) => {
@@ -54,6 +58,7 @@ const NewFilter: React.FC<NewFilterProps> = ({ onCreate, options }) => {
 			onClick={() => setHardOpen((open) => !open)}
 		>
 			<FilterMenu
+				removeSpacing
 				pointUpwards={menuOpenTop}
 				aria-expanded={menuOpen}
 				onMouseEnter={() => setSoftOpen(true)}
@@ -61,7 +66,14 @@ const NewFilter: React.FC<NewFilterProps> = ({ onCreate, options }) => {
 			>
 				{options.map((option) => (
 					<li key={option}>
-						<Button onClick={(e) => selectItem(e, option)}>{option}</Button>
+						<FillIn>
+							<OptionButton
+								type="button"
+								onClick={(e) => selectItem(e, option)}
+							>
+								{option}
+							</OptionButton>
+						</FillIn>
 					</li>
 				))}
 			</FilterMenu>

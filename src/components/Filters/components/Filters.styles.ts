@@ -16,7 +16,11 @@ export const FilterPillButton = styled.button`
 	}
 `;
 
-export const FilterMenu = styled.ul<{ pointUpwards: boolean; height?: string }>`
+export const FilterMenu = styled.ul<{
+	pointUpwards: boolean;
+	height?: string;
+	removeSpacing?: boolean;
+}>`
 	display: none;
 	z-index: ${Z_RAISED};
 
@@ -28,13 +32,13 @@ export const FilterMenu = styled.ul<{ pointUpwards: boolean; height?: string }>`
 	height: ${(props) => props.height ?? "max-content"};
 
 	background-color: ${(props) => props.theme.base.background};
-	padding: ${SIZE_SM};
+	padding: ${(props) => (props.removeSpacing ? "0" : SIZE_SM)};
 
 	border: 1px solid ${(props) => props.theme.base.textColor};
 
 	&[aria-expanded='true'] {
 		display: flex;
 		flex-direction: column;
-		gap: ${SIZE_SM};
+		gap: ${(props) => (props.removeSpacing ? "0" : SIZE_SM)};
 	}
 `;

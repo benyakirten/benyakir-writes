@@ -1,15 +1,16 @@
+import React from "react";
 import styled from "styled-components";
 
 import {
-	FONT_SM,
-	FONT_XS,
-	FONT_XXS,
-	SIZE_SM,
 	SIZE_XS,
+	FONT_XS,
 	TRANSITION_NORMAL,
-} from "@StyleVars";
+	SIZE_SM,
+	FONT_SM,
+	FONT_XXS,
+} from "@/styles/variables";
 
-export const TextInputContainer = styled.div`
+const TextInputContainer = styled.div`
   position: relative;
 
   label {
@@ -37,8 +38,26 @@ export const TextInputContainer = styled.div`
     &:focus + label,
     &:not(:placeholder-shown) + label {
       top: 4px;
-      color: ${(props) => props.theme.base.disabled};
+      opacity: 0.7;
       font-size: ${FONT_XXS};
     }
   }
 `;
+
+const Text: React.FC<TextInputProps> = ({ label, name, onChange, value }) => {
+	return (
+		<TextInputContainer>
+			<input
+				value={value}
+				type="text"
+				placeholder=" "
+				name={name}
+				id={name}
+				onChange={(e) => onChange(e.target.value)}
+			/>
+			<label htmlFor={name}>{label}</label>
+		</TextInputContainer>
+	);
+};
+
+export default Text;

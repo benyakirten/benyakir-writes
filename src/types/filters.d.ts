@@ -20,6 +20,13 @@ type MultipleChoiceInputProps = {
 	onSelect: (choices: readonly PotentialChoice[]) => void;
 };
 
+type TextInputProps = {
+	label: string;
+	name: string;
+	onChange: (val: string) => void;
+	value: string;
+};
+
 type BorderRadiusCorners = {
 	topLeft?: string;
 	topRight?: string;

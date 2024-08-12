@@ -1,12 +1,13 @@
-import { useFlyout } from "@/hooks/useFlyout.hook";
 import React from "react";
+
+import { useFlyout } from "@/hooks/useFlyout.hook";
 import {
 	FilterPill,
 	FilterText,
 	FilterButton,
 	FilterMenu,
+	TextInput,
 } from "../components";
-import { Text } from "@/components/Input";
 
 const SearchFilter: React.FC<SearchFilterProps> = ({
 	onSearch,
@@ -41,7 +42,12 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
 				onMouseEnter={() => setSearchSoftOpen(true)}
 				onMouseLeave={() => setSearchSoftOpen(false)}
 			>
-				<Text label="Search" name={id} value={search} onChange={onSearch} />
+				<TextInput
+					label="Search"
+					name={id}
+					value={search}
+					onChange={onSearch}
+				/>
 			</FilterMenu>
 			<FilterButton
 				borderRadiusCorners={{ topRight: "2rem", bottomRight: "2rem" }}
