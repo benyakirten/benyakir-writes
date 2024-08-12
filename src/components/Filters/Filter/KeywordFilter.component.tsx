@@ -42,11 +42,15 @@ const KeywordFilter: React.FC<KeywordFilterProps> = ({
 				{type}
 			</FilterButton>
 			<FilterMenu
-				height="13rem"
+				height="14.5rem"
 				pointUpwards={keywordsOpenTop}
 				aria-expanded={keywordsOpen}
 			>
-				<MultipleChoice choices={allKeywords} onSelect={onModify} />
+				<MultipleChoice
+					label={`Choose ${label}`}
+					choices={allKeywords}
+					onSelect={onModify}
+				/>
 			</FilterMenu>
 			<FilterButton
 				borderRadiusCorners={{ topRight: "2rem", bottomRight: "2rem" }}
@@ -56,7 +60,10 @@ const KeywordFilter: React.FC<KeywordFilterProps> = ({
 				onClick={() => setKeywordsHardOpen((val) => !val)}
 			>
 				{displayedKeywords.join(", ")}
-				{otherKeywordCount > 0 && `, ${otherKeywordCount} others`}
+				<span style={{ textTransform: "lowercase" }}>
+					{otherKeywordCount > 0 &&
+						`, ${otherKeywordCount} other${otherKeywordCount !== 1 ? "s" : ""}`}
+				</span>
 			</FilterButton>
 		</FilterPill>
 	);

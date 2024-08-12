@@ -15,6 +15,7 @@ type FilterProps = {
 };
 
 type MultipleChoiceInputProps = {
+	label: string;
 	choices: PotentialChoice[];
 	onSelect: (choices: readonly PotentialChoice[]) => void;
 };
