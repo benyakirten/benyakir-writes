@@ -36,16 +36,21 @@ const NewFilter: React.FC<NewFilterProps> = ({ onCreate, options }) => {
 		option: string,
 	) => {
 		e.stopPropagation();
-		setHardOpen(false);
-		setSoftOpen(false);
+		closeAllMenus();
 		onCreate(option);
 	};
+
+	function closeAllMenus() {
+		setSoftOpen(false);
+		setHardOpen(false);
+	}
 
 	return (
 		<FilterPillButton
 			ref={menuRef}
 			onMouseEnter={() => setSoftOpen(true)}
 			onMouseLeave={() => setSoftOpen(false)}
+			onKeyDown={(e) => e.key === "Escape" && closeAllMenus()}
 			onClick={() => setHardOpen((open) => !open)}
 		>
 			<FilterMenu

@@ -29,13 +29,14 @@ type BorderRadiusCorners = {
 
 type FilterPillProps = ChildrenProp & {
 	onRemove: () => void;
-	ref: React.RefObject<HTMLDivElement>;
+	onEscape: () => void;
 };
 
 type FilterButtonProps = ChildrenProp &
 	React.ButtonHTMLAttributes<HTMLButtonElement> & {
 		borderRadiusCorners?: BorderRadiusCorners;
 		filledIn?: boolean;
+		width?: string;
 	};
 
 type DateFilterProps = DateFilter & {

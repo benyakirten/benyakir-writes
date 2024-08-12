@@ -19,21 +19,26 @@ const StyledFilterPill = styled.div`
     }
 `;
 
-const FilterPill: React.FC<FilterPillProps> = ({ children, onRemove, ref }) => {
-	return (
-		<StyledFilterPill ref={ref}>
-			<FilterButton
-				borderRadiusCorners={{ topLeft: "2rem", bottomLeft: "2rem" }}
-				type="button"
-				onClick={onRemove}
+const FilterPill = React.forwardRef<HTMLDivElement, FilterPillProps>(
+	({ children, onRemove, onEscape }, ref) => {
+		return (
+			<StyledFilterPill
+				ref={ref}
+				onKeyDown={(e) => e.key === "Escape" && onEscape()}
 			>
-				<IconContainer>
-					<CloseIcon />
-				</IconContainer>
-			</FilterButton>
-			{children}
-		</StyledFilterPill>
-	);
-};
+				<FilterButton
+					borderRadiusCorners={{ topLeft: "2rem", bottomLeft: "2rem" }}
+					type="button"
+					onClick={onRemove}
+				>
+					<IconContainer>
+						<CloseIcon />
+					</IconContainer>
+				</FilterButton>
+				{children}
+			</StyledFilterPill>
+		);
+	},
+);
 
 export default FilterPill;

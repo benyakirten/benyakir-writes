@@ -32,8 +32,15 @@ const DateFilter: React.FC<DateFilterProps> = ({
 		onModify(time, value);
 	}
 
+	function closeAllMenus() {
+		setBeforeSoftOpen(false);
+		setBeforeHardOpen(false);
+		setAfterSoftOpen(false);
+		setAfterHardOpen(false);
+	}
+
 	return (
-		<FilterPill ref={menuRef} onRemove={onRemove}>
+		<FilterPill ref={menuRef} onEscape={closeAllMenus} onRemove={onRemove}>
 			<FilterText>{label}</FilterText>
 			<FilterMenu
 				pointUpwards={beforeOpenTop}

@@ -13,10 +13,10 @@ const StyledFilterButtonExterior = styled.div`
 	}
 `;
 
-const FilterButtonInterior = styled.button`
+const FilterButtonInterior = styled.button<{ width?: string }>`
 	height: 100%;
-	display: flex;
-	align-items: center;
+	white-space: nowrap;
+	width: ${(props) => props.width || "auto"};
 	padding: ${HORIZONTAL_XS};
 	text-transform: capitalize;
 `;
@@ -25,12 +25,13 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 	children,
 	borderRadiusCorners = {},
 	filledIn,
+	width,
 	...buttonProps
 }) => {
 	return (
 		<StyledFilterButtonExterior>
 			<FillIn filledIn={filledIn} borderRadiusCorners={borderRadiusCorners}>
-				<FilterButtonInterior type="button" {...buttonProps}>
+				<FilterButtonInterior width={width} type="button" {...buttonProps}>
 					{children}
 				</FilterButtonInterior>
 			</FillIn>
