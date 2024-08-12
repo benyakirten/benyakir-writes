@@ -15,9 +15,13 @@ const StyledFilterButtonExterior = styled.div`
 
 const FilterButtonInterior = styled.button<{ width?: string }>`
 	height: 100%;
-	white-space: nowrap;
 	width: ${(props) => props.width || "auto"};
+	
 	padding: ${HORIZONTAL_XS};
+	
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	text-transform: capitalize;
 `;
 

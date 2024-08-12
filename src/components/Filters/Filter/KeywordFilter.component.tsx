@@ -69,7 +69,7 @@ const KeywordFilter: React.FC<KeywordFilterProps> = ({
 				onClick={() => setKeywordsHardOpen((val) => !val)}
 			>
 				{displayedKeywords.length === 0 ? (
-					<span>None</span>
+					<span>No {label}s selected.</span>
 				) : (
 					<span>
 						{displayedKeywords.join(", ")}

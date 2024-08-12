@@ -10,7 +10,7 @@ export const FONT_LG = "1.6rem";
 export const FONT_MD = "1.4rem";
 export const FONT_SM = "1.2rem";
 export const FONT_XS = "1rem";
-export const FONT_XXS = "0.6rem";
+export const FONT_XXS = "0.8rem";
 
 // COLOR
 export const PRIMARY_100 = "#FDF3D8";
