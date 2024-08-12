@@ -285,7 +285,7 @@ type FlattenedBlogCard = PartiallyFlattenedBlogPost & {
 	meta: BooleanLookup;
 };
 
-type SearchType = "book" | "story" | "project" | "post";
+type WordFilterType = "book" | "story" | "project" | "post";
 
 type SearchableBlogPost = FlattenedBlogPost & {
 	type: "post";
@@ -311,7 +311,7 @@ type GlobalSearch = {
 };
 
 type SearchableItem = {
-	type: SearchType;
+	type: WordFilterType;
 	meta: {
 		[key: string]: boolean;
 	};

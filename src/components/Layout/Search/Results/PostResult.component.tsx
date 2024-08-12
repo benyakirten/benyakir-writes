@@ -9,12 +9,14 @@ import {
 	SlubTitle,
 	TitleContainer,
 	InnerContainer,
-	TagPill,
 } from "./Result.styles";
 import { getActiveCategory } from "@/utils/blog";
 import { getPrettyDate } from "@/utils/dates";
 import { FONT_SM, SANS_SERIF_FONT, SIZE_SM, SIZE_XS } from "@/styles/variables";
-import { WpContentDescription } from "@/styles/general-components";
+import {
+	PillContainer,
+	WpContentDescription,
+} from "@/styles/general-components";
 import { truncate } from "@/utils/strings";
 
 const PostTitleContainer = styled.div`
@@ -69,12 +71,12 @@ const PostResult: React.FC<{
 					<CategoryContainer>{activeCategory}</CategoryContainer>
 					<TagContainer>
 						{tags.map((tag) => (
-							<TagPill key={tag}>{tag}</TagPill>
+							<PillContainer key={tag}>{tag}</PillContainer>
 						))}
 						{otherTags > 0 && (
-							<TagPill>
+							<PillContainer>
 								{otherTags} other{otherTags > 1 && "s"}
-							</TagPill>
+							</PillContainer>
 						)}
 					</TagContainer>
 				</MetadataContainer>

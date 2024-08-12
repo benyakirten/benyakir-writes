@@ -7,9 +7,16 @@ type FilterProps = {
 	onCreate: (id: string) => void;
 	onRemove: (id: string) => void;
 	onModifyDate: (time: "before" | "after", value: Date) => void;
-	onModifyKeywords: (id: string, keywords: string[]) => void;
+	onModifyKeywords: (id: string, keywords: PotentialChoice[]) => void;
+	onModifyWordFilterType: (id: string, type: WordFilterType) => void;
+	onModifySearch: (id: string, search: string) => void;
 	options: string[];
 	filters: ItemFilter[];
+};
+
+type MultipleChoiceInputProps = {
+	choices: PotentialChoice[];
+	onSelect: (choices: PotentialChoice[]) => void;
 };
 
 type BorderRadiusCorners = {
@@ -17,6 +24,11 @@ type BorderRadiusCorners = {
 	topRight?: string;
 	bottomLeft?: string;
 	bottomRight?: string;
+};
+
+type FilterPillProps = ChildrenProp & {
+	onRemove: () => void;
+	ref: React.RefObject<HTMLDivElement>;
 };
 
 type FilterButtonProps = ChildrenProp &
@@ -31,33 +43,38 @@ type DateFilterProps = DateFilter & {
 };
 
 type KeywordFilterProps = KeywordFilter & {
-	onModify: (id: string, keywords: string[]) => void;
+	onModify: (keywords: PotentialChoice[]) => void;
+	onChangeType: (type: WordFilterType) => void;
 	onRemove: () => void;
 };
 
 type SearchFilterProps = SearchFilter & {
-	onSearch: (id: string, search: string) => void;
-	onChangeType: (id: string, type: SearchType) => void;
+	onSearch: (search: string) => void;
+	onChangeType: (type: WordFilterType) => void;
 	onRemove: () => void;
 };
 
-type ItemFilter = DateFilter | KeywordFilter;
+type ItemFilter = DateFilter | KeywordFilter | SearchFilter;
 
 type DateFilter = {
+	id: "date";
 	label: string;
 	before: Date;
 	after: Date;
 };
 
 type KeywordFilter = {
+	id: string;
 	label: string;
-	currentKeywords: string[];
-	allKeywords: string[];
+	type: WordFilterType;
+	currentKeywords: PotentialChoice[];
+	allKeywords: PotentialChoice[];
 };
 
-type SearchType = "any" | "all";
+type WordFilterType = "any" | "all";
 type SearchFilter = {
 	id: string;
-	type: SearchType;
+	label: string;
+	type: WordFilterType;
 	search: string;
 };

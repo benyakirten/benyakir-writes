@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import React from "react";
+
 import { SIZE_SM, VERTICAL_SM, Z_ABOVE } from "@/styles/variables";
-import NewFilter from "./NewFilter.component";
-import DateFilter from "./DateFilter.component";
-import KeywordFilter from "./KeywordFilter.component";
+import { DateFilter, KeywordFilter, NewFilter, SearchFilter } from "./Filter";
 
 const FilterBar = styled.div`
     position: sticky;
@@ -23,15 +22,36 @@ const FilterBar = styled.div`
 const FilterComponent: React.FC<{
 	filter: ItemFilter;
 	onModifyDate: (time: "before" | "after", value: Date) => void;
-	onModifyKeywords: (id: string, keywords: string[]) => void;
+	onModifyKeywords: (id: string, keywords: PotentialChoice[]) => void;
+	onModifyWordFilterType: (id: string, type: WordFilterType) => void;
+	onModifySearch: (id: string, search: string) => void;
 	onRemove: (id: string) => void;
-}> = ({ filter, onModifyDate, onModifyKeywords, onRemove }) => {
+}> = ({
+	filter,
+	onModifyDate,
+	onModifyKeywords,
+	onRemove,
+	onModifySearch,
+	onModifyWordFilterType,
+}) => {
+	const onRemoveFilter = () => onRemove(filter.id);
 	if ("before" in filter) {
 		return (
 			<DateFilter
 				onModify={onModifyDate}
-				onRemove={() => onRemove("date")}
+				onRemove={onRemoveFilter}
 				{...filter}
+			/>
+		);
+	}
+
+	if ("search" in filter) {
+		return (
+			<SearchFilter
+				{...filter}
+				onRemove={onRemoveFilter}
+				onSearch={(search) => onModifySearch(filter.label, search)}
+				onChangeType={(type) => onModifyWordFilterType(filter.label, type)}
 			/>
 		);
 	}
@@ -39,8 +59,9 @@ const FilterComponent: React.FC<{
 	return (
 		<KeywordFilter
 			{...filter}
-			onRemove={() => onRemove(filter.label)}
-			onModify={onModifyKeywords}
+			onRemove={onRemoveFilter}
+			onModify={(keywords) => onModifyKeywords(filter.label, keywords)}
+			onChangeType={(type) => onModifyWordFilterType(filter.label, type)}
 		/>
 	);
 };
@@ -50,6 +71,8 @@ const Filter: React.FC<FilterProps> = ({
 	onRemove,
 	onModifyDate,
 	onModifyKeywords,
+	onModifySearch,
+	onModifyWordFilterType,
 	options,
 	filters,
 }) => {
@@ -63,6 +86,8 @@ const Filter: React.FC<FilterProps> = ({
 					onModifyDate={onModifyDate}
 					onModifyKeywords={onModifyKeywords}
 					onRemove={onRemove}
+					onModifySearch={onModifySearch}
+					onModifyWordFilterType={onModifyWordFilterType}
 				/>
 			))}
 		</FilterBar>

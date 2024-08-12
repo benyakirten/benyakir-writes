@@ -1,12 +1,10 @@
-import { useFlyout } from "@/hooks/useFlyout.hook";
 import React from "react";
-import { FilterMenu, FilterPill } from "./components/Filters.styles";
-import { CloseIcon } from "../Icons";
+
+import { useFlyout } from "@/hooks/useFlyout.hook";
 import { getPrettyDate } from "@/utils/dates";
-import FilterText from "./components/FilterText.component";
-import IconContainer from "./components/IconContainer.component";
-import { DatePicker } from "../Input";
-import FilterButton from "./components/FilterButton.component";
+import { DatePicker } from "@/components/Input";
+import { FilterMenu } from "../components/Filters.styles";
+import { FilterText, FilterButton, FilterPill } from "../components";
 
 const DateFilter: React.FC<DateFilterProps> = ({
 	onModify,
@@ -15,13 +13,12 @@ const DateFilter: React.FC<DateFilterProps> = ({
 	after,
 	label,
 }) => {
-	const beforeRef = React.useRef<HTMLButtonElement>(null);
+	const menuRef = React.useRef<HTMLDivElement>(null);
 	const [beforeOpenTop, beforeOpen, setBeforeSoftOpen, setBeforeHardOpen] =
-		useFlyout(beforeRef);
+		useFlyout(menuRef);
 
-	const afterRef = React.useRef<HTMLButtonElement>(null);
 	const [afterOpenTop, afterOpen, setAfterSoftOpen, setAfterHardOpen] =
-		useFlyout(afterRef);
+		useFlyout(menuRef);
 
 	function modifyDate(time: "before" | "after", value: Date) {
 		if (time === "before") {
@@ -36,16 +33,7 @@ const DateFilter: React.FC<DateFilterProps> = ({
 	}
 
 	return (
-		<FilterPill>
-			<FilterButton
-				borderRadiusCorners={{ topLeft: "2rem", bottomLeft: "2rem" }}
-				type="button"
-				onClick={onRemove}
-			>
-				<IconContainer>
-					<CloseIcon />
-				</IconContainer>
-			</FilterButton>
+		<FilterPill ref={menuRef} onRemove={onRemove}>
 			<FilterText>{label}</FilterText>
 			<FilterMenu
 				pointUpwards={beforeOpenTop}

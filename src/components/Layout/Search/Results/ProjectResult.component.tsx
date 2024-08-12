@@ -8,12 +8,14 @@ import {
 	ItemTitle,
 	ResultContainer,
 	SlubTitle,
-	TagPill,
 	TitleContainer,
 } from "./Result.styles";
 import ProjectTech from "./ProjectTech.component";
 import { SIZE_XS } from "@/styles/variables";
-import { WpContentDescription } from "@/styles/general-components";
+import {
+	PillContainer,
+	WpContentDescription,
+} from "@/styles/general-components";
 import { getPrettyDate } from "@/utils/dates";
 
 const TechContainer = styled.div`
@@ -31,6 +33,7 @@ const ProjectResult: React.FC<{
 }> = ({ project, onView }) => {
 	const firstIcons = project.icons.slice(0, 2);
 	const otherIcons = project.icons.length - MAX_TECHS;
+
 	return (
 		<ResultContainer
 			role="link"
@@ -52,9 +55,9 @@ const ProjectResult: React.FC<{
 						<ProjectTech key={i.name} tech={i.name} publicURL={i.publicURL} />
 					))}
 					{otherIcons > 0 && (
-						<TagPill>
+						<PillContainer>
 							{otherIcons} other{otherIcons > 1 && "s"}
-						</TagPill>
+						</PillContainer>
 					)}
 				</TechContainer>
 			</InnerContainer>

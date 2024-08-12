@@ -1,14 +1,17 @@
 import React from "react";
 import { styled } from "styled-components";
 
-import { FilterMenu, FilterPillButton } from "./components/Filters.styles";
+import {
+	FilterMenu,
+	FilterPillButton,
+	FilterText,
+	IconContainer,
+} from "../components";
 import { useFlyout } from "@/hooks/useFlyout.hook";
-import { AddIcon } from "../Icons";
-import { Button } from "../General";
-import FilterText from "./components/FilterText.component";
-import IconContainer from "./components/IconContainer.component";
-import FillIn from "../General/FillIn/FillIn.component";
-import { TRANSITION_NORMAL, TRANSITION_SLOW } from "@/styles/variables";
+import { AddIcon } from "@/components/Icons";
+import { Button } from "@/components/General";
+import { TRANSITION_SLOW } from "@/styles/variables";
+import { FillIn } from "@/components/General";
 
 const InnerContainer = styled.div`
 	display: flex;

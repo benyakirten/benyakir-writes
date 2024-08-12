@@ -18,6 +18,9 @@ import {
 	TRANSITION_EXTRA_SLOW,
 	TRANSITION_NORMAL,
 	TRANSITION_SLOW,
+	SANS_SERIF_FONT,
+	SIZE_SM,
+	SIZE_XS,
 } from "./variables";
 
 export const FadeIn = styled.div<{ duration?: string; delay?: string }>`
@@ -505,4 +508,18 @@ export const PageContents = styled.div`
   ${media.tablet} {
     padding: 1rem 4rem;
   }
+`;
+
+export const PillContainer = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: between;
+	height: min-content;
+
+	font-family: ${SANS_SERIF_FONT};
+
+	border-radius: ${SIZE_MD};
+	border: 1px solid ${(props) => props.theme.base.textColor};
+
+	padding: ${SIZE_XS} ${SIZE_SM};
 `;

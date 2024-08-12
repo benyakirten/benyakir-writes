@@ -2,19 +2,6 @@ import styled from "styled-components";
 
 import { SIZE_MD, SIZE_SM, Z_RAISED } from "@/styles/variables";
 
-export const FilterPill = styled.div`
-    display: flex;
-    align-items: center;
-    position: relative;
-    border: 1px solid ${(props) => props.theme.base.border};
-
-    border-radius: ${SIZE_MD};
-
-    & > *:not(:last-child) {
-        border-right: 1px solid ${(props) => props.theme.base.border};
-    }
-`;
-
 export const FilterPillButton = styled.button`
     display: flex;
     align-items: center;

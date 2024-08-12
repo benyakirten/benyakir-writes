@@ -63,17 +63,3 @@ export const BookCoverContainer = styled.div`
 	justify-content: center;
     flex: 1;
 `;
-
-export const TagPill = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: between;
-	height: min-content;
-
-	font-family: ${SANS_SERIF_FONT};
-
-	border-radius: ${SIZE_MD};
-	border: 1px solid ${(props) => props.theme.base.textColor};
-
-	padding: ${SIZE_XS} ${SIZE_SM};
-`;

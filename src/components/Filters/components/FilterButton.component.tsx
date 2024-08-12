@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
 
-import FillIn from "@/components/General/FillIn/FillIn.component";
+import { FillIn } from "@/components/General";
 import { HORIZONTAL_XS } from "@/styles/variables";
 
 const StyledFilterButtonExterior = styled.div`
@@ -18,6 +18,7 @@ const FilterButtonInterior = styled.button`
 	display: flex;
 	align-items: center;
 	padding: ${HORIZONTAL_XS};
+	text-transform: capitalize;
 `;
 
 const FilterButton: React.FC<FilterButtonProps> = ({

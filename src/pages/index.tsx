@@ -24,16 +24,32 @@ const IndexPage: React.FC = () => {
 	function handlePublishDate() {
 		const before = new Date("2020-01-01");
 		const after = new Date("2020-01-01");
-		setFilters((filters) => [...filters, { label: "Date", before, after }]);
+		setFilters((filters) => [
+			...filters,
+			{ label: "Date", id: "date", before, after },
+		]);
+	}
+
+	function handleSearch() {
+		const label = "search";
+		const id = Math.random().toString();
+		const search = "";
+		const type = "any";
+		setFilters((filters) => [...filters, { label, search, type, id }]);
 	}
 
 	function handleKeywords() {
 		const label = "Keywords";
-		const currentKeywords = ["Test1"];
-		const allKeywords = ["Test1", "Test2"];
+		const currentKeywords = [{ label: "Test1", value: "test1" }];
+		const allKeywords = [
+			{ label: "Test1", value: "test1" },
+			{ label: "Test2", value: "Test2" },
+		];
+		const id = "keywords";
+		const type = "all";
 		setFilters((filters) => [
 			...filters,
-			{ label, currentKeywords, allKeywords },
+			{ label, id, type, currentKeywords, allKeywords },
 		]);
 	}
 	return (
@@ -41,10 +57,12 @@ const IndexPage: React.FC = () => {
 			<PageContents>
 				<LeadHeading>Welcome to Benyakir Writes</LeadHeading>
 				<Filter
-					options={["Publish Date", "Keywords"]}
+					options={["Publish Date", "Keywords", "Search"]}
 					onCreate={(id) => {
 						if (id === "Publish Date") {
 							handlePublishDate();
+						} else if (id === "Search") {
+							handleSearch();
 						} else {
 							handleKeywords();
 						}
@@ -53,6 +71,8 @@ const IndexPage: React.FC = () => {
 					onModifyDate={(time, value) => console.log(time, value)}
 					onRemove={(id) => console.log(id)}
 					filters={filters}
+					onModifyWordFilterType={console.log}
+					onModifySearch={console.log}
 				/>
 				<Grouping>
 					<BigParagraph>
