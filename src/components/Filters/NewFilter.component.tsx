@@ -45,7 +45,12 @@ const NewFilter: React.FC<NewFilterProps> = ({ onCreate, options }) => {
 			onMouseLeave={() => setSoftOpen(false)}
 			onClick={() => setHardOpen((open) => !open)}
 		>
-			<FilterMenu pointUpwards={menuOpenTop} aria-expanded={menuOpen}>
+			<FilterMenu
+				pointUpwards={menuOpenTop}
+				aria-expanded={menuOpen}
+				onMouseEnter={() => setSoftOpen(true)}
+				onMouseLeave={() => setSoftOpen(false)}
+			>
 				{options.map((option) => (
 					<li key={option}>
 						<Button onClick={(e) => selectItem(e, option)}>{option}</Button>

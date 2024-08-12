@@ -47,7 +47,12 @@ const DateFilter: React.FC<DateFilterProps> = ({
 				</IconContainer>
 			</FilterButton>
 			<FilterText>{label}</FilterText>
-			<FilterMenu pointUpwards={beforeOpenTop} aria-expanded={beforeOpen}>
+			<FilterMenu
+				pointUpwards={beforeOpenTop}
+				aria-expanded={beforeOpen}
+				onMouseEnter={() => setBeforeSoftOpen(true)}
+				onMouseLeave={() => setBeforeSoftOpen(false)}
+			>
 				<li>
 					<DatePicker
 						label={`${label} Before`}
@@ -65,7 +70,12 @@ const DateFilter: React.FC<DateFilterProps> = ({
 			>
 				Before {getPrettyDate(before)}
 			</FilterButton>
-			<FilterMenu pointUpwards={afterOpenTop} aria-expanded={afterOpen}>
+			<FilterMenu
+				pointUpwards={afterOpenTop}
+				aria-expanded={afterOpen}
+				onMouseEnter={() => setAfterSoftOpen(true)}
+				onMouseLeave={() => setAfterSoftOpen(false)}
+			>
 				<li>
 					<DatePicker
 						label={`${label} After`}
