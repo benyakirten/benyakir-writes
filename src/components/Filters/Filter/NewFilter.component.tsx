@@ -68,7 +68,7 @@ const NewFilter: React.FC<NewFilterProps> = ({ onCreate, options }) => {
 	) => {
 		e.stopPropagation();
 		closeAllMenus();
-		onCreate(option.label);
+		onCreate(option.id);
 	};
 
 	function closeAllMenus() {

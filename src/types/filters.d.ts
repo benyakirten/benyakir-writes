@@ -8,7 +8,7 @@ type NewFilterProps = {
 	options: FilterOption[];
 };
 
-type FilterProps = {
+type FilterProps = ChildrenProp & {
 	onCreate: (id: string) => void;
 	onRemove: (id: string) => void;
 	onModifyDate: (time: "start" | "end", value: Date) => void;

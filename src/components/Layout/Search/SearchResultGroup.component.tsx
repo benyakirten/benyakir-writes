@@ -94,7 +94,7 @@ const SearchResultGroup: React.FC<SearchResultGroupProps> = ({
 				>
 					<GroupLabel>{title}</GroupLabel>
 					<ToggleVisibilityButton>
-						<EyeIcon height="1.5rem" bgColor={theme.base.textColor} />
+						<EyeIcon bgColor={theme.base.textColor} />
 						<EyeBar open={open} />
 					</ToggleVisibilityButton>
 				</TopBar>

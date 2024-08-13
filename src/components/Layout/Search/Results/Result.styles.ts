@@ -10,6 +10,7 @@ import {
 	VERTICAL_SM,
 } from "@/styles/variables";
 import { convertHexToRGBA } from "@/utils/colors";
+import { media } from "@/styles/queries";
 
 export const ResultContainer = styled.button`
     width: 100%;
@@ -38,6 +39,10 @@ export const InnerContainer = styled.div`
 	width: 100%;
 	height: 100%;
 	gap: ${SIZE_SM};
+
+	${media.phone} {
+		flex-direction: column;
+	}
 `;
 
 export const ContentContainer = styled.div`
@@ -60,6 +65,11 @@ export const SlubTitle = styled.span`
 
 export const BookCoverContainer = styled.div`
 	display: flex;
-	justify-content: center;
+	padding-left: 1rem;
+	max-height: 7rem;
     flex: 1;
+
+	${media.phone} {
+		display: none;
+	}
 `;

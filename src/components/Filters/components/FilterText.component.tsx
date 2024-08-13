@@ -18,7 +18,7 @@ const InnerFilterText = styled.span<{ hideBackground?: boolean }>`
     margin-top: 1px;
     padding: ${SIZE_XS};
 
-    background-color: ${(props) => (props.hideBackground ? "none" : props.theme.colors.background)};
+    background-color: ${(props) => (props.hideBackground ? "none" : props.theme.base.background)};
 `;
 
 const FilterText: React.FC<ChildrenProp & { hideBackground?: boolean }> = ({

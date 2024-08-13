@@ -7,7 +7,9 @@ import { DateFilter, KeywordFilter, NewFilter, SearchFilter } from "./Filter";
 const FilterBar = styled.div`
     position: fixed;
     top: 2rem;
-	left: 70%;
+	left: 98%;
+
+	width: 0px;
 
     display: flex;
     flex-wrap: wrap;
@@ -15,7 +17,6 @@ const FilterBar = styled.div`
     gap: ${SIZE_SM};
 
 	z-index: ${Z_RAISED};
-	isolation: isolate;
 `;
 
 const FilterComponent: React.FC<{
@@ -74,9 +75,11 @@ const Filter: React.FC<FilterProps> = ({
 	onModifyWordFilterType,
 	options,
 	filters,
+	children,
 }) => {
 	return (
 		<FilterBar data-filter>
+			{children}
 			<NewFilter onCreate={onCreate} options={options} />
 			{filters.map((filter) => (
 				<FilterComponent

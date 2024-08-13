@@ -70,8 +70,8 @@ const BlogPage: React.FC = () => {
 	}
 
 	function createPublishDateFilter() {
-		const start = posts[0].published.date;
-		const end = posts[posts.length - 1].published.date;
+		const start = posts[posts.length - 1].published.date;
+		const end = posts[0].published.date;
 		setFilters((filters) => [
 			...filters,
 			{ label: "Date", id: "date", start, end },

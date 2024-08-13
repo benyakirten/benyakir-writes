@@ -1,17 +1,13 @@
 import React from "react";
 
-const EyeIcon: React.FC<{ bgColor: string; height: string }> = ({
-	bgColor,
-	height,
-}) => (
+const EyeIcon: React.FC<{ bgColor: string }> = ({ bgColor }) => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		fill="none"
 		viewBox="0 0 24 24"
 		strokeWidth={1.5}
 		stroke={bgColor}
-		className="size-6"
-		height={height}
+		style={{ width: "1.5rem", height: "1.5rem" }}
 	>
 		<title>View</title>
 		<path
