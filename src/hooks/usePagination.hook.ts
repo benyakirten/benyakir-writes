@@ -4,7 +4,7 @@ import type { PaginationHook } from "@/types/hooks";
 
 const usePagination: PaginationHook = <T>(
 	initialItems: T[],
-	defaultItemsPerPage = 10,
+	defaultItemsPerPage = 4,
 ) => {
 	const [page, setPage] = useState(0);
 	const [items, _setItems] = useState(initialItems);
@@ -21,17 +21,18 @@ const usePagination: PaginationHook = <T>(
 		_setItems(items);
 	}, []);
 
-	const goToPreviousPage = useCallback(() => {
-		setPage((prevPage) => prevPage - 1);
-	}, []);
-
-	const goToNextPage = useCallback(() => {
-		setPage((prevPage) => prevPage + 1);
-	}, []);
-
 	const numPages = useMemo(
-		() => Math.ceil(items.length / itemsPerPage),
+		() => Math.floor(items.length / itemsPerPage),
 		[items, itemsPerPage],
+	);
+
+	const visibleItems: T[] = useMemo(
+		() =>
+			items.slice(
+				itemsPerPage * page,
+				page < numPages ? itemsPerPage * (page + 1) : items.length,
+			),
+		[items, page, itemsPerPage, numPages],
 	);
 
 	return {
@@ -41,9 +42,8 @@ const usePagination: PaginationHook = <T>(
 		setItems,
 		itemsPerPage,
 		setItemsPerPage,
-		goToPreviousPage,
-		goToNextPage,
 		numPages,
+		visibleItems,
 	};
 };
 

@@ -1,4 +1,4 @@
-import { keepWithinRange } from "./numbers";
+import { clamp } from "./numbers";
 import { validateRange } from "./validation";
 
 export function convertHexToRGBA(color: string, opacity = 0.4) {
@@ -149,19 +149,19 @@ export function changeHex(
 ): string {
 	checkIfHexValid(color);
 	const convertedColor = convertHexToRGBNumber(color);
-	const changeAmount = Math.round(keepWithinRange((255 * percent) / 100));
+	const changeAmount = Math.round(clamp((255 * percent) / 100));
 	if (positive) {
 		const changedRGB: RGBNumber = {
-			red: keepWithinRange(convertedColor.red + changeAmount),
-			green: keepWithinRange(convertedColor.blue + changeAmount),
-			blue: keepWithinRange(convertedColor.green + changeAmount),
+			red: clamp(convertedColor.red + changeAmount),
+			green: clamp(convertedColor.blue + changeAmount),
+			blue: clamp(convertedColor.green + changeAmount),
 		};
 		return convertRGBNumberToHex(changedRGB);
 	}
 	const changedRGB: RGBNumber = {
-		red: keepWithinRange(convertedColor.red - changeAmount),
-		green: keepWithinRange(convertedColor.blue - changeAmount),
-		blue: keepWithinRange(convertedColor.green - changeAmount),
+		red: clamp(convertedColor.red - changeAmount),
+		green: clamp(convertedColor.blue - changeAmount),
+		blue: clamp(convertedColor.green - changeAmount),
 	};
 	return convertRGBNumberToHex(changedRGB);
 }

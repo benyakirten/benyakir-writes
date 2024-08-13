@@ -26,9 +26,8 @@ type PaginationHook = <T>(
 	setItems: (_items: T[]) => void;
 	itemsPerPage: number;
 	setItemsPerPage: (_itemsPerPage: number) => void;
-	goToPreviousPage: () => void;
-	goToNextPage: () => void;
 	numPages: number;
+	visibleItems: T[];
 };
 
 type ToggleHook = (initialVal?: boolean) => [boolean, () => void];

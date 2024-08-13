@@ -66,7 +66,7 @@ const DateFilter: React.FC<DateFilterProps> = ({
 				onMouseLeave={() => setStartSoftOpen(false)}
 				onClick={() => setStartHardOpen((val) => !val)}
 			>
-				Start {getPrettyDate(start)}
+				After {getPrettyDate(start)}
 			</FilterButton>
 			<FilterMenu
 				pointUpwards={endOpenTop}
@@ -90,7 +90,7 @@ const DateFilter: React.FC<DateFilterProps> = ({
 				onMouseLeave={() => setEndSoftOpen(false)}
 				onClick={() => setEndHardOpen((val) => !val)}
 			>
-				End {getPrettyDate(end)}
+				Before {getPrettyDate(end)}
 			</FilterButton>
 		</FilterPill>
 	);

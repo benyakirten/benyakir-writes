@@ -234,8 +234,7 @@ const BlogPage: React.FC = () => {
 					<CurrentPage
 						currentPage={postPagination.page}
 						numPages={postPagination.numPages}
-						onLeft={postPagination.goToPreviousPage}
-						onRight={postPagination.goToNextPage}
+						onSetPage={postPagination.setPage}
 					/>
 				</Filter>
 				<Grouping>

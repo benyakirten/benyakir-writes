@@ -1,10 +1,11 @@
 import React from "react";
 import { styled } from "styled-components";
 
-import { HORIZONTAL_XS } from "@/styles/variables";
+import { FONT_XS, HORIZONTAL_XS } from "@/styles/variables";
 import { NextIcon, PreviousIcon } from "@/components/Icons";
 import { StyledFilterPill } from "../components/FilterPill.component";
 import { FillIn } from "@/components/General";
+import { clamp } from "@/utils/numbers";
 
 const DirectionButton = styled.button`
     height: 100%;
@@ -15,6 +16,21 @@ const InnerContainer = styled.div`
 	place-items: center;
 
     padding: ${HORIZONTAL_XS};
+`;
+
+const PageNumber = styled.input`
+	font-size: ${FONT_XS};
+	padding: ${HORIZONTAL_XS};
+
+	border: none;
+	outline: none;
+
+	&:focus {
+		outline: 1px solid ${(prop) => prop.theme.base.border};
+	}
+
+	width: 3rem;
+	border-bottom: 1px solid ${(prop) => prop.theme.base.border};
 `;
 
 const PageCount = styled.div`
@@ -28,11 +44,20 @@ const PageCount = styled.div`
 const CurrentPage: React.FC<CurrentPageProps> = ({
 	currentPage,
 	numPages,
-	onLeft,
-	onRight,
+	onSetPage,
 }) => {
 	const previousDisabled = currentPage === 0;
 	const nextDisabled = currentPage === numPages;
+
+	function setPageNumber(event: React.ChangeEvent<HTMLInputElement>) {
+		const value = Number.parseInt(event.target.value, 10);
+		if (Number.isNaN(value)) {
+			return;
+		}
+
+		const newPageNumber = clamp(value - 1, 0, numPages);
+		onSetPage(newPageNumber);
+	}
 	return (
 		<StyledFilterPill style={{ backgroundColor: "white" }}>
 			<FillIn
@@ -42,7 +67,7 @@ const CurrentPage: React.FC<CurrentPageProps> = ({
 				<DirectionButton
 					aria-label="Previous Page"
 					disabled={previousDisabled}
-					onClick={onLeft}
+					onClick={() => onSetPage(currentPage - 1)}
 				>
 					<InnerContainer>
 						<PreviousIcon />
@@ -51,7 +76,16 @@ const CurrentPage: React.FC<CurrentPageProps> = ({
 			</FillIn>
 			<PageCount>
 				<InnerContainer>
-					Page {currentPage + 1} / {numPages + 1}
+					<span>
+						Page{" "}
+						<PageNumber
+							aria-label="Set page number"
+							type="number"
+							value={currentPage + 1}
+							onChange={setPageNumber}
+						/>
+						/ {numPages + 1}
+					</span>
 				</InnerContainer>
 			</PageCount>
 			<FillIn
@@ -61,7 +95,7 @@ const CurrentPage: React.FC<CurrentPageProps> = ({
 				<DirectionButton
 					aria-label="Next Page"
 					disabled={nextDisabled}
-					onClick={onRight}
+					onClick={() => onSetPage(currentPage + 1)}
 				>
 					<InnerContainer>
 						<NextIcon />

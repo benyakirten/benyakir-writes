@@ -92,3 +92,13 @@ type SearchFilter = {
 	type: WordFilterType;
 	search: string;
 };
+
+type CurrentPageProps = {
+	currentPage: number;
+	numPages: number;
+	onSetPage: (page: number) => void;
+};
+
+type PaginateControlsProps = {
+	onSet: (itemCount: number) => void;
+};

@@ -1,15 +1,15 @@
 import { describe, it, expect } from "vitest";
 
-import { keepWithinRange } from "@/utils/numbers";
+import { clamp } from "@/utils/numbers";
 
-describe("keepWithinRange", () => {
+describe("clamp", () => {
 	it("should return numbers that are between the min and max without changing them", () => {
 		const min = 0;
 		const max = 100;
 		const inputs = [10, 20, 30, 99, 1, 0.00001, 99.99999];
 
 		for (const input of inputs) {
-			expect(keepWithinRange(input, min, max)).toEqual(input);
+			expect(clamp(input, min, max)).toEqual(input);
 		}
 	});
 
@@ -19,7 +19,7 @@ describe("keepWithinRange", () => {
 		const inputs = [100.1, 2000, 10e10, Number.POSITIVE_INFINITY];
 
 		for (const input of inputs) {
-			expect(keepWithinRange(input, min, max)).toEqual(max);
+			expect(clamp(input, min, max)).toEqual(max);
 		}
 	});
 
@@ -29,7 +29,7 @@ describe("keepWithinRange", () => {
 		const inputs = [-0.000001, -10e10, Number.NEGATIVE_INFINITY];
 
 		for (const input of inputs) {
-			expect(keepWithinRange(input, min, max)).toEqual(min);
+			expect(clamp(input, min, max)).toEqual(min);
 		}
 	});
 });
