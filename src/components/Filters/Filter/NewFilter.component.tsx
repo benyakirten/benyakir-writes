@@ -113,7 +113,7 @@ const NewFilter: React.FC<NewFilterProps> = ({ onCreate, options }) => {
 					<IconContainer>
 						<AddIcon />
 					</IconContainer>
-					<FilterText>New Filter</FilterText>
+					<FilterText hideBackground>New Filter</FilterText>
 				</InnerContainer>
 			</FillIn>
 		</FilterPillButton>

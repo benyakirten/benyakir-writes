@@ -8,7 +8,7 @@ const StyledFilterText = styled.span`
     text-transform: capitalize;
 `;
 
-const InnerFilterText = styled.span`
+const InnerFilterText = styled.span<{ hideBackground?: boolean }>`
     display: grid;
     place-items: center;
 
@@ -17,14 +17,19 @@ const InnerFilterText = styled.span`
 
     margin-top: 1px;
     padding: ${SIZE_XS};
+
+    background-color: ${(props) => (props.hideBackground ? "none" : props.theme.colors.background)};
 `;
 
-// TODO: Figure out why margin-top is required
-
-const FilterText: React.FC<ChildrenProp> = ({ children }) => {
+const FilterText: React.FC<ChildrenProp & { hideBackground?: boolean }> = ({
+	children,
+	hideBackground,
+}) => {
 	return (
 		<StyledFilterText>
-			<InnerFilterText>{children}</InnerFilterText>
+			<InnerFilterText hideBackground={hideBackground}>
+				{children}
+			</InnerFilterText>
 		</StyledFilterText>
 	);
 };

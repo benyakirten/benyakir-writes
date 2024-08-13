@@ -7,7 +7,7 @@ const Activeindicator: React.FC<ActiveIndicatorProps> = ({ activeLinkRef }) => {
 		return null;
 	}
 
-	return <StyledActiveIndicator top={activeLinkRef.current.offsetTop} />;
+	return <StyledActiveIndicator linkTop={activeLinkRef.current.offsetTop} />;
 };
 
 export default Activeindicator;

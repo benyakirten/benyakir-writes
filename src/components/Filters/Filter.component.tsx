@@ -1,22 +1,21 @@
 import styled from "styled-components";
 import React from "react";
 
-import { SIZE_SM, VERTICAL_SM, Z_ABOVE } from "@/styles/variables";
+import { SIZE_SM, Z_RAISED } from "@/styles/variables";
 import { DateFilter, KeywordFilter, NewFilter, SearchFilter } from "./Filter";
 
 const FilterBar = styled.div`
-    position: sticky;
-    top: 0;
-	left: 0;
-	width: 100%;
-    padding: ${VERTICAL_SM};
+    position: fixed;
+    top: 2rem;
+	left: 70%;
 
     display: flex;
     flex-wrap: wrap;
+	justify-content: end;
     gap: ${SIZE_SM};
 
-	background-color: ${(props) => props.theme.base.background};
-	z-index: ${Z_ABOVE};
+	z-index: ${Z_RAISED};
+	isolation: isolate;
 `;
 
 const FilterComponent: React.FC<{

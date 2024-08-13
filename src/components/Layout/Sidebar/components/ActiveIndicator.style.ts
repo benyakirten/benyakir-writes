@@ -2,10 +2,10 @@ import { FONT_LG, TRANSITION_NORMAL } from "@/styles/variables";
 import { convertHexToRGBA } from "@/utils/colors";
 import styled from "styled-components";
 
-export const StyledActiveIndicator = styled.div<{ top: number }>`
+export const StyledActiveIndicator = styled.div<{ linkTop: number }>`
     position: absolute;
     right: 0;
-    top: ${({ top }) => top}px;
+    top: ${({ linkTop }) => linkTop}px;
 
     height: ${FONT_LG};
     width: 12%;
