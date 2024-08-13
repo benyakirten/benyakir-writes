@@ -16,11 +16,19 @@ type DebounceHook = (
 	timeout?: number,
 ) => [string, (val: string) => void];
 
-type PaginationHook = <T>(initialItems: T[]) => {
-	currentPage: number;
-	onPageChange: React.Dispatch<React.SetStateAction<number>>;
+type PaginationHook = <T>(
+	initialItems: T[],
+	defaultItemsPerPage?: number,
+) => {
+	page: number;
+	setPage: React.Dispatch<React.SetStateAction<number>>;
 	items: T[];
-	setCurrentItems: (_items: T[]) => void;
+	setItems: (_items: T[]) => void;
+	itemsPerPage: number;
+	setItemsPerPage: (_itemsPerPage: number) => void;
+	goToPreviousPage: () => void;
+	goToNextPage: () => void;
+	numPages: number;
 };
 
 type ToggleHook = (initialVal?: boolean) => [boolean, () => void];

@@ -34,6 +34,10 @@ export const GlobalStyles = createGlobalStyle`
   button {
       all: unset;
       cursor: pointer;
+
+      &:disabled {
+          cursor: default;
+      }
   }
 
   a {

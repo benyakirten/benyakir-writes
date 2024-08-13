@@ -6,7 +6,7 @@ import { CloseIcon } from "@/components/Icons";
 import FilterButton from "./FilterButton.component";
 import IconContainer from "./IconContainer.component";
 
-const StyledFilterPill = styled.div`
+export const StyledFilterPill = styled.div`
     display: flex;
     align-items: center;
     position: relative;

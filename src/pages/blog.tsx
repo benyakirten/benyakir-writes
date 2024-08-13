@@ -9,6 +9,7 @@ import type { FlattenedBlogCard } from "@/types/posts";
 import { createChoiceSet } from "@/utils/filter";
 import { blogDescription, posts } from "@/data/search";
 import { Filter } from "@/components/Filters";
+import { CurrentPage } from "@/components/Filters/Pagination";
 
 export const Head: React.FC = () => (
 	<>
@@ -214,7 +215,7 @@ const BlogPage: React.FC = () => {
 			}
 		}
 
-		postPagination.setCurrentItems(filteredPosts);
+		postPagination.setItems(filteredPosts);
 	}
 
 	return (
@@ -229,9 +230,21 @@ const BlogPage: React.FC = () => {
 					onRemove={removeFilter}
 					onModifyWordFilterType={modifyFilterType}
 					onModifySearch={modifySearch}
-				/>
+				>
+					<CurrentPage
+						currentPage={postPagination.page}
+						numPages={postPagination.numPages}
+						onLeft={postPagination.goToPreviousPage}
+						onRight={postPagination.goToNextPage}
+					/>
+				</Filter>
 				<Grouping>
-					<Paginate<FlattenedBlogCard> {...postPagination} El={BlogCard} />
+					<Paginate<FlattenedBlogCard>
+						El={BlogCard}
+						currentPage={postPagination.page}
+						items={postPagination.items}
+						onPageChange={postPagination.setPage}
+					/>
 				</Grouping>
 			</PageContents>
 		</Page>
