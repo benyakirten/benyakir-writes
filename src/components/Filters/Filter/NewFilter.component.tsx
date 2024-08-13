@@ -38,21 +38,16 @@ const OptionButton = styled.button`
 
 const FilterOption: React.FC<{
 	option: FilterOption;
-	filters: ItemFilter[];
 	selectItem: (
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
 		option: FilterOption,
 	) => void;
-}> = ({ option, filters, selectItem }) => {
-	const disabled =
-		option.disabled instanceof Function
-			? option.disabled(filters)
-			: option.disabled;
+}> = ({ option, selectItem }) => {
 	return (
 		<li>
-			<FillIn disabled={disabled}>
+			<FillIn disabled={option.disabled}>
 				<OptionButton
-					disabled={disabled}
+					disabled={option.disabled}
 					type="button"
 					onClick={(e) => selectItem(e, option)}
 				>
@@ -63,11 +58,7 @@ const FilterOption: React.FC<{
 	);
 };
 
-const NewFilter: React.FC<NewFilterProps> = ({
-	onCreate,
-	options,
-	filters,
-}) => {
+const NewFilter: React.FC<NewFilterProps> = ({ onCreate, options }) => {
 	const menuRef = React.useRef<HTMLButtonElement>(null);
 	const [menuOpenTop, menuOpen, setSoftOpen, setHardOpen] = useFlyout(menuRef);
 
@@ -104,9 +95,8 @@ const NewFilter: React.FC<NewFilterProps> = ({
 			>
 				{options.map((option) => (
 					<FilterOption
-						key={option.label}
+						key={option.id}
 						option={option}
-						filters={filters}
 						selectItem={selectItem}
 					/>
 				))}

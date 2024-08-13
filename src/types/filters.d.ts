@@ -1,17 +1,17 @@
 type FilterOption = {
 	label: string;
-	disabled: boolean | ((filters: ItemFilter[]) => boolean);
+	id: string;
+	disabled: boolean;
 };
 type NewFilterProps = {
 	onCreate: (val: string) => void;
 	options: FilterOption[];
-	filters: ItemFilter[];
 };
 
 type FilterProps = {
 	onCreate: (id: string) => void;
 	onRemove: (id: string) => void;
-	onModifyDate: (time: "before" | "after", value: Date) => void;
+	onModifyDate: (time: "start" | "end", value: Date) => void;
 	onModifyKeywords: (id: string, keywords: readonly PotentialChoice[]) => void;
 	onModifyWordFilterType: (id: string, type: WordFilterType) => void;
 	onModifySearch: (id: string, search: string) => void;
@@ -52,7 +52,7 @@ type FilterButtonProps = ChildrenProp &
 	};
 
 type DateFilterProps = DateFilter & {
-	onModify: (time: "before" | "after", value: Date) => void;
+	onModify: (time: "start" | "end", value: Date) => void;
 	onRemove: () => void;
 };
 
@@ -73,8 +73,8 @@ type ItemFilter = DateFilter | KeywordFilter | SearchFilter;
 type DateFilter = {
 	id: "date";
 	label: string;
-	before: Date;
-	after: Date;
+	start: Date;
+	end: Date;
 };
 
 type KeywordFilter = {

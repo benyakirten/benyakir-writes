@@ -2,14 +2,11 @@ import * as React from "react";
 
 import { Grouping, Page, PageContents } from "@Styles/general-components";
 
-import { LeadPage, Paginate } from "@Layout";
-import { BlogFilter } from "@Posts";
+import { Paginate } from "@Layout";
 import { BlogCard } from "@Variants";
 import usePagination from "@/hooks/usePagination.hook";
 import type { FlattenedBlogCard } from "@/types/posts";
-import { useMultiSelect } from "@/hooks";
 import { createChoiceSet } from "@/utils/filter";
-import { hasSomeContent } from "@/utils/search";
 import { blogDescription, posts } from "@/data/search";
 import { Filter } from "@/components/Filters";
 
@@ -22,90 +19,133 @@ export const Head: React.FC = () => (
 
 const BlogPage: React.FC = () => {
 	const postPagination = usePagination<FlattenedBlogCard>(posts);
-
-	const [filters, setFilters] = React.useState<ItemFilter[]>([]);
-	function handlePublishDate() {
-		const before = new Date("2020-01-01");
-		const after = new Date("2020-01-01");
-		setFilters((filters) => [
-			...filters,
-			{ label: "Date", id: "date", before, after },
-		]);
-	}
-
-	function handleSearch() {
-		const label = "search";
-		const id = Math.random().toString();
-		const search = "";
-		const type = "any";
-		setFilters((filters) => [...filters, { label, search, type, id }]);
-	}
-
-	function handleKeywords() {
-		const label = "Keywords";
-		const currentKeywords = [
-			{ label: "Test1", value: "test1" },
-			{ label: "Test2", value: "test2" },
-			{ label: "Test3", value: "test3" },
-			{ label: "Test4", value: "test4" },
-		];
-		const allKeywords = [
-			{ label: "Test1", value: "test1" },
-			{ label: "Test2", value: "Test2" },
-			{ label: "Test3", value: "test3" },
-			{ label: "Test4", value: "Test4" },
-			{ label: "Test5", value: "test5" },
-			{ label: "Test6", value: "Test6" },
-			{ label: "Test7", value: "test7" },
-			{ label: "Test8", value: "Test8" },
-			{ label: "Test9", value: "test9" },
-			{ label: "Test10", value: "Test10" },
-			{ label: "Test11", value: "test11" },
-			{ label: "Test21", value: "Test12" },
-		];
-		const id = "keywords";
-		const type = "all";
-		setFilters((filters) => [
-			...filters,
-			{ label, id, type, currentKeywords, allKeywords },
-		]);
-	}
-
-	const [publishedBefore, setPublishedBefore] = React.useState<Date>(
-		posts[0].published.date,
-	);
-	const [publishedAfter, setPublishedAfter] = React.useState<Date>(
-		posts[posts.length - 1].published.date,
-	);
-
-	const [filterWords, setFilterWords] = React.useState<string[]>([]);
-
 	const categories = React.useMemo(
 		() => createChoiceSet(posts, "categories"),
 		[],
 	);
 	const tags = React.useMemo(() => createChoiceSet(posts, "tags"), []);
 
+	const [filters, setFilters] = React.useState<ItemFilter[]>([]);
+	const options: FilterOption[] = React.useMemo(
+		() => [
+			{
+				label: "Publish Date",
+				id: "date",
+				disabled: filters.some((filter) => filter.id === "date"),
+			},
+			{
+				label: "Tags",
+				id: "tags",
+				disabled: false,
+			},
+			{
+				label: "Categories",
+				id: "categories",
+				disabled: false,
+			},
+			{
+				label: "Search",
+				id: "search",
+				disabled: false,
+			},
+		],
+		[filters],
+	);
+
+	function handleFilterCreate(id: string) {
+		switch (id) {
+			case "date":
+				createPublishDateFilter();
+				break;
+			case "tags":
+				createTagFilter();
+				break;
+			case "categories":
+				createCategoryFilter();
+				break;
+			case "search":
+				createSearchFilter();
+				break;
+		}
+	}
+
+	function createPublishDateFilter() {
+		const start = posts[0].published.date;
+		const end = posts[posts.length - 1].published.date;
+		setFilters((filters) => [
+			...filters,
+			{ label: "Date", id: "date", start, end },
+		]);
+	}
+
+	function createTagFilter() {
+		const tagFilter: KeywordFilter = {
+			id: "tags",
+			label: "Tags",
+			type: "any",
+			currentKeywords: [],
+			allKeywords: tags,
+		};
+		setFilters((filters) => [...filters, tagFilter]);
+	}
+
+	function createCategoryFilter() {
+		const categoryFilter: KeywordFilter = {
+			id: "categories",
+			label: "Categories",
+			type: "any",
+			currentKeywords: [],
+			allKeywords: categories,
+		};
+		setFilters((filters) => [...filters, categoryFilter]);
+	}
+
+	function createSearchFilter() {
+		const searchFilter: SearchFilter = {
+			label: "search",
+			id: Math.random().toString(),
+			search: "",
+			type: "any",
+		};
+		setFilters((filters) => [...filters, searchFilter]);
+	}
+
+	function removeFilter(id: string) {
+		setFilters((filters) => filters.filter((filter) => filter.id !== id));
+	}
+
+	function modifyDate(time: "start" | "end", value: Date) {
+		// TODO
+	}
+
+	function modifyKeywords(id: string, keywords: readonly PotentialChoice[]) {
+		// TODO
+	}
+
+	function modifyFilterType(id: string, type: WordFilterType) {
+		// TODO
+	}
+
+	function modifySearch(id: string, search: string) {
+		// TODO
+	}
+
+	function filterBlogPosts(filters: ItemFilter[], posts: FlattenedBlogCard[]) {
+		// TODO
+	}
+
 	return (
 		<Page>
 			<PageContents>
 				<Filter
-					options={["Publish Date", "Keywords", "Search"]}
-					onCreate={(id) => {
-						if (id === "Publish Date") {
-							handlePublishDate();
-						} else if (id === "Search") {
-							handleSearch();
-						} else {
-							handleKeywords();
-						}
-					}}
-					onModifyKeywords={(id, keywords) => console.log(id, keywords)}
-					onModifyDate={(time, value) => console.log(time, value)}
-					onRemove={(id) => console.log(id)}
+					options={options}
 					filters={filters}
-					onModifyWordFilterType={console.log}
-					onModifySearch={console.log}
+					onCreate={handleFilterCreate}
+					onModifyKeywords={modifyKeywords}
+					onModifyDate={modifyDate}
+					onRemove={removeFilter}
+					onModifyWordFilterType={modifyFilterType}
+					onModifySearch={modifySearch}
 				/>
 				<Grouping>
 					<Paginate<FlattenedBlogCard> {...postPagination} El={BlogCard} />

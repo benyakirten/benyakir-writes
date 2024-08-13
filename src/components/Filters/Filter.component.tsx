@@ -21,7 +21,7 @@ const FilterBar = styled.div`
 
 const FilterComponent: React.FC<{
 	filter: ItemFilter;
-	onModifyDate: (time: "before" | "after", value: Date) => void;
+	onModifyDate: (time: "start" | "end", value: Date) => void;
 	onModifyKeywords: (id: string, keywords: readonly PotentialChoice[]) => void;
 	onModifyWordFilterType: (id: string, type: WordFilterType) => void;
 	onModifySearch: (id: string, search: string) => void;
@@ -35,7 +35,7 @@ const FilterComponent: React.FC<{
 	onModifyWordFilterType,
 }) => {
 	const onRemoveFilter = () => onRemove(filter.id);
-	if ("before" in filter) {
+	if ("start" in filter) {
 		return (
 			<DateFilter
 				onModify={onModifyDate}
@@ -78,7 +78,7 @@ const Filter: React.FC<FilterProps> = ({
 }) => {
 	return (
 		<FilterBar data-filter>
-			<NewFilter filters={filters} onCreate={onCreate} options={options} />
+			<NewFilter onCreate={onCreate} options={options} />
 			{filters.map((filter) => (
 				<FilterComponent
 					key={filter.id}

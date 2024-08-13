@@ -10,7 +10,6 @@ import {
 	Subtitle,
 } from "@Styles/general-components";
 import { homeDescription } from "@/data/search";
-import { Filter } from "@/components/Filters";
 
 export const Head: React.FC = () => (
 	<>
@@ -20,90 +19,10 @@ export const Head: React.FC = () => (
 );
 
 const IndexPage: React.FC = () => {
-	const [filters, setFilters] = React.useState<ItemFilter[]>([]);
-	function handlePublishDate() {
-		const before = new Date("2020-01-01");
-		const after = new Date("2020-01-01");
-		setFilters((filters) => [
-			...filters,
-			{ label: "Date", id: "date", before, after },
-		]);
-	}
-
-	function handleSearch() {
-		const label = "search";
-		const id = Math.random().toString();
-		const search = "";
-		const type = "any";
-		setFilters((filters) => [...filters, { label, search, type, id }]);
-	}
-
-	function handleKeywords() {
-		const label = "Keywords";
-		const currentKeywords = [
-			{ label: "Test1", value: "test1" },
-			{ label: "Test2", value: "test2" },
-			{ label: "Test3", value: "test3" },
-			{ label: "Test4", value: "test4" },
-		];
-		const allKeywords = [
-			{ label: "Test1", value: "test1" },
-			{ label: "Test2", value: "Test2" },
-			{ label: "Test3", value: "test3" },
-			{ label: "Test4", value: "Test4" },
-			{ label: "Test5", value: "test5" },
-			{ label: "Test6", value: "Test6" },
-			{ label: "Test7", value: "test7" },
-			{ label: "Test8", value: "Test8" },
-			{ label: "Test9", value: "test9" },
-			{ label: "Test10", value: "Test10" },
-			{ label: "Test11", value: "test11" },
-			{ label: "Test21", value: "Test12" },
-		];
-		const id = "keywords";
-		const type = "all";
-		setFilters((filters) => [
-			...filters,
-			{ label, id, type, currentKeywords, allKeywords },
-		]);
-	}
-
-	const options: FilterOption[] = [
-		{
-			label: "Publish Date",
-			disabled: (filters) => filters.some((filter) => filter.id === "date"),
-		},
-		{
-			label: "Keywords",
-			disabled: false,
-		},
-		{
-			label: "Search",
-			disabled: false,
-		},
-	];
 	return (
 		<Page>
 			<PageContents>
 				<LeadHeading>Welcome to Benyakir Writes</LeadHeading>
-				<Filter
-					options={options}
-					onCreate={(id) => {
-						if (id === "Publish Date") {
-							handlePublishDate();
-						} else if (id === "Search") {
-							handleSearch();
-						} else {
-							handleKeywords();
-						}
-					}}
-					onModifyKeywords={(id, keywords) => console.log(id, keywords)}
-					onModifyDate={(time, value) => console.log(time, value)}
-					onRemove={(id) => console.log(id)}
-					filters={filters}
-					onModifyWordFilterType={console.log}
-					onModifySearch={console.log}
-				/>
 				<Grouping>
 					<BigParagraph>
 						Hello stranger or welcome back. Struggling to find a better term, I

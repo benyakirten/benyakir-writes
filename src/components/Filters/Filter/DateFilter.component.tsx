@@ -10,34 +10,34 @@ import { useCloseFlyouts } from "./useListenForEscape.hook";
 const DateFilter: React.FC<DateFilterProps> = ({
 	onModify,
 	onRemove,
-	before,
-	after,
+	start,
+	end,
 	label,
 }) => {
 	const menuRef = React.useRef<HTMLDivElement>(null);
-	const [beforeOpenTop, beforeOpen, setBeforeSoftOpen, setBeforeHardOpen] =
+	const [startOpenTop, startOpen, setStartSoftOpen, setStartHardOpen] =
 		useFlyout(menuRef);
 
-	const [afterOpenTop, afterOpen, setAfterSoftOpen, setAfterHardOpen] =
+	const [endOpenTop, endOpen, setEndSoftOpen, setEndHardOpen] =
 		useFlyout(menuRef);
 
-	function modifyDate(time: "before" | "after", value: Date) {
-		if (time === "before") {
-			setBeforeSoftOpen(false);
-			setBeforeHardOpen(false);
+	function modifyDate(time: "start" | "end", value: Date) {
+		if (time === "start") {
+			setStartSoftOpen(false);
+			setStartHardOpen(false);
 		} else {
-			setAfterSoftOpen(false);
-			setAfterHardOpen(false);
+			setEndSoftOpen(false);
+			setEndHardOpen(false);
 		}
 
 		onModify(time, value);
 	}
 
 	function closeAllMenus() {
-		setBeforeSoftOpen(false);
-		setBeforeHardOpen(false);
-		setAfterSoftOpen(false);
-		setAfterHardOpen(false);
+		setStartSoftOpen(false);
+		setStartHardOpen(false);
+		setEndSoftOpen(false);
+		setEndHardOpen(false);
 	}
 
 	useCloseFlyouts(closeAllMenus);
@@ -46,51 +46,51 @@ const DateFilter: React.FC<DateFilterProps> = ({
 		<FilterPill ref={menuRef} onEscape={closeAllMenus} onRemove={onRemove}>
 			<FilterText>{label}</FilterText>
 			<FilterMenu
-				pointUpwards={beforeOpenTop}
-				aria-expanded={beforeOpen}
-				onMouseEnter={() => setBeforeSoftOpen(true)}
-				onMouseLeave={() => setBeforeSoftOpen(false)}
+				pointUpwards={startOpenTop}
+				aria-expanded={startOpen}
+				onMouseEnter={() => setStartSoftOpen(true)}
+				onMouseLeave={() => setStartSoftOpen(false)}
 			>
 				<li>
 					<DatePicker
-						label={`${label} Before`}
-						name="date-before"
-						value={before}
-						onChange={(val) => modifyDate("before", val)}
+						label={`${label} Since`}
+						name="date-start"
+						value={start}
+						onChange={(val) => modifyDate("start", val)}
 					/>
 				</li>
 			</FilterMenu>
 			<FilterButton
-				filledIn={beforeOpen}
-				onMouseEnter={() => setBeforeSoftOpen(true)}
-				onMouseLeave={() => setBeforeSoftOpen(false)}
-				onClick={() => setBeforeHardOpen((val) => !val)}
+				filledIn={startOpen}
+				onMouseEnter={() => setStartSoftOpen(true)}
+				onMouseLeave={() => setStartSoftOpen(false)}
+				onClick={() => setStartHardOpen((val) => !val)}
 			>
-				Before {getPrettyDate(before)}
+				Start {getPrettyDate(start)}
 			</FilterButton>
 			<FilterMenu
-				pointUpwards={afterOpenTop}
-				aria-expanded={afterOpen}
-				onMouseEnter={() => setAfterSoftOpen(true)}
-				onMouseLeave={() => setAfterSoftOpen(false)}
+				pointUpwards={endOpenTop}
+				aria-expanded={endOpen}
+				onMouseEnter={() => setEndSoftOpen(true)}
+				onMouseLeave={() => setEndSoftOpen(false)}
 			>
 				<li>
 					<DatePicker
-						label={`${label} After`}
-						name="date-after"
-						value={after}
-						onChange={(val) => modifyDate("after", val)}
+						label={`${label} Until`}
+						name="date-end"
+						value={end}
+						onChange={(val) => modifyDate("end", val)}
 					/>
 				</li>
 			</FilterMenu>
 			<FilterButton
 				borderRadiusCorners={{ topRight: "2rem", bottomRight: "2rem" }}
-				filledIn={afterOpen}
-				onMouseEnter={() => setAfterSoftOpen(true)}
-				onMouseLeave={() => setAfterSoftOpen(false)}
-				onClick={() => setAfterHardOpen((val) => !val)}
+				filledIn={endOpen}
+				onMouseEnter={() => setEndSoftOpen(true)}
+				onMouseLeave={() => setEndSoftOpen(false)}
+				onClick={() => setEndHardOpen((val) => !val)}
 			>
-				After {getPrettyDate(after)}
+				End {getPrettyDate(end)}
 			</FilterButton>
 		</FilterPill>
 	);
