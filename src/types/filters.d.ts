@@ -81,7 +81,7 @@ type KeywordFilter = {
 	id: string;
 	label: string;
 	type: WordFilterType;
-	currentKeywords: PotentialChoice[];
+	currentKeywords: readonly PotentialChoice[];
 	allKeywords: PotentialChoice[];
 };
 

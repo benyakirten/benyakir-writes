@@ -115,23 +115,106 @@ const BlogPage: React.FC = () => {
 	}
 
 	function modifyDate(time: "start" | "end", value: Date) {
-		// TODO
+		setFilters((filters) => {
+			const dateFilter = filters.find((filter) => filter.id === "date");
+			if (!dateFilter || !("start" in dateFilter)) {
+				return filters;
+			}
+
+			dateFilter[time] = value;
+			filterBlogPosts(filters);
+
+			return filters;
+		});
 	}
 
 	function modifyKeywords(id: string, keywords: readonly PotentialChoice[]) {
-		// TODO
+		setFilters((filters) => {
+			const keywordFilter = filters.find((filter) => filter.id === id);
+			if (!keywordFilter || !("currentKeywords" in keywordFilter)) {
+				return filters;
+			}
+
+			keywordFilter.currentKeywords = keywords;
+			filterBlogPosts(filters);
+
+			return filters;
+		});
 	}
 
 	function modifyFilterType(id: string, type: WordFilterType) {
-		// TODO
+		setFilters((filters) => {
+			const filter = filters.find((filter) => filter.id === id);
+			if (!filter || !("type" in filter)) {
+				return filters;
+			}
+
+			filter.type = type;
+			filterBlogPosts(filters);
+
+			return filters;
+		});
 	}
 
 	function modifySearch(id: string, search: string) {
-		// TODO
+		setFilters((filters) => {
+			const searchFilter = filters.find((filter) => filter.id === id);
+			if (!searchFilter || !("search" in searchFilter)) {
+				return filters;
+			}
+
+			searchFilter.search = search;
+			filterBlogPosts(filters);
+
+			return filters;
+		});
 	}
 
-	function filterBlogPosts(filters: ItemFilter[], posts: FlattenedBlogCard[]) {
-		// TODO
+	function filterBySearch(
+		filter: SearchFilter,
+		posts: FlattenedBlogCard[],
+	): FlattenedBlogCard[] {
+		const search = filter.search.toLowerCase().split(" ");
+		const fn = filter.type === "any" ? search.some : search.every;
+		return posts.filter((post) => fn((word) => post.meta[word]));
+	}
+
+	function filterByKeywords(
+		filter: KeywordFilter,
+		posts: FlattenedBlogCard[],
+	): FlattenedBlogCard[] {
+		const fn =
+			filter.type === "any"
+				? filter.currentKeywords.some
+				: filter.currentKeywords.every;
+		return posts.filter((post) => {
+			const keywords = filter.id === "tags" ? post.tags : post.categories;
+			return fn((keyword) => keywords?.includes(keyword.value));
+		});
+	}
+
+	function filterByDate(filter: DateFilter, posts: FlattenedBlogCard[]) {
+		return posts.filter((post) => {
+			const postDate = post.published.date.getTime();
+			const start = filter.start.getTime();
+			const end = filter.end.getTime();
+			return postDate >= start && postDate <= end;
+		});
+	}
+
+	function filterBlogPosts(filters: ItemFilter[]) {
+		let filteredPosts = posts;
+		for (const filter of filters) {
+			if (filter.id === "date" && "start" in filter) {
+				filteredPosts = filterByDate(filter, filteredPosts);
+			} else if ("search" in filter) {
+				filteredPosts = filterBySearch(filter, filteredPosts);
+			} else if ("currentKeywords" in filter) {
+				filteredPosts = filterByKeywords(filter, filteredPosts);
+			}
+		}
+
+		postPagination.setCurrentItems(filteredPosts);
 	}
 
 	return (
