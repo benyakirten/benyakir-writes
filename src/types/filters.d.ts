@@ -98,7 +98,3 @@ type CurrentPageProps = {
 	numPages: number;
 	onSetPage: (page: number) => void;
 };
-
-type PaginateControlsProps = {
-	onSet: (itemCount: number) => void;
-};

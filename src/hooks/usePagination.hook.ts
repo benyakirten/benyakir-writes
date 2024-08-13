@@ -2,9 +2,10 @@ import { useState, useCallback, useMemo } from "react";
 
 import type { PaginationHook } from "@/types/hooks";
 
+const DEFAULT_ITEMS_PER_PAGE = 10;
 const usePagination: PaginationHook = <T>(
 	initialItems: T[],
-	defaultItemsPerPage = 4,
+	defaultItemsPerPage = DEFAULT_ITEMS_PER_PAGE,
 ) => {
 	const [page, setPage] = useState(0);
 	const [items, _setItems] = useState(initialItems);
