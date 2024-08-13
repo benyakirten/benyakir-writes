@@ -8,6 +8,7 @@ import {
 	FilterMenu,
 	TextInput,
 } from "../components";
+import { useCloseFlyouts } from "./useListenForEscape.hook";
 
 const SearchFilter: React.FC<SearchFilterProps> = ({
 	onSearch,
@@ -26,6 +27,8 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
 		setSearchSoftOpen(false);
 		setSearchHardOpen(false);
 	}
+
+	useCloseFlyouts(closeAllMenus);
 
 	return (
 		<FilterPill onEscape={closeAllMenus} ref={menuRef} onRemove={onRemove}>

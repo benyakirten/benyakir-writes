@@ -5,6 +5,7 @@ import { getPrettyDate } from "@/utils/dates";
 import { DatePicker } from "@/components/Input";
 import { FilterMenu } from "../components/Filters.styles";
 import { FilterText, FilterButton, FilterPill } from "../components";
+import { useCloseFlyouts } from "./useListenForEscape.hook";
 
 const DateFilter: React.FC<DateFilterProps> = ({
 	onModify,
@@ -38,6 +39,8 @@ const DateFilter: React.FC<DateFilterProps> = ({
 		setAfterSoftOpen(false);
 		setAfterHardOpen(false);
 	}
+
+	useCloseFlyouts(closeAllMenus);
 
 	return (
 		<FilterPill ref={menuRef} onEscape={closeAllMenus} onRemove={onRemove}>

@@ -11,6 +11,7 @@ import { useFlyout } from "@/hooks/useFlyout.hook";
 import { AddIcon } from "@/components/Icons";
 import { SIZE_SM, TRANSITION_SLOW } from "@/styles/variables";
 import { FillIn } from "@/components/General";
+import { useCloseFlyouts } from "./useListenForEscape.hook";
 
 const InnerContainer = styled.div`
 	display: flex;
@@ -83,6 +84,8 @@ const NewFilter: React.FC<NewFilterProps> = ({
 		setSoftOpen(false);
 		setHardOpen(false);
 	}
+
+	useCloseFlyouts(closeAllMenus);
 
 	return (
 		<FilterPillButton

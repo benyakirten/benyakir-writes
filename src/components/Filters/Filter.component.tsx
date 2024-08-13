@@ -77,7 +77,7 @@ const Filter: React.FC<FilterProps> = ({
 	filters,
 }) => {
 	return (
-		<FilterBar>
+		<FilterBar data-filter>
 			<NewFilter filters={filters} onCreate={onCreate} options={options} />
 			{filters.map((filter) => (
 				<FilterComponent

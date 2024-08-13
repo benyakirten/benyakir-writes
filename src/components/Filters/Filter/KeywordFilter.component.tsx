@@ -8,6 +8,7 @@ import {
 	MultipleChoice,
 } from "../components";
 import { useFlyout } from "@/hooks/useFlyout.hook";
+import { useCloseFlyouts } from "./useListenForEscape.hook";
 
 const MAX_KEYWORDS = 1;
 
@@ -37,6 +38,8 @@ const KeywordFilter: React.FC<KeywordFilterProps> = ({
 		setKeywordsSoftOpen(false);
 		setKeywordsHardOpen(false);
 	}
+
+	useCloseFlyouts(closeAllMenus);
 
 	return (
 		<FilterPill onEscape={closeAllMenus} ref={menuRef} onRemove={onRemove}>
