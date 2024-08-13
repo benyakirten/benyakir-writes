@@ -67,12 +67,27 @@ const IndexPage: React.FC = () => {
 			{ label, id, type, currentKeywords, allKeywords },
 		]);
 	}
+
+	const options: FilterOption[] = [
+		{
+			label: "Publish Date",
+			disabled: (filters) => filters.some((filter) => filter.id === "date"),
+		},
+		{
+			label: "Keywords",
+			disabled: false,
+		},
+		{
+			label: "Search",
+			disabled: false,
+		},
+	];
 	return (
 		<Page>
 			<PageContents>
 				<LeadHeading>Welcome to Benyakir Writes</LeadHeading>
 				<Filter
-					options={["Publish Date", "Keywords", "Search"]}
+					options={options}
 					onCreate={(id) => {
 						if (id === "Publish Date") {
 							handlePublishDate();

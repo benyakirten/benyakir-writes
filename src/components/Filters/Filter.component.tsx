@@ -78,10 +78,10 @@ const Filter: React.FC<FilterProps> = ({
 }) => {
 	return (
 		<FilterBar>
-			<NewFilter onCreate={onCreate} options={options} />
+			<NewFilter filters={filters} onCreate={onCreate} options={options} />
 			{filters.map((filter) => (
 				<FilterComponent
-					key={filter.label}
+					key={filter.id}
 					filter={filter}
 					onModifyDate={onModifyDate}
 					onModifyKeywords={onModifyKeywords}

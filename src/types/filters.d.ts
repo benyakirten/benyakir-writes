@@ -1,6 +1,11 @@
+type FilterOption = {
+	label: string;
+	disabled: boolean | ((filters: ItemFilter[]) => boolean);
+};
 type NewFilterProps = {
-	onCreate: (string) => void;
-	options: string[];
+	onCreate: (val: string) => void;
+	options: FilterOption[];
+	filters: ItemFilter[];
 };
 
 type FilterProps = {
@@ -10,7 +15,7 @@ type FilterProps = {
 	onModifyKeywords: (id: string, keywords: readonly PotentialChoice[]) => void;
 	onModifyWordFilterType: (id: string, type: WordFilterType) => void;
 	onModifySearch: (id: string, search: string) => void;
-	options: string[];
+	options: FilterOption[];
 	filters: ItemFilter[];
 };
 

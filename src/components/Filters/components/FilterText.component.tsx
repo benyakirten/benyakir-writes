@@ -5,6 +5,7 @@ import { SIZE_XS } from "@/styles/variables";
 
 const StyledFilterText = styled.span`
     flex-grow: 1;
+    text-transform: capitalize;
 `;
 
 const InnerFilterText = styled.span`

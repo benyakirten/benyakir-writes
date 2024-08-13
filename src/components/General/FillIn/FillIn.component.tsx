@@ -12,8 +12,9 @@ const FillIn: React.FC<
 	ChildrenProp & {
 		borderRadiusCorners?: BorderRadiusCorners;
 		filledIn?: boolean;
+		disabled?: boolean;
 	}
-> = ({ children, borderRadiusCorners = {}, filledIn }) => {
+> = ({ children, borderRadiusCorners = {}, filledIn, disabled }) => {
 	const [cornerIdx, setCornerIdx] = React.useState<number>(0);
 
 	const handleMouseover: React.MouseEventHandler = (e) => {
@@ -31,6 +32,7 @@ const FillIn: React.FC<
 			data-force-fill-in={filledIn || false}
 			borderRadiusCorners={borderRadiusCorners}
 			onMouseEnter={handleMouseover}
+			data-disabled={disabled}
 		>
 			<div
 				data-fill-in

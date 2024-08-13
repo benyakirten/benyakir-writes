@@ -29,19 +29,54 @@ const InnerContainer = styled.div`
 const OptionButton = styled.button`
 	padding: ${SIZE_SM};
 	white-space: nowrap;
+
+	&:disabled {
+		cursor: default;
+	}
 `;
 
-const NewFilter: React.FC<NewFilterProps> = ({ onCreate, options }) => {
+const FilterOption: React.FC<{
+	option: FilterOption;
+	filters: ItemFilter[];
+	selectItem: (
+		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+		option: FilterOption,
+	) => void;
+}> = ({ option, filters, selectItem }) => {
+	const disabled =
+		option.disabled instanceof Function
+			? option.disabled(filters)
+			: option.disabled;
+	return (
+		<li>
+			<FillIn disabled={disabled}>
+				<OptionButton
+					disabled={disabled}
+					type="button"
+					onClick={(e) => selectItem(e, option)}
+				>
+					{option.label}
+				</OptionButton>
+			</FillIn>
+		</li>
+	);
+};
+
+const NewFilter: React.FC<NewFilterProps> = ({
+	onCreate,
+	options,
+	filters,
+}) => {
 	const menuRef = React.useRef<HTMLButtonElement>(null);
 	const [menuOpenTop, menuOpen, setSoftOpen, setHardOpen] = useFlyout(menuRef);
 
 	const selectItem = (
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-		option: string,
+		option: FilterOption,
 	) => {
 		e.stopPropagation();
 		closeAllMenus();
-		onCreate(option);
+		onCreate(option.label);
 	};
 
 	function closeAllMenus() {
@@ -65,16 +100,12 @@ const NewFilter: React.FC<NewFilterProps> = ({ onCreate, options }) => {
 				onMouseLeave={() => setSoftOpen(false)}
 			>
 				{options.map((option) => (
-					<li key={option}>
-						<FillIn>
-							<OptionButton
-								type="button"
-								onClick={(e) => selectItem(e, option)}
-							>
-								{option}
-							</OptionButton>
-						</FillIn>
-					</li>
+					<FilterOption
+						key={option.label}
+						option={option}
+						filters={filters}
+						selectItem={selectItem}
+					/>
 				))}
 			</FilterMenu>
 			<FillIn

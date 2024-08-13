@@ -23,6 +23,24 @@ export const FillInExterior = styled.div<{
     z-index: ${Z_ABOVE};
   }
 
+  &[data-disabled='true'] {
+    cursor: default;
+    background-color: ${(props) => props.theme.button.disabled.background};
+
+    span {
+      color: ${(props) => props.theme.button.disabled.textColor};
+    }
+
+    &:hover {
+      span {
+        color: ${(props) => props.theme.button.disabled.textColor};
+      }
+      div[data-fill-in] {
+        transform: scale(0) !important;
+      }
+    }
+  }
+
   div[data-fill-in] {
     position: absolute;
 
