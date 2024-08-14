@@ -50,8 +50,8 @@ const FilterComponent: React.FC<{
 			<SearchFilter
 				{...filter}
 				onRemove={onRemoveFilter}
-				onSearch={(search) => onModifySearch(filter.label, search)}
-				onChangeType={(type) => onModifyWordFilterType(filter.label, type)}
+				onSearch={(search) => onModifySearch(filter.id, search)}
+				onChangeType={(type) => onModifyWordFilterType(filter.id, type)}
 			/>
 		);
 	}
@@ -60,8 +60,8 @@ const FilterComponent: React.FC<{
 		<KeywordFilter
 			{...filter}
 			onRemove={onRemoveFilter}
-			onModify={(keywords) => onModifyKeywords(filter.label, keywords)}
-			onChangeType={(type) => onModifyWordFilterType(filter.label, type)}
+			onModify={(keywords) => onModifyKeywords(filter.id, keywords)}
+			onChangeType={(type) => onModifyWordFilterType(filter.id, type)}
 		/>
 	);
 };

@@ -2,16 +2,15 @@ import styled from "styled-components";
 
 import {
 	SERIF_FONT,
-	FONT_SM,
 	FONT_XL,
 	FONT_XXL,
 	SHADOW_MD,
-	TRANSITION_FAST,
 	TRANSITION_NORMAL,
 	TRANSITION_SLOW,
 	Z_ABOVE,
 	Z_RAISED,
 	SIZE_SM,
+	FONT_XXS,
 } from "@StyleVars";
 import { media } from "@Styles/queries";
 import { convertHexToRGBA } from "@Utils/colors";
@@ -20,9 +19,12 @@ export const StyledSidebar = styled.nav<{ open?: boolean }>`
   position: fixed;
   z-index: ${Z_RAISED};
 
-  width: 25rem;
+  width: 17rem;
   height: 100vh;
   overflow: auto;
+
+  padding-top: 1rem;
+  padding-left: 1rem;
 
   transform: translateX(${(props) => (props.open ? "0%" : "-80%")});
 
@@ -47,24 +49,11 @@ export const StyledSidebar = styled.nav<{ open?: boolean }>`
 
 export const SidebarContents = styled.div<{ open: boolean }>`
   position: relative;
-  top: 1rem;
-  left: 2.5rem;
-  padding-right: 2rem;
-
   transform: translateX(${(props) => (props.open ? "0" : "-100%")});
 `;
 
 export const ArrowButton = styled.button<{ open: boolean }>`
-  cursor: pointer;
-
   position: relative;
-  left: 1rem;
-  top: 1rem;
-
-  background: none;
-  border: none;
-
-  align-self: start;
 
   font-size: ${FONT_XL};
 
@@ -76,7 +65,7 @@ export const ArrowButton = styled.button<{ open: boolean }>`
 
   transition: all ${TRANSITION_SLOW} ease;
   rotate: ${(props) => (props.open ? "180" : "0")}deg;
-  translate: ${(props) => (props.open ? "0" : "20")}rem 0;
+  left: ${(props) => (props.open ? "0%" : "83%")};
 `;
 
 export const VisibleGroup = styled.div<{ open: boolean }>`
@@ -91,7 +80,6 @@ export const NavGroup = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
-  justify-content: space-around;
   gap: ${SIZE_SM};
 `;
 
@@ -108,20 +96,12 @@ export const SubLinks = styled.div<{ open: boolean }>`
 `;
 
 export const LegalBox = styled.div`
-  cursor: default;
-
   display: flex;
   flex-direction: column;
-
-  height: 4rem;
-  margin: 2rem 4rem;
-  min-width: 4rem;
-
-  transition: opacity ${TRANSITION_FAST} ease;
 `;
 
 export const LegalItem = styled.span`
-  font-size: ${FONT_SM};
+  font-size: ${FONT_XXS};
   color: ${(props) => props.theme.base.textColor};
 `;
 

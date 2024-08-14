@@ -1,15 +1,19 @@
 import * as React from "react";
 
-import { Grouping, Page, PageContents } from "@Styles/general-components";
+import {
+	Grouping,
+	LeadHeading,
+	Page,
+	PaginatedPageContents,
+} from "@Styles/general-components";
 
-import { Paginate } from "@Layout";
-import { BlogCard } from "@Variants";
 import usePagination from "@/hooks/usePagination.hook";
 import type { FlattenedBlogCard } from "@/types/posts";
 import { createChoiceSet } from "@/utils/filter";
 import { blogDescription, posts } from "@/data/search";
 import { Filter } from "@/components/Filters";
 import { CurrentPage } from "@/components/Filters/Pagination";
+import { CardContainer, NewBlogCard } from "@/components/Cards";
 
 export const Head: React.FC = () => (
 	<>
@@ -19,7 +23,7 @@ export const Head: React.FC = () => (
 );
 
 const BlogPage: React.FC = () => {
-	const postPagination = usePagination<FlattenedBlogCard>(posts);
+	const postPagination = usePagination(posts);
 	const categories = React.useMemo(
 		() => createChoiceSet(posts, "categories"),
 		[],
@@ -112,7 +116,11 @@ const BlogPage: React.FC = () => {
 	}
 
 	function removeFilter(id: string) {
-		setFilters((filters) => filters.filter((filter) => filter.id !== id));
+		setFilters((filters) => {
+			const newFilters = filters.filter((filter) => filter.id !== id);
+			filterBlogPosts(newFilters);
+			return newFilters;
+		});
 	}
 
 	function modifyDate(time: "start" | "end", value: Date) {
@@ -176,8 +184,21 @@ const BlogPage: React.FC = () => {
 		posts: FlattenedBlogCard[],
 	): FlattenedBlogCard[] {
 		const search = filter.search.toLowerCase().split(" ");
-		const fn = filter.type === "any" ? search.some : search.every;
-		return posts.filter((post) => fn((word) => post.meta[word]));
+		const fn =
+			filter.type === "any"
+				? search.some.bind(search)
+				: search.every.bind(search);
+		return posts.filter((post) =>
+			fn(
+				(word) =>
+					post.meta[word] ||
+					post.title.includes(word) ||
+					post.excerpt?.includes(word) ||
+					post.content?.includes(word) ||
+					post.tags?.find((tag) => tag.includes(word)) ||
+					post.categories?.find((cat) => cat.includes(word)),
+			),
+		);
 	}
 
 	function filterByKeywords(
@@ -186,8 +207,8 @@ const BlogPage: React.FC = () => {
 	): FlattenedBlogCard[] {
 		const fn =
 			filter.type === "any"
-				? filter.currentKeywords.some
-				: filter.currentKeywords.every;
+				? filter.currentKeywords.some.bind(filter.currentKeywords)
+				: filter.currentKeywords.every.bind(filter.currentKeywords);
 		return posts.filter((post) => {
 			const keywords = filter.id === "tags" ? post.tags : post.categories;
 			return fn((keyword) => keywords?.includes(keyword.value));
@@ -220,7 +241,7 @@ const BlogPage: React.FC = () => {
 
 	return (
 		<Page>
-			<PageContents>
+			<PaginatedPageContents>
 				<Filter
 					options={options}
 					filters={filters}
@@ -237,15 +258,15 @@ const BlogPage: React.FC = () => {
 						onSetPage={postPagination.setPage}
 					/>
 				</Filter>
+				<LeadHeading>Blog Posts</LeadHeading>
 				<Grouping>
-					<Paginate<FlattenedBlogCard>
-						El={BlogCard}
-						currentPage={postPagination.page}
-						items={postPagination.items}
-						onPageChange={postPagination.setPage}
-					/>
+					<CardContainer>
+						{postPagination.items.map((post) => (
+							<NewBlogCard key={post.slug} post={post} />
+						))}
+					</CardContainer>
 				</Grouping>
-			</PageContents>
+			</PaginatedPageContents>
 		</Page>
 	);
 };

@@ -523,3 +523,7 @@ export const PillContainer = styled.div`
 
 	padding: ${SIZE_XS} ${SIZE_SM};
 `;
+
+export const PaginatedPageContents = styled.div`
+
+`;

@@ -2,6 +2,7 @@ import { Link, graphql, useStaticQuery } from "gatsby";
 import * as React from "react";
 
 import { LogoContainer } from "./Logo.styles";
+import { LogoProps, LogoQuery } from "@/types/props/layout";
 
 const Logo: React.FC<LogoProps> = ({ opening, open }) => {
 	const data: LogoQuery = useStaticQuery(graphql`

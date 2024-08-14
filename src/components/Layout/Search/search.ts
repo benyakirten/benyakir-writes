@@ -48,6 +48,8 @@ export function search(query: string): SearchResultItems | null {
 			(word) =>
 				post.meta[word] ||
 				post.title.toLowerCase().includes(word) ||
+				post.excerpt?.toLowerCase().includes(word) ||
+				post.content?.toLowerCase().includes(word) ||
 				post.categories?.find((cat) => cat.toLowerCase().includes(word)) ||
 				post.tags?.find((tag) => tag.toLowerCase().includes(word)),
 		),

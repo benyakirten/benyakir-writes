@@ -8,9 +8,9 @@ export const LogoContainer = styled(SVGContainer)<{
 	open: boolean;
 }>`
   position: relative;
-  left: 1rem;
-  translate: ${(props) => (props.open ? "0" : "19.5")}rem 0;
-  transition: translate ${TRANSITION_SLOW} ease;
+  margin-top: 1rem;
+  left: ${(props) => (props.open ? "0" : "83%")};
+  transition: left ${TRANSITION_SLOW} ease;
 
   animation: ${(props) =>
 		props.opening ? "500ms rotate ease forwards" : "none"};
