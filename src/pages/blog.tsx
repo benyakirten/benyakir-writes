@@ -133,7 +133,7 @@ const BlogPage: React.FC = () => {
 			dateFilter[time] = value;
 			filterBlogPosts(filters);
 
-			return filters;
+			return structuredClone(filters);
 		});
 	}
 
@@ -147,7 +147,7 @@ const BlogPage: React.FC = () => {
 			keywordFilter.currentKeywords = keywords;
 			filterBlogPosts(filters);
 
-			return filters;
+			return structuredClone(filters);
 		});
 	}
 
@@ -161,7 +161,7 @@ const BlogPage: React.FC = () => {
 			filter.type = type;
 			filterBlogPosts(filters);
 
-			return filters;
+			return structuredClone(filters);
 		});
 	}
 
@@ -175,7 +175,7 @@ const BlogPage: React.FC = () => {
 			searchFilter.search = search;
 			filterBlogPosts(filters);
 
-			return filters;
+			return structuredClone(filters);
 		});
 	}
 
@@ -183,6 +183,10 @@ const BlogPage: React.FC = () => {
 		filter: SearchFilter,
 		posts: FlattenedBlogCard[],
 	): FlattenedBlogCard[] {
+		if (filter.search === "") {
+			return posts;
+		}
+
 		const search = filter.search.toLowerCase().split(" ");
 		const fn =
 			filter.type === "any"
@@ -194,7 +198,7 @@ const BlogPage: React.FC = () => {
 					post.meta[word] ||
 					post.title.includes(word) ||
 					post.excerpt?.includes(word) ||
-					post.content?.includes(word) ||
+					post.content?.toLowerCase().includes(word) ||
 					post.tags?.find((tag) => tag.includes(word)) ||
 					post.categories?.find((cat) => cat.includes(word)),
 			),
@@ -261,7 +265,7 @@ const BlogPage: React.FC = () => {
 				<LeadHeading>Blog Posts</LeadHeading>
 				<Grouping>
 					<CardContainer>
-						{postPagination.items.map((post) => (
+						{postPagination.visibleItems.map((post) => (
 							<NewBlogCard key={post.slug} post={post} />
 						))}
 					</CardContainer>

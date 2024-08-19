@@ -12,14 +12,10 @@ import {
 	StyledSidebar,
 	VisibleGroup,
 } from "./Sidebar.styles";
-
 import { Toggle } from "@Input";
-
 import { capitalize } from "@Utils/strings";
-
 import { useAppDispatch, useAppSelector } from "@Store/hooks";
 import { toggleTimeOfDay } from "@Store/theme/theme.slice";
-
 import {
 	setSidebarState,
 	toggleSidebarState,
@@ -120,10 +116,8 @@ const Sidebar: React.FC<{ onSearch: () => void }> = ({ onSearch }) => {
 				open={open}
 			>
 				<ArrowButton
-					tabIndex={0}
 					open={open}
 					onClick={toggleOpen}
-					data-cy="open-sidemenu"
 					aria-label={open ? "Close Sidebar" : "Open Sidebar"}
 				>
 					&larr;

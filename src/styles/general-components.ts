@@ -21,6 +21,7 @@ import {
 	SANS_SERIF_FONT,
 	SIZE_SM,
 	SIZE_XS,
+	FONT_SM,
 } from "./variables";
 
 export const FadeIn = styled.div<{ duration?: string; delay?: string }>`
@@ -513,8 +514,9 @@ export const PageContents = styled.div`
 export const PillContainer = styled.div`
 	display: flex;
 	align-items: center;
-	justify-content: between;
+	justify-content: space-between;
 	height: min-content;
+  white-space: nowrap;
 
 	font-family: ${SANS_SERIF_FONT};
 
@@ -525,5 +527,5 @@ export const PillContainer = styled.div`
 `;
 
 export const PaginatedPageContents = styled.div`
-
+  padding: 2rem 18rem 4rem 1rem;
 `;

@@ -33,6 +33,14 @@ export const getPrettyDate = (date: Date) =>
 		day: "2-digit",
 	});
 
+export function getShortDate(date: Date) {
+	return date.toLocaleString("en-US", {
+		year: "2-digit",
+		month: "numeric",
+		day: "numeric",
+	});
+}
+
 export function getMonth(month: number): FullMonth {
 	switch (month) {
 		case 1:

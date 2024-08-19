@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
-import { SIZE_SM } from "@/styles/variables";
+import { SIZE_LG } from "@/styles/variables";
 
 export const CardContainer = styled.ul`
     display: grid;
-    gap: ${SIZE_SM};
-    grid-template-columns: repeat(4, minmax(300px, 1fr));
+    gap: ${SIZE_LG};
 `;

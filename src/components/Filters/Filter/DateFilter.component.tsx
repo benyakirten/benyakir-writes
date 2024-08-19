@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useFlyout } from "@/hooks/useFlyout.hook";
-import { getPrettyDate } from "@/utils/dates";
+import { getShortDate } from "@/utils/dates";
 import { DatePicker } from "@/components/Input";
 import { FilterMenu } from "../components/Filters.styles";
 import { FilterText, FilterButton, FilterPill } from "../components";
@@ -66,7 +66,7 @@ const DateFilter: React.FC<DateFilterProps> = ({
 				onMouseLeave={() => setStartSoftOpen(false)}
 				onClick={() => setStartHardOpen((val) => !val)}
 			>
-				After {getPrettyDate(start)}
+				After {getShortDate(start)}
 			</FilterButton>
 			<FilterMenu
 				pointUpwards={endOpenTop}
@@ -90,7 +90,7 @@ const DateFilter: React.FC<DateFilterProps> = ({
 				onMouseLeave={() => setEndSoftOpen(false)}
 				onClick={() => setEndHardOpen((val) => !val)}
 			>
-				Before {getPrettyDate(end)}
+				Before {getShortDate(end)}
 			</FilterButton>
 		</FilterPill>
 	);
