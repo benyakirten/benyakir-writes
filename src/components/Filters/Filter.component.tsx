@@ -1,8 +1,12 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useRef } from "react";
 
 import { SIZE_SM, Z_RAISED } from "@/styles/variables";
 import { DateFilter, KeywordFilter, NewFilter, SearchFilter } from "./Filter";
+import { CurrentPage } from "./Pagination";
+import { FilterProps, ItemFilter, WordFilterType } from "@/types/filters";
+import { useFlyout } from "@/hooks/useFlyout.hook";
+import { useFilter } from "./useFilter.hook";
 
 const FilterBar = styled.div`
     position: fixed;
@@ -75,12 +79,35 @@ const Filter: React.FC<FilterProps> = ({
 	onModifyWordFilterType,
 	options,
 	filters,
-	children,
+	currentPage,
+	numPages,
+	setPage,
 }) => {
+	const filterBarRef = useRef<HTMLDivElement>(null);
+	const pageRef = useRef<HTMLInputElement>(null);
+	const newFilterRef = useRef<HTMLButtonElement>(null);
+
+	const [menuOpenTop, menuOpen, setSoftOpen, setHardOpen] =
+		useFlyout(newFilterRef);
+
+	useFilter(filterBarRef, newFilterRef, pageRef);
 	return (
-		<FilterBar data-filter>
-			{children}
-			<NewFilter onCreate={onCreate} options={options} />
+		<FilterBar ref={filterBarRef}>
+			<CurrentPage
+				currentPage={currentPage}
+				numPages={numPages}
+				onSetPage={setPage}
+				ref={pageRef}
+			/>
+			<NewFilter
+				ref={newFilterRef}
+				onCreate={onCreate}
+				options={options}
+				menuOpenTop={menuOpenTop}
+				menuOpen={menuOpen}
+				setSoftOpen={setSoftOpen}
+				setHardOpen={setHardOpen}
+			/>
 			{filters.map((filter) => (
 				<FilterComponent
 					key={filter.id}

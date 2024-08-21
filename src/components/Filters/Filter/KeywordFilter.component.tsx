@@ -8,7 +8,8 @@ import {
 	MultipleChoice,
 } from "../components";
 import { useFlyout } from "@/hooks/useFlyout.hook";
-import { useCloseFlyouts } from "./useListenForEscape.hook";
+import { KeywordFilterProps } from "@/types/filters";
+import { registerCleanupFn } from "../useFilter.hook";
 
 const MAX_KEYWORDS = 1;
 
@@ -34,15 +35,18 @@ const KeywordFilter: React.FC<KeywordFilterProps> = ({
 		setKeywordsHardOpen,
 	] = useFlyout(menuRef);
 
-	function closeAllMenus() {
+	const closeAllMenus = React.useCallback(() => {
 		setKeywordsSoftOpen(false);
 		setKeywordsHardOpen(false);
-	}
+	}, [setKeywordsHardOpen, setKeywordsSoftOpen]);
 
-	useCloseFlyouts(closeAllMenus);
+	React.useEffect(() => {
+		const cleanup = registerCleanupFn(label, closeAllMenus);
+		return cleanup;
+	});
 
 	return (
-		<FilterPill onEscape={closeAllMenus} ref={menuRef} onRemove={onRemove}>
+		<FilterPill ref={menuRef} onRemove={onRemove}>
 			<FilterText>{label}</FilterText>
 			<FilterButton
 				aria-label="Change keyword filter type"
@@ -72,7 +76,7 @@ const KeywordFilter: React.FC<KeywordFilterProps> = ({
 				onClick={() => setKeywordsHardOpen((val) => !val)}
 			>
 				{displayedKeywords.length === 0 ? (
-					<span>None.</span>
+					<span>None</span>
 				) : (
 					<span>
 						{displayedKeywords.join(", ")}

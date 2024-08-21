@@ -5,6 +5,7 @@ import { SIZE_MD } from "@/styles/variables";
 import { CloseIcon } from "@/components/Icons";
 import FilterButton from "./FilterButton.component";
 import IconContainer from "./IconContainer.component";
+import { FilterPillProps } from "@/types/filters";
 
 export const StyledFilterPill = styled.div`
     display: flex;
@@ -20,12 +21,9 @@ export const StyledFilterPill = styled.div`
 `;
 
 const FilterPill = React.forwardRef<HTMLDivElement, FilterPillProps>(
-	({ children, onRemove, onEscape }, ref) => {
+	({ children, onRemove }, ref) => {
 		return (
-			<StyledFilterPill
-				ref={ref}
-				onKeyDown={(e) => e.key === "Escape" && onEscape()}
-			>
+			<StyledFilterPill ref={ref}>
 				<FilterButton
 					borderRadiusCorners={{ topLeft: "2rem", bottomLeft: "2rem" }}
 					type="button"

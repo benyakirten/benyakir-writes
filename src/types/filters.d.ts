@@ -1,14 +1,21 @@
+import { useFlyout } from "@/hooks/useFlyout.hook";
+
 type FilterOption = {
 	label: string;
 	id: string;
 	disabled: boolean;
 };
+
 type NewFilterProps = {
 	onCreate: (val: string) => void;
 	options: FilterOption[];
+	menuOpenTop: boolean;
+	menuOpen: boolean;
+	setSoftOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	setHardOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-type FilterProps = ChildrenProp & {
+type FilterProps = {
 	onCreate: (id: string) => void;
 	onRemove: (id: string) => void;
 	onModifyDate: (time: "start" | "end", value: Date) => void;
@@ -17,6 +24,9 @@ type FilterProps = ChildrenProp & {
 	onModifySearch: (id: string, search: string) => void;
 	options: FilterOption[];
 	filters: ItemFilter[];
+	currentPage: number;
+	numPages: number;
+	setPage: React.Dispatch<React.SetStateAction<number>>;
 };
 
 type MultipleChoiceInputProps = {
@@ -41,7 +51,6 @@ type BorderRadiusCorners = {
 
 type FilterPillProps = ChildrenProp & {
 	onRemove: () => void;
-	onEscape: () => void;
 };
 
 type FilterButtonProps = ChildrenProp &

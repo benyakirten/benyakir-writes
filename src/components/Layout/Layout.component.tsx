@@ -15,7 +15,7 @@ import {
 	setActiveThemeByName,
 } from "@Store/theme/theme.slice";
 import Search from "./Search";
-import { isInputFocused } from "@/utils/dom";
+import { inputIsFocused } from "@/utils/dom";
 import { setSidebarState } from "@/store/sidebar/sidebar.slice";
 
 export const Head: React.FC = () => (
@@ -48,7 +48,7 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 
 	React.useEffect(() => {
 		const handler = (e: KeyboardEvent) => {
-			if (isInputFocused()) {
+			if (inputIsFocused()) {
 				return;
 			}
 

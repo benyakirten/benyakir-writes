@@ -5,10 +5,11 @@ import { FlyoutHook } from "@/types/hooks";
 export const useFlyout: FlyoutHook = (menuRef) => {
 	const shouldMenuOpenTop = React.useCallback(() => {
 		const windowHeight = window.innerHeight;
-		const buttonTop = menuRef.current?.getBoundingClientRect().top || 0;
+		const buttonTop = menuRef?.current?.getBoundingClientRect().top || 0;
 
 		return buttonTop > windowHeight / 2;
 	}, [menuRef]);
+
 	const [menuOpenTop, setMenuOpenTop] = React.useState(shouldMenuOpenTop());
 
 	React.useEffect(() => {

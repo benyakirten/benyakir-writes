@@ -5,7 +5,8 @@ import { getShortDate } from "@/utils/dates";
 import { DatePicker } from "@/components/Input";
 import { FilterMenu } from "../components/Filters.styles";
 import { FilterText, FilterButton, FilterPill } from "../components";
-import { useCloseFlyouts } from "./useListenForEscape.hook";
+import { DateFilterProps } from "@/types/filters";
+import { registerCleanupFn } from "../useFilter.hook";
 
 const DateFilter: React.FC<DateFilterProps> = ({
 	onModify,
@@ -33,17 +34,20 @@ const DateFilter: React.FC<DateFilterProps> = ({
 		onModify(time, value);
 	}
 
-	function closeAllMenus() {
+	const closeAllMenus = React.useCallback(() => {
 		setStartSoftOpen(false);
 		setStartHardOpen(false);
 		setEndSoftOpen(false);
 		setEndHardOpen(false);
-	}
+	}, [setStartSoftOpen, setStartHardOpen, setEndSoftOpen, setEndHardOpen]);
 
-	useCloseFlyouts(closeAllMenus);
+	React.useEffect(() => {
+		const cleanup = registerCleanupFn(label, closeAllMenus);
+		return cleanup;
+	}, [label, closeAllMenus]);
 
 	return (
-		<FilterPill ref={menuRef} onEscape={closeAllMenus} onRemove={onRemove}>
+		<FilterPill ref={menuRef} onRemove={onRemove}>
 			<FilterText>{label}</FilterText>
 			<FilterMenu
 				pointUpwards={startOpenTop}

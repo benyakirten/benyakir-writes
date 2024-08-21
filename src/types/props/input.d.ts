@@ -4,11 +4,6 @@ type InputProps = {
 	tabIndex?: number;
 };
 
-type FilterProps = ChildrenProp & {
-	name: string;
-	onSearch: (val: string) => void;
-};
-
 type TextProps = InputProps & {
 	value: string;
 	onChange: (newText: string) => void;

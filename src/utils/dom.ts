@@ -26,7 +26,7 @@ export function downloadFile(href: string, name: string) {
 	document.body.removeChild(link);
 }
 
-export function isInputFocused(): boolean {
+export function inputIsFocused(): boolean {
 	const el = document.activeElement;
 	if (!el) {
 		return false;

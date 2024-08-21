@@ -8,7 +8,8 @@ import {
 	FilterMenu,
 	TextInput,
 } from "../components";
-import { useCloseFlyouts } from "./useListenForEscape.hook";
+import { SearchFilterProps } from "@/types/filters";
+import { registerCleanupFn } from "../useFilter.hook";
 
 const SearchFilter: React.FC<SearchFilterProps> = ({
 	onSearch,
@@ -23,15 +24,18 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
 	const [searchOpenTop, searchOpen, setSearchSoftOpen, setSearchHardOpen] =
 		useFlyout(menuRef);
 
-	function closeAllMenus() {
+	const closeAllMenus = React.useCallback(() => {
 		setSearchSoftOpen(false);
 		setSearchHardOpen(false);
-	}
+	}, [setSearchHardOpen, setSearchSoftOpen]);
 
-	useCloseFlyouts(closeAllMenus);
+	React.useEffect(() => {
+		const cleanup = registerCleanupFn(id, closeAllMenus);
+		return cleanup;
+	}, [id, closeAllMenus]);
 
 	return (
-		<FilterPill onEscape={closeAllMenus} ref={menuRef} onRemove={onRemove}>
+		<FilterPill ref={menuRef} onRemove={onRemove}>
 			<FilterText>{label}</FilterText>
 			<FilterButton
 				aria-label="Change search filter type"

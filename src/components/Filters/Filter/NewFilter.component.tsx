@@ -7,11 +7,11 @@ import {
 	FilterText,
 	IconContainer,
 } from "../components";
-import { useFlyout } from "@/hooks/useFlyout.hook";
 import { AddIcon } from "@/components/Icons";
 import { SIZE_SM, TRANSITION_SLOW } from "@/styles/variables";
 import { FillIn } from "@/components/General";
-import { useCloseFlyouts } from "./useListenForEscape.hook";
+import { NewFilterProps, FilterOption } from "@/types/filters";
+import { registerCleanupFn } from "../useFilter.hook";
 
 const InnerContainer = styled.div`
 	display: flex;
@@ -36,7 +36,7 @@ const OptionButton = styled.button`
 	}
 `;
 
-const FilterOption: React.FC<{
+const FilterChoice: React.FC<{
 	option: FilterOption;
 	selectItem: (
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -58,66 +58,70 @@ const FilterOption: React.FC<{
 	);
 };
 
-const NewFilter: React.FC<NewFilterProps> = ({ onCreate, options }) => {
-	const menuRef = React.useRef<HTMLButtonElement>(null);
-	const [menuOpenTop, menuOpen, setSoftOpen, setHardOpen] = useFlyout(menuRef);
-
-	const selectItem = (
-		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-		option: FilterOption,
+const NewFilter = React.forwardRef<HTMLButtonElement, NewFilterProps>(
+	(
+		{ onCreate, options, menuOpenTop, menuOpen, setSoftOpen, setHardOpen },
+		ref,
 	) => {
-		e.stopPropagation();
-		closeAllMenus();
-		onCreate(option.id);
-	};
+		const selectItem = (
+			e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+			option: FilterOption,
+		) => {
+			e.stopPropagation();
+			closeAllMenus();
+			onCreate(option.id);
+		};
 
-	function closeAllMenus() {
-		setSoftOpen(false);
-		setHardOpen(false);
-	}
+		const closeAllMenus = React.useCallback(() => {
+			setSoftOpen(false);
+			setHardOpen(false);
+		}, [setSoftOpen, setHardOpen]);
 
-	useCloseFlyouts(closeAllMenus);
+		React.useEffect(() => {
+			const cleanup = registerCleanupFn("new-filter", closeAllMenus);
+			return cleanup;
+		}, [closeAllMenus]);
 
-	return (
-		<FilterPillButton
-			ref={menuRef}
-			onMouseEnter={() => setSoftOpen(true)}
-			onMouseLeave={() => setSoftOpen(false)}
-			onKeyDown={(e) => e.key === "Escape" && closeAllMenus()}
-			onClick={() => setHardOpen((open) => !open)}
-		>
-			<FilterMenu
-				removeSpacing
-				pointUpwards={menuOpenTop}
-				aria-expanded={menuOpen}
+		return (
+			<FilterPillButton
+				ref={ref}
 				onMouseEnter={() => setSoftOpen(true)}
 				onMouseLeave={() => setSoftOpen(false)}
+				onClick={() => setHardOpen((open) => !open)}
 			>
-				{options.map((option) => (
-					<FilterOption
-						key={option.id}
-						option={option}
-						selectItem={selectItem}
-					/>
-				))}
-			</FilterMenu>
-			<FillIn
-				borderRadiusCorners={{
-					bottomLeft: "2rem",
-					bottomRight: "2rem",
-					topLeft: "2rem",
-					topRight: "2rem",
-				}}
-			>
-				<InnerContainer>
-					<IconContainer>
-						<AddIcon />
-					</IconContainer>
-					<FilterText hideBackground>New Filter</FilterText>
-				</InnerContainer>
-			</FillIn>
-		</FilterPillButton>
-	);
-};
+				<FilterMenu
+					removeSpacing
+					pointUpwards={menuOpenTop}
+					aria-expanded={menuOpen}
+					onMouseEnter={() => setSoftOpen(true)}
+					onMouseLeave={() => setSoftOpen(false)}
+				>
+					{options.map((option) => (
+						<FilterChoice
+							key={option.id}
+							option={option}
+							selectItem={selectItem}
+						/>
+					))}
+				</FilterMenu>
+				<FillIn
+					borderRadiusCorners={{
+						bottomLeft: "2rem",
+						bottomRight: "2rem",
+						topLeft: "2rem",
+						topRight: "2rem",
+					}}
+				>
+					<InnerContainer>
+						<IconContainer>
+							<AddIcon />
+						</IconContainer>
+						<FilterText hideBackground>New Filter</FilterText>
+					</InnerContainer>
+				</FillIn>
+			</FilterPillButton>
+		);
+	},
+);
 
 export default NewFilter;
