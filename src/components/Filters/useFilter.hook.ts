@@ -4,7 +4,6 @@ import { inputIsFocused } from "@/utils/dom";
 
 const closeFns: Map<string, () => void> = new Map();
 export function registerCleanupFn(key: string, fn: () => void) {
-	console.log("CLEANING UP", key);
 	closeFns.set(key, fn);
 	return () => {
 		closeFns.delete(key);
@@ -24,7 +23,6 @@ export const useFilter = (
 ) => {
 	const keydownListener = useCallback(
 		(event: KeyboardEvent) => {
-			console.log(event.key);
 			if (event.key === "Escape") {
 				closeAll();
 				return;

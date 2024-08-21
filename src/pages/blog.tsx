@@ -9,7 +9,12 @@ import {
 
 import usePagination from "@/hooks/usePagination.hook";
 import type { FlattenedBlogCard } from "@/types/posts";
-import { createChoiceSet } from "@/utils/filter";
+import {
+	createChoiceSet,
+	isDateFilter,
+	isKeywordFilter,
+	isSearchFilter,
+} from "@/utils/filter";
 import { blogDescription, posts } from "@/data/search";
 import { Filter } from "@/components/Filters";
 import { CardContainer, NewBlogCard } from "@/components/Cards";
@@ -216,6 +221,10 @@ const BlogPage: React.FC = () => {
 		filter: KeywordFilter,
 		posts: FlattenedBlogCard[],
 	): FlattenedBlogCard[] {
+		if (filter.currentKeywords.length === 0) {
+			return posts;
+		}
+
 		const fn =
 			filter.type === "any"
 				? filter.currentKeywords.some.bind(filter.currentKeywords)
@@ -238,11 +247,11 @@ const BlogPage: React.FC = () => {
 	function filterBlogPosts(filters: ItemFilter[]) {
 		let filteredPosts = posts;
 		for (const filter of filters) {
-			if (filter.id === "date" && "start" in filter) {
+			if (isDateFilter(filter)) {
 				filteredPosts = filterByDate(filter, filteredPosts);
-			} else if ("search" in filter) {
+			} else if (isSearchFilter(filter)) {
 				filteredPosts = filterBySearch(filter, filteredPosts);
-			} else if ("currentKeywords" in filter) {
+			} else if (isKeywordFilter(filter)) {
 				filteredPosts = filterByKeywords(filter, filteredPosts);
 			}
 		}

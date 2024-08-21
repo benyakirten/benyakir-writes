@@ -1,3 +1,10 @@
+import {
+	ItemFilter,
+	DateFilter,
+	SearchFilter,
+	KeywordFilter,
+} from "@/types/filters";
+
 export const createChoiceSet = <T extends object, U extends keyof T>(
 	items: T[],
 	key: T[U] extends string[] | null ? U : never,
@@ -22,4 +29,18 @@ export const createChoiceSet = <T extends object, U extends keyof T>(
 		);
 
 	return choiceSet;
+};
+
+export const isDateFilter = (filter: ItemFilter): filter is DateFilter => {
+	return "start" in filter;
+};
+
+export const isSearchFilter = (filter: ItemFilter): filter is SearchFilter => {
+	return "search" in filter;
+};
+
+export const isKeywordFilter = (
+	filter: ItemFilter,
+): filter is KeywordFilter => {
+	return "currentKeywords" in filter;
 };
