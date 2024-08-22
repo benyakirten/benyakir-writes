@@ -10,13 +10,13 @@ import {
 	SlubTitle,
 	TitleContainer,
 } from "./Result.styles";
-import ProjectTech from "./ProjectTech.component";
 import { SIZE_XS } from "@/styles/variables";
 import {
 	PillContainer,
 	WpContentDescription,
 } from "@/styles/general-components";
 import { getPrettyDate } from "@/utils/dates";
+import { ProjectTech } from "@/components/General";
 
 const TechContainer = styled.div`
 	flex: 1;

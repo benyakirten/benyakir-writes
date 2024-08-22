@@ -54,7 +54,7 @@ export const ImageContainer = styled.div`
     grid-row: 1 / 4;
 `;
 
-export const AuthorTitle = styled.h3`
+export const HalfTitle = styled.h3`
     font-weight: bold;
     grid-column: span 1;
 `;

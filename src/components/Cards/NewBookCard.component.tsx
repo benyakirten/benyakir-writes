@@ -4,7 +4,7 @@ import { FlattenedBookCard } from "@/types/posts";
 import CardExterior from "./CardExterior.component";
 import {
 	AuthorContent,
-	AuthorTitle,
+	HalfTitle,
 	ImageContainer,
 	PublishedContainer,
 } from "./Card.styles";
@@ -19,7 +19,7 @@ const NewBookCard: React.FC<{ book: FlattenedBookCard }> = ({ book }) => {
 					<GatsbyImage image={book.cover} alt={book.title} />
 				</ImageContainer>
 			)}
-			<AuthorTitle>{book.title}</AuthorTitle>
+			<HalfTitle>{book.title}</HalfTitle>
 			<AuthorContent dangerouslySetInnerHTML={{ __html: book.content }} />
 			<PublishedContainer>
 				Published on {getPrettyDate(book.published.date)}

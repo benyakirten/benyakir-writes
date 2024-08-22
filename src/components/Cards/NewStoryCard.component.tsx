@@ -4,7 +4,7 @@ import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 import { FlattenedStoryCard } from "@/types/posts";
 import CardExterior from "./CardExterior.component";
 import {
-	AuthorTitle,
+	HalfTitle,
 	CategoryContainer,
 	AuthorContent,
 	ImageContainer,
@@ -36,7 +36,7 @@ const NewStoryCard: React.FC<{ story: FlattenedStoryCard }> = ({ story }) => {
 					<GatsbyImage image={relatedBook.cover} alt={story.title} />
 				</ImageContainer>
 			)}
-			<AuthorTitle>{story.title}</AuthorTitle>
+			<HalfTitle>{story.title}</HalfTitle>
 			<AuthorContent dangerouslySetInnerHTML={{ __html: story.content }} />
 			<PublishedContainer>
 				Published on {getPrettyDate(story.published.date)}
