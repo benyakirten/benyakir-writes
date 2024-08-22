@@ -4,13 +4,12 @@ import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 import { FlattenedStoryCard } from "@/types/posts";
 import CardExterior from "./CardExterior.component";
 import {
-	HalfTitle,
+	SpanOneTitle,
 	CategoryContainer,
-	AuthorContent,
+	SpanOneContent,
 	ImageContainer,
-	PublishedContainer,
 } from "./Card.styles";
-import { getPrettyDate } from "@/utils/dates";
+import { PublishedDate } from "./IconedText.component";
 
 const NewStoryCard: React.FC<{ story: FlattenedStoryCard }> = ({ story }) => {
 	function determineRelatedStory(
@@ -36,11 +35,9 @@ const NewStoryCard: React.FC<{ story: FlattenedStoryCard }> = ({ story }) => {
 					<GatsbyImage image={relatedBook.cover} alt={story.title} />
 				</ImageContainer>
 			)}
-			<HalfTitle>{story.title}</HalfTitle>
-			<AuthorContent dangerouslySetInnerHTML={{ __html: story.content }} />
-			<PublishedContainer>
-				Published on {getPrettyDate(story.published.date)}
-			</PublishedContainer>
+			<SpanOneTitle>{story.title}</SpanOneTitle>
+			<SpanOneContent dangerouslySetInnerHTML={{ __html: story.content }} />
+			<PublishedDate date={story.published.date} />
 		</CardExterior>
 	);
 };

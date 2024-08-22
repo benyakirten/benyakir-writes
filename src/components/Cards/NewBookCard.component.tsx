@@ -1,15 +1,10 @@
 import React from "react";
+import { GatsbyImage } from "gatsby-plugin-image";
 
 import { FlattenedBookCard } from "@/types/posts";
 import CardExterior from "./CardExterior.component";
-import {
-	AuthorContent,
-	HalfTitle,
-	ImageContainer,
-	PublishedContainer,
-} from "./Card.styles";
-import { getPrettyDate } from "@/utils/dates";
-import { GatsbyImage } from "gatsby-plugin-image";
+import { SpanOneContent, SpanOneTitle, ImageContainer } from "./Card.styles";
+import { PublishedDate } from "./IconedText.component";
 
 const NewBookCard: React.FC<{ book: FlattenedBookCard }> = ({ book }) => {
 	return (
@@ -19,11 +14,9 @@ const NewBookCard: React.FC<{ book: FlattenedBookCard }> = ({ book }) => {
 					<GatsbyImage image={book.cover} alt={book.title} />
 				</ImageContainer>
 			)}
-			<HalfTitle>{book.title}</HalfTitle>
-			<AuthorContent dangerouslySetInnerHTML={{ __html: book.content }} />
-			<PublishedContainer>
-				Published on {getPrettyDate(book.published.date)}
-			</PublishedContainer>
+			<SpanOneTitle>{book.title}</SpanOneTitle>
+			<SpanOneContent dangerouslySetInnerHTML={{ __html: book.content }} />
+			<PublishedDate date={book.published.date} />
 		</CardExterior>
 	);
 };

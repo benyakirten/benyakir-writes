@@ -4,3 +4,4 @@ export { default as AddIcon } from "./Add.component";
 export { default as EyeIcon } from "./Eye.component";
 export { default as PreviousIcon } from "./Previous.component";
 export { default as NextIcon } from "./Next.component";
+export { default as CalendarIcon } from "./Calendar.component";

@@ -5,9 +5,7 @@ import type { LatestUpdateState } from "@/types/hooks";
 import { getPrettyDate } from "@/utils/dates";
 import { FetchState } from "@Hooks";
 
-const LoadingItemRenderer: React.FC<{ state: LatestUpdateState }> = ({
-	state,
-}) => {
+const LatestUpdate: React.FC<{ state: LatestUpdateState }> = ({ state }) => {
 	const determineComponentByState = React.useCallback(
 		(state: LatestUpdateState) => {
 			if (state === FetchState.NONE) {
@@ -28,4 +26,4 @@ const LoadingItemRenderer: React.FC<{ state: LatestUpdateState }> = ({
 	return component === null ? component : <>Latest Update: {component}</>;
 };
 
-export default LoadingItemRenderer;
+export default LatestUpdate;

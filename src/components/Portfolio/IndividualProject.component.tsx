@@ -1,7 +1,6 @@
 import { GatsbyImage } from "gatsby-plugin-image";
 import * as React from "react";
 
-import LatestUpdate from "@/components/Portfolio/LatestUpdate.component";
 import { useFetchRepoUpdatedDate } from "@/hooks";
 import { Column } from "@/styles/general-components";
 import type { ProjectGridDatum } from "@/types/portfolio";
@@ -18,12 +17,14 @@ import {
 	TechBadges,
 	TitleContainer,
 } from "./Portfolio.styles";
+import LatestUpdate from "./LatestUpdate.component";
 
 const IndividualProject: React.FC<{
 	project: ProjectGridDatum;
 	techs: Set<string>;
 }> = ({ project, techs }) => {
 	const latestUpdateState = useFetchRepoUpdatedDate(project.repoLink);
+
 	return (
 		<ProjectContents>
 			<ProjectCardTop>

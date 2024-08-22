@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 
 import { FlattenedProjectCard } from "@/types/posts";
 import {
@@ -10,20 +9,12 @@ import {
 	SlubTitle,
 	TitleContainer,
 } from "./Result.styles";
-import { SIZE_XS } from "@/styles/variables";
 import {
 	PillContainer,
 	WpContentDescription,
 } from "@/styles/general-components";
 import { getPrettyDate } from "@/utils/dates";
-import { ProjectTech } from "@/components/General";
-
-const TechContainer = styled.div`
-	flex: 1;
-	display: flex;
-	gap ${SIZE_XS};
-	flex-wrap: wrap;
-`;
+import { ProjectTech, TechContainer } from "@/components/General";
 
 const MAX_TECHS = 2;
 

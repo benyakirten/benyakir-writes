@@ -1,7 +1,6 @@
 import { navigate } from "gatsby";
 import * as React from "react";
 
-import LatestUpdate from "@/components/Portfolio/LatestUpdate.component";
 import { Button, IconGrid } from "@Gen";
 import {
 	CardSection,
@@ -17,6 +16,7 @@ import {
 import { getPrettyDate } from "@Utils/dates";
 
 import type { ProjectHeaderProps } from "@Types/props/post-components";
+import LatestUpdate from "@/components/Portfolio/LatestUpdate.component";
 
 const ProjectHeader: React.FC<ProjectHeaderProps> = ({
 	project,

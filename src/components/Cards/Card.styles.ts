@@ -43,22 +43,19 @@ export const FullContainer = styled.p`
 	grid-column: span 2;
 `;
 
-export const PublishedContainer = styled.p`
-	grid-column: span 2;
-	color: ${(props) => props.theme.base.pillText};
-	font-size: ${FONT_XXS};
-`;
-
 export const ImageContainer = styled.div`
     grid-column: 2 / 3;
     grid-row: 1 / 4;
 `;
 
-export const HalfTitle = styled.h3`
+export const SpanOneTitle = styled.h3`
+    display: grid;
+    align-content: center;
+    
     font-weight: bold;
     grid-column: span 1;
 `;
 
-export const AuthorContent = styled.p`
+export const SpanOneContent = styled.p`
     grid-column: span 1;
 `;

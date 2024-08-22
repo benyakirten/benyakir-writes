@@ -3,15 +3,14 @@ import React from "react";
 import { FlattenedBlogCard } from "@/types/posts";
 import { getActiveCategory } from "@/utils/blog";
 import { PillContainer } from "@/styles/general-components";
-import { getPrettyDate } from "@/utils/dates";
 import CardExterior from "./CardExterior.component";
 import {
 	CardTitle,
 	CategoryContainer,
 	FullContainer,
-	PublishedContainer,
 	TagContainer,
 } from "./Card.styles";
+import { PublishedDate } from "./IconedText.component";
 
 const MAX_TAGS = 2;
 
@@ -37,9 +36,7 @@ const NewBlogCard: React.FC<{ post: FlattenedBlogCard }> = ({ post }) => {
 			<FullContainer>
 				{post.excerpt ?? post.content ?? "Click to read more."}
 			</FullContainer>
-			<PublishedContainer>
-				Published on {getPrettyDate(post.published.date)}
-			</PublishedContainer>
+			<PublishedDate date={post.published.date} />
 		</CardExterior>
 	);
 };

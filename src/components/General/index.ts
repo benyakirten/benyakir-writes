@@ -11,3 +11,4 @@ export { default as IconButton } from "./IconButton/IconButton.component";
 export { default as GrowableUnderline } from "./GrowableUnderline/GrowableUnderline.component";
 export { default as FillIn } from "./FillIn/FillIn.component";
 export { default as ProjectTech } from "./Project/ProjectTech.component";
+export * from "./Project/Components.style";

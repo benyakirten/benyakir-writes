@@ -1,18 +1,17 @@
 import * as React from "react";
 
-import { Grouping, Page } from "@Styles/general-components";
-
-import { LeadPage, Paginate } from "@Layout";
-import { ProjectFilter } from "@Posts";
-import { ProjectCard } from "@Variants";
+import {
+	Grouping,
+	LeadHeading,
+	Page,
+	PaginatedPageContents,
+} from "@Styles/general-components";
 
 import { useMultiSelect, usePagination } from "@Hooks";
-
 import projectsMisc from "@WPData/Projects/misc.json";
-
 import { FlattenedProjectCard } from "@Types/posts";
-import { hasSomeContent } from "@/utils/search";
 import { projects, projectsDescription } from "@/data/search";
+import { CardContainer, NewProjectCard } from "@/components/Cards";
 
 export const Head: React.FC = () => (
 	<>
@@ -44,103 +43,18 @@ const ProjectsPage: React.FC = () => {
 
 	const [hostChoices, filterByHost] = useMultiSelect();
 	const [techChoices, filterByTech] = useMultiSelect();
-
-	function triggerFilter({
-		newPublishedBefore,
-		newPublishedAfter,
-		newFilterWords,
-		newHosts,
-		newTechs,
-	}: {
-		newPublishedBefore?: Date;
-		newPublishedAfter?: Date;
-		newFilterWords?: string[];
-		newHosts?: Set<string>;
-		newTechs?: Set<string>;
-	}) {
-		const _publishedBefore = newPublishedBefore ?? publishedBefore;
-		const _publishedAfter = newPublishedAfter ?? publishedAfter;
-		const _filterWords = newFilterWords ?? filterWords;
-		const _hosts = newHosts ?? hostChoices;
-		const _techs = newTechs ?? techChoices;
-
-		let filteredProjects = projects
-			.filter(
-				(p) => p.firstReleased.date.getTime() <= _publishedBefore.getTime(),
-			)
-			.filter(
-				(p) => p.firstReleased.date.getTime() >= _publishedAfter.getTime(),
-			);
-
-		if (hasSomeContent(_filterWords)) {
-			filteredProjects = filteredProjects.filter((p) =>
-				_filterWords.every((w) => p.meta[w] || p.meta[w.toLowerCase()]),
-			);
-		}
-
-		filteredProjects = filterByHost(_hosts, filteredProjects, (project) =>
-			project.hostedOn ? [project.hostedOn] : [""],
-		);
-
-		filteredProjects = filterByTech(
-			_techs,
-			filteredProjects,
-			(project) => project.longTechnologies,
-		);
-
-		projectPagination.setCurrentItems(filteredProjects);
-	}
-
-	function changePublishedBefore(val: Date) {
-		setPublishedBefore(val);
-		triggerFilter({ newPublishedBefore: val });
-	}
-
-	function changePublishedAfter(val: Date) {
-		setPublishedAfter(val);
-		triggerFilter({ newPublishedAfter: val });
-	}
-
-	function changeFilterWords(words: string[]) {
-		setFilterWords(words);
-		triggerFilter({ newFilterWords: words });
-	}
-
-	function changeHosts(hosts: PotentialChoice[]) {
-		const choices = new Set(hosts.map((host) => host.value));
-		triggerFilter({ newHosts: choices });
-	}
-
-	function changeTechs(techs: PotentialChoice[]) {
-		const choices = new Set(techs.map((tech) => tech.value));
-		triggerFilter({ newTechs: choices });
-	}
-
 	return (
 		<Page>
-			<LeadPage
-				title="Projects"
-				filter={
-					<ProjectFilter
-						publishedBefore={publishedBefore}
-						publishedAfter={publishedAfter}
-						hosts={hosts}
-						changeHosts={changeHosts}
-						techs={techs}
-						changeTechs={changeTechs}
-						changePublishedBefore={changePublishedBefore}
-						changePublishedAfter={changePublishedAfter}
-						changeFilterWords={changeFilterWords}
-					/>
-				}
-			>
+			<PaginatedPageContents>
+				<LeadHeading>Projects</LeadHeading>
 				<Grouping>
-					<Paginate<FlattenedProjectCard>
-						{...projectPagination}
-						El={ProjectCard}
-					/>
+					<CardContainer>
+						{projectPagination.visibleItems.map((project) => (
+							<NewProjectCard key={project.title} project={project} />
+						))}
+					</CardContainer>
 				</Grouping>
-			</LeadPage>
+			</PaginatedPageContents>
 		</Page>
 	);
 };
