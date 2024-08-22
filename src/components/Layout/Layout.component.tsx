@@ -86,7 +86,7 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 
 			const setThemeByPreference = (e: MediaQueryList) => {
 				if (!storedComputerPreferences) {
-					dispatch(setActiveThemeByName(e.matches ? "night" : "day"));
+					dispatch(setActiveThemeByName(e.matches ? "day" : "day"));
 				}
 			};
 

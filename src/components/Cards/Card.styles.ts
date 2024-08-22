@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
-import { SIZE_XL } from "@/styles/variables";
+import { SIZE_LG } from "@/styles/variables";
+import { media } from "@/styles/queries";
 
 export const CardContainer = styled.ul`
     display: grid;
-    gap: ${SIZE_XL};
-    grid-auto-rows: 1fr;
-    grid-template-columns: repeat(1, 1fr);
+    gap: ${SIZE_LG};
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+
+    ${media.phone} {
+        grid-template-columns: 1fr;
+    }
 `;

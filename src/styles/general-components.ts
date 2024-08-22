@@ -533,8 +533,15 @@ export const PillContainer = styled.div`
   background-color: ${(props) => props.theme.base.pillBackground};
 
 	padding: ${SIZE_XS} ${SIZE_SM};
+
+  ${media.phone} {
+    padding: ${SIZE_XS};
+  }
 `;
 
 export const PaginatedPageContents = styled.div`
   padding: 2rem 18rem 4rem 1rem;
+  ${media.phone} {
+    padding: 2rem 1rem 4rem 0.5rem;
+  }
 `;

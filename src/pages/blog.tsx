@@ -262,6 +262,7 @@ const BlogPage: React.FC = () => {
 	return (
 		<Page>
 			<PaginatedPageContents>
+				<LeadHeading>Blog Posts</LeadHeading>
 				<Filter
 					options={options}
 					filters={filters}
@@ -275,7 +276,6 @@ const BlogPage: React.FC = () => {
 					numPages={postPagination.numPages}
 					setPage={postPagination.setPage}
 				/>
-				<LeadHeading>Blog Posts</LeadHeading>
 				<Grouping>
 					<CardContainer>
 						{postPagination.visibleItems.map((post) => (

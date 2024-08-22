@@ -7,6 +7,7 @@ import { CurrentPage } from "./Pagination";
 import { FilterProps, ItemFilter, WordFilterType } from "@/types/filters";
 import { useFlyout } from "@/hooks/useFlyout.hook";
 import { useFilter } from "./useFilter.hook";
+import { media } from "@/styles/queries";
 
 const FilterBar = styled.div`
     position: fixed;
@@ -21,6 +22,11 @@ const FilterBar = styled.div`
     gap: ${SIZE_SM};
 
 	z-index: ${Z_RAISED};
+
+	${media.phone} {
+		position: sticky;
+		margin-bottom: ${SIZE_SM};
+	}
 `;
 
 const FilterComponent: React.FC<{

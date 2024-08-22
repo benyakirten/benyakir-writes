@@ -17,15 +17,21 @@ import {
 	TRANSITION_SLOW,
 } from "@/styles/variables";
 import { getPrettyDate } from "@/utils/dates";
+import { media } from "@/styles/queries";
+import CardExterior from "./CardExterior.component";
 
 const BlogCardExterior = styled.div`
 	display: grid;
 	position: relative;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: min-content 1fr;
 	height: 100%;
 	gap: ${SIZE_SM};
 
 	padding: ${SIZE_SM};
+
+	${media.phone} {
+		padding: ${SIZE_SM} ${SIZE_XS};
+	}
 
 	border: 1px solid ${(props) => props.theme.base.border};
 	border-radius: ${SIZE_XS};
@@ -55,7 +61,7 @@ const ExternalArrow = styled.div`
 	background-color: white;
 
 	opacity: 0;
-	clip-path: polygon(0% 35%, 15% 35%, 15% 0, 100% 50%, 15% 100%, 15% 65%, 0% 65%);
+	clip-path: polygon(0% 35%, 1% 35%, 1% 0, 2% 50%, 1% 100%, 1% 65%, 0% 65%);
 	transition: clip-path ${TRANSITION_SLOW} ease ${TRANSITION_FAST};
 	transition: opacity: ${TRANSITION_FAST} ease;
 `;
@@ -78,8 +84,13 @@ const TagContainer = styled.div`
 
 	display: flex;
 	justify-content: flex-end;
+	flex-wrap: wrap;
 	align-items: center;
 	gap: ${SIZE_XS};
+
+	${media.phone} {
+		gap: 2px;
+	}
 `;
 
 const ContentContainer = styled.p`
@@ -100,31 +111,26 @@ const NewBlogCard: React.FC<{ post: FlattenedBlogCard }> = ({ post }) => {
 	const otherTags = post.tags ? post.tags.length - MAX_TAGS : 0;
 
 	return (
-		<li>
-			<Link to={`/post/${post.slug}`}>
-				<BlogCardExterior>
-					<ExternalArrow data-arrow />
-					<CategoryContainer>{activeCategory}</CategoryContainer>
-					<TagContainer>
-						{tags.map((t) => (
-							<PillContainer key={t}>{t}</PillContainer>
-						))}
-						{otherTags > 0 && (
-							<PillContainer>
-								{otherTags} other{otherTags > 1 && "s"}
-							</PillContainer>
-						)}
-					</TagContainer>
-					<BlogTitle>{post.title}</BlogTitle>
-					<ContentContainer>
-						{post.excerpt ?? post.content ?? "Click to read more."}
-					</ContentContainer>
-					<PublishedContainer>
-						Published on {getPrettyDate(post.published.date)}
-					</PublishedContainer>
-				</BlogCardExterior>
-			</Link>
-		</li>
+		<CardExterior slug={post.slug}>
+			<CategoryContainer>{activeCategory}</CategoryContainer>
+			<TagContainer>
+				{tags.map((t) => (
+					<PillContainer key={t}>{t}</PillContainer>
+				))}
+				{otherTags > 0 && (
+					<PillContainer>
+						{otherTags} other{otherTags > 1 && "s"}
+					</PillContainer>
+				)}
+			</TagContainer>
+			<BlogTitle>{post.title}</BlogTitle>
+			<ContentContainer>
+				{post.excerpt ?? post.content ?? "Click to read more."}
+			</ContentContainer>
+			<PublishedContainer>
+				Published on {getPrettyDate(post.published.date)}
+			</PublishedContainer>
+		</CardExterior>
 	);
 };
 
