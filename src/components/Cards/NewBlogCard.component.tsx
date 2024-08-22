@@ -50,7 +50,7 @@ const ExternalArrow = styled.div`
 	bottom: -12px;
 	left: 4px;
 
-	width: 97%;
+	width: 99%;
 	height: 8px;
 	background-color: white;
 
