@@ -25,6 +25,7 @@ const NewStoryCard: React.FC<{ story: FlattenedStoryCard }> = ({ story }) => {
 	}
 
 	const relatedBook = determineRelatedStory(story);
+
 	return (
 		<CardExterior slug={`/story/${story.slug}`} columns="1fr 67px">
 			{relatedBook && (

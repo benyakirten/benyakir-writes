@@ -1,4 +1,5 @@
 import React from "react";
+import { styled } from "styled-components";
 
 import { FetchState } from "@/hooks";
 import { LatestUpdateState } from "@/types/hooks";
@@ -6,6 +7,13 @@ import { getPrettyDate } from "@/utils/dates";
 import Loading from "../Loading/Loading.component";
 import IconedText from "@/components/Cards/IconedText.component";
 import RefreshIcon from "@/components/Icons/Refresh.component";
+import { SIZE_XS } from "@/styles/variables";
+
+const TextContainer = styled.p`
+	display: flex;
+	align-items: center;
+	gap: ${SIZE_XS};
+`;
 
 const LatestUpdate: React.FC<{ state: LatestUpdateState }> = ({ state }) => {
 	const determineComponentByState = React.useCallback(
@@ -15,20 +23,25 @@ const LatestUpdate: React.FC<{ state: LatestUpdateState }> = ({ state }) => {
 			}
 			switch (state) {
 				case FetchState.ERROR:
-					return "Unable to retrieve date";
+					return "Unknown";
 				case FetchState.LOADING:
-					return <Loading />;
+					return <Loading size="1.2rem" />;
 				default:
-					return `Latest Update: ${getPrettyDate(state)}`;
+					return getPrettyDate(state);
 			}
 		},
 		[],
 	);
+
+	const renderable = determineComponentByState(state);
+
 	return (
-		<IconedText
-			icon={<RefreshIcon />}
-			text={determineComponentByState(state)}
-		/>
+		renderable && (
+			<IconedText
+				icon={<RefreshIcon />}
+				text={<TextContainer>Latest Update: {renderable}</TextContainer>}
+			/>
+		)
 	);
 };
 

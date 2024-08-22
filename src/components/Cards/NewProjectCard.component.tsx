@@ -1,6 +1,5 @@
 import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
-import { styled } from "styled-components";
 
 import { FlattenedProjectCard } from "@/types/posts";
 import CardExterior from "./CardExterior.component";
@@ -28,17 +27,11 @@ const ProjectHost: React.FC<{ host: string }> = ({ host }) => {
 	);
 };
 
-const SecondItemContainer = styled.div`
-	grid-column: 2 / 3;
-
-	display: flex;
-	align-items: center;
-`;
-
 const NewProjectCard: React.FC<{ project: FlattenedProjectCard }> = ({
 	project,
 }) => {
 	const latestUpdateState = useFetchRepoUpdatedDate(project.repoLink);
+
 	return (
 		<CardExterior slug={`/project/${project.slug}`} columns="1fr 1fr">
 			<SpanOneTitle>{project.title}</SpanOneTitle>
