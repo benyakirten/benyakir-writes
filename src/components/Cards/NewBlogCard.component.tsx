@@ -22,6 +22,7 @@ const BlogCardExterior = styled.div`
 	display: grid;
 	position: relative;
 	grid-template-columns: 1fr 1fr;
+	height: 100%;
 	gap: ${SIZE_SM};
 
 	padding: ${SIZE_SM};
