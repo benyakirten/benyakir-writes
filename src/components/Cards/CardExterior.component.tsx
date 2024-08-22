@@ -12,10 +12,10 @@ import {
 	TRANSITION_FAST,
 } from "@/styles/variables";
 
-const StyledCardExterior = styled.div`
+const StyledCardExterior = styled.div<{ columns: string }>`
 	display: grid;
 	position: relative;
-	grid-template-columns: auto 1fr;
+	grid-template-columns: ${(props) => props.columns};
 	height: 100%;
 	gap: ${SIZE_SM};
 
@@ -58,14 +58,13 @@ const ExternalArrow = styled.div`
 	transition: opacity: ${TRANSITION_FAST} ease;
 `;
 
-const CardExterior: React.FC<{ slug: string } & ChildrenProp> = ({
-	slug,
-	children,
-}) => {
+const CardExterior: React.FC<
+	{ slug: string; columns: string } & ChildrenProp
+> = ({ slug, children, columns }) => {
 	return (
 		<li>
 			<Link to={slug}>
-				<StyledCardExterior>
+				<StyledCardExterior columns={columns}>
 					<ExternalArrow data-arrow />
 					{children}
 				</StyledCardExterior>
