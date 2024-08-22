@@ -16,6 +16,8 @@ type ThemeBase = BasicThemeSection & {
 	shadowColor: string;
 	disabled: string;
 	highlighted: string;
+	pillBackground: string;
+	pillText: string;
 };
 
 type ThemeSearchBox = BasicThemeSection & {

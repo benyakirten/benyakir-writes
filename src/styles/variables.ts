@@ -83,6 +83,8 @@ export const SHADOW_MD = "3px 2px 4px";
 export const SHADOW_MD_BALANCED = "0px 2px 4px";
 export const SHADOW_SM = "0 1px 2px";
 export const SHADOW_UP = "-2px -3px 1.2rem -2px rgba(0,0,0,0.75)";
+export const SHADOW_CARD_NORMAL = "2px 6px 0px 0px rgba(0,0,0,0.75);";
+export const SHADOW_CARD_HOVER = "2px 16px 0px 0px rgba(0,0,0,0.75);";
 
 // Z INDEX
 export const Z_SEARCH = 6;

@@ -8,6 +8,8 @@ export const defaultDayTheme: BaseTheme = {
 		shadowColor: "#9b825d",
 		disabled: "#495057",
 		highlighted: "#FF00FF",
+		pillText: "#6F6F77",
+		pillBackground: "#F4F4F5",
 	},
 	searchBox: {
 		border: "#05491F",
@@ -118,6 +120,8 @@ export const defaultNightTheme: BaseTheme = {
 		shadowColor: "#647DA2",
 		disabled: "#e9ecef",
 		highlighted: "#35F58F",
+		pillText: "#FFF",
+		pillBackground: "#000",
 	},
 	searchBox: {
 		border: "#e9ecef",

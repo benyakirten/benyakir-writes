@@ -1,11 +1,10 @@
-import { configureStore } from "@reduxjs/toolkit";
-import type * as Redux from "redux";
+import { configureStore, type Middleware } from "@reduxjs/toolkit";
 
 import dragReducer from "./drag/drag.slice";
 import sidebarReducer from "./sidebar/sidebar.slice";
 import themeReducer from "./theme/theme.slice";
 
-const otherMiddleware: Redux.Middleware[] = [];
+const otherMiddleware: Middleware[] = [];
 
 if (process.env.NODE_ENV === "development") {
 	// otherMiddleware.push(logger)

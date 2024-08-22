@@ -22,6 +22,9 @@ import {
 	SIZE_SM,
 	SIZE_XS,
 	FONT_SM,
+	SIZE_LG,
+	FONT_XS,
+	FONT_XXS,
 } from "./variables";
 
 export const FadeIn = styled.div<{ duration?: string; delay?: string }>`
@@ -515,13 +518,19 @@ export const PillContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	height: min-content;
+
   white-space: nowrap;
+	
+  height: min-content;
+  width: min-content;
 
 	font-family: ${SANS_SERIF_FONT};
-
-	border-radius: ${SIZE_MD};
-	border: 1px solid ${(props) => props.theme.base.textColor};
+  font-size: ${FONT_XXS};
+  text-transform: capitalize;
+  
+  border-radius: ${SIZE_LG};
+  color: ${(props) => props.theme.base.pillText};
+  background-color: ${(props) => props.theme.base.pillBackground};
 
 	padding: ${SIZE_XS} ${SIZE_SM};
 `;
