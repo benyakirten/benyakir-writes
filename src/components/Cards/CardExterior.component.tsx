@@ -15,7 +15,7 @@ import {
 const StyledCardExterior = styled.div`
 	display: grid;
 	position: relative;
-	grid-template-columns: min-content 1fr;
+	grid-template-columns: auto 1fr;
 	height: 100%;
 	gap: ${SIZE_SM};
 
@@ -64,7 +64,7 @@ const CardExterior: React.FC<{ slug: string } & ChildrenProp> = ({
 }) => {
 	return (
 		<li>
-			<Link to={`/post/${slug}`}>
+			<Link to={slug}>
 				<StyledCardExterior>
 					<ExternalArrow data-arrow />
 					{children}

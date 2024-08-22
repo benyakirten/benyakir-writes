@@ -1,76 +1,14 @@
 import React from "react";
-import { Link } from "gatsby";
 import styled from "styled-components";
 
 import { FlattenedBlogCard } from "@/types/posts";
 import { getActiveCategory } from "@/utils/blog";
 import { PillContainer } from "@/styles/general-components";
-import {
-	FONT_SM,
-	FONT_XS,
-	FONT_XXS,
-	SHADOW_CARD_HOVER,
-	SHADOW_CARD_NORMAL,
-	SIZE_SM,
-	SIZE_XS,
-	TRANSITION_FAST,
-	TRANSITION_SLOW,
-} from "@/styles/variables";
+import { FONT_XS, FONT_XXS, SIZE_XS } from "@/styles/variables";
 import { getPrettyDate } from "@/utils/dates";
 import { media } from "@/styles/queries";
 import CardExterior from "./CardExterior.component";
-
-const BlogCardExterior = styled.div`
-	display: grid;
-	position: relative;
-	grid-template-columns: min-content 1fr;
-	height: 100%;
-	gap: ${SIZE_SM};
-
-	padding: ${SIZE_SM};
-
-	${media.phone} {
-		padding: ${SIZE_SM} ${SIZE_XS};
-	}
-
-	border: 1px solid ${(props) => props.theme.base.border};
-	border-radius: ${SIZE_XS};
-	
-	transition: box-shadow ${TRANSITION_SLOW} ease;
-
-	box-shadow: ${SHADOW_CARD_NORMAL};
-	&:hover {
-		box-shadow: ${SHADOW_CARD_HOVER};
-
-		& > [data-arrow] {
-			opacity: 1;
-			clip-path: polygon(0% 35%, 99% 35%, 99% 0, 100% 50%, 99% 100%, 99% 65%, 0% 65%);
-		}
-	}
-`;
-
-const ExternalArrow = styled.div`
-	position: absolute;
-	display: inline-block;
-
-	bottom: -12px;
-	left: 4px;
-
-	width: 99%;
-	height: 8px;
-	background-color: white;
-
-	opacity: 0;
-	clip-path: polygon(0% 35%, 1% 35%, 1% 0, 2% 50%, 1% 100%, 1% 65%, 0% 65%);
-	transition: clip-path ${TRANSITION_SLOW} ease ${TRANSITION_FAST};
-	transition: opacity: ${TRANSITION_FAST} ease;
-`;
-
-const BlogTitle = styled.h3`
-	font-size: ${FONT_SM};
-	font-weight: bold;
-	grid-column: span 2;
-`;
+import { CardTitle } from "./Card.styles";
 
 const CategoryContainer = styled.p`
 	grid-column: 1 / 2;
@@ -111,7 +49,7 @@ const NewBlogCard: React.FC<{ post: FlattenedBlogCard }> = ({ post }) => {
 	const otherTags = post.tags ? post.tags.length - MAX_TAGS : 0;
 
 	return (
-		<CardExterior slug={post.slug}>
+		<CardExterior slug={`/post/${post.slug}`}>
 			<CategoryContainer>{activeCategory}</CategoryContainer>
 			<TagContainer>
 				{tags.map((t) => (
@@ -123,7 +61,7 @@ const NewBlogCard: React.FC<{ post: FlattenedBlogCard }> = ({ post }) => {
 					</PillContainer>
 				)}
 			</TagContainer>
-			<BlogTitle>{post.title}</BlogTitle>
+			<CardTitle>{post.title}</CardTitle>
 			<ContentContainer>
 				{post.excerpt ?? post.content ?? "Click to read more."}
 			</ContentContainer>

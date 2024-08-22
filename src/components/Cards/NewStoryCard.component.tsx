@@ -1,5 +1,15 @@
 import React from "react";
 
-const NewStoryCard: React.FC = () => null;
+import { FlattenedStoryCard } from "@/types/posts";
+import CardExterior from "./CardExterior.component";
+import { CardTitle } from "./Card.styles";
+
+const NewStoryCard: React.FC<{ story: FlattenedStoryCard }> = ({ story }) => {
+	return (
+		<CardExterior slug={`/story/${story.slug}`}>
+			<CardTitle>{story.title}</CardTitle>
+		</CardExterior>
+	);
+};
 
 export default NewStoryCard;

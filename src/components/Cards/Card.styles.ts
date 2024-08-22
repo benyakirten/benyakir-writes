@@ -12,3 +12,8 @@ export const CardContainer = styled.ul`
         grid-template-columns: 1fr;
     }
 `;
+
+export const CardTitle = styled.h3`
+    font-weight: bold;
+    grid-column: span 2;
+`;
