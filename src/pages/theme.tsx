@@ -3,12 +3,10 @@ import * as React from "react";
 import { Grouping, LeadHeading, Page } from "@Styles/general-components";
 import { ThemeOptions } from "@Variants";
 import { themeDescription } from "@/data/search";
+import { HeadBase } from "@/components/General";
 
 export const Head: React.FC = () => (
-	<>
-		<title>Benyakir Writes - Themes</title>
-		<meta name="description" content={themeDescription} />
-	</>
+	<HeadBase title="Theme" description={themeDescription} />
 );
 
 const Theme: React.FC = () => {

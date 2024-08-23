@@ -27,12 +27,10 @@ import {
 } from "@/utils/filter";
 import { FlattenedProjectCard } from "@/types/posts";
 import { Filter } from "@/components/Filters";
+import { HeadBase } from "@/components/General";
 
 export const Head: React.FC = () => (
-	<>
-		<title>Benyakir Writes - Projects</title>
-		<meta name="description" content={projectsDescription} />
-	</>
+	<HeadBase title="Projects" description={projectsDescription} />
 );
 
 const ProjectsPage: React.FC = () => {

@@ -18,24 +18,6 @@ import Search from "./Search";
 import { inputIsFocused } from "@/utils/dom";
 import { setSidebarState } from "@/store/sidebar/sidebar.slice";
 
-export const Head: React.FC = () => (
-	<>
-		<html lang="en" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" />
-		<link
-			href="https://fonts.googleapis.com/css2?family=SERIF_FONT&family=SANS_SERIF_FONT&display=swap"
-			rel="stylesheet"
-		/>
-		<title>Benyakir Writes</title>
-		<meta
-			name="description"
-			content="Benyakir Writes is my blog, an outlet for my latest works. Learn about the latest books, projects and short stories he's written.
-              Or check out his blog posts, reviews of books or podcast episodes.."
-		/>
-	</>
-);
-
 const Layout: React.FC<ChildrenProp> = ({ children }) => {
 	const location = useLocation();
 	const modalRef = React.useRef<HTMLDialogElement>(null);

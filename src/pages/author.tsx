@@ -8,15 +8,13 @@ import {
 } from "@Styles/general-components";
 import { usePagination } from "@Hooks";
 import type { AuthoredItemCard } from "@Types/posts";
-import { authorDescription, books, posts, stories } from "@/data/search";
+import { authorDescription, books, stories } from "@/data/search";
 import { CardContainer, NewBookCard, NewStoryCard } from "@/components/Cards";
 import {
 	ItemFilter,
 	FilterOption,
 	CreateFilterOption,
-	DateFilter,
 	KeywordFilter,
-	SearchFilter,
 } from "@/types/filters";
 import { Filter } from "@/components/Filters";
 import {
@@ -26,12 +24,10 @@ import {
 	createFilterBySearchFn,
 	createModifyFilterFns,
 } from "@/utils/filter";
+import { HeadBase } from "@/components/General";
 
 export const Head: React.FC = () => (
-	<>
-		<title>Benyakir Writes - Author</title>
-		<meta name="description" content={authorDescription} />
-	</>
+	<HeadBase title="Author" description={authorDescription} />
 );
 
 const AuthorCard: React.FC<{ item: AuthoredItemCard }> = ({ item }) => {

@@ -25,20 +25,11 @@ import {
 } from "@/data/search";
 import { Filter } from "@/components/Filters";
 import { CardContainer, NewBlogCard } from "@/components/Cards";
-import {
-	CreateFilterOption,
-	DateFilter,
-	FilterOption,
-	ItemFilter,
-	KeywordFilter,
-	SearchFilter,
-} from "@/types/filters";
+import { CreateFilterOption, FilterOption, ItemFilter } from "@/types/filters";
+import { HeadBase } from "@/components/General";
 
 export const Head: React.FC = () => (
-	<>
-		<title>Benyakir Writes - Blogs</title>
-		<meta name="description" content={blogDescription} />
-	</>
+	<HeadBase title="Blog" description={blogDescription} />
 );
 
 const BlogPage: React.FC = () => {

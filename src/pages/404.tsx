@@ -2,15 +2,13 @@ import * as React from "react";
 
 import { CustomLink } from "@Gen";
 import { BigParagraph, LeadHeading, Page } from "@Styles/general-components";
+import { HeadBase } from "@/components/General";
 
 export const Head: React.FC = () => (
-	<>
-		<title>Benyakir Writes - 404</title>
-		<meta
-			name="description"
-			content="This page wasn't found. Please navigate to another page."
-		/>
-	</>
+	<HeadBase
+		title="404"
+		description="The page was not found. Plese navigate to another page."
+	/>
 );
 
 const NotFoundPage: React.FC = () => {
@@ -18,10 +16,8 @@ const NotFoundPage: React.FC = () => {
 		<Page>
 			<LeadHeading>Page Not Found</LeadHeading>
 			<BigParagraph>
-				Unfortunately, the page you were looking for doesn't exist. I suggest
-				you find a link that better suits you from the left hand side. Or you
-				can just visit the{" "}
-				<CustomLink to="/">home page by clicking here</CustomLink>.
+				Unfortunately, the page you were looking for doesn't exist. You can
+				visit the home page<CustomLink to="/">here</CustomLink>.
 			</BigParagraph>
 		</Page>
 	);

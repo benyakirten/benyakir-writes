@@ -15,7 +15,6 @@ const InnerFilterText = styled.span<{ hideBackground?: boolean }>`
     height: 100%;
     width: max-content;
 
-    margin-top: 1px;
     padding: ${SIZE_XS};
 
     background-color: ${(props) => (props.hideBackground ? "none" : props.theme.base.background)};

@@ -1,6 +1,6 @@
 import styled, { createGlobalStyle } from "styled-components";
 
-import { SANS_SERIF_FONT, TRANSITION_NORMAL } from "@StyleVars";
+import { SANS_SERIF_FONT, SERIF_FONT, TRANSITION_NORMAL } from "@StyleVars";
 import { media } from "@Styles/queries";
 
 export const GlobalStyles = createGlobalStyle`
@@ -22,13 +22,22 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     box-sizing: border-box;
-    font-family: ${SANS_SERIF_FONT};
+    font-family: ${SERIF_FONT};
     color: ${(props) =>
 			// @ts-ignore
 			props.theme.base.textColor};
     background-color: ${(props) =>
 			// @ts-ignore
 			props.theme.base.background};
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: ${SANS_SERIF_FONT};
   }
 
   button {

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useLocation } from "@reach/router";
 
-import Logo from "../Logo/Logo.component";
+import Logo from "./components/Logo/Logo.component";
 import {
 	ArrowButton,
 	LegalBox,

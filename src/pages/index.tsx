@@ -1,14 +1,11 @@
 import * as React from "react";
 
-import { CustomLink } from "@Gen";
+import { HeadBase } from "@Gen";
 import {
-	BigParagraph,
 	Grouping,
 	LeadHeading,
 	NormalPageContents,
 	Page,
-	PageContents,
-	Subtitle,
 } from "@Styles/general-components";
 import { homeDescription, latestTwentyItems } from "@/data/search";
 import {
@@ -26,10 +23,7 @@ import {
 } from "@/components/Cards";
 
 export const Head: React.FC = () => (
-	<>
-		<title>Benyakir Writes - Home</title>
-		<meta name="description" content={homeDescription} />
-	</>
+	<HeadBase title="Home" description={homeDescription} />
 );
 
 const ItemCard: React.FC<{

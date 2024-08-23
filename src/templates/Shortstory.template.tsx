@@ -16,22 +16,17 @@ import { truncate } from "@Utils/strings";
 
 import ShortStoryHeader from "@/components/Variants/Headers/ShortStoryHeader.component";
 import type { WpStory } from "@Types/query";
+import { HeadBase } from "@/components/General";
 
 export const Head: React.FC<WpStory> = ({ data }) => {
 	const story = flattenStory(data.wpShortstory, data.file.publicURL);
-	return (
-		<>
-			<title>{story.title}</title>
-			<meta
-				name="description"
-				content={`${story.title}, published on ${getPrettyDate(
-					story.published.date,
-				)}${
-					story.book ? `, related to ${story.book.title}` : null
-				}: ${truncate(formatWpText(story.content), 100)}`}
-			/>
-		</>
-	);
+	const description = `${story.title}, published on ${getPrettyDate(
+		story.published.date,
+	)}${
+		story.book ? `, related to ${story.book.title}` : null
+	}: ${truncate(formatWpText(story.content), 100)}`;
+
+	return <HeadBase title={story.title} description={description} />;
 };
 
 const Story: React.FC<WpStory> = ({ data }) => {

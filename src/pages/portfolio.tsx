@@ -1,7 +1,7 @@
 import { graphql } from "gatsby";
 import * as React from "react";
 
-import { CustomLink } from "@/components/General";
+import { CustomLink, HeadBase } from "@/components/General";
 import {
 	ProjectFilters,
 	ProjectGrid,
@@ -20,10 +20,7 @@ import type { ProjectsQuery } from "@Types/query";
 import { portfolioDescription } from "@/data/search";
 
 export const Head: React.FC = () => (
-	<>
-		<title>Benyakir Writes - Portfolio</title>
-		<meta name="description" content={portfolioDescription} />
-	</>
+	<HeadBase title="Portfolio" description={portfolioDescription} />
 );
 
 const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {

@@ -16,20 +16,15 @@ import { truncate } from "@Utils/strings";
 
 import type { WpBook } from "@Types/query";
 import { BookHeader } from "@Variants";
+import { HeadBase } from "@/components/General";
 
 export const Head: React.FC<WpBook> = ({ data }) => {
 	const book = flattenBook(data.wpBook, data.file.publicURL);
-	return (
-		<>
-			<title>{book.title}</title>
-			<meta
-				name="description"
-				content={`${book.title}, published on ${getPrettyDate(
-					book.published.date,
-				)}: ${truncate(formatWpText(book.content), 100)}`}
-			/>
-		</>
-	);
+	const description = `${book.title}, published on ${getPrettyDate(
+		book.published.date,
+	)}: ${truncate(formatWpText(book.content), 100)}`;
+
+	return <HeadBase title={book.title} description={description} />;
 };
 
 const Book: React.FC<WpBook> = ({ data }) => {

@@ -10,18 +10,13 @@ import { truncate } from "@Utils/strings";
 
 import type { WpPost } from "@Types/query";
 import { PostHeader } from "@Variants";
+import { HeadBase } from "@/components/General";
 
 export const Head: React.FC<WpPost> = ({ data }) => {
 	const post = formatBlogPost(data.wpPost);
-	return (
-		<>
-			<title>Benyakir Writes - {post.title}</title>
-			<meta
-				name="description"
-				content={truncate(formatWpText(post.excerpt ?? ""), 150)}
-			/>
-		</>
-	);
+	const description = truncate(formatWpText(post.excerpt ?? ""), 150);
+
+	return <HeadBase title={post.title} description={description} />;
 };
 
 const Post: React.FC<WpPost> = ({ data }) => {

@@ -16,23 +16,18 @@ import { truncate } from "@Utils/strings";
 
 import { useFetchRepoUpdatedDate } from "@/hooks";
 import type { WpProject } from "@Types/query";
+import { HeadBase } from "@/components/General";
 
 export const Head: React.FC<WpProject> = ({ data }) => {
 	const project = formatProject(data.wpProject);
-	return (
-		<>
-			<title>{project.title}</title>
-			<meta
-				name="description"
-				content={`${project.title}, created on ${getPrettyDate(
-					project.firstReleased.date,
-				)}, using ${project.longTechnologies.join(", ")}. ${truncate(
-					formatWpText(project.content),
-					150,
-				)}`}
-			/>
-		</>
-	);
+	const description = `${project.title}, created on ${getPrettyDate(
+		project.firstReleased.date,
+	)}, using ${project.longTechnologies.join(", ")}. ${truncate(
+		formatWpText(project.content),
+		150,
+	)}`;
+
+	return <HeadBase title={project.title} description={description} />;
 };
 
 const Project: React.FC<WpProject> = ({ data }) => {
