@@ -4,7 +4,11 @@ import { FlyoutHook } from "@/types/hooks";
 
 export const useFlyout: FlyoutHook = (menuRef) => {
 	const shouldMenuOpenTop = React.useCallback(() => {
-		const windowHeight = window.innerHeight;
+		if (!globalThis.window) {
+			return false;
+		}
+
+		const windowHeight = window.innerHeight ?? 0;
 		const buttonTop = menuRef?.current?.getBoundingClientRect().top || 0;
 
 		return buttonTop > windowHeight / 2;
@@ -18,9 +22,9 @@ export const useFlyout: FlyoutHook = (menuRef) => {
 			setMenuOpenTop(shouldOpenTop);
 		};
 
-		window.addEventListener("scroll", calculateIfMenuShouldOpenTop);
+		window?.addEventListener("scroll", calculateIfMenuShouldOpenTop);
 		return () => {
-			window.removeEventListener("scroll", calculateIfMenuShouldOpenTop);
+			window?.removeEventListener("scroll", calculateIfMenuShouldOpenTop);
 		};
 	}, [shouldMenuOpenTop]);
 

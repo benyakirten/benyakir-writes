@@ -58,6 +58,10 @@ export const useFilter = (
 	);
 
 	useEffect(() => {
+		if (!window?.addEventListener) {
+			return;
+		}
+
 		window.addEventListener("keydown", keydownListener);
 		window.addEventListener("click", clickListener);
 

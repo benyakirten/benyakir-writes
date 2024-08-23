@@ -7,13 +7,28 @@ import { StyledNavLink } from "./NavLink.styles";
 const NavLink = React.forwardRef<HTMLElement, NavLinkProps>(
 	({ tabIndex, active, children, to }, ref) => {
 		const dispatch = useAppDispatch();
-		const reducedMotionActive = window.matchMedia(
-			"(prefers-reduced-motion: reduce)",
-		).matches;
+
+		const [shouldReduceMotion, setShouldReduceMotion] = React.useState(false);
+		React.useEffect(() => {
+			if (!window?.matchMedia) {
+				return;
+			}
+
+			const reducedMotionActive = window?.matchMedia(
+				"(prefers-reduced-motion: reduce)",
+			);
+
+			const fn = (e: MediaQueryListEvent) => {
+				setShouldReduceMotion(e.matches);
+			};
+			reducedMotionActive.addEventListener("change", fn);
+			return () => reducedMotionActive.removeEventListener("change", fn);
+		}, []);
+
 		const onClick = () =>
 			setTimeout(
 				() => dispatch(setSidebarState(false)),
-				reducedMotionActive ? 0 : 200,
+				shouldReduceMotion ? 0 : 200,
 			);
 
 		return (
