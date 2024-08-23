@@ -11,7 +11,7 @@ import { capitalize } from "./strings";
 export const createChoiceSet = <T extends object, U extends keyof T>(
 	items: T[],
 	key: T[U] extends string[] | null ? U : never,
-) => {
+): PotentialChoice[] => {
 	const [choiceSet, _] = items
 		.flatMap((item) => item[key] as string[] | null)
 		.reduce<[{ label: string; value: string }[], Set<string>]>(

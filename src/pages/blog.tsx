@@ -6,17 +6,20 @@ import {
 	Page,
 	PaginatedPageContents,
 } from "@Styles/general-components";
-
 import usePagination from "@/hooks/usePagination.hook";
 import type { FlattenedBlogCard } from "@/types/posts";
 import {
 	createAddDateFilterFn,
 	createAddKeywordFilterFn,
 	createAddSearchFilterFn,
-	createChoiceSet,
 	createModifyFilterFns,
 } from "@/utils/filter";
-import { blogDescription, posts } from "@/data/search";
+import {
+	blogDescription,
+	postCategories,
+	posts,
+	postTags,
+} from "@/data/search";
 import { Filter } from "@/components/Filters";
 import { CardContainer, NewBlogCard } from "@/components/Cards";
 import {
@@ -37,12 +40,6 @@ export const Head: React.FC = () => (
 
 const BlogPage: React.FC = () => {
 	const postPagination = usePagination(posts);
-	const categories = React.useMemo(
-		() => createChoiceSet(posts, "categories"),
-		[],
-	);
-	const tags = React.useMemo(() => createChoiceSet(posts, "tags"), []);
-
 	const [filters, setFilters] = React.useState<ItemFilter[]>([]);
 	const options: FilterOption[] = [
 		{
@@ -78,11 +75,11 @@ const BlogPage: React.FC = () => {
 		},
 		{
 			match: "tags",
-			fn: createAddKeywordFilterFn("tags", tags, setFilters),
+			fn: createAddKeywordFilterFn("tags", postTags, setFilters),
 		},
 		{
 			match: "categories",
-			fn: createAddKeywordFilterFn("categories", categories, setFilters),
+			fn: createAddKeywordFilterFn("categories", postCategories, setFilters),
 		},
 		{
 			match: "search",

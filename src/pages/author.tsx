@@ -6,13 +6,24 @@ import {
 	Page,
 	PaginatedPageContents,
 } from "@Styles/general-components";
-
 import { usePagination } from "@Hooks";
 import type { AuthoredItemCard } from "@Types/posts";
-import { authorDescription, books, stories } from "@/data/search";
+import { authorDescription, books, posts, stories } from "@/data/search";
 import { CardContainer, NewBookCard, NewStoryCard } from "@/components/Cards";
-import { ItemFilter, FilterOption, WordFilterType } from "@/types/filters";
+import {
+	ItemFilter,
+	FilterOption,
+	CreateFilterOption,
+	DateFilter,
+	KeywordFilter,
+	SearchFilter,
+} from "@/types/filters";
 import { Filter } from "@/components/Filters";
+import {
+	createAddDateFilterFn,
+	createAddSearchFilterFn,
+	createModifyFilterFns,
+} from "@/utils/filter";
 
 export const Head: React.FC = () => (
 	<>
@@ -37,30 +48,89 @@ const AuthorPage: React.FC = () => {
 	const itemPagination = usePagination<AuthoredItemCard>(items);
 
 	const [filters, setFilters] = React.useState<ItemFilter[]>([]);
-	const options: FilterOption[] = React.useMemo(
-		() => [
-			{
-				label: "Publish Date",
-				id: "date",
-				disabled: filters.some((filter) => filter.id === "date"),
-			},
-			{
-				label: "Tags",
-				id: "tags",
-				disabled: false,
-			},
-			{
-				label: "Categories",
-				id: "categories",
-				disabled: false,
-			},
-			{
-				label: "Search",
-				id: "search",
-				disabled: false,
-			},
-		],
-		[filters],
+	const options: FilterOption[] = [
+		{
+			label: "Publish Date",
+			id: "date",
+			disabled: filters.some((filter) => filter.id === "date"),
+		},
+		{
+			label: "Search",
+			id: "search",
+			disabled: false,
+		},
+	];
+
+	const newFilterOptions: CreateFilterOption[] = [
+		{
+			match: "date",
+			fn: createAddDateFilterFn(
+				items[items.length - 1].published.date,
+				items[0].published.date,
+				setFilters,
+			),
+		},
+		{
+			match: "search",
+			fn: createAddSearchFilterFn(setFilters),
+		},
+	];
+
+	function filterBySearch(
+		filter: SearchFilter,
+		items: AuthoredItemCard[],
+	): AuthoredItemCard[] {
+		if (filter.search === "") {
+			return items;
+		}
+
+		const search = filter.search.toLowerCase().split(" ");
+		const fn =
+			filter.type === "any"
+				? search.some.bind(search)
+				: search.every.bind(search);
+
+		return items.filter((item) =>
+			fn((word) => {
+				const lcWord = word.toLocaleLowerCase();
+				return (
+					item.meta[word] ||
+					item.title.toLocaleLowerCase().includes(lcWord) ||
+					item.content?.toLocaleLowerCase().includes(lcWord)
+				);
+			}),
+		);
+	}
+
+	const filterByKeywords = (
+		_: KeywordFilter,
+		items: AuthoredItemCard[],
+	): AuthoredItemCard[] => items;
+
+	function filterByDate(filter: DateFilter, items: AuthoredItemCard[]) {
+		return items.filter((item) => {
+			const itemDate = item.published.date.getTime();
+			const start = filter.start.getTime();
+			const end = filter.end.getTime();
+			return itemDate >= start && itemDate <= end;
+		});
+	}
+
+	const {
+		createFilter,
+		removeFilter,
+		modifyDate,
+		modifyKeywords,
+		modifySearch,
+		modifyFilterType,
+	} = createModifyFilterFns(
+		newFilterOptions,
+		setFilters,
+		filterByDate,
+		filterByKeywords,
+		filterBySearch,
+		itemPagination.setItems,
+		items,
 	);
 
 	return (
@@ -68,34 +138,17 @@ const AuthorPage: React.FC = () => {
 			<PaginatedPageContents>
 				<LeadHeading>Written Work</LeadHeading>
 				<Filter
-					onCreate={(id: string): void => {
-						throw new Error("Function not implemented.");
-					}}
-					onRemove={(id: string): void => {
-						throw new Error("Function not implemented.");
-					}}
-					onModifyDate={(time: "start" | "end", value: Date): void => {
-						throw new Error("Function not implemented.");
-					}}
-					onModifyKeywords={(
-						id: string,
-						keywords: readonly PotentialChoice[],
-					): void => {
-						throw new Error("Function not implemented.");
-					}}
-					onModifyWordFilterType={(id: string, type: WordFilterType): void => {
-						throw new Error("Function not implemented.");
-					}}
-					onModifySearch={(id: string, search: string): void => {
-						throw new Error("Function not implemented.");
-					}}
+					onCreate={createFilter}
+					onRemove={removeFilter}
+					onModifyDate={modifyDate}
+					onModifyKeywords={modifyKeywords}
+					onModifyWordFilterType={modifyFilterType}
+					onModifySearch={modifySearch}
 					options={options}
 					filters={filters}
-					currentPage={0}
-					numPages={0}
-					setPage={(value: React.SetStateAction<number>): void => {
-						throw new Error("Function not implemented.");
-					}}
+					currentPage={itemPagination.page}
+					numPages={itemPagination.numPages}
+					setPage={itemPagination.setPage}
 				/>
 				<Grouping>
 					<CardContainer>

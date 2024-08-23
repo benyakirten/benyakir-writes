@@ -3,7 +3,7 @@ import rawStories from "./wp/Author/stories.json";
 import rawProjects from "./wp/Projects/projects.json";
 import rawPosts from "./wp/Posts/all.json";
 import lookups from "./wp/lookups.json";
-
+import projectsMisc from "./wp/Projects/misc.json";
 import {
 	FlattenedBlogCard,
 	FlattenedBookCard,
@@ -11,6 +11,7 @@ import {
 	FlattenedStoryCard,
 } from "@/types/posts";
 import { Trie } from "@/utils/search";
+import { createChoiceSet } from "@/utils/filter";
 
 export const blogDescription =
 	"Browse a list of all my blog posts ordered by most recent publication to least recent. Users can filter the blog results by publication date, category and tags.";
@@ -57,6 +58,20 @@ export const projects: FlattenedProjectCard[] = rawProjects.map(
 	},
 );
 
+export const projectHosts: PotentialChoice[] = projectsMisc.hosts.map(
+	(host) => ({
+		label: host,
+		value: host,
+	}),
+);
+
+export const projectTechs: PotentialChoice[] = projectsMisc.longTechs.map(
+	(tech) => ({
+		label: tech,
+		value: tech,
+	}),
+);
+
 export const posts: FlattenedBlogCard[] = rawPosts.map(
 	// @ts-ignore
 	(b: FlattenedBlogCard) => {
@@ -64,6 +79,9 @@ export const posts: FlattenedBlogCard[] = rawPosts.map(
 		return b;
 	},
 );
+
+export const postCategories = createChoiceSet(posts, "categories");
+export const postTags = createChoiceSet(posts, "tags");
 
 export type PageSearch = {
 	title: string;
@@ -124,11 +142,11 @@ function getItemDate(
 	return new Date(0);
 }
 
-export const latestTenItems = [...books, ...stories, ...projects, ...posts]
+export const latestTwentyItems = [...books, ...stories, ...projects, ...posts]
 	.sort((a, b) => {
 		const aDate = getItemDate(a);
 		const bDate = getItemDate(b);
 
 		return bDate.valueOf() - aDate.valueOf();
 	})
-	.slice(0, 10);
+	.slice(0, 20);
