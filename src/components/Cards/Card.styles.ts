@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { FONT_XS, FONT_XXS, SIZE_LG, SIZE_XS } from "@/styles/variables";
+import { FONT_XS, SIZE_LG, SIZE_XS } from "@/styles/variables";
 import { media } from "@/styles/queries";
 
 export const CardContainer = styled.ul`
@@ -21,8 +21,10 @@ export const CardTitle = styled.h3`
 export const CategoryContainer = styled.p`
     grid-column: 1 / 2;
     align-self: center;
+
     font-size: ${FONT_XS};
     font-weight: bold;
+    white-space: nowrap;
 `;
 
 export const TagContainer = styled.div`
@@ -33,6 +35,8 @@ export const TagContainer = styled.div`
 	flex-wrap: wrap;
 	align-items: center;
 	gap: ${SIZE_XS};
+
+    width: clamp(max-content, 100%);
 
 	${media.phone} {
 		gap: 2px;

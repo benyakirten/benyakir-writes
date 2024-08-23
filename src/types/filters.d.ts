@@ -107,3 +107,8 @@ type CurrentPageProps = {
 	numPages: number;
 	onSetPage: (page: number) => void;
 };
+
+type CreateFilterOption = {
+	match: string;
+	fn: () => void;
+};

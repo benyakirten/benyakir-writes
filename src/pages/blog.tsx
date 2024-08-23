@@ -10,21 +10,22 @@ import {
 import usePagination from "@/hooks/usePagination.hook";
 import type { FlattenedBlogCard } from "@/types/posts";
 import {
+	createAddDateFilterFn,
+	createAddKeywordFilterFn,
+	createAddSearchFilterFn,
 	createChoiceSet,
-	isDateFilter,
-	isKeywordFilter,
-	isSearchFilter,
+	createModifyFilterFns,
 } from "@/utils/filter";
 import { blogDescription, posts } from "@/data/search";
 import { Filter } from "@/components/Filters";
 import { CardContainer, NewBlogCard } from "@/components/Cards";
 import {
+	CreateFilterOption,
 	DateFilter,
 	FilterOption,
 	ItemFilter,
 	KeywordFilter,
 	SearchFilter,
-	WordFilterType,
 } from "@/types/filters";
 
 export const Head: React.FC = () => (
@@ -43,153 +44,51 @@ const BlogPage: React.FC = () => {
 	const tags = React.useMemo(() => createChoiceSet(posts, "tags"), []);
 
 	const [filters, setFilters] = React.useState<ItemFilter[]>([]);
-	const options: FilterOption[] = React.useMemo(
-		() => [
-			{
-				label: "Publish Date",
-				id: "date",
-				disabled: filters.some((filter) => filter.id === "date"),
-			},
-			{
-				label: "Tags",
-				id: "tags",
-				disabled: false,
-			},
-			{
-				label: "Categories",
-				id: "categories",
-				disabled: false,
-			},
-			{
-				label: "Search",
-				id: "search",
-				disabled: false,
-			},
-		],
-		[filters],
-	);
-
-	function handleFilterCreate(id: string) {
-		switch (id) {
-			case "date":
-				createPublishDateFilter();
-				break;
-			case "tags":
-				createTagFilter();
-				break;
-			case "categories":
-				createCategoryFilter();
-				break;
-			case "search":
-				createSearchFilter();
-				break;
-		}
-	}
-
-	function createPublishDateFilter() {
-		const start = posts[posts.length - 1].published.date;
-		const end = posts[0].published.date;
-		setFilters((filters) => [
-			...filters,
-			{ label: "Date", id: "date", start, end },
-		]);
-	}
-
-	function createTagFilter() {
-		const tagFilter: KeywordFilter = {
-			id: "tags",
+	const options: FilterOption[] = [
+		{
+			label: "Publish Date",
+			id: "date",
+			disabled: filters.some((filter) => filter.id === "date"),
+		},
+		{
 			label: "Tags",
-			type: "any",
-			currentKeywords: [],
-			allKeywords: tags,
-		};
-		setFilters((filters) => [...filters, tagFilter]);
-	}
-
-	function createCategoryFilter() {
-		const categoryFilter: KeywordFilter = {
-			id: "categories",
+			id: "tags",
+			disabled: false,
+		},
+		{
 			label: "Categories",
-			type: "any",
-			currentKeywords: [],
-			allKeywords: categories,
-		};
-		setFilters((filters) => [...filters, categoryFilter]);
-	}
+			id: "categories",
+			disabled: false,
+		},
+		{
+			label: "Search",
+			id: "search",
+			disabled: false,
+		},
+	];
 
-	function createSearchFilter() {
-		const searchFilter: SearchFilter = {
-			label: "search",
-			id: Math.random().toString(),
-			search: "",
-			type: "any",
-		};
-		setFilters((filters) => [...filters, searchFilter]);
-	}
-
-	function removeFilter(id: string) {
-		setFilters((filters) => {
-			const newFilters = filters.filter((filter) => filter.id !== id);
-			filterBlogPosts(newFilters);
-			return newFilters;
-		});
-	}
-
-	function modifyDate(time: "start" | "end", value: Date) {
-		setFilters((filters) => {
-			const dateFilter = filters.find((filter) => filter.id === "date");
-			if (!dateFilter || !("start" in dateFilter)) {
-				return filters;
-			}
-
-			dateFilter[time] = value;
-			filterBlogPosts(filters);
-
-			return structuredClone(filters);
-		});
-	}
-
-	function modifyKeywords(id: string, keywords: readonly PotentialChoice[]) {
-		setFilters((filters) => {
-			const keywordFilter = filters.find((filter) => filter.id === id);
-			if (!keywordFilter || !("currentKeywords" in keywordFilter)) {
-				return filters;
-			}
-
-			keywordFilter.currentKeywords = keywords;
-			filterBlogPosts(filters);
-
-			return structuredClone(filters);
-		});
-	}
-
-	function modifyFilterType(id: string, type: WordFilterType) {
-		setFilters((filters) => {
-			const filter = filters.find((filter) => filter.id === id);
-			if (!filter || !("type" in filter)) {
-				return filters;
-			}
-
-			filter.type = type;
-			filterBlogPosts(filters);
-
-			return structuredClone(filters);
-		});
-	}
-
-	function modifySearch(id: string, search: string) {
-		setFilters((filters) => {
-			const searchFilter = filters.find((filter) => filter.id === id);
-			if (!searchFilter || !("search" in searchFilter)) {
-				return filters;
-			}
-
-			searchFilter.search = search;
-			filterBlogPosts(filters);
-
-			return structuredClone(filters);
-		});
-	}
+	const newFilterOptions: CreateFilterOption[] = [
+		{
+			match: "date",
+			fn: createAddDateFilterFn(
+				posts[posts.length - 1].published.date,
+				posts[0].published.date,
+				setFilters,
+			),
+		},
+		{
+			match: "tags",
+			fn: createAddKeywordFilterFn("tags", tags, setFilters),
+		},
+		{
+			match: "categories",
+			fn: createAddKeywordFilterFn("categories", categories, setFilters),
+		},
+		{
+			match: "search",
+			fn: createAddSearchFilterFn(setFilters),
+		},
+	];
 
 	function filterBySearch(
 		filter: SearchFilter,
@@ -204,16 +103,21 @@ const BlogPage: React.FC = () => {
 			filter.type === "any"
 				? search.some.bind(search)
 				: search.every.bind(search);
+
 		return posts.filter((post) =>
-			fn(
-				(word) =>
+			fn((word) => {
+				const lcWord = word.toLocaleLowerCase();
+				return (
 					post.meta[word] ||
-					post.title.includes(word) ||
-					post.excerpt?.includes(word) ||
-					post.content?.toLowerCase().includes(word) ||
-					post.tags?.find((tag) => tag.includes(word)) ||
-					post.categories?.find((cat) => cat.includes(word)),
-			),
+					post.title.toLocaleLowerCase().includes(lcWord) ||
+					post.excerpt?.toLocaleLowerCase().includes(lcWord) ||
+					post.content?.toLocaleLowerCase().includes(lcWord) ||
+					post.tags?.find((tag) => tag.toLocaleLowerCase().includes(lcWord)) ||
+					post.categories?.find((cat) =>
+						cat.toLocaleLowerCase().includes(lcWord),
+					)
+				);
+			}),
 		);
 	}
 
@@ -244,20 +148,22 @@ const BlogPage: React.FC = () => {
 		});
 	}
 
-	function filterBlogPosts(filters: ItemFilter[]) {
-		let filteredPosts = posts;
-		for (const filter of filters) {
-			if (isDateFilter(filter)) {
-				filteredPosts = filterByDate(filter, filteredPosts);
-			} else if (isSearchFilter(filter)) {
-				filteredPosts = filterBySearch(filter, filteredPosts);
-			} else if (isKeywordFilter(filter)) {
-				filteredPosts = filterByKeywords(filter, filteredPosts);
-			}
-		}
-
-		postPagination.setItems(filteredPosts);
-	}
+	const {
+		createFilter,
+		removeFilter,
+		modifyDate,
+		modifyKeywords,
+		modifySearch,
+		modifyFilterType,
+	} = createModifyFilterFns(
+		newFilterOptions,
+		setFilters,
+		filterByDate,
+		filterByKeywords,
+		filterBySearch,
+		postPagination.setItems,
+		posts,
+	);
 
 	return (
 		<Page>
@@ -266,7 +172,7 @@ const BlogPage: React.FC = () => {
 				<Filter
 					options={options}
 					filters={filters}
-					onCreate={handleFilterCreate}
+					onCreate={createFilter}
 					onModifyKeywords={modifyKeywords}
 					onModifyDate={modifyDate}
 					onRemove={removeFilter}

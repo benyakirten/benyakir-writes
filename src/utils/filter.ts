@@ -3,7 +3,10 @@ import {
 	DateFilter,
 	SearchFilter,
 	KeywordFilter,
+	CreateFilterOption,
+	WordFilterType,
 } from "@/types/filters";
+import { capitalize } from "./strings";
 
 export const createChoiceSet = <T extends object, U extends keyof T>(
 	items: T[],
@@ -44,3 +47,195 @@ export const isKeywordFilter = (
 ): filter is KeywordFilter => {
 	return "currentKeywords" in filter;
 };
+
+export function createAddDateFilterFn(
+	start: Date,
+	end: Date,
+	setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>,
+): () => void {
+	return () =>
+		setFilters((filters) => [
+			...filters,
+			{ label: "Date", id: "date", start, end },
+		]);
+}
+
+export function createAddKeywordFilterFn(
+	id: string,
+	keywords: PotentialChoice[],
+	setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>,
+): () => void {
+	return () =>
+		setFilters((filters) => [
+			...filters,
+			{
+				label: capitalize(id),
+				id,
+				type: "any",
+				currentKeywords: [],
+				allKeywords: keywords,
+			},
+		]);
+}
+
+export function createAddSearchFilterFn(
+	setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>,
+): () => void {
+	return () =>
+		setFilters((filters) => [
+			...filters,
+			{
+				label: "Search",
+				id: Math.random().toString(),
+				search: "",
+				type: "any",
+			},
+		]);
+}
+
+function createFilterCreationFn(
+	items: CreateFilterOption[],
+): (id: string) => void {
+	return (id: string) => {
+		const item = items.find((item) => item.match === id);
+		if (!item) {
+			return;
+		}
+
+		item.fn();
+	};
+}
+
+function createRemoveFilterFn(
+	setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>,
+	filterItems: (filters: ItemFilter[]) => void,
+): (id: string) => void {
+	return (id: string) =>
+		setFilters((filters) => {
+			const newFilters = filters.filter((filter) => filter.id !== id);
+			filterItems(newFilters);
+			return newFilters;
+		});
+}
+
+function createModifyDateFn(
+	setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>,
+	filterItems: (filters: ItemFilter[]) => void,
+): (time: "start" | "end", value: Date) => void {
+	return (time: "start" | "end", value: Date) =>
+		setFilters((filters) => {
+			const dateFilter = filters.find((filter) => filter.id === "date");
+			if (!dateFilter || !("start" in dateFilter)) {
+				return filters;
+			}
+
+			dateFilter[time] = value;
+			filterItems(filters);
+
+			return structuredClone(filters);
+		});
+}
+
+function createModifyKeywordFn(
+	setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>,
+	filterItems: (filters: ItemFilter[]) => void,
+): (id: string, keywords: readonly PotentialChoice[]) => void {
+	return (id: string, keywords: readonly PotentialChoice[]) =>
+		setFilters((filters) => {
+			const keywordFilter = filters.find((filter) => filter.id === id);
+			if (!keywordFilter || !("currentKeywords" in keywordFilter)) {
+				return filters;
+			}
+
+			keywordFilter.currentKeywords = keywords;
+			filterItems(filters);
+
+			return structuredClone(filters);
+		});
+}
+
+function createModifyFilterTypeFn(
+	setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>,
+	filterItems: (filters: ItemFilter[]) => void,
+): (id: string, type: WordFilterType) => void {
+	return (id: string, type: WordFilterType) =>
+		setFilters((filters) => {
+			const filter = filters.find((filter) => filter.id === id);
+			if (!filter || !("type" in filter)) {
+				return filters;
+			}
+
+			filter.type = type;
+			filterItems(filters);
+
+			return structuredClone(filters);
+		});
+}
+
+function createModifySearchFn(
+	setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>,
+	filterItems: (filters: ItemFilter[]) => void,
+): (id: string, search: string) => void {
+	return (id: string, search: string) =>
+		setFilters((filters) => {
+			const searchFilter = filters.find((filter) => filter.id === id);
+			if (!searchFilter || !("search" in searchFilter)) {
+				return filters;
+			}
+
+			searchFilter.search = search;
+			filterItems(filters);
+
+			return structuredClone(filters);
+		});
+}
+
+function createFilterItemsFn<T extends object>(
+	filterByDate: (filter: DateFilter, items: T[]) => T[],
+	filterByKeywords: (filter: KeywordFilter, items: T[]) => T[],
+	filterBySearch: (filter: SearchFilter, items: T[]) => T[],
+	setItems: (items: T[]) => void,
+	items: T[],
+) {
+	return (filters: ItemFilter[]) => {
+		let filteredItems = items;
+		for (const filter of filters) {
+			if (isDateFilter(filter)) {
+				filteredItems = filterByDate(filter, filteredItems);
+			} else if (isSearchFilter(filter)) {
+				filteredItems = filterBySearch(filter, filteredItems);
+			} else if (isKeywordFilter(filter)) {
+				filteredItems = filterByKeywords(filter, filteredItems);
+			}
+		}
+
+		setItems(filteredItems);
+	};
+}
+
+export function createModifyFilterFns<T extends object>(
+	options: CreateFilterOption[],
+	setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>,
+	filterByDate: (filter: DateFilter, items: T[]) => T[],
+	filterByKeywords: (filter: KeywordFilter, items: T[]) => T[],
+	filterBySearch: (filter: SearchFilter, items: T[]) => T[],
+	setItems: (items: T[]) => void,
+	items: T[],
+) {
+	const filterItems = createFilterItemsFn(
+		filterByDate,
+		filterByKeywords,
+		filterBySearch,
+		setItems,
+		items,
+	);
+
+	return {
+		createFilter: createFilterCreationFn(options),
+		removeFilter: createRemoveFilterFn(setFilters, filterItems),
+		modifyDate: createModifyDateFn(setFilters, filterItems),
+		modifyKeywords: createModifyKeywordFn(setFilters, filterItems),
+		modifyFilterType: createModifyFilterTypeFn(setFilters, filterItems),
+		modifySearch: createModifySearchFn(setFilters, filterItems),
+	};
+}
