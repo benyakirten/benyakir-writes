@@ -5,7 +5,7 @@ import styled from "styled-components";
 export const StyledActiveIndicator = styled.div<{ linkTop: number }>`
     position: absolute;
     left: -14%;
-    top: ${({ linkTop }) => linkTop - 1}px;
+    top: ${({ linkTop }) => linkTop + 4}px;
 
     height: ${FONT_LG};
     width: 13%;

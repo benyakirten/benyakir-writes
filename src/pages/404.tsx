@@ -1,7 +1,12 @@
 import * as React from "react";
 
 import { CustomLink } from "@Gen";
-import { BigParagraph, LeadHeading, Page } from "@Styles/general-components";
+import {
+	BigParagraph,
+	LeadHeading,
+	NormalPageContents,
+	Page,
+} from "@Styles/general-components";
 import { HeadBase } from "@/components/General";
 
 export const Head: React.FC = () => (
@@ -14,11 +19,13 @@ export const Head: React.FC = () => (
 const NotFoundPage: React.FC = () => {
 	return (
 		<Page>
-			<LeadHeading>Page Not Found</LeadHeading>
-			<BigParagraph>
-				Unfortunately, the page you were looking for doesn't exist. You can
-				visit the home page<CustomLink to="/">here</CustomLink>.
-			</BigParagraph>
+			<NormalPageContents>
+				<LeadHeading>Page Not Found</LeadHeading>
+				<BigParagraph>
+					Unfortunately, the page you were looking for doesn't exist. You can
+					visit the home page<CustomLink to="/">here</CustomLink>.
+				</BigParagraph>
+			</NormalPageContents>
 		</Page>
 	);
 };

@@ -11,6 +11,8 @@ import {
 	TRANSITION_FAST,
 	TRANSITION_NORMAL,
 	Z_ABOVE,
+	SANS_SERIF_FONT,
+	SIZE_MD,
 } from "@Styles/variables";
 
 export const ProjectBoxes = styled.div`
@@ -180,15 +182,6 @@ export const TechnologyLabel = styled.label<{ checked: boolean }>`
   }
 `;
 
-export const TechnologyCheckox = styled.input.attrs<{ checked: boolean }>(
-	(checked) => ({
-		type: "checkbox",
-		checked,
-	}),
-)<{ checked: boolean }>`
-  display: none;
-`;
-
 export const PortfolioBackground = styled.div`
   position: relative;
   padding-block: 2rem;
@@ -209,35 +202,6 @@ export const FilterContainer = styled.div`
   ${media.phone} {
     max-width: 100%;
   }
-`;
-
-export const PortfolioHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-
-  gap: 8rem;
-
-  ${media.phone} {
-    flex-direction: column;
-    gap: 4rem;
-  }
-
-  justify-content: space-between;
-
-  margin: 2rem 0;
-
-  padding-block: 2rem;
-`;
-
-export const PortfolioDescription = styled.p`
-  text-align: left;
-  width: 40%;
-  ${media.phone} {
-    width: 100%;
-  }
-  line-height: 1.8rem;
-  font-size: ${FONT_MD};
-  z-index: 1;
 `;
 
 export const PortfolioSVGContainer = styled.div<{
