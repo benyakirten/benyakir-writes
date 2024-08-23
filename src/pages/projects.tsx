@@ -15,18 +15,14 @@ import {
 	projectsDescription,
 } from "@/data/search";
 import { CardContainer, NewProjectCard } from "@/components/Cards";
-import {
-	CreateFilterOption,
-	DateFilter,
-	FilterOption,
-	ItemFilter,
-	KeywordFilter,
-	SearchFilter,
-} from "@/types/filters";
+import { CreateFilterOption, FilterOption, ItemFilter } from "@/types/filters";
 import {
 	createAddDateFilterFn,
 	createAddKeywordFilterFn,
 	createAddSearchFilterFn,
+	createFilterByDateFn,
+	createFilterByKeywordFn,
+	createFilterBySearchFn,
 	createModifyFilterFns,
 } from "@/utils/filter";
 import { FlattenedProjectCard } from "@/types/posts";
@@ -88,66 +84,32 @@ const ProjectsPage: React.FC = () => {
 		},
 	];
 
-	function filterBySearch(
-		filter: SearchFilter,
-		projects: FlattenedProjectCard[],
-	): FlattenedProjectCard[] {
-		if (filter.search === "") {
-			return projects;
-		}
+	const filterBySearch = createFilterBySearchFn<FlattenedProjectCard>(
+		(project, word) => {
+			const lcWord = word.toLocaleLowerCase();
+			return (
+				!!project.meta[word] ||
+				project.title.toLocaleLowerCase().includes(lcWord) ||
+				project.content?.toLocaleLowerCase().includes(lcWord) ||
+				!!project.longTechnologies?.find((lt) =>
+					lt.toLocaleLowerCase().includes(lcWord),
+				) ||
+				!!project.shortTechnologies.find((st) =>
+					st.toLocaleLowerCase().includes(lcWord),
+				) ||
+				!!project.hostedOn?.toLocaleLowerCase().includes(lcWord)
+			);
+		},
+	);
 
-		const search = filter.search.toLowerCase().split(" ");
-		const fn =
-			filter.type === "any"
-				? search.some.bind(search)
-				: search.every.bind(search);
+	const filterByKeywords = createFilterByKeywordFn<FlattenedProjectCard>(
+		(project, id) =>
+			id === "hosts" ? [project.hostedOn ?? ""] : project.longTechnologies,
+	);
 
-		return projects.filter((project) =>
-			fn((word) => {
-				const lcWord = word.toLocaleLowerCase();
-				return (
-					project.meta[word] ||
-					project.title.toLocaleLowerCase().includes(lcWord) ||
-					project.content?.toLocaleLowerCase().includes(lcWord) ||
-					project.longTechnologies?.find((lt) =>
-						lt.toLocaleLowerCase().includes(lcWord),
-					) ||
-					project.shortTechnologies.find((st) =>
-						st.toLocaleLowerCase().includes(lcWord),
-					) ||
-					project.hostedOn?.toLocaleLowerCase().includes(lcWord)
-				);
-			}),
-		);
-	}
-
-	function filterByKeywords(
-		filter: KeywordFilter,
-		projects: FlattenedProjectCard[],
-	): FlattenedProjectCard[] {
-		if (filter.currentKeywords.length === 0) {
-			return projects;
-		}
-
-		const fn =
-			filter.type === "any"
-				? filter.currentKeywords.some.bind(filter.currentKeywords)
-				: filter.currentKeywords.every.bind(filter.currentKeywords);
-		return projects.filter((project) => {
-			const keywords =
-				filter.id === "hosts" ? [project.hostedOn] : project.longTechnologies;
-			return fn((keyword) => keywords?.includes(keyword.value));
-		});
-	}
-
-	function filterByDate(filter: DateFilter, projects: FlattenedProjectCard[]) {
-		return projects.filter((project) => {
-			const projectDate = project.firstReleased.date.getTime();
-			const start = filter.start.getTime();
-			const end = filter.end.getTime();
-			return projectDate >= start && projectDate <= end;
-		});
-	}
+	const filterByDate = createFilterByDateFn<FlattenedProjectCard>(
+		(project) => project.firstReleased.date,
+	);
 
 	const {
 		createFilter,

@@ -12,6 +12,9 @@ import {
 	createAddDateFilterFn,
 	createAddKeywordFilterFn,
 	createAddSearchFilterFn,
+	createFilterByDateFn,
+	createFilterByKeywordFn,
+	createFilterBySearchFn,
 	createModifyFilterFns,
 } from "@/utils/filter";
 import {
@@ -87,63 +90,27 @@ const BlogPage: React.FC = () => {
 		},
 	];
 
-	function filterBySearch(
-		filter: SearchFilter,
-		posts: FlattenedBlogCard[],
-	): FlattenedBlogCard[] {
-		if (filter.search === "") {
-			return posts;
-		}
-
-		const search = filter.search.toLowerCase().split(" ");
-		const fn =
-			filter.type === "any"
-				? search.some.bind(search)
-				: search.every.bind(search);
-
-		return posts.filter((post) =>
-			fn((word) => {
-				const lcWord = word.toLocaleLowerCase();
-				return (
-					post.meta[word] ||
-					post.title.toLocaleLowerCase().includes(lcWord) ||
-					post.excerpt?.toLocaleLowerCase().includes(lcWord) ||
-					post.content?.toLocaleLowerCase().includes(lcWord) ||
-					post.tags?.find((tag) => tag.toLocaleLowerCase().includes(lcWord)) ||
-					post.categories?.find((cat) =>
-						cat.toLocaleLowerCase().includes(lcWord),
-					)
-				);
-			}),
-		);
-	}
-
-	function filterByKeywords(
-		filter: KeywordFilter,
-		posts: FlattenedBlogCard[],
-	): FlattenedBlogCard[] {
-		if (filter.currentKeywords.length === 0) {
-			return posts;
-		}
-
-		const fn =
-			filter.type === "any"
-				? filter.currentKeywords.some.bind(filter.currentKeywords)
-				: filter.currentKeywords.every.bind(filter.currentKeywords);
-		return posts.filter((post) => {
-			const keywords = filter.id === "tags" ? post.tags : post.categories;
-			return fn((keyword) => keywords?.includes(keyword.value));
-		});
-	}
-
-	function filterByDate(filter: DateFilter, posts: FlattenedBlogCard[]) {
-		return posts.filter((post) => {
-			const postDate = post.published.date.getTime();
-			const start = filter.start.getTime();
-			const end = filter.end.getTime();
-			return postDate >= start && postDate <= end;
-		});
-	}
+	const filterBySearch = createFilterBySearchFn<FlattenedBlogCard>(
+		(post, word) => {
+			const lcWord = word.toLocaleLowerCase();
+			return (
+				!!post.meta[word] ||
+				post.title.toLocaleLowerCase().includes(lcWord) ||
+				post.excerpt?.toLocaleLowerCase().includes(lcWord) ||
+				post.content?.toLocaleLowerCase().includes(lcWord) ||
+				!!post.tags?.find((tag) => tag.toLocaleLowerCase().includes(lcWord)) ||
+				!!post.categories?.find((cat) =>
+					cat.toLocaleLowerCase().includes(lcWord),
+				)
+			);
+		},
+	);
+	const filterByKeywords = createFilterByKeywordFn<FlattenedBlogCard>(
+		(post, id) => (id === "tags" ? post.tags : post.categories) ?? [],
+	);
+	const filterByDate = createFilterByDateFn<FlattenedBlogCard>(
+		(post) => post.published.date,
+	);
 
 	const {
 		createFilter,

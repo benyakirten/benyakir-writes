@@ -22,6 +22,8 @@ import { Filter } from "@/components/Filters";
 import {
 	createAddDateFilterFn,
 	createAddSearchFilterFn,
+	createFilterByDateFn,
+	createFilterBySearchFn,
 	createModifyFilterFns,
 } from "@/utils/filter";
 
@@ -76,45 +78,25 @@ const AuthorPage: React.FC = () => {
 		},
 	];
 
-	function filterBySearch(
-		filter: SearchFilter,
-		items: AuthoredItemCard[],
-	): AuthoredItemCard[] {
-		if (filter.search === "") {
-			return items;
-		}
-
-		const search = filter.search.toLowerCase().split(" ");
-		const fn =
-			filter.type === "any"
-				? search.some.bind(search)
-				: search.every.bind(search);
-
-		return items.filter((item) =>
-			fn((word) => {
-				const lcWord = word.toLocaleLowerCase();
-				return (
-					item.meta[word] ||
-					item.title.toLocaleLowerCase().includes(lcWord) ||
-					item.content?.toLocaleLowerCase().includes(lcWord)
-				);
-			}),
-		);
-	}
+	const filterBySearch = createFilterBySearchFn<AuthoredItemCard>(
+		(item, word) => {
+			const lcWord = word.toLocaleLowerCase();
+			return (
+				item.meta[word] ||
+				item.title.toLocaleLowerCase().includes(lcWord) ||
+				item.content?.toLocaleLowerCase().includes(lcWord)
+			);
+		},
+	);
 
 	const filterByKeywords = (
 		_: KeywordFilter,
 		items: AuthoredItemCard[],
 	): AuthoredItemCard[] => items;
 
-	function filterByDate(filter: DateFilter, items: AuthoredItemCard[]) {
-		return items.filter((item) => {
-			const itemDate = item.published.date.getTime();
-			const start = filter.start.getTime();
-			const end = filter.end.getTime();
-			return itemDate >= start && itemDate <= end;
-		});
-	}
+	const filterByDate = createFilterByDateFn<AuthoredItemCard>(
+		(item) => item.published.date,
+	);
 
 	const {
 		createFilter,

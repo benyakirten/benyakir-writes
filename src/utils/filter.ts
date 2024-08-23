@@ -239,3 +239,54 @@ export function createModifyFilterFns<T extends object>(
 		modifySearch: createModifySearchFn(setFilters, filterItems),
 	};
 }
+
+export function createFilterBySearchFn<T extends object>(
+	searchFn: (item: T, word: string) => boolean,
+) {
+	return (filter: SearchFilter, items: T[]): T[] => {
+		if (filter.search === "") {
+			return items;
+		}
+
+		const search = filter.search.toLowerCase().split(" ");
+		const fn =
+			filter.type === "any"
+				? search.some.bind(search)
+				: search.every.bind(search);
+
+		return items.filter((item) => fn((word) => searchFn(item, word)));
+	};
+}
+
+export function createFilterByKeywordFn<T extends object>(
+	getChoiceFn: (item: T, id: string) => string[],
+) {
+	return (filter: KeywordFilter, items: T[]): T[] => {
+		if (filter.currentKeywords.length === 0) {
+			return items;
+		}
+
+		const fn =
+			filter.type === "any"
+				? filter.currentKeywords.some.bind(filter.currentKeywords)
+				: filter.currentKeywords.every.bind(filter.currentKeywords);
+
+		return items.filter((item) => {
+			const choices = getChoiceFn(item, filter.id);
+			return fn((keyword) => choices.includes(keyword.value));
+		});
+	};
+}
+
+export function createFilterByDateFn<T extends object>(
+	getDateFn: (item: T) => Date,
+) {
+	return (filter: DateFilter, items: T[]): T[] => {
+		return items.filter((item) => {
+			const itemDate = getDateFn(item).getTime();
+			const start = filter.start.getTime();
+			const end = filter.end.getTime();
+			return itemDate >= start && itemDate <= end;
+		});
+	};
+}

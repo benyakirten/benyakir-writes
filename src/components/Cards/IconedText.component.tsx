@@ -29,8 +29,10 @@ const InnerIconContainer = styled.div`
 const IconTextContainer = styled.p`
     display: flex;
     align-items: center;
+
     height: 100%;
     margin-top: 1px;
+	white-space: nowrap;
 `;
 
 const IconedText: React.FC<{
