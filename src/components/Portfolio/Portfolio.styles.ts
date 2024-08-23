@@ -184,10 +184,8 @@ export const TechnologyLabel = styled.label<{ checked: boolean }>`
 
 export const PortfolioBackground = styled.div`
   position: relative;
-  padding-block: 2rem;
   min-height: 100vh;
-  background: ${(props) =>
-		css`linear-gradient(to bottom, ${props.theme.base.background} 5%, ${props.theme.portfolio.gradient.color1}, ${props.theme.portfolio.gradient.color2} 75%, ${props.theme.portfolio.gradient.color3})`};
+  background: ${(props) => props.theme.base.background};
 `;
 
 export const FilterContainer = styled.div`
@@ -202,15 +200,6 @@ export const FilterContainer = styled.div`
   ${media.phone} {
     max-width: 100%;
   }
-`;
-
-export const PortfolioSVGContainer = styled.div<{
-	xPosition: number;
-	yPosition: number;
-}>`
-  position: absolute;
-  top: ${(props) => props.yPosition}px;
-  left: ${(props) => props.xPosition}px;
 `;
 
 export const ProjectLink = styled.a`

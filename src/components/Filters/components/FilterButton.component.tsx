@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 
 import { FillIn } from "@/components/General";
 import { HORIZONTAL_XS } from "@/styles/variables";
+import { FilterButtonProps } from "@/types/filters";
 
 const StyledFilterButtonExterior = styled.div`
 	height: 100%;

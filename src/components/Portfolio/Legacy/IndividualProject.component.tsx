@@ -16,7 +16,7 @@ import {
 	TechBadge,
 	TechBadges,
 	TitleContainer,
-} from "./Portfolio.styles";
+} from "../Portfolio.styles";
 import LatestUpdate from "./LatestUpdate.component";
 
 const IndividualProject: React.FC<{

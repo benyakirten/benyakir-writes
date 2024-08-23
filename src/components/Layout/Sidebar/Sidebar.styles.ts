@@ -19,7 +19,7 @@ export const StyledSidebar = styled.nav<{ open?: boolean }>`
   position: fixed;
   z-index: ${Z_RAISED};
 
-  width: 17rem;
+  width: 15rem;
   height: 100vh;
   overflow: auto;
 

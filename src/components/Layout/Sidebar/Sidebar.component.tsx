@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useLocation } from "@reach/router";
 
-import Logo from "./components/Logo/Logo.component";
+import Logo from "./components/Logo.component";
 import {
 	ArrowButton,
 	LegalBox,
@@ -22,6 +22,7 @@ import {
 } from "@/store/sidebar/sidebar.slice";
 import { NavLink, ActiveIndicator } from "./components";
 import OpenSearchButton from "./components/OpenSearchButton.component";
+import { NextIcon } from "@/components/Icons";
 
 const Sidebar: React.FC<{ onSearch: () => void }> = ({ onSearch }) => {
 	const portfolioRef = React.useRef<HTMLElement>(null);
@@ -29,7 +30,6 @@ const Sidebar: React.FC<{ onSearch: () => void }> = ({ onSearch }) => {
 	const authorRef = React.useRef<HTMLElement>(null);
 	const projectsRef = React.useRef<HTMLElement>(null);
 	const themeRef = React.useRef<HTMLElement>(null);
-	const contactRef = React.useRef<HTMLElement>(null);
 	const homeRef = React.useRef<HTMLElement>(null);
 
 	const location = useLocation();
@@ -114,7 +114,7 @@ const Sidebar: React.FC<{ onSearch: () => void }> = ({ onSearch }) => {
 					onClick={toggleOpen}
 					aria-label={open ? "Close Sidebar" : "Open Sidebar"}
 				>
-					&larr;
+					<NextIcon />
 				</ArrowButton>
 				<SidebarContents
 					className={open ? "nav-toggle-open" : "nav-toggle-close"}

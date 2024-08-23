@@ -1,13 +1,8 @@
 import { graphql } from "gatsby";
 import * as React from "react";
 
-import { CustomLink, HeadBase } from "@/components/General";
-import {
-	PortfolioHeader,
-	ProjectFilters,
-	ProjectGrid,
-	RandomizedBackground,
-} from "@/components/Portfolio";
+import { HeadBase } from "@/components/General";
+import { PortfolioHeader, RandomizedBackground } from "@/components/Portfolio";
 import { NormalPageContents, Page } from "@/styles/general-components";
 import type { ProjectGridDatum } from "@/types/portfolio";
 import { downloadFile } from "@/utils/dom";

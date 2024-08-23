@@ -1,8 +1,9 @@
 import * as React from "react";
 import Select, { GroupBase } from "react-select";
+import styled, { useTheme } from "styled-components";
 
 import { FONT_SM, SIZE_SM, TRANSITION_NORMAL } from "@StyleVars";
-import styled, { useTheme } from "styled-components";
+import { MultipleChoiceInputProps } from "@/types/filters";
 
 const MultipleChoiceContainer = styled.label`
 	display: grid;

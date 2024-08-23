@@ -3,8 +3,8 @@ import {
 	createDimensionalRepresentation,
 } from "@/utils/portfolio";
 import * as React from "react";
-import { PortfolioBackground } from "./Portfolio.styles";
-import Shapes from "./Shapes.component";
+import { PortfolioBackground } from "../Portfolio.styles";
+import { Shapes } from "./shapes";
 
 const RandomizedBackground: React.FC<ChildrenProp> = ({ children }) => {
 	const [_, startTransition] = React.useTransition();

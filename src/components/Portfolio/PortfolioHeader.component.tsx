@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { SANS_SERIF_FONT, FONT_MD, FONT_LG, SIZE_SM } from "@/styles/variables";
+import { SANS_SERIF_FONT, FONT_MD, SIZE_SM, FONT_XL } from "@/styles/variables";
 
 const StyledPortfolioHeader = styled.div`
   display: grid;
@@ -11,7 +11,7 @@ const StyledPortfolioHeader = styled.div`
 `;
 
 const StyledName = styled.h2`
-    font-size: ${FONT_LG};
+    font-size: ${FONT_XL};
     text-align: center;
 `;
 
@@ -24,7 +24,7 @@ const PortfolioHeader: React.FC = () => {
 	return (
 		<StyledPortfolioHeader>
 			<StyledName>Ben Horowitz</StyledName>
-			<StyledRole>Software Engineer</StyledRole>
+			<StyledRole>Full Stack Developer</StyledRole>
 		</StyledPortfolioHeader>
 	);
 };

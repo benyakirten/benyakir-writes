@@ -20,7 +20,7 @@ const NewBlogCard: React.FC<{ post: FlattenedBlogCard }> = ({ post }) => {
 	const otherTags = post.tags ? post.tags.length - MAX_TAGS : 0;
 
 	return (
-		<CardExterior slug={`/post/${post.slug}`} columns="min-content 1fr">
+		<CardExterior slug={`/post/${post.slug}`} columns="auto 1fr">
 			<CategoryContainer>{activeCategory}</CategoryContainer>
 			<TagContainer>
 				{tags.map((t) => (

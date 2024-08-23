@@ -16,7 +16,7 @@ import {
 import { getPrettyDate } from "@Utils/dates";
 
 import type { ProjectHeaderProps } from "@Types/props/post-components";
-import LatestUpdate from "@/components/Portfolio/LatestUpdate.component";
+import LatestUpdate from "@/components/Portfolio/Legacy/LatestUpdate.component";
 
 const ProjectHeader: React.FC<ProjectHeaderProps> = ({
 	project,

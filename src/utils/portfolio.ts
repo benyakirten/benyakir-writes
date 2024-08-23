@@ -3,7 +3,7 @@ import {
 	Segment1,
 	Segment2,
 	Wheel,
-} from "@/components/Portfolio/svgs";
+} from "@/components/Portfolio/RandomizedBackground/shapes";
 import type { SVGData } from "@/types/portfolio";
 
 enum SVGShapeType {

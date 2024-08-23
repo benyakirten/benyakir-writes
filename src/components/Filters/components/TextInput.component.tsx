@@ -9,6 +9,7 @@ import {
 	FONT_SM,
 	FONT_XXS,
 } from "@/styles/variables";
+import { TextInputProps } from "@/types/filters";
 
 const TextInputContainer = styled.div`
   position: relative;
