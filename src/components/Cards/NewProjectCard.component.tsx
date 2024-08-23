@@ -46,7 +46,7 @@ const NewProjectCard: React.FC<{ project: FlattenedProjectCard }> = ({
 					<ProjectTech key={i.name} tech={i.name} publicURL={i.publicURL} />
 				))}
 			</TechContainer>
-			<PublishedDate date={project.firstReleased.date} />
+			<PublishedDate span={1} date={project.firstReleased.date} />
 			<LatestUpdate state={latestUpdateState} />
 		</CardExterior>
 	);

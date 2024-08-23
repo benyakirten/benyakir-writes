@@ -148,7 +148,7 @@ const BlogPage: React.FC = () => {
 				/>
 				<Grouping>
 					<CardContainer>
-						{postPagination.visibleItems.map((post) => (
+						{postPagination.visibleItems.slice(0, 1).map((post) => (
 							<NewBlogCard key={post.slug} post={post} />
 						))}
 					</CardContainer>

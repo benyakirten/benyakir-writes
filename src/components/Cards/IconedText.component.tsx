@@ -4,14 +4,19 @@ import { styled } from "styled-components";
 import { FONT_XXS, SIZE_SM } from "@/styles/variables";
 import { getPrettyDate } from "@/utils/dates";
 import { CalendarIcon } from "../Icons";
+import { media } from "@/styles/queries";
 
-const IconContainer = styled.div`
-	grid-column: span 1;
+const IconContainer = styled.div<{ span: number }>`
+	grid-column: span ${(props) => props.span};
 	color: ${(props) => props.theme.base.pillText};
 	font-size: ${FONT_XXS};
 
     display: flex;
     gap: ${SIZE_SM};
+
+	${media.phone} {
+		grid-column: span 2;
+	}
 `;
 
 const StyledIconContainer = styled.div`
@@ -32,15 +37,15 @@ const IconTextContainer = styled.p`
 
     height: 100%;
     margin-top: 1px;
-	white-space: nowrap;
 `;
 
 const IconedText: React.FC<{
 	icon: React.ReactNode;
 	text: React.ReactNode;
-}> = ({ icon, text }) => {
+	span: number;
+}> = ({ icon, text, span }) => {
 	return (
-		<IconContainer>
+		<IconContainer span={span}>
 			<StyledIconContainer>
 				<InnerIconContainer>{icon}</InnerIconContainer>
 			</StyledIconContainer>
@@ -49,9 +54,12 @@ const IconedText: React.FC<{
 	);
 };
 
-export const PublishedDate: React.FC<{ date: Date }> = ({ date }) => {
+export const PublishedDate: React.FC<{ date: Date; span: number }> = ({
+	date,
+	span,
+}) => {
 	const prettyDate = `Published: ${getPrettyDate(date)}`;
-	return <IconedText icon={<CalendarIcon />} text={prettyDate} />;
+	return <IconedText span={span} icon={<CalendarIcon />} text={prettyDate} />;
 };
 
 export default IconedText;

@@ -16,7 +16,7 @@ const NewBookCard: React.FC<{ book: FlattenedBookCard }> = ({ book }) => {
 			)}
 			<SpanOneTitle>{book.title}</SpanOneTitle>
 			<SpanOneContent dangerouslySetInnerHTML={{ __html: book.content }} />
-			<PublishedDate date={book.published.date} />
+			<PublishedDate span={2} date={book.published.date} />
 		</CardExterior>
 	);
 };

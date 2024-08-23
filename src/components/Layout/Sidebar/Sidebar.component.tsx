@@ -70,12 +70,6 @@ const Sidebar: React.FC<{ onSearch: () => void }> = ({ onSearch }) => {
 			isActive: isActive("theme"),
 		},
 		{
-			name: "Contact",
-			link: "/contact",
-			ref: contactRef,
-			isActive: isActive("contact"),
-		},
-		{
 			name: "Home",
 			link: "/",
 			ref: homeRef,

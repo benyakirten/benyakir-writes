@@ -4,14 +4,14 @@ import styled from "styled-components";
 
 export const StyledActiveIndicator = styled.div<{ linkTop: number }>`
     position: absolute;
-    right: 0;
-    top: ${({ linkTop }) => linkTop}px;
+    left: -14%;
+    top: ${({ linkTop }) => linkTop - 1}px;
 
     height: ${FONT_LG};
-    width: 12%;
+    width: 13%;
     transition: top ${TRANSITION_NORMAL} ease-in-out;
 
-    background: ${(props) => createLinearGradient(props.theme.link.dark)};
+    background: ${(props) => props.theme.link.dark};
 `;
 
 // TODO: Make this better once we have redone theme colors.

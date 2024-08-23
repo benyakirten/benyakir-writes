@@ -12,7 +12,7 @@ import {
 	TRANSITION_FAST,
 } from "@/styles/variables";
 
-const StyledCardExterior = styled.div<{ columns: string }>`
+const StyledCardExterior = styled.article<{ columns: string }>`
 	display: grid;
 	position: relative;
 	grid-template-columns: ${(props) => props.columns};

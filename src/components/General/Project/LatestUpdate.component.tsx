@@ -38,6 +38,7 @@ const LatestUpdate: React.FC<{ state: LatestUpdateState }> = ({ state }) => {
 	return (
 		renderable && (
 			<IconedText
+				span={1}
 				icon={<RefreshIcon />}
 				text={<TextContainer>Latest Update: {renderable}</TextContainer>}
 			/>

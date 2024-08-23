@@ -542,6 +542,13 @@ export const PillContainer = styled.div`
 export const PaginatedPageContents = styled.div`
   padding: 2rem 18rem 4rem 1rem;
   ${media.phone} {
-    padding: 2rem 1rem 4rem 0.5rem;
+    padding: 2rem 0.5rem 4rem 0.5rem;
+  }
+`;
+
+export const NormalPageContents = styled.div`
+  padding: 2rem 1rem;;
+  ${media.phone} {
+    padding: 2rem 0.5rem;
   }
 `;

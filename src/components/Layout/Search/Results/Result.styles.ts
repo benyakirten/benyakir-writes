@@ -3,7 +3,6 @@ import styled from "styled-components";
 import {
 	SANS_SERIF_FONT,
 	SERIF_FONT,
-	SIZE_MD,
 	SIZE_SM,
 	SIZE_XS,
 	TRANSITION_NORMAL,

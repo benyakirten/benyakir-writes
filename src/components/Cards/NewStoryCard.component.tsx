@@ -38,7 +38,7 @@ const NewStoryCard: React.FC<{ story: FlattenedStoryCard }> = ({ story }) => {
 			)}
 			<SpanOneTitle>{story.title}</SpanOneTitle>
 			<SpanOneContent dangerouslySetInnerHTML={{ __html: story.content }} />
-			<PublishedDate date={story.published.date} />
+			<PublishedDate span={2} date={story.published.date} />
 		</CardExterior>
 	);
 };

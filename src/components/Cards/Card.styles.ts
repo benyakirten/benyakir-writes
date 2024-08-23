@@ -6,7 +6,7 @@ import { media } from "@/styles/queries";
 export const CardContainer = styled.ul`
     display: grid;
     gap: ${SIZE_LG};
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
 
     ${media.phone} {
         grid-template-columns: 1fr;
@@ -24,7 +24,6 @@ export const CategoryContainer = styled.p`
 
     font-size: ${FONT_XS};
     font-weight: bold;
-    white-space: nowrap;
 `;
 
 export const TagContainer = styled.div`
@@ -36,10 +35,16 @@ export const TagContainer = styled.div`
 	align-items: center;
 	gap: ${SIZE_XS};
 
-    width: clamp(max-content, 100%);
+    min-width: max-content;
+    max-width: 100%;
 
 	${media.phone} {
 		gap: 2px;
+        width: 100%;
+        justify-self: end;
+
+        min-width: unset;
+        max-width: unset;
 	}
 `;
 

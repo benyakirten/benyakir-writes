@@ -33,10 +33,12 @@ const NewBlogCard: React.FC<{ post: FlattenedBlogCard }> = ({ post }) => {
 				)}
 			</TagContainer>
 			<CardTitle>{post.title}</CardTitle>
-			<FullContainer>
-				{post.excerpt ?? post.content ?? "Click to read more."}
-			</FullContainer>
-			<PublishedDate date={post.published.date} />
+			<FullContainer
+				dangerouslySetInnerHTML={{
+					__html: post.excerpt ?? post.content ?? "Click to read more.",
+				}}
+			/>
+			<PublishedDate span={2} date={post.published.date} />
 		</CardExterior>
 	);
 };
