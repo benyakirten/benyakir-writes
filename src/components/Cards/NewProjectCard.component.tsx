@@ -1,5 +1,7 @@
 import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
+import { GatsbyImage } from "gatsby-plugin-image";
+import { styled } from "styled-components";
 
 import { FlattenedProjectCard } from "@/types/posts";
 import CardExterior from "./CardExterior.component";
@@ -8,6 +10,8 @@ import { ProjectTech, TechContainer } from "../General";
 import { PublishedDate } from "./IconedText.component";
 import { useFetchRepoUpdatedDate } from "@/hooks";
 import LatestUpdate from "../General/Project/LatestUpdate.component";
+import { ProjectImage } from "@/types/portfolio";
+import { SIZE_XS } from "@/styles/variables";
 
 type IconQuery = {
 	file: null | {
@@ -30,10 +34,25 @@ const ProjectHost: React.FC<{ host: string }> = ({ host }) => {
 const NewProjectCard: React.FC<{ project: FlattenedProjectCard }> = ({
 	project,
 }) => {
-	const latestUpdateState = useFetchRepoUpdatedDate(project.repoLink);
-
 	return (
 		<CardExterior slug={`/project/${project.slug}`} columns="1fr 1fr">
+			<ProjectCardInterior project={project} />
+		</CardExterior>
+	);
+};
+
+const ExtraMarginedContainer = styled.div`
+	margin: ${SIZE_XS} 0;
+	grid-column: span 2;
+`;
+
+export const ProjectCardInterior: React.FC<{
+	project: FlattenedProjectCard;
+	image?: ProjectImage;
+}> = ({ project, image }) => {
+	const latestUpdateState = useFetchRepoUpdatedDate(project.repoLink);
+	return (
+		<>
 			<SpanOneTitle>{project.title}</SpanOneTitle>
 			{project.hostedOn && (
 				<TagContainer>
@@ -46,9 +65,17 @@ const NewProjectCard: React.FC<{ project: FlattenedProjectCard }> = ({
 					<ProjectTech key={i.name} tech={i.name} publicURL={i.publicURL} />
 				))}
 			</TechContainer>
+			{image && (
+				<ExtraMarginedContainer>
+					<GatsbyImage
+						image={image.childImageSharp.gatsbyImageData}
+						alt={image.name}
+					/>
+				</ExtraMarginedContainer>
+			)}
 			<PublishedDate span={1} date={project.firstReleased.date} />
 			<LatestUpdate state={latestUpdateState} />
-		</CardExterior>
+		</>
 	);
 };
 

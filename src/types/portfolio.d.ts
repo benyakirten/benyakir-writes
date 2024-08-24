@@ -1,14 +1,13 @@
-import type { ProjectImageData } from "./query";
+import { FlattenedProjectCard } from "./posts";
 
-export type RecentProjectItem = {
-	title: string;
-	description: string;
-	technologies: string[];
-	firstReleased: Date;
-	mainLink?: string;
-	repoLink?: string;
-	hostedOn?: string;
-	image?: ProjectImageData;
+export type ProjectImage = FileNode & {
+	childImageSharp: {
+		gatsbyImageData: IGatsbyImageData;
+	};
+};
+
+export type RecentProjectItem = FlattenedProjectCard & {
+	image?: ProjectImage;
 };
 
 export type ProjectGridData = {

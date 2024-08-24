@@ -8,13 +8,13 @@ import { NormalPageContents, Page } from "@/styles/general-components";
 import type { RecentProjectItem } from "@/types/portfolio";
 import { getFirstParagraphOfContent } from "@/utils/project";
 import type { ProjectsQuery } from "@Types/query";
-import { portfolioDescription } from "@/data/search";
+import { portfolioDescription, projects } from "@/data/search";
 import {
 	AboutMe,
 	RecentProjects,
 	WorkHistory,
-} from "@/components/Portfolio/Sections";
-import Tabs from "@/components/Portfolio/Tabs.component";
+	Tabs,
+} from "@/components/Portfolio";
 import { SIZE_LG } from "@/styles/variables";
 
 export const Head: React.FC = () => (
@@ -27,14 +27,11 @@ const CentralizedItem = styled.div`
 `;
 
 const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
-	const projects = React.useMemo<RecentProjectItem[]>(() => {
-		const mappedProjects = data.allWpProject.nodes
+	const portfolioProjects = React.useMemo<RecentProjectItem[]>(() => {
+		const mappedProjects = projects
 			.map((node) => ({
-				title: node.title,
-				description: getFirstParagraphOfContent(node.content),
-				...node.project,
-				firstReleased: new Date(node.project.firstReleased),
-				technologies: node.project.technologies.split(", "),
+				...node,
+				content: getFirstParagraphOfContent(node.content),
 				image: data.allFile.nodes.find(
 					(imageNode) =>
 						imageNode.name.toLowerCase() ===
@@ -44,29 +41,32 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
 			.filter(
 				(node) =>
 					node.title === "Benyakir Writes" ||
-					node.firstReleased.valueOf() > new Date("2023-01-01").valueOf(),
+					node.firstReleased.date.valueOf() > new Date("2023-01-01").valueOf(),
 			);
 		return mappedProjects;
 	}, [data]);
+	const tabs: TabData[] = React.useMemo(
+		() => [
+			{
+				id: "projects",
+				label: "Recent Projects",
+				content: <RecentProjects projects={portfolioProjects} />,
+			},
+			{
+				id: "history",
+				label: "Work History",
+				content: <WorkHistory />,
+			},
+			{
+				id: "bio",
+				label: "About Me",
+				content: <AboutMe />,
+			},
+		],
+		[portfolioProjects],
+	);
 
 	const [selectedId, setSelectedId] = React.useState<string>("bio");
-	const tabs: TabData[] = [
-		{
-			id: "projects",
-			label: "Recent Projects",
-			content: <RecentProjects projects={projects} />,
-		},
-		{
-			id: "history",
-			label: "Work History",
-			content: <WorkHistory />,
-		},
-		{
-			id: "bio",
-			label: "About Me",
-			content: <AboutMe />,
-		},
-	];
 
 	return (
 		<Page>
@@ -89,27 +89,12 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
 
 export const query = graphql`
   query MyQuery {
-    allWpProject {
-      nodes {
-        project {
-          technologies
-          mainLink
-          repoLink
-          hostedOn
-          firstReleased
-          latestUpdate
-        }
-        title
-        content
-        slug
-      }
-    }
     allFile(filter: { relativePath: { regex: "^/projects/" } }) {
       nodes {
         publicURL
         name
         childImageSharp {
-          gatsbyImageData(height: 300, formats: [AVIF, WEBP, AUTO])
+          gatsbyImageData(height: 200, formats: [AVIF, WEBP, AUTO])
         }
       }
     }

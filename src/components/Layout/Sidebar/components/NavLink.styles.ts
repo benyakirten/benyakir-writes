@@ -17,7 +17,7 @@ export const StyledNavLink = styled(Link)<{
   transition: color ${TRANSITION_NORMAL} ease;
 
   &::before {
-    content: '';
+    content: "";
 
     position: absolute;
     bottom: 0;

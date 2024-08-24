@@ -3,7 +3,9 @@ import {
 	SIZE_SM,
 	SIZE_XS,
 	TRANSITION_NORMAL,
+	Z_ABOVE,
 } from "@/styles/variables";
+import { mod } from "@/utils/numbers";
 import React from "react";
 import styled from "styled-components";
 
@@ -26,13 +28,16 @@ const TabList = styled.div`
 
 	background-color: ${(props) => props.theme.portfolio.sliderBackground};
 	border-radius: ${SIZE_XS};
+
+	&:focus-within > [data-indicator]::after {
+		outline: 1px solid ${(props) => props.theme.link.dark};
+	}
 `;
 
 const SelectedTabIndicator = styled.div<{ selectedIdx: number }>`
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	padding: ${SIZE_XS};
 
 	&::after {
 		content: "";
@@ -44,7 +49,6 @@ const SelectedTabIndicator = styled.div<{ selectedIdx: number }>`
 		width: 31%;
 		height: 70%;
 	
-	
 		opacity: ${(props) => (props.selectedIdx === -1 ? 0 : 1)};
 	
 		border-radius: ${SIZE_XS};
@@ -54,17 +58,21 @@ const SelectedTabIndicator = styled.div<{ selectedIdx: number }>`
 	}
 `;
 
-const TabButton = styled.button<{ highlighted: boolean }>`
-	width: 33%;
+const TabButton = styled.button`
+	width: 31%;
+
+	display: grid;
+	place-items: center;
+	z-index: ${Z_ABOVE};
 `;
 
 const TabButtonLabel = styled.span`
 	position: relative;
-	z-index: 2;
 
-	display: grid;
-	place-items: center;
+	width: min-content;
+	white-space: nowrap;
 `;
+
 const TabPanel = styled.div<{ selected: boolean }>`
 	display: ${(props) => (props.selected ? "block" : "none")};
 `;
@@ -75,16 +83,36 @@ const Tabs: React.FC<{
 	selectedId: string;
 	onSelect: (id: string) => void;
 }> = ({ label, tabs, selectedId, onSelect }) => {
-	const [highlightedTab, setHighlightedTab] = React.useState<string | null>(
-		null,
-	);
-
 	const selectedTabButtonIdx = tabs.findIndex(({ id }) => id === selectedId);
+	const tabListRef = React.useRef<HTMLDivElement>(null);
+
+	function selectTab(tabId: string) {
+		onSelect(tabId);
+
+		const el = tabListRef.current?.querySelector<HTMLDivElement>(
+			`#tab-${tabId}`,
+		);
+		el?.focus();
+	}
+
+	function handleKeyDown(e: React.KeyboardEvent) {
+		switch (e.key) {
+			case "ArrowLeft":
+				selectTab(tabs[mod(selectedTabButtonIdx - 1, tabs.length)].id);
+				break;
+			case "ArrowRight":
+				selectTab(tabs[mod(selectedTabButtonIdx + 1, tabs.length)].id);
+				break;
+		}
+	}
 
 	return (
-		<TabContainer>
-			<TabList role="tablist" aria-label={label}>
-				<SelectedTabIndicator selectedIdx={selectedTabButtonIdx} />
+		<TabContainer onKeyDown={handleKeyDown}>
+			<TabList ref={tabListRef} role="tablist" aria-label={label}>
+				<SelectedTabIndicator
+					data-indicator
+					selectedIdx={selectedTabButtonIdx}
+				/>
 				{tabs.map(({ id, label }) => {
 					const selected = selectedId === id;
 					return (
@@ -94,7 +122,6 @@ const Tabs: React.FC<{
 							type="button"
 							role="tab"
 							aria-selected={selected}
-							highlighted={highlightedTab === id}
 							tabIndex={selected ? 0 : -1}
 							aria-controls={`panel-${id}`}
 							onClick={() => onSelect(id)}

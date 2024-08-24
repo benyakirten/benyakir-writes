@@ -99,9 +99,6 @@ type ProjectImageData = FileNode & {
 
 type ProjectsQuery = {
 	data: {
-		allWpProject: {
-			nodes: ProjectType[];
-		};
 		allFile: {
 			nodes: ProjectImageData[];
 		};

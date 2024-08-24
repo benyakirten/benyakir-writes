@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 
-import { clamp } from "@/utils/numbers";
+import { clamp, mod } from "@/utils/numbers";
 
 describe("clamp", () => {
 	it("should return numbers that are between the min and max without changing them", () => {
@@ -31,5 +31,31 @@ describe("clamp", () => {
 		for (const input of inputs) {
 			expect(clamp(input, min, max)).toEqual(min);
 		}
+	});
+});
+
+describe("mod", () => {
+	it("should return the correct modulo when the dividend is positive", () => {
+		expect(mod(10, 3)).toEqual(1);
+		expect(mod(15, 7)).toEqual(1);
+		expect(mod(20, 5)).toEqual(0);
+	});
+
+	it("should return the correct modulo when the dividend is negative", () => {
+		expect(mod(-10, 3)).toEqual(2);
+		expect(mod(-15, 7)).toEqual(6);
+		expect(mod(-20, 5)).toEqual(0);
+	});
+
+	it("should return 0 when the dividend is 0", () => {
+		expect(mod(0, 3)).toEqual(0);
+		expect(mod(0, 7)).toEqual(0);
+		expect(mod(0, 5)).toEqual(0);
+	});
+
+	it("should return NaN when the divisor is 0", () => {
+		expect(mod(10, 0)).toBeNaN();
+		expect(mod(-15, 0)).toBeNaN();
+		expect(mod(0, 0)).toBeNaN();
 	});
 });
