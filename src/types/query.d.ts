@@ -1,3 +1,4 @@
+import { FileQuery } from "./general";
 import type {
 	BlogPostType,
 	BookType,
@@ -102,10 +103,9 @@ type ProjectsQuery = {
 		allFile: {
 			nodes: ProjectImageData[];
 		};
-		file: {
-			name: string;
-			publicURL: string;
-		};
+		resume: { publicURL: string };
+		ghIcon: { publicURL: string };
+		liIcon: { publicURL: string };
 	};
 };
 

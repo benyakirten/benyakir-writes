@@ -2,22 +2,26 @@ import React from "react";
 import { graphql, Link, useStaticQuery } from "gatsby";
 import styled from "styled-components";
 
-import { ImageQuery } from "@/types/general";
+import { FileQuery, ImageQuery } from "@/types/general";
 import {
 	FONT_LG,
 	FONT_SM,
-	SIZE_MD,
+	FONT_XS,
 	SIZE_SM,
 	SIZE_XS,
+	TRANSITION_NORMAL,
 	Z_ABOVE,
 } from "@/styles/variables";
 import { GatsbyImage } from "gatsby-plugin-image";
+import IconedText from "@/components/Cards/IconedText.component";
+import { MailIcon, ResumeIcon } from "@/components/Icons";
+import { downloadFile } from "@/utils/dom";
 
 const StyledProfile = styled.div`
 	display: flex;
 	gap: ${SIZE_SM};
 
-	margin: ${SIZE_MD} ${SIZE_SM};
+	margin: ${SIZE_SM} 0;
 `;
 
 const StyledNameContainer = styled.p`
@@ -71,11 +75,97 @@ const StyledAboutMe = styled.div`
 	border: 1px solid ${(props) => props.theme.base.border};
 	border-radius: ${SIZE_SM};
 `;
-const StyledLink = styled(Link)``;
-const AboutMe: React.FC = () => {
+
+const StyledBio = styled.p``;
+
+const StyledLinks = styled.div`
+	display: grid;
+	gap: ${SIZE_XS};
+`;
+const StyledLinkImage = styled.img`
+	width: 1.5rem;
+	height: 1.5rem;
+`;
+
+const StyledLinkText = styled.p`
+	font-size: ${FONT_XS};
+
+	opacity: 0.6;
+	color: ${(props) => props.theme.base.textColor};
+	transition: opacity ${TRANSITION_NORMAL} ease;
+	&:hover, &:focus {
+		opacity: 1;
+	}
+`;
+
+const PortfolioLink: React.FC<{
+	to: string;
+	text: React.ReactNode;
+	icon: React.ReactNode;
+}> = ({ to, text, icon }) => {
+	return (
+		<a style={{ width: "max-content" }} href={to}>
+			<IconedText
+				icon={icon}
+				text={<StyledLinkText>{text}</StyledLinkText>}
+				span={2}
+			/>
+		</a>
+	);
+};
+const ResumeButton: React.FC<{ resume: string }> = ({ resume }) => (
+	<button
+		style={{ width: "max-content" }}
+		type="button"
+		onClick={() => downloadFile(resume, "Resume - Ben Horowitz.pdf")}
+	>
+		<IconedText
+			icon={<ResumeIcon />}
+			text={<StyledLinkText>Download Resume</StyledLinkText>}
+			span={2}
+		/>
+	</button>
+);
+
+const AboutMe: React.FC<{
+	ghIcon?: string;
+	liIcon?: string;
+	resume?: string;
+}> = ({ ghIcon, liIcon, resume }) => {
+	console.log(ghIcon, liIcon, resume);
 	return (
 		<StyledAboutMe>
 			<Profile />
+			<StyledBio>
+				I am a passionate full-stack web developer with four years of experience
+				building every part of web applications. I am eternally curious, a quick
+				learner, self-motivated and a team player. I use every frontend
+				technology, including React, Vue, Angular, Svelte and vanilla
+				JavaScript. I also work with databases, Python, Node, Go, Rust and
+				Elixir.
+			</StyledBio>
+			<StyledLinks>
+				<PortfolioLink
+					to="mailto:ben@benyakiredits.com"
+					text="ben@benyakiredits.com"
+					icon={<MailIcon />}
+				/>
+				{resume && <ResumeButton resume={resume} />}
+				{ghIcon && (
+					<PortfolioLink
+						to="https://github.com/benyakirten"
+						text="GitHub"
+						icon={<StyledLinkImage src={ghIcon} alt="GitHub" />}
+					/>
+				)}
+				{liIcon && (
+					<PortfolioLink
+						to="https://www.linkedin.com/in/ben-horowitz-93609b8a/"
+						text="LinkedIn"
+						icon={<StyledLinkImage src={liIcon} alt="LinkedIn" />}
+					/>
+				)}
+			</StyledLinks>
 		</StyledAboutMe>
 	);
 };

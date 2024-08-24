@@ -135,18 +135,20 @@ const Tabs: React.FC<{
 					);
 				})}
 			</TabList>
-			{tabs.map(({ id, content }) => (
-				<TabPanel
-					key={id}
-					id={`panel-${id}`}
-					role="tabpanel"
-					aria-labelledby={`tab-${id}`}
-					selected={selectedId === id}
-					tabIndex={0}
-				>
-					{content}
-				</TabPanel>
-			))}
+			<section>
+				{tabs.map(({ id, content }) => (
+					<TabPanel
+						key={id}
+						id={`panel-${id}`}
+						role="tabpanel"
+						aria-labelledby={`tab-${id}`}
+						selected={selectedId === id}
+						tabIndex={0}
+					>
+						{content}
+					</TabPanel>
+				))}
+			</section>
 		</TabContainer>
 	);
 };

@@ -16,6 +16,7 @@ import {
 	Tabs,
 } from "@/components/Portfolio";
 import { SIZE_LG } from "@/styles/variables";
+import { TabData } from "@/types/general";
 
 export const Head: React.FC = () => (
 	<HeadBase title="Portfolio" description={portfolioDescription} />
@@ -45,6 +46,7 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
 			);
 		return mappedProjects;
 	}, [data]);
+
 	const tabs: TabData[] = React.useMemo(
 		() => [
 			{
@@ -60,10 +62,16 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
 			{
 				id: "bio",
 				label: "About Me",
-				content: <AboutMe />,
+				content: (
+					<AboutMe
+						liIcon={data.liIcon.publicURL}
+						ghIcon={data.ghIcon.publicURL}
+						resume={data.resume.publicURL}
+					/>
+				),
 			},
 		],
-		[portfolioProjects],
+		[portfolioProjects, data],
 	);
 
 	const [selectedId, setSelectedId] = React.useState<string>("bio");
@@ -76,7 +84,7 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
 					<CentralizedItem>
 						<Tabs
 							tabs={tabs}
-							label="Biographical Section"
+							label="Portfolio Sections"
 							selectedId={selectedId}
 							onSelect={setSelectedId}
 						/>
@@ -98,10 +106,15 @@ export const query = graphql`
         }
       }
     }
-    file(extension: { eq: "pdf" }) {
-      publicURL
-      name
+    resume: file(extension: { eq: "pdf" }) {
+		publicURL
     }
+	ghIcon: file(name: { eq: "Github" }) {
+		publicURL
+	}
+	liIcon: file(name: { eq: "LinkedIn" }) {
+		publicURL
+	}
   }
 `;
 

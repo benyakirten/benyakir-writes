@@ -5,3 +5,5 @@ export { default as EyeIcon } from "./Eye.component";
 export { default as PreviousIcon } from "./Previous.component";
 export { default as NextIcon } from "./Next.component";
 export { default as CalendarIcon } from "./Calendar.component";
+export { default as MailIcon } from "./Mail.component";
+export { default as ResumeIcon } from "./Document.component";

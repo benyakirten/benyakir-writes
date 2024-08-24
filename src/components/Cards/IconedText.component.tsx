@@ -13,6 +13,7 @@ const IconContainer = styled.div<{ span: number }>`
 
     display: flex;
     gap: ${SIZE_SM};
+	align-items: center;
 
 	${media.phone} {
 		grid-column: span 2;
