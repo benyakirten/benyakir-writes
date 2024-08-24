@@ -1,6 +1,6 @@
 import type { ProjectImageData } from "./query";
 
-export type ProjectGridDatum = {
+export type RecentProjectItem = {
 	title: string;
 	description: string;
 	technologies: string[];
@@ -12,7 +12,7 @@ export type ProjectGridDatum = {
 };
 
 export type ProjectGridData = {
-	projects: ProjectGridDatum[];
+	projects: RecentProjectItem[];
 	highlightedProjectTitles: Set<string>;
 	viewedTechs: Set<string>;
 	handleMouseEnter: (title: string) => void;

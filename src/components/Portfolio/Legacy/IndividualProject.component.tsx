@@ -3,7 +3,7 @@ import * as React from "react";
 
 import { useFetchRepoUpdatedDate } from "@/hooks";
 import { Column } from "@/styles/general-components";
-import type { ProjectGridDatum } from "@/types/portfolio";
+import type { RecentProjectItem } from "@/types/portfolio";
 import { getPrettyDate } from "@/utils/dates";
 import { getFullTechName } from "@/utils/project";
 import {
@@ -20,7 +20,7 @@ import {
 import LatestUpdate from "./LatestUpdate.component";
 
 const IndividualProject: React.FC<{
-	project: ProjectGridDatum;
+	project: RecentProjectItem;
 	techs: Set<string>;
 }> = ({ project, techs }) => {
 	const latestUpdateState = useFetchRepoUpdatedDate(project.repoLink);

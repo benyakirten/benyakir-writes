@@ -107,6 +107,7 @@ type ThemePortfolio = {
 		color2: string;
 		color3: string;
 	};
+	sliderBackground: string;
 };
 
 type BaseTheme = {

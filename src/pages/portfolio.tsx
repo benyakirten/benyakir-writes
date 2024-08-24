@@ -1,21 +1,33 @@
 import { graphql } from "gatsby";
 import * as React from "react";
+import { styled } from "styled-components";
 
 import { HeadBase } from "@/components/General";
 import { PortfolioHeader, RandomizedBackground } from "@/components/Portfolio";
 import { NormalPageContents, Page } from "@/styles/general-components";
-import type { ProjectGridDatum } from "@/types/portfolio";
-import { downloadFile } from "@/utils/dom";
+import type { RecentProjectItem } from "@/types/portfolio";
 import { getFirstParagraphOfContent } from "@/utils/project";
 import type { ProjectsQuery } from "@Types/query";
 import { portfolioDescription } from "@/data/search";
+import {
+	AboutMe,
+	RecentProjects,
+	WorkHistory,
+} from "@/components/Portfolio/Sections";
+import Tabs from "@/components/Portfolio/Tabs.component";
+import { SIZE_LG } from "@/styles/variables";
 
 export const Head: React.FC = () => (
 	<HeadBase title="Portfolio" description={portfolioDescription} />
 );
 
+const CentralizedItem = styled.div`
+	margin: ${SIZE_LG} auto;
+	width: 80%;
+`;
+
 const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
-	const projects = React.useMemo<ProjectGridDatum[]>(() => {
+	const projects = React.useMemo<RecentProjectItem[]>(() => {
 		const mappedProjects = data.allWpProject.nodes
 			.map((node) => ({
 				title: node.title,
@@ -37,11 +49,39 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
 		return mappedProjects;
 	}, [data]);
 
+	const [selectedId, setSelectedId] = React.useState<string>("bio");
+	const tabs: TabData[] = [
+		{
+			id: "projects",
+			label: "Recent Projects",
+			content: <RecentProjects projects={projects} />,
+		},
+		{
+			id: "history",
+			label: "Work History",
+			content: <WorkHistory />,
+		},
+		{
+			id: "bio",
+			label: "About Me",
+			content: <AboutMe />,
+		},
+	];
+
 	return (
 		<Page>
 			<NormalPageContents>
 				<PortfolioHeader />
-				<RandomizedBackground>{/*  */}</RandomizedBackground>
+				<RandomizedBackground>
+					<CentralizedItem>
+						<Tabs
+							tabs={tabs}
+							label="Biographical Section"
+							selectedId={selectedId}
+							onSelect={setSelectedId}
+						/>
+					</CentralizedItem>
+				</RandomizedBackground>
 			</NormalPageContents>
 		</Page>
 	);

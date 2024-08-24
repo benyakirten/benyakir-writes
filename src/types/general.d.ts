@@ -86,3 +86,5 @@ type ArrayItemsTransfer = {
 	end: string;
 	position: DraggedOverPosition;
 };
+
+type TabData = { id: string; label: string; content: React.ReactNode };

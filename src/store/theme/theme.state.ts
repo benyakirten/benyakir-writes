@@ -107,6 +107,7 @@ export const defaultDayTheme: BaseTheme = {
 			color2: "#FEF8E3",
 			color3: "#FEF4E1",
 		},
+		sliderBackground: "#DCDCDC",
 	},
 };
 
@@ -219,6 +220,7 @@ export const defaultNightTheme: BaseTheme = {
 			color2: "#23314D",
 			color3: "#394860",
 		},
+		sliderBackground: "#FDF3D8",
 	},
 };
 
