@@ -16,10 +16,10 @@ import {
 } from "@/types/posts";
 import {
 	CardContainer,
-	NewBlogCard,
-	NewBookCard,
-	NewProjectCard,
-	NewStoryCard,
+	BlogCard,
+	BookCard,
+	ProjectCard,
+	StoryCard,
 } from "@/components/Cards";
 
 export const Head: React.FC = () => (
@@ -34,18 +34,18 @@ const ItemCard: React.FC<{
 		| FlattenedStoryCard;
 }> = ({ item }) => {
 	if ("categories" in item) {
-		return <NewBlogCard post={item} />;
+		return <BlogCard post={item} />;
 	}
 
 	if ("firstReleased" in item) {
-		return <NewProjectCard project={item} />;
+		return <ProjectCard project={item} />;
 	}
 
 	if ("stories" in item) {
-		return <NewBookCard book={item} />;
+		return <BookCard book={item} />;
 	}
 
-	return <NewStoryCard story={item} />;
+	return <StoryCard story={item} />;
 };
 
 const IndexPage: React.FC = () => {

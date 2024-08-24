@@ -5,6 +5,7 @@ import {
 	TRANSITION_NORMAL,
 	Z_ABOVE,
 } from "@/styles/variables";
+import { TabData } from "@/types/general";
 import { mod } from "@/utils/numbers";
 import React from "react";
 import styled from "styled-components";
@@ -77,6 +78,9 @@ const TabPanel = styled.div<{ selected: boolean }>`
 	display: ${(props) => (props.selected ? "block" : "none")};
 `;
 
+/**
+ * To increase the simplicity of this component, it should have exactly three tabs.
+ */
 const Tabs: React.FC<{
 	label: string;
 	tabs: TabData[];

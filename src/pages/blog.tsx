@@ -24,7 +24,7 @@ import {
 	postTags,
 } from "@/data/search";
 import { Filter } from "@/components/Filters";
-import { CardContainer, NewBlogCard } from "@/components/Cards";
+import { CardContainer, BlogCard } from "@/components/Cards";
 import { CreateFilterOption, FilterOption, ItemFilter } from "@/types/filters";
 import { HeadBase } from "@/components/General";
 
@@ -140,7 +140,7 @@ const BlogPage: React.FC = () => {
 				<Grouping>
 					<CardContainer>
 						{postPagination.visibleItems.map((post) => (
-							<NewBlogCard key={post.slug} post={post} />
+							<BlogCard key={post.slug} post={post} />
 						))}
 					</CardContainer>
 				</Grouping>

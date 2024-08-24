@@ -11,7 +11,7 @@ import {
 } from "./Card.styles";
 import { PublishedDate } from "./IconedText.component";
 
-const NewStoryCard: React.FC<{ story: FlattenedStoryCard }> = ({ story }) => {
+const StoryCard: React.FC<{ story: FlattenedStoryCard }> = ({ story }) => {
 	function determineRelatedStory(
 		story: FlattenedStoryCard,
 	): { relationship: string; cover: IGatsbyImageData | null } | null {
@@ -43,4 +43,4 @@ const NewStoryCard: React.FC<{ story: FlattenedStoryCard }> = ({ story }) => {
 	);
 };
 
-export default NewStoryCard;
+export default StoryCard;

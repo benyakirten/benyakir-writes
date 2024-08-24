@@ -1,16 +1,16 @@
 import { FlattenedProjectCard } from "./posts";
 
-export type ProjectImage = FileNode & {
+type ProjectImage = FileNode & {
 	childImageSharp: {
 		gatsbyImageData: IGatsbyImageData;
 	};
 };
 
-export type RecentProjectItem = FlattenedProjectCard & {
+type RecentProjectItem = FlattenedProjectCard & {
 	image?: ProjectImage;
 };
 
-export type ProjectGridData = {
+type ProjectGridData = {
 	projects: RecentProjectItem[];
 	highlightedProjectTitles: Set<string>;
 	viewedTechs: Set<string>;
@@ -18,16 +18,24 @@ export type ProjectGridData = {
 	handleMouseLeave: () => void;
 };
 
-export type SVGData = {
+type SVGData = {
 	xMovement: number;
 	yMovement: number;
 };
 
-export type SVGShapeData = SVGData & ChildrenProp;
+type SVGShapeData = SVGData & ChildrenProp;
 
-export type ProjectFiltersData = {
+type ProjectFiltersData = {
 	allTechs: string[];
 	viewedTechs: Set<string>;
 	onToggle: (tech: string) => void;
 	onToggleTentativeTech: (tech: string) => void;
+};
+
+type WorkHistoryDatum = {
+	title: string;
+	company: string;
+	startDate: Date;
+	endDate: Date | null;
+	points: string[];
 };

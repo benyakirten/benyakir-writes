@@ -1,3 +1,5 @@
+import { IGatsbyImageData } from "gatsby-plugin-image";
+
 type PageTransitionProperties = {
 	entering: Record<string, string>;
 	entered: Record<string, string>;
@@ -88,3 +90,17 @@ type ArrayItemsTransfer = {
 };
 
 type TabData = { id: string; label: string; content: React.ReactNode };
+
+type FileQuery = {
+	file: null | {
+		publicURL: string;
+	};
+};
+
+type ImageQuery = {
+	file: null | {
+		childrenImageSharp: {
+			gatsbyImageData: IGatsbyImageData;
+		}[];
+	};
+};

@@ -6,7 +6,7 @@ import CardExterior from "./CardExterior.component";
 import { SpanOneContent, SpanOneTitle, ImageContainer } from "./Card.styles";
 import { PublishedDate } from "./IconedText.component";
 
-const NewBookCard: React.FC<{ book: FlattenedBookCard }> = ({ book }) => {
+const BookCard: React.FC<{ book: FlattenedBookCard }> = ({ book }) => {
 	return (
 		<CardExterior slug={`/book/${book.slug}`} columns="1fr 67px">
 			{book.cover && (
@@ -21,4 +21,4 @@ const NewBookCard: React.FC<{ book: FlattenedBookCard }> = ({ book }) => {
 	);
 };
 
-export default NewBookCard;
+export default BookCard;

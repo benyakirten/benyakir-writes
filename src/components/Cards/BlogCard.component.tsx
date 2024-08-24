@@ -14,7 +14,7 @@ import { PublishedDate } from "./IconedText.component";
 
 const MAX_TAGS = 2;
 
-const NewBlogCard: React.FC<{ post: FlattenedBlogCard }> = ({ post }) => {
+const BlogCard: React.FC<{ post: FlattenedBlogCard }> = ({ post }) => {
 	const activeCategory = getActiveCategory(post.categories);
 	const tags = post.tags?.slice(0, MAX_TAGS) ?? [];
 	const otherTags = post.tags ? post.tags.length - MAX_TAGS : 0;
@@ -43,4 +43,4 @@ const NewBlogCard: React.FC<{ post: FlattenedBlogCard }> = ({ post }) => {
 	);
 };
 
-export default NewBlogCard;
+export default BlogCard;

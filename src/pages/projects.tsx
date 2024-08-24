@@ -14,7 +14,7 @@ import {
 	projects,
 	projectsDescription,
 } from "@/data/search";
-import { CardContainer, NewProjectCard } from "@/components/Cards";
+import { CardContainer, ProjectCard } from "@/components/Cards";
 import { CreateFilterOption, FilterOption, ItemFilter } from "@/types/filters";
 import {
 	createAddDateFilterFn,
@@ -146,7 +146,7 @@ const ProjectsPage: React.FC = () => {
 				<Grouping>
 					<CardContainer>
 						{projectPagination.visibleItems.map((project) => (
-							<NewProjectCard key={project.title} project={project} />
+							<ProjectCard key={project.title} project={project} />
 						))}
 					</CardContainer>
 				</Grouping>

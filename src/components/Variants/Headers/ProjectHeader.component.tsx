@@ -15,8 +15,7 @@ import {
 
 import { getPrettyDate } from "@Utils/dates";
 
-import type { ProjectHeaderProps } from "@Types/props/post-components";
-import LatestUpdate from "@/components/Portfolio/Legacy/LatestUpdate.component";
+import LegacyLatestUpdate from "@/components/General/Project/LegacyLatestUpdate.component";
 
 const ProjectHeader: React.FC<ProjectHeaderProps> = ({
 	project,
@@ -54,7 +53,7 @@ const ProjectHeader: React.FC<ProjectHeaderProps> = ({
 							First Released: {getPrettyDate(project.firstReleased.date)}
 						</LItem>
 						<LItem>
-							<LatestUpdate state={latestUpdateState} />
+							<LegacyLatestUpdate state={latestUpdateState} />
 						</LItem>
 					</List>
 				</CardSection>

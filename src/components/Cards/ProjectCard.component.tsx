@@ -12,15 +12,11 @@ import { useFetchRepoUpdatedDate } from "@/hooks";
 import LatestUpdate from "../General/Project/LatestUpdate.component";
 import { ProjectImage } from "@/types/portfolio";
 import { SIZE_XS } from "@/styles/variables";
+import { FileQuery } from "@/types/general";
 
-type IconQuery = {
-	file: null | {
-		publicURL: string;
-	};
-};
 const ProjectHost: React.FC<{ host: string }> = ({ host }) => {
-	const iconQuery = useStaticQuery<IconQuery>(graphql`
-		query {
+	const iconQuery = useStaticQuery<FileQuery>(graphql`
+		query IconQuery {
 			file (name: { eq: "Globe" }) {
 				publicURL
 			}
@@ -31,7 +27,7 @@ const ProjectHost: React.FC<{ host: string }> = ({ host }) => {
 	);
 };
 
-const NewProjectCard: React.FC<{ project: FlattenedProjectCard }> = ({
+const ProjectCard: React.FC<{ project: FlattenedProjectCard }> = ({
 	project,
 }) => {
 	return (
@@ -79,4 +75,4 @@ export const ProjectCardInterior: React.FC<{
 	);
 };
 
-export default NewProjectCard;
+export default ProjectCard;

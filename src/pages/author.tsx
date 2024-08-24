@@ -9,7 +9,7 @@ import {
 import { usePagination } from "@Hooks";
 import type { AuthoredItemCard } from "@Types/posts";
 import { authorDescription, books, stories } from "@/data/search";
-import { CardContainer, NewBookCard, NewStoryCard } from "@/components/Cards";
+import { CardContainer, BookCard, StoryCard } from "@/components/Cards";
 import {
 	ItemFilter,
 	FilterOption,
@@ -32,9 +32,9 @@ export const Head: React.FC = () => (
 
 const AuthorCard: React.FC<{ item: AuthoredItemCard }> = ({ item }) => {
 	if ("book" in item) {
-		return <NewStoryCard story={item} />;
+		return <StoryCard story={item} />;
 	}
-	return <NewBookCard book={item} />;
+	return <BookCard book={item} />;
 };
 
 const AuthorPage: React.FC = () => {
