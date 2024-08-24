@@ -16,6 +16,7 @@ import { GatsbyImage } from "gatsby-plugin-image";
 import IconedText from "@/components/Cards/IconedText.component";
 import { MailIcon, ResumeIcon } from "@/components/Icons";
 import { downloadFile } from "@/utils/dom";
+import { media } from "@/styles/queries";
 
 const StyledProfile = styled.div`
 	display: flex;
@@ -38,6 +39,13 @@ const StyledTitle = styled.span`
 	font-size: ${FONT_SM};
 `;
 
+const StyledImage = styled.div`
+	display: block;
+	${media.phone} {
+		display: none;
+	}
+`;
+
 const Profile: React.FC = () => {
 	const profilePicture = useStaticQuery<ImageQuery>(graphql`
 		query ProfilePictureQuery {
@@ -52,7 +60,9 @@ const Profile: React.FC = () => {
 	return (
 		<StyledProfile>
 			{profilePicture && (
-				<GatsbyImage alt="Ben Horowitz" image={profilePicture} />
+				<StyledImage>
+					<GatsbyImage alt="Ben Horowitz" image={profilePicture} />
+				</StyledImage>
 			)}
 			<StyledNameContainer>
 				<StyledName>Ben Horowitz</StyledName>
@@ -82,6 +92,7 @@ const StyledLinks = styled.div`
 	display: grid;
 	gap: ${SIZE_XS};
 `;
+
 const StyledLinkImage = styled.img`
 	width: 1.5rem;
 	height: 1.5rem;
@@ -104,25 +115,25 @@ const PortfolioLink: React.FC<{
 	icon: React.ReactNode;
 }> = ({ to, text, icon }) => {
 	return (
-		<a style={{ width: "max-content" }} href={to}>
+		<a style={{ width: "max-content", gridColumn: "span 1" }} href={to}>
 			<IconedText
 				icon={icon}
 				text={<StyledLinkText>{text}</StyledLinkText>}
-				span={2}
+				span={1}
 			/>
 		</a>
 	);
 };
 const ResumeButton: React.FC<{ resume: string }> = ({ resume }) => (
 	<button
-		style={{ width: "max-content" }}
+		style={{ width: "max-content", gridColumn: "span 1" }}
 		type="button"
 		onClick={() => downloadFile(resume, "Resume - Ben Horowitz.pdf")}
 	>
 		<IconedText
 			icon={<ResumeIcon />}
-			text={<StyledLinkText>Download Resume</StyledLinkText>}
-			span={2}
+			text={<StyledLinkText>Resume</StyledLinkText>}
+			span={1}
 		/>
 	</button>
 );
@@ -147,7 +158,7 @@ const AboutMe: React.FC<{
 			<StyledLinks>
 				<PortfolioLink
 					to="mailto:ben@benyakiredits.com"
-					text="ben@benyakiredits.com"
+					text="Email"
 					icon={<MailIcon />}
 				/>
 				{resume && <ResumeButton resume={resume} />}

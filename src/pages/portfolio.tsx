@@ -17,6 +17,7 @@ import {
 } from "@/components/Portfolio";
 import { SIZE_LG } from "@/styles/variables";
 import { TabData } from "@/types/general";
+import { media } from "@/styles/queries";
 
 export const Head: React.FC = () => (
 	<HeadBase title="Portfolio" description={portfolioDescription} />
@@ -25,6 +26,10 @@ export const Head: React.FC = () => (
 const CentralizedItem = styled.div`
 	margin: ${SIZE_LG} auto;
 	width: 80%;
+
+	${media.tablet} {
+		width: 100%;
+	}
 `;
 
 const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
@@ -47,7 +52,7 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
 		return mappedProjects;
 	}, [data]);
 
-	const tabs: TabData[] = React.useMemo(
+	const tabs: [TabData, TabData, TabData] = React.useMemo(
 		() => [
 			{
 				id: "projects",

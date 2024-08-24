@@ -1,3 +1,4 @@
+import { media } from "@/styles/queries";
 import {
 	SANS_SERIF_FONT,
 	SIZE_SM,
@@ -22,7 +23,11 @@ const TabList = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	flex-wrap: wrap;
+
+	${media.phone} {
+		flex-direction: column;
+		gap: ${SIZE_XS};
+	}
 
 	width: 100%;
 	padding: ${SIZE_SM};
@@ -48,19 +53,46 @@ const SelectedTabIndicator = styled.div<{ selectedIdx: number }>`
 		top: 15%;
 	
 		width: 31%;
+		${media.tablet} {
+			width: 30%;
+		}
 		height: 70%;
 	
 		opacity: ${(props) => (props.selectedIdx === -1 ? 0 : 1)};
 	
 		border-radius: ${SIZE_XS};
-		transition: left ${TRANSITION_NORMAL} ease;
+		transition: left ${TRANSITION_NORMAL} ease, top ${TRANSITION_NORMAL} ease;
 	
 		background-color: ${(props) => props.theme.base.background};
+
+		${media.phone} {
+			width: 90%;
+			left: 50%;
+			height: 30%;
+			transform: translateX(-50%);
+
+			top: ${(props) => calculateSelectedTabIndicatorPositionTop(props.selectedIdx)};
+		}
 	}
 `;
 
+function calculateSelectedTabIndicatorPositionTop(selectedIdx: number) {
+	switch (selectedIdx) {
+		case 0:
+			return "-4px";
+		case 1:
+			return `calc(33% - ${SIZE_XS} - 4px)`;
+		case 2:
+			return `calc(66% - ${SIZE_XS} - 9px)`;
+	}
+}
+
 const TabButton = styled.button`
 	width: 31%;
+
+	${media.phone} {
+		width: 100%;
+	}
 
 	display: grid;
 	place-items: center;
@@ -69,8 +101,6 @@ const TabButton = styled.button`
 
 const TabButtonLabel = styled.span`
 	position: relative;
-
-	width: min-content;
 	white-space: nowrap;
 `;
 
@@ -78,19 +108,17 @@ const TabPanel = styled.div<{ selected: boolean }>`
 	display: ${(props) => (props.selected ? "block" : "none")};
 `;
 
-/**
- * To increase the simplicity of this component, it should have exactly three tabs.
- */
 const Tabs: React.FC<{
 	label: string;
-	tabs: TabData[];
+	tabs: [TabData, TabData, TabData];
 	selectedId: string;
 	onSelect: (id: string) => void;
 }> = ({ label, tabs, selectedId, onSelect }) => {
 	const selectedTabButtonIdx = tabs.findIndex(({ id }) => id === selectedId);
 	const tabListRef = React.useRef<HTMLDivElement>(null);
 
-	function selectTab(tabId: string) {
+	function selectTab(dist: -1 | 1) {
+		const tabId = tabs[mod(selectedTabButtonIdx + dist, tabs.length)].id;
 		onSelect(tabId);
 
 		const el = tabListRef.current?.querySelector<HTMLDivElement>(
@@ -102,10 +130,12 @@ const Tabs: React.FC<{
 	function handleKeyDown(e: React.KeyboardEvent) {
 		switch (e.key) {
 			case "ArrowLeft":
-				selectTab(tabs[mod(selectedTabButtonIdx - 1, tabs.length)].id);
+			case "ArrowUp":
+				selectTab(-1);
 				break;
 			case "ArrowRight":
-				selectTab(tabs[mod(selectedTabButtonIdx + 1, tabs.length)].id);
+			case "ArrowDown":
+				selectTab(1);
 				break;
 		}
 	}
