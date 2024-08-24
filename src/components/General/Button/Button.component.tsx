@@ -9,6 +9,7 @@ import {
 	TRANSFORM_ORIGIN_FOR_CORNER_INDEX,
 	TRIANGLES_FOR_CORNER_INDEX,
 } from "@Constants";
+import { Coord, Corners } from "@/types/general";
 
 const Button: React.FC<ButtonProps> = ({
 	disabled = false,

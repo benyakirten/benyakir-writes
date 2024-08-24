@@ -18,6 +18,7 @@ const RecentProjectsContainer = styled.ul`
 `;
 
 const ProjectCardListItem = styled.li`
+	position: relative;
 	border-radius: ${SIZE_XS};
 	border: 1px solid ${(props) => props.theme.base.border};
 	
