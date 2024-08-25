@@ -13,6 +13,8 @@ import {
 import { media } from "@/styles/queries";
 import IconedText from "@/components/Cards/IconedText.component";
 import { CalendarIcon } from "@/components/Icons";
+import { calculateDuration } from "@/utils/dates";
+import { Time } from "@/components/General";
 
 const workHistory: WorkHistoryDatum[] = [
 	{
@@ -51,6 +53,11 @@ const workHistory: WorkHistoryDatum[] = [
 		],
 	},
 ];
+
+const WorkHistoryContainer = styled.ul`
+	display: grid;
+	gap: ${SIZE_MD};
+`;
 
 const WorkHistoryItem = styled.li`
 	position: relative;
@@ -122,13 +129,16 @@ const BulletedList = styled.ul`
 `;
 
 const BulletedListItem = styled.li`
-	margin-top: 2px;
+	margin-top: ${SIZE_XS};
 	&:first-of-type {
 		margin-top: 0;
 	}
 `;
 
-const WorkHistory: React.FC = () => {
+const WorkHistoryLength: React.FC<{ start: Date; end: Date | null }> = ({
+	start,
+	end,
+}) => {
 	function formatWorkHistoryDates(start: Date, end: Date | null): string {
 		const formatter = new Intl.DateTimeFormat("en-US", {
 			month: "long",
@@ -139,29 +149,37 @@ const WorkHistory: React.FC = () => {
 			end ? formatter.format(end) : "Present"
 		}`;
 	}
+	const formattedDates = formatWorkHistoryDates(start, end);
+	const formattedDuration = calculateDuration(start, end);
 
 	return (
-		<ul>
+		<WorkHistoryDates>
+			<IconedText
+				span={2}
+				icon={<CalendarIcon />}
+				text={<time dateTime={formattedDuration}>{formattedDates}</time>}
+			/>
+		</WorkHistoryDates>
+	);
+};
+
+const WorkHistory: React.FC = () => {
+	return (
+		<WorkHistoryContainer>
 			{workHistory.map((datum) => (
 				<WorkHistoryItem key={datum.startDate.valueOf()}>
 					<WorkPosition title={datum.title} company={datum.company} />
-					<WorkHistoryDates>
-						<IconedText
-							span={2}
-							icon={<CalendarIcon />}
-							text={formatWorkHistoryDates(datum.startDate, datum.endDate)}
-						/>
-					</WorkHistoryDates>
+					<WorkHistoryLength start={datum.startDate} end={datum.endDate} />
 					<BulletedList>
 						{datum.points.map((point, i) => (
 							<BulletedListItem key={`${i}-${point[0]}`}>
-								{point}
+								{point}.
 							</BulletedListItem>
 						))}
 					</BulletedList>
 				</WorkHistoryItem>
 			))}
-		</ul>
+		</WorkHistoryContainer>
 	);
 };
 

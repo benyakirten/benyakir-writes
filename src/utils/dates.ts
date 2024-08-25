@@ -133,15 +133,13 @@ export function convertDateToDatePickerValue(value: Date): string {
 			? new Date(0)
 			: value;
 
-	// getMonth returns a 0-indexed month, so we need to add 1 to it.
-	const month = (validatedValue.getMonth() + 1).toString();
-	const date = validatedValue.getDate().toString();
-	const convertedDate = `${validatedValue.getFullYear()}-${month.padStart(
-		2,
-		"0",
-	)}-${date.padStart(2, "0")}`;
+	const year = validatedValue.getFullYear().toString();
 
-	return convertedDate;
+	// getMonth returns a 0-indexed month, so we need to add 1 to it.
+	const month = (validatedValue.getMonth() + 1).toString().padStart(2, "0");
+	const date = validatedValue.getDate().toString().padStart(2, "0");
+
+	return `${year}-${month}-${date}`;
 }
 
 export const formatDateToTimeDatetime = (date: Date) =>
@@ -151,3 +149,19 @@ export const formatDateToTimeDatetime = (date: Date) =>
 		month: "2-digit",
 		day: "2-digit",
 	}).format(date);
+
+export const MS_IN_MINUTE = 1000 * 60;
+export const MS_IN_HOUR = MS_IN_MINUTE * 60;
+export const MS_IN_DAY = MS_IN_HOUR * 24;
+/**
+ * Calculate the duration between two dates in the format P{days}DT{hours}H{minutes}M
+ * to be used as the duration in a <time> element.
+ */
+export const calculateDuration = (start: Date, end: Date | null): string => {
+	const totalMs = (end || new Date()).getTime() - start.getTime();
+	const days = Math.floor(totalMs / MS_IN_DAY);
+	const hours = Math.floor((totalMs % MS_IN_DAY) / MS_IN_HOUR);
+	const minutes = Math.floor((totalMs % MS_IN_HOUR) / MS_IN_MINUTE);
+
+	return `P${days}DT${hours}H${minutes}M`;
+};

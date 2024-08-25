@@ -5,7 +5,12 @@ import {
 	getBlogPostDateInformation,
 	convertDatePickerValueToDate,
 	convertDateToDatePickerValue,
+	calculateDuration,
+	MS_IN_DAY,
+	MS_IN_HOUR,
+	MS_IN_MINUTE,
 } from "@/utils/dates";
+import { DateInformation } from "@/types/general";
 
 describe("getTimeFromDateString", () => {
 	it("should parse the input according to certain criteria", () => {
@@ -174,19 +179,30 @@ describe("getBlogPostDateInformation", () => {
 
 describe("convertDateToDatePickerValue", () => {
 	it("should convert the date to the correct date picker value format", () => {
-		const date = new Date("2022-09-15");
+		const date = new Date();
+		date.setDate(15);
+		date.setMonth(9);
+		date.setFullYear(2022);
 		const result = convertDateToDatePickerValue(date);
-		expect(result).toEqual("2022-09-15");
+		expect(result).toEqual("2022-10-15");
 	});
 
 	it("should handle single-digit month and date values", () => {
-		const date = new Date("2022-01-05");
+		const date = new Date();
+		date.setDate(5);
+		date.setMonth(0);
+		date.setFullYear(2022);
+
 		const result = convertDateToDatePickerValue(date);
 		expect(result).toEqual("2022-01-05");
 	});
 
 	it("should handle leap year dates", () => {
-		const date = new Date("2024-02-29");
+		const date = new Date();
+		date.setDate(29);
+		date.setMonth(1);
+		date.setFullYear(2024);
+
 		const result = convertDateToDatePickerValue(date);
 		expect(result).toEqual("2024-02-29");
 	});
@@ -194,7 +210,14 @@ describe("convertDateToDatePickerValue", () => {
 	it("should return Jan 1st 1970 if the date is invalid", () => {
 		const date = new Date("invalid");
 		const result = convertDateToDatePickerValue(date);
-		expect(result).toEqual("1970-01-01");
+
+		const wantDate = new Date(0);
+		const year = wantDate.getFullYear().toString();
+		const month = (wantDate.getMonth() + 1).toString().padStart(2, "0");
+		const day = wantDate.getDate().toString().padStart(2, "0");
+		const want = `${year}-${month}-${day}`;
+
+		expect(result).toEqual(want);
 	});
 });
 
@@ -224,4 +247,25 @@ describe("convertDatePickerValueToDate", () => {
 			expect(result).toEqual(new Date("invalid"));
 		},
 	);
+});
+
+describe("calculateDuration", () => {
+	it("should calculate the duration between two dates in the correct format", () => {
+		const start = new Date("2022-09-15T10:30:00Z");
+		const end = new Date("2022-09-15T12:45:00Z");
+		const result = calculateDuration(start, end);
+		expect(result).toEqual("P0DT2H15M");
+	});
+
+	it("should handle the case when the end date is not provided", () => {
+		const start = new Date("2022-09-15T10:30:00Z");
+		const result = calculateDuration(start, null);
+		const currentDate = new Date();
+		const totalMs = currentDate.getTime() - start.getTime();
+		const days = Math.floor(totalMs / MS_IN_DAY);
+		const hours = Math.floor((totalMs % MS_IN_DAY) / MS_IN_HOUR);
+		const minutes = Math.floor((totalMs % MS_IN_HOUR) / MS_IN_MINUTE);
+		const expected = `P${days}DT${hours}H${minutes}M`;
+		expect(result).toEqual(expected);
+	});
 });
