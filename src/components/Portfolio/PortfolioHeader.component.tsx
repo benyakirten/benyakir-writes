@@ -1,7 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-import { SANS_SERIF_FONT, FONT_MD, SIZE_SM, FONT_XL } from "@/styles/variables";
+import {
+	SANS_SERIF_FONT,
+	FONT_SIZE_MD,
+	SIZE_SM,
+	FONT_SIZE_XL,
+} from "@/styles/variables";
 
 const StyledPortfolioHeader = styled.div`
   display: grid;
@@ -11,12 +16,12 @@ const StyledPortfolioHeader = styled.div`
 `;
 
 const StyledName = styled.h2`
-    font-size: ${FONT_XL};
+    font-size: ${FONT_SIZE_XL};
     text-align: center;
 `;
 
 const StyledRole = styled.p`
-    font-size: ${FONT_MD};
+    font-size: ${FONT_SIZE_MD};
     text-align: center;
 `;
 

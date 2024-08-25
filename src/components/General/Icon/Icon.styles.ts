@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { FONT_XS, TRANSITION_EXTRA_SLOW, Z_ABOVE } from "@StyleVars";
+import { FONT_SIZE_XS, TRANSITION_EXTRA_SLOW, Z_ABOVE } from "@StyleVars";
 
 export const IconContainer = styled.div<{ height: string }>`
   position: relative;
@@ -70,7 +70,7 @@ export const IconCaption = styled.span`
   top: 0.5rem;
 
   color: ${(props) => props.theme.icon.default.textColor};
-  font-size: ${FONT_XS};
+  font-size: ${FONT_SIZE_XS};
 
   transition: all ${TRANSITION_EXTRA_SLOW} ease;
 `;

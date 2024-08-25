@@ -2,15 +2,15 @@ import styled from "styled-components";
 
 import {
 	SERIF_FONT,
-	FONT_XL,
-	FONT_XXL,
+	FONT_SIZE_XL,
+	FONT_SIZE_XXL,
 	SHADOW_MD,
 	TRANSITION_NORMAL,
 	TRANSITION_SLOW,
 	Z_ABOVE,
 	Z_RAISED,
 	SIZE_SM,
-	FONT_XXS,
+	FONT_SIZE_XXS,
 } from "@StyleVars";
 import { media } from "@Styles/queries";
 import { convertHexToRGBA } from "@Utils/colors";
@@ -29,7 +29,7 @@ export const StyledSidebar = styled.nav<{ open?: boolean }>`
   transform: translateX(${(props) => (props.open ? "0%" : "-80%")});
 
   font-family: ${SERIF_FONT};
-  font-size: ${FONT_XXL};
+  font-size: ${FONT_SIZE_XXL};
 
   user-select: none;
 
@@ -55,10 +55,10 @@ export const SidebarContents = styled.div<{ open: boolean }>`
 export const ArrowButton = styled.button<{ open: boolean }>`
   position: relative;
 
-  font-size: ${FONT_XL};
+  font-size: ${FONT_SIZE_XL};
 
   ${media.phone} {
-    font-size: ${FONT_XXL};
+    font-size: ${FONT_SIZE_XXL};
   }
 
   color: ${(props) => props.theme.base.textColor};
@@ -101,7 +101,7 @@ export const LegalBox = styled.div`
 `;
 
 export const LegalItem = styled.span`
-  font-size: ${FONT_XXS};
+  font-size: ${FONT_SIZE_XXS};
   color: ${(props) => props.theme.base.textColor};
 `;
 

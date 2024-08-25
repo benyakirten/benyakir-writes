@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { FONT_MD, SANS_SERIF_FONT, TRANSITION_NORMAL } from "@StyleVars";
+import { FONT_SIZE_MD, SANS_SERIF_FONT, TRANSITION_NORMAL } from "@StyleVars";
 
 export const ItemContainer = styled.li`
   position: relative;
@@ -29,7 +29,7 @@ export const ItemTitle = styled.span<{ draggedOver: boolean }>`
 			: props.theme.base.textColor};
 
   font-family: ${SANS_SERIF_FONT};
-  font-size: ${FONT_MD};
+  font-size: ${FONT_SIZE_MD};
 
   transition: all ${TRANSITION_NORMAL} ease;
 `;
@@ -38,7 +38,7 @@ export const ItemContent = styled.p<{ draggedOver: boolean }>`
   overflow: auto;
   padding: 2rem 1rem;
 
-  font-size: ${FONT_MD};
+  font-size: ${FONT_SIZE_MD};
 
   background-color: ${(props) =>
 		props.draggedOver

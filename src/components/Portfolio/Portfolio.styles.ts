@@ -4,9 +4,9 @@ import { media } from "@/styles/queries";
 import { convertHexToRGBA } from "@/utils/colors";
 import {
 	SERIF_FONT,
-	FONT_LG,
-	FONT_MD,
-	FONT_SM,
+	FONT_SIZE_LG,
+	FONT_SIZE_MD,
+	FONT_SIZE_SM,
 	SHADOW_SM,
 	TRANSITION_FAST,
 	TRANSITION_NORMAL,
@@ -28,7 +28,7 @@ export const ProjectBox = styled.article<{ highlighted?: boolean }>`
   position: relative;
   z-index: ${Z_ABOVE};
   border-radius: 4px;
-  font-size: ${FONT_SM};
+  font-size: ${FONT_SIZE_SM};
   box-shadow: 2px 1px 8px 2px ${(props) => props.theme.base.shadowColor}60;
   padding: 1rem;
 
@@ -52,7 +52,7 @@ export const ProjectContents = styled.div`
 `;
 
 export const ProjectTitle = styled.h3`
-  font-size: ${FONT_LG};
+  font-size: ${FONT_SIZE_LG};
   text-decoration: underline;
   font-family: ${SERIF_FONT};
   display: inline;
@@ -60,11 +60,11 @@ export const ProjectTitle = styled.h3`
 
 export const ProjectDescription = styled.p`
   text-overflow: ellipsis;
-  font-size: ${FONT_MD};
+  font-size: ${FONT_SIZE_MD};
   flex-grow: 1;
 
   ${media.phone} {
-    font-size: ${FONT_LG};
+    font-size: ${FONT_SIZE_LG};
   }
 
   a,
@@ -154,7 +154,7 @@ export const TechnologyLabel = styled.label<{ checked: boolean }>`
 			? props.theme.button.default.background
 			: props.theme.button.default.textColor};
   cursor: pointer;
-  font-size: ${FONT_MD};
+  font-size: ${FONT_SIZE_MD};
   border: 1px solid ${(props) => props.theme.checkbox.border};
   box-shadow: ${(props) =>
 		props.checked

@@ -3,11 +3,11 @@ import { styled } from "styled-components";
 
 import { FetchState } from "@/hooks";
 import { LatestUpdateState } from "@/types/hooks";
-import { getPrettyDate } from "@/utils/dates";
 import Loading from "../Loading/Loading.component";
 import IconedText from "@/components/Cards/IconedText.component";
 import RefreshIcon from "@/components/Icons/Refresh.component";
 import { SIZE_XS } from "@/styles/variables";
+import { Time } from "@/components/General";
 
 const TextContainer = styled.p`
 	display: flex;
@@ -27,7 +27,7 @@ const LatestUpdate: React.FC<{ state: LatestUpdateState }> = ({ state }) => {
 				case FetchState.LOADING:
 					return <Loading size="1.2rem" />;
 				default:
-					return getPrettyDate(state);
+					return <Time date={state} />;
 			}
 		},
 		[],

@@ -12,7 +12,12 @@ import {
 } from "./Result.styles";
 import { getActiveCategory } from "@/utils/blog";
 import { getPrettyDate } from "@/utils/dates";
-import { FONT_SM, SANS_SERIF_FONT, SIZE_SM, SIZE_XS } from "@/styles/variables";
+import {
+	FONT_SIZE_SM,
+	SANS_SERIF_FONT,
+	SIZE_SM,
+	SIZE_XS,
+} from "@/styles/variables";
 import {
 	PillContainer,
 	WpContentDescription,
@@ -33,7 +38,7 @@ const MetadataContainer = styled.div`
 `;
 
 const CategoryContainer = styled.p`
-	font-size: ${FONT_SM};
+	font-size: ${FONT_SIZE_SM};
 `;
 const TagContainer = styled.div`
 	display: flex;

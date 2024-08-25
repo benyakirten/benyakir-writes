@@ -1,7 +1,7 @@
 import { Link } from "gatsby";
 import styled from "styled-components";
 
-import { FONT_LG, FONT_MD, TRANSITION_NORMAL } from "@StyleVars";
+import { FONT_SIZE_LG, FONT_SIZE_MD, TRANSITION_NORMAL } from "@StyleVars";
 import { media } from "@Styles/queries";
 
 export const StyledLink = styled(Link)<{
@@ -29,7 +29,7 @@ export const StyledLink = styled(Link)<{
 				: props.dark
 					? props.theme.link.dark
 					: props.theme.link.normal};
-  font-size: ${(props) => (props.small ? FONT_LG : "inherit")};
+  font-size: ${(props) => (props.small ? FONT_SIZE_LG : "inherit")};
 
   transition: color ${TRANSITION_NORMAL} ease;
 
@@ -98,7 +98,7 @@ export const OutsideLink = styled.a<{
 					: props.theme.link.normal};
 
   text-decoration: none;
-  font-size: ${(props) => (props.small ? FONT_MD : "inherit")};
+  font-size: ${(props) => (props.small ? FONT_SIZE_MD : "inherit")};
 
   &::after {
     content: '';

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { FONT_MD } from "@StyleVars";
+import { FONT_SIZE_MD } from "@StyleVars";
 import { rollOut } from "@Styles/animations";
 
 export const StyledAlertBox = styled.div<{ success: boolean }>`
@@ -17,7 +17,7 @@ export const StyledAlertBox = styled.div<{ success: boolean }>`
 			? props.theme.alertBox.alert.success
 			: props.theme.alertBox.alert.error};
   color: ${(props) => props.theme.alertBox.textColor};
-  font-size: ${FONT_MD};
+  font-size: ${FONT_SIZE_MD};
   border: 2px solid ${(props) => props.theme.base.border};
 
   transform-origin: top;

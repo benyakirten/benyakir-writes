@@ -2,7 +2,7 @@ import * as React from "react";
 import Select, { GroupBase } from "react-select";
 import styled, { useTheme } from "styled-components";
 
-import { FONT_SM, SIZE_SM, TRANSITION_NORMAL } from "@StyleVars";
+import { FONT_SIZE_SM, SIZE_SM, TRANSITION_NORMAL } from "@StyleVars";
 import { MultipleChoiceInputProps } from "@/types/filters";
 
 const MultipleChoiceContainer = styled.label`
@@ -32,12 +32,12 @@ const MultipleChoice: React.FC<MultipleChoiceInputProps> = ({
 					option: (base) => ({
 						...base,
 						color: theme.base.textColor,
-						fontSize: FONT_SM,
+						fontSize: FONT_SIZE_SM,
 						textTransform: "capitalize",
 					}),
 					multiValue: (base) => ({
 						...base,
-						fontSize: FONT_SM,
+						fontSize: FONT_SIZE_SM,
 					}),
 					multiValueRemove: (base) => ({
 						...base,

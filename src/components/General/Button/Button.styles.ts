@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { media } from "@/styles/queries";
-import { FONT_MD, TRANSITION_SLOW, Z_ABOVE } from "@StyleVars";
+import { FONT_SIZE_MD, TRANSITION_SLOW, Z_ABOVE } from "@StyleVars";
 
 export const ButtonExterior = styled.button`
   cursor: pointer;
@@ -44,7 +44,7 @@ export const ButtonExterior = styled.button`
     transition: color ${TRANSITION_SLOW} ease;
 
     position: relative;
-    font-size: ${FONT_MD};
+    font-size: ${FONT_SIZE_MD};
     z-index: ${Z_ABOVE};
   }
 

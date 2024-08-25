@@ -3,11 +3,11 @@ import styled from "styled-components";
 
 import {
 	SIZE_XS,
-	FONT_XS,
+	FONT_SIZE_XS,
 	TRANSITION_NORMAL,
 	SIZE_SM,
-	FONT_SM,
-	FONT_XXS,
+	FONT_SIZE_SM,
+	FONT_SIZE_XXS,
 } from "@/styles/variables";
 import { TextInputProps } from "@/types/filters";
 
@@ -22,7 +22,7 @@ const TextInputContainer = styled.div`
     cursor: text;
 
     color: ${(props) => props.theme.textInput.textColor};
-    font-size: ${FONT_XS};
+    font-size: ${FONT_SIZE_XS};
 
     transition: all ${TRANSITION_NORMAL} ease;
   }
@@ -31,7 +31,7 @@ const TextInputContainer = styled.div`
     padding: calc(${SIZE_SM} + 4px) ${SIZE_XS} 2px;
     border: 2px solid ${(props) => props.theme.textInput.border};
 
-    font-size: ${FONT_SM};
+    font-size: ${FONT_SIZE_SM};
     color: ${(props) => props.theme.textInput.textColor};
     background-color: ${(props) => props.theme.textInput.background};
 
@@ -40,7 +40,7 @@ const TextInputContainer = styled.div`
     &:not(:placeholder-shown) + label {
       top: 4px;
       opacity: 0.7;
-      font-size: ${FONT_XXS};
+      font-size: ${FONT_SIZE_XXS};
     }
   }
 `;

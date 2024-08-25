@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { FONT_LG, TRANSITION_SLOW, Z_BASE, Z_UNDER } from "@StyleVars";
+import { FONT_SIZE_LG, TRANSITION_SLOW, Z_BASE, Z_UNDER } from "@StyleVars";
 import { media } from "@Styles/queries";
 
 export const ChoiceContainer = styled.div<{
@@ -42,7 +42,7 @@ export const ChoiceContainer = styled.div<{
 			? props.theme.multipleChoice.background
 			: props.theme.multipleChoice.textColor};
 
-  font-size: ${FONT_LG};
+  font-size: ${FONT_SIZE_LG};
 
   transition: all ${TRANSITION_SLOW};
 `;

@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 import { WorkHistoryDatum } from "@/types/portfolio";
 import {
-	FONT_MD,
-	FONT_SM,
+	FONT_SIZE_MD,
+	FONT_SIZE_SM,
 	SIZE_MD,
 	SIZE_SM,
 	SIZE_XS,
@@ -78,12 +78,12 @@ const WorkHistoryPosition = styled.p`
 
 const WorkHistoryPositionText = styled.span`
 	font-weight: bold;
-	font-size: ${FONT_MD};
+	font-size: ${FONT_SIZE_MD};
 	white-space: nowrap;
 
 	${media.phone} {
 		font-weight: normal;
-		font-size: ${FONT_SM};
+		font-size: ${FONT_SIZE_SM};
 		white-space: initial;
 	}
 `;

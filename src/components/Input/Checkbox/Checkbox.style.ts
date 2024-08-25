@@ -1,4 +1,4 @@
-import { FONT_MD, FONT_XXL, TRANSITION_NORMAL } from "@StyleVars";
+import { FONT_SIZE_MD, FONT_SIZE_XXL, TRANSITION_NORMAL } from "@StyleVars";
 import styled from "styled-components";
 
 export const CheckboxGroup = styled.div`
@@ -47,7 +47,7 @@ export const CheckboxGroup = styled.div`
 
       color: ${(props) => props.theme.checkbox.fingerColor};
 
-      font-size: ${FONT_XXL};
+      font-size: ${FONT_SIZE_XXL};
       font-weight: bold;
 
       transition: all ${TRANSITION_NORMAL};
@@ -61,6 +61,6 @@ export const CheckboxGroup = styled.div`
   }
   span {
     cursor: pointer;
-    font-size: ${FONT_MD};
+    font-size: ${FONT_SIZE_MD};
   }
 `;

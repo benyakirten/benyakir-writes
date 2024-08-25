@@ -1,5 +1,5 @@
 import {
-	FONT_MD,
+	FONT_SIZE_MD,
 	SIZE_MD,
 	SIZE_SM,
 	SIZE_XXL,
@@ -67,5 +67,5 @@ export const ToggleOutput = styled.span`
   /* TODO: Figure out why this needs the margin top */
   margin-top: 4px;
   cursor: pointer;
-  font-size: ${FONT_MD};
+  font-size: ${FONT_SIZE_MD};
 `;

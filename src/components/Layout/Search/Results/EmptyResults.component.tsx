@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-import { FONT_LG, FONT_MD, SIZE_SM } from "@/styles/variables";
+import { FONT_SIZE_LG, FONT_SIZE_MD, SIZE_SM } from "@/styles/variables";
 import { GrowableUnderline } from "@/components/General";
 
 const EmptyContainer = styled.div`
     padding: ${SIZE_SM};
-	font-size: ${FONT_MD};
-	line-height: ${FONT_LG};
+	font-size: ${FONT_SIZE_MD};
+	line-height: ${FONT_SIZE_LG};
 `;
 
 const EmptyResults: React.FC<{

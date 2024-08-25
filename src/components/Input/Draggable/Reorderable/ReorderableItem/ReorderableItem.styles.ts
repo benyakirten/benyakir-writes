@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { FONT_MD, SHADOW_SM, TRANSITION_NORMAL } from "@Styles/variables";
+import { FONT_SIZE_MD, SHADOW_SM, TRANSITION_NORMAL } from "@Styles/variables";
 
 import { DraggedOverPosition } from "@Utils/enums";
 
@@ -14,7 +14,7 @@ export const IndividualItem = styled.li<{
   overflow: auto;
   position: relative;
 
-  font-size: ${FONT_MD};
+  font-size: ${FONT_SIZE_MD};
 
   border: 2px solid
     ${(props) =>

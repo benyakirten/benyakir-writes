@@ -5,7 +5,7 @@ import {
 	SIZE_SM,
 	Z_ABOVE,
 	SANS_SERIF_FONT,
-	FONT_SM,
+	FONT_SIZE_SM,
 	HORIZONTAL_XS,
 	TRANSITION_NORMAL,
 	SIZE_MD,
@@ -40,7 +40,7 @@ const GroupLabel = styled.h3`
     z-index: ${Z_ABOVE};
 
     font-family: ${SANS_SERIF_FONT};
-    font-size: ${FONT_SM};
+    font-size: ${FONT_SIZE_SM};
 
     background-color: ${(props) => props.theme.base.background};
     padding: ${HORIZONTAL_XS};

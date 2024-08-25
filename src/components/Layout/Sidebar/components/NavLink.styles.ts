@@ -1,7 +1,7 @@
 import { Link } from "gatsby";
 import styled from "styled-components";
 
-import { FONT_LG, TRANSITION_NORMAL, TRANSITION_SLOW } from "@StyleVars";
+import { FONT_SIZE_LG, TRANSITION_NORMAL, TRANSITION_SLOW } from "@StyleVars";
 
 export const StyledNavLink = styled(Link)<{
 	active: boolean;
@@ -9,7 +9,7 @@ export const StyledNavLink = styled(Link)<{
   position: relative;
 
   text-decoration: none;
-  font-size: ${FONT_LG};
+  font-size: ${FONT_SIZE_LG};
   width: fit-content;
 
   color: ${(props) => props.theme.link.dark};

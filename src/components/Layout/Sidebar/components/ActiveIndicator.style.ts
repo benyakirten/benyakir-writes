@@ -1,4 +1,4 @@
-import { FONT_LG, TRANSITION_NORMAL } from "@/styles/variables";
+import { FONT_SIZE_LG, TRANSITION_NORMAL } from "@/styles/variables";
 import { convertHexToRGBA } from "@/utils/colors";
 import styled from "styled-components";
 
@@ -7,7 +7,7 @@ export const StyledActiveIndicator = styled.div<{ linkTop: number }>`
     left: -14%;
     top: ${({ linkTop }) => linkTop + 4}px;
 
-    height: ${FONT_LG};
+    height: ${FONT_SIZE_LG};
     width: 13%;
     transition: top ${TRANSITION_NORMAL} ease-in-out;
 

@@ -1,3 +1,5 @@
+import { DateInformation, FullMonth } from "@/types/general";
+
 export function getTimeFromDateString(date: string): DateInformation {
 	const month = +date.substring(0, 2);
 	const year = +date.substring(6);
@@ -141,3 +143,11 @@ export function convertDateToDatePickerValue(value: Date): string {
 
 	return convertedDate;
 }
+
+export const formatDateToTimeDatetime = (date: Date) =>
+	// French Canadian format is correct for this use case.
+	new Intl.DateTimeFormat("fr-CA", {
+		year: "numeric",
+		month: "2-digit",
+		day: "2-digit",
+	}).format(date);

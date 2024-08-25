@@ -11,4 +11,5 @@ export { default as GrowableUnderline } from "./GrowableUnderline/GrowableUnderl
 export { default as FillIn } from "./FillIn/FillIn.component";
 export { default as ProjectTech } from "./Project/ProjectTech.component";
 export { default as HeadBase } from "./HeadBase/HeadBase.component";
+export { default as Time } from "./Accessibility/Time.component";
 export * from "./Project/Components.style";

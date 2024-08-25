@@ -7,11 +7,11 @@ import { media } from "./queries";
 import {
 	BLACK,
 	SERIF_FONT,
-	FONT_LG,
-	FONT_MD,
-	FONT_XL,
-	FONT_XXL,
-	FONT_XXXL,
+	FONT_SIZE_LG,
+	FONT_SIZE_MD,
+	FONT_SIZE_XL,
+	FONT_SIZE_XXL,
+	FONT_SIZE_XXXL,
 	SECONDARY_800,
 	SHADOW_MD_BALANCED,
 	SIZE_MD,
@@ -21,10 +21,10 @@ import {
 	SANS_SERIF_FONT,
 	SIZE_SM,
 	SIZE_XS,
-	FONT_SM,
+	FONT_SIZE_SM,
 	SIZE_LG,
-	FONT_XS,
-	FONT_XXS,
+	FONT_SIZE_XS,
+	FONT_SIZE_XXS,
 } from "./variables";
 
 export const FadeIn = styled.div<{ duration?: string; delay?: string }>`
@@ -74,10 +74,10 @@ export const LeadHeading = styled.h1`
   margin-bottom: 1rem;
 
   font-family: ${SERIF_FONT};
-  font-size: ${FONT_XXXL};
+  font-size: ${FONT_SIZE_XXXL};
 
   ${media.phone} {
-    font-size: ${FONT_XXL};
+    font-size: ${FONT_SIZE_XXL};
   }
 
   &::after {
@@ -110,10 +110,10 @@ export const LeadHeading = styled.h1`
 
 export const Subtitle = styled.h2<{ noUnderline?: boolean }>`
     font-family: ${SERIF_FONT};
-    font-size: ${FONT_XXL};
+    font-size: ${FONT_SIZE_XXL};
 
     ${media.phone} {
-        ${FONT_XL};
+        ${FONT_SIZE_XL};
     }
     text-decoration: ${(props) => (props.noUnderline ? "none" : "underline")};
 
@@ -121,29 +121,29 @@ export const Subtitle = styled.h2<{ noUnderline?: boolean }>`
 
     ${media.tablet} {
         margin-bottom 0.5rem;
-        font-size: ${FONT_XL};
+        font-size: ${FONT_SIZE_XL};
     }
 `;
 
 export const SubHeading = styled.h3<{ noUnderline?: boolean }>`
   font-family: ${SERIF_FONT};
-  font-size: ${FONT_XL};
+  font-size: ${FONT_SIZE_XL};
   text-decoration: ${(props) => (props.noUnderline ? "none" : "underline")};
 
   margin-bottom: 0.5rem;
 
   ${media.tablet} {
-    font-size: ${FONT_LG};
+    font-size: ${FONT_SIZE_LG};
   }
 `;
 
 export const MinorHeading = styled.h4`
     font-family: ${SERIF_FONT};
-    font-size: ${FONT_LG};
+    font-size: ${FONT_SIZE_LG};
 
     ${media.tablet} {
         margin-bottom 0.5rem;
-        font-size: ${FONT_MD};
+        font-size: ${FONT_SIZE_MD};
     }
 `;
 
@@ -151,7 +151,7 @@ export const BigParagraph = styled.p<{
 	marginRight?: string;
 	marginVertical?: string;
 }>`
-  font-size: ${FONT_XL};
+  font-size: ${FONT_SIZE_XL};
   margin-top: ${(props) => (props.marginVertical ? props.marginVertical : "0")};
   margin-bottom: ${(props) =>
 		props.marginVertical ? props.marginVertical : "0"};
@@ -159,7 +159,7 @@ export const BigParagraph = styled.p<{
 `;
 
 export const Paragraph = styled.p`
-  font-size: ${FONT_MD};
+  font-size: ${FONT_SIZE_MD};
   margin: 0;
 `;
 
@@ -171,7 +171,7 @@ export const Centered = styled.div`
   width: 100%;
   height: 100%;
 
-  font-size: ${FONT_MD};
+  font-size: ${FONT_SIZE_MD};
 `;
 
 // There's no reason to include a third google font
@@ -274,7 +274,7 @@ export const HoverableGatsbyImage = styled(GatsbyImage)`
 `;
 
 export const List = styled.ul`
-  font-size: ${FONT_MD};
+  font-size: ${FONT_SIZE_MD};
 `;
 
 export const LItem = styled.li`
@@ -282,9 +282,9 @@ export const LItem = styled.li`
 `;
 
 export const WpContentDescription = styled.div<{ fontSize?: string }>`
-  font-size: ${(props) => (props.fontSize ? props.fontSize : FONT_LG)};
+  font-size: ${(props) => (props.fontSize ? props.fontSize : FONT_SIZE_LG)};
   ${media.desktop} {
-    font-size: ${FONT_MD};
+    font-size: ${FONT_SIZE_MD};
   }
   text-overflow: ellipsis;
 
@@ -379,10 +379,10 @@ export const SVGContainer = styled.div<{
 `;
 
 export const WpContent = styled.div<{ fontSize?: string }>`
-  font-size: ${(props) => (props.fontSize ? props.fontSize : FONT_LG)};
+  font-size: ${(props) => (props.fontSize ? props.fontSize : FONT_SIZE_LG)};
 
   ${media.phone} {
-    font-size: ${(props) => (props.fontSize ? props.fontSize : FONT_MD)};
+    font-size: ${(props) => (props.fontSize ? props.fontSize : FONT_SIZE_MD)};
   }
 
   a:link,
@@ -443,7 +443,7 @@ export const WpContent = styled.div<{ fontSize?: string }>`
 `;
 
 export const WpContentInline = styled.span<{ fontSize?: string }>`
-  font-size: ${(props) => (props.fontSize ? props.fontSize : FONT_LG)};
+  font-size: ${(props) => (props.fontSize ? props.fontSize : FONT_SIZE_LG)};
 
   a:link,
   a:visited {
@@ -525,7 +525,7 @@ export const PillContainer = styled.div`
   width: min-content;
 
 	font-family: ${SANS_SERIF_FONT};
-  font-size: ${FONT_XXS};
+  font-size: ${FONT_SIZE_XXS};
   text-transform: capitalize;
   
   border-radius: ${SIZE_LG};

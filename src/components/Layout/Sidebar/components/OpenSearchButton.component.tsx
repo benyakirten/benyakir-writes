@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { SearchIcon } from "@/components/Icons";
-import { FONT_MD, SIZE_SM, SIZE_XS } from "@/styles/variables";
+import { FONT_SIZE_MD, SIZE_SM, SIZE_XS } from "@/styles/variables";
 import { GrowableUnderline } from "@/components/General";
 
 const SearchButton = styled.button`
@@ -21,7 +21,7 @@ const IconContainer = styled.div`
 `;
 
 const TextContainer = styled.span`
-	font-size: ${FONT_MD};
+	font-size: ${FONT_SIZE_MD};
 `;
 
 // TODO: Update this button's styles

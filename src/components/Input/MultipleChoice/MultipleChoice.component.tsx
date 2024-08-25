@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { FONT_MD } from "@StyleVars";
+import { FONT_SIZE_MD } from "@StyleVars";
 
 import Select from "react-select";
 
@@ -24,7 +24,7 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = ({
 				option: (base) => ({
 					...base,
 					color: "#000",
-					fontSize: FONT_MD,
+					fontSize: FONT_SIZE_MD,
 					textTransform: "capitalize",
 				}),
 				multiValue: (base) => ({
@@ -33,7 +33,7 @@ const MultipleChoice: React.FC<MultipleChoiceProps> = ({
 					backgroundColor: "#ccc",
 					display: "flex",
 					alignItems: "center",
-					fontSize: FONT_MD,
+					fontSize: FONT_SIZE_MD,
 				}),
 				multiValueRemove: (base) => ({
 					...base,

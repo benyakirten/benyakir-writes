@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 import {
-	FONT_XS,
-	FONT_XXS,
+	FONT_SIZE_XS,
+	FONT_SIZE_XXS,
 	SANS_SERIF_FONT,
 	SIZE_MD,
 	SIZE_SM,
@@ -25,12 +25,12 @@ const TechPill = styled.div`
 `;
 
 const TechIcon = styled.img`
-	width: ${FONT_XS};
-	height: ${FONT_XS};
+	width: ${FONT_SIZE_XS};
+	height: ${FONT_SIZE_XS};
 `;
 
 const TechName = styled.span`
-	font-size: ${FONT_XXS};
+	font-size: ${FONT_SIZE_XXS};
 `;
 
 const ProjectTech: React.FC<{ publicURL: string; tech: string }> = ({

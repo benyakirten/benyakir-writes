@@ -4,9 +4,9 @@ import styled from "styled-components";
 
 import { FileQuery, ImageQuery } from "@/types/general";
 import {
-	FONT_LG,
-	FONT_SM,
-	FONT_XS,
+	FONT_SIZE_LG,
+	FONT_SIZE_SM,
+	FONT_SIZE_XS,
 	SIZE_SM,
 	SIZE_XS,
 	TRANSITION_NORMAL,
@@ -32,11 +32,11 @@ const StyledNameContainer = styled.p`
 
 const StyledName = styled.span`
 	font-weight: bold;
-	font-size: ${FONT_LG};
+	font-size: ${FONT_SIZE_LG};
 `;
 
 const StyledTitle = styled.span`
-	font-size: ${FONT_SM};
+	font-size: ${FONT_SIZE_SM};
 `;
 
 const StyledImage = styled.div`
@@ -99,7 +99,7 @@ const StyledLinkImage = styled.img`
 `;
 
 const StyledLinkText = styled.p`
-	font-size: ${FONT_XS};
+	font-size: ${FONT_SIZE_XS};
 
 	opacity: 0.6;
 	color: ${(props) => props.theme.base.textColor};

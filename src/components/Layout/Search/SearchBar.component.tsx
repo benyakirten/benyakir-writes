@@ -6,9 +6,9 @@ import { SearchBarProps } from "./types";
 import {
 	SIZE_XXL,
 	SIZE_SM,
-	FONT_LG,
+	FONT_SIZE_LG,
 	SIZE_MD,
-	FONT_XS,
+	FONT_SIZE_XS,
 } from "@/styles/variables";
 import { media } from "@/styles/queries";
 
@@ -24,12 +24,12 @@ const SearchInput = styled.input`
     border: 0;
     outline: none;
 	width: 50%;
-	font-size: ${FONT_LG};
+	font-size: ${FONT_SIZE_LG};
 	flex-grow: 1;
 `;
 
 const SearchCount = styled.span`
-	font-size: ${FONT_XS};
+	font-size: ${FONT_SIZE_XS};
 	text-transform: uppercase;
 	opacity: 0.8;
 	align-self: center;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { FONT_MD, SHADOW_MD } from "@StyleVars";
+import { FONT_SIZE_MD, SHADOW_MD } from "@StyleVars";
 import { convertHexToRGBA } from "@Utils/colors";
 
 export const Container = styled.div`
@@ -10,7 +10,7 @@ export const Container = styled.div`
 `;
 
 export const Label = styled.label`
-  font-size: ${FONT_MD};
+  font-size: ${FONT_SIZE_MD};
 `;
 
 export const ColorInput = styled.input`

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { FONT_LG, TRANSITION_NORMAL } from "@StyleVars";
+import { FONT_SIZE_LG, TRANSITION_NORMAL } from "@StyleVars";
 import { media } from "@Styles/queries";
 import { multiplyCSSNumber } from "@Utils/strings";
 
@@ -34,7 +34,7 @@ export const StyledFigure = styled.figure<{
 
   figcaption {
     text-align: center;
-    font-size: ${FONT_LG};
+    font-size: ${FONT_SIZE_LG};
     transition: all ${TRANSITION_NORMAL} ease;
     color: ${(props) => props.theme.hoverImage.textColor};
   }
