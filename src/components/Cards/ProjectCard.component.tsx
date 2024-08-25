@@ -27,22 +27,7 @@ const ProjectHost: React.FC<{ host: string }> = ({ host }) => {
 	);
 };
 
-const ProjectCard: React.FC<{ project: FlattenedProjectCard }> = ({
-	project,
-}) => {
-	return (
-		<CardExterior slug={`/project/${project.slug}`} columns="1fr 1fr">
-			<ProjectCardInterior project={project} />
-		</CardExterior>
-	);
-};
-
-const ExtraMarginedContainer = styled.div`
-	margin: ${SIZE_XS} 0;
-	grid-column: span 2;
-`;
-
-export const ProjectCardInterior: React.FC<{
+const ProjectCardInterior: React.FC<{
 	project: FlattenedProjectCard;
 	image?: ProjectImage;
 }> = ({ project, image }) => {
@@ -74,5 +59,21 @@ export const ProjectCardInterior: React.FC<{
 		</>
 	);
 };
+
+const ProjectCard: React.FC<{
+	project: FlattenedProjectCard;
+	image?: ProjectImage;
+}> = ({ project, image }) => {
+	return (
+		<CardExterior slug={`/project/${project.slug}`} columns="1fr 1fr">
+			<ProjectCardInterior project={project} image={image} />
+		</CardExterior>
+	);
+};
+
+const ExtraMarginedContainer = styled.div`
+	margin: ${SIZE_XS} 0;
+	grid-column: span 2;
+`;
 
 export default ProjectCard;

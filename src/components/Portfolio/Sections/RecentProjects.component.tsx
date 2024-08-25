@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { Link } from "gatsby";
 
 import { RecentProjectItem } from "@/types/portfolio";
-import { ProjectCardInterior } from "@/components/Cards/ProjectCard.component";
-import { SIZE_MD, SIZE_SM, SIZE_XS, Z_ABOVE } from "@/styles/variables";
+import ProjectCard from "@/components/Cards/ProjectCard.component";
+import { SIZE_MD, SIZE_SM, Z_ABOVE } from "@/styles/variables";
 import { media } from "@/styles/queries";
 
 const RecentProjectsContainer = styled.ul`
@@ -12,25 +12,14 @@ const RecentProjectsContainer = styled.ul`
 	grid-template-columns: repeat(2, 1fr);
 	gap: ${SIZE_MD};
 
+	& > li {
+		z-index: ${Z_ABOVE};
+		background-color: ${(props) => props.theme.base.background};
+	}
+
 	${media.tablet} {
 		grid-template-columns: 1fr;
 	}
-`;
-
-const ProjectCardListItem = styled.li`
-	position: relative;
-	border-radius: ${SIZE_XS};
-	border: 1px solid ${(props) => props.theme.base.border};
-	
-	padding: ${SIZE_SM};
-	background-color: ${(props) => props.theme.base.background};
-	z-index: ${Z_ABOVE};
-`;
-
-const ProjectCardLink = styled(Link)`
-	display: grid;
-	gap: ${SIZE_SM};
-	grid-template-columns: repeat(2, 1fr);
 `;
 
 const RecentProjects: React.FC<{ projects: RecentProjectItem[] }> = ({
@@ -39,11 +28,11 @@ const RecentProjects: React.FC<{ projects: RecentProjectItem[] }> = ({
 	return (
 		<RecentProjectsContainer>
 			{projects.map((project) => (
-				<ProjectCardListItem key={project.slug}>
-					<ProjectCardLink to={`/project/${project.slug}`}>
-						<ProjectCardInterior project={project} image={project.image} />
-					</ProjectCardLink>
-				</ProjectCardListItem>
+				<ProjectCard
+					project={project}
+					key={project.slug}
+					image={project.image}
+				/>
 			))}
 		</RecentProjectsContainer>
 	);
