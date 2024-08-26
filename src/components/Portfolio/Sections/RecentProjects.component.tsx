@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "gatsby";
 
 import { RecentProjectItem } from "@/types/portfolio";
 import ProjectCard from "@/components/Cards/ProjectCard.component";
-import { SIZE_MD, SIZE_SM, Z_ABOVE } from "@/styles/variables";
+import { SIZE_MD, Z_ABOVE } from "@/styles/variables";
 import { media } from "@/styles/queries";
 
 const RecentProjectsContainer = styled.ul`

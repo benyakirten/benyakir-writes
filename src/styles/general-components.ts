@@ -10,8 +10,6 @@ import {
 	FONT_SIZE_LG,
 	FONT_SIZE_MD,
 	FONT_SIZE_XL,
-	FONT_SIZE_XXL,
-	FONT_SIZE_XXXL,
 	SECONDARY_800,
 	SHADOW_MD_BALANCED,
 	SIZE_MD,
@@ -21,11 +19,13 @@ import {
 	SANS_SERIF_FONT,
 	SIZE_SM,
 	SIZE_XS,
-	FONT_SIZE_SM,
 	SIZE_LG,
-	FONT_SIZE_XS,
 	FONT_SIZE_XXS,
+	FONT_XXXL,
+	FONT_XXL,
+	FONT_XL,
 } from "./variables";
+import { multiplyCSSNumber } from "@/utils/strings";
 
 export const FadeIn = styled.div<{ duration?: string; delay?: string }>`
   opacity: 0;
@@ -67,53 +67,37 @@ export const GroupingBox = styled.section`
 		)}`};
 `;
 
+// TODO: Make the colors look good
 export const LeadHeading = styled.h1`
   position: relative;
 
   padding-bottom: 1rem;
   margin-bottom: 1rem;
 
-  font-family: ${SERIF_FONT};
-  font-size: ${FONT_SIZE_XXXL};
+  ${FONT_XXXL};
 
-  ${media.phone} {
-    font-size: ${FONT_SIZE_XXL};
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-
-    bottom: 0;
-    left: 0;
-
-    width: 100%;
-    height: 2px;
-
-    background-color: ${(props) => props.theme.base.textColor};
-
-    transform-origin: left;
-    transform: scaleX(1) translateY(0);
-    transition: transform ${TRANSITION_NORMAL} ease;
-
-    ${media.reducedMotion} {
-      transform: scaleX(0.9) translateY(-2rem);
-    }
-  }
+  background-image: linear-gradient(45deg, ${(props) => props.theme.base.textColor} 50%, ${(props) => props.theme.base.highlighted});
+  background-position: left;
+  background-size: 300%;
+  background-clip: text;
+  color: transparent;
+  transition: background-position ${multiplyCSSNumber(TRANSITION_EXTRA_SLOW, 1.5)} ease;
 
   &:hover {
-    &::after {
-      transform: scaleX(0.9) translateY(-2rem);
-    }
+    background-position: right;
+  }
+
+  ${media.phone} {
+    ${FONT_XXL};
   }
 `;
 
 export const Subtitle = styled.h2<{ noUnderline?: boolean }>`
     font-family: ${SERIF_FONT};
-    font-size: ${FONT_SIZE_XXL};
+    ${FONT_XXL};
 
     ${media.phone} {
-        ${FONT_SIZE_XL};
+        ${FONT_XL};;
     }
     text-decoration: ${(props) => (props.noUnderline ? "none" : "underline")};
 
@@ -121,7 +105,7 @@ export const Subtitle = styled.h2<{ noUnderline?: boolean }>`
 
     ${media.tablet} {
         margin-bottom 0.5rem;
-        font-size: ${FONT_SIZE_XL};
+        ${FONT_XL};
     }
 `;
 
@@ -547,7 +531,7 @@ export const PaginatedPageContents = styled.div`
 `;
 
 export const NormalPageContents = styled.div`
-  padding: 2rem 1rem;;
+  padding: 2rem 1rem;
   ${media.phone} {
     padding: 2rem 0.5rem;
   }

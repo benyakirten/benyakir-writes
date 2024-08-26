@@ -4,6 +4,7 @@ import * as React from "react";
 import {
 	Grouping,
 	LeadHeading,
+	NormalPageContents,
 	Page,
 	WpContent,
 } from "@Styles/general-components";
@@ -17,6 +18,7 @@ import { truncate } from "@Utils/strings";
 import { useFetchRepoUpdatedDate } from "@/hooks";
 import type { WpProject } from "@Types/query";
 import { HeadBase } from "@/components/General";
+import { FileNode } from "@/types/general";
 
 export const Head: React.FC<WpProject> = ({ data }) => {
 	const project = formatProject(data.wpProject);
@@ -39,15 +41,17 @@ const Project: React.FC<WpProject> = ({ data }) => {
 	const latestUpdateState = useFetchRepoUpdatedDate(project.repoLink);
 	return (
 		<Page>
-			<LeadHeading>{project.title}</LeadHeading>
-			<ProjectHeader
-				project={project}
-				icons={icons}
-				latestUpdateState={latestUpdateState}
-			/>
-			<Grouping>
-				<WpContent dangerouslySetInnerHTML={{ __html: project.content }} />
-			</Grouping>
+			<NormalPageContents>
+				<LeadHeading>{project.title}</LeadHeading>
+				<ProjectHeader
+					project={project}
+					icons={icons}
+					latestUpdateState={latestUpdateState}
+				/>
+				<Grouping>
+					<WpContent dangerouslySetInnerHTML={{ __html: project.content }} />
+				</Grouping>
+			</NormalPageContents>
 		</Page>
 	);
 };
