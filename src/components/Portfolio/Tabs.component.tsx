@@ -135,7 +135,7 @@ const Tabs: React.FC<{
 				break;
 			case "ArrowRight":
 			case "ArrowDown":
-				selectTab(1);
+				selectTab(+1);
 				break;
 		}
 	}

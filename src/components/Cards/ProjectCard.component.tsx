@@ -1,31 +1,16 @@
 import React from "react";
-import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
 import { styled } from "styled-components";
 
 import { FlattenedProjectCard } from "@/types/posts";
 import CardExterior from "./CardExterior.component";
 import { FullContainer, SpanOneTitle, TagContainer } from "./Card.styles";
-import { ProjectTech, TechContainer } from "../General";
+import { ProjectHost, ProjectTech, TechContainer } from "../General";
 import { PublishedDate } from "./IconedText.component";
 import { useFetchRepoUpdatedDate } from "@/hooks";
 import LatestUpdate from "../General/Project/LatestUpdate.component";
 import { ProjectImage } from "@/types/portfolio";
 import { SIZE_XS } from "@/styles/variables";
-import { FileQuery } from "@/types/general";
-
-const ProjectHost: React.FC<{ host: string }> = ({ host }) => {
-	const iconQuery = useStaticQuery<FileQuery>(graphql`
-		query IconQuery {
-			file (name: { eq: "Globe" }) {
-				publicURL
-			}
-		}
-	`);
-	return (
-		<ProjectTech tech={host} publicURL={iconQuery.file?.publicURL ?? ""} />
-	);
-};
 
 const ProjectCardInterior: React.FC<{
 	project: FlattenedProjectCard;
@@ -34,7 +19,7 @@ const ProjectCardInterior: React.FC<{
 	const latestUpdateState = useFetchRepoUpdatedDate(project.repoLink);
 	return (
 		<>
-			<SpanOneTitle>{project.title}</SpanOneTitle>
+			<FullContainer>{project.title}</FullContainer>
 			{project.hostedOn && (
 				<TagContainer>
 					<ProjectHost host={project.hostedOn} />

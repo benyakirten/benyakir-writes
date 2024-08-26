@@ -116,11 +116,7 @@ const PortfolioLink: React.FC<{
 }> = ({ to, text, icon }) => {
 	return (
 		<a style={{ width: "max-content", gridColumn: "span 1" }} href={to}>
-			<IconedText
-				icon={icon}
-				text={<StyledLinkText>{text}</StyledLinkText>}
-				span={1}
-			/>
+			<IconedText icon={icon} text={<StyledLinkText>{text}</StyledLinkText>} />
 		</a>
 	);
 };
@@ -133,7 +129,6 @@ const ResumeButton: React.FC<{ resume: string }> = ({ resume }) => (
 		<IconedText
 			icon={<ResumeIcon />}
 			text={<StyledLinkText>Resume</StyledLinkText>}
-			span={1}
 		/>
 	</button>
 );

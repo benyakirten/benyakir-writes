@@ -490,7 +490,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       mainLink: project.project.mainLink,
       hostedOn: project.project.hostedOn,
       repoLink: project.project.repoLink,
-      content: truncate(project.content, 100),
+      content: truncate(project.content, 300),
       firstReleased: getTimeFromDateString(project.project.firstReleased),
       shortTechnologies: tech,
       longTechnologies: tech.map((t) => getFullTechName(t)),
@@ -575,14 +575,14 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     const _story = {
       slug: story.slug,
       title: story.title,
-      content: truncate(formatText(story.content), 170),
+      content: truncate(formatText(story.content), 300),
       published: getTimeFromDateString(story.shortStory.publishedOn),
       book: story.shortStory.relatedBook
         ? {
             title: story.shortStory.relatedBook.title,
             slug: story.shortStory.relatedBook.slug,
             content: formatText(
-              truncate(story.shortStory.relatedBook.content, 50)
+              truncate(story.shortStory.relatedBook.content, 300)
             ),
             relationship: story.shortStory.relationshipToBook
               ? story.shortStory.relationshipToBook
@@ -643,7 +643,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       slug: book.slug,
       title: book.title,
       published: getTimeFromDateString(book.book.publishedOn),
-      content: truncate(book.content, 170),
+      content: truncate(book.content, 300),
       cover: book.book.cover
         ? book.book.cover.localFile.childImageSharp.gatsbyImageData
         : null,
@@ -688,7 +688,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     const data = {
       title: post.title,
       slug: post.slug,
-      excerpt: truncate(formatText(post.excerpt), 150),
+      excerpt: truncate(formatText(post.excerpt), 300),
       content: formatText(post.content),
       published: getBlogPostDateInformation(post.date),
       categories: post.categories.nodes?.map((n) => n.name),

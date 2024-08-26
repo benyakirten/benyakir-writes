@@ -155,7 +155,6 @@ const WorkHistoryLength: React.FC<{ start: Date; end: Date | null }> = ({
 	return (
 		<WorkHistoryDates>
 			<IconedText
-				span={2}
 				icon={<CalendarIcon />}
 				text={<time dateTime={formattedDuration}>{formattedDates}</time>}
 			/>

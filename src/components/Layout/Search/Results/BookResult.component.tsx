@@ -1,5 +1,5 @@
 import React from "react";
-import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
+import { GatsbyImage } from "gatsby-plugin-image";
 
 import { FlattenedBookCard } from "@/types/posts";
 import {
@@ -27,7 +27,6 @@ const BookResult: React.FC<{
 						<SlubTitle>{getPrettyDate(book.published.date)}</SlubTitle>
 					</TitleContainer>
 					<WpContentDescription
-						fontSize="1rem"
 						dangerouslySetInnerHTML={{ __html: book.content }}
 					/>
 				</ContentContainer>

@@ -1,19 +1,18 @@
 import React from "react";
 import { styled } from "styled-components";
 
-import { FONT_SIZE_XXS, SIZE_SM } from "@/styles/variables";
-import { formatDateToTimeDatetime, getPrettyDate } from "@/utils/dates";
+import { FONT_SIZE_XXS, SIZE_XS } from "@/styles/variables";
 import { CalendarIcon } from "../Icons";
 import { media } from "@/styles/queries";
 import { Time } from "../General";
 
-const IconContainer = styled.div<{ span: number }>`
-	grid-column: span ${(props) => props.span};
+const IconContainer = styled.div<{ span?: number }>`
+	grid-column: span ${(props) => props.span ?? 2};
 	color: ${(props) => props.theme.base.pillText};
 	font-size: ${FONT_SIZE_XXS};
 
     display: flex;
-    gap: ${SIZE_SM};
+    gap: ${SIZE_XS};
 	align-items: center;
 
 	${media.phone} {
@@ -44,7 +43,7 @@ const IconTextContainer = styled.p`
 const IconedText: React.FC<{
 	icon: React.ReactNode;
 	text: React.ReactNode;
-	span: number;
+	span?: number;
 }> = ({ icon, text, span }) => {
 	return (
 		<IconContainer span={span}>
@@ -58,7 +57,7 @@ const IconedText: React.FC<{
 
 export const PublishedDate: React.FC<{
 	date: Date;
-	span: number;
+	span?: number;
 	icon?: React.ReactNode;
 }> = ({ date, span, icon = <CalendarIcon /> }) => {
 	return (

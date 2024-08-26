@@ -51,9 +51,8 @@ export const ContentContainer = styled.div`
 `;
 
 export const TitleContainer = styled.div`
-	display: flex;
+	display: grid;
 	gap: ${SIZE_XS};
-	justify-content: space-between;
 `;
 
 export const SlubTitle = styled.span`

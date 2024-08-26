@@ -24,6 +24,8 @@ import {
 	FONT_XXXL,
 	FONT_XXL,
 	FONT_XL,
+	Z_ABOVE,
+	FONT_MD,
 } from "./variables";
 import { multiplyCSSNumber } from "@/utils/strings";
 
@@ -71,8 +73,7 @@ export const GroupingBox = styled.section`
 export const LeadHeading = styled.h1`
   position: relative;
 
-  padding-bottom: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: ${SIZE_MD};
 
   ${FONT_XXXL};
 
@@ -266,11 +267,14 @@ export const LItem = styled.li`
 `;
 
 export const WpContentDescription = styled.div<{ fontSize?: string }>`
-  font-size: ${(props) => (props.fontSize ? props.fontSize : FONT_SIZE_LG)};
-  ${media.desktop} {
-    font-size: ${FONT_SIZE_MD};
-  }
+  ${FONT_MD};
+
+  overflow: hidden;
   text-overflow: ellipsis;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 
   a:link,
   a:visited {
@@ -338,8 +342,7 @@ export const DisappearOnPhone = styled.div`
 export const Box = styled.div`
   display: flex;
   align-items: center;
-  margin: 1rem 0;
-  gap: 1rem;
+  gap: ${SIZE_MD};
 `;
 
 export const FlatBox = styled(Box)`
@@ -535,4 +538,12 @@ export const NormalPageContents = styled.div`
   ${media.phone} {
     padding: 2rem 0.5rem;
   }
+`;
+
+export const TemplateHeaderTitle = styled(LeadHeading)`
+  margin-bottom: 0;
+`;
+
+export const TemplateContent = styled.div`
+  margin: ${SIZE_MD} 0;
 `;

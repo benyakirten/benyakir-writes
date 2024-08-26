@@ -2,13 +2,13 @@ import { graphql } from "gatsby";
 import * as React from "react";
 
 import {
-	Grouping,
-	LeadHeading,
+	Box,
 	NormalPageContents,
 	Page,
+	TemplateContent,
+	TemplateHeaderTitle,
 	WpContent,
 } from "@Styles/general-components";
-import { ProjectHeader } from "@Variants";
 
 import { getPrettyDate } from "@Utils/dates";
 import { formatWpText } from "@Utils/posts";
@@ -17,8 +17,17 @@ import { truncate } from "@Utils/strings";
 
 import { useFetchRepoUpdatedDate } from "@/hooks";
 import type { WpProject } from "@Types/query";
-import { HeadBase } from "@/components/General";
+import {
+	HeadBase,
+	ProjectHost,
+	ProjectTech,
+	TechContainer,
+} from "@/components/General";
 import { FileNode } from "@/types/general";
+import { SIZE_MD, SIZE_SM } from "@/styles/variables";
+import { PublishedDate } from "@/components/Cards/IconedText.component";
+import LatestUpdate from "@/components/General/Project/LatestUpdate.component";
+import styled from "styled-components";
 
 export const Head: React.FC<WpProject> = ({ data }) => {
 	const project = formatProject(data.wpProject);
@@ -32,25 +41,56 @@ export const Head: React.FC<WpProject> = ({ data }) => {
 	return <HeadBase title={project.title} description={description} />;
 };
 
+const ProjectHeaderContainer = styled.div`
+	display: grid;
+	gap: ${SIZE_MD};
+	margin-bottom: ${SIZE_SM};
+`;
+
+const ProjectHeader: React.FC<{
+	title: string;
+	icons: FileNode[];
+	repoLink?: string;
+	firstReleasedDate: Date;
+	hostedOn?: string;
+}> = ({ title, icons, repoLink, firstReleasedDate, hostedOn }) => {
+	const latestUpdateState = useFetchRepoUpdatedDate(repoLink);
+	return (
+		<ProjectHeaderContainer>
+			<TechContainer>
+				{hostedOn && <ProjectHost host={hostedOn} />}
+				{icons.map((i) => (
+					<ProjectTech key={i.name} tech={i.name} publicURL={i.publicURL} />
+				))}
+			</TechContainer>
+			<TemplateHeaderTitle>{title}</TemplateHeaderTitle>
+			<Box>
+				<PublishedDate date={firstReleasedDate} />
+				<LatestUpdate state={latestUpdateState} />
+			</Box>
+		</ProjectHeaderContainer>
+	);
+};
+
 const Project: React.FC<WpProject> = ({ data }) => {
 	const project = formatProject(data.wpProject);
 	const icons: FileNode[] = data.allFile.nodes
 		.filter((f) => project.shortTechnologies.includes(f.name))
 		.map((f) => ({ ...f, name: getFullTechName(f.name) }));
 
-	const latestUpdateState = useFetchRepoUpdatedDate(project.repoLink);
 	return (
 		<Page>
 			<NormalPageContents>
-				<LeadHeading>{project.title}</LeadHeading>
 				<ProjectHeader
-					project={project}
 					icons={icons}
-					latestUpdateState={latestUpdateState}
+					title={project.title}
+					repoLink={project.repoLink}
+					firstReleasedDate={project.firstReleased.date}
+					hostedOn={project.hostedOn}
 				/>
-				<Grouping>
+				<TemplateContent>
 					<WpContent dangerouslySetInnerHTML={{ __html: project.content }} />
-				</Grouping>
+				</TemplateContent>
 			</NormalPageContents>
 		</Page>
 	);
