@@ -11,8 +11,11 @@ import { ControlsContainer, ThemeAppearance } from "./ModifyTheme.styles";
 import SettingsGroup from "./SettingsGroup.component";
 
 import { useMultiple } from "@/hooks";
-import { useAppDispatch, useAppSelector } from "@Store/hooks";
-import { changeThemeName, flattenedThemeShape } from "@Store/theme/theme.slice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import {
+	changeThemeName,
+	flattenedThemeShape,
+} from "@/store/theme/theme.slice";
 import { capitalize } from "@/utils/strings";
 
 const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme, open }) => {

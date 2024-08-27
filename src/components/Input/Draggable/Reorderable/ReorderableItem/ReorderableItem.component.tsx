@@ -4,8 +4,8 @@ import { IndividualItem } from "./ReorderableItem.styles";
 
 import { DraggedOverPosition } from "@/utils/enums";
 
-import { setDraggedValue } from "@Store/drag/drag.slice";
-import { useAppDispatch, useAppSelector } from "@Store/hooks";
+import { setDraggedValue } from "@/store/drag/drag.slice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 import type { ReorderableItemProps } from "@/types/props/draggable";
 

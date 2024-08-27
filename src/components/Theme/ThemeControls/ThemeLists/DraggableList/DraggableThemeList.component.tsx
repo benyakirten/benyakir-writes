@@ -4,8 +4,8 @@ import * as React from "react";
 import { ReorderableList } from "@/components/Input/Draggable";
 import DraggableTheme from "./DraggableTheme/DraggableTheme.component";
 
-import { useAppDispatch, useAppSelector } from "@Store/hooks";
-import { reorderThemes } from "@Store/theme/theme.slice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { reorderThemes } from "@/store/theme/theme.slice";
 import type { DraggedOverPosition } from "@/utils/enums";
 
 const DraggableThemeList: React.FC<DraggableThemeListProps> = ({

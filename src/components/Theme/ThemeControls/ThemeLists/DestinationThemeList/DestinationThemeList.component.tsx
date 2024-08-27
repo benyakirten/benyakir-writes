@@ -3,13 +3,13 @@ import * as React from "react";
 import { DestinationColumn } from "./DestinationThemeList.styles";
 
 import { DestinationItem } from "@/components/Input/Draggable";
-import { useAppDispatch, useAppSelector } from "@Store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
 	copyThemeByID,
 	deleteThemeByID,
 	setActiveThemeByID,
 	setThemePreferenceByID,
-} from "@Store/theme/theme.slice";
+} from "@/store/theme/theme.slice";
 
 const DestinationThemeList: React.FC<DestinationThemeListProps> = ({
 	selectedTheme,

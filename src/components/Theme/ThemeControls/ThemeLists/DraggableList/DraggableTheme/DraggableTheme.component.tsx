@@ -4,13 +4,13 @@ import { styled } from "styled-components";
 import { FlatBox } from "@/styles/general-components";
 import { ThemeName } from "./DraggableTheme.styles";
 
-import { useAppDispatch } from "@Store/hooks";
+import { useAppDispatch } from "@/store/hooks";
 import {
 	copyThemeByID,
 	deleteThemeByID,
 	setActiveThemeByID,
 	setThemePreferenceByID,
-} from "@Store/theme/theme.slice";
+} from "@/store/theme/theme.slice";
 import { SIZE_MD, TRANSITION_EXTRA_SLOW } from "@/styles/variables";
 
 const IconButton: React.FC<IconButtonProps> = ({

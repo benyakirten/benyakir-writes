@@ -13,8 +13,8 @@ import ModifyTheme from "./ModifyTheme/ModifyTheme.component";
 import ThemeControls from "./ThemeControls/ThemeControl.component";
 
 import { useAlternation, useMultiple } from "@/hooks";
-import { useAppDispatch, useAppSelector } from "@Store/hooks";
-import { toggleUseComputerPreferences } from "@Store/theme/theme.slice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { toggleUseComputerPreferences } from "@/store/theme/theme.slice";
 
 const ThemeCard: React.FC = () => {
 	const [allowsHover, setAllowsHover] = React.useState<boolean>();

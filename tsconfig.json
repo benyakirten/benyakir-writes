@@ -11,9 +11,6 @@
 		"baseUrl": "./",
 		"paths": {
 			"@/*": ["src/*"],
-			"@Store/*": ["src/store/*"],
-			"@TestProps": ["__tests__/props.ts"],
-			"@TestUtils": ["__tests__/test-utils.tsx"]
 		},
 		"esModuleInterop": true,
 		"skipLibCheck": true,

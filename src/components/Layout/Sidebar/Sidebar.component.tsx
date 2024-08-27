@@ -14,8 +14,8 @@ import {
 } from "./Sidebar.styles";
 import { Toggle } from "@/components/Input";
 import { capitalize } from "@/utils/strings";
-import { useAppDispatch, useAppSelector } from "@Store/hooks";
-import { toggleTimeOfDay } from "@Store/theme/theme.slice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { toggleTimeOfDay } from "@/store/theme/theme.slice";
 import {
 	setSidebarState,
 	toggleSidebarState,

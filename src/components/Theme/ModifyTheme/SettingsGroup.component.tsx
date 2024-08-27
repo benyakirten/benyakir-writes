@@ -7,8 +7,8 @@ import { BigParagraph } from "@/styles/general-components";
 import { getThemePropRecursive } from "@/utils/other";
 import { titleCase } from "@/utils/strings";
 
-import { useAppDispatch } from "@Store/hooks";
-import { changePropOnTheme } from "@Store/theme/theme.slice";
+import { useAppDispatch } from "@/store/hooks";
+import { changePropOnTheme } from "@/store/theme/theme.slice";
 
 const SettingsGroup: React.FC<SettingsGroupProps> = ({
 	title,

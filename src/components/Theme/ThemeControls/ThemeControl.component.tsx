@@ -5,8 +5,8 @@ import { CardContainer, CardHalf } from "./ThemeControls.styles";
 import DestinationThemeList from "./ThemeLists/DestinationThemeList/DestinationThemeList.component";
 import DraggableThemeList from "./ThemeLists/DraggableList/DraggableThemeList.component";
 
-import { useAppDispatch } from "@Store/hooks";
-import { createTheme, resetThemeOptions } from "@Store/theme/theme.slice";
+import { useAppDispatch } from "@/store/hooks";
+import { createTheme, resetThemeOptions } from "@/store/theme/theme.slice";
 
 const ThemeControls: React.FC<ThemeControlProps> = ({
 	selectedTheme,

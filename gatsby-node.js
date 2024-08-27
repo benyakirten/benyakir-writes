@@ -7,9 +7,6 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "src"),
-        "@Store": path.resolve(__dirname, "src/store"),
-        "@TestProps": path.resolve(__dirname, "__tests__/props.ts"),
-        "@TestUtils": path.resolve(__dirname, "__tests__/test-utils.tsx"),
       },
     },
   });

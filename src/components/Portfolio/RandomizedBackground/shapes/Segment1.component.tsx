@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { useAppSelector } from "@Store/hooks";
+import { useAppSelector } from "@/store/hooks";
 import type { SVGData } from "@/types/portfolio";
 import SVGLine from "./SVGLine.component";
 

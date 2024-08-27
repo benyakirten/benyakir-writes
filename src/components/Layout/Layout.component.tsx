@@ -9,11 +9,11 @@ import {
 	PAGE_TRANSITION_DURATION,
 	getPageTransitionStyles,
 } from "@/styles/transitions";
-import { useAppDispatch, useAppSelector } from "@Store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
 	intializeThemeStore,
 	setActiveThemeByName,
-} from "@Store/theme/theme.slice";
+} from "@/store/theme/theme.slice";
 import Search from "./Search";
 import { inputIsFocused } from "@/utils/dom";
 import { setSidebarState } from "@/store/sidebar/sidebar.slice";
