@@ -7,6 +7,8 @@ import {
 	TRIANGLES_FOR_CORNER_INDEX,
 } from "@/data/constants";
 import { FillInExterior } from "./FillIn.styles";
+import { BorderRadiusCorners } from "@/types/filters";
+import { Coord, Corners } from "@/types/general";
 
 const FillIn: React.FC<
 	ChildrenProp & {

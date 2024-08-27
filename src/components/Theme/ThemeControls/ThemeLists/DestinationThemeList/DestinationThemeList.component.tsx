@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { DestinationColumn } from "./DestinationThemeList.styles";
 
-import { DestinationItem } from "@Draggable";
+import { DestinationItem } from "@/components/Input/Draggable";
 import { useAppDispatch, useAppSelector } from "@Store/hooks";
 import {
 	copyThemeByID,

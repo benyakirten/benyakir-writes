@@ -8,7 +8,7 @@ import type {
 	SingleBook,
 	SingleStory,
 	StoryType,
-} from "@Types/posts";
+} from "@/types/posts";
 
 describe("author util", () => {
 	describe("books", () => {

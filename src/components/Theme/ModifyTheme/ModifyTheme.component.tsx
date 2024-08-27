@@ -1,19 +1,19 @@
 import * as React from "react";
 
-import { Text } from "@Input";
+import { Text } from "@/components/Input";
 import {
 	BigParagraph,
 	Box,
 	Column,
 	Paragraph,
-} from "@Styles/general-components";
+} from "@/styles/general-components";
 import { ControlsContainer, ThemeAppearance } from "./ModifyTheme.styles";
 import SettingsGroup from "./SettingsGroup.component";
 
-import { useMultiple } from "@Hooks";
+import { useMultiple } from "@/hooks";
 import { useAppDispatch, useAppSelector } from "@Store/hooks";
 import { changeThemeName, flattenedThemeShape } from "@Store/theme/theme.slice";
-import { capitalize } from "@Utils/strings";
+import { capitalize } from "@/utils/strings";
 
 const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme, open }) => {
 	const dispatch = useAppDispatch();

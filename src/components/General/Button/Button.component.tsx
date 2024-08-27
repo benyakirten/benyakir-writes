@@ -2,13 +2,13 @@ import * as React from "react";
 
 import { ButtonExterior } from "./Button.styles";
 
-import { getFourCorners, getNearestCornerIdx } from "@Utils/coordinates";
+import { getFourCorners, getNearestCornerIdx } from "@/utils/coordinates";
 
 import {
 	CORNER_INDEX_TO_POSITIONING,
 	TRANSFORM_ORIGIN_FOR_CORNER_INDEX,
 	TRIANGLES_FOR_CORNER_INDEX,
-} from "@Constants";
+} from "@/data/constants";
 import { Coord, Corners } from "@/types/general";
 
 const Button: React.FC<ButtonProps> = ({

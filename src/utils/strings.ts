@@ -1,4 +1,4 @@
-import { CSS_MEASUREMENT_REGEX } from "@Constants";
+import { CSS_MEASUREMENT_REGEX } from "@/data/constants";
 
 export function titleToKebab(title: string): string {
 	// Since this function is only applied in the build phase

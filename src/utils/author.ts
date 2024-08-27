@@ -5,7 +5,7 @@ import type {
 	FlattenedSingleStory,
 	SingleBook,
 	SingleStory,
-} from "@Types/posts";
+} from "@/types/posts";
 
 export const flattenBook = (
 	book: SingleBook,

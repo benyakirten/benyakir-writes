@@ -8,14 +8,14 @@ import {
 	TemplateContent,
 	TemplateHeaderContainer,
 	TemplateHeaderTitle,
-} from "@Styles/general-components";
+} from "@/styles/general-components";
 
-import { preprocessWPBlocks } from "@Utils/blocks/identify-blocks";
-import { formatBlogPost, getActiveCategory } from "@Utils/blog";
-import { formatWpText } from "@Utils/posts";
-import { truncate } from "@Utils/strings";
+import { preprocessWPBlocks } from "@/utils/blocks/identify-blocks";
+import { formatBlogPost, getActiveCategory } from "@/utils/blog";
+import { formatWpText } from "@/utils/posts";
+import { truncate } from "@/utils/strings";
 
-import type { WpPost } from "@Types/query";
+import type { WpPost } from "@/types/query";
 import { HeadBase } from "@/components/General";
 import {
 	CategoryContainer,

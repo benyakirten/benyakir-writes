@@ -5,7 +5,7 @@ import type {
 	FlattenedProject,
 	PartialFlattenedProject,
 	ProjectType,
-} from "@Types/posts";
+} from "@/types/posts";
 
 export function formatProject(project: ProjectType): FlattenedProject {
 	const tech = project.project.technologies.split(", ");

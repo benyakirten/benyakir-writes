@@ -6,7 +6,7 @@ import {
 	ReorderableContainer,
 } from "./ReorderableList.styles";
 
-import type { ReorderableListProps } from "@Types/props/draggable";
+import type { ReorderableListProps } from "@/types/props/draggable";
 
 const ReorderableList: React.FC<ReorderableListProps> = ({
 	onDrop,

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { FONT_SIZE_MD } from "@StyleVars";
+import { FONT_SIZE_MD } from "@/styles/variables";
 
 import Select from "react-select";
 

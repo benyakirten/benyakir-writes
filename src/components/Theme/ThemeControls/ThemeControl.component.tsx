@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Button } from "@Gen";
+import { Button } from "@/components/General";
 import { CardContainer, CardHalf } from "./ThemeControls.styles";
 import DestinationThemeList from "./ThemeLists/DestinationThemeList/DestinationThemeList.component";
 import DraggableThemeList from "./ThemeLists/DraggableList/DraggableThemeList.component";

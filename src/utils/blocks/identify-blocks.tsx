@@ -1,7 +1,7 @@
 import React from "react";
 
-import { SyntaxHighlighter } from "@Blocks";
-import { WpContent } from "@Styles/general-components";
+import { SyntaxHighlighter } from "@/components/Blocks";
+import { WpContent } from "@/styles/general-components";
 
 const KNOWN_BLOCK_CLASSES: BlockComponents = {
 	"benyakir-syntax-highlighter": SyntaxHighlighter,

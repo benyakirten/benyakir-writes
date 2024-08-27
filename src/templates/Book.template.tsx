@@ -11,12 +11,12 @@ import {
 	TemplateHeaderContainer,
 	TemplateHeaderTitle,
 	WpContent,
-} from "@Styles/general-components";
-import { flattenBook } from "@Utils/author";
-import { getPrettyDate } from "@Utils/dates";
-import { formatWpText } from "@Utils/posts";
-import { truncate } from "@Utils/strings";
-import type { WpBook } from "@Types/query";
+} from "@/styles/general-components";
+import { flattenBook } from "@/utils/author";
+import { getPrettyDate } from "@/utils/dates";
+import { formatWpText } from "@/utils/posts";
+import { truncate } from "@/utils/strings";
+import type { WpBook } from "@/types/query";
 import { GrowableUnderline, HeadBase } from "@/components/General";
 import { FONT_LG, SIZE_MD, SIZE_SM } from "@/styles/variables";
 import { PublishedDate } from "@/components/Cards/IconedText.component";

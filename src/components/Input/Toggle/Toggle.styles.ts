@@ -4,7 +4,7 @@ import {
 	SIZE_SM,
 	SIZE_XXL,
 	TRANSITION_SLOW,
-} from "@StyleVars";
+} from "@/styles/variables";
 import styled from "styled-components";
 
 export const ToggleGroup = styled.div`

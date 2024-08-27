@@ -1,6 +1,6 @@
 import { getBlogPostDateInformation } from "./dates";
 
-import type { BlogPostType, FlattenedBlogPost } from "@Types/posts";
+import type { BlogPostType, FlattenedBlogPost } from "@/types/posts";
 
 export function formatBlogPost(post: BlogPostType): FlattenedBlogPost {
 	return {

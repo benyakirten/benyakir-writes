@@ -2,12 +2,12 @@ import * as React from "react";
 
 import { IndividualItem } from "./ReorderableItem.styles";
 
-import { DraggedOverPosition } from "@Utils/enums";
+import { DraggedOverPosition } from "@/utils/enums";
 
 import { setDraggedValue } from "@Store/drag/drag.slice";
 import { useAppDispatch, useAppSelector } from "@Store/hooks";
 
-import type { ReorderableItemProps } from "@Types/props/draggable";
+import type { ReorderableItemProps } from "@/types/props/draggable";
 
 const DraggableItem: React.FC<ReorderableItemProps> = ({
 	children,

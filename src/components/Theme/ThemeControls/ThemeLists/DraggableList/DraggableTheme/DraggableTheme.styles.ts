@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { media } from "@Styles/queries";
+import { media } from "@/styles/queries";
 
 export const ThemeName = styled.span`
   max-width: 55%;

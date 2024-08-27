@@ -5,7 +5,7 @@ import {
 	LeadHeading,
 	Page,
 	PaginatedPageContents,
-} from "@Styles/general-components";
+} from "@/styles/general-components";
 import usePagination from "@/hooks/usePagination.hook";
 import type { FlattenedBlogCard } from "@/types/posts";
 import {

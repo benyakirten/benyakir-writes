@@ -1,12 +1,12 @@
 import * as React from "react";
 
-import { HeadBase } from "@Gen";
+import { HeadBase } from "@/components/General";
 import {
 	Grouping,
 	LeadHeading,
 	NormalPageContents,
 	Page,
-} from "@Styles/general-components";
+} from "@/styles/general-components";
 import { homeDescription, latestTwentyItems } from "@/data/search";
 import {
 	FlattenedBlogCard,

@@ -5,9 +5,9 @@ import {
 	LeadHeading,
 	Page,
 	PaginatedPageContents,
-} from "@Styles/general-components";
+} from "@/styles/general-components";
 
-import { usePagination } from "@Hooks";
+import { usePagination } from "@/hooks";
 import {
 	projectHosts,
 	projectTechs,

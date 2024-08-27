@@ -7,31 +7,6 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "src"),
-        "@Blocks": path.resolve(__dirname, "src/components/Blocks/index.ts"),
-        "@Gen": path.resolve(__dirname, "src/components/General/index.ts"),
-        "@Input": path.resolve(__dirname, "src/components/Input/index.ts"),
-        "@Pre": path.resolve(__dirname, "src/components/Prefix/index.ts"),
-        "@Draggable": path.resolve(
-          __dirname,
-          "src/components/Input/Draggable/index.ts"
-        ),
-        "@Posts": path.resolve(__dirname, "src/components/Posts/index.ts"),
-        "@Layout": path.resolve(__dirname, "src/components/Layout/index.ts"),
-        "@Variants": path.resolve(
-          __dirname,
-          "src/components/Variants/index.ts"
-        ),
-        "@Styles": path.resolve(__dirname, "src/styles"),
-        "@StyleVars": path.resolve(__dirname, "src/styles/variables.ts"),
-        "@Animations": path.resolve(__dirname, "src/styles/animations.ts"),
-        "@Utils": path.resolve(__dirname, "src/utils"),
-        "@Images": path.resolve(__dirname, "src/files/images"),
-        "@Tech": path.resolve(__dirname, "src/files/images/tech"),
-        "@Constants": path.resolve(__dirname, "src/data/constants.ts"),
-        "@Hooks": path.resolve(__dirname, "src/hooks/index.ts"),
-        "@Data": path.resolve(__dirname, "src/data"),
-        "@WPData": path.resolve(__dirname, "src/data/wp"),
-        "@Types": path.resolve(__dirname, "src/types"),
         "@Store": path.resolve(__dirname, "src/store"),
         "@TestProps": path.resolve(__dirname, "__tests__/props.ts"),
         "@TestUtils": path.resolve(__dirname, "__tests__/test-utils.tsx"),

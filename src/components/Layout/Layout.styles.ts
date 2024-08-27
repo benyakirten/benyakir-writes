@@ -1,7 +1,11 @@
 import styled, { createGlobalStyle } from "styled-components";
 
-import { SANS_SERIF_FONT, SERIF_FONT, TRANSITION_NORMAL } from "@StyleVars";
-import { media } from "@Styles/queries";
+import {
+	SANS_SERIF_FONT,
+	SERIF_FONT,
+	TRANSITION_NORMAL,
+} from "@/styles/variables";
+import { media } from "@/styles/queries";
 
 export const GlobalStyles = createGlobalStyle`
   *,

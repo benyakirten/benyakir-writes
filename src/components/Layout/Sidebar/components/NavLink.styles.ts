@@ -1,7 +1,11 @@
 import { Link } from "gatsby";
 import styled from "styled-components";
 
-import { FONT_SIZE_LG, TRANSITION_NORMAL, TRANSITION_SLOW } from "@StyleVars";
+import {
+	FONT_SIZE_LG,
+	TRANSITION_NORMAL,
+	TRANSITION_SLOW,
+} from "@/styles/variables";
 
 export const StyledNavLink = styled(Link)<{
 	active: boolean;

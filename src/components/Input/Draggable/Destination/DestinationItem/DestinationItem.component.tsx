@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import type { DestinationItemProps } from "@Types/props/draggable";
+import type { DestinationItemProps } from "@/types/props/draggable";
 import {
 	ItemContainer,
 	ItemContent,

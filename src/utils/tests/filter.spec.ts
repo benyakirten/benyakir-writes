@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 
-import * as filter from "@Utils/filter";
+import * as filter from "@/utils/filter";
 
 describe("filter util", () => {
 	describe("createChoiceSet", () => {

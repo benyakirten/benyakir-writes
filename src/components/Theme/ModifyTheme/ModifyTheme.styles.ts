@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { FONT_SIZE_MD } from "@StyleVars";
+import { FONT_SIZE_MD } from "@/styles/variables";
 import { fadeIn } from "@/styles/animations";
 
 export const ControlsContainer = styled.div`

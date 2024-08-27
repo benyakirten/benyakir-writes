@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { useAppSelector } from "@Store/hooks";
-import type { SVGData } from "@Types/portfolio";
+import type { SVGData } from "@/types/portfolio";
 import SVGLine from "./SVGLine.component";
 
 const Segment2: React.FC<SVGData> = ({ xMovement, yMovement }) => {

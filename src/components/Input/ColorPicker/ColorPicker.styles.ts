@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import { FONT_SIZE_MD, SHADOW_MD } from "@StyleVars";
-import { convertHexToRGBA } from "@Utils/colors";
+import { FONT_SIZE_MD, SHADOW_MD } from "@/styles/variables";
+import { convertHexToRGBA } from "@/utils/colors";
 
 export const Container = styled.div`
   display: flex;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { media } from "@/styles/queries";
-import { FONT_SIZE_MD, TRANSITION_SLOW, Z_ABOVE } from "@StyleVars";
+import { FONT_SIZE_MD, TRANSITION_SLOW, Z_ABOVE } from "@/styles/variables";
 
 export const ButtonExterior = styled.button`
   cursor: pointer;

@@ -1,7 +1,12 @@
 import styled from "styled-components";
 
-import { FONT_SIZE_LG, TRANSITION_SLOW, Z_BASE, Z_UNDER } from "@StyleVars";
-import { media } from "@Styles/queries";
+import {
+	FONT_SIZE_LG,
+	TRANSITION_SLOW,
+	Z_BASE,
+	Z_UNDER,
+} from "@/styles/variables";
+import { media } from "@/styles/queries";
 
 export const ChoiceContainer = styled.div<{
 	checked: boolean;

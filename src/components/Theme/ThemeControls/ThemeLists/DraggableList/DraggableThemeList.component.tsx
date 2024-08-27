@@ -1,12 +1,12 @@
 import { graphql, useStaticQuery } from "gatsby";
 import * as React from "react";
 
-import { ReorderableList } from "@Draggable";
+import { ReorderableList } from "@/components/Input/Draggable";
 import DraggableTheme from "./DraggableTheme/DraggableTheme.component";
 
 import { useAppDispatch, useAppSelector } from "@Store/hooks";
 import { reorderThemes } from "@Store/theme/theme.slice";
-import type { DraggedOverPosition } from "@Utils/enums";
+import type { DraggedOverPosition } from "@/utils/enums";
 
 const DraggableThemeList: React.FC<DraggableThemeListProps> = ({
 	open,

@@ -5,7 +5,7 @@ import {
 	LeadHeading,
 	NormalPageContents,
 	Page,
-} from "@Styles/general-components";
+} from "@/styles/general-components";
 import { themeDescription } from "@/data/search";
 import { HeadBase } from "@/components/General";
 import { ThemeOptions } from "@/components/Theme";

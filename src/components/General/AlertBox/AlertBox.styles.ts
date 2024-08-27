@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
 
-import { FONT_SIZE_MD } from "@StyleVars";
+import { FONT_SIZE_MD } from "@/styles/variables";
 
 const rollOut = keyframes`
     from {

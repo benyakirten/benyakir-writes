@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import { FONT_SIZE_LG, SHADOW_MD, Z_ABOVE, Z_RAISED } from "@StyleVars";
-import { convertHexToRGBA } from "@Utils/colors";
+import { FONT_SIZE_LG, SHADOW_MD, Z_ABOVE, Z_RAISED } from "@/styles/variables";
+import { convertHexToRGBA } from "@/utils/colors";
 
 export const HighlighterContainer = styled.div`
   position: relative;

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { ChoiceContainer } from "./Choice.styles";
 
-import { titleToKebab } from "@Utils/strings";
+import { titleToKebab } from "@/utils/strings";
 
 const Choice: React.FC<ChoiceProps> = ({
 	label,

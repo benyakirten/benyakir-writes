@@ -3,7 +3,7 @@ import * as React from "react";
 import DraggableDestinationItem from "../DestinationItem/DestinationItem.component";
 import { DestinationColumn } from "./DestinationList.styles";
 
-import type { DestinationListProps } from "@Types/props/draggable";
+import type { DestinationListProps } from "@/types/props/draggable";
 
 const DraggableDestinationList: React.FC<DestinationListProps> = ({
 	destinations,

@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import { useAppSelector } from "@Store/hooks";
-import type { SVGData } from "@Types/portfolio";
-import { generatePolygonPoints } from "@Utils/svgs";
+import type { SVGData } from "@/types/portfolio";
+import { generatePolygonPoints } from "@/utils/svgs";
 import SVGShape from "./SVGShape.component";
 
 const Polygon: React.FC<SVGData> = ({ xMovement, yMovement }) => {

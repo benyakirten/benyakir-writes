@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-import { FONT_SIZE_MD, SANS_SERIF_FONT, TRANSITION_NORMAL } from "@StyleVars";
+import {
+	FONT_SIZE_MD,
+	SANS_SERIF_FONT,
+	TRANSITION_NORMAL,
+} from "@/styles/variables";
 
 export const ItemContainer = styled.li`
   position: relative;

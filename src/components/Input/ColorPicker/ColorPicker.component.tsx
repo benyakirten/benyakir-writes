@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { ColorInput, Container, Label } from "./ColorPicker.styles";
 
-import { COLOR_REGEX } from "@Constants";
+import { COLOR_REGEX } from "@/data/constants";
 
 const ColorPicker: React.FC<ColorPickerProps> = ({
 	name,

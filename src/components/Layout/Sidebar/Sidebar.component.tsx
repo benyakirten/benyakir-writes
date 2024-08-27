@@ -12,8 +12,8 @@ import {
 	StyledSidebar,
 	VisibleGroup,
 } from "./Sidebar.styles";
-import { Toggle } from "@Input";
-import { capitalize } from "@Utils/strings";
+import { Toggle } from "@/components/Input";
+import { capitalize } from "@/utils/strings";
 import { useAppDispatch, useAppSelector } from "@Store/hooks";
 import { toggleTimeOfDay } from "@Store/theme/theme.slice";
 import {

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { TRANSITION_NORMAL } from "@/styles/variables";
 import { multiplyCSSNumber } from "@/utils/strings";
-import { media } from "@Styles/queries";
+import { media } from "@/styles/queries";
 
 export const FoldoutContainer = styled.div`
   position: relative;

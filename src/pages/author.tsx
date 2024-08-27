@@ -5,9 +5,9 @@ import {
 	LeadHeading,
 	Page,
 	PaginatedPageContents,
-} from "@Styles/general-components";
-import { usePagination } from "@Hooks";
-import type { AuthoredItemCard } from "@Types/posts";
+} from "@/styles/general-components";
+import { usePagination } from "@/hooks";
+import type { AuthoredItemCard } from "@/types/posts";
 import { authorDescription, books, stories } from "@/data/search";
 import { CardContainer, BookCard, StoryCard } from "@/components/Cards";
 import {

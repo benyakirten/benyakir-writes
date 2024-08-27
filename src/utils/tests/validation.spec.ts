@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 
-import { COLOR_REGEX } from "@Constants";
+import { COLOR_REGEX } from "@/data/constants";
 import {
 	validate,
 	validateByRegex,

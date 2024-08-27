@@ -8,7 +8,7 @@ import {
 	LoadingContainer,
 } from "./SyntaxHighlighter.styles";
 
-import { Loading } from "@Gen";
+import { Loading } from "@/components/General";
 
 import {
 	ENABLED_THEMES,

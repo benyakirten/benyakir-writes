@@ -2,8 +2,8 @@ import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import { defaultDayTheme, initialState } from "./theme.state";
 
-import { DraggedOverPosition } from "@Utils/enums";
-import { flattenTheme } from "@Utils/other";
+import { DraggedOverPosition } from "@/utils/enums";
+import { flattenTheme } from "@/utils/other";
 
 function determineComputerPreferredTheme(state: ThemeState) {
 	const darkThemeTime = window.matchMedia(

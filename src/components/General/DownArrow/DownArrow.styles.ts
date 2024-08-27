@@ -1,4 +1,4 @@
-import { FONT_SIZE_LG, TRANSITION_SLOW } from "@StyleVars";
+import { FONT_SIZE_LG, TRANSITION_SLOW } from "@/styles/variables";
 import styled from "styled-components";
 
 export const StyledArrow = styled.span<{ open: boolean }>`

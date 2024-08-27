@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { TRANSITION_SLOW, Z_ABOVE } from "@StyleVars";
+import { TRANSITION_SLOW, Z_ABOVE } from "@/styles/variables";
 
 export const FillInExterior = styled.div<{
 	borderRadiusCorners: BorderRadiusCorners;

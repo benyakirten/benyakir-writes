@@ -1,7 +1,7 @@
 import * as React from "react";
 import { styled } from "styled-components";
 
-import { FlatBox } from "@Styles/general-components";
+import { FlatBox } from "@/styles/general-components";
 import { ThemeName } from "./DraggableTheme.styles";
 
 import { useAppDispatch } from "@Store/hooks";

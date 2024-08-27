@@ -12,9 +12,9 @@ import {
 	SIZE_SM,
 	FONT_SIZE_XXS,
 	SIZE_XS,
-} from "@StyleVars";
-import { media } from "@Styles/queries";
-import { convertHexToRGBA } from "@Utils/colors";
+} from "@/styles/variables";
+import { media } from "@/styles/queries";
+import { convertHexToRGBA } from "@/utils/colors";
 
 export const StyledSidebar = styled.nav<{ open?: boolean }>`
   position: fixed;

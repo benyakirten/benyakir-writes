@@ -5,7 +5,7 @@ import {
 	FoldoutContainer,
 	TopbarContainer,
 } from "./Foldout.styles";
-import { findAttrInElTree } from "@Utils/dom";
+import { findAttrInElTree } from "@/utils/dom";
 import { DownArrow } from "..";
 
 const Foldout: React.FC<FoldoutProps> = ({

@@ -1,12 +1,12 @@
 import * as React from "react";
 
-import { GrowableUnderline } from "@Gen";
+import { GrowableUnderline } from "@/components/General";
 import {
 	BigParagraph,
 	LeadHeading,
 	NormalPageContents,
 	Page,
-} from "@Styles/general-components";
+} from "@/styles/general-components";
 import { HeadBase } from "@/components/General";
 import { Link } from "gatsby";
 

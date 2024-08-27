@@ -13,7 +13,7 @@ import {
 	Z_ABOVE,
 	SANS_SERIF_FONT,
 	SIZE_MD,
-} from "@Styles/variables";
+} from "@/styles/variables";
 
 export const ProjectBoxes = styled.div`
   display: grid;

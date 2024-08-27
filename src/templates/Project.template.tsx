@@ -9,15 +9,15 @@ import {
 	TemplateHeaderContainer,
 	TemplateHeaderTitle,
 	WpContent,
-} from "@Styles/general-components";
+} from "@/styles/general-components";
 
-import { getPrettyDate } from "@Utils/dates";
-import { formatWpText } from "@Utils/posts";
-import { formatProject, getFullTechName } from "@Utils/project";
-import { truncate } from "@Utils/strings";
+import { getPrettyDate } from "@/utils/dates";
+import { formatWpText } from "@/utils/posts";
+import { formatProject, getFullTechName } from "@/utils/project";
+import { truncate } from "@/utils/strings";
 
 import { useFetchRepoUpdatedDate } from "@/hooks";
-import type { WpProject } from "@Types/query";
+import type { WpProject } from "@/types/query";
 import {
 	HeadBase,
 	ProjectHost,

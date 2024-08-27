@@ -3,7 +3,7 @@ import * as React from "react";
 import { Loading } from "@/components/General";
 import type { LatestUpdateState } from "@/types/hooks";
 import { getPrettyDate } from "@/utils/dates";
-import { FetchState } from "@Hooks";
+import { FetchState } from "@/hooks";
 
 const LegacyLatestUpdate: React.FC<{ state: LatestUpdateState }> = ({
 	state,

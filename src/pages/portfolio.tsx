@@ -7,7 +7,7 @@ import { PortfolioHeader, RandomizedBackground } from "@/components/Portfolio";
 import { NormalPageContents, Page } from "@/styles/general-components";
 import type { RecentProjectItem } from "@/types/portfolio";
 import { getFirstParagraphOfContent } from "@/utils/project";
-import type { ProjectsQuery } from "@Types/query";
+import type { ProjectsQuery } from "@/types/query";
 import { portfolioDescription, projects } from "@/data/search";
 import {
 	AboutMe,

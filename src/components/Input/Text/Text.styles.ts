@@ -7,7 +7,7 @@ import {
 	SIZE_SM,
 	SIZE_XS,
 	TRANSITION_NORMAL,
-} from "@StyleVars";
+} from "@/styles/variables";
 
 export const TextInputContainer = styled.div`
   position: relative;

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import { FONT_SIZE_MD, SHADOW_SM, TRANSITION_NORMAL } from "@Styles/variables";
+import { FONT_SIZE_MD, SHADOW_SM, TRANSITION_NORMAL } from "@/styles/variables";
 
-import { DraggedOverPosition } from "@Utils/enums";
+import { DraggedOverPosition } from "@/utils/enums";
 
 export const IndividualItem = styled.li<{
 	selected: boolean;

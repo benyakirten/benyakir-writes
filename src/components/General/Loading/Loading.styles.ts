@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import { ABS_BLACK } from "@StyleVars";
-
 export const LoadingContainer = styled.span<{ size: string }>`
   display: inline-block;
 

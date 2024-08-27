@@ -2,7 +2,7 @@ import * as React from "react";
 import Select, { GroupBase } from "react-select";
 import styled, { useTheme } from "styled-components";
 
-import { FONT_SIZE_SM, SIZE_SM, TRANSITION_NORMAL } from "@StyleVars";
+import { FONT_SIZE_SM, SIZE_SM, TRANSITION_NORMAL } from "@/styles/variables";
 import { MultipleChoiceInputProps } from "@/types/filters";
 
 const MultipleChoiceContainer = styled.label`

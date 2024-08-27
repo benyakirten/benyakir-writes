@@ -5,14 +5,14 @@ import {
 	Box,
 	Column,
 	Paragraph,
-} from "@Styles/general-components";
+} from "@/styles/general-components";
 
-import { AlertBox, Foldout } from "@Gen";
-import { Toggle } from "@Input";
+import { AlertBox, Foldout } from "@/components/General";
+import { Toggle } from "@/components/Input";
 import ModifyTheme from "./ModifyTheme/ModifyTheme.component";
 import ThemeControls from "./ThemeControls/ThemeControl.component";
 
-import { useAlternation, useMultiple } from "@Hooks";
+import { useAlternation, useMultiple } from "@/hooks";
 import { useAppDispatch, useAppSelector } from "@Store/hooks";
 import { toggleUseComputerPreferences } from "@Store/theme/theme.slice";
 
