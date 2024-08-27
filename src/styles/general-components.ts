@@ -77,7 +77,7 @@ export const LeadHeading = styled.h1`
 
   ${FONT_XXXL};
 
-  background-image: linear-gradient(45deg, ${(props) => props.theme.base.textColor} 50%, ${(props) => props.theme.base.highlighted});
+  background-image: linear-gradient(45deg, ${(props) => props.theme.base.textColor} 30%, ${(props) => props.theme.base.highlighted});
   background-position: left;
   background-size: 300%;
   background-clip: text;
@@ -344,7 +344,6 @@ export const FlatBox = styled(Box)`
 `;
 
 // https://stackoverflow.com/questions/24933430/img-src-svg-changing-the-styles-with-css
-
 export const SVGContainer = styled.div<{
 	src: string;
 	alt: string;
@@ -359,47 +358,36 @@ export const SVGContainer = styled.div<{
   width: ${(props) => props.size ?? SIZE_MD};
 `;
 
-export const WpContent = styled.div<{ fontSize?: string }>`
-  font-size: ${(props) => (props.fontSize ? props.fontSize : FONT_SIZE_LG)};
+export const WpContent = styled.div`
+  ${FONT_LG};
 
   ${media.phone} {
-    font-size: ${(props) => (props.fontSize ? props.fontSize : FONT_SIZE_MD)};
+    ${FONT_MD};
   }
 
   a:link,
   a:visited {
-    position: relative;
+    width: min-content;
 
-    color: ${(props) => props.theme.base.textColor};
+    background-color: transparent;
+    background-image: linear-gradient(${(props) => props.theme.link.dark}, ${(props) => props.theme.link.dark});
+    background-repeat: no-repeat;
+    background-size: 0px 2px;
+    background-position: 0 100%;
+    text-decoration: none;
 
-    overflow: hidden;
-    white-space: nowrap;
+    transition: background-size ${TRANSITION_SLOW} ease;
 
-    &::after {
-      content: '';
-
-      position: absolute;
-      left: 0;
-      bottom: 0;
-
-      height: 2px;
-      width: 100%;
-
-      background-color: ${(props) => props.theme.base.textColor};
-
-      transition: transform ${TRANSITION_NORMAL} ease;
-      transform-origin: left;
-      transform: scaleX(0);
+    &:hover, &:focus-within {
+      background-size: 100% 2px;
     }
 
-    &:hover {
-      &::after {
-        transform: scaleX(1);
+    &:focus-within {
+      outline: 1px solid ${(props) => props.theme.link.dark};
+    }
 
-        ${media.reducedMotion} {
-          transform: scaleX(0);
-        }
-      }
+    ${media.noHover} {
+      background-size: 100% 2px;
     }
   }
 
@@ -409,77 +397,23 @@ export const WpContent = styled.div<{ fontSize?: string }>`
   h4,
   h5,
   h6 {
-    font-family: ${SERIF_FONT};
-    margin: 2rem 0;
+    font-family: ${SANS_SERIF_FONT};
+    margin: ${SIZE_MD} 0;
   }
 
+
+  ul,
   ol,
   li {
-    margin-left: 1rem;
+    margin-left: ${SIZE_SM};
+  }
+
+  ul:has(li > a), ol:has(li > a) {
+    list-style-type: disc;
   }
 
   p {
-    margin: 1rem 0;
-  }
-`;
-
-export const WpContentInline = styled.span<{ fontSize?: string }>`
-  font-size: ${(props) => (props.fontSize ? props.fontSize : FONT_SIZE_LG)};
-
-  a:link,
-  a:visited {
-    position: relative;
-
-    color: ${(props) => props.theme.base.textColor};
-
-    overflow: hidden;
-    white-space: nowrap;
-
-    &::after {
-      content: '';
-
-      position: absolute;
-      left: 0;
-      bottom: 0;
-
-      height: 2px;
-      width: 100%;
-
-      background-color: ${(props) => props.theme.base.textColor};
-
-      transition: transform ${TRANSITION_NORMAL} ease;
-      transform-origin: left;
-      transform: scaleX(0);
-    }
-
-    &:hover {
-      &::after {
-        transform: scaleX(1);
-
-        ${media.reducedMotion} {
-          transform: scaleX(0);
-        }
-      }
-    }
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: ${SERIF_FONT};
-    margin: 2rem 0;
-  }
-
-  ol,
-  li {
-    margin-left: 1rem;
-  }
-
-  p {
-    margin: 0.25rem 0;
+    margin: ${SIZE_MD} 0;
   }
 `;
 
@@ -543,7 +477,8 @@ export const TemplateContent = styled.div`
 `;
 
 export const TemplateHeaderContainer = styled.div`
-  display: grid;
-  gap: ${SIZE_SM};
+  display: flex;
+  flex-direction: column;
+  gap: ${SIZE_XS};
   margin-bottom: ${SIZE_SM};
 `;

@@ -1,15 +1,9 @@
-import { SyntaxHighlighter } from "@Blocks";
-
 // In milliseconds
 export const SEARCH_TIMEOUT = 250;
 
 export const ICONS_TO_LINKS = {
 	GitHub: "https://github.com/benyakirten",
 	Blog: "https://benyakiredits.com",
-};
-
-export const KNOWN_BLOCK_CLASSES: BlockComponents = {
-	"benyakir-syntax-highlighter": SyntaxHighlighter,
 };
 
 export const DATE_REGEX = /^\d{2}\/\d{2}\/\d{4}$/;

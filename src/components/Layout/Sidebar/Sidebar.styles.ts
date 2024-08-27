@@ -11,6 +11,7 @@ import {
 	Z_RAISED,
 	SIZE_SM,
 	FONT_SIZE_XXS,
+	SIZE_XS,
 } from "@StyleVars";
 import { media } from "@Styles/queries";
 import { convertHexToRGBA } from "@Utils/colors";
@@ -80,7 +81,8 @@ export const NavGroup = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
-  gap: ${SIZE_SM};
+  gap: ${SIZE_XS};
+  margin: ${SIZE_SM} 0;
 `;
 
 export const SubLinks = styled.div<{ open: boolean }>`

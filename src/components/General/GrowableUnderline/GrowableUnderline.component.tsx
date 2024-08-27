@@ -1,4 +1,5 @@
 import { media } from "@/styles/queries";
+import { TRANSITION_SLOW } from "@/styles/variables";
 import React from "react";
 import styled from "styled-components";
 
@@ -16,7 +17,7 @@ const UnderlinableItem = styled.div<{ display?: string }>`
 	background-position: 0 100%;
 	text-decoration: none;
 
-	transition: background-size 0.3s;
+	transition: background-size ${TRANSITION_SLOW} ease;
 
 	&:hover, &:focus-within {
 		background-size: 100% 2px;

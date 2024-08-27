@@ -3,9 +3,10 @@ import * as React from "react";
 import styled from "styled-components";
 
 import {
-	Grouping,
 	NormalPageContents,
 	Page,
+	TemplateContent,
+	TemplateHeaderContainer,
 	TemplateHeaderTitle,
 	WpContent,
 } from "@Styles/general-components";
@@ -15,7 +16,7 @@ import { formatWpText } from "@Utils/posts";
 import { truncate } from "@Utils/strings";
 import type { WpStory } from "@Types/query";
 import { GrowableUnderline, HeadBase } from "@/components/General";
-import { FONT_SM, SIZE_SM, SIZE_XS } from "@/styles/variables";
+import { FONT_SM } from "@/styles/variables";
 import { PublishedDate } from "@/components/Cards/IconedText.component";
 import { NamedLink } from "@/types/general";
 import { formatOutsideLink } from "@/utils/other";
@@ -30,13 +31,6 @@ export const Head: React.FC<WpStory> = ({ data }) => {
 
 	return <HeadBase title={story.title} description={description} />;
 };
-
-const StoryHeaderContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${SIZE_XS};
-  margin-bottom: ${SIZE_SM};
-`;
 
 const StoryBookRelationshipContainer = styled.span`
   ${FONT_SM};
@@ -64,7 +58,7 @@ const StoryHeader: React.FC<{
 	alternateLinks?: NamedLink[];
 }> = ({ title, published, relatedBook, alternateLinks }) => {
 	return (
-		<StoryHeaderContainer>
+		<TemplateHeaderContainer>
 			{relatedBook && <StoryBookRelationship {...relatedBook} />}
 			<TemplateHeaderTitle>{title}</TemplateHeaderTitle>
 			<PublishedDate date={published} />
@@ -81,7 +75,7 @@ const StoryHeader: React.FC<{
 					))}
 				</p>
 			)}
-		</StoryHeaderContainer>
+		</TemplateHeaderContainer>
 	);
 };
 
@@ -103,9 +97,9 @@ const Story: React.FC<WpStory> = ({ data }) => {
 					relatedBook={relatedBook}
 					alternateLinks={story.alternateLinks}
 				/>
-				<Grouping>
+				<TemplateContent>
 					<WpContent dangerouslySetInnerHTML={{ __html: story.content }} />
-				</Grouping>
+				</TemplateContent>
 			</NormalPageContents>
 		</Page>
 	);

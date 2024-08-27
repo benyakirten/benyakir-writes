@@ -3,19 +3,26 @@ import * as React from "react";
 
 import {
 	Grouping,
-	LeadHeading,
 	NormalPageContents,
 	Page,
+	PillContainer,
+	TemplateContent,
+	TemplateHeaderContainer,
+	TemplateHeaderTitle,
 } from "@Styles/general-components";
 
-import { createBlocks, preprocessWPEntry } from "@Utils/blocks/identify-blocks";
-import { formatBlogPost } from "@Utils/blog";
+import { preprocessWPBlocks } from "@Utils/blocks/identify-blocks";
+import { formatBlogPost, getActiveCategory } from "@Utils/blog";
 import { formatWpText } from "@Utils/posts";
 import { truncate } from "@Utils/strings";
 
 import type { WpPost } from "@Types/query";
-import { PostHeader } from "@Variants";
 import { HeadBase } from "@/components/General";
+import {
+	CategoryContainer,
+	TagContainer,
+} from "@/components/Cards/Card.styles";
+import { PublishedDate } from "@/components/Cards/IconedText.component";
 
 export const Head: React.FC<WpPost> = ({ data }) => {
 	const post = formatBlogPost(data.wpPost);
@@ -24,21 +31,49 @@ export const Head: React.FC<WpPost> = ({ data }) => {
 	return <HeadBase title={post.title} description={description} />;
 };
 
+const PostHeader: React.FC<{
+	title: string;
+	category: string;
+	tags: string[] | null;
+	date: Date;
+}> = ({ category, tags, title, date }) => {
+	return (
+		<TemplateHeaderContainer>
+			<CategoryContainer style={{ alignSelf: "self-start" }}>
+				{category}
+			</CategoryContainer>
+			{tags && (
+				<TagContainer style={{ justifyContent: "start" }}>
+					{tags.map((t) => (
+						<PillContainer key={t}>{t}</PillContainer>
+					))}
+				</TagContainer>
+			)}
+			<TemplateHeaderTitle>{title}</TemplateHeaderTitle>
+			<PublishedDate date={date} />
+		</TemplateHeaderContainer>
+	);
+};
+
 const Post: React.FC<WpPost> = ({ data }) => {
-	const entry = preprocessWPEntry(data.wpPost.content ?? "");
-	const blocks = createBlocks(entry);
+	const blocks = preprocessWPBlocks(data.wpPost.content ?? "");
 	const post = formatBlogPost(data.wpPost);
+	const activeCategory = getActiveCategory(post.categories);
 
 	return (
 		<Page>
 			<NormalPageContents>
-				<LeadHeading>{post.title}</LeadHeading>
-				<PostHeader post={post} />
-				<Grouping>
+				<PostHeader
+					title={post.title}
+					category={activeCategory}
+					tags={post.tags}
+					date={post.published.date}
+				/>
+				<TemplateContent>
 					{blocks.map((block) => (
 						<div key={block.key}>{block}</div>
 					))}
-				</Grouping>
+				</TemplateContent>
 			</NormalPageContents>
 		</Page>
 	);
