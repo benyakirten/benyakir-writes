@@ -25,6 +25,7 @@ import {
 	FONT_MD,
 	FONT_LG,
 } from "./variables";
+import { hoverUnderline, textClipWithHoverTransition } from "./composables";
 
 export const FadeIn = styled.div<{ duration?: string; delay?: string }>`
   opacity: 0;
@@ -64,16 +65,7 @@ export const LeadHeading = styled.h1`
 
   ${FONT_XXXL};
 
-  background-image: linear-gradient(45deg, ${(props) => props.theme.base.textColor} 30%, ${(props) => props.theme.base.highlighted});
-  background-position: left;
-  background-size: 300%;
-  background-clip: text;
-  color: transparent;
-  transition: background-position ${TRANSITION_EXTRA_SLOW} ease;
-
-  &:hover {
-    background-position: right;
-  }
+  ${(props) => textClipWithHoverTransition(props.theme.base.textColor, props.theme.base.highlighted)}
 
   ${media.phone} {
     ${FONT_XXL};
@@ -87,30 +79,11 @@ export const Subtitle = styled.h2`
 
   ${FONT_XL};
 
-  background-image: linear-gradient(45deg, ${(props) => props.theme.base.textColor} 50%, ${(props) => props.theme.base.highlighted});
-  background-position: left;
-  background-size: 300%;
-  background-clip: text;
-  color: transparent;
-  transition: background-position ${TRANSITION_EXTRA_SLOW} ease;
-
-  &:hover {
-    background-position: right;
-  }
+  ${(props) => textClipWithHoverTransition(props.theme.base.textColor, props.theme.base.highlighted)}
 
   ${media.phone} {
     ${FONT_LG};
   }
-`;
-
-export const MinorHeading = styled.h4`
-    font-family: ${SERIF_FONT};
-    font-size: ${FONT_SIZE_LG};
-
-    ${media.tablet} {
-        margin-bottom 0.5rem;
-        font-size: ${FONT_SIZE_MD};
-    }
 `;
 
 export const BigParagraph = styled.p<{
@@ -129,17 +102,6 @@ export const Paragraph = styled.p`
   margin: 0;
 `;
 
-export const Centered = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
-  height: 100%;
-
-  font-size: ${FONT_SIZE_MD};
-`;
-
 export const Card = styled.div`
 	border-radius: ${SIZE_XS};
 	border: 1px solid ${(props) => props.theme.base.border};
@@ -148,91 +110,11 @@ export const Card = styled.div`
 	background-color: ${(props) => props.theme.base.background};
 `;
 
-export const CardSection = styled.div`
-  flex: 1;
-  &:not(:last-child) {
-    margin-right: 2rem;
-  }
-`;
-
-export const CardDoubleSection = styled.div`
-  flex: 2;
-  &:not(:last-child) {
-    margin-right: 2rem;
-  }
-`;
-
-export const VerticalSeparator = styled.div`
-  padding-top: 10rem;
-`;
-
-export const Grid = styled.div`
-  display: grid;
-  grid-gap: 2rem 2rem;
-`;
-
-export const Row = styled.div`
-  position: relative;
-
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-`;
-
-export const RowUntilPhone = styled.div`
-  display: flex;
-  align-items: center;
-
-  ${media.phone} {
-    flex-direction: column;
-    align-items: start;
-  }
-`;
-
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   gap: 1rem;
-`;
-
-export const NoLineBreak = styled.span`
-  white-space: nowrap;
-`;
-
-export const CardLinkBox = styled.div`
-  display: flex;
-  align-items: center;
-
-  margin-top: 1rem;
-  gap: 1rem;
-`;
-
-export const HoverableContainer = styled.div<{
-	height?: number;
-	width?: number;
-}>`
-  height: ${(props) => (props.height ? `${props.height}px` : "200px")};
-  width: ${(props) => (props.height ? `${props.width}px` : "134px")};
-
-  border: 2px solid ${BLACK};
-
-  overflow: hidden;
-`;
-
-export const HoverableGatsbyImage = styled(GatsbyImage)`
-  transition: transform calc(2 * ${TRANSITION_EXTRA_SLOW});
-  &:hover {
-    transform: scale(1.2);
-  }
-`;
-
-export const List = styled.ul`
-  font-size: ${FONT_SIZE_MD};
-`;
-
-export const LItem = styled.li`
-  margin: 1rem 0;
 `;
 
 export const WpContentDescription = styled.div<{ fontSize?: string }>`
@@ -283,31 +165,6 @@ export const WpContentDescription = styled.div<{ fontSize?: string }>`
   }
 `;
 
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: start;
-
-  transition: all ${TRANSITION_SLOW} ease;
-`;
-
-export const ControlGroup = styled.div`
-  margin: 1rem 0;
-`;
-
-export const DisappearOnTablet = styled.div`
-  ${media.desktop} {
-    display: none;
-  }
-`;
-
-export const DisappearOnPhone = styled.div`
-  ${media.phone} {
-    display: none;
-  }
-`;
-
 export const Box = styled.div`
   display: flex;
   align-items: center;
@@ -342,28 +199,7 @@ export const WpContent = styled.div`
 
   a:link,
   a:visited {
-    width: min-content;
-
-    background-color: transparent;
-    background-image: linear-gradient(${(props) => props.theme.link.dark}, ${(props) => props.theme.link.dark});
-    background-repeat: no-repeat;
-    background-size: 0px 2px;
-    background-position: 0 100%;
-    text-decoration: none;
-
-    transition: background-size ${TRANSITION_SLOW} ease;
-
-    &:hover, &:focus-within {
-      background-size: 100% 2px;
-    }
-
-    &:focus-within {
-      outline: 1px solid ${(props) => props.theme.link.dark};
-    }
-
-    ${media.noHover} {
-      background-size: 100% 2px;
-    }
+    ${(props) => hoverUnderline(props.theme.link.dark)}
   }
 
   h1,
@@ -373,7 +209,8 @@ export const WpContent = styled.div`
   h5,
   h6 {
     font-family: ${SANS_SERIF_FONT};
-    margin: ${SIZE_MD} 0;
+    padding: ${SIZE_MD} 0;
+    ${(props) => textClipWithHoverTransition(props.theme.base.textColor, props.theme.base.highlighted)}
   }
 
 
@@ -388,7 +225,7 @@ export const WpContent = styled.div`
   }
 
   p {
-    margin: ${SIZE_MD} 0;
+    margin: ${SIZE_XS} 0;
   }
 `;
 
