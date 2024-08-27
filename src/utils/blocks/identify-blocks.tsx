@@ -20,9 +20,8 @@ function parseChildToBlocks(child: Element): JSX.Element | null {
 			try {
 				const properties = JSON.parse(innerHTML);
 
-				// Custom Gutenberg blocks are stored as a
-				// set of JSON parseable properties
-				// in a hidden pre tag within the block
+				// All attributes are stored as a json string in the innerHTML of a pre element.
+				// https://github.com/benyakirten/gutenberg-syntax-highlighter/blob/main/bshg.php
 				const Block = KNOWN_BLOCK_CLASSES[cls];
 
 				return <Block {...properties} />;

@@ -1,7 +1,17 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import { FONT_SIZE_MD } from "@StyleVars";
-import { rollOut } from "@Styles/animations";
+
+const rollOut = keyframes`
+    from {
+        opacity: 0.2;
+        transform: scaleY(0.6);
+    }
+    to {
+        opactiy: 1;
+        transform: scaleY(1);
+    }
+`;
 
 export const StyledAlertBox = styled.div<{ success: boolean }>`
   position: relative;

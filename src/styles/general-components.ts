@@ -1,7 +1,6 @@
 import { GatsbyImage } from "gatsby-plugin-image";
 import styled from "styled-components";
 
-import { convertHexToRGBA } from "@Utils/colors";
 import { fadeIn, slideInLeft, slideInRight } from "./animations";
 import { media } from "./queries";
 import {
@@ -11,7 +10,6 @@ import {
 	FONT_SIZE_MD,
 	FONT_SIZE_XL,
 	SECONDARY_800,
-	SHADOW_MD_BALANCED,
 	SIZE_MD,
 	TRANSITION_EXTRA_SLOW,
 	TRANSITION_NORMAL,
@@ -27,7 +25,6 @@ import {
 	FONT_MD,
 	FONT_LG,
 } from "./variables";
-import { multiplyCSSNumber } from "@/utils/strings";
 
 export const FadeIn = styled.div<{ duration?: string; delay?: string }>`
   opacity: 0;
@@ -57,16 +54,6 @@ export const Grouping = styled.section<{ marginVertical?: string }>`
   margin-top: ${(props) => (props.marginVertical ? props.marginVertical : "0")};
   margin-bottom: ${(props) =>
 		props.marginVertical ? props.marginVertical : "4rem"};
-`;
-
-export const GroupingBox = styled.section`
-  position: relative;
-  padding: 1rem;
-  box-shadow: ${(props) =>
-		`${SHADOW_MD_BALANCED} ${convertHexToRGBA(
-			props.theme.base.shadowColor,
-			0.4,
-		)}`};
 `;
 
 // TODO: Make the colors look good
@@ -113,18 +100,6 @@ export const Subtitle = styled.h2`
 
   ${media.phone} {
     ${FONT_LG};
-  }
-`;
-
-export const SubHeading = styled.h3<{ noUnderline?: boolean }>`
-  font-family: ${SERIF_FONT};
-  font-size: ${FONT_SIZE_XL};
-  text-decoration: ${(props) => (props.noUnderline ? "none" : "underline")};
-
-  margin-bottom: 0.5rem;
-
-  ${media.tablet} {
-    font-size: ${FONT_SIZE_LG};
   }
 `;
 
