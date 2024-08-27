@@ -6,6 +6,7 @@ import {
 	NormalPageContents,
 	Page,
 	TemplateContent,
+	TemplateHeaderContainer,
 	TemplateHeaderTitle,
 	WpContent,
 } from "@Styles/general-components";
@@ -24,10 +25,8 @@ import {
 	TechContainer,
 } from "@/components/General";
 import { FileNode } from "@/types/general";
-import { SIZE_MD, SIZE_SM } from "@/styles/variables";
 import { PublishedDate } from "@/components/Cards/IconedText.component";
 import LatestUpdate from "@/components/General/Project/LatestUpdate.component";
-import styled from "styled-components";
 
 export const Head: React.FC<WpProject> = ({ data }) => {
 	const project = formatProject(data.wpProject);
@@ -41,24 +40,23 @@ export const Head: React.FC<WpProject> = ({ data }) => {
 	return <HeadBase title={project.title} description={description} />;
 };
 
-const ProjectHeaderContainer = styled.div`
-	display: grid;
-	gap: ${SIZE_MD};
-	margin-bottom: ${SIZE_SM};
-`;
-
 const ProjectHeader: React.FC<{
 	title: string;
 	icons: FileNode[];
 	repoLink?: string;
 	firstReleasedDate: Date;
 	hostedOn?: string;
-}> = ({ title, icons, repoLink, firstReleasedDate, hostedOn }) => {
+	mainLink?: string;
+}> = ({ title, icons, repoLink, firstReleasedDate, hostedOn, mainLink }) => {
 	const latestUpdateState = useFetchRepoUpdatedDate(repoLink);
 	return (
-		<ProjectHeaderContainer>
+		<TemplateHeaderContainer>
 			<TechContainer>
-				{hostedOn && <ProjectHost host={hostedOn} />}
+				{hostedOn && (
+					<a href={mainLink ?? "#"}>
+						<ProjectHost host={hostedOn} />
+					</a>
+				)}
 				{icons.map((i) => (
 					<ProjectTech key={i.name} tech={i.name} publicURL={i.publicURL} />
 				))}
@@ -68,7 +66,7 @@ const ProjectHeader: React.FC<{
 				<PublishedDate date={firstReleasedDate} />
 				<LatestUpdate state={latestUpdateState} />
 			</Box>
-		</ProjectHeaderContainer>
+		</TemplateHeaderContainer>
 	);
 };
 
@@ -77,6 +75,7 @@ const Project: React.FC<WpProject> = ({ data }) => {
 	const icons: FileNode[] = data.allFile.nodes
 		.filter((f) => project.shortTechnologies.includes(f.name))
 		.map((f) => ({ ...f, name: getFullTechName(f.name) }));
+	console.log(project.mainLink);
 
 	return (
 		<Page>
@@ -87,6 +86,7 @@ const Project: React.FC<WpProject> = ({ data }) => {
 					repoLink={project.repoLink}
 					firstReleasedDate={project.firstReleased.date}
 					hostedOn={project.hostedOn}
+					mainLink={project.mainLink}
 				/>
 				<TemplateContent>
 					<WpContent dangerouslySetInnerHTML={{ __html: project.content }} />

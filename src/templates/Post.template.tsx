@@ -1,7 +1,12 @@
 import { graphql } from "gatsby";
 import * as React from "react";
 
-import { Grouping, LeadHeading, Page } from "@Styles/general-components";
+import {
+	Grouping,
+	LeadHeading,
+	NormalPageContents,
+	Page,
+} from "@Styles/general-components";
 
 import { createBlocks, preprocessWPEntry } from "@Utils/blocks/identify-blocks";
 import { formatBlogPost } from "@Utils/blog";
@@ -26,13 +31,15 @@ const Post: React.FC<WpPost> = ({ data }) => {
 
 	return (
 		<Page>
-			<LeadHeading>{post.title}</LeadHeading>
-			<PostHeader post={post} />
-			<Grouping>
-				{blocks.map((block) => (
-					<div key={block.key}>{block}</div>
-				))}
-			</Grouping>
+			<NormalPageContents>
+				<LeadHeading>{post.title}</LeadHeading>
+				<PostHeader post={post} />
+				<Grouping>
+					{blocks.map((block) => (
+						<div key={block.key}>{block}</div>
+					))}
+				</Grouping>
+			</NormalPageContents>
 		</Page>
 	);
 };

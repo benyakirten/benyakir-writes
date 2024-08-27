@@ -6,9 +6,9 @@ import {
 	NormalPageContents,
 	Page,
 } from "@Styles/general-components";
-import { ThemeOptions } from "@Variants";
 import { themeDescription } from "@/data/search";
 import { HeadBase } from "@/components/General";
+import { ThemeOptions } from "@/components/Theme";
 
 export const Head: React.FC = () => (
 	<HeadBase title="Theme" description={themeDescription} />

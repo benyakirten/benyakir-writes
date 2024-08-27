@@ -6,7 +6,6 @@ export { default as HoverImage } from "./HoverImage/HoverImage.component";
 export { default as Loading } from "./Loading/Loading.component";
 export { default as Icon } from "./Icon/Icon.component";
 export { default as IconGrid } from "./IconGrid/IconGrid.component";
-export { default as IconButton } from "./IconButton/IconButton.component";
 export { default as GrowableUnderline } from "./GrowableUnderline/GrowableUnderline.component";
 export { default as FillIn } from "./FillIn/FillIn.component";
 export { default as ProjectTech } from "./Project/ProjectTech.component";

@@ -1,5 +1,7 @@
 import type { IGatsbyImageData } from "gatsby-plugin-image";
 
+import type { DateInformation, NamedLink } from "./general";
+
 type PostType = {
 	content: string;
 	slug?: string;
@@ -167,15 +169,17 @@ type SingleBook = {
 	};
 };
 
+type BookCoverArtist = {
+	name: string;
+	bio: string;
+	links?: NamedLink[];
+};
+
 type FlattenedSingleBook = {
 	title: string;
 	content: string;
 	published: DateInformation;
-	coverDesigner?: {
-		name: string;
-		bio: string;
-		links?: NamedLink[];
-	};
+	coverDesigner?: BookCoverArtist;
 	purchaseLinks: NamedLink[];
 	project: null | {
 		title: string;

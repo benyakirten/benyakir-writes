@@ -14,7 +14,7 @@ import { media } from "@/styles/queries";
 import IconedText from "@/components/Cards/IconedText.component";
 import { CalendarIcon } from "@/components/Icons";
 import { calculateDuration } from "@/utils/dates";
-import { Time } from "@/components/General";
+import { Card } from "@/styles/general-components";
 
 const workHistory: WorkHistoryDatum[] = [
 	{
@@ -59,18 +59,12 @@ const WorkHistoryContainer = styled.ul`
 	gap: ${SIZE_MD};
 `;
 
-const WorkHistoryItem = styled.li`
+const WorkHistoryItem = styled(Card)`
 	position: relative;
 	z-index: ${Z_ABOVE};
-
+	
 	display: grid;
 	gap: ${SIZE_XS};
-
-	border-radius: ${SIZE_XS};
-	border: 1px solid ${(props) => props.theme.base.border};
-	
-	padding: ${SIZE_SM};
-	background-color: ${(props) => props.theme.base.background};
 `;
 
 const WorkHistoryPosition = styled.p`
@@ -166,17 +160,19 @@ const WorkHistory: React.FC = () => {
 	return (
 		<WorkHistoryContainer>
 			{workHistory.map((datum) => (
-				<WorkHistoryItem key={datum.startDate.valueOf()}>
-					<WorkPosition title={datum.title} company={datum.company} />
-					<WorkHistoryLength start={datum.startDate} end={datum.endDate} />
-					<BulletedList>
-						{datum.points.map((point, i) => (
-							<BulletedListItem key={`${i}-${point[0]}`}>
-								{point}.
-							</BulletedListItem>
-						))}
-					</BulletedList>
-				</WorkHistoryItem>
+				<li key={datum.startDate.valueOf()}>
+					<WorkHistoryItem>
+						<WorkPosition title={datum.title} company={datum.company} />
+						<WorkHistoryLength start={datum.startDate} end={datum.endDate} />
+						<BulletedList>
+							{datum.points.map((point, i) => (
+								<BulletedListItem key={`${i}-${point[0]}`}>
+									{point}.
+								</BulletedListItem>
+							))}
+						</BulletedList>
+					</WorkHistoryItem>
+				</li>
 			))}
 		</WorkHistoryContainer>
 	);

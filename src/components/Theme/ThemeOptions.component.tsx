@@ -9,8 +9,8 @@ import {
 
 import { AlertBox, Foldout } from "@Gen";
 import { Toggle } from "@Input";
-import ModifyTheme from "../ModifyTheme/ModifyTheme.component";
-import ThemeControls from "../ThemeControls/ThemeControl.component";
+import ModifyTheme from "./ModifyTheme/ModifyTheme.component";
+import ThemeControls from "./ThemeControls/ThemeControl.component";
 
 import { useAlternation, useMultiple } from "@Hooks";
 import { useAppDispatch, useAppSelector } from "@Store/hooks";

@@ -8,6 +8,7 @@ import { FilterProps, ItemFilter, WordFilterType } from "@/types/filters";
 import { useFlyout } from "@/hooks/useFlyout.hook";
 import { useFilter } from "./useFilter.hook";
 import { media } from "@/styles/queries";
+import { PotentialChoice } from "@/types/general";
 
 const FilterBar = styled.div`
     position: fixed;

@@ -24,8 +24,8 @@ import {
 	FONT_XXXL,
 	FONT_XXL,
 	FONT_XL,
-	Z_ABOVE,
 	FONT_MD,
+	FONT_LG,
 } from "./variables";
 import { multiplyCSSNumber } from "@/utils/strings";
 
@@ -82,7 +82,7 @@ export const LeadHeading = styled.h1`
   background-size: 300%;
   background-clip: text;
   color: transparent;
-  transition: background-position ${multiplyCSSNumber(TRANSITION_EXTRA_SLOW, 1.5)} ease;
+  transition: background-position ${TRANSITION_EXTRA_SLOW} ease;
 
   &:hover {
     background-position: right;
@@ -93,21 +93,27 @@ export const LeadHeading = styled.h1`
   }
 `;
 
-export const Subtitle = styled.h2<{ noUnderline?: boolean }>`
-    font-family: ${SERIF_FONT};
-    ${FONT_XXL};
+export const Subtitle = styled.h2`
+  position: relative;
 
-    ${media.phone} {
-        ${FONT_XL};;
-    }
-    text-decoration: ${(props) => (props.noUnderline ? "none" : "underline")};
+  margin-bottom: ${SIZE_MD};
 
-    margin-bottom: 1rem;
+  ${FONT_XL};
 
-    ${media.tablet} {
-        margin-bottom 0.5rem;
-        ${FONT_XL};
-    }
+  background-image: linear-gradient(45deg, ${(props) => props.theme.base.textColor} 50%, ${(props) => props.theme.base.highlighted});
+  background-position: left;
+  background-size: 300%;
+  background-clip: text;
+  color: transparent;
+  transition: background-position ${TRANSITION_EXTRA_SLOW} ease;
+
+  &:hover {
+    background-position: right;
+  }
+
+  ${media.phone} {
+    ${FONT_LG};
+  }
 `;
 
 export const SubHeading = styled.h3<{ noUnderline?: boolean }>`
@@ -159,24 +165,12 @@ export const Centered = styled.div`
   font-size: ${FONT_SIZE_MD};
 `;
 
-// There's no reason to include a third google font
-// and cause browsers to download another ~10kb of data
-// Especially since the monospace font will only be used here
-export const Card = styled.article`
-  position: relative;
-
-  height: 24rem;
-  box-shadow: ${SHADOW_MD_BALANCED};
-
-  font-family: monospace;
-
-  overflow: auto;
-
-  padding: 2rem;
-
-  &:not(:last-child) {
-    margin-bottom: 2rem;
-  }
+export const Card = styled.div`
+	border-radius: ${SIZE_XS};
+	border: 1px solid ${(props) => props.theme.base.border};
+	
+	padding: ${SIZE_SM};
+	background-color: ${(props) => props.theme.base.background};
 `;
 
 export const CardSection = styled.div`
@@ -546,4 +540,10 @@ export const TemplateHeaderTitle = styled(LeadHeading)`
 
 export const TemplateContent = styled.div`
   margin: ${SIZE_MD} 0;
+`;
+
+export const TemplateHeaderContainer = styled.div`
+  display: grid;
+  gap: ${SIZE_SM};
+  margin-bottom: ${SIZE_SM};
 `;

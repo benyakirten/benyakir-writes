@@ -126,3 +126,10 @@ export function deepEquals<T>(a: T, b: T): boolean {
 export function noop() {
 	return null;
 }
+
+export function formatOutsideLink(link: string) {
+	if (link.startsWith("http")) {
+		return link;
+	}
+	return `https://${link}`;
+}
