@@ -2,7 +2,6 @@ import { graphql } from "gatsby";
 import * as React from "react";
 
 import {
-	Grouping,
 	NormalPageContents,
 	Page,
 	PillContainer,
