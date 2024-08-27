@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { CustomLink } from "@Gen";
+import { GrowableUnderline } from "@Gen";
 import {
 	BigParagraph,
 	LeadHeading,
@@ -8,6 +8,7 @@ import {
 	Page,
 } from "@Styles/general-components";
 import { HeadBase } from "@/components/General";
+import { Link } from "gatsby";
 
 export const Head: React.FC = () => (
 	<HeadBase
@@ -23,7 +24,10 @@ const NotFoundPage: React.FC = () => {
 				<LeadHeading>Page Not Found</LeadHeading>
 				<BigParagraph>
 					Unfortunately, the page you were looking for doesn't exist. You can
-					visit the home page<CustomLink to="/">here</CustomLink>.
+					visit the home page{" "}
+					<GrowableUnderline>
+						<Link to="/">here</Link>.
+					</GrowableUnderline>
 				</BigParagraph>
 			</NormalPageContents>
 		</Page>

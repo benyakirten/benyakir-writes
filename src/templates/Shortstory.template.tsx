@@ -1,22 +1,24 @@
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import * as React from "react";
+import styled from "styled-components";
 
 import {
 	Grouping,
-	LeadHeading,
+	NormalPageContents,
 	Page,
-	Subtitle,
+	TemplateHeaderTitle,
 	WpContent,
 } from "@Styles/general-components";
-
 import { flattenStory } from "@/utils/author";
 import { getPrettyDate } from "@Utils/dates";
 import { formatWpText } from "@Utils/posts";
 import { truncate } from "@Utils/strings";
-
-import ShortStoryHeader from "@/components/Variants/Headers/ShortStoryHeader.component";
 import type { WpStory } from "@Types/query";
-import { HeadBase } from "@/components/General";
+import { GrowableUnderline, HeadBase } from "@/components/General";
+import { FONT_SM, SIZE_SM, SIZE_XS } from "@/styles/variables";
+import { PublishedDate } from "@/components/Cards/IconedText.component";
+import { NamedLink } from "@/types/general";
+import { formatOutsideLink } from "@/utils/other";
 
 export const Head: React.FC<WpStory> = ({ data }) => {
 	const story = flattenStory(data.wpShortstory, data.file.publicURL);
@@ -29,16 +31,86 @@ export const Head: React.FC<WpStory> = ({ data }) => {
 	return <HeadBase title={story.title} description={description} />;
 };
 
+const StoryHeaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${SIZE_XS};
+  margin-bottom: ${SIZE_SM};
+`;
+
+const StoryBookRelationshipContainer = styled.span`
+  ${FONT_SM};
+`;
+
+const StoryBookRelationship: React.FC<{
+	title: string;
+	relationship: string;
+	link: string;
+}> = ({ title, relationship, link }) => {
+	return (
+		<StoryBookRelationshipContainer>
+			{relationship} to{" "}
+			<GrowableUnderline>
+				<Link to={link}>{title}</Link>
+			</GrowableUnderline>
+		</StoryBookRelationshipContainer>
+	);
+};
+
+const StoryHeader: React.FC<{
+	title: string;
+	published: Date;
+	relatedBook: null | { title: string; relationship: string; link: string };
+	alternateLinks?: NamedLink[];
+}> = ({ title, published, relatedBook, alternateLinks }) => {
+	alternateLinks ??= [
+		{ name: "Amazon", link: "MYLink" },
+		{ name: "Google", link: "MYLink" },
+	];
+	return (
+		<StoryHeaderContainer>
+			{relatedBook && <StoryBookRelationship {...relatedBook} />}
+			<TemplateHeaderTitle>{title}</TemplateHeaderTitle>
+			<PublishedDate date={published} />
+			{alternateLinks && (
+				<p>
+					Available on{" "}
+					{alternateLinks.map((link, i) => (
+						<>
+							<GrowableUnderline key={link.name}>
+								<a href={formatOutsideLink(link.link)}>{link.name}</a>
+							</GrowableUnderline>
+							{i < alternateLinks.length - 1 && ", "}
+						</>
+					))}
+				</p>
+			)}
+		</StoryHeaderContainer>
+	);
+};
+
 const Story: React.FC<WpStory> = ({ data }) => {
 	const story = flattenStory(data.wpShortstory, data.file.publicURL);
+
+	const relatedBook = story.book && {
+		title: story.book.title,
+		relationship: story.book.relationship,
+		link: `/book/${story.book.slug}`,
+	};
+
 	return (
 		<Page>
-			<LeadHeading>{story.title}</LeadHeading>
-			<ShortStoryHeader story={story} />
-			<Grouping>
-				<Subtitle>The Story</Subtitle>
-				<WpContent dangerouslySetInnerHTML={{ __html: story.content }} />
-			</Grouping>
+			<NormalPageContents>
+				<StoryHeader
+					title={story.title}
+					published={story.published.date}
+					relatedBook={relatedBook}
+					alternateLinks={story.alternateLinks}
+				/>
+				<Grouping>
+					<WpContent dangerouslySetInnerHTML={{ __html: story.content }} />
+				</Grouping>
+			</NormalPageContents>
 		</Page>
 	);
 };

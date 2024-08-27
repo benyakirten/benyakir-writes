@@ -18,7 +18,7 @@ import { formatWpText } from "@Utils/posts";
 import { truncate } from "@Utils/strings";
 import type { WpBook } from "@Types/query";
 import { GrowableUnderline, HeadBase } from "@/components/General";
-import { FONT_LG, SIZE_MD, SIZE_SM, SIZE_XS } from "@/styles/variables";
+import { FONT_LG, SIZE_MD, SIZE_SM } from "@/styles/variables";
 import { PublishedDate } from "@/components/Cards/IconedText.component";
 import { BookCoverArtist } from "@/types/posts";
 import { formatOutsideLink } from "@/utils/other";
@@ -61,12 +61,13 @@ const PurchaseLinks: React.FC<{ links: NamedLink[] }> = ({ links }) => {
 	return (
 		<PurchaseLinkContiner>
 			<p>Available for purchase&nbsp;</p>
-			{links.map((link) => (
+			{links.map((link, i) => (
 				<li key={link.name}>
 					on{" "}
 					<GrowableUnderline>
 						<a href={formatOutsideLink(link.link)}>{link.name}</a>
 					</GrowableUnderline>
+					{i < links.length - 1 && ", "}
 				</li>
 			))}
 		</PurchaseLinkContiner>
