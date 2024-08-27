@@ -1,13 +1,12 @@
 import * as React from "react";
 
-import { DownArrow } from "@Pre";
 import {
 	FoldoutBody,
 	FoldoutContainer,
 	TopbarContainer,
 } from "./Foldout.styles";
-
 import { findAttrInElTree } from "@Utils/dom";
+import { DownArrow } from "..";
 
 const Foldout: React.FC<FoldoutProps> = ({
 	open = false,
