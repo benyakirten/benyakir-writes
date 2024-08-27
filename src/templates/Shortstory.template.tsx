@@ -63,10 +63,6 @@ const StoryHeader: React.FC<{
 	relatedBook: null | { title: string; relationship: string; link: string };
 	alternateLinks?: NamedLink[];
 }> = ({ title, published, relatedBook, alternateLinks }) => {
-	alternateLinks ??= [
-		{ name: "Amazon", link: "MYLink" },
-		{ name: "Google", link: "MYLink" },
-	];
 	return (
 		<StoryHeaderContainer>
 			{relatedBook && <StoryBookRelationship {...relatedBook} />}
