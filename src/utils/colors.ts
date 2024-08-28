@@ -87,15 +87,8 @@ export function convertRGBNumberToRGBString(color: RGBNumber): RGBString {
 	if (!validateRGBNumbers(red, blue, green)) {
 		throw new Error("Unable to validate color values");
 	}
-	function getValues(...colors: number[]) {
-		const finalColors = [];
-		for (const color of colors) {
-			let colorVal = color.toString(16);
-			colorVal = colorVal.length === 1 ? colorVal + colorVal : colorVal;
-			finalColors.push(colorVal);
-		}
-		return finalColors;
-	}
+	const getValues = (...colors: number[]) => colors.map((c) => toHex(c));
+
 	const [redVal, greenVal, blueVal] = getValues(red, green, blue);
 
 	return {
@@ -131,7 +124,7 @@ export function convertRGBNumberToHex(color: RGBNumber): string {
 	if (!validateRGBNumbers(red, blue, green)) {
 		throw new Error("Unable to validate color values");
 	}
-	return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
+	return `#${toHex(red)}${toHex(green)}${toHex(blue)}`;
 }
 
 /**
@@ -207,15 +200,11 @@ export function parseHSLString(color: string): HSLColor | null {
 	};
 }
 
-export function convertHSLToHex(color: HSLColor): string {
-	// Convert a ratio 0-1 to value 0-255
-	const toHex = (val: number) => {
-		const hex = Math.round(val * 255)
-			.toString(16)
-			.padStart(2, "0");
-		return hex.toUpperCase();
-	};
+export function toHex(val: number): string {
+	return val.toString(16).padStart(2, "0").toUpperCase();
+}
 
+export function convertHSLToHex(color: HSLColor): string {
 	const chroma = (1 - Math.abs(2 * color.luminance - 1)) * color.saturation;
 
 	// Intermediate value that is used to calculate the RGB values
@@ -259,9 +248,9 @@ export function convertHSLToHex(color: HSLColor): string {
 	b += lightnessAdjustmentFactor;
 
 	// Convert RGB and Opacity to Hex
-	const rHex = toHex(r);
-	const gHex = toHex(g);
-	const bHex = toHex(b);
+	const rHex = toHex(r * 255);
+	const gHex = toHex(g * 255);
+	const bHex = toHex(b * 255);
 
 	return `#${rHex}${gHex}${bHex}`;
 }

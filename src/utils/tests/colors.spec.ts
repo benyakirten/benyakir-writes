@@ -9,6 +9,7 @@ import {
 	convertRGBNumberToRGBString,
 	convertRGBStringToRGBNumber,
 	parseHSLString,
+	toHex,
 	validateRGBNumbers,
 } from "@/utils/colors";
 
@@ -216,9 +217,9 @@ describe("convertRGBNumberToRGBString", () => {
 				blue: 239,
 			},
 			want: {
-				red: "ab",
-				green: "cd",
-				blue: "ef",
+				red: "AB",
+				green: "CD",
+				blue: "EF",
 			},
 		},
 		{
@@ -252,9 +253,9 @@ describe("convertRGBNumberToRGBString", () => {
 				blue: 204,
 			},
 			want: {
-				red: "aa",
-				green: "bb",
-				blue: "cc",
+				red: "AA",
+				green: "BB",
+				blue: "CC",
 			},
 		},
 	])("should convert $input to $want", ({ input, want }) => {
@@ -364,7 +365,7 @@ describe("convertRGBNumberToHex", () => {
 				green: 205,
 				blue: 239,
 			},
-			want: "#abcdef",
+			want: "#ABCDEF",
 		},
 		{
 			input: {
@@ -372,7 +373,7 @@ describe("convertRGBNumberToHex", () => {
 				green: 0,
 				blue: 0,
 			},
-			want: "#000",
+			want: "#000000",
 		},
 		{
 			input: {
@@ -380,7 +381,7 @@ describe("convertRGBNumberToHex", () => {
 				green: 0,
 				blue: 0,
 			},
-			want: "#000",
+			want: "#000000",
 		},
 		{
 			input: {
@@ -388,7 +389,7 @@ describe("convertRGBNumberToHex", () => {
 				green: 187,
 				blue: 204,
 			},
-			want: "#aabbcc",
+			want: "#AABBCC",
 		},
 	])("should convert $input to $want", ({ input, want }) => {
 		const got = convertRGBNumberToHex(input);
@@ -486,6 +487,15 @@ describe("convertHexToHSL", () => {
 
 	test("should return throw for invalid hex string", () => {
 		expect(() => convertHexToHSL("#12345")).toThrow();
+	});
+});
+describe("toHex", () => {
+	it("should convert decimal numbers to hexadecimal strings", () => {
+		expect(toHex(0)).toEqual("00");
+		expect(toHex(10)).toEqual("0A");
+		expect(toHex(255)).toEqual("FF");
+		expect(toHex(16)).toEqual("10");
+		expect(toHex(123)).toEqual("7B");
 	});
 });
 
