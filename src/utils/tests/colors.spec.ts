@@ -8,6 +8,7 @@ import {
 	convertRGBNumberToHex,
 	convertRGBNumberToRGBString,
 	convertRGBStringToRGBNumber,
+	parseHSLString,
 	validateRGBNumbers,
 } from "@/utils/colors";
 
@@ -485,5 +486,97 @@ describe("convertHexToHSL", () => {
 
 	test("should return throw for invalid hex string", () => {
 		expect(() => convertHexToHSL("#12345")).toThrow();
+	});
+});
+
+describe("parseHSLString", () => {
+	test.for<{ input: string; want: HSLColor | null }>([
+		{
+			input: "hsl(0 100% 50%)",
+			want: {
+				hue: 0,
+				saturation: 1,
+				luminance: 0.5,
+			},
+		},
+		{
+			input: "hsl(120 100 50%)",
+			want: {
+				hue: 120,
+				saturation: 1,
+				luminance: 0.5,
+			},
+		},
+		{
+			input: "hsl(240 100% 50)",
+			want: {
+				hue: 240,
+				saturation: 1,
+				luminance: 0.5,
+			},
+		},
+		{
+			input: "hsl(0 0 100)",
+			want: {
+				hue: 0,
+				saturation: 0,
+				luminance: 1,
+			},
+		},
+		{
+			input: "hsl(0 0% 0%)",
+			want: {
+				hue: 0,
+				saturation: 0,
+				luminance: 0,
+			},
+		},
+		{
+			input: "hsl(106 100 50)",
+			want: {
+				hue: 106,
+				saturation: 1,
+				luminance: 0.5,
+			},
+		},
+		{
+			input: "hsl(75 43% 76%)",
+			want: {
+				hue: 75,
+				saturation: 0.43,
+				luminance: 0.76,
+			},
+		},
+		{
+			input: "hsl(360 100% 50%)",
+			want: {
+				hue: 360,
+				saturation: 1,
+				luminance: 0.5,
+			},
+		},
+		{
+			input: "hsl(720 100% 50%)",
+			want: null,
+		},
+		{
+			input: "hsl(1 100% 150%)",
+			want: null,
+		},
+		{
+			input: "hsl(0 100% 50% 25%)",
+			want: null,
+		},
+		{
+			input: "hsl(0 25)",
+			want: null,
+		},
+		{
+			input: "0 100 50",
+			want: null,
+		},
+	])("should parse $input to $want", ({ input, want }) => {
+		const got = parseHSLString(input);
+		expect(got).toEqual(want);
 	});
 });

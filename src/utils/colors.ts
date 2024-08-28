@@ -181,16 +181,27 @@ export function parseHSLString(color: string): HSLColor | null {
 		return null;
 	}
 
-	const [_, hue, saturation, luminance] = parts;
+	const [_, h, saturation, luminance] = parts;
+	const hue = +h;
 	const sat = Number.parseInt(saturation);
 	const lum = Number.parseInt(luminance);
 
-	if (Number.isNaN(sat) || Number.isNaN(lum)) {
+	if (
+		Number.isNaN(sat) ||
+		Number.isNaN(lum) ||
+		Number.isNaN(hue) ||
+		hue < 0 ||
+		hue > 360 ||
+		sat < 0 ||
+		sat > 100 ||
+		lum < 0 ||
+		lum > 100
+	) {
 		return null;
 	}
 
 	return {
-		hue: +hue,
+		hue,
 		saturation: sat / 100,
 		luminance: lum / 100,
 	};
@@ -235,7 +246,7 @@ export function convertHSLToHex(color: HSLColor): string {
 		r = x;
 		g = 0;
 		b = chroma;
-	} else if (300 <= color.hue && color.hue < 360) {
+	} else if (300 <= color.hue && color.hue <= 360) {
 		r = chroma;
 		g = 0;
 		b = x;
@@ -253,29 +264,4 @@ export function convertHSLToHex(color: HSLColor): string {
 	const bHex = toHex(b);
 
 	return `#${rHex}${gHex}${bHex}`;
-}
-
-export function parseOpacityString(rawNum: string): number {
-	if (rawNum.length === 1) {
-		const num = Number.parseInt(rawNum);
-		if (Number.isNaN(num)) {
-			throw new Error("Unable to parse opacity");
-		}
-		return num * 0.1;
-	}
-
-	if (rawNum.length === 2) {
-		const num = Number.parseInt(rawNum);
-		if (Number.isNaN(num)) {
-			throw new Error("Unable to parse opacity");
-		}
-
-		if (rawNum.includes(".")) {
-			return num;
-		}
-
-		return num * 0.01;
-	}
-
-	throw new Error("Unable to parse opacity");
 }
