@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 
-import { clamp, mod } from "@/utils/numbers";
+import { clamp, mod, round } from "@/utils/numbers";
 
 describe("clamp", () => {
 	it("should return numbers that are between the min and max without changing them", () => {
@@ -57,5 +57,26 @@ describe("mod", () => {
 		expect(mod(10, 0)).toBeNaN();
 		expect(mod(-15, 0)).toBeNaN();
 		expect(mod(0, 0)).toBeNaN();
+	});
+});
+describe("round", () => {
+	it("should round the number to the specified precision", () => {
+		expect(round(Math.PI, 0)).toEqual(3);
+		expect(round(Math.PI, 1)).toEqual(3.1);
+		expect(round(Math.PI, 2)).toEqual(3.14);
+		// biome-ignore lint/suspicious/noApproximativeNumericConstant: Not precise enough
+		expect(round(Math.PI, 3)).toEqual(3.142);
+	});
+
+	it("should round the number to 0 decimal places by default", () => {
+		expect(round(Math.PI)).toEqual(3);
+		expect(round(Math.E)).toEqual(3);
+		expect(round(Math.SQRT2)).toEqual(1);
+	});
+
+	it("should return the number itself when precision is 0", () => {
+		expect(round(42, 0)).toEqual(42);
+		expect(round(100, 0)).toEqual(100);
+		expect(round(0, 0)).toEqual(0);
 	});
 });

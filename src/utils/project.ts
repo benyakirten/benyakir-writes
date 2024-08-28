@@ -1,5 +1,4 @@
 import { getTimeFromDateString } from "./dates";
-import { createSearchableString } from "./posts";
 
 import type {
 	FlattenedProject,

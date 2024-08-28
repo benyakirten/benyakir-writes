@@ -1,6 +1,7 @@
 import { describe, it, expect, test } from "vitest";
 
 import {
+	convertHexToHSL,
 	convertHexToRGBA,
 	convertHexToRGBNumber,
 	convertHexToRGBString,
@@ -416,5 +417,73 @@ describe("convertRGBNumberToHex", () => {
 		},
 	])("should throw an error for '%s'", (val) => {
 		expect(() => convertRGBNumberToHex(val)).toThrow();
+	});
+});
+
+describe("convertHexToHSL", () => {
+	test.for<{ input: string; want: HSLColor }>([
+		{
+			input: "#FF0000",
+			want: {
+				hue: 0,
+				saturation: 1,
+				luminance: 0.5,
+			},
+		},
+		{
+			input: "#00FF00",
+			want: {
+				hue: 120,
+				saturation: 1,
+				luminance: 0.5,
+			},
+		},
+		{
+			input: "#0000FF",
+			want: {
+				hue: 240,
+				saturation: 1,
+				luminance: 0.5,
+			},
+		},
+		{
+			input: "#FFFFFF",
+			want: {
+				hue: 0,
+				saturation: 0,
+				luminance: 1,
+			},
+		},
+		{
+			input: "#000000",
+			want: {
+				hue: 0,
+				saturation: 0,
+				luminance: 0,
+			},
+		},
+		{
+			input: "#3bff00",
+			want: {
+				hue: 106,
+				saturation: 1,
+				luminance: 0.5,
+			},
+		},
+		{
+			input: "#cfdca8",
+			want: {
+				hue: 75,
+				saturation: 0.43,
+				luminance: 0.76,
+			},
+		},
+	])("should convert $input to $want", ({ input, want }) => {
+		const got = convertHexToHSL(input);
+		expect(got).toEqual(want);
+	});
+
+	test("should return throw for invalid hex string", () => {
+		expect(() => convertHexToHSL("#12345")).toThrow();
 	});
 });

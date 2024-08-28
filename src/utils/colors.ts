@@ -1,4 +1,4 @@
-import { clamp } from "./numbers";
+import { clamp, round } from "./numbers";
 import { validateRange } from "./validation";
 
 const HSL_REGEX_PARSER = /hsl\(([a-zA-Z0-9\.]+) (\w+)%? (\w+)%?\)/;
@@ -170,8 +170,8 @@ export function convertHexToHSL(color: string): HSLColor {
 
 	return {
 		hue: Math.round(hue * 60),
-		saturation,
-		luminance,
+		saturation: round(saturation, 2),
+		luminance: round(luminance, 2),
 	};
 }
 
@@ -188,6 +188,7 @@ export function parseHSLString(color: string): HSLColor | null {
 	if (Number.isNaN(sat) || Number.isNaN(lum)) {
 		return null;
 	}
+
 	return {
 		hue: +hue,
 		saturation: sat / 100,
