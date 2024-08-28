@@ -24,6 +24,7 @@ import {
 	FONT_XL,
 	FONT_MD,
 	FONT_LG,
+	FONT_SIZE_SM,
 } from "./variables";
 import { hoverUnderline, textClipWithHoverTransition } from "./composables";
 
@@ -199,7 +200,7 @@ export const WpContent = styled.div`
 
   a:link,
   a:visited {
-    ${(props) => hoverUnderline(props.theme.link.dark)}
+    ${(props) => hoverUnderline(props.theme.base.link)}
   }
 
   h1,
@@ -225,7 +226,12 @@ export const WpContent = styled.div`
   }
 
   p {
-    margin: ${SIZE_XS} 0;
+    margin: ${SIZE_SM} 0;
+  }
+
+  code {
+    font-family: monospace;
+    font-size: ${FONT_SIZE_MD};
   }
 `;
 

@@ -8,7 +8,7 @@ const UnderlinableItem = styled.div<{
 }>`
     display: ${(props) => props.display ?? "inline"};
 
-	${(props) => hoverUnderline(props.theme.link.dark)}
+	${(props) => hoverUnderline(props.theme.base.link)}
 `;
 
 const GrowableUnderline: React.FC<

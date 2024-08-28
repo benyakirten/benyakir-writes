@@ -1,10 +1,17 @@
+import * as React from "react";
+import { styled } from "styled-components";
+
 import {
 	type SVGPositionData,
 	createDimensionalRepresentation,
 } from "@/utils/portfolio";
-import * as React from "react";
-import { PortfolioBackground } from "../Portfolio.styles";
 import { Shapes } from "./shapes";
+
+const PortfolioBackground = styled.div`
+  position: relative;
+  min-height: 100vh;
+  background: ${(props) => props.theme.base.background};
+`;
 
 const RandomizedBackground: React.FC<ChildrenProp> = ({ children }) => {
 	const [_, startTransition] = React.useTransition();

@@ -36,7 +36,7 @@ const TabList = styled.div`
 	border-radius: ${SIZE_XS};
 
 	&:focus-within > [data-indicator]::after {
-		outline: 1px solid ${(props) => props.theme.link.dark};
+		outline: 1px solid ${(props) => props.theme.base.link};
 	}
 `;
 

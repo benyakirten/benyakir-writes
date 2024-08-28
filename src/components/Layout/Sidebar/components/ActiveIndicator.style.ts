@@ -11,7 +11,7 @@ export const StyledActiveIndicator = styled.div<{ linkTop: number }>`
     width: 13%;
     transition: top ${TRANSITION_NORMAL} ease-in-out;
 
-    background: ${(props) => props.theme.link.dark};
+    background: ${(props) => props.theme.base.link};
 `;
 
 // TODO: Make this better once we have redone theme colors.

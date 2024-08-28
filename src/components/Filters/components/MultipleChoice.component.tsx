@@ -4,6 +4,7 @@ import styled, { useTheme } from "styled-components";
 
 import { FONT_SIZE_SM, SIZE_SM, TRANSITION_NORMAL } from "@/styles/variables";
 import { MultipleChoiceInputProps } from "@/types/filters";
+import { PotentialChoice } from "@/types/general";
 
 const MultipleChoiceContainer = styled.label`
 	display: grid;

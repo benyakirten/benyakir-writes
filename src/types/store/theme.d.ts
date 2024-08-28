@@ -18,16 +18,8 @@ type ThemeBase = BasicThemeSection & {
 	highlighted: string;
 	pillBackground: string;
 	pillText: string;
-};
-
-type ThemeSearchBox = BasicThemeSection & {
-	border: string;
-	background: string;
-	textColor: string;
-	result: {
-		textColor: string;
-		border: string;
-	};
+	link: string;
+	neutral: string;
 };
 
 type ThemeSidebar = {
@@ -38,41 +30,11 @@ type ThemeSidebar = {
 	shadowColor: string;
 };
 
-type ThemePaginate = {
-	textColor: string;
-	arrowColor: string;
-	pageNumberColor: string;
-};
-
 type ThemeTextInput = BasicThemeSection & {
 	border: string;
 };
 
-type ThemeFilter = BasicThemeSection & {};
-
-type ThemeCheckbox = {
-	border: string;
-	fingerColor: string;
-	backgroundColor: string;
-};
-
 type ThemeMultipleChoice = BasicThemeSection & {};
-
-type ThemeLink = {
-	normal: string;
-	inline: string;
-	dark: string;
-};
-
-type ThemeIcon = {
-	default: BasicThemeSection;
-	hover: BasicThemeSection;
-};
-
-type ThemeHoverImage = {
-	textColor: string;
-	hoveredTextColor: string;
-};
 
 type ButtonTheme = {
 	border: string;
@@ -97,38 +59,16 @@ type ThemeToggle = {
 	border: string;
 };
 
-type ThemeSkewRow = {
-	background: string;
-};
-
-type ThemePortfolio = {
-	gradient: {
-		color1: string;
-		color2: string;
-		color3: string;
-	};
-	sliderBackground: string;
-};
-
 type BaseTheme = {
 	id: string;
 	name: string;
 	base: ThemeBase;
-	searchBox: ThemeSearchBox;
 	sidebar: ThemeSidebar;
-	paginate: ThemePaginate;
 	textInput: ThemeTextInput;
-	filter: ThemeFilter;
-	checkbox: ThemeCheckbox;
 	multipleChoice: ThemeMultipleChoice;
-	link: ThemeLink;
-	icon: ThemeIcon;
-	skewRow: ThemeSkewRow;
-	hoverImage: ThemeHoverImage;
 	button: ButtonTheme;
 	alertBox: ThemeAlertBox;
 	toggle: ThemeToggle;
-	portfolio: ThemePortfolio;
 } & Record<string, string>;
 
 type FullTheme = BaseTheme & {

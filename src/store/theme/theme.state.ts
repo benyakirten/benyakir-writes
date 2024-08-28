@@ -10,15 +10,8 @@ export const defaultDayTheme: BaseTheme = {
 		highlighted: "#FF00FF",
 		pillText: "#6F6F77",
 		pillBackground: "#F4F4F5",
-	},
-	searchBox: {
-		border: "#05491F",
-		background: "#000000",
-		textColor: "#D8E3FD",
-		result: {
-			textColor: "#FFFFFF",
-			border: "#FFFFFF",
-		},
+		link: "#05491F",
+		neutral: "#DCDCDC",
 	},
 	sidebar: {
 		primaryColor: "#FDEDC4",
@@ -27,50 +20,14 @@ export const defaultDayTheme: BaseTheme = {
 		secondaryColor: "#FDF3D8",
 		shadowColor: "#000000",
 	},
-	paginate: {
-		textColor: "#000000",
-		arrowColor: "#39435b",
-		pageNumberColor: "#485372",
-	},
 	textInput: {
 		textColor: "#000000",
 		background: "#FFFFFF",
 		border: "#ced4da",
 	},
-	filter: {
-		background: "#39435b",
-		textColor: "#FFFFFF",
-	},
-	checkbox: {
-		border: "#05491F",
-		fingerColor: "#05491F",
-		backgroundColor: "#FFFFFF",
-	},
 	multipleChoice: {
 		background: "#343a40",
 		textColor: "#FDF3D8",
-	},
-	link: {
-		normal: "#D8E3FD",
-		inline: "#65749f",
-		dark: "#05491F",
-	},
-	icon: {
-		default: {
-			background: "#FFFFFF",
-			textColor: "#05491F",
-		},
-		hover: {
-			background: "#000000",
-			textColor: "#FFFFFF",
-		},
-	},
-	skewRow: {
-		background: "#FFFFFF",
-	},
-	hoverImage: {
-		textColor: "#05491F",
-		hoveredTextColor: "#000000",
 	},
 	button: {
 		border: "#05491F",
@@ -101,14 +58,6 @@ export const defaultDayTheme: BaseTheme = {
 		offBackground: "#FDE6B0",
 		border: "#000000",
 	},
-	portfolio: {
-		gradient: {
-			color1: "#FEFDF3",
-			color2: "#FEF8E3",
-			color3: "#FEF4E1",
-		},
-		sliderBackground: "#DCDCDC",
-	},
 };
 
 export const defaultNightTheme: BaseTheme = {
@@ -123,15 +72,8 @@ export const defaultNightTheme: BaseTheme = {
 		highlighted: "#35F58F",
 		pillText: "#FFF",
 		pillBackground: "#000",
-	},
-	searchBox: {
-		border: "#e9ecef",
-		background: "#000000",
-		textColor: "#D8E3FD",
-		result: {
-			textColor: "#FFFFFF",
-			border: "#FFFFFF",
-		},
+		link: "#FFF",
+		neutral: "#FDF3D8",
 	},
 	sidebar: {
 		primaryColor: "#252F47",
@@ -140,50 +82,14 @@ export const defaultNightTheme: BaseTheme = {
 		secondaryColor: "#2F3951",
 		shadowColor: "#212529",
 	},
-	paginate: {
-		textColor: "#FFFFFF",
-		arrowColor: "#FDF3D8",
-		pageNumberColor: "#FDF3D8",
-	},
 	textInput: {
 		textColor: "#FFFFFF",
 		background: "#000000",
 		border: "#ced4da",
 	},
-	filter: {
-		background: "#202039",
-		textColor: "#FFFFFF",
-	},
-	checkbox: {
-		border: "#000000",
-		fingerColor: "#000000",
-		backgroundColor: "#FFFFFF",
-	},
 	multipleChoice: {
 		background: "#343a40",
 		textColor: "#FDF3D8",
-	},
-	link: {
-		normal: "#05491F",
-		inline: "#D8E2FD",
-		dark: "#FFFFFF",
-	},
-	icon: {
-		default: {
-			background: "#111B33",
-			textColor: "#D8E3FD",
-		},
-		hover: {
-			background: "#000000",
-			textColor: "#FFFFFF",
-		},
-	},
-	skewRow: {
-		background: "#FFFFFF",
-	},
-	hoverImage: {
-		textColor: "#05491F",
-		hoveredTextColor: "#000000",
 	},
 	button: {
 		border: "#e9ecef",
@@ -213,14 +119,6 @@ export const defaultNightTheme: BaseTheme = {
 		offColor: "#993d4d",
 		offBackground: "#FDE6B0",
 		border: "#D8E2FD",
-	},
-	portfolio: {
-		gradient: {
-			color1: "#111B33",
-			color2: "#23314D",
-			color3: "#394860",
-		},
-		sliderBackground: "#FDF3D8",
 	},
 };
 

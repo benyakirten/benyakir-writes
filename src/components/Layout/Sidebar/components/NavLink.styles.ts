@@ -16,7 +16,7 @@ export const StyledNavLink = styled(Link)<{
   font-size: ${FONT_SIZE_LG};
   width: fit-content;
 
-  color: ${(props) => props.theme.link.dark};
+  color: ${(props) => props.theme.base.link};
 
   transition: color ${TRANSITION_NORMAL} ease;
 
@@ -30,7 +30,7 @@ export const StyledNavLink = styled(Link)<{
     height: 2px;
     width: 100%;
 
-    background-color: ${(props) => props.theme.link.dark};
+    background-color: ${(props) => props.theme.base.link};
 
     transition: scale ${TRANSITION_SLOW} ease;
     scale: 0 1;
@@ -38,7 +38,7 @@ export const StyledNavLink = styled(Link)<{
   }
 
   &:hover, &:focus {
-    color: ${(props) => props.theme.link.hoverColor};
+    color: ${(props) => props.theme.base.dark};
     &::before {
       scale: 1 1;
     }
