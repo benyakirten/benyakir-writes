@@ -1,6 +1,8 @@
 import { clamp } from "./numbers";
 import { validateRange } from "./validation";
 
+const HSL_REGEX_PARSER = /hsl\(([a-zA-Z0-9\.]+) (\w+)%? (\w+)%?\)/;
+
 export function convertHexToRGBA(color: string, opacity = 0.4) {
 	const parsedColors = convertHexToRGBNumber(color);
 	return `rgba(${parsedColors.red}, ${parsedColors.green}, ${
@@ -32,14 +34,19 @@ export function convertHexToRGBString(color: string): RGBString {
 	let green = "";
 	let blue = "";
 
-	if (color.length === 4) {
-		red = `${color[1]}${color[1]}`;
-		green = `${color[2]}${color[2]}`;
-		blue = `${color[3]}${color[3]}`;
-	} else if (color.length === 7) {
-		red = color.slice(1, 3);
-		green = color.slice(3, 5);
-		blue = color.slice(5, 7);
+	switch (color.length) {
+		case 4:
+			red = `${color[1]}${color[1]}`;
+			green = `${color[2]}${color[2]}`;
+			blue = `${color[3]}${color[3]}`;
+			break;
+		case 7:
+			red = color.slice(1, 3);
+			green = color.slice(3, 5);
+			blue = color.slice(5, 7);
+			break;
+		default:
+			break;
 	}
 
 	parseAndCheck(red, blue, green);
@@ -109,23 +116,8 @@ export function validateRGBNumbers(...colors: number[]) {
 	return true;
 }
 
-// TODO: Combine convertHexToRGBString and this function
 export function convertHexToRGBNumber(color: string): RGBNumber {
-	checkIfHexValid(color);
-	let red = "";
-	let green = "";
-	let blue = "";
-
-	if (color.length === 4) {
-		red = `${color[1]}${color[1]}`;
-		green = `${color[2]}${color[2]}`;
-		blue = `${color[3]}${color[3]}`;
-	} else if (color.length === 7) {
-		red = color.slice(1, 3);
-		green = color.slice(3, 5);
-		blue = color.slice(5, 7);
-	}
-
+	const { red, green, blue } = convertHexToRGBString(color);
 	const [parsedRed, parsedGreen, parsedBlue] = parseAndCheck(red, green, blue);
 	return {
 		red: parsedRed,
@@ -142,34 +134,147 @@ export function convertRGBNumberToHex(color: RGBNumber): string {
 	return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
 }
 
-export function changeHex(
-	color: string,
-	percent: number,
-	positive = true,
-): string {
-	checkIfHexValid(color);
-	const convertedColor = convertHexToRGBNumber(color);
-	const changeAmount = Math.round(clamp((255 * percent) / 100));
-	if (positive) {
-		const changedRGB: RGBNumber = {
-			red: clamp(convertedColor.red + changeAmount),
-			green: clamp(convertedColor.blue + changeAmount),
-			blue: clamp(convertedColor.green + changeAmount),
-		};
-		return convertRGBNumberToHex(changedRGB);
+/**
+ * Function to convert a hex string (i.e. #FF0000) to an HSL color object
+ */
+export function convertHexToHSL(color: string): HSLColor {
+	const rgb = convertHexToRGBNumber(color);
+	const red = rgb.red / 255;
+	const green = rgb.green / 255;
+	const blue = rgb.blue / 255;
+
+	const max = Math.max(red, green, blue);
+	const min = Math.min(red, green, blue);
+
+	let hue = 0;
+	let saturation = 0;
+	const luminance = (max + min) / 2;
+
+	if (max !== min) {
+		const delta = max - min;
+		saturation = delta / (luminance > 0.5 ? 2 - max - min : max + min);
+		switch (max) {
+			case red:
+				hue = ((green - blue) / delta) % 6;
+				break;
+			case green:
+				hue = (blue - red) / delta + 2;
+				break;
+			case blue:
+				hue = (red - green) / delta + 4;
+				break;
+			default:
+				break;
+		}
 	}
-	const changedRGB: RGBNumber = {
-		red: clamp(convertedColor.red - changeAmount),
-		green: clamp(convertedColor.blue - changeAmount),
-		blue: clamp(convertedColor.green - changeAmount),
+
+	return {
+		hue: Math.round(hue * 60),
+		saturation,
+		luminance,
 	};
-	return convertRGBNumberToHex(changedRGB);
 }
 
-export function lighten(color: string, percent: number): string {
-	return changeHex(color, percent);
+export function parseHSLString(color: string): HSLColor | null {
+	const parts = color.match(HSL_REGEX_PARSER);
+	if (parts === null) {
+		return null;
+	}
+
+	const [_, hue, saturation, luminance] = parts;
+	const sat = Number.parseInt(saturation);
+	const lum = Number.parseInt(luminance);
+
+	if (Number.isNaN(sat) || Number.isNaN(lum)) {
+		return null;
+	}
+	return {
+		hue: +hue,
+		saturation: sat / 100,
+		luminance: lum / 100,
+	};
 }
 
-export function darken(color: string, percent: number): string {
-	return changeHex(color, percent, false);
+export function convertHSLToHex(color: HSLColor): string {
+	// Convert a ratio 0-1 to value 0-255
+	const toHex = (val: number) => {
+		const hex = Math.round(val * 255)
+			.toString(16)
+			.padStart(2, "0");
+		return hex.toUpperCase();
+	};
+
+	const chroma = (1 - Math.abs(2 * color.luminance - 1)) * color.saturation;
+
+	// Intermediate value that is used to calculate the RGB values
+	// Value will be between 0 and chroma
+	const x = chroma * (1 - Math.abs(((color.hue / 60) % 2) - 1));
+
+	let r = 0;
+	let g = 0;
+	let b = 0;
+
+	if (0 <= color.hue && color.hue < 60) {
+		r = chroma;
+		g = x;
+		b = 0;
+	} else if (60 <= color.hue && color.hue < 120) {
+		r = x;
+		g = chroma;
+		b = 0;
+	} else if (120 <= color.hue && color.hue < 180) {
+		r = 0;
+		g = chroma;
+		b = x;
+	} else if (180 <= color.hue && color.hue < 240) {
+		r = 0;
+		g = x;
+		b = chroma;
+	} else if (240 <= color.hue && color.hue < 300) {
+		r = x;
+		g = 0;
+		b = chroma;
+	} else if (300 <= color.hue && color.hue < 360) {
+		r = chroma;
+		g = 0;
+		b = x;
+	}
+
+	const lightnessAdjustmentFactor = color.luminance - chroma / 2;
+	// Normalize RGB values to [0, 1]
+	r += lightnessAdjustmentFactor;
+	g += lightnessAdjustmentFactor;
+	b += lightnessAdjustmentFactor;
+
+	// Convert RGB and Opacity to Hex
+	const rHex = toHex(r);
+	const gHex = toHex(g);
+	const bHex = toHex(b);
+
+	return `#${rHex}${gHex}${bHex}`;
+}
+
+export function parseOpacityString(rawNum: string): number {
+	if (rawNum.length === 1) {
+		const num = Number.parseInt(rawNum);
+		if (Number.isNaN(num)) {
+			throw new Error("Unable to parse opacity");
+		}
+		return num * 0.1;
+	}
+
+	if (rawNum.length === 2) {
+		const num = Number.parseInt(rawNum);
+		if (Number.isNaN(num)) {
+			throw new Error("Unable to parse opacity");
+		}
+
+		if (rawNum.includes(".")) {
+			return num;
+		}
+
+		return num * 0.01;
+	}
+
+	throw new Error("Unable to parse opacity");
 }

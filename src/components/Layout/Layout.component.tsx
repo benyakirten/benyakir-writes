@@ -17,6 +17,11 @@ import {
 import Search from "./Search";
 import { inputIsFocused } from "@/utils/dom";
 import { setSidebarState } from "@/store/sidebar/sidebar.slice";
+import {
+	STORED_PREFERENCE_KEY,
+	STORED_THEMES,
+	STORED_PREFERENCES,
+} from "@/data/constants";
 
 const Layout: React.FC<ChildrenProp> = ({ children }) => {
 	const location = useLocation();
@@ -27,6 +32,14 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 
 	const closeModal = () => modalRef.current?.close();
 	const openModal = () => modalRef.current?.showModal();
+
+	// Debug to reset storage of themes
+	React.useEffect(() => {
+		localStorage.clear();
+	}, []);
+
+	// TODO: Set versioning on theme storage
+	// TODO: Allow a theme to be exported/imported as base64
 
 	React.useEffect(() => {
 		const handler = (e: KeyboardEvent) => {
@@ -51,9 +64,11 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 
 	React.useEffect(() => {
 		const storedComputerPreferences =
-			localStorage.getItem("BWB_ICP") === "true";
-		const storedThemes = localStorage.getItem("BWB_TS");
-		const storedPreference = localStorage.getItem("BWB_TNP")?.replace(/"/g, "");
+			localStorage.getItem(STORED_PREFERENCE_KEY) === "true";
+		const storedThemes = localStorage.getItem(STORED_THEMES);
+		const storedPreference = localStorage
+			.getItem(STORED_PREFERENCES)
+			?.replace(/"/g, "");
 
 		dispatch(
 			intializeThemeStore({

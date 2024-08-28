@@ -5,9 +5,15 @@ type RGBString = {
 };
 
 type RGBNumber = {
-	red: number;
-	green: number;
-	blue: number;
+	red: number; // 0-255
+	green: number; // 0-255
+	blue: number; // 0-255
+};
+
+type HSLColor = {
+	hue: number; // 0-360
+	saturation: number; // 0-1
+	luminance: number; // 0-1
 };
 
 type NamedColor =

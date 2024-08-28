@@ -18,7 +18,7 @@ export const IndividualItem = styled.li<{
 
   border: 2px solid
     ${(props) =>
-			props.selected ? props.theme.base.highlighted : props.theme.base.border};
+			props.selected ? props.theme.base.focus : props.theme.base.border};
   box-shadow: ${SHADOW_SM} ${(props) => props.theme.base.shadowColor};
 
   background-color: ${(props) =>

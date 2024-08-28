@@ -15,17 +15,14 @@ type ThemeBase = BasicThemeSection & {
 	border: string;
 	shadowColor: string;
 	disabled: string;
-	highlighted: string;
-	pillBackground: string;
-	pillText: string;
+	focus: string;
 	link: string;
 	neutral: string;
 };
 
 type ThemeSidebar = {
 	primaryColor: string;
-	useGradient: boolean;
-	primaryColorEnd: number;
+	gradient: string;
 	secondaryColor: string;
 	shadowColor: string;
 };
@@ -59,26 +56,23 @@ type ThemeToggle = {
 	border: string;
 };
 
+type ThemeHeader = {
+	startColor: string;
+	endColor: string;
+};
+
 type BaseTheme = {
 	id: string;
 	name: string;
 	base: ThemeBase;
+	pill: BasicThemeSection;
+	header: ThemeHeader;
 	sidebar: ThemeSidebar;
 	textInput: ThemeTextInput;
 	multipleChoice: ThemeMultipleChoice;
 	button: ButtonTheme;
 	alertBox: ThemeAlertBox;
 	toggle: ThemeToggle;
-} & Record<string, string>;
-
-type FullTheme = BaseTheme & {
-	fontExtraSmall: CSSMeasure;
-	fontSmall: CSSMeasure;
-	fontMedium: CSSMeasure;
-	fontLarge: CSSMeasure;
-	fontExtraLarge: CSSMeasure;
-	fontTitle: CSSMeasure;
-	fontBanner: CSSMeasure;
 };
 
 type RecursiveControlGroup = {

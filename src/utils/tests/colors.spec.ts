@@ -1,534 +1,420 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, test } from "vitest";
 
 import {
-	changeHex,
 	convertHexToRGBA,
 	convertHexToRGBNumber,
 	convertHexToRGBString,
 	convertRGBNumberToHex,
 	convertRGBNumberToRGBString,
 	convertRGBStringToRGBNumber,
-	darken,
-	lighten,
 	validateRGBNumbers,
 } from "@/utils/colors";
 
 describe("convertHexToRGBA", () => {
-	it("will give known outputs for known inputs", () => {
-		const correctInputs = [
-			{
-				val: "#000000",
-				op: 0.8,
-			},
-			{
-				val: "#abcdef",
-				op: 0.2,
-			},
-			{
-				val: "#000",
-				op: 0,
-			},
-			{
-				val: "#000000",
-				op: 0,
-			},
-			{
-				val: "#000000",
-				op: 1,
-			},
-		];
-		const expected = [
-			"rgba(0, 0, 0, 0.8)",
-			"rgba(171, 205, 239, 0.2)",
-			"rgba(0, 0, 0, 0)",
-			"rgba(0, 0, 0, 0)",
-			"rgba(0, 0, 0, 1)",
-		];
-
-		for (let i = 0; i < correctInputs.length; i++) {
-			const { val, op } = correctInputs[i];
-			const result = expected[i];
-			expect(convertHexToRGBA(val, op)).toEqual(result);
-		}
+	test.for<{ want: string; val: string; op: number }>([
+		{
+			val: "#000000",
+			op: 0.8,
+			want: "rgba(0, 0, 0, 0.8)",
+		},
+		{
+			val: "#abcdef",
+			op: 0.2,
+			want: "rgba(171, 205, 239, 0.2)",
+		},
+		{
+			val: "#000",
+			op: 0,
+			want: "rgba(0, 0, 0, 0)",
+		},
+		{
+			val: "#000000",
+			op: 0,
+			want: "rgba(0, 0, 0, 0)",
+		},
+		{
+			want: "rgba(0, 0, 0, 1)",
+			val: "#000000",
+			op: 1,
+		},
+	])("should convert $val with opacity $op to $want", ({ val, op, want }) => {
+		const got = convertHexToRGBA(val, op);
+		expect(got).toEqual(want);
 	});
 
-	it("will round opacity to the nearest two decimal numbers", () => {
-		const inputs = [
-			{
-				val: "#000000",
-				op: 0.799,
-			},
-			{
-				val: "#abcdef",
-				op: 0.249999999,
-			},
+	test.for<{ want: string; val: string; op: number }>([
+		{
+			val: "#000000",
+			op: 0.799,
+			want: "rgba(0, 0, 0, 0.8)",
+		},
+		{
+			val: "#abcdef",
+			op: 0.249999999,
+			want: "rgba(171, 205, 239, 0.25)",
+		},
 
-			{
-				val: "#000000",
-				op: 0.001,
-			},
-			{
-				val: "#000000",
-				op: 0.9999,
-			},
-		];
-		const expected = [
-			"rgba(0, 0, 0, 0.8)",
-			"rgba(171, 205, 239, 0.25)",
-			"rgba(0, 0, 0, 0)",
-			"rgba(0, 0, 0, 1)",
-		];
-
-		for (let i = 0; i < inputs.length; i++) {
-			const { val, op } = inputs[i];
-			const result = expected[i];
-			expect(convertHexToRGBA(val, op)).toEqual(result);
-		}
+		{
+			val: "#000000",
+			op: 0.001,
+			want: "rgba(0, 0, 0, 0)",
+		},
+		{
+			val: "#000000",
+			op: 0.9999,
+			want: "rgba(0, 0, 0, 1)",
+		},
+	])("should convert $val with opacity $op to $want", ({ val, op, want }) => {
+		const got = convertHexToRGBA(val, op);
+		expect(got).toEqual(want);
 	});
 
-	it("will throw errors if the input is incorrectly formatted", () => {
-		const badInputs = [
-			{
-				val: "#0000000",
-				op: 0.799,
-			},
-			{
-				val: "#ab",
-				op: 0.249999999,
-			},
-
-			{
-				val: "abcdef",
-				op: 0.001,
-			},
-			{
-				val: "       ",
-				op: 0.9999,
-			},
-		];
-
-		for (const input of badInputs) {
-			expect(() => convertHexToRGBA(input.val, input.op)).toThrow();
-		}
-	});
+	test.for<string>(["#0000000", "#ab", "abcdef", "       "])(
+		"should throw an error for '%s'",
+		(val) => {
+			expect(() => convertHexToRGBA(val)).toThrow();
+		},
+	);
 });
 
 describe("convertHexToRGBString", () => {
-	it("will give known outputs for known inputs", () => {
-		const correctInputs = ["#abcdef", "#000000", "#000", "#abc"];
-		const expected = [
-			{
+	test.for<{ input: string; want: RGBString }>([
+		{
+			want: {
 				red: "ab",
 				green: "cd",
 				blue: "ef",
 			},
-			{
+			input: "#abcdef",
+		},
+		{
+			want: {
 				red: "00",
 				green: "00",
 				blue: "00",
 			},
-			{
+			input: "#000000",
+		},
+		{
+			want: {
 				red: "00",
 				green: "00",
 				blue: "00",
 			},
-			{
+			input: "#000",
+		},
+		{
+			want: {
 				red: "aa",
 				green: "bb",
 				blue: "cc",
 			},
-		];
-
-		for (let i = 0; i < correctInputs.length; i++) {
-			const val = correctInputs[i];
-			const result = expected[i];
-			expect(convertHexToRGBString(val)).toEqual(result);
-		}
+			input: "#abc",
+		},
+	])("should convert $input to $want", ({ input, want }) => {
+		const got = convertHexToRGBString(input);
+		expect(got).toEqual(want);
 	});
 
-	it("will throw errors if the input is incorrectly formatted", () => {
-		const badInputs = ["#0000000", "#ab", "abcdef", "       "];
-
-		for (const input of badInputs) {
-			expect(() => convertHexToRGBString(input)).toThrow();
-		}
-	});
+	test.for<string>(["#0000000", "#ab", "abcdef", "       "])(
+		"should throw an error for '%s'",
+		(val) => {
+			expect(() => convertHexToRGBString(val)).toThrow();
+		},
+	);
 });
 
 describe("convertRGBStringToRGBNumber", () => {
-	it("will give known outputs for known inputs", () => {
-		const correctInputs = [
-			{
+	test.for<{ want: RGBNumber; input: RGBString }>([
+		{
+			input: {
 				red: "ab",
 				green: "cd",
 				blue: "ef",
 			},
-			{
-				red: "00",
-				green: "00",
-				blue: "00",
-			},
-			{
-				red: "00",
-				green: "00",
-				blue: "00",
-			},
-			{
-				red: "aa",
-				green: "bb",
-				blue: "cc",
-			},
-		];
-		const expected = [
-			{
+			want: {
 				red: 171,
 				green: 205,
 				blue: 239,
 			},
-			{
+		},
+		{
+			input: {
+				red: "00",
+				green: "00",
+				blue: "00",
+			},
+			want: {
 				red: 0,
 				green: 0,
 				blue: 0,
 			},
-			{
+		},
+		{
+			input: {
+				red: "00",
+				green: "00",
+				blue: "00",
+			},
+			want: {
 				red: 0,
 				green: 0,
 				blue: 0,
 			},
-			{
+		},
+		{
+			input: {
+				red: "aa",
+				green: "bb",
+				blue: "cc",
+			},
+			want: {
 				red: 170,
 				green: 187,
 				blue: 204,
 			},
-		];
-
-		for (let i = 0; i < correctInputs.length; i++) {
-			const val = correctInputs[i];
-			const result = expected[i];
-			expect(convertRGBStringToRGBNumber(val)).toEqual(result);
-		}
+		},
+	])("should convert $input to $want", ({ input, want }) => {
+		const got = convertRGBStringToRGBNumber(input);
+		expect(got).toEqual(want);
 	});
 
-	it("will throw errors if the input is incorrectly formatted", () => {
-		const badInputs = [
-			{
-				red: "abc",
-				green: "cd",
-				blue: "ef",
-			},
-			{
-				red: "00",
-				green: "-255",
-				blue: "00",
-			},
-			{
-				red: "how",
-				green: "00",
-				blue: "00",
-			},
-			{
-				red: "aa",
-				green: "bb",
-				blue: "299",
-			},
-		];
-
-		for (const input of badInputs) {
-			expect(() => convertRGBStringToRGBNumber(input)).toThrow();
-		}
+	test.for<RGBString>([
+		{
+			red: "abc",
+			green: "cd",
+			blue: "ef",
+		},
+		{
+			red: "00",
+			green: "-255",
+			blue: "00",
+		},
+		{
+			red: "how",
+			green: "00",
+			blue: "00",
+		},
+		{
+			red: "aa",
+			green: "bb",
+			blue: "299",
+		},
+	])("should throw an error for '%s'", (val) => {
+		expect(() => convertRGBStringToRGBNumber(val)).toThrow();
 	});
 });
 
 describe("convertRGBNumberToRGBString", () => {
-	it("will give known outputs for known inputs", () => {
-		const correctInputs = [
-			{
+	test.for<{ want: RGBString; input: RGBNumber }>([
+		{
+			input: {
 				red: 171,
 				green: 205,
 				blue: 239,
 			},
-			{
-				red: 0,
-				green: 0,
-				blue: 0,
-			},
-			{
-				red: 0,
-				green: 0,
-				blue: 0,
-			},
-			{
-				red: 170,
-				green: 187,
-				blue: 204,
-			},
-		];
-
-		const expected = [
-			{
+			want: {
 				red: "ab",
 				green: "cd",
 				blue: "ef",
 			},
-			{
+		},
+		{
+			input: {
+				red: 0,
+				green: 0,
+				blue: 0,
+			},
+			want: {
 				red: "00",
 				green: "00",
 				blue: "00",
 			},
-			{
+		},
+		{
+			input: {
+				red: 0,
+				green: 0,
+				blue: 0,
+			},
+			want: {
 				red: "00",
 				green: "00",
 				blue: "00",
 			},
-			{
+		},
+		{
+			input: {
+				red: 170,
+				green: 187,
+				blue: 204,
+			},
+			want: {
 				red: "aa",
 				green: "bb",
 				blue: "cc",
 			},
-		];
-
-		for (let i = 0; i < correctInputs.length; i++) {
-			const val = correctInputs[i];
-			const result = expected[i];
-			expect(convertRGBNumberToRGBString(val)).toEqual(result);
-		}
+		},
+	])("should convert $input to $want", ({ input, want }) => {
+		const got = convertRGBNumberToRGBString(input);
+		expect(got).toEqual(want);
 	});
 
-	it("will throw errors if the input is incorrectly formatted", () => {
-		const badInputs = [
-			{
-				red: 116.5,
-				green: 205,
-				blue: 239,
-			},
-			{
-				red: -20,
-				green: 0,
-				blue: 0,
-			},
-			{
-				red: 0,
-				green: 280,
-				blue: 0,
-			},
-			{
-				red: 0,
-				green: 187,
-				blue: Number.POSITIVE_INFINITY,
-			},
-		];
-
-		for (const input of badInputs) {
-			expect(() => convertRGBNumberToRGBString(input)).toThrow();
-		}
+	test.for<RGBNumber>([
+		{
+			red: 116.5,
+			green: 205,
+			blue: 239,
+		},
+		{
+			red: -20,
+			green: 0,
+			blue: 0,
+		},
+		{
+			red: 0,
+			green: 280,
+			blue: 0,
+		},
+		{
+			red: 0,
+			green: 187,
+			blue: Number.POSITIVE_INFINITY,
+		},
+	])("should throw an error for '%s'", (val) => {
+		expect(() => convertRGBNumberToRGBString(val)).toThrow();
 	});
 });
 
 describe("validateRGBNumbers", () => {
-	it("will return true for known correct inputs", () => {
-		const correctInputs = [
-			[155, 255, 125],
-			[0, 0, 0],
-			[1, 2, 3, 4, 5, 5, 6, 6, 7, 8, 255, 255, 255, 255, 21, 18],
-		];
-
-		for (const input of correctInputs) {
-			expect(validateRGBNumbers(...input)).toBe(true);
-		}
+	test.for<{ input: number[] }>([
+		{ input: [155, 255, 125] },
+		{ input: [0, 0, 0] },
+		{ input: [1, 2, 3, 4, 5, 5, 6, 6, 7, 8, 255, 255, 255, 255, 21, 18] },
+	])("should return true for %input", ({ input }) => {
+		expect(validateRGBNumbers(...input)).toBe(true);
 	});
 
-	it("will return false for known incorrect inputs", () => {
-		const incorrectInputs = [
-			[100.1],
-			[],
-			[275],
-			[100, 115, 125, 255, 256],
-			[-50],
-			[100, 200, 100, 200, -1],
-		];
-
-		for (const input of incorrectInputs) {
-			expect(validateRGBNumbers(...input)).toBe(false);
-		}
+	test.for<{ input: number[] }>([
+		{ input: [100.1] },
+		{ input: [] },
+		{ input: [275] },
+		{ input: [100, 115, 125, 255, 256] },
+		{ input: [-50] },
+		{ input: [100, 200, 100, 200, -1] },
+	])("should return false for %input", ({ input }) => {
+		expect(validateRGBNumbers(...input)).toBe(false);
 	});
 });
 
 describe("convertHexToRGBNumber", () => {
-	it("will give known outputs for known inputs", () => {
-		const correctInputs = ["#abcdef", "#000000", "#000", "#abc"];
-		const expected = [
-			{
+	test.for<{ input: string; want: RGBNumber }>([
+		{
+			want: {
 				red: 171,
 				green: 205,
 				blue: 239,
 			},
-			{
+			input: "#abcdef",
+		},
+		{
+			want: {
 				red: 0,
 				green: 0,
 				blue: 0,
 			},
-			{
+			input: "#000000",
+		},
+		{
+			want: {
 				red: 0,
 				green: 0,
 				blue: 0,
 			},
-			{
+			input: "#000",
+		},
+		{
+			want: {
 				red: 170,
 				green: 187,
 				blue: 204,
 			},
-		];
-
-		for (let i = 0; i < correctInputs.length; i++) {
-			const val = correctInputs[i];
-			const result = expected[i];
-			expect(convertHexToRGBNumber(val)).toEqual(result);
-		}
+			input: "#abc",
+		},
+	])("should convert $input to $want", ({ input, want }) => {
+		const got = convertHexToRGBNumber(input);
+		expect(got).toEqual(want);
 	});
 
-	it("will throw errors if the input is incorrectly formatted", () => {
-		const badInputs = ["#0000000", "#ab", "abcdef", "       "];
-
-		for (const input of badInputs) {
-			expect(() => convertHexToRGBString(input)).toThrow();
-		}
-	});
+	test.for<string>(["#0000000", "#ab", "abcdef", "       "])(
+		"should throw an error for '%s'",
+		(val) => {
+			expect(() => convertHexToRGBNumber(val)).toThrow();
+		},
+	);
 });
 
 describe("convertRGBNumberToHex", () => {
-	it("will give known outputs for known inputs", () => {
-		const correctInputs = [
-			{
+	test.for<{ input: RGBNumber; want: string }>([
+		{
+			input: {
 				red: 171,
 				green: 205,
 				blue: 239,
 			},
-			{
+			want: "#abcdef",
+		},
+		{
+			input: {
 				red: 0,
 				green: 0,
 				blue: 0,
 			},
-			{
+			want: "#000",
+		},
+		{
+			input: {
 				red: 0,
 				green: 0,
 				blue: 0,
 			},
-			{
+			want: "#000",
+		},
+		{
+			input: {
 				red: 170,
 				green: 187,
 				blue: 204,
 			},
-		];
-
-		const expected = ["#abcdef", "#000", "#000", "#aabbcc"];
-
-		for (let i = 0; i < correctInputs.length; i++) {
-			const val = correctInputs[i];
-			const result = expected[i];
-			expect(convertRGBNumberToHex(val)).toEqual(result);
-		}
+			want: "#aabbcc",
+		},
+	])("should convert $input to $want", ({ input, want }) => {
+		const got = convertRGBNumberToHex(input);
+		expect(got).toEqual(want);
 	});
 
-	it("will throw errors if the input is incorrectly formatted", () => {
-		const badInputs = [
-			{
-				red: 116.5,
-				green: 205,
-				blue: 239,
-			},
-			{
-				red: -20,
-				green: 0,
-				blue: 0,
-			},
-			{
-				red: 0,
-				green: 280,
-				blue: 0,
-			},
-			{
-				red: 0,
-				green: 187,
-				blue: Number.POSITIVE_INFINITY,
-			},
-		];
-
-		for (const input of badInputs) {
-			expect(() => convertRGBNumberToHex(input)).toThrow();
-		}
-	});
-});
-
-describe("changeHex", () => {
-	it("will give known outputs for known inputs", () => {
-		const correctInputs = [
-			{
-				color: "#abcdef",
-				percent: 10,
-				positive: true,
-			},
-			{
-				color: "#000000",
-				percent: 10,
-				positive: true,
-			},
-			{
-				color: "#abcdef",
-				percent: 10,
-				positive: false,
-			},
-		];
-		const expected = ["#c5ffe7", "#1a1a1a", "#91d5b3"];
-
-		for (let i = 0; i < correctInputs.length; i++) {
-			const val = correctInputs[i];
-			const result = expected[i];
-			expect(changeHex(val.color, val.percent, val.positive)).toEqual(result);
-		}
-	});
-
-	it("will return valid hex strings even if the value will be > 255 or < 0", () => {
-		const inputs = [
-			{
-				color: "#ffffff",
-				percent: 200,
-				positive: true,
-			},
-			{
-				color: "#000000",
-				percent: 200,
-				positive: false,
-			},
-		];
-
-		const expected = ["#ffffff", "#000"];
-
-		for (let i = 0; i < inputs.length; i++) {
-			const val = inputs[i];
-			const result = expected[i];
-			expect(changeHex(val.color, val.percent, val.positive)).toEqual(result);
-		}
-	});
-});
-
-describe("darken", () => {
-	it("will return outputs less than the original values", () => {
-		const res = darken("#ffffff", 10);
-		const beforeAsnumber = convertHexToRGBNumber("#ffffff");
-		const resAsNumber = convertHexToRGBNumber(res);
-		expect(beforeAsnumber.red > resAsNumber.red).toBe(true);
-		expect(beforeAsnumber.green > resAsNumber.green).toBe(true);
-		expect(beforeAsnumber.blue > resAsNumber.blue).toBe(true);
-	});
-});
-
-describe("lighten", () => {
-	it("will return outputs greater than the original values", () => {
-		const res = lighten("#000000", 10);
-		const beforeAsnumber = convertHexToRGBNumber("#000000");
-		const resAsNumber = convertHexToRGBNumber(res);
-		expect(beforeAsnumber.red < resAsNumber.red).toBe(true);
-		expect(beforeAsnumber.green < resAsNumber.green).toBe(true);
-		expect(beforeAsnumber.blue < resAsNumber.blue).toBe(true);
+	test.for<RGBNumber>([
+		{
+			red: 116.5,
+			green: 205,
+			blue: 239,
+		},
+		{
+			red: -20,
+			green: 0,
+			blue: 0,
+		},
+		{
+			red: 0,
+			green: 280,
+			blue: 0,
+		},
+		{
+			red: 0,
+			green: 187,
+			blue: Number.POSITIVE_INFINITY,
+		},
+	])("should throw an error for '%s'", (val) => {
+		expect(() => convertRGBNumberToHex(val)).toThrow();
 	});
 });

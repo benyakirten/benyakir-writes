@@ -34,13 +34,7 @@ export const StyledSidebar = styled.nav<{ open?: boolean }>`
 
   user-select: none;
 
-  background-color: red;
-
-  background-image: ${(props) => `linear-gradient(
-    to right,
-    ${props.theme.sidebar.primaryColor} ${props.theme.sidebar.primaryColorEnd}%,
-    ${props.theme.sidebar.secondaryColor}
-  )`};
+  background-image: ${(props) => props.theme.sidebar.gradient};
   border-right: 2px solid ${(props) => props.theme.base.border};
   box-shadow: ${(props) =>
 		`${SHADOW_MD} ${convertHexToRGBA(props.theme.sidebar.shadowColor, 0.4)}`};

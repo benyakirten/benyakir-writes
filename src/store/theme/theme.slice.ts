@@ -4,6 +4,12 @@ import { defaultDayTheme, initialState } from "./theme.state";
 
 import { DraggedOverPosition } from "@/utils/enums";
 import { flattenTheme } from "@/utils/other";
+import { ArrayItemsTransfer, StringLookup } from "@/types/general";
+import {
+	STORED_PREFERENCE_KEY,
+	STORED_PREFERENCES,
+	STORED_THEMES,
+} from "@/data/constants";
 
 function determineComputerPreferredTheme(state: ThemeState) {
 	const darkThemeTime = window.matchMedia(
@@ -84,7 +90,7 @@ const themeSlice = createSlice({
 			state.error = undefined;
 			state.ignoreComputerPreferences = !state.ignoreComputerPreferences;
 			localStorage.setItem(
-				"BWB_ICP",
+				STORED_PREFERENCE_KEY,
 				state.ignoreComputerPreferences.toString(),
 			);
 			if (!state.ignoreComputerPreferences) {
@@ -94,7 +100,7 @@ const themeSlice = createSlice({
 		setThemePreferenceByIndex: (state, action: PayloadAction<number>) => {
 			state.error = undefined;
 			state.prefers = state.themes[action.payload].id;
-			localStorage.setItem("BWB_TNP", state.prefers);
+			localStorage.setItem(STORED_PREFERENCES, state.prefers);
 		},
 		setThemePreferenceByID: (state, action: PayloadAction<string>) => {
 			state.error = undefined;
@@ -106,7 +112,7 @@ const themeSlice = createSlice({
 				return;
 			}
 			state.prefers = preferredTheme.id;
-			localStorage.setItem("BWB_TNP", state.prefers);
+			localStorage.setItem(STORED_PREFERENCES, state.prefers);
 		},
 		reorderThemes: (state, action: PayloadAction<ArrayItemsTransfer>) => {
 			state.error = undefined;
@@ -147,7 +153,7 @@ const themeSlice = createSlice({
 				state.themes[endPosition],
 				state.themes[startPosition],
 			];
-			localStorage.setItem("BWB_TS", JSON.stringify(state.themes));
+			localStorage.setItem(STORED_THEMES, JSON.stringify(state.themes));
 		},
 		copyThemeByID: (state, action: PayloadAction<string>) => {
 			state.error = undefined;
@@ -164,7 +170,7 @@ const themeSlice = createSlice({
 				const { name, id } = copyTheme(copiedTheme, state);
 				// @ts-ignore
 				state.themes.push({ ...copiedTheme, name, id });
-				localStorage.setItem("BWB_TS", JSON.stringify(state.themes));
+				localStorage.setItem(STORED_THEMES, JSON.stringify(state.themes));
 			} catch {
 				state.error = "Unable to create new theme";
 			}
@@ -185,7 +191,7 @@ const themeSlice = createSlice({
 				const { name, id } = copyTheme(copiedTheme, state);
 				// @ts-ignore
 				state.themes.push({ ...copiedTheme, name, id });
-				localStorage.setItem("BWB_TS", JSON.stringify(state.themes));
+				localStorage.setItem(STORED_THEMES, JSON.stringify(state.themes));
 			} catch {
 				state.error = "Unable to create new theme";
 			}
@@ -196,7 +202,7 @@ const themeSlice = createSlice({
 				const { name, id } = copyTheme(defaultDayTheme, state);
 				// @ts-ignore
 				state.themes.push({ ...defaultDayTheme, name, id });
-				localStorage.setItem("BWB_TS", JSON.stringify(state.themes));
+				localStorage.setItem(STORED_THEMES, JSON.stringify(state.themes));
 			} catch {
 				state.error = "Unable to create new theme";
 			}
@@ -221,7 +227,7 @@ const themeSlice = createSlice({
 				state.error = "Day and night themes are immutable";
 			}
 			state.themes[themeToUpdateIndex] = theme;
-			localStorage.setItem("BWB_TS", JSON.stringify(state.themes));
+			localStorage.setItem(STORED_THEMES, JSON.stringify(state.themes));
 		},
 		deleteThemeByIndex: (state, action: PayloadAction<number>) => {
 			state.error = undefined;
@@ -237,7 +243,7 @@ const themeSlice = createSlice({
 				state.prefers = state.themes[action.payload === 0 ? 1 : 0].name;
 			}
 			state.themes.splice(action.payload, 1);
-			localStorage.setItem("BWB_TS", JSON.stringify(state.themes));
+			localStorage.setItem(STORED_THEMES, JSON.stringify(state.themes));
 		},
 		deleteThemeByID: (state, action: PayloadAction<string>) => {
 			state.error = undefined;
@@ -257,7 +263,7 @@ const themeSlice = createSlice({
 			state.themes = state.themes.filter(
 				(theme) => theme.id !== action.payload,
 			);
-			localStorage.setItem("BWB_TS", JSON.stringify(state.themes));
+			localStorage.setItem(STORED_THEMES, JSON.stringify(state.themes));
 		},
 		changeThemeName: (
 			state,
@@ -280,7 +286,7 @@ const themeSlice = createSlice({
 				state.active =
 					state.themes.find((theme) => theme.id === id) ?? state.active;
 			}
-			localStorage.setItem("BWB_TS", JSON.stringify(state.themes));
+			localStorage.setItem(STORED_THEMES, JSON.stringify(state.themes));
 		},
 		changePropOnTheme: (
 			state,
@@ -325,7 +331,7 @@ const themeSlice = createSlice({
 				state.active =
 					state.themes.find((theme) => theme.id === id) ?? state.active;
 			}
-			localStorage.setItem("BWB_TS", JSON.stringify(state.themes));
+			localStorage.setItem(STORED_THEMES, JSON.stringify(state.themes));
 		},
 		dismissThemeError: (state) => {
 			state.error = undefined;
@@ -354,9 +360,9 @@ const themeSlice = createSlice({
 			}
 		},
 		resetThemeOptions: () => {
-			localStorage.removeItem("BWB_TS");
-			localStorage.removeItem("BWB_TNP");
-			localStorage.removeItem("BWB_ICP");
+			localStorage.removeItem(STORED_THEMES);
+			localStorage.removeItem(STORED_PREFERENCES);
+			localStorage.removeItem(STORED_PREFERENCE_KEY);
 			const defaultState = { ...initialState };
 			defaultState.active = determineComputerPreferredTheme(defaultState);
 			return defaultState;

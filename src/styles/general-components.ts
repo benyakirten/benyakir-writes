@@ -1,19 +1,14 @@
-import { GatsbyImage } from "gatsby-plugin-image";
 import styled from "styled-components";
 
 import { fadeIn, slideInLeft, slideInRight } from "./animations";
 import { media } from "./queries";
 import {
-	BLACK,
-	SERIF_FONT,
-	FONT_SIZE_LG,
 	FONT_SIZE_MD,
 	FONT_SIZE_XL,
 	SECONDARY_800,
 	SIZE_MD,
 	TRANSITION_EXTRA_SLOW,
 	TRANSITION_NORMAL,
-	TRANSITION_SLOW,
 	SANS_SERIF_FONT,
 	SIZE_SM,
 	SIZE_XS,
@@ -24,9 +19,8 @@ import {
 	FONT_XL,
 	FONT_MD,
 	FONT_LG,
-	FONT_SIZE_SM,
 } from "./variables";
-import { hoverUnderline, textClipWithHoverTransition } from "./composables";
+import { hoverUnderline, textClipWithHoverTransition } from "./style-mixins";
 
 export const FadeIn = styled.div<{ duration?: string; delay?: string }>`
   opacity: 0;
@@ -66,7 +60,7 @@ export const LeadHeading = styled.h1`
 
   ${FONT_XXXL};
 
-  ${(props) => textClipWithHoverTransition(props.theme.base.textColor, props.theme.base.highlighted)}
+  ${(props) => textClipWithHoverTransition(props.theme.header.startColor, props.theme.header.endColor)}
 
   ${media.phone} {
     ${FONT_XXL};
@@ -80,7 +74,7 @@ export const Subtitle = styled.h2`
 
   ${FONT_XL};
 
-  ${(props) => textClipWithHoverTransition(props.theme.base.textColor, props.theme.base.highlighted)}
+  ${(props) => textClipWithHoverTransition(props.theme.header.startColor, props.theme.header.endColor)}
 
   ${media.phone} {
     ${FONT_LG};
@@ -211,7 +205,7 @@ export const WpContent = styled.div`
   h6 {
     font-family: ${SANS_SERIF_FONT};
     padding: ${SIZE_MD} 0;
-    ${(props) => textClipWithHoverTransition(props.theme.base.textColor, props.theme.base.highlighted)}
+    ${(props) => textClipWithHoverTransition(props.theme.header.startColor, props.theme.header.endColor)}
   }
 
 

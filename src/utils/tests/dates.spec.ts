@@ -240,7 +240,7 @@ describe("convertDatePickerValueToDate", () => {
 		expect(result).toEqual(new Date("02/29/2024"));
 	});
 
-	test.each<string>(["invalid", "2024-2-29", ""])(
+	test.for<string>(["invalid", "2024-2-29", ""])(
 		"should return an invalid date for %s",
 		(value) => {
 			const result = convertDatePickerValueToDate(value);

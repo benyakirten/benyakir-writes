@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { hoverUnderline } from "@/styles/composables";
+import { hoverUnderline } from "@/styles/style-mixins";
 
 const UnderlinableItem = styled.div<{
 	display?: React.CSSProperties["display"];

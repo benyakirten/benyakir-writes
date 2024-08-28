@@ -15,6 +15,7 @@ import ThemeControls from "./ThemeControls/ThemeControl.component";
 import { useAlternation, useMultiple } from "@/hooks";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { toggleUseComputerPreferences } from "@/store/theme/theme.slice";
+import { SIZE_MD } from "@/styles/variables";
 
 const ThemeCard: React.FC = () => {
 	const [allowsHover, setAllowsHover] = React.useState<boolean>();
@@ -48,46 +49,40 @@ const ThemeCard: React.FC = () => {
 
 	return (
 		<Column style={{ gap: "1rem" }}>
-			{themeStore.error && (
-				<AlertBox success={false}>{themeStore.error}</AlertBox>
-			)}
-			<>
-				<Foldout
-					open={openMenus.general}
-					height={generalHeight}
-					onClick={() => toggleOpenMenus("general")}
-					topbar={<BigParagraph>General Options</BigParagraph>}
-					cyId="theme-open-general"
-				>
-					<Box>
-						<Paragraph>Use Computer Theme Preferences:</Paragraph>
-						<Toggle
-							label={themeStore.ignoreComputerPreferences ? "Off" : "On"}
-							name="theme-ignore-computer-preferences"
-							onToggle={() => dispatch(toggleUseComputerPreferences())}
-							value={!themeStore.ignoreComputerPreferences}
-							tabIndex={openMenus.general ? 0 : -1}
-						/>
-					</Box>
-					<ThemeControls
-						open={openMenus.general}
-						selectedTheme={selectedTheme}
-						setSelectedTheme={setSelectedTheme}
-						allowsHover={!!allowsHover}
+			<Foldout
+				open={openMenus.general}
+				height={generalHeight}
+				onClick={() => toggleOpenMenus("general")}
+				topbar={<BigParagraph>General Options</BigParagraph>}
+				cyId="theme-open-general"
+			>
+				<Box style={{ margin: `${SIZE_MD} 0` }}>
+					<Paragraph>Use Computer Theme Preferences:</Paragraph>
+					<Toggle
+						label={themeStore.ignoreComputerPreferences ? "Off" : "On"}
+						name="theme-ignore-computer-preferences"
+						onToggle={() => dispatch(toggleUseComputerPreferences())}
+						value={!themeStore.ignoreComputerPreferences}
+						tabIndex={openMenus.general ? 0 : -1}
 					/>
-				</Foldout>
-			</>
-			<>
-				<Foldout
-					height="auto"
-					open={openMenus.modify}
-					onClick={() => toggleOpenMenus("modify")}
-					topbar={<BigParagraph>Modify Theme</BigParagraph>}
-					cyId="theme-open-modify"
-				>
-					<ModifyTheme open={openMenus.modify} selectedTheme={selectedTheme} />
-				</Foldout>
-			</>
+				</Box>
+				<ThemeControls
+					open={openMenus.general}
+					selectedTheme={selectedTheme}
+					setSelectedTheme={setSelectedTheme}
+					allowsHover={!!allowsHover}
+				/>
+			</Foldout>
+
+			<Foldout
+				height="auto"
+				open={openMenus.modify}
+				onClick={() => toggleOpenMenus("modify")}
+				topbar={<BigParagraph>Modify Theme</BigParagraph>}
+				cyId="theme-open-modify"
+			>
+				<ModifyTheme open={openMenus.modify} selectedTheme={selectedTheme} />
+			</Foldout>
 		</Column>
 	);
 };
