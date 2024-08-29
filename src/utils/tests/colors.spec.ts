@@ -5,6 +5,7 @@ import {
 	convertHexToRGBA,
 	convertHexToRGBNumber,
 	convertHexToRGBString,
+	convertHSLToCSSColor,
 	convertRGBNumberToHex,
 	convertRGBNumberToRGBString,
 	convertRGBStringToRGBNumber,
@@ -496,6 +497,69 @@ describe("toHex", () => {
 		expect(toHex(255)).toEqual("FF");
 		expect(toHex(16)).toEqual("10");
 		expect(toHex(123)).toEqual("7B");
+	});
+});
+describe("convertHSLToCSSColor", () => {
+	test.for<{ input: HSLColor; want: string }>([
+		{
+			input: {
+				hue: 0,
+				saturation: 1,
+				luminance: 0.5,
+			},
+			want: "hsl(0 100% 50%)",
+		},
+		{
+			input: {
+				hue: 120,
+				saturation: 1,
+				luminance: 0.5,
+			},
+			want: "hsl(120 100% 50%)",
+		},
+		{
+			input: {
+				hue: 240,
+				saturation: 1,
+				luminance: 0.5,
+			},
+			want: "hsl(240 100% 50%)",
+		},
+		{
+			input: {
+				hue: 0,
+				saturation: 0,
+				luminance: 1,
+			},
+			want: "hsl(0 0% 100%)",
+		},
+		{
+			input: {
+				hue: 0,
+				saturation: 0,
+				luminance: 0,
+			},
+			want: "hsl(0 0% 0%)",
+		},
+		{
+			input: {
+				hue: 106,
+				saturation: 1,
+				luminance: 0.5,
+			},
+			want: "hsl(106 100% 50%)",
+		},
+		{
+			input: {
+				hue: 75,
+				saturation: 0.43,
+				luminance: 0.76,
+			},
+			want: "hsl(75 43% 76%)",
+		},
+	])("should convert $input to %want", ({ want, input }) => {
+		const got = convertHSLToCSSColor(input);
+		expect(got).toEqual(want);
 	});
 });
 

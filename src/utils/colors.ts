@@ -254,3 +254,7 @@ export function convertHSLToHex(color: HSLColor): string {
 
 	return `#${rHex}${gHex}${bHex}`;
 }
+
+export function convertHSLToCSSColor(color: HSLColor): string {
+	return `hsl(${color.hue} ${Math.round(color.saturation * 100)}% ${Math.round(color.luminance * 100)}%)`;
+}
