@@ -478,8 +478,16 @@ describe("convertHexToHSL", () => {
 			input: "#cfdca8",
 			want: {
 				hue: 75,
-				saturation: 0.43,
-				luminance: 0.76,
+				saturation: 0.42622950819672145,
+				luminance: 0.7607843137254902,
+			},
+		},
+		{
+			input: "#abcdef",
+			want: {
+				hue: 210,
+				saturation: 0.68,
+				luminance: 0.803921568627451,
 			},
 		},
 	])("should convert $input to $want", ({ input, want }) => {
@@ -491,6 +499,7 @@ describe("convertHexToHSL", () => {
 		expect(() => convertHexToHSL("#12345")).toThrow();
 	});
 });
+
 describe("toHex", () => {
 	it("should convert decimal numbers to hexadecimal strings", () => {
 		expect(toHex(0)).toEqual("00");
@@ -500,6 +509,7 @@ describe("toHex", () => {
 		expect(toHex(123)).toEqual("7B");
 	});
 });
+
 describe("convertHSLToHex", () => {
 	test.for<{ input: HSLColor; want: string }>([
 		{
@@ -556,7 +566,15 @@ describe("convertHSLToHex", () => {
 				saturation: 0.43,
 				luminance: 0.76,
 			},
-			want: "#CEDCA7",
+			want: "#CFDCA7",
+		},
+		{
+			input: {
+				hue: 210,
+				saturation: 0.68,
+				luminance: 0.803921568627451,
+			},
+			want: "#ABCDEF",
 		},
 	])("should convert $input to $want", ({ input, want }) => {
 		const got = convertHSLToHex(input);
@@ -718,4 +736,15 @@ describe("parseHSLString", () => {
 		const got = parseHSLString(input);
 		expect(got).toEqual(want);
 	});
+});
+
+describe("hsl and hex conversions", () => {
+	test.each<string>(["#000000", "#ABCDEF", "#FF00FF", "#12AB35"])(
+		"should convert %s to hsl and back to the same value",
+		(hex) => {
+			const hsl = convertHexToHSL(hex);
+			const newHex = convertHSLToHex(hsl);
+			expect(newHex).toEqual(hex);
+		},
+	);
 });

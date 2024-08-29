@@ -1,4 +1,4 @@
-import { clamp, round } from "./numbers";
+import { round } from "./numbers";
 import { validateRange } from "./validation";
 
 const HSL_REGEX_PARSER = /hsl\(([a-zA-Z0-9\.]+) (\w+)%? (\w+)%?\)/;
@@ -161,10 +161,14 @@ export function convertHexToHSL(color: string): HSLColor {
 		}
 	}
 
+	if (hue < 0) {
+		hue += 6;
+	}
+
 	return {
 		hue: Math.round(hue * 60),
-		saturation: round(saturation, 2),
-		luminance: round(luminance, 2),
+		saturation,
+		luminance,
 	};
 }
 
@@ -201,66 +205,47 @@ export function parseHSLString(color: string): HSLColor | null {
 }
 
 export function toHex(val: number): string {
-	let hex = val.toString(16);
-
-	const decimalPosition = hex.indexOf(".");
-	if (decimalPosition !== -1) {
-		hex = hex.slice(0, decimalPosition);
-	}
-
-	return hex.padStart(2, "0").toUpperCase();
-}
-
-export function convertHSLToHex(color: HSLColor): string {
-	const chroma = (1 - Math.abs(2 * color.luminance - 1)) * color.saturation;
-	// Intermediate value that is used to calculate the RGB values
-	// Value will be between 0 and chroma
-	const x = chroma * (1 - Math.abs(((color.hue / 60) % 2) - 1));
-
-	let r = 0;
-	let g = 0;
-	let b = 0;
-
-	if (0 <= color.hue && color.hue < 60) {
-		r = chroma;
-		g = x;
-		b = 0;
-	} else if (60 <= color.hue && color.hue < 120) {
-		r = x;
-		g = chroma;
-		b = 0;
-	} else if (120 <= color.hue && color.hue < 180) {
-		r = 0;
-		g = chroma;
-		b = x;
-	} else if (180 <= color.hue && color.hue < 240) {
-		r = 0;
-		g = x;
-		b = chroma;
-	} else if (240 <= color.hue && color.hue < 300) {
-		r = x;
-		g = 0;
-		b = chroma;
-	} else if (300 <= color.hue && color.hue <= 360) {
-		r = chroma;
-		g = 0;
-		b = x;
-	}
-
-	const lightnessAdjustmentFactor = color.luminance - chroma / 2;
-	// Normalize RGB values to [0, 1]
-	r += lightnessAdjustmentFactor;
-	g += lightnessAdjustmentFactor;
-	b += lightnessAdjustmentFactor;
-
-	// Convert RGB and Opacity to Hex
-	const rHex = toHex(r * 255);
-	const gHex = toHex(g * 255);
-	const bHex = toHex(b * 255);
-
-	return `#${rHex}${gHex}${bHex}`;
+	return Math.round(val).toString(16).padStart(2, "0").toUpperCase();
 }
 
 export function convertHSLToCSSColor(color: HSLColor): string {
 	return `hsl(${color.hue} ${Math.round(color.saturation * 100)}% ${Math.round(color.luminance * 100)}%)`;
+}
+
+export function convertHSLToHex(hsl: HSLColor): string {
+	let r: number;
+	let g: number;
+	let b: number;
+
+	if (hsl.saturation === 0) {
+		r = g = b = hsl.luminance * 255;
+	} else {
+		// Adaptation of https://github.com/gka/chroma.js/blob/2a429f21f02c70420df9be9cb6cd302648f36187/src/io/hsl/hsl2rgb.js
+		const t3 = [0, 0, 0];
+		const c = [0, 0, 0];
+		const t2 =
+			hsl.luminance < 0.5
+				? hsl.luminance * (1 + hsl.saturation)
+				: hsl.luminance + hsl.saturation - hsl.luminance * hsl.saturation;
+		const t1 = 2 * hsl.luminance - t2;
+		const h_ = hsl.hue / 360;
+		t3[0] = h_ + 1 / 3;
+		t3[1] = h_;
+		t3[2] = h_ - 1 / 3;
+		for (let i = 0; i < 3; i++) {
+			if (t3[i] < 0) t3[i] += 1;
+			if (t3[i] > 1) t3[i] -= 1;
+			if (6 * t3[i] < 1) c[i] = t1 + (t2 - t1) * 6 * t3[i];
+			else if (2 * t3[i] < 1) c[i] = t2;
+			else if (3 * t3[i] < 2) c[i] = t1 + (t2 - t1) * (2 / 3 - t3[i]) * 6;
+			else c[i] = t1;
+		}
+		[r, g, b] = [c[0] * 255, c[1] * 255, c[2] * 255];
+	}
+
+	const rHex = toHex(r);
+	const gHex = toHex(g);
+	const bHex = toHex(b);
+
+	return `#${rHex}${gHex}${bHex}`;
 }

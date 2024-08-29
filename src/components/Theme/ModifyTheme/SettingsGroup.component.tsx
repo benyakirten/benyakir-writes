@@ -9,6 +9,11 @@ import { titleCase } from "@/utils/strings";
 
 import { useAppDispatch } from "@/store/hooks";
 import { changePropOnTheme } from "@/store/theme/theme.slice";
+import {
+	convertHexToHSL,
+	convertHSLToCSSColor,
+	parseHSLString,
+} from "@/utils/colors";
 
 const SettingsGroup: React.FC<SettingsGroupProps> = ({
 	title,
@@ -20,7 +25,14 @@ const SettingsGroup: React.FC<SettingsGroupProps> = ({
 }) => {
 	const dispatch = useAppDispatch();
 	const handleChange = (e: string, control: ThemeAccessors) => {
-		dispatch(changePropOnTheme({ id: theme.id, props: control, newVal: e }));
+		const val = convertHexToHSL(e);
+		dispatch(
+			changePropOnTheme({
+				id: theme.id,
+				props: control,
+				newVal: convertHSLToCSSColor(val),
+			}),
+		);
 	};
 	return (
 		<Foldout

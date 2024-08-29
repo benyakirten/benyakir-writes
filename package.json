@@ -26,7 +26,9 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
+    "@types/chroma-js": "^2.4.4",
     "babel-plugin-styled-components": "^2.0.2",
+    "chroma-js": "^3.0.0",
     "gatsby": "^5.11.0",
     "gatsby-plugin-catch-links": "^5.11.0",
     "gatsby-plugin-image": "^3.11.0",
