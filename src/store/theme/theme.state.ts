@@ -64,6 +64,7 @@ export const defaultDayTheme: BaseTheme = {
 		border: "#000000",
 	},
 	theme: {
+		iconColor: "#FFFFFF",
 		iconHoverColor: "#0000FF",
 		selectedThemeColor: "#FF0000",
 		activeThemeColor: "#00FF00",
@@ -136,6 +137,7 @@ export const defaultNightTheme: BaseTheme = {
 		border: "#D8E2FD",
 	},
 	theme: {
+		iconColor: "#000000",
 		iconHoverColor: "#FF00FF",
 		selectedThemeColor: "#00FFFF",
 		activeThemeColor: "#FF0000",

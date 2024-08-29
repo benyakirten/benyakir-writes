@@ -7,7 +7,7 @@ import {
 import React from "react";
 import styled from "styled-components";
 
-const StyledThemeButton = styled.button`
+const StyledThemeButton = styled.button<{ iconColor?: string }>`
     display: flex;
 	flex-direction: column;
     justify-content: space-between;
@@ -23,6 +23,7 @@ const StyledThemeButton = styled.button`
 
 	& svg {
 		transition: fill ${TRANSITION_EXTRA_SLOW} ease;
+		fill: ${(props) => props.iconColor ?? props.theme.theme.iconColor};
 	}
 
 	&:not(:disabled):hover svg {
@@ -38,8 +39,9 @@ const IconContainer = styled.div`
 const ThemeButton: React.FC<ThemeButtonProps> = ({
 	icon,
 	text,
-	onClick,
 	disabled,
+	iconColor,
+	onClick,
 }) => {
 	return (
 		<StyledThemeButton
@@ -47,6 +49,7 @@ const ThemeButton: React.FC<ThemeButtonProps> = ({
 			type="button"
 			disabled={disabled}
 			onClick={onClick}
+			iconColor={iconColor}
 		>
 			<IconContainer>{icon}</IconContainer>
 			<p>{text}</p>

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { FONT_LG, FONT_XL, SIZE_SM, SIZE_XS } from "@/styles/variables";
+import { FONT_XL, SIZE_SM, SIZE_XS } from "@/styles/variables";
 import ThemeButton from "./ThemeButton.component";
 import DeleteIcon from "@/components/Icons/Delete.component";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -11,7 +11,7 @@ import {
 	setActiveThemeByID,
 } from "@/store/theme/theme.slice";
 import CopyIcon from "@/components/Icons/Copy.component";
-import { EditIcon, FavoriteIcon } from "@/components/Icons";
+import { EditIcon, SelectIcon } from "@/components/Icons";
 
 const StyledThemeItem = styled.li`
 	display: flex;
@@ -52,13 +52,10 @@ const ThemeItem: React.FC<ThemeItemProps> = ({
 			<StyledThemeButtons>
 				<ThemeButton
 					text="Select"
-					icon={
-						<FavoriteIcon
-							fill={active ? theme.active.theme.selectedThemeColor : "none"}
-						/>
-					}
+					icon={<SelectIcon />}
 					disabled={active}
 					onClick={() => dispatch(setActiveThemeByID(id))}
+					iconColor={active ? theme.active.theme.selectedThemeColor : undefined}
 				/>
 				<ThemeButton
 					text="Edit"

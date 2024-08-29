@@ -14,6 +14,7 @@ type ThemeButtonProps = {
 	icon: React.ReactNode;
 	text: string;
 	disabled?: boolean;
+	iconColor?: string;
 	onClick: () => void;
 };
 

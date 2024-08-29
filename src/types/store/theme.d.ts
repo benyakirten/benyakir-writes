@@ -62,6 +62,7 @@ type ThemeHeader = {
 };
 
 type ThemeThemePage = {
+	iconColor: string;
 	iconHoverColor: string;
 	activeThemeColor: string;
 	selectedThemeColor: string;

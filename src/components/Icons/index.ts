@@ -7,5 +7,5 @@ export { default as NextIcon } from "./Next.component";
 export { default as CalendarIcon } from "./Calendar.component";
 export { default as MailIcon } from "./Mail.component";
 export { default as ResumeIcon } from "./Document.component";
-export { default as FavoriteIcon } from "./Favorite.component";
+export { default as SelectIcon } from "./Select.component";
 export { default as EditIcon } from "./Edit.component";

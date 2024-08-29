@@ -1,9 +1,9 @@
 import React from "react";
 
-const FavoriteIcon: React.FC<{ fill?: string }> = ({ fill }) => (
+const SelectIcon: React.FC = () => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
-		fill={fill ?? "none"}
+		fill="none"
 		viewBox="0 0 24 24"
 		strokeWidth={1.5}
 		stroke="currentColor"
@@ -17,4 +17,4 @@ const FavoriteIcon: React.FC<{ fill?: string }> = ({ fill }) => (
 	</svg>
 );
 
-export default FavoriteIcon;
+export default SelectIcon;
