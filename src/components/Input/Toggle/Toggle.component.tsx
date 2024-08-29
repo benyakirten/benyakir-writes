@@ -15,6 +15,7 @@ const Toggle: React.FC<ToggleProps> = ({
 	dataCy,
 	tabIndex,
 }) => {
+	const labelId = `${name}-label`;
 	return (
 		<ToggleGroup>
 			<ToggleInput
@@ -24,10 +25,12 @@ const Toggle: React.FC<ToggleProps> = ({
 				name={name}
 				checked={value}
 				onChange={onToggle}
-				aria-pressed={value}
+				aria-labelledby={labelId}
 			/>
 			<ToggleLabel htmlFor={name} label={label} data-cy={dataCy ?? "toggle"} />
-			<ToggleOutput onClick={onToggle}>{label}</ToggleOutput>
+			<ToggleOutput id={labelId} onClick={onToggle}>
+				{label}
+			</ToggleOutput>
 		</ToggleGroup>
 	);
 };

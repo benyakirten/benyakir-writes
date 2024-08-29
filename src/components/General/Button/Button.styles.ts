@@ -1,21 +1,22 @@
 import styled from "styled-components";
 
-import { media } from "@/styles/queries";
-import { FONT_SIZE_MD, TRANSITION_SLOW, Z_ABOVE } from "@/styles/variables";
+import {
+	FONT_SIZE_MD,
+	SIZE_SM,
+	SIZE_XS,
+	TRANSITION_SLOW,
+	Z_ABOVE,
+} from "@/styles/variables";
 
 export const ButtonExterior = styled.button`
   cursor: pointer;
 
   position: relative;
 
-  padding: 1rem;
+  padding: ${SIZE_SM} ${SIZE_XS};
+  width: fit-content;
 
-  ${media.tablet} {
-    padding: 0.5rem;
-  }
-
-  min-width: 7rem;
-
+  border-radius: ${SIZE_XS};
   border: 2px solid ${(props) => props.theme.button.border};
   background-color: ${(props) => props.theme.button.default.background};
 

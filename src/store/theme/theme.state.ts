@@ -1,6 +1,6 @@
 export const defaultDayTheme: BaseTheme = {
 	id: "0",
-	name: "day",
+	name: "Day",
 	base: {
 		textColor: "#000000",
 		background: "hsl(0 0% 100%)",
@@ -67,7 +67,7 @@ export const defaultDayTheme: BaseTheme = {
 
 export const defaultNightTheme: BaseTheme = {
 	id: "1",
-	name: "night",
+	name: "Night",
 	base: {
 		textColor: "#FFFFFF",
 		background: "#111B33",

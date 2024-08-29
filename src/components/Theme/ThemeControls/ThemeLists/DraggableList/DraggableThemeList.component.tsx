@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { reorderThemes } from "@/store/theme/theme.slice";
 import type { DraggedOverPosition } from "@/utils/enums";
 
-const DraggableThemeList: React.FC<DraggableThemeListProps> = ({
+const DraggableThemeList: React.FC<ThemeListProps> = ({
 	onSelect,
 	selectedTheme,
 }) => {

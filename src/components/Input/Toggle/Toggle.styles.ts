@@ -35,7 +35,7 @@ export const ToggleInput = styled.input`
 
     &::after {
       background-color: ${(props) => props.theme.toggle.offColor};
-      left: 0
+      left: 0;
     }
   }
 `;
@@ -63,9 +63,6 @@ export const ToggleLabel = styled.label<{ label: string }>`
   }
 `;
 
-export const ToggleOutput = styled.span`
-  /* TODO: Figure out why this needs the margin top */
-  margin-top: 4px;
-  cursor: pointer;
+export const ToggleOutput = styled.button`
   font-size: ${FONT_SIZE_MD};
 `;

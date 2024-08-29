@@ -11,7 +11,7 @@ import { Toggle } from "@/components/Input";
 import ModifyTheme from "./ModifyTheme/ModifyTheme.component";
 import ThemeControls from "./ThemeControls/ThemeControl.component";
 
-import { useAlternation, useMultiple } from "@/hooks";
+import { useAlternation } from "@/hooks";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { toggleUseComputerPreferences } from "@/store/theme/theme.slice";
 import { SIZE_MD } from "@/styles/variables";
@@ -44,13 +44,7 @@ const ThemeCard: React.FC = () => {
 			</Box>
 			<ThemeControls
 				selectedTheme={selectedTheme}
-				setSelectedTheme={(e) => {
-					if (e === "0" || e === "1") {
-						return;
-					}
-					setSelectedTheme(e);
-				}}
-				allowsHover={!!allowsHover}
+				setSelectedTheme={setSelectedTheme}
 			/>
 			<BigParagraph>Modify Theme</BigParagraph>
 			<ModifyTheme selectedTheme={selectedTheme} />

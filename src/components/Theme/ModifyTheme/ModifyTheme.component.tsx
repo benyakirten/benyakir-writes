@@ -18,7 +18,7 @@ import {
 } from "@/store/theme/theme.slice";
 import { capitalize } from "@/utils/strings";
 
-const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme, open }) => {
+const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme }) => {
 	const dispatch = useAppDispatch();
 	const themes = useAppSelector((root) => root.theme.themes);
 	const theme = React.useMemo(
@@ -40,7 +40,6 @@ const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme, open }) => {
 						<Paragraph>Name:</Paragraph>
 						<Text
 							value={theme.name}
-							tabIndex={open ? 0 : -1}
 							onChange={(e) =>
 								dispatch(
 									changeThemeName({

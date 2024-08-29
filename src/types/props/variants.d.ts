@@ -1,22 +1,12 @@
-type ModifyThemeProps = {
-	selectedTheme: string;
-};
-
 type ThemeControlProps = ModifyThemeProps & {
 	selectedTheme: string;
 	setSelectedTheme: (theme: string) => void;
-	allowsHover: boolean;
 };
 
 type ThemeIconsQuery = {
 	allFile: {
 		nodes: FileNode[];
 	};
-};
-
-type DraggableThemeListProps = {
-	onSelect: (val: string) => void;
-	selectedTheme: string;
 };
 
 type DraggableThemeProps = {
