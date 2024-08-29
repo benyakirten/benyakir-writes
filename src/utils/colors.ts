@@ -201,12 +201,18 @@ export function parseHSLString(color: string): HSLColor | null {
 }
 
 export function toHex(val: number): string {
-	return val.toString(16).padStart(2, "0").toUpperCase();
+	let hex = val.toString(16);
+
+	const decimalPosition = hex.indexOf(".");
+	if (decimalPosition !== -1) {
+		hex = hex.slice(0, decimalPosition);
+	}
+
+	return hex.padStart(2, "0").toUpperCase();
 }
 
 export function convertHSLToHex(color: HSLColor): string {
 	const chroma = (1 - Math.abs(2 * color.luminance - 1)) * color.saturation;
-
 	// Intermediate value that is used to calculate the RGB values
 	// Value will be between 0 and chroma
 	const x = chroma * (1 - Math.abs(((color.hue / 60) % 2) - 1));

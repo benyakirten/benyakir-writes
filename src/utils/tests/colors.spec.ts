@@ -6,6 +6,7 @@ import {
 	convertHexToRGBNumber,
 	convertHexToRGBString,
 	convertHSLToCSSColor,
+	convertHSLToHex,
 	convertRGBNumberToHex,
 	convertRGBNumberToRGBString,
 	convertRGBStringToRGBNumber,
@@ -499,6 +500,70 @@ describe("toHex", () => {
 		expect(toHex(123)).toEqual("7B");
 	});
 });
+describe("convertHSLToHex", () => {
+	test.for<{ input: HSLColor; want: string }>([
+		{
+			input: {
+				hue: 0,
+				saturation: 1,
+				luminance: 0.5,
+			},
+			want: "#FF0000",
+		},
+		{
+			input: {
+				hue: 120,
+				saturation: 1,
+				luminance: 0.5,
+			},
+			want: "#00FF00",
+		},
+		{
+			input: {
+				hue: 240,
+				saturation: 1,
+				luminance: 0.5,
+			},
+			want: "#0000FF",
+		},
+		{
+			input: {
+				hue: 0,
+				saturation: 0,
+				luminance: 1,
+			},
+			want: "#FFFFFF",
+		},
+		{
+			input: {
+				hue: 0,
+				saturation: 0,
+				luminance: 0,
+			},
+			want: "#000000",
+		},
+		{
+			input: {
+				hue: 106,
+				saturation: 1,
+				luminance: 0.5,
+			},
+			want: "#3BFF00",
+		},
+		{
+			input: {
+				hue: 75,
+				saturation: 0.43,
+				luminance: 0.76,
+			},
+			want: "#CEDCA7",
+		},
+	])("should convert $input to $want", ({ input, want }) => {
+		const got = convertHSLToHex(input);
+		expect(got).toEqual(want);
+	});
+});
+
 describe("convertHSLToCSSColor", () => {
 	test.for<{ input: HSLColor; want: string }>([
 		{
