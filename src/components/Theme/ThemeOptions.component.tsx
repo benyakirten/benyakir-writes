@@ -7,7 +7,6 @@ import {
 	Paragraph,
 } from "@/styles/general-components";
 
-import { AlertBox, Foldout } from "@/components/General";
 import { Toggle } from "@/components/Input";
 import ModifyTheme from "./ModifyTheme/ModifyTheme.component";
 import ThemeControls from "./ThemeControls/ThemeControl.component";
@@ -30,59 +29,31 @@ const ThemeCard: React.FC = () => {
 	const dispatch = useAppDispatch();
 
 	const [selectedTheme, setSelectedTheme] = useAlternation();
-	const [openMenus, toggleOpenMenus] = useMultiple(["general", "modify"]);
-
-	const generalHeight = React.useMemo(() => {
-		const baseHeight = allowsHover ? 48 : 30;
-		if (
-			(allowsHover && themeStore.themes.length < 5) ||
-			(!allowsHover && themeStore.themes.length < 4)
-		) {
-			return `${baseHeight}rem`;
-		}
-		const themesOverThreshold = allowsHover
-			? themeStore.themes.length - 5
-			: themeStore.themes.length - 3;
-		const multiplier = allowsHover ? 6 : 4;
-		return `${baseHeight + multiplier * themesOverThreshold}rem`;
-	}, [themeStore.themes, allowsHover]);
 
 	return (
 		<Column style={{ gap: "1rem" }}>
-			<Foldout
-				open={openMenus.general}
-				height={generalHeight}
-				onClick={() => toggleOpenMenus("general")}
-				topbar={<BigParagraph>General Options</BigParagraph>}
-				cyId="theme-open-general"
-			>
-				<Box style={{ margin: `${SIZE_MD} 0` }}>
-					<Paragraph>Use Computer Theme Preferences:</Paragraph>
-					<Toggle
-						label={themeStore.ignoreComputerPreferences ? "Off" : "On"}
-						name="theme-ignore-computer-preferences"
-						onToggle={() => dispatch(toggleUseComputerPreferences())}
-						value={!themeStore.ignoreComputerPreferences}
-						tabIndex={openMenus.general ? 0 : -1}
-					/>
-				</Box>
-				<ThemeControls
-					open={openMenus.general}
-					selectedTheme={selectedTheme}
-					setSelectedTheme={setSelectedTheme}
-					allowsHover={!!allowsHover}
+			<BigParagraph>General Options</BigParagraph>
+			<Box style={{ margin: `${SIZE_MD} 0` }}>
+				<Paragraph>Use Computer Theme Preferences:</Paragraph>
+				<Toggle
+					label={themeStore.ignoreComputerPreferences ? "Off" : "On"}
+					name="theme-ignore-computer-preferences"
+					onToggle={() => dispatch(toggleUseComputerPreferences())}
+					value={!themeStore.ignoreComputerPreferences}
 				/>
-			</Foldout>
-
-			<Foldout
-				height="auto"
-				open={openMenus.modify}
-				onClick={() => toggleOpenMenus("modify")}
-				topbar={<BigParagraph>Modify Theme</BigParagraph>}
-				cyId="theme-open-modify"
-			>
-				<ModifyTheme open={openMenus.modify} selectedTheme={selectedTheme} />
-			</Foldout>
+			</Box>
+			<ThemeControls
+				selectedTheme={selectedTheme}
+				setSelectedTheme={(e) => {
+					if (e === "0" || e === "1") {
+						return;
+					}
+					setSelectedTheme(e);
+				}}
+				allowsHover={!!allowsHover}
+			/>
+			<BigParagraph>Modify Theme</BigParagraph>
+			<ModifyTheme selectedTheme={selectedTheme} />
 		</Column>
 	);
 };

@@ -17,12 +17,13 @@ import { getPrettyDate } from "@/utils/dates";
 import { formatWpText } from "@/utils/posts";
 import { truncate } from "@/utils/strings";
 import type { WpBook } from "@/types/query";
-import { GrowableUnderline, HeadBase } from "@/components/General";
+import { GrowableUnderline } from "@/components/General";
 import { FONT_LG, SIZE_MD, SIZE_SM } from "@/styles/variables";
 import { PublishedDate } from "@/components/Cards/IconedText.component";
 import { BookCoverArtist } from "@/types/posts";
 import { formatOutsideLink } from "@/utils/other";
 import { NamedLink } from "@/types/general";
+import { HeadBase } from "@/components/SEO";
 
 export const Head: React.FC<WpBook> = ({ data }) => {
 	const book = flattenBook(data.wpBook, data.file.publicURL);

@@ -15,11 +15,12 @@ import { getPrettyDate } from "@/utils/dates";
 import { formatWpText } from "@/utils/posts";
 import { truncate } from "@/utils/strings";
 import type { WpStory } from "@/types/query";
-import { GrowableUnderline, HeadBase } from "@/components/General";
+import { GrowableUnderline } from "@/components/General";
 import { FONT_SM } from "@/styles/variables";
 import { PublishedDate } from "@/components/Cards/IconedText.component";
 import { NamedLink } from "@/types/general";
 import { formatOutsideLink } from "@/utils/other";
+import { HeadBase } from "@/components/SEO";
 
 export const Head: React.FC<WpStory> = ({ data }) => {
 	const story = flattenStory(data.wpShortstory, data.file.publicURL);

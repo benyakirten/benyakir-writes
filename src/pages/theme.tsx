@@ -7,7 +7,7 @@ import {
 	Page,
 } from "@/styles/general-components";
 import { themeDescription } from "@/data/search";
-import { HeadBase } from "@/components/General";
+import { HeadBase } from "@/components/SEO";
 import { ThemeOptions } from "@/components/Theme";
 
 export const Head: React.FC = () => (

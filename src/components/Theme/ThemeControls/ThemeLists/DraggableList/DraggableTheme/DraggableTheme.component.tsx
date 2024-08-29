@@ -71,7 +71,6 @@ const IconButton: React.FC<IconButtonProps> = ({
 };
 
 const DraggableTheme: React.FC<DraggableThemeProps> = ({
-	open,
 	nodes,
 	themeId,
 	themeName,
@@ -87,7 +86,6 @@ const DraggableTheme: React.FC<DraggableThemeProps> = ({
 					iconSrc={nodes[0].publicURL}
 					name={`${themeName}-set-preference`}
 					size="2rem"
-					tabIndex={open ? 0 : -1}
 				/>
 				<IconButton
 					alt={nodes[1].name.slice(2)}
@@ -95,7 +93,6 @@ const DraggableTheme: React.FC<DraggableThemeProps> = ({
 					iconSrc={nodes[1].publicURL}
 					name={`${themeName}-set-active`}
 					size="2rem"
-					tabIndex={open ? 0 : -1}
 				/>
 				<IconButton
 					alt={nodes[2].name.slice(2)}
@@ -103,7 +100,6 @@ const DraggableTheme: React.FC<DraggableThemeProps> = ({
 					iconSrc={nodes[2].publicURL}
 					name={`${themeName}-copy`}
 					size="2rem"
-					tabIndex={open ? 0 : -1}
 				/>
 				<IconButton
 					alt={nodes[3].name.slice(2)}
@@ -111,7 +107,6 @@ const DraggableTheme: React.FC<DraggableThemeProps> = ({
 					iconSrc={nodes[3].publicURL}
 					name={`${themeName}-delete`}
 					size="2rem"
-					tabIndex={open ? 0 : -1}
 					disabled={themeId === "0" || themeId === "1"}
 				/>
 			</FlatBox>

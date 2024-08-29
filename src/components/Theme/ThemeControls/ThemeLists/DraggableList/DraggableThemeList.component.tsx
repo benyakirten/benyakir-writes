@@ -9,7 +9,6 @@ import { reorderThemes } from "@/store/theme/theme.slice";
 import type { DraggedOverPosition } from "@/utils/enums";
 
 const DraggableThemeList: React.FC<DraggableThemeListProps> = ({
-	open,
 	onSelect,
 	selectedTheme,
 }) => {
@@ -38,12 +37,11 @@ const DraggableThemeList: React.FC<DraggableThemeListProps> = ({
 							nodes={nodes}
 							themeId={theme.id}
 							themeName={theme.name}
-							open={open}
 						/>
 					),
 				};
 			}),
-		[themeStore, open, themeQuery],
+		[themeStore, themeQuery],
 	);
 
 	const dropHandler = React.useCallback(

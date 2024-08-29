@@ -16,7 +16,7 @@ import { formatWpText } from "@/utils/posts";
 import { truncate } from "@/utils/strings";
 
 import type { WpPost } from "@/types/query";
-import { HeadBase } from "@/components/General";
+import { HeadBase } from "@/components/SEO";
 import {
 	CategoryContainer,
 	TagContainer,

@@ -11,7 +11,6 @@ import { createTheme, resetThemeOptions } from "@/store/theme/theme.slice";
 const ThemeControls: React.FC<ThemeControlProps> = ({
 	selectedTheme,
 	setSelectedTheme,
-	open,
 	allowsHover,
 }) => {
 	const dispatch = useAppDispatch();
@@ -19,22 +18,13 @@ const ThemeControls: React.FC<ThemeControlProps> = ({
 		<CardContainer>
 			<CardHalf>
 				<DraggableThemeList
-					open={open}
 					onSelect={setSelectedTheme}
 					selectedTheme={selectedTheme}
 				/>
-				<Button
-					tabIndex={open ? 0 : -1}
-					onClick={() => dispatch(createTheme())}
-				>
+				<Button onClick={() => dispatch(createTheme())}>
 					Create New Theme
 				</Button>
-				<Button
-					tabIndex={open ? 0 : -1}
-					onClick={() => dispatch(resetThemeOptions())}
-				>
-					Reset
-				</Button>
+				<Button onClick={() => dispatch(resetThemeOptions())}>Reset</Button>
 			</CardHalf>
 			{allowsHover && (
 				<CardHalf>

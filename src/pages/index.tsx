@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { HeadBase } from "@/components/General";
+import { HeadBase } from "@/components/SEO";
 import {
 	Grouping,
 	LeadHeading,

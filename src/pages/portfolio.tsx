@@ -2,7 +2,7 @@ import { graphql } from "gatsby";
 import * as React from "react";
 import { styled } from "styled-components";
 
-import { HeadBase } from "@/components/General";
+import { HeadBase } from "@/components/SEO";
 import { PortfolioHeader, RandomizedBackground } from "@/components/Portfolio";
 import { NormalPageContents, Page } from "@/styles/general-components";
 import type { RecentProjectItem } from "@/types/portfolio";

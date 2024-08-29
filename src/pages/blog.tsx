@@ -26,7 +26,7 @@ import {
 import { Filter } from "@/components/Filters";
 import { CardContainer, BlogCard } from "@/components/Cards";
 import { CreateFilterOption, FilterOption, ItemFilter } from "@/types/filters";
-import { HeadBase } from "@/components/General";
+import { HeadBase } from "@/components/SEO";
 
 export const Head: React.FC = () => (
 	<HeadBase title="Blog" description={blogDescription} />

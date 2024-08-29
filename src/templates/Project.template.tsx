@@ -18,15 +18,11 @@ import { truncate } from "@/utils/strings";
 
 import { useFetchRepoUpdatedDate } from "@/hooks";
 import type { WpProject } from "@/types/query";
-import {
-	HeadBase,
-	ProjectHost,
-	ProjectTech,
-	TechContainer,
-} from "@/components/General";
+import { ProjectHost, ProjectTech, TechContainer } from "@/components/General";
 import { FileNode } from "@/types/general";
 import { PublishedDate } from "@/components/Cards/IconedText.component";
 import LatestUpdate from "@/components/General/Project/LatestUpdate.component";
+import { HeadBase } from "@/components/SEO";
 
 export const Head: React.FC<WpProject> = ({ data }) => {
 	const project = formatProject(data.wpProject);

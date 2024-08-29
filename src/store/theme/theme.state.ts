@@ -3,7 +3,7 @@ export const defaultDayTheme: BaseTheme = {
 	name: "day",
 	base: {
 		textColor: "#000000",
-		background: "#FFFFFF",
+		background: "hsl(0 0% 100%)",
 		border: "#39435b",
 		shadowColor: "#9b825d",
 		disabled: "#495057",

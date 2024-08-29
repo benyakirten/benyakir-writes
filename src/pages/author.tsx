@@ -24,7 +24,7 @@ import {
 	createFilterBySearchFn,
 	createModifyFilterFns,
 } from "@/utils/filter";
-import { HeadBase } from "@/components/General";
+import { HeadBase } from "@/components/SEO";
 
 export const Head: React.FC = () => (
 	<HeadBase title="Author" description={authorDescription} />

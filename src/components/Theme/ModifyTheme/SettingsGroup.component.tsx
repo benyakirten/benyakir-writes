@@ -9,18 +9,12 @@ import { titleCase } from "@/utils/strings";
 
 import { useAppDispatch } from "@/store/hooks";
 import { changePropOnTheme } from "@/store/theme/theme.slice";
-import {
-	convertHexToHSL,
-	convertHSLToCSSColor,
-	parseHSLString,
-} from "@/utils/colors";
+import { convertHexToHSL, convertHSLToCSSColor } from "@/utils/colors";
 
 const SettingsGroup: React.FC<SettingsGroupProps> = ({
-	title,
 	preface,
 	controls,
 	open,
-	onOpen,
 	theme,
 }) => {
 	const dispatch = useAppDispatch();
@@ -34,13 +28,9 @@ const SettingsGroup: React.FC<SettingsGroupProps> = ({
 			}),
 		);
 	};
+
 	return (
-		<Foldout
-			onClick={onOpen}
-			topbar={<BigParagraph>{title}</BigParagraph>}
-			open={open}
-			height="auto"
-		>
+		<>
 			{controls.map((control) => {
 				const name = control.join("-");
 				const label = titleCase(
@@ -57,7 +47,7 @@ const SettingsGroup: React.FC<SettingsGroupProps> = ({
 					/>
 				);
 			})}
-		</Foldout>
+		</>
 	);
 };
 

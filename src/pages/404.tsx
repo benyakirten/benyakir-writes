@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "gatsby";
 
 import { GrowableUnderline } from "@/components/General";
 import {
@@ -7,8 +8,7 @@ import {
 	NormalPageContents,
 	Page,
 } from "@/styles/general-components";
-import { HeadBase } from "@/components/General";
-import { Link } from "gatsby";
+import { HeadBase } from "@/components/SEO";
 
 export const Head: React.FC = () => (
 	<HeadBase

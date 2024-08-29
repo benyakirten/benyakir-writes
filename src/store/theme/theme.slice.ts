@@ -1,7 +1,6 @@
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import { defaultDayTheme, initialState } from "./theme.state";
-
 import { DraggedOverPosition } from "@/utils/enums";
 import { flattenTheme } from "@/utils/other";
 import { ArrayItemsTransfer, StringLookup } from "@/types/general";
@@ -72,6 +71,7 @@ const themeSlice = createSlice({
 					: state.themes.find((theme) => theme.name === "day");
 			state.active = newTheme ? newTheme : state.active;
 		},
+
 		setActiveThemeByID: (state, action: PayloadAction<string>) => {
 			state.error = undefined;
 			const newTheme = state.themes.find(
@@ -79,6 +79,7 @@ const themeSlice = createSlice({
 			);
 			state.active = newTheme ? newTheme : state.active;
 		},
+
 		setActiveThemeByName: (state, action: PayloadAction<string>) => {
 			state.error = undefined;
 			const newTheme = state.themes.find(
@@ -86,6 +87,7 @@ const themeSlice = createSlice({
 			);
 			state.active = newTheme ? newTheme : state.active;
 		},
+
 		toggleUseComputerPreferences: (state) => {
 			state.error = undefined;
 			state.ignoreComputerPreferences = !state.ignoreComputerPreferences;
@@ -97,11 +99,13 @@ const themeSlice = createSlice({
 				state.active = determineComputerPreferredTheme(state);
 			}
 		},
+
 		setThemePreferenceByIndex: (state, action: PayloadAction<number>) => {
 			state.error = undefined;
 			state.prefers = state.themes[action.payload].id;
 			localStorage.setItem(STORED_PREFERENCES, state.prefers);
 		},
+
 		setThemePreferenceByID: (state, action: PayloadAction<string>) => {
 			state.error = undefined;
 			const preferredTheme = state.themes.find(
@@ -114,6 +118,7 @@ const themeSlice = createSlice({
 			state.prefers = preferredTheme.id;
 			localStorage.setItem(STORED_PREFERENCES, state.prefers);
 		},
+
 		reorderThemes: (state, action: PayloadAction<ArrayItemsTransfer>) => {
 			state.error = undefined;
 			const { start, end, position } = action.payload;
@@ -155,6 +160,7 @@ const themeSlice = createSlice({
 			];
 			localStorage.setItem(STORED_THEMES, JSON.stringify(state.themes));
 		},
+
 		copyThemeByID: (state, action: PayloadAction<string>) => {
 			state.error = undefined;
 			const copiedTheme = state.themes.find(
@@ -175,6 +181,7 @@ const themeSlice = createSlice({
 				state.error = "Unable to create new theme";
 			}
 		},
+
 		copyThemeByIndex: (state, action: PayloadAction<number>) => {
 			// Normally, I would create a deep copy of the desired theme
 			// i.e. const copiedTheme = { ...state.themes[action.payload] }
@@ -196,6 +203,7 @@ const themeSlice = createSlice({
 				state.error = "Unable to create new theme";
 			}
 		},
+
 		createTheme: (state) => {
 			state.error = undefined;
 			try {
@@ -207,6 +215,7 @@ const themeSlice = createSlice({
 				state.error = "Unable to create new theme";
 			}
 		},
+
 		updateTheme: (
 			state,
 			action: PayloadAction<{ id: string; theme: BaseTheme }>,
@@ -229,6 +238,7 @@ const themeSlice = createSlice({
 			state.themes[themeToUpdateIndex] = theme;
 			localStorage.setItem(STORED_THEMES, JSON.stringify(state.themes));
 		},
+
 		deleteThemeByIndex: (state, action: PayloadAction<number>) => {
 			state.error = undefined;
 			const theme = state.themes[action.payload];
@@ -245,6 +255,7 @@ const themeSlice = createSlice({
 			state.themes.splice(action.payload, 1);
 			localStorage.setItem(STORED_THEMES, JSON.stringify(state.themes));
 		},
+
 		deleteThemeByID: (state, action: PayloadAction<string>) => {
 			state.error = undefined;
 			if (action.payload === "0" || action.payload === "1") {
@@ -265,6 +276,7 @@ const themeSlice = createSlice({
 			);
 			localStorage.setItem(STORED_THEMES, JSON.stringify(state.themes));
 		},
+
 		changeThemeName: (
 			state,
 			action: PayloadAction<{ id: string; newVal: string }>,
@@ -288,6 +300,7 @@ const themeSlice = createSlice({
 			}
 			localStorage.setItem(STORED_THEMES, JSON.stringify(state.themes));
 		},
+
 		changePropOnTheme: (
 			state,
 			action: PayloadAction<{ id: string; props: string[]; newVal: string }>,

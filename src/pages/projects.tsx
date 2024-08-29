@@ -27,7 +27,7 @@ import {
 } from "@/utils/filter";
 import { FlattenedProjectCard } from "@/types/posts";
 import { Filter } from "@/components/Filters";
-import { HeadBase } from "@/components/General";
+import { HeadBase } from "@/components/SEO";
 
 export const Head: React.FC = () => (
 	<HeadBase title="Projects" description={projectsDescription} />

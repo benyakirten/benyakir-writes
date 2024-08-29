@@ -1,6 +1,5 @@
 type ModifyThemeProps = {
 	selectedTheme: string;
-	open: boolean;
 };
 
 type ThemeControlProps = ModifyThemeProps & {
@@ -16,14 +15,12 @@ type ThemeIconsQuery = {
 };
 
 type DraggableThemeListProps = {
-	open: boolean;
 	onSelect: (val: string) => void;
 	selectedTheme: string;
 };
 
 type DraggableThemeProps = {
 	nodes: FileNode[];
-	open: boolean;
 	themeName: string;
 	themeId: string;
 };
