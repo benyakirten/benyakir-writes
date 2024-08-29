@@ -1,3 +1,4 @@
+import chroma from "chroma-js";
 import { round } from "./numbers";
 import { validateRange } from "./validation";
 
@@ -130,7 +131,7 @@ export function convertRGBNumberToHex(color: RGBNumber): string {
 /**
  * Function to convert a hex string (i.e. #FF0000) to an HSL color object
  */
-export function convertHexToHSL(color: string): HSLColor {
+export function _convertHexToHSL(color: string): HSLColor {
 	const rgb = convertHexToRGBNumber(color);
 	const red = rgb.red / 255;
 	const green = rgb.green / 255;
@@ -212,7 +213,7 @@ export function convertHSLToCSSColor(color: HSLColor): string {
 	return `hsl(${color.hue} ${Math.round(color.saturation * 100)}% ${Math.round(color.luminance * 100)}%)`;
 }
 
-export function convertHSLToHex(hsl: HSLColor): string {
+export function _convertHSLToHex(hsl: HSLColor): string {
 	let r: number;
 	let g: number;
 	let b: number;
@@ -248,4 +249,18 @@ export function convertHSLToHex(hsl: HSLColor): string {
 	const bHex = toHex(b);
 
 	return `#${rHex}${gHex}${bHex}`;
+}
+
+export function convertHSLToHex(hsl: HSLColor): string {
+	const { hue, saturation, luminance } = hsl;
+	return chroma.hsl(hue, saturation, luminance).hex();
+}
+
+export function convertHexToHSL(hex: string): HSLColor {
+	const [h, s, l] = chroma(hex).hsl();
+	return {
+		hue: Number.isNaN(h) ? 0 : h,
+		saturation: s,
+		luminance: l,
+	};
 }

@@ -451,7 +451,7 @@ describe("convertHexToHSL", () => {
 			},
 		},
 		{
-			input: "#FFFFFF",
+			input: "#ffffff",
 			want: {
 				hue: 0,
 				saturation: 0,
@@ -469,7 +469,7 @@ describe("convertHexToHSL", () => {
 		{
 			input: "#3bff00",
 			want: {
-				hue: 106,
+				hue: 106.11764705882352,
 				saturation: 1,
 				luminance: 0.5,
 			},
@@ -495,7 +495,7 @@ describe("convertHexToHSL", () => {
 		expect(got).toEqual(want);
 	});
 
-	test("should return throw for invalid hex string", () => {
+	it("should return throw for invalid hex string", () => {
 		expect(() => convertHexToHSL("#12345")).toThrow();
 	});
 });
@@ -518,7 +518,7 @@ describe("convertHSLToHex", () => {
 				saturation: 1,
 				luminance: 0.5,
 			},
-			want: "#FF0000",
+			want: "#ff0000",
 		},
 		{
 			input: {
@@ -526,7 +526,7 @@ describe("convertHSLToHex", () => {
 				saturation: 1,
 				luminance: 0.5,
 			},
-			want: "#00FF00",
+			want: "#00ff00",
 		},
 		{
 			input: {
@@ -534,7 +534,7 @@ describe("convertHSLToHex", () => {
 				saturation: 1,
 				luminance: 0.5,
 			},
-			want: "#0000FF",
+			want: "#0000ff",
 		},
 		{
 			input: {
@@ -542,7 +542,7 @@ describe("convertHSLToHex", () => {
 				saturation: 0,
 				luminance: 1,
 			},
-			want: "#FFFFFF",
+			want: "#ffffff",
 		},
 		{
 			input: {
@@ -558,7 +558,7 @@ describe("convertHSLToHex", () => {
 				saturation: 1,
 				luminance: 0.5,
 			},
-			want: "#3BFF00",
+			want: "#3bff00",
 		},
 		{
 			input: {
@@ -566,7 +566,7 @@ describe("convertHSLToHex", () => {
 				saturation: 0.43,
 				luminance: 0.76,
 			},
-			want: "#CFDCA7",
+			want: "#cfdca7",
 		},
 		{
 			input: {
@@ -574,7 +574,7 @@ describe("convertHSLToHex", () => {
 				saturation: 0.68,
 				luminance: 0.803921568627451,
 			},
-			want: "#ABCDEF",
+			want: "#abcdef",
 		},
 	])("should convert $input to $want", ({ input, want }) => {
 		const got = convertHSLToHex(input);
@@ -739,12 +739,17 @@ describe("parseHSLString", () => {
 });
 
 describe("hsl and hex conversions", () => {
-	test.each<string>(["#000000", "#ABCDEF", "#FF00FF", "#12AB35"])(
-		"should convert %s to hsl and back to the same value",
-		(hex) => {
-			const hsl = convertHexToHSL(hex);
-			const newHex = convertHSLToHex(hsl);
-			expect(newHex).toEqual(hex);
-		},
-	);
+	test.each<string>([
+		"#000000",
+		"#abcdef",
+		"#ff00ff",
+		"#12ab35",
+		"#ffffff",
+		"#ddeeff",
+		"#001100",
+	])("should convert %s to hsl and back to the same value", (hex) => {
+		const hsl = convertHexToHSL(hex);
+		const newHex = convertHSLToHex(hsl);
+		expect(newHex).toEqual(hex);
+	});
 });
