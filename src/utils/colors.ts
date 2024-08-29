@@ -1,5 +1,5 @@
 import chroma from "chroma-js";
-import { round } from "./numbers";
+
 import { validateRange } from "./validation";
 
 const HSL_REGEX_PARSER = /hsl\(([a-zA-Z0-9\.]+) (\w+)%? (\w+)%?\)/;
@@ -128,51 +128,6 @@ export function convertRGBNumberToHex(color: RGBNumber): string {
 	return `#${toHex(red)}${toHex(green)}${toHex(blue)}`;
 }
 
-/**
- * Function to convert a hex string (i.e. #FF0000) to an HSL color object
- */
-export function _convertHexToHSL(color: string): HSLColor {
-	const rgb = convertHexToRGBNumber(color);
-	const red = rgb.red / 255;
-	const green = rgb.green / 255;
-	const blue = rgb.blue / 255;
-
-	const max = Math.max(red, green, blue);
-	const min = Math.min(red, green, blue);
-
-	let hue = 0;
-	let saturation = 0;
-	const luminance = (max + min) / 2;
-
-	if (max !== min) {
-		const delta = max - min;
-		saturation = delta / (luminance > 0.5 ? 2 - max - min : max + min);
-		switch (max) {
-			case red:
-				hue = ((green - blue) / delta) % 6;
-				break;
-			case green:
-				hue = (blue - red) / delta + 2;
-				break;
-			case blue:
-				hue = (red - green) / delta + 4;
-				break;
-			default:
-				break;
-		}
-	}
-
-	if (hue < 0) {
-		hue += 6;
-	}
-
-	return {
-		hue: Math.round(hue * 60),
-		saturation,
-		luminance,
-	};
-}
-
 export function parseHSLString(color: string): HSLColor | null {
 	const parts = color.match(HSL_REGEX_PARSER);
 	if (parts === null) {
@@ -210,45 +165,7 @@ export function toHex(val: number): string {
 }
 
 export function convertHSLToCSSColor(color: HSLColor): string {
-	return `hsl(${color.hue} ${Math.round(color.saturation * 100)}% ${Math.round(color.luminance * 100)}%)`;
-}
-
-export function _convertHSLToHex(hsl: HSLColor): string {
-	let r: number;
-	let g: number;
-	let b: number;
-
-	if (hsl.saturation === 0) {
-		r = g = b = hsl.luminance * 255;
-	} else {
-		// Adaptation of https://github.com/gka/chroma.js/blob/2a429f21f02c70420df9be9cb6cd302648f36187/src/io/hsl/hsl2rgb.js
-		const t3 = [0, 0, 0];
-		const c = [0, 0, 0];
-		const t2 =
-			hsl.luminance < 0.5
-				? hsl.luminance * (1 + hsl.saturation)
-				: hsl.luminance + hsl.saturation - hsl.luminance * hsl.saturation;
-		const t1 = 2 * hsl.luminance - t2;
-		const h_ = hsl.hue / 360;
-		t3[0] = h_ + 1 / 3;
-		t3[1] = h_;
-		t3[2] = h_ - 1 / 3;
-		for (let i = 0; i < 3; i++) {
-			if (t3[i] < 0) t3[i] += 1;
-			if (t3[i] > 1) t3[i] -= 1;
-			if (6 * t3[i] < 1) c[i] = t1 + (t2 - t1) * 6 * t3[i];
-			else if (2 * t3[i] < 1) c[i] = t2;
-			else if (3 * t3[i] < 2) c[i] = t1 + (t2 - t1) * (2 / 3 - t3[i]) * 6;
-			else c[i] = t1;
-		}
-		[r, g, b] = [c[0] * 255, c[1] * 255, c[2] * 255];
-	}
-
-	const rHex = toHex(r);
-	const gHex = toHex(g);
-	const bHex = toHex(b);
-
-	return `#${rHex}${gHex}${bHex}`;
+	return `hsl(${Math.round(color.hue)} ${Math.round(color.saturation * 100)}% ${Math.round(color.luminance * 100)}%)`;
 }
 
 export function convertHSLToHex(hsl: HSLColor): string {

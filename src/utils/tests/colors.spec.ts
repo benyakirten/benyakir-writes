@@ -1,4 +1,4 @@
-import { describe, it, expect, test } from "vitest";
+import { describe, it, expect, test, assert } from "vitest";
 
 import {
 	convertHexToHSL,
@@ -751,5 +751,20 @@ describe("hsl and hex conversions", () => {
 		const hsl = convertHexToHSL(hex);
 		const newHex = convertHSLToHex(hsl);
 		expect(newHex).toEqual(hex);
+	});
+
+	test.each<string>([
+		"hsl(120 100% 50%)",
+		"hsl(106 100% 50%)",
+		"hsl(75 43% 76%)",
+	])("should convert %s to hex and back to the same value", (raw) => {
+		const hsl = parseHSLString(raw);
+		assert(hsl !== null);
+
+		const hex = convertHSLToHex(hsl);
+		const newHSL = convertHexToHSL(hex);
+		const css = convertHSLToCSSColor(newHSL);
+
+		expect(css).toEqual(raw);
 	});
 });
