@@ -1,3 +1,5 @@
+import React from "react";
+
 const FavoriteIcon: React.FC<{ fill?: string }> = ({ fill }) => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
@@ -6,7 +8,7 @@ const FavoriteIcon: React.FC<{ fill?: string }> = ({ fill }) => (
 		strokeWidth={1.5}
 		stroke="currentColor"
 	>
-		<title>Favorite</title>
+		<title>Select</title>
 		<path
 			strokeLinecap="round"
 			strokeLinejoin="round"

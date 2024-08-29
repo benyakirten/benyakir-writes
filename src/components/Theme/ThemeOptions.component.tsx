@@ -5,6 +5,7 @@ import {
 	Box,
 	Column,
 	Paragraph,
+	Subtitle,
 } from "@/styles/general-components";
 
 import { Toggle } from "@/components/Input";
@@ -17,14 +18,6 @@ import { toggleUseComputerPreferences } from "@/store/theme/theme.slice";
 import { SIZE_MD } from "@/styles/variables";
 
 const ThemeCard: React.FC = () => {
-	const [allowsHover, setAllowsHover] = React.useState<boolean>();
-	React.useEffect(() => {
-		const _allowshover = window.matchMedia
-			? window.matchMedia("(any-hover: hover)").matches
-			: true;
-		setAllowsHover(_allowshover);
-	}, []);
-
 	const themeStore = useAppSelector((root) => root.theme);
 	const dispatch = useAppDispatch();
 
@@ -32,21 +25,11 @@ const ThemeCard: React.FC = () => {
 
 	return (
 		<Column style={{ gap: "1rem" }}>
-			<BigParagraph>General Options</BigParagraph>
-			<Box style={{ margin: `${SIZE_MD} 0` }}>
-				<Paragraph>Use Computer Theme Preferences:</Paragraph>
-				<Toggle
-					label={themeStore.ignoreComputerPreferences ? "Off" : "On"}
-					name="theme-ignore-computer-preferences"
-					onToggle={() => dispatch(toggleUseComputerPreferences())}
-					value={!themeStore.ignoreComputerPreferences}
-				/>
-			</Box>
 			<ThemeControls
 				selectedTheme={selectedTheme}
 				setSelectedTheme={setSelectedTheme}
 			/>
-			<BigParagraph>Modify Theme</BigParagraph>
+			<Subtitle>Modify Theme</Subtitle>
 			<ModifyTheme selectedTheme={selectedTheme} />
 		</Column>
 	);

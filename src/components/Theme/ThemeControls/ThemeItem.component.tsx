@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { SIZE_SM, SIZE_XS } from "@/styles/variables";
+import { FONT_LG, FONT_XL, SIZE_SM, SIZE_XS } from "@/styles/variables";
 import ThemeButton from "./ThemeButton.component";
 import DeleteIcon from "@/components/Icons/Delete.component";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -13,27 +13,25 @@ import {
 import CopyIcon from "@/components/Icons/Copy.component";
 import { EditIcon, FavoriteIcon } from "@/components/Icons";
 
-const StyledThemeItem = styled.li<{ selected: boolean }>`
-	position: relative;
-
+const StyledThemeItem = styled.li`
 	display: flex;
-	justify-contents: space-between;
+	justify-content: space-between;
 	align-items: center;
 
+	height: fit-content;
 	padding: ${SIZE_SM} ${SIZE_XS};
 
-	&::before {
-		content: "";
-		display: ${(props) => (props.selected ? "block" : "none")};
-
-		position: absolute;
-	}
+	border: 1px solid ${({ theme }) => theme.base.border};
+	border-radius: ${SIZE_SM};
 `;
 
 const StyledThemeButtons = styled.div`
 	display: flex;
-	gap: ${SIZE_XS};
-	align-items: center;
+	gap: ${SIZE_SM};
+`;
+
+const NameContainer = styled.p`
+	${FONT_XL};
 `;
 
 const ThemeItem: React.FC<ThemeItemProps> = ({
@@ -45,27 +43,27 @@ const ThemeItem: React.FC<ThemeItemProps> = ({
 	const dispatch = useAppDispatch();
 	const theme = useAppSelector((state) => state.theme);
 
-	const ActiveIcon = React.useMemo(
-		() => (
-			<FavoriteIcon
-				fill={id === theme.active.id ? theme.active.base.focus : "none"}
-			/>
-		),
-		[id, theme],
-	);
+	const active = id === theme.active.id;
+	const selected = id === selectedTheme;
 
 	return (
-		<StyledThemeItem selected={id === selectedTheme}>
-			<p>{name}</p>
+		<StyledThemeItem>
+			<NameContainer>{name}</NameContainer>
 			<StyledThemeButtons>
 				<ThemeButton
 					text="Select"
-					icon={ActiveIcon}
+					icon={
+						<FavoriteIcon
+							fill={active ? theme.active.theme.selectedThemeColor : "none"}
+						/>
+					}
+					disabled={active}
 					onClick={() => dispatch(setActiveThemeByID(id))}
 				/>
 				<ThemeButton
 					text="Edit"
 					icon={<EditIcon />}
+					disabled={selected}
 					onClick={() => onSelect(id)}
 				/>
 				<ThemeButton

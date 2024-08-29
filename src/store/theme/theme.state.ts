@@ -63,6 +63,11 @@ export const defaultDayTheme: BaseTheme = {
 		offBackground: "#FDE6B0",
 		border: "#000000",
 	},
+	theme: {
+		iconHoverColor: "#0000FF",
+		selectedThemeColor: "#FF0000",
+		activeThemeColor: "#00FF00",
+	},
 };
 
 export const defaultNightTheme: BaseTheme = {
@@ -129,6 +134,11 @@ export const defaultNightTheme: BaseTheme = {
 		offColor: "#993d4d",
 		offBackground: "#FDE6B0",
 		border: "#D8E2FD",
+	},
+	theme: {
+		iconHoverColor: "#FF00FF",
+		selectedThemeColor: "#00FFFF",
+		activeThemeColor: "#FF0000",
 	},
 };
 

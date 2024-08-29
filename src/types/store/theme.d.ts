@@ -61,6 +61,12 @@ type ThemeHeader = {
 	endColor: string;
 };
 
+type ThemeThemePage = {
+	iconHoverColor: string;
+	activeThemeColor: string;
+	selectedThemeColor: string;
+};
+
 type BaseTheme = {
 	id: string;
 	name: string;
@@ -73,6 +79,7 @@ type BaseTheme = {
 	button: ButtonTheme;
 	alertBox: ThemeAlertBox;
 	toggle: ThemeToggle;
+	theme: ThemeThemePage;
 };
 
 type RecursiveControlGroup = {
