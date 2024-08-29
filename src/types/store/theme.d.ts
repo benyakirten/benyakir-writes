@@ -1,9 +1,7 @@
 type ThemeState = {
 	themes: BaseTheme[];
 	ignoreComputerPreferences: boolean;
-	prefers: string;
 	active: BaseTheme;
-	error?: string;
 };
 
 type BasicThemeSection = {

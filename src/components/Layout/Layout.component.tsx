@@ -12,7 +12,7 @@ import {
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
 	intializeThemeStore,
-	setActiveThemeByName,
+	setActiveThemeByID,
 } from "@/store/theme/theme.slice";
 import Search from "./Search";
 import { inputIsFocused } from "@/utils/dom";
@@ -83,7 +83,7 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 
 			const setThemeByPreference = (e: MediaQueryList) => {
 				if (!storedComputerPreferences) {
-					dispatch(setActiveThemeByName(e.matches ? "day" : "day"));
+					dispatch(setActiveThemeByID(e.matches ? "0" : "0"));
 				}
 			};
 

@@ -1,4 +1,5 @@
 import * as React from "react";
+import styled from "styled-components";
 
 import { Text } from "@/components/Input";
 import {
@@ -7,7 +8,6 @@ import {
 	Column,
 	Paragraph,
 } from "@/styles/general-components";
-import { ControlsContainer, ThemeAppearance } from "./ModifyTheme.styles";
 import SettingsGroup from "./SettingsGroup.component";
 
 import { useMultiple } from "@/hooks";
@@ -17,6 +17,19 @@ import {
 	flattenedThemeShape,
 } from "@/store/theme/theme.slice";
 import { capitalize } from "@/utils/strings";
+import { fadeIn } from "@/styles/animations";
+import { FONT_MD } from "@/styles/variables";
+
+const ControlsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  ${FONT_MD};
+`;
+
+const ThemeAppearance = styled.div`
+  opacity: 0;
+  animation: ${fadeIn} 1s ease-in forwards;
+`;
 
 const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme }) => {
 	const dispatch = useAppDispatch();
