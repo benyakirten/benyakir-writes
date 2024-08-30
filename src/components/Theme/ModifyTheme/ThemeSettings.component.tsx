@@ -21,6 +21,19 @@ const ThemeTitleContainer = styled.div`
 
 const ThemeSettings: React.FC<{ theme: BaseTheme }> = ({ theme }) => {
 	const dispatch = useAppDispatch();
+	const groups = Object.keys(theme).reduce<React.ReactNode[]>((acc, next) => {
+		if (next === "id" || next === "name") {
+			return acc;
+		}
+
+		const item = (
+			<SettingsGroup key={next} name={next as keyof BaseTheme} id={theme.id} />
+		);
+		acc.push(item);
+
+		return acc;
+	}, []);
+
 	return (
 		<StyledThemeSettings>
 			<ThemeTitleContainer>
@@ -34,13 +47,7 @@ const ThemeSettings: React.FC<{ theme: BaseTheme }> = ({ theme }) => {
 					label="Theme Name"
 				/>
 			</ThemeTitleContainer>
-			{Object.keys(theme).reduce((acc, next) => {
-				if (next === "id" || next === "name") {
-					return acc;
-				}
-
-				const item = <SettingsGroup />;
-			})}
+			{groups}
 		</StyledThemeSettings>
 	);
 };

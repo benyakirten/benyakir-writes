@@ -45,5 +45,5 @@ export const titleCase = (sentence: string | string[]): string => {
 };
 
 const CAMEL_CASE_REGEX = /(?=[A-Z])/;
-export const camelToTitle = (camel: string, otherSections: string[] = []) =>
+export const camelToTitleCase = (camel: string, otherSections: string[] = []) =>
 	otherSections.concat(camel.split(CAMEL_CASE_REGEX)).map(capitalize).join(" ");

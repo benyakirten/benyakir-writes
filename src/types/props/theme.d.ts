@@ -23,13 +23,13 @@ type ModifyThemeProps = {
 };
 
 type SettingsGroupProps = {
-	name: string;
+	name: keyof BaseTheme;
 	id: string;
 };
 
 type SettingsItemProps = {
 	accessors: string[];
-	control: RecursiveControlGroup;
+	theme: BaseTheme;
 	id: string;
 };
 

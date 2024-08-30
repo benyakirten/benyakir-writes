@@ -12,7 +12,7 @@ export function encode(data: object) {
 export function getThemePropRecursive(
 	obj: RecursiveControlGroup,
 	accessors: string[],
-): string {
+): string | RecursiveControlGroup {
 	if (accessors.length > 1) {
 		const val = obj[accessors[0]];
 		if (typeof val === "string") {
@@ -22,12 +22,7 @@ export function getThemePropRecursive(
 		return getThemePropRecursive(val, accessors.slice(1));
 	}
 
-	const val = obj[accessors[0]];
-	if (typeof val !== "string") {
-		throw new Error("Invalid theme prop");
-	}
-
-	return val;
+	return obj[accessors[0]];
 }
 
 export function formatOutsideLink(link: string) {

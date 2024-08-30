@@ -6,7 +6,7 @@ import {
 	multiplyCSSNumber,
 	capitalize,
 	titleCase,
-	camelToTitle,
+	camelToTitleCase,
 } from "../strings";
 
 describe("titleToKebab", () => {
@@ -132,7 +132,7 @@ describe("titleCase", () => {
 	);
 });
 
-describe("camelToTitle", () => {
+describe("camelToTitleCase", () => {
 	test.for<{ camel: string; otherSections: string[]; result: string }>([
 		{ camel: "helloWorld", otherSections: [], result: "Hello World" },
 		{
@@ -153,7 +153,7 @@ describe("camelToTitle", () => {
 	])(
 		"should convert $camel with additions $otherSections to $result case",
 		({ camel, otherSections, result }) => {
-			const got = camelToTitle(camel, otherSections);
+			const got = camelToTitleCase(camel, otherSections);
 			expect(got).toEqual(result);
 		},
 	);
