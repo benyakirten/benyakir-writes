@@ -12,10 +12,10 @@ import {
 	TRANSITION_FAST,
 } from "@/styles/variables";
 
-const StyledCardExterior = styled.article<{ columns: string }>`
+const StyledCardExterior = styled.article<{ $columns: string }>`
 	display: grid;
 	position: relative;
-	grid-template-columns: ${(props) => props.columns};
+	grid-template-columns: ${(props) => props.$columns};
 	height: 100%;
 	gap: ${SIZE_SM};
 
@@ -64,7 +64,7 @@ const CardExterior: React.FC<
 	return (
 		<li>
 			<Link to={slug}>
-				<StyledCardExterior columns={columns}>
+				<StyledCardExterior $columns={columns}>
 					<ExternalArrow data-arrow />
 					{children}
 				</StyledCardExterior>

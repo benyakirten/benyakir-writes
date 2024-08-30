@@ -82,7 +82,7 @@ const ThemeControls: React.FC<ThemeControlProps> = ({
 						onClick={() => dispatch(resetThemeOptions())}
 						type="button"
 					>
-						Reset Themes
+						Reset All Settings
 					</ResetButton>
 				</FillIn>
 				<Toggle

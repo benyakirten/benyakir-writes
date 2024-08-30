@@ -10,7 +10,10 @@ import {
 	getPageTransitionStyles,
 } from "@/styles/transitions";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { setActiveThemeByID } from "@/store/theme/theme.slice";
+import {
+	initializeThemeState,
+	setActiveThemeByID,
+} from "@/store/theme/theme.slice";
 import Search from "./Search";
 import { inputIsFocused } from "@/utils/dom";
 import { setSidebarState } from "@/store/sidebar/sidebar.slice";
@@ -24,8 +27,6 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 
 	const closeModal = () => modalRef.current?.close();
 	const openModal = () => modalRef.current?.showModal();
-
-	// TODO: Allow a theme to be exported/imported as base64
 
 	React.useEffect(() => {
 		const handler = (e: KeyboardEvent) => {
@@ -49,6 +50,10 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 	});
 
 	React.useEffect(() => {
+		dispatch(initializeThemeState());
+	}, [dispatch]);
+
+	React.useEffect(() => {
 		if (window?.matchMedia) {
 			const darkColorScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -57,8 +62,7 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 					return;
 				}
 
-				// TODO: Remove debug and set this to "1" : "0"
-				dispatch(setActiveThemeByID(e.matches ? "0" : "0"));
+				dispatch(setActiveThemeByID(e.matches ? "1" : "0"));
 			};
 
 			const themePreferenceChange = (e: MediaQueryListEvent) =>

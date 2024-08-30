@@ -9,7 +9,7 @@ import RefreshIcon from "@/components/Icons/Refresh.component";
 import { SIZE_XS } from "@/styles/variables";
 import { Time } from "@/components/General";
 
-const TextContainer = styled.p`
+const TextContainer = styled.span`
 	display: flex;
 	align-items: center;
 	gap: ${SIZE_XS};

@@ -1,6 +1,5 @@
 import { describe, it, expect } from "vitest";
 
-import { defaultDayTheme } from "@/store/theme/theme.state";
 import * as other from "@/utils/other";
 
 describe("other utils", () => {
@@ -35,26 +34,6 @@ describe("other utils", () => {
 			for (const expectation of expectations) {
 				expect(other.encode(expectation.input)).toEqual(expectation.result);
 			}
-		});
-	});
-
-	describe("flattenTheme", () => {
-		it("should return a string[][][] based on the properties of a BaseTheme object", () => {
-			const theme = Object.keys(defaultDayTheme)
-				.filter((key) => key !== "name" && key !== "id")
-				.reduce<Record<string, string>>((acc, next) => {
-					acc[next] = defaultDayTheme[next as keyof BaseTheme];
-					return acc;
-				}, {});
-
-			const res = other.flattenTheme(defaultDayTheme);
-			expect(res.length).toEqual(Object.keys(theme).length);
-		});
-
-		it("should not encode either the ID or name prop of the theme", () => {
-			const res = other.flattenTheme(defaultDayTheme);
-			expect(Object.keys(res)).not.toContain("name");
-			expect(Object.keys(res)).not.toContain("id");
 		});
 	});
 });

@@ -8,7 +8,7 @@ import {
 } from "@/styles/general-components";
 import { themeDescription } from "@/data/search";
 import { HeadBase } from "@/components/SEO";
-import { ThemeOptions } from "@/components/Theme";
+import ThemeOptions from "@/components/Theme/ThemeOptions.component";
 
 export const Head: React.FC = () => (
 	<HeadBase title="Theme" description={themeDescription} />

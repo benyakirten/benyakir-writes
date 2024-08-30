@@ -17,7 +17,6 @@ const NavLink = React.forwardRef<HTMLElement, NavLinkProps>(
 				to={to}
 				onClick={onClick}
 				tabIndex={tabIndex}
-				active={active}
 			>
 				{children}
 			</StyledNavLink>

@@ -7,7 +7,7 @@ import { SVGContainer } from "@/styles/general-components";
 import { TRANSITION_SLOW } from "@/styles/variables";
 
 const LogoContainer = styled(SVGContainer)<{
-	opening: boolean;
+	$opening: boolean;
 	open: boolean;
 }>`
   position: relative;
@@ -16,7 +16,7 @@ const LogoContainer = styled(SVGContainer)<{
   transition: left ${TRANSITION_SLOW} ease;
 
   animation: ${(props) =>
-		props.opening ? "500ms rotate ease forwards" : "none"};
+		props.$opening ? "500ms rotate ease forwards" : "none"};
 `;
 
 const Logo: React.FC<LogoProps> = ({ opening, open }) => {
@@ -34,7 +34,7 @@ const Logo: React.FC<LogoProps> = ({ opening, open }) => {
 				src={data?.file?.publicURL}
 				role="img"
 				alt="Benyakir Writes Logo"
-				opening={opening}
+				$opening={opening}
 				open={open}
 				aria-label="Logo"
 			/>

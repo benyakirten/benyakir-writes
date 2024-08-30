@@ -1,6 +1,6 @@
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { initialState } from "./theme.state";
+import { initialState, defaultDayTheme } from "./theme.state";
 import { StringLookup } from "@/types/general";
 import {
 	STORED_IGNORE_COMPUTER_PREFERENCE,
@@ -9,7 +9,6 @@ import {
 } from "@/data/constants";
 import {
 	determineComputerPreferredTheme,
-	defaultDayTheme,
 	getDefaultThemeState,
 } from "./theme.utils";
 

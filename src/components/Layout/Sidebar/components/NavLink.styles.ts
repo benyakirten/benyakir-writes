@@ -7,9 +7,7 @@ import {
 	TRANSITION_SLOW,
 } from "@/styles/variables";
 
-export const StyledNavLink = styled(Link)<{
-	active: boolean;
-}>`
+export const StyledNavLink = styled(Link)`
   position: relative;
 
   text-decoration: none;
