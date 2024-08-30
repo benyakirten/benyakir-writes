@@ -4,9 +4,8 @@ import { initialState } from "./theme.state";
 import { StringLookup } from "@/types/general";
 import {
 	STORED_IGNORE_COMPUTER_PREFERENCE,
-	STORED_ACTIVE_THEME,
+	STORED_ACTIVE_THEME_ID,
 	STORED_THEMES,
-	STORED_LAST_USED_THEME_ID,
 } from "@/data/constants";
 import {
 	determineComputerPreferredTheme,
@@ -48,7 +47,17 @@ const themeSlice = createSlice({
 					? state.themes.find((theme) => theme.id === "1")
 					: state.themes.find((theme) => theme.id === "0");
 			state.active = newTheme ? newTheme : state.active;
-			localStorage.setItem(STORED_ACTIVE_THEME, state.active.id);
+			localStorage.setItem(STORED_ACTIVE_THEME_ID, state.active.id);
+		},
+
+		initializeThemeState: (state) => {
+			const { themes, latestId, ignoreComputerPreferences, active } =
+				getDefaultThemeState();
+
+			state.themes = themes;
+			state.latestId = latestId;
+			state.ignoreComputerPreferences = ignoreComputerPreferences;
+			state.active = active;
 		},
 
 		setActiveThemeByID: (state, action: PayloadAction<string>) => {
@@ -56,7 +65,7 @@ const themeSlice = createSlice({
 				(theme) => theme.id === action.payload,
 			);
 			state.active = newTheme ? newTheme : state.active;
-			localStorage.setItem(STORED_ACTIVE_THEME, state.active.id);
+			localStorage.setItem(STORED_ACTIVE_THEME_ID, state.active.id);
 		},
 
 		toggleUseComputerPreferences: (state) => {
@@ -84,7 +93,7 @@ const themeSlice = createSlice({
 			state.themes.push({ ...copiedTheme, name, id: id.toString() });
 			state.latestId = id;
 			localStorage.setItem(STORED_THEMES, JSON.stringify(state.themes));
-			localStorage.setItem(STORED_LAST_USED_THEME_ID, id.toString());
+			localStorage.setItem(STORED_ACTIVE_THEME_ID, id.toString());
 		},
 
 		createTheme: (state) => {
@@ -92,10 +101,7 @@ const themeSlice = createSlice({
 			state.latestId = id;
 			state.themes.push({ ...defaultDayTheme, name, id: id.toString() });
 
-			localStorage.setItem(
-				STORED_LAST_USED_THEME_ID,
-				state.latestId.toString(),
-			);
+			localStorage.setItem(STORED_ACTIVE_THEME_ID, state.latestId.toString());
 			localStorage.setItem(STORED_THEMES, JSON.stringify(state.themes));
 		},
 
@@ -127,7 +133,7 @@ const themeSlice = createSlice({
 
 			if (state.active.id === action.payload) {
 				state.active = state.themes[themeIndexToDelete === 0 ? 1 : 0];
-				localStorage.setItem(STORED_ACTIVE_THEME, state.active.id);
+				localStorage.setItem(STORED_ACTIVE_THEME_ID, state.active.id);
 			}
 
 			state.themes = state.themes.filter(
@@ -206,9 +212,8 @@ const themeSlice = createSlice({
 
 		resetThemeOptions: () => {
 			localStorage.removeItem(STORED_THEMES);
-			localStorage.removeItem(STORED_ACTIVE_THEME);
+			localStorage.removeItem(STORED_ACTIVE_THEME_ID);
 			localStorage.removeItem(STORED_IGNORE_COMPUTER_PREFERENCE);
-			localStorage.removeItem(STORED_LAST_USED_THEME_ID);
 
 			return getDefaultThemeState();
 		},
@@ -216,6 +221,7 @@ const themeSlice = createSlice({
 });
 
 export const {
+	initializeThemeState,
 	toggleTimeOfDay,
 	setActiveThemeByID,
 	toggleUseComputerPreferences,

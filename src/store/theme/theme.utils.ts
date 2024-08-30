@@ -1,6 +1,6 @@
 import {
 	STORED_IGNORE_COMPUTER_PREFERENCE,
-	STORED_LAST_USED_THEME_ID,
+	STORED_ACTIVE_THEME_ID,
 	STORED_THEMES,
 } from "@/data/constants";
 
@@ -13,7 +13,7 @@ export const defaultDayTheme: BaseTheme = {
 		border: "#39435b",
 		shadowColor: "#9b825d",
 		disabled: "#495057",
-		focus: "hsl(300, 100%, 50%)",
+		focus: "hsl(300 100% 50%)",
 		link: "#05491F",
 		neutral: "#DCDCDC",
 	},
@@ -141,7 +141,7 @@ export function getDefaultThemeState(): ThemeState {
 
 	const ignoreComputerPreferences =
 		localStorage.getItem(STORED_IGNORE_COMPUTER_PREFERENCE) === "true";
-	const lastUsedThemeId = localStorage.getItem(STORED_LAST_USED_THEME_ID);
+	const lastUsedThemeId = localStorage.getItem(STORED_ACTIVE_THEME_ID);
 	const latestId =
 		!lastUsedThemeId || Number.isNaN(+lastUsedThemeId) ? 1 : +lastUsedThemeId;
 	try {
@@ -150,7 +150,7 @@ export function getDefaultThemeState(): ThemeState {
 			? JSON.parse(storedThemes)
 			: [defaultDayTheme, defaultNightTheme];
 
-		const storedActiveTheme = localStorage.getItem(STORED_LAST_USED_THEME_ID);
+		const storedActiveTheme = localStorage.getItem(STORED_ACTIVE_THEME_ID);
 		const active =
 			(storedActiveTheme && themes.find((t) => t.id === storedActiveTheme)) ||
 			defaultDayTheme;

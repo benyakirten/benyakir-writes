@@ -4,6 +4,7 @@ import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 import styled from "styled-components";
 
 import {
+	Card,
 	NormalPageContents,
 	Page,
 	Subtitle,
@@ -87,14 +88,6 @@ const BookHeader: React.FC<{
 		</TemplateHeaderContainer>
 	);
 };
-
-const Card = styled.div`
-	border-radius: ${SIZE_XS};
-	border: 1px solid ${(props) => props.theme.base.border};
-	
-	padding: ${SIZE_SM};
-	background-color: ${(props) => props.theme.base.background};
-`;
 
 const TitledCard: React.FC<{ title: string } & ChildrenProp> = ({
 	title,

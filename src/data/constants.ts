@@ -48,5 +48,4 @@ export const CORNER_INDEX_TO_POSITIONING = [
 // Local storage keys
 export const STORED_IGNORE_COMPUTER_PREFERENCE = "stored_color_preference_v2";
 export const STORED_THEMES = "stored_themes_v2";
-export const STORED_ACTIVE_THEME = "stored_active_theme_v2";
-export const STORED_LAST_USED_THEME_ID = "last_used_theme_v2";
+export const STORED_ACTIVE_THEME_ID = "stored_active_theme_id_v2";

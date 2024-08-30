@@ -12,13 +12,7 @@ import { BigParagraph } from "@/styles/general-components";
 import { styled } from "styled-components";
 import { getThemePropRecursive } from "@/utils/other";
 import { camelToTitleCase, capitalize } from "@/utils/strings";
-import {
-	FONT_LG,
-	FONT_MD,
-	SIZE_SM,
-	SIZE_XS,
-	Z_ABOVE,
-} from "@/styles/variables";
+import { FONT_LG, SIZE_SM, SIZE_XS, Z_ABOVE } from "@/styles/variables";
 import ColorPicker from "./ColorPicker/ColorPicker.component";
 
 const SettingsItem: React.FC<SettingsItemProps> = ({
@@ -72,10 +66,7 @@ const SettingsItem: React.FC<SettingsItemProps> = ({
 				label={label}
 				name={name}
 				value={val}
-				onChange={(e) => {
-					console.log(e);
-					// handleChange(e, accessors)
-				}}
+				onChange={(e) => handleChange(e, accessors)}
 			/>
 		);
 	}

@@ -132,6 +132,14 @@ export const WpContentDescription = styled.div<{ fontSize?: string }>`
   }
 `;
 
+export const Card = styled.div`
+  border-radius: ${SIZE_XS};
+  border: 1px solid ${(props) => props.theme.base.border};
+
+  padding: ${SIZE_SM};
+  background-color: ${(props) => props.theme.base.background};
+`;
+
 export const Box = styled.div`
   display: flex;
   align-items: center;
