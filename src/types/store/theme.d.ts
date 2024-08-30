@@ -2,6 +2,7 @@ type ThemeState = {
 	themes: BaseTheme[];
 	ignoreComputerPreferences: boolean;
 	active: BaseTheme;
+	latestId: number;
 };
 
 type BasicThemeSection = {
@@ -31,19 +32,11 @@ type ThemeTextInput = BasicThemeSection & {
 
 type ThemeMultipleChoice = BasicThemeSection & {};
 
-type ButtonTheme = {
+type ThemeFillIn = {
 	border: string;
 	default: BasicThemeSection;
 	disabled: BasicThemeSection;
 	hover: BasicThemeSection;
-};
-
-type ThemeAlertBox = {
-	textColor: string;
-	alert: {
-		success: string;
-		error: string;
-	};
 };
 
 type ThemeToggle = {
@@ -75,7 +68,7 @@ type BaseTheme = {
 	sidebar: ThemeSidebar;
 	textInput: ThemeTextInput;
 	multipleChoice: ThemeMultipleChoice;
-	button: ButtonTheme;
+	fillIn: ThemeFillIn;
 	alertBox: ThemeAlertBox;
 	toggle: ThemeToggle;
 	theme: ThemeThemePage;

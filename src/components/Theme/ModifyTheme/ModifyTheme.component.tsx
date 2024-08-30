@@ -34,10 +34,8 @@ const ThemeAppearance = styled.div`
 const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme }) => {
 	const dispatch = useAppDispatch();
 	const themes = useAppSelector((root) => root.theme.themes);
-	const theme = React.useMemo(
-		() => themes.find((theme) => theme.id === selectedTheme),
-		[selectedTheme, themes],
-	);
+	const theme = themes.find((theme) => theme.id === selectedTheme);
+
 	const groupNames = React.useMemo(
 		() => flattenedThemeShape.map((groups) => groups[0][0]),
 		[],

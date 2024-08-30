@@ -4,11 +4,15 @@ import { styled } from "styled-components";
 
 import { FlattenedProjectCard } from "@/types/posts";
 import CardExterior from "./CardExterior.component";
-import { FullContainer, SpanOneTitle, TagContainer } from "./Card.styles";
-import { ProjectHost, ProjectTech, TechContainer } from "../General";
+import { FullContainer, TagContainer } from "./Card.styles";
+import {
+	LatestUpdate,
+	ProjectHost,
+	ProjectTech,
+	TechContainer,
+} from "../General";
 import { PublishedDate } from "./IconedText.component";
 import { useFetchRepoUpdatedDate } from "@/hooks";
-import LatestUpdate from "../General/Project/LatestUpdate.component";
 import { ProjectImage } from "@/types/portfolio";
 import { SIZE_XS } from "@/styles/variables";
 

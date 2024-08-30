@@ -147,7 +147,6 @@ export const defaultNightTheme: BaseTheme = {
 export const initialState: ThemeState = {
 	themes: [defaultDayTheme, defaultNightTheme],
 	ignoreComputerPreferences: false,
-	prefers: "0",
 	active: defaultDayTheme,
-	error: undefined,
+	latestId: 1,
 };

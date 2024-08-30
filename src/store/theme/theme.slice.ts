@@ -1,9 +1,8 @@
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import { defaultDayTheme, initialState } from "./theme.state";
-import { DraggedOverPosition } from "@/utils/enums";
 import { flattenTheme } from "@/utils/other";
-import { ArrayItemsTransfer, StringLookup } from "@/types/general";
+import { StringLookup } from "@/types/general";
 import {
 	STORED_PREFERENCE_KEY,
 	STORED_PREFERENCES,
@@ -15,7 +14,7 @@ function determineComputerPreferredTheme(state: ThemeState) {
 		"(prefers-color-scheme: dark)",
 	).matches;
 	const themePreference = darkThemeTime ? "1" : "0";
-	if (state.active.name !== themePreference) {
+	if (state.active.id !== themePreference) {
 		return (
 			state.themes.find((theme) => theme.id === themePreference) ?? state.active
 		);
@@ -23,17 +22,10 @@ function determineComputerPreferredTheme(state: ThemeState) {
 	return state.active;
 }
 
-function getLatestId(state: ThemeState) {
-	return state.themes.reduce((acc, next) => {
-		const nextId = +next.id;
-		return Number.isNaN(nextId) || acc > nextId ? acc : nextId;
-	}, -1);
-}
-
 function copyTheme(
 	copiedTheme: BaseTheme,
 	state: ThemeState,
-): { name: string; id: string } {
+): { name: string; id: number } {
 	let { name } = copiedTheme;
 	let nameIndex = 1;
 	const match = name.match(/\d+$/);
@@ -46,15 +38,20 @@ function copyTheme(
 	let finalName = `${name}${nameIndex}`;
 
 	while (state.themes.find((theme) => theme.name === finalName)) {
-		nameIndex++;
-		if (nameIndex > 10e10) {
-			throw new Error("Unable to create new theme");
+		if (nameIndex === Number.MAX_SAFE_INTEGER) {
+			nameIndex = 0;
 		}
+
+		if (nameIndex > 0) {
+			nameIndex++;
+		} else {
+			nameIndex--;
+		}
+
 		finalName = `${name}${nameIndex}`;
 	}
 
-	const id = getLatestId(state) + 1;
-	return { name: finalName, id: id.toString() };
+	return { name: finalName, id: state.latestId + 1 };
 }
 
 const themeSlice = createSlice({
@@ -97,20 +94,18 @@ const themeSlice = createSlice({
 				return;
 			}
 
-			try {
-				const { name, id } = copyTheme(copiedTheme, state);
-				// @ts-ignore
-				state.themes.push({ ...copiedTheme, name, id });
-				localStorage.setItem(STORED_THEMES, JSON.stringify(state.themes));
-			} catch {}
+			const { name, id } = copyTheme(copiedTheme, state);
+			// @ts-ignore
+			state.themes.push({ ...copiedTheme, name, id });
+			state.latestId = +id;
+			localStorage.setItem(STORED_THEMES, JSON.stringify(state.themes));
 		},
 
 		createTheme: (state) => {
-			try {
-				const { name, id } = copyTheme(defaultDayTheme, state);
-				state.themes.push({ ...defaultDayTheme, name, id });
-				localStorage.setItem(STORED_THEMES, JSON.stringify(state.themes));
-			} catch {}
+			const { name, id } = copyTheme(defaultDayTheme, state);
+			state.latestId = id;
+			state.themes.push({ ...defaultDayTheme, name, id: id.toString() });
+			localStorage.setItem(STORED_THEMES, JSON.stringify(state.themes));
 		},
 
 		updateTheme: (
