@@ -143,7 +143,7 @@ const Sidebar: React.FC<{ onSearch: () => void }> = ({ onSearch }) => {
 						</NavGroup>
 						<OpenSearchButton onSearch={onSearch} />
 						<Toggle
-							value={activeTheme.name === "night"}
+							value={activeTheme.id === "1"}
 							onToggle={() => dispatch(toggleTimeOfDay())}
 							label={`Theme: ${capitalize(activeTheme.name)}`}
 							name="active-theme-toggle"

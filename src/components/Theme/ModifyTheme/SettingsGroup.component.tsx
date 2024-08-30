@@ -1,8 +1,6 @@
 import * as React from "react";
 
-import { Foldout } from "@/components/General";
 import { ColorPicker } from "@/components/Input";
-import { BigParagraph } from "@/styles/general-components";
 
 import { getThemePropRecursive } from "@/utils/other";
 import { titleCase } from "@/utils/strings";

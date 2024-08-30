@@ -81,15 +81,8 @@ export const Subtitle = styled.h2`
   }
 `;
 
-export const BigParagraph = styled.p<{
-	marginRight?: string;
-	marginVertical?: string;
-}>`
-  font-size: ${FONT_SIZE_XL};
-  margin-top: ${(props) => (props.marginVertical ? props.marginVertical : "0")};
-  margin-bottom: ${(props) =>
-		props.marginVertical ? props.marginVertical : "0"};
-  margin-right: ${(props) => (props.marginRight ? props.marginRight : "0")};
+export const BigParagraph = styled.p`
+  ${FONT_XL};
 `;
 
 export const Paragraph = styled.p`

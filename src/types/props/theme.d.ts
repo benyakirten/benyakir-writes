@@ -21,3 +21,17 @@ type ThemeButtonProps = {
 type ModifyThemeProps = {
 	selectedTheme: string;
 };
+
+type RecursiveThemePart = {
+	[key: string]: RecursiveThemePart | string;
+};
+
+type SettingsGroupProps = {
+	name: string;
+	// group
+};
+
+type ThemeControlProps = ModifyThemeProps & {
+	selectedTheme: string;
+	setSelectedTheme: (theme: string) => void;
+};

@@ -10,18 +10,10 @@ import {
 	getPageTransitionStyles,
 } from "@/styles/transitions";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import {
-	intializeThemeStore,
-	setActiveThemeByID,
-} from "@/store/theme/theme.slice";
+import { setActiveThemeByID } from "@/store/theme/theme.slice";
 import Search from "./Search";
 import { inputIsFocused } from "@/utils/dom";
 import { setSidebarState } from "@/store/sidebar/sidebar.slice";
-import {
-	STORED_PREFERENCE_KEY,
-	STORED_THEMES,
-	STORED_PREFERENCES,
-} from "@/data/constants";
 
 const Layout: React.FC<ChildrenProp> = ({ children }) => {
 	const location = useLocation();
@@ -63,38 +55,25 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 	});
 
 	React.useEffect(() => {
-		const storedComputerPreferences =
-			localStorage.getItem(STORED_PREFERENCE_KEY) === "true";
-		const storedThemes = localStorage.getItem(STORED_THEMES);
-		const storedPreference = localStorage
-			.getItem(STORED_PREFERENCES)
-			?.replace(/"/g, "");
-
-		dispatch(
-			intializeThemeStore({
-				computerPreferences: storedComputerPreferences,
-				themes: storedThemes,
-				preference: storedPreference,
-			}),
-		);
-
 		if (window?.matchMedia) {
 			const darkColorScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
 			const setThemeByPreference = (e: MediaQueryList) => {
-				if (!storedComputerPreferences) {
-					dispatch(setActiveThemeByID(e.matches ? "0" : "0"));
+				if (themeStore.ignoreComputerPreferences) {
+					return;
 				}
+
+				dispatch(setActiveThemeByID(e.matches ? "0" : "0"));
 			};
 
 			const themePreferenceChange = (e: MediaQueryListEvent) =>
 				setThemeByPreference(e.target as MediaQueryList);
 			darkColorScheme.addEventListener("change", themePreferenceChange);
-			setThemeByPreference(darkColorScheme);
+
 			return () =>
 				darkColorScheme.removeEventListener("change", themePreferenceChange);
 		}
-	}, [dispatch]);
+	}, [dispatch, themeStore]);
 
 	return (
 		<ThemeProvider theme={themeStore.active}>

@@ -69,7 +69,6 @@ type BaseTheme = {
 	textInput: ThemeTextInput;
 	multipleChoice: ThemeMultipleChoice;
 	fillIn: ThemeFillIn;
-	alertBox: ThemeAlertBox;
 	toggle: ThemeToggle;
 	theme: ThemeThemePage;
 };

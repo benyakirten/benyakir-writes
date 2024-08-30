@@ -12,7 +12,7 @@ export const FillInExterior = styled.div<{
   
   overflow: hidden;
   
-  background-color: ${(props) => props.theme.button.default.background};
+  background-color: ${(props) => props.theme.fillIn.default.background};
 
   border-top-right-radius: ${(props) => props.borderRadiusCorners.topRight};
   border-bottom-right-radius: ${(props) => props.borderRadiusCorners.bottomRight};
@@ -20,7 +20,7 @@ export const FillInExterior = styled.div<{
   border-top-left-radius: ${(props) => props.borderRadiusCorners.topLeft};
 
   span {
-    color: ${(props) => props.theme.button.default.textColor};
+    color: ${(props) => props.theme.fillIn.default.textColor};
     transition: color ${TRANSITION_SLOW} ease;
 
     position: relative;
@@ -29,15 +29,15 @@ export const FillInExterior = styled.div<{
 
   &[data-disabled='true'] {
     cursor: default;
-    background-color: ${(props) => props.theme.button.disabled.background};
+    background-color: ${(props) => props.theme.fillIn.disabled.background};
 
     span {
-      color: ${(props) => props.theme.button.disabled.textColor};
+      color: ${(props) => props.theme.fillIn.disabled.textColor};
     }
 
     &:hover {
       span {
-        color: ${(props) => props.theme.button.disabled.textColor};
+        color: ${(props) => props.theme.fillIn.disabled.textColor};
       }
       div[data-fill-in] {
         transform: scale(0) !important;
@@ -51,7 +51,7 @@ export const FillInExterior = styled.div<{
     height: 200%;
     width: 200%;
 
-    background-color: ${(props) => props.theme.button.hover.background};
+    background-color: ${(props) => props.theme.fillIn.hover.background};
 
     transition: transform ${TRANSITION_SLOW} ease;
     transform: scale(0);
@@ -59,7 +59,7 @@ export const FillInExterior = styled.div<{
 
   &:hover, &:focus, &[data-force-fill-in='true'] {
     span {
-      color: ${(props) => props.theme.button.hover.textColor};
+      color: ${(props) => props.theme.fillIn.hover.textColor};
     }
 
     div[data-fill-in] {

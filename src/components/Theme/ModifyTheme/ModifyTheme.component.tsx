@@ -1,24 +1,11 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { Text } from "@/components/Input";
-import {
-	BigParagraph,
-	Box,
-	Column,
-	Paragraph,
-} from "@/styles/general-components";
-import SettingsGroup from "./SettingsGroup.component";
-
-import { useMultiple } from "@/hooks";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import {
-	changeThemeName,
-	flattenedThemeShape,
-} from "@/store/theme/theme.slice";
-import { capitalize } from "@/utils/strings";
 import { fadeIn } from "@/styles/animations";
 import { FONT_MD } from "@/styles/variables";
+import { BigParagraph } from "@/styles/general-components";
+import ThemeSettings from "./ThemeSettings.component";
 
 const ControlsContainer = styled.div`
   display: flex;
@@ -32,53 +19,14 @@ const ThemeAppearance = styled.div`
 `;
 
 const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme }) => {
-	const dispatch = useAppDispatch();
 	const themes = useAppSelector((root) => root.theme.themes);
 	const theme = themes.find((theme) => theme.id === selectedTheme);
-
-	const groupNames = React.useMemo(
-		() => flattenedThemeShape.map((groups) => groups[0][0]),
-		[],
-	);
-	const [openGroups, toggleOpenGroups] = useMultiple(groupNames);
 
 	return (
 		<ControlsContainer>
 			{theme ? (
 				<ThemeAppearance>
-					<BigParagraph>Change the properties of {theme.name}:</BigParagraph>
-					<Box>
-						<Paragraph>Name:</Paragraph>
-						<Text
-							value={theme.name}
-							onChange={(e) =>
-								dispatch(
-									changeThemeName({
-										id: theme.id,
-										newVal: e,
-									}),
-								)
-							}
-							name="theme-name-change"
-							label="Name"
-						/>
-					</Box>
-					<Column style={{ gap: "1rem" }}>
-						{flattenedThemeShape.map((group) => {
-							const groupName = group[0][0];
-							return (
-								<SettingsGroup
-									key={groupName}
-									preface={groupName}
-									theme={theme}
-									controls={group}
-									title={capitalize(groupName)}
-									open={openGroups[groupName]}
-									onOpen={() => toggleOpenGroups(groupName)}
-								/>
-							);
-						})}
-					</Column>
+					<ThemeSettings theme={theme} />
 				</ThemeAppearance>
 			) : (
 				<BigParagraph>Select a theme to modify it here</BigParagraph>
