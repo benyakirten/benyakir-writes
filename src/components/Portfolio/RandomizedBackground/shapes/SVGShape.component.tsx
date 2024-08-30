@@ -8,7 +8,7 @@ const SVGShape: React.FC<SVGShapeData> = ({
 	yMovement,
 	children,
 }) => (
-	<SVGShapeBase size={40} xMovement={xMovement} yMovement={yMovement}>
+	<SVGShapeBase size={40} $xMovement={xMovement} $yMovement={yMovement}>
 		{children}
 	</SVGShapeBase>
 );

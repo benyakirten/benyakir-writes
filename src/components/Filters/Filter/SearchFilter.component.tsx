@@ -44,7 +44,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
 				{type}
 			</FilterButton>
 			<FilterMenu
-				pointUpwards={searchOpenTop}
+				$pointUpwards={searchOpenTop}
 				aria-expanded={searchOpen}
 				onMouseEnter={() => setSearchSoftOpen(true)}
 				onMouseLeave={() => setSearchSoftOpen(false)}

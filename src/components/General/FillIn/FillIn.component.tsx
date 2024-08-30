@@ -32,7 +32,7 @@ const FillIn: React.FC<
 	return (
 		<FillInExterior
 			data-force-fill-in={filledIn || false}
-			borderRadiusCorners={borderRadiusCorners}
+			$borderRadiusCorners={borderRadiusCorners}
 			onMouseEnter={handleMouseover}
 			data-disabled={disabled}
 		>

@@ -8,13 +8,17 @@ const SVGShape: React.FC<SVGShapeData> = ({
 	yMovement,
 	children,
 }) => {
-	const [rotation] = React.useState((Math.floor(Math.random() * 3) + 3) * -60);
+	const rotation = React.useMemo(
+		() => (Math.floor(Math.random() * 3) + 3) * -60,
+		[],
+	);
+
 	return (
 		<SVGShapeBase
 			size={80}
-			xMovement={xMovement}
-			yMovement={yMovement}
-			rotation={rotation}
+			$xMovement={xMovement}
+			$yMovement={yMovement}
+			$rotation={rotation}
 		>
 			{children}
 		</SVGShapeBase>

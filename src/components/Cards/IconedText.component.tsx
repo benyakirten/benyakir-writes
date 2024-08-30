@@ -32,7 +32,7 @@ const InnerIconContainer = styled.div`
     height: 1.5rem;
 `;
 
-const IconTextContainer = styled.p`
+const IconTextContainer = styled.div`
     display: flex;
     align-items: center;
 

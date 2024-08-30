@@ -50,7 +50,7 @@ const DateFilter: React.FC<DateFilterProps> = ({
 		<FilterPill ref={menuRef} onRemove={onRemove}>
 			<FilterText>{label}</FilterText>
 			<FilterMenu
-				pointUpwards={startOpenTop}
+				$pointUpwards={startOpenTop}
 				aria-expanded={startOpen}
 				onMouseEnter={() => setStartSoftOpen(true)}
 				onMouseLeave={() => setStartSoftOpen(false)}
@@ -73,7 +73,7 @@ const DateFilter: React.FC<DateFilterProps> = ({
 				After {getShortDate(start)}
 			</FilterButton>
 			<FilterMenu
-				pointUpwards={endOpenTop}
+				$pointUpwards={endOpenTop}
 				aria-expanded={endOpen}
 				onMouseEnter={() => setEndSoftOpen(true)}
 				onMouseLeave={() => setEndSoftOpen(false)}

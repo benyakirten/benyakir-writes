@@ -16,6 +16,7 @@ const PortfolioBackground = styled.div`
 const RandomizedBackground: React.FC<ChildrenProp> = ({ children }) => {
 	const [_, startTransition] = React.useTransition();
 	const [positions, setPositions] = React.useState<SVGPositionData[]>();
+
 	React.useEffect(() => {
 		const fn = () => {
 			const main = document.querySelector("main");

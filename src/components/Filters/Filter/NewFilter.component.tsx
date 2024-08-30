@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 
 import {
 	FilterMenu,
-	FilterPillButton,
+	FilterPillButtonExterior,
 	FilterText,
 	IconContainer,
 } from "../components";
@@ -13,7 +13,7 @@ import { FillIn } from "@/components/General";
 import { NewFilterProps, FilterOption } from "@/types/filters";
 import { registerCleanupFn } from "../useFilter.hook";
 
-const InnerContainer = styled.div`
+const InnerContainer = styled.button`
 	display: flex;
 	align-items: center;
 
@@ -83,15 +83,14 @@ const NewFilter = React.forwardRef<HTMLButtonElement, NewFilterProps>(
 		}, [closeAllMenus]);
 
 		return (
-			<FilterPillButton
-				ref={ref}
+			<FilterPillButtonExterior
 				onMouseEnter={() => setSoftOpen(true)}
 				onMouseLeave={() => setSoftOpen(false)}
 				onClick={() => setHardOpen((open) => !open)}
 			>
 				<FilterMenu
-					removeSpacing
-					pointUpwards={menuOpenTop}
+					$removeSpacing
+					$pointUpwards={menuOpenTop}
 					aria-expanded={menuOpen}
 					onMouseEnter={() => setSoftOpen(true)}
 					onMouseLeave={() => setSoftOpen(false)}
@@ -112,14 +111,14 @@ const NewFilter = React.forwardRef<HTMLButtonElement, NewFilterProps>(
 						topRight: "2rem",
 					}}
 				>
-					<InnerContainer>
+					<InnerContainer ref={ref}>
 						<IconContainer>
 							<AddIcon />
 						</IconContainer>
 						<FilterText hideBackground>New Filter</FilterText>
 					</InnerContainer>
 				</FillIn>
-			</FilterPillButton>
+			</FilterPillButtonExterior>
 		);
 	},
 );

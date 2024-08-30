@@ -138,7 +138,6 @@ const AboutMe: React.FC<{
 	liIcon?: string;
 	resume?: string;
 }> = ({ ghIcon, liIcon, resume }) => {
-	console.log(ghIcon, liIcon, resume);
 	return (
 		<StyledAboutMe>
 			<Profile />

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { FONT_SIZE_XS, SIZE_LG, SIZE_XS } from "@/styles/variables";
+import { FONT_SM, SIZE_LG, SIZE_XS } from "@/styles/variables";
 import { media } from "@/styles/queries";
 
 export const CardContainer = styled.ul`
@@ -22,7 +22,7 @@ export const CategoryContainer = styled.p`
     grid-column: 1 / 2;
     align-self: center;
 
-    font-size: ${FONT_SIZE_XS};
+    ${FONT_SM};
     font-weight: bold;
 `;
 

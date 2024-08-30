@@ -200,7 +200,7 @@ export const WpContent = styled.div`
   }
 
   p {
-    margin: ${SIZE_SM} 0;
+    margin: ${SIZE_MD} 0;
   }
 
   code {
@@ -236,8 +236,8 @@ export const PillContainer = styled.div`
   text-transform: capitalize;
   
   border-radius: ${SIZE_LG};
-  color: ${(props) => props.theme.base.pillText};
-  background-color: ${(props) => props.theme.base.pillBackground};
+  color: ${(props) => props.theme.base.textColor};
+  background-color: ${(props) => props.theme.pill.background};
 
 	padding: ${SIZE_XS} ${SIZE_SM};
 

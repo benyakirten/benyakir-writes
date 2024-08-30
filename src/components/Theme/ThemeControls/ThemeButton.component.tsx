@@ -8,7 +8,7 @@ import {
 	TRANSITION_NORMAL,
 } from "@/styles/variables";
 
-const StyledThemeButton = styled.button<{ iconColor?: string }>`
+const StyledThemeButton = styled.button<{ $iconColor?: string }>`
     display: flex;
 	flex-direction: column;
     justify-content: space-between;
@@ -24,7 +24,7 @@ const StyledThemeButton = styled.button<{ iconColor?: string }>`
 
 	& svg {
 		transition: fill ${TRANSITION_EXTRA_SLOW} ease;
-		fill: ${(props) => props.iconColor ?? props.theme.theme.iconColor};
+		fill: ${(props) => props.$iconColor ?? props.theme.theme.iconColor};
 	}
 
 	&:not(:disabled):hover svg {
@@ -50,7 +50,7 @@ const ThemeButton: React.FC<ThemeButtonProps> = ({
 			type="button"
 			disabled={disabled}
 			onClick={onClick}
-			iconColor={iconColor}
+			$iconColor={iconColor}
 		>
 			<IconContainer>{icon}</IconContainer>
 			<p>{text}</p>

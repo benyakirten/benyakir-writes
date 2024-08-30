@@ -70,7 +70,7 @@ const Post: React.FC<WpPost> = ({ data }) => {
 				/>
 				<TemplateContent>
 					{blocks.map((block) => (
-						<div key={block.key}>{block}</div>
+						<div key={block.key ?? Math.random()}>{block}</div>
 					))}
 				</TemplateContent>
 			</NormalPageContents>

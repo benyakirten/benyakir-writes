@@ -32,7 +32,7 @@ const TabList = styled.div`
 	width: 100%;
 	padding: ${SIZE_SM};
 
-	background-color: ${(props) => props.theme.portfolio.sliderBackground};
+	background-color: ${(props) => props.theme.base.neutral};
 	border-radius: ${SIZE_XS};
 
 	&:focus-within > [data-indicator]::after {
@@ -40,7 +40,7 @@ const TabList = styled.div`
 	}
 `;
 
-const SelectedTabIndicator = styled.div<{ selectedIdx: number }>`
+const SelectedTabIndicator = styled.div<{ $selectedIdx: number }>`
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -49,7 +49,7 @@ const SelectedTabIndicator = styled.div<{ selectedIdx: number }>`
 		content: "";
 
 		position: absolute;
-		left: ${(props) => props.selectedIdx * 33}%;
+		left: ${(props) => props.$selectedIdx * 33}%;
 		top: 15%;
 	
 		width: 31%;
@@ -58,7 +58,7 @@ const SelectedTabIndicator = styled.div<{ selectedIdx: number }>`
 		}
 		height: 70%;
 	
-		opacity: ${(props) => (props.selectedIdx === -1 ? 0 : 1)};
+		opacity: ${(props) => (props.$selectedIdx === -1 ? 0 : 1)};
 	
 		border-radius: ${SIZE_XS};
 		transition: left ${TRANSITION_NORMAL} ease, top ${TRANSITION_NORMAL} ease;
@@ -71,7 +71,7 @@ const SelectedTabIndicator = styled.div<{ selectedIdx: number }>`
 			height: 30%;
 			transform: translateX(-50%);
 
-			top: ${(props) => calculateSelectedTabIndicatorPositionTop(props.selectedIdx)};
+			top: ${(props) => calculateSelectedTabIndicatorPositionTop(props.$selectedIdx)};
 		}
 	}
 `;
@@ -145,7 +145,7 @@ const Tabs: React.FC<{
 			<TabList ref={tabListRef} role="tablist" aria-label={label}>
 				<SelectedTabIndicator
 					data-indicator
-					selectedIdx={selectedTabButtonIdx}
+					$selectedIdx={selectedTabButtonIdx}
 				/>
 				{tabs.map(({ id, label }) => {
 					const selected = selectedId === id;

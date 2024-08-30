@@ -74,7 +74,6 @@ const Project: React.FC<WpProject> = ({ data }) => {
 	const icons: FileNode[] = data.allFile.nodes
 		.filter((f) => project.shortTechnologies.includes(f.name))
 		.map((f) => ({ ...f, name: getFullTechName(f.name) }));
-	console.log(project.mainLink);
 
 	return (
 		<Page>

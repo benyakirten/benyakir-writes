@@ -4,7 +4,7 @@ import { TRANSITION_SLOW, Z_ABOVE } from "@/styles/variables";
 import { BorderRadiusCorners } from "@/types/filters";
 
 export const FillInExterior = styled.div<{
-	borderRadiusCorners: BorderRadiusCorners;
+	$borderRadiusCorners: BorderRadiusCorners;
 }>`
   position: relative;
   
@@ -14,10 +14,10 @@ export const FillInExterior = styled.div<{
   
   background-color: ${(props) => props.theme.fillIn.default.background};
 
-  border-top-right-radius: ${(props) => props.borderRadiusCorners.topRight};
-  border-bottom-right-radius: ${(props) => props.borderRadiusCorners.bottomRight};
-  border-bottom-left-radius: ${(props) => props.borderRadiusCorners.bottomLeft};
-  border-top-left-radius: ${(props) => props.borderRadiusCorners.topLeft};
+  border-top-right-radius: ${(props) => props.$borderRadiusCorners.topRight};
+  border-bottom-right-radius: ${(props) => props.$borderRadiusCorners.bottomRight};
+  border-bottom-left-radius: ${(props) => props.$borderRadiusCorners.bottomLeft};
+  border-top-left-radius: ${(props) => props.$borderRadiusCorners.topLeft};
 
   span {
     color: ${(props) => props.theme.fillIn.default.textColor};

@@ -17,8 +17,8 @@ const createShapeAnimation = (
 
 export const SVGShapeBase = styled.svg.attrs<{
 	size: number;
-	xMovement?: number;
-	yMovement?: number;
+	$xMovement?: number;
+	$yMovement?: number;
 }>(({ size }) => ({
 	xmlns: "http://www.w3.org/2000/svg",
 	viewBox: "0 0 100 100",
@@ -26,18 +26,18 @@ export const SVGShapeBase = styled.svg.attrs<{
 	height: size,
 }))<{
 	size: number;
-	xMovement?: number;
-	yMovement?: number;
-	rotation?: number;
+	$xMovement?: number;
+	$yMovement?: number;
+	$rotation?: number;
 }>`
   transition: filter 3s ease, scale 5s ease;
   filter: ${(props) => `blur(${props.size / 15}px)`};
   animation: ${(props) =>
 		css`
       ${createShapeAnimation(
-				props.xMovement,
-				props.yMovement,
-				props.rotation ?? 0,
+				props.$xMovement,
+				props.$yMovement,
+				props.$rotation ?? 0,
 			)} 30s infinite alternate linear
     `};
 

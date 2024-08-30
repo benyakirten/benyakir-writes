@@ -8,7 +8,7 @@ const StyledFilterText = styled.span`
     text-transform: capitalize;
 `;
 
-const InnerFilterText = styled.span<{ hideBackground?: boolean }>`
+const InnerFilterText = styled.span<{ $hideBackground?: boolean }>`
     display: grid;
     place-items: center;
 
@@ -17,7 +17,7 @@ const InnerFilterText = styled.span<{ hideBackground?: boolean }>`
 
     padding: ${SIZE_XS};
 
-    background-color: ${(props) => (props.hideBackground ? "none" : props.theme.base.background)};
+    background-color: ${(props) => (props.$hideBackground ? "none" : props.theme.base.background)};
 `;
 
 const FilterText: React.FC<ChildrenProp & { hideBackground?: boolean }> = ({
@@ -26,7 +26,7 @@ const FilterText: React.FC<ChildrenProp & { hideBackground?: boolean }> = ({
 }) => {
 	return (
 		<StyledFilterText>
-			<InnerFilterText hideBackground={hideBackground}>
+			<InnerFilterText $hideBackground={hideBackground}>
 				{children}
 			</InnerFilterText>
 		</StyledFilterText>
