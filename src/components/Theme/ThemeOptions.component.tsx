@@ -21,7 +21,7 @@ const ThemeCard: React.FC = () => {
 				selectedTheme={selectedTheme}
 				setSelectedTheme={setSelectedTheme}
 			/>
-			<Subtitle>Modify Theme</Subtitle>
+			<Subtitle style={{ marginBottom: 0 }}>Modify Theme</Subtitle>
 			<ModifyTheme selectedTheme={selectedTheme} />
 		</ThemeCardContainer>
 	);

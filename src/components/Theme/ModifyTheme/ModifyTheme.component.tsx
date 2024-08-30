@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useAppSelector } from "@/store/hooks";
 import { fadeIn } from "@/styles/animations";
 import { FONT_MD } from "@/styles/variables";
 import { BigParagraph } from "@/styles/general-components";

@@ -14,6 +14,7 @@ import { getThemePropRecursive } from "@/utils/other";
 import { camelToTitleCase, capitalize } from "@/utils/strings";
 import { FONT_LG, SIZE_SM, SIZE_XS, Z_ABOVE } from "@/styles/variables";
 import ColorPicker from "./ColorPicker/ColorPicker.component";
+import { media } from "@/styles/queries";
 
 const SettingsItem: React.FC<SettingsItemProps> = ({
 	accessors,
@@ -95,6 +96,10 @@ const SettingsGroupContainer = styled.div`
 	display: grid;
 	gap: ${SIZE_SM};
 	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+	${media.phone} {
+		grid-template-columns: 1fr;
+	}
 
 	padding: ${SIZE_SM};
 	border-radius: ${SIZE_XS};

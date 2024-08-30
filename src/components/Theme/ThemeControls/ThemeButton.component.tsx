@@ -1,11 +1,12 @@
+import React from "react";
+import styled from "styled-components";
+
 import {
 	SIZE_MD,
 	SIZE_XS,
 	TRANSITION_EXTRA_SLOW,
 	TRANSITION_NORMAL,
 } from "@/styles/variables";
-import React from "react";
-import styled from "styled-components";
 
 const StyledThemeButton = styled.button<{ iconColor?: string }>`
     display: flex;

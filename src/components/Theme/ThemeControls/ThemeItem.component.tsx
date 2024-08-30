@@ -12,6 +12,7 @@ import {
 } from "@/store/theme/theme.slice";
 import CopyIcon from "@/components/Icons/Copy.component";
 import { EditIcon, SelectIcon } from "@/components/Icons";
+import { media } from "@/styles/queries";
 
 const StyledThemeItem = styled.li`
 	display: flex;
@@ -23,6 +24,12 @@ const StyledThemeItem = styled.li`
 
 	border: 1px solid ${({ theme }) => theme.base.border};
 	border-radius: ${SIZE_SM};
+
+	${media.phone} {
+		flex-direction: column;
+		gap: ${SIZE_SM};
+		padding: ${SIZE_XS};
+	}
 `;
 
 const StyledThemeButtons = styled.div`

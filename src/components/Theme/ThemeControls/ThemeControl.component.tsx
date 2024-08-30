@@ -11,6 +11,7 @@ import { Subtitle } from "@/styles/general-components";
 import ThemeItem from "./ThemeItem.component";
 import { SIZE_MD, SIZE_SM, SIZE_XS } from "@/styles/variables";
 import { Toggle } from "@/components/Input";
+import { media } from "@/styles/queries";
 
 const StyledThemeControls = styled.div`
 	display: grid;
@@ -22,6 +23,10 @@ const StyledThemeControls = styled.div`
 
 	height: 20rem;
 	overflow: auto;
+
+	${media.phone} {
+		gap: ${SIZE_MD};
+	}
 `;
 
 const StyledControlContainer = styled.div`
@@ -29,6 +34,11 @@ const StyledControlContainer = styled.div`
 	align-items: center;
 	gap: ${SIZE_MD};
 	height: fit-content;
+
+	${media.phone} {
+		flex-direction: column;
+		align-items: baseline;
+	}
 `;
 
 const StyledItemContainer = styled.div`
@@ -36,6 +46,11 @@ const StyledItemContainer = styled.div`
 	gap: ${SIZE_MD};
 	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 	align-content: baseline;
+
+	${media.phone} {
+		grid-template-columns: 1fr;
+		gap: ${SIZE_XS};
+	}
 `;
 
 const ResetButton = styled.button`

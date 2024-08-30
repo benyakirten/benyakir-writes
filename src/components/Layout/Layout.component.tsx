@@ -25,12 +25,6 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 	const closeModal = () => modalRef.current?.close();
 	const openModal = () => modalRef.current?.showModal();
 
-	// Debug to reset storage of themes
-	React.useEffect(() => {
-		localStorage.clear();
-	}, []);
-
-	// TODO: Set versioning on theme storage
 	// TODO: Allow a theme to be exported/imported as base64
 
 	React.useEffect(() => {
