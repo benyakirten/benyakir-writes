@@ -40,7 +40,7 @@ const SettingsItem: React.FC<SettingsItemProps> = ({
 		const name = allAccessors.join("-");
 		const label = allAccessors.map(capitalize).join(" > ");
 
-		if (accessors[-1].toLowerCase().includes("gradient")) {
+		if (accessors.at(-1)?.toLowerCase().includes("gradient")) {
 			// TODO: Render different control for gradient
 			return null;
 		}
