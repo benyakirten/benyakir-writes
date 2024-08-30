@@ -1,52 +1,62 @@
 import * as React from "react";
 
-import { ColorPicker } from "@/components/Input";
-
-import { getThemePropRecursive } from "@/utils/other";
-import { titleCase } from "@/utils/strings";
-
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { changePropOnTheme } from "@/store/theme/theme.slice";
 import { convertHexToHSL, convertHSLToCSSColor } from "@/utils/colors";
+import { BigParagraph } from "@/styles/general-components";
+import { styled } from "styled-components";
 
-const SettingsGroup: React.FC<SettingsGroupProps> = ({
-	preface,
-	controls,
-	open,
-	theme,
+const SettingsItem: React.FC<SettingsItemProps> = ({
+	accessors,
+	control,
+	id,
 }) => {
 	const dispatch = useAppDispatch();
-	const handleChange = (e: string, control: ThemeAccessors) => {
+
+	const handleChange = (e: string, control: string[]) => {
 		const val = convertHexToHSL(e);
 		dispatch(
 			changePropOnTheme({
-				id: theme.id,
+				id,
 				props: control,
 				newVal: convertHSLToCSSColor(val),
 			}),
 		);
 	};
+	return null;
+};
 
-	return (
-		<>
-			{controls.map((control) => {
-				const name = control.join("-");
-				const label = titleCase(
-					control.slice(1).flatMap((ctrl) => ctrl.split(/(?=[A-Z])/)),
-				);
-				return (
-					<ColorPicker
-						key={`${preface}-${name}`}
-						tabIndex={open ? 0 : -1}
-						label={label}
-						name={name}
-						value={getThemePropRecursive(theme, control)}
-						onChange={(e) => handleChange(e, control)}
-					/>
-				);
-			})}
-		</>
-	);
+const SettingsGroupContainer = styled.div``;
+
+const SettingsGroup: React.FC<SettingsGroupProps> = ({ name, id }) => {
+	const themes = useAppSelector((state) => state.theme.themes);
+	const selectedTheme = themes.find((theme) => theme.id === id);
+
+	if (!selectedTheme) {
+		return <BigParagraph>Unable to find selected theme.</BigParagraph>;
+	}
+
+	return null;
+	// return (
+	// 	<>
+	// 		{controls.map((control) => {
+	// 			const name = control.join("-");
+	// 			const label = titleCase(
+	// 				control.slice(1).flatMap((ctrl) => ctrl.split(/(?=[A-Z])/)),
+	// 			);
+	// 			return (
+	// 				<ColorPicker
+	// 					key={`${preface}-${name}`}
+	// 					tabIndex={open ? 0 : -1}
+	// 					label={label}
+	// 					name={name}
+	// 					value={getThemePropRecursive(theme, control)}
+	// 					onChange={(e) => handleChange(e, control)}
+	// 				/>
+	// 			);
+	// 		})}
+	// 	</>
+	// );
 };
 
 export default SettingsGroup;

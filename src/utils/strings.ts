@@ -43,3 +43,7 @@ export const titleCase = (sentence: string | string[]): string => {
 		typeof sentence === "string" ? sentence.split(" ") : sentence;
 	return _sentence.map((word) => capitalize(word)).join(" ");
 };
+
+const CAMEL_CASE_REGEX = /(?=[A-Z])/;
+export const camelToTitle = (camel: string, otherSections: string[] = []) =>
+	otherSections.concat(camel.split(CAMEL_CASE_REGEX)).map(capitalize).join(" ");

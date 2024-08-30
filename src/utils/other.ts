@@ -14,12 +14,20 @@ export function getThemePropRecursive(
 	accessors: string[],
 ): string {
 	if (accessors.length > 1) {
-		return getThemePropRecursive(
-			obj[accessors[0]] as RecursiveControlGroup,
-			accessors.slice(1),
-		);
+		const val = obj[accessors[0]];
+		if (typeof val === "string") {
+			return val;
+		}
+
+		return getThemePropRecursive(val, accessors.slice(1));
 	}
-	return obj[accessors[0]] as string;
+
+	const val = obj[accessors[0]];
+	if (typeof val !== "string") {
+		throw new Error("Invalid theme prop");
+	}
+
+	return val;
 }
 
 export function formatOutsideLink(link: string) {

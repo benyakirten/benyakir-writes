@@ -1,223 +1,160 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, test } from "vitest";
 
-import * as strings from "@/utils/strings";
+import {
+	titleToKebab,
+	truncate,
+	multiplyCSSNumber,
+	capitalize,
+	titleCase,
+	camelToTitle,
+} from "../strings";
 
-describe("strings util", () => {
-	describe("titleToKebab", () => {
-		it("should return known results from known inputs", () => {
-			const expectations = [
-				{
-					title: "title",
-					kebab: "title",
-				},
-				{
-					title: "Title Two",
-					kebab: "title-two",
-				},
-				{
-					title: "Bob's BIG BURGER's big STAND's burger craze",
-					kebab: "bobs-big-burgers-big-stands-burger-craze",
-				},
-				{
-					title:
-						"Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb",
-					kebab:
-						"dr-strangelove-or-how-i-learned-to-stop-worrying-and-love-the-bomb",
-				},
-				{
-					title: "tIItle  three",
-					kebab: "tiitle-three",
-				},
-				{
-					title: "tIItle        four",
-					kebab: "tiitle-four",
-				},
-				{
-					title: "     tIItle  five    ",
-					kebab: "tiitle-five",
-				},
-			];
-			for (const expectation of expectations) {
-				expect(strings.titleToKebab(expectation.title)).toEqual(
-					expectation.kebab,
-				);
-			}
-		});
-
-		it("should throw exceptions for bad inputs", () => {
-			const badInput = ["      ", "'''''", "     '   '    ' ", ":  ! @ #  ***"];
-			for (const input of badInput) {
-				expect(() => strings.titleToKebab(input)).toThrow();
-			}
-		});
-	});
-	describe("truncate", () => {
-		it("should give known results for known inputs", () => {
-			const expectations = [
-				{
-					input: {
-						sentence: "a long sentence that goes on and on",
-						cutoff: 18,
-					},
-					result: "a long sentence...",
-				},
-				{
-					input: {
-						sentence:
-							"An abstract base class serves as the model for the converters",
-						cutoff: 14,
-					},
-					result: "An abstract...",
-				},
-				{
-					input: {
-						sentence: "a bb ccc dddd",
-						cutoff: 5,
-					},
-					result: "a bb...",
-				},
-			];
-			for (const expectation of expectations) {
-				expect(
-					strings.truncate(
-						expectation.input.sentence,
-						expectation.input.cutoff,
-					),
-				).toEqual(expectation.result);
-			}
-		});
-
-		it("should return the same sentence if the cutoff is >= the sentence length", () => {
-			const expectations = [
-				{
-					sentence: "abcdef",
-					cutoff: 6,
-				},
-				{
-					sentence: "abc defg",
-					cutoff: 8,
-				},
-				{
-					sentence: "a b c d",
-					cutoff: 200,
-				},
-			];
-			for (const expectation of expectations) {
-				expect(
-					strings.truncate(expectation.sentence, expectation.cutoff),
-				).toEqual(expectation.sentence);
-			}
-		});
-
-		it("should throw an error if the substring is only spaces or has a length of 0", () => {
-			const badInputs = ["               e", "               "];
-			for (const input of badInputs) {
-				expect(() => strings.truncate(input, 8)).toThrow();
-			}
-		});
+describe("titleToKebab", () => {
+	test.for<{ title: string; kebab: string }>([
+		{ title: "title", kebab: "title" },
+		{ title: "Title Two", kebab: "title-two" },
+		{
+			title: "Bob's BIG BURGER's big STAND's burger craze",
+			kebab: "bobs-big-burgers-big-stands-burger-craze",
+		},
+		{
+			title:
+				"Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb",
+			kebab:
+				"dr-strangelove-or-how-i-learned-to-stop-worrying-and-love-the-bomb",
+		},
+		{ title: "tIItle  three", kebab: "tiitle-three" },
+		{ title: "tIItle        four", kebab: "tiitle-four" },
+		{ title: "     tIItle  five    ", kebab: "tiitle-five" },
+	])("should convert $title to $kebab", ({ title, kebab }) => {
+		expect(titleToKebab(title)).toEqual(kebab);
 	});
 
-	describe("multiplyCSSNumber", () => {
-		it("should give known results for known inputs", () => {
-			const expectations = [
-				{
-					input: "10rem",
-					result: "15rem",
-				},
-				{
-					input: "1.5%",
-					result: "2.3%",
-				},
-				{
-					input: "11.8px",
-					result: "17.7px",
-				},
-			];
+	test.for<{ input: string }>([
+		{ input: "      " },
+		{ input: "'''''" },
+		{ input: "     '   '    ' " },
+		{ input: ":  ! @ #  ***" },
+	])("should throw for input $input", ({ input }) => {
+		expect(() => titleToKebab(input)).toThrow();
+	});
+});
 
-			for (const expectation of expectations) {
-				expect(strings.multiplyCSSNumber(expectation.input, 1.5)).toEqual(
-					expectation.result,
-				);
-			}
-		});
-
-		it("should return the prop if it doesn't match the regex", () => {
-			const badInputs = ["badstring", "rem10"];
-			for (const input of badInputs) {
-				expect(strings.multiplyCSSNumber(input, 1)).toEqual(input);
-			}
-		});
+describe("truncate", () => {
+	test.for<{ input: { sentence: string; cutoff: number }; result: string }>([
+		{
+			input: { sentence: "a long sentence that goes on and on", cutoff: 18 },
+			result: "a long sentence...",
+		},
+		{
+			input: {
+				sentence:
+					"An abstract base class serves as the model for the converters",
+				cutoff: 14,
+			},
+			result: "An abstract...",
+		},
+		{ input: { sentence: "a bb ccc dddd", cutoff: 5 }, result: "a bb..." },
+	])("should give known results for known inputs", ({ input, result }) => {
+		expect(truncate(input.sentence, input.cutoff)).toEqual(result);
 	});
 
-	describe("capitalize", () => {
-		it("should return the first letter of a string capitalized", () => {
-			const expectations: { input: string; result: string }[] = [
-				{
-					input: "hello",
-					result: "Hello",
-				},
-				{
-					input: "  hi",
-					result: "  hi",
-				},
-				{
-					input: "hi  ",
-					result: "Hi  ",
-				},
-			];
-			for (const expectation of expectations) {
-				expect(strings.capitalize(expectation.input)).toEqual(
-					expectation.result,
-				);
-			}
-		});
+	test.for<{ sentence: string; cutoff: number }>([
+		{ sentence: "abcdef", cutoff: 6 },
+		{ sentence: "abc defg", cutoff: 8 },
+		{ sentence: "a b c d", cutoff: 200 },
+	])(
+		"should return the same sentence if the cutoff is >= the sentence length",
+		({ sentence, cutoff }) => {
+			expect(truncate(sentence, cutoff)).toEqual(sentence);
+		},
+	);
+
+	test.for<{ input: string }>([
+		{ input: "               e" },
+		{ input: "               " },
+	])("should throw for an input of $input", ({ input }) => {
+		expect(() => truncate(input, 8)).toThrow();
+	});
+});
+
+describe("multiplyCSSNumber", () => {
+	test.for<{ input: string; result: string }>([
+		{ input: "10rem", result: "15rem" },
+		{ input: "1.5%", result: "2.3%" },
+		{ input: "11.8px", result: "17.7px" },
+	])("should give known results for known inputs", ({ input, result }) => {
+		expect(multiplyCSSNumber(input, 1.5)).toEqual(result);
 	});
 
-	describe("titleCase", () => {
-		it("should capitalize the first word in every word if given a string of space separated words", () => {
-			const expectations: { input: string; result: string }[] = [
-				{
-					input: "hello there",
-					result: "Hello There",
-				},
-				{
-					input: "  hi",
-					result: "  Hi",
-				},
-				{
-					input: "hi  you",
-					result: "Hi  You",
-				},
-			];
+	test.for<{ input: string }>([{ input: "badstring" }, { input: "rem10" }])(
+		"should return the prop if it doesn't match the regex",
+		({ input }) => {
+			expect(multiplyCSSNumber(input, 1)).toEqual(input);
+		},
+	);
+});
 
-			for (const expectation of expectations) {
-				expect(strings.titleCase(expectation.input)).toEqual(
-					expectation.result,
-				);
-			}
-		});
+describe("capitalize", () => {
+	test.for<{ input: string; result: string }>([
+		{ input: "hello", result: "Hello" },
+		{ input: "  hi", result: "  hi" },
+		{ input: "hi  ", result: "Hi  " },
+	])(
+		"should return the first letter of a string capitalized",
+		({ input, result }) => {
+			expect(capitalize(input)).toEqual(result);
+		},
+	);
+});
 
-		it("should capitalize the first word in every word if given an array of strings", () => {
-			const expectations: { input: string[]; result: string }[] = [
-				{
-					input: ["hello", "there"],
-					result: "Hello There",
-				},
-				{
-					input: ["", "", "hi"],
-					result: "  Hi",
-				},
-				{
-					input: ["hi", "", "", "you"],
-					result: "Hi   You",
-				},
-			];
+describe("titleCase", () => {
+	test.for<{ input: string; result: string }>([
+		{ input: "hello there", result: "Hello There" },
+		{ input: "  hi", result: "  Hi" },
+		{ input: "hi  you", result: "Hi  You" },
+	])(
+		"should capitalize the first word in every word if given a string of space separated words",
+		({ input, result }) => {
+			expect(titleCase(input)).toEqual(result);
+		},
+	);
 
-			for (const expectation of expectations) {
-				expect(strings.titleCase(expectation.input)).toEqual(
-					expectation.result,
-				);
-			}
-		});
-	});
+	test.for<{ input: string[]; result: string }>([
+		{ input: ["hello", "there"], result: "Hello There" },
+		{ input: ["", "", "hi"], result: "  Hi" },
+		{ input: ["hi", "", "", "you"], result: "Hi   You" },
+	])(
+		"should capitalize the first word in every word if given an array of strings",
+		({ input, result }) => {
+			expect(titleCase(input)).toEqual(result);
+		},
+	);
+});
+
+describe("camelToTitle", () => {
+	test.for<{ camel: string; otherSections: string[]; result: string }>([
+		{ camel: "helloWorld", otherSections: [], result: "Hello World" },
+		{
+			camel: "helloWorld",
+			otherSections: ["greetings"],
+			result: "Greetings Hello World",
+		},
+		{
+			camel: "helloWorldHowAreYou",
+			otherSections: [],
+			result: "Hello World How Are You",
+		},
+		{
+			camel: "helloWorldHowAreYou",
+			otherSections: ["greetings", "question"],
+			result: "Greetings Question Hello World How Are You",
+		},
+	])(
+		"should convert $camel with additions $otherSections to $result case",
+		({ camel, otherSections, result }) => {
+			const got = camelToTitle(camel, otherSections);
+			expect(got).toEqual(result);
+		},
+	);
 });

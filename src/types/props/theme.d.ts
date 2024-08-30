@@ -22,13 +22,15 @@ type ModifyThemeProps = {
 	selectedTheme: string;
 };
 
-type RecursiveThemePart = {
-	[key: string]: RecursiveThemePart | string;
-};
-
 type SettingsGroupProps = {
 	name: string;
-	// group
+	id: string;
+};
+
+type SettingsItemProps = {
+	accessors: string[];
+	control: RecursiveControlGroup;
+	id: string;
 };
 
 type ThemeControlProps = ModifyThemeProps & {

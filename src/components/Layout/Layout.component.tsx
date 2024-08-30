@@ -63,6 +63,7 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 					return;
 				}
 
+				// TODO: Remove debug and set this to "1" : "0"
 				dispatch(setActiveThemeByID(e.matches ? "0" : "0"));
 			};
 

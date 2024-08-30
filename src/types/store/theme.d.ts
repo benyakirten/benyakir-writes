@@ -76,7 +76,3 @@ type BaseTheme = {
 type RecursiveControlGroup = {
 	[key: string]: string | RecursiveControlGroup;
 };
-
-type ThemeAccessors = string[];
-type ThemeGroup = ThemeAccessors[];
-type ThemeGroups = ThemeGroup[];

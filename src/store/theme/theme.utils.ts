@@ -175,7 +175,8 @@ export function determineComputerPreferredTheme(state: ThemeState) {
 	const darkThemeTime = window.matchMedia(
 		"(prefers-color-scheme: dark)",
 	).matches;
-	const themePreference = darkThemeTime ? "1" : "0";
+	// TODO: Remove debug and reset this to "1" : "0"
+	const themePreference = darkThemeTime ? "0" : "0";
 	if (state.active.id !== themePreference) {
 		return (
 			state.themes.find((theme) => theme.id === themePreference) ?? state.active
