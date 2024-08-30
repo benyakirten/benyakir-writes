@@ -21,18 +21,15 @@ const ThemeTitleContainer = styled.div`
 
 const ThemeSettings: React.FC<{ theme: BaseTheme }> = ({ theme }) => {
 	const dispatch = useAppDispatch();
-	const groups = Object.keys(theme).reduce<React.ReactNode[]>((acc, next) => {
-		if (next === "id" || next === "name") {
-			return acc;
-		}
-
-		const item = (
-			<SettingsGroup key={next} name={next as keyof BaseTheme} id={theme.id} />
-		);
-		acc.push(item);
-
-		return acc;
-	}, []);
+	const groups = React.useMemo(
+		() =>
+			Object.keys(theme)
+				.filter((k) => k !== "id" && k !== "name")
+				.map((k) => (
+					<SettingsGroup key={k} name={k as keyof BaseTheme} id={theme.id} />
+				)),
+		[theme],
+	);
 
 	return (
 		<StyledThemeSettings>
