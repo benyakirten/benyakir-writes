@@ -1,7 +1,7 @@
 import * as React from "react";
 import { styled } from "styled-components";
 
-import { Button, FillIn } from "@/components/General";
+import { FillIn } from "@/components/General";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
 	resetThemeOptions,
@@ -9,7 +9,7 @@ import {
 } from "@/store/theme/theme.slice";
 import { Subtitle } from "@/styles/general-components";
 import ThemeItem from "./ThemeItem.component";
-import { SIZE_LG, SIZE_MD, SIZE_SM, SIZE_XS } from "@/styles/variables";
+import { SIZE_MD, SIZE_SM, SIZE_XS } from "@/styles/variables";
 import { Toggle } from "@/components/Input";
 
 const StyledThemeControls = styled.div`
