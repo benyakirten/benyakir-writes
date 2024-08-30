@@ -1,17 +1,17 @@
 import styled from "styled-components";
 
-import { FONT_SIZE_LG, SHADOW_MD, Z_ABOVE, Z_RAISED } from "@/styles/variables";
-import { convertHexToRGBA } from "@/utils/colors";
+import { FONT_SIZE_LG, SIZE_XS, Z_ABOVE, Z_RAISED } from "@/styles/variables";
 
 export const HighlighterContainer = styled.div`
   position: relative;
 
   display: flex;
   flex-direction: column;
-  box-shadow: ${(props) =>
-		`${SHADOW_MD} ${convertHexToRGBA(props.theme.base.shadowColor, 0.4)}`};
   padding: 0.5rem 1rem;
   margin: 2rem 0;
+
+  border: 1px solid ${(props) => props.theme.base.border};
+  border-radius: ${SIZE_XS};
 `;
 
 export const HighlighterTopbar = styled.div`

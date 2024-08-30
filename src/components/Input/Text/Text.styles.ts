@@ -43,7 +43,7 @@ export const TextInputContainer = styled.div`
     &:not(:placeholder-shown) + label {
       top: 0;
       opacity: 1;
-      color: ${(props) => props.theme.base.disabled};
+      color: ${(props) => props.theme.textInput.disabled};
       transform: translateY(0) scale(0.6);
     }
   }

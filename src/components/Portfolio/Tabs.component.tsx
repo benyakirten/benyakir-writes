@@ -32,7 +32,7 @@ const TabList = styled.div`
 	width: 100%;
 	padding: ${SIZE_SM};
 
-	background-color: ${(props) => props.theme.base.neutral};
+	background-color: ${(props) => props.theme.pill.background};
 	border-radius: ${SIZE_XS};
 
 	&:focus-within > [data-indicator]::after {

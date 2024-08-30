@@ -5,11 +5,8 @@ export const defaultDayTheme: BaseTheme = {
 		textColor: "#000000",
 		background: "hsl(0 0% 100%)",
 		border: "#39435b",
-		shadowColor: "#9b825d",
-		disabled: "#495057",
 		focus: "hsl(300 100% 50%)",
 		link: "#05491F",
-		neutral: "#DCDCDC",
 	},
 	header: {
 		startColor: "#000000",
@@ -20,15 +17,14 @@ export const defaultDayTheme: BaseTheme = {
 		background: "#F4F4F5",
 	},
 	sidebar: {
-		primaryColor: "#FDEDC4",
 		gradient: "linear-gradient(to right, #FDEDC4 70%, #FDF3D8)",
-		secondaryColor: "#FDF3D8",
 		shadowColor: "#000000",
 	},
 	textInput: {
 		textColor: "#000000",
 		background: "#FFFFFF",
 		border: "#ced4da",
+		disabled: "#495057",
 	},
 	multipleChoice: {
 		background: "#343a40",
@@ -70,11 +66,9 @@ export const defaultNightTheme: BaseTheme = {
 		textColor: "#FFFFFF",
 		background: "#111B33",
 		border: "#343a40",
-		shadowColor: "#647DA2",
-		disabled: "#e9ecef",
+
 		focus: "#35F58F",
 		link: "#FFF",
-		neutral: "#FDF3D8",
 	},
 	header: {
 		startColor: "#FFF",
@@ -85,14 +79,13 @@ export const defaultNightTheme: BaseTheme = {
 		background: "#000",
 	},
 	sidebar: {
-		primaryColor: "#252F47",
 		gradient: "linear-gradient(to right, #252F47 70%, #2F3951)",
-		secondaryColor: "#2F3951",
 		shadowColor: "#212529",
 	},
 	textInput: {
 		textColor: "#FFFFFF",
 		background: "#000000",
+		disabled: "#e9ecef",
 		border: "#ced4da",
 	},
 	multipleChoice: {

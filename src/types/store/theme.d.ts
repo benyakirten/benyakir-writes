@@ -12,22 +12,18 @@ type BasicThemeSection = {
 
 type ThemeBase = BasicThemeSection & {
 	border: string;
-	shadowColor: string;
-	disabled: string;
 	focus: string;
 	link: string;
-	neutral: string;
 };
 
 type ThemeSidebar = {
-	primaryColor: string;
 	gradient: string;
-	secondaryColor: string;
 	shadowColor: string;
 };
 
 type ThemeTextInput = BasicThemeSection & {
 	border: string;
+	disabled: string;
 };
 
 type ThemeMultipleChoice = BasicThemeSection & {};
