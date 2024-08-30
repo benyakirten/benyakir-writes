@@ -6,10 +6,10 @@ import {
 	FilterText,
 	FilterButton,
 	FilterMenu,
-	TextInput,
 } from "../components";
 import { SearchFilterProps } from "@/types/filters";
 import { registerCleanupFn } from "../useFilter.hook";
+import { Text } from "@/components/Input";
 
 const SearchFilter: React.FC<SearchFilterProps> = ({
 	onSearch,
@@ -49,12 +49,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
 				onMouseEnter={() => setSearchSoftOpen(true)}
 				onMouseLeave={() => setSearchSoftOpen(false)}
 			>
-				<TextInput
-					label="Search"
-					name={id}
-					value={search}
-					onChange={onSearch}
-				/>
+				<Text label="Search" name={id} value={search} onChange={onSearch} />
 			</FilterMenu>
 			<FilterButton
 				borderRadiusCorners={{ topRight: "2rem", bottomRight: "2rem" }}

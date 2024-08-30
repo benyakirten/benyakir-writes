@@ -34,7 +34,6 @@ const ThemeSettings: React.FC<{ theme: BaseTheme }> = ({ theme }) => {
 	return (
 		<StyledThemeSettings>
 			<ThemeTitleContainer>
-				<Subtitle>Edit</Subtitle>
 				<Text
 					name="change-theme-name"
 					value={theme.name}

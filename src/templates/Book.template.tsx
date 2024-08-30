@@ -4,7 +4,6 @@ import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 import styled from "styled-components";
 
 import {
-	Card,
 	NormalPageContents,
 	Page,
 	Subtitle,
@@ -18,7 +17,7 @@ import { formatWpText } from "@/utils/posts";
 import { truncate } from "@/utils/strings";
 import type { WpBook } from "@/types/query";
 import { GrowableUnderline } from "@/components/General";
-import { FONT_LG, SIZE_MD, SIZE_SM } from "@/styles/variables";
+import { FONT_LG, SIZE_MD, SIZE_SM, SIZE_XS } from "@/styles/variables";
 import { PublishedDate } from "@/components/Cards/IconedText.component";
 import { BookCoverArtist } from "@/types/posts";
 import { formatOutsideLink } from "@/utils/other";
@@ -88,6 +87,14 @@ const BookHeader: React.FC<{
 		</TemplateHeaderContainer>
 	);
 };
+
+const Card = styled.div`
+	border-radius: ${SIZE_XS};
+	border: 1px solid ${(props) => props.theme.base.border};
+	
+	padding: ${SIZE_SM};
+	background-color: ${(props) => props.theme.base.background};
+`;
 
 const TitledCard: React.FC<{ title: string } & ChildrenProp> = ({
 	title,

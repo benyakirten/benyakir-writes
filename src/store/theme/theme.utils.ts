@@ -13,7 +13,7 @@ export const defaultDayTheme: BaseTheme = {
 		border: "#39435b",
 		shadowColor: "#9b825d",
 		disabled: "#495057",
-		focus: "#FF00FF",
+		focus: "hsl(300, 100%, 50%)",
 		link: "#05491F",
 		neutral: "#DCDCDC",
 	},

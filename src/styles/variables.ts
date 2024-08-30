@@ -32,7 +32,7 @@ export const FONT_SM = `font-size: ${FONT_SIZE_SM}; line-height: ${LINE_HEIGHT_S
 export const FONT_XS = `font-size: ${FONT_SIZE_XS}; line-height: ${LINE_HEIGHT_XS};`;
 export const FONT_XXS = `font-size: ${FONT_SIZE_XXS}; line-height: ${LINE_HEIGHT_XXS};`;
 
-// COLOR
+// TODO: Remove these
 export const PRIMARY_100 = "#FDF3D8";
 export const PRIMARY_200 = "#FDEDC4";
 export const PRIMARY_300 = "#FDE6B0";
@@ -52,16 +52,6 @@ export const SECONDARY_600 = "#65749f";
 export const SECONDARY_700 = "#566488";
 export const SECONDARY_800 = "#485372";
 export const SECONDARY_900 = "#39435b";
-
-export const GRAY_100 = "#f8f9fa";
-export const GRAY_200 = "#e9ecef";
-export const GRAY_300 = "#dee2e6";
-export const GRAY_400 = "#ced4da";
-export const GRAY_500 = "#adb5bd";
-export const GRAY_600 = "#6c757d";
-export const GRAY_700 = "#495057";
-export const GRAY_800 = "#343a40";
-export const GRAY_900 = "#212529";
 
 export const BLACK = "#05491F";
 export const WHITE = "#D8E3FD";

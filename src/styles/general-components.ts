@@ -4,8 +4,6 @@ import { fadeIn, slideInLeft, slideInRight } from "./animations";
 import { media } from "./queries";
 import {
 	FONT_SIZE_MD,
-	FONT_SIZE_XL,
-	SECONDARY_800,
 	SIZE_MD,
 	TRANSITION_EXTRA_SLOW,
 	TRANSITION_NORMAL,
@@ -20,6 +18,7 @@ import {
 	FONT_MD,
 	FONT_LG,
 } from "./variables";
+
 import { hoverUnderline, textClipWithHoverTransition } from "./style-mixins";
 
 export const FadeIn = styled.div<{ duration?: string; delay?: string }>`
@@ -85,26 +84,6 @@ export const BigParagraph = styled.p`
   ${FONT_XL};
 `;
 
-export const Paragraph = styled.p`
-  font-size: ${FONT_SIZE_MD};
-  margin: 0;
-`;
-
-export const Card = styled.div`
-	border-radius: ${SIZE_XS};
-	border: 1px solid ${(props) => props.theme.base.border};
-	
-	padding: ${SIZE_SM};
-	background-color: ${(props) => props.theme.base.background};
-`;
-
-export const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  gap: 1rem;
-`;
-
 export const WpContentDescription = styled.div<{ fontSize?: string }>`
   ${FONT_MD};
 
@@ -119,7 +98,7 @@ export const WpContentDescription = styled.div<{ fontSize?: string }>`
   a:visited {
     position: relative;
 
-    color: ${SECONDARY_800};
+    color: ${(props) => props.theme.base.textColor};
 
     overflow: hidden;
     white-space: nowrap;
@@ -134,7 +113,7 @@ export const WpContentDescription = styled.div<{ fontSize?: string }>`
       height: 2px;
       width: 100%;
 
-      background-color: ${SECONDARY_800};
+      background-color: ${(props) => props.theme.base.background};
 
       transition: transform ${TRANSITION_NORMAL} ease;
       transform-origin: left;
