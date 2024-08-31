@@ -12,7 +12,6 @@ type BasicThemeSection = {
 
 type ThemeBase = BasicThemeSection & {
 	border: string;
-	focus: string;
 	link: string;
 	pageGradient: string;
 };

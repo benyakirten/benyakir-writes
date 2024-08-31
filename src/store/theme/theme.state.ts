@@ -1,22 +1,17 @@
-// hsl(143 64% 31%) - med green
-// hsl(143 28% 94%) - Start/End page gradient
-// hsl(143 44% 80%) - Mid page gradient
-
 export const defaultDayTheme: BaseTheme = {
 	id: "0",
 	name: "Day",
 	base: {
-		textColor: "hsl(143 48% 13%)",
+		textColor: "hsl(143 48% 10%)",
 		background: "hsl(0 0% 100%)",
-		border: "#39435b",
-		focus: "hsl(300 100% 50%)",
+		border: "hsl(143 53% 28%)",
 		link: "hsl(143 87% 15%)",
 		pageGradient:
-			"linear-gradient(to bottom right, hsl(143 24% 92%), hsl(143 47% 96%), hsl(143 24% 80%))",
+			"linear-gradient(to bottom right, hsl(143 33% 97%), hsl(143 34% 94%), hsl(143 36% 96%))",
 	},
 	header: {
-		startColor: "#000000",
-		endColor: "#FF00FF",
+		startColor: "hsl(143 48% 10%)",
+		endColor: "hsl(322 61% 56%)",
 	},
 	pill: {
 		textColor: "#6F6F77",
@@ -72,7 +67,6 @@ export const defaultNightTheme: BaseTheme = {
 		textColor: "#FFFFFF",
 		background: "#111B33",
 		border: "#343a40",
-		focus: "#35F58F",
 		link: "#FFF",
 		pageGradient: "TODO",
 	},
