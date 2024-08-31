@@ -212,6 +212,8 @@ export const WpContent = styled.div`
 export const Page = styled.div`
   overflow-y: auto;
   height: 100vh;
+
+  background-image: ${(props) => props.theme.base.pageGradient};
 `;
 
 export const PageContents = styled.div`
