@@ -54,6 +54,11 @@ type ThemeThemePage = {
 	selectedThemeColor: string;
 };
 
+type ThemeCard = {
+	arrowColor: string;
+	boxShadow: string;
+};
+
 type BaseTheme = {
 	id: string;
 	name: string;
@@ -66,6 +71,7 @@ type BaseTheme = {
 	fillIn: ThemeFillIn;
 	toggle: ThemeToggle;
 	theme: ThemeThemePage;
+	card: ThemeCard;
 };
 
 type RecursiveControlGroup = {

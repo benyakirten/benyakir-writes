@@ -9,6 +9,10 @@ export const defaultDayTheme: BaseTheme = {
 		pageGradient:
 			"linear-gradient(to bottom right, hsl(143 13% 99%), hsl(143 33% 98%), hsl(143 16% 99%))",
 	},
+	card: {
+		arrowColor: "hsl(143 25% 92%)",
+		boxShadow: "hsl(143 50% 15%)",
+	},
 	header: {
 		startColor: "hsl(143 48% 10%)",
 		endColor: "hsl(323 61% 56%)",
@@ -70,6 +74,10 @@ export const defaultNightTheme: BaseTheme = {
 		border: "#343a40",
 		link: "#FFF",
 		pageGradient: "TODO",
+	},
+	card: {
+		arrowColor: "TODO",
+		boxShadow: "TODO",
 	},
 	header: {
 		startColor: "#FFF",
