@@ -1,14 +1,14 @@
 import * as React from "react";
 
+import { HeadBase } from "@/components/SEO";
+import ThemeOptions from "@/components/Theme/ThemeOptions.component";
+import { themeDescription } from "@/data/search";
 import {
 	Grouping,
 	LeadHeading,
 	NormalPageContents,
 	Page,
 } from "@/styles/general-components";
-import { themeDescription } from "@/data/search";
-import { HeadBase } from "@/components/SEO";
-import ThemeOptions from "@/components/Theme/ThemeOptions.component";
 
 export const Head: React.FC = () => (
 	<HeadBase title="Theme" description={themeDescription} />

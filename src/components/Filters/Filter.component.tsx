@@ -1,14 +1,14 @@
-import styled from "styled-components";
 import React, { useRef } from "react";
+import styled from "styled-components";
 
+import { useFlyout } from "@/hooks/useFlyout.hook";
+import { media } from "@/styles/queries";
 import { SIZE_SM, Z_RAISED } from "@/styles/variables";
+import { FilterProps, ItemFilter, WordFilterType } from "@/types/filters";
+import { PotentialChoice } from "@/types/general";
 import { DateFilter, KeywordFilter, NewFilter, SearchFilter } from "./Filter";
 import { CurrentPage } from "./Pagination";
-import { FilterProps, ItemFilter, WordFilterType } from "@/types/filters";
-import { useFlyout } from "@/hooks/useFlyout.hook";
 import { useFilter } from "./useFilter.hook";
-import { media } from "@/styles/queries";
-import { PotentialChoice } from "@/types/general";
 
 const FilterBar = styled.div`
     position: fixed;

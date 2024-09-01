@@ -1,18 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
-import { FlattenedStoryCard } from "@/types/posts";
 import { WpContentDescription } from "@/styles/general-components";
+import { FlattenedStoryCard } from "@/types/posts";
 import { getPrettyDate } from "@/utils/dates";
 import { GatsbyImage } from "gatsby-plugin-image";
 import {
-	ResultContainer,
-	InnerContainer,
-	ContentContainer,
-	TitleContainer,
-	ItemTitle,
-	SlubTitle,
 	BookCoverContainer,
+	ContentContainer,
+	InnerContainer,
+	ItemTitle,
+	ResultContainer,
+	SlubTitle,
+	TitleContainer,
 } from "./Result.styles";
 const PostStory: React.FC<{
 	story: FlattenedStoryCard;

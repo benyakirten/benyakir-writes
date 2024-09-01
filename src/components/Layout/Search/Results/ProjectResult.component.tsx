@@ -1,6 +1,10 @@
 import React from "react";
 
+import { ProjectTech, TechContainer } from "@/components/General";
+import { TechPill } from "@/components/General/Project/ProjectTech.component";
+import { WpContentDescription } from "@/styles/general-components";
 import { FlattenedProjectCard } from "@/types/posts";
+import { getPrettyDate } from "@/utils/dates";
 import {
 	ContentContainer,
 	InnerContainer,
@@ -9,10 +13,6 @@ import {
 	SlubTitle,
 	TitleContainer,
 } from "./Result.styles";
-import { WpContentDescription } from "@/styles/general-components";
-import { getPrettyDate } from "@/utils/dates";
-import { ProjectTech, TechContainer } from "@/components/General";
-import { TechPill } from "@/components/General/Project/ProjectTech.component";
 
 const MAX_TECHS = 2;
 

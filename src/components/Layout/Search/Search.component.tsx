@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
+import { autocomplete } from "@/data/search";
+import { useDebounce } from "@/hooks";
+import { media } from "@/styles/queries";
+import { SIZE_MD, Z_SEARCH } from "@/styles/variables";
+import { getRandomSuggestions } from "@/utils/search";
 import SearchBar from "./SearchBar.component";
 import SearchResults from "./SearchResults.component";
-import { SearchProps, SearchResultItems } from "./types";
 import { search } from "./search";
-import { useDebounce } from "@/hooks";
-import { autocomplete } from "@/data/search";
-import { getRandomSuggestions } from "@/utils/search";
-import { Z_SEARCH, SIZE_MD } from "@/styles/variables";
-import { media } from "@/styles/queries";
+import { SearchProps, SearchResultItems } from "./types";
 
 const SearchModal = styled.dialog`
     position: fixed;

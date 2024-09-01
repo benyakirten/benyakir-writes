@@ -1,7 +1,10 @@
-import { graphql, Link } from "gatsby";
+import { Link, graphql } from "gatsby";
 import * as React from "react";
 import styled from "styled-components";
 
+import { PublishedDate } from "@/components/Cards/IconedText.component";
+import { GrowableUnderline } from "@/components/General";
+import { HeadBase } from "@/components/SEO";
 import {
 	NormalPageContents,
 	Page,
@@ -10,17 +13,14 @@ import {
 	TemplateHeaderTitle,
 	WpContent,
 } from "@/styles/general-components";
+import { FONT_SM } from "@/styles/variables";
+import { NamedLink } from "@/types/general";
+import type { WpStory } from "@/types/query";
 import { flattenStory } from "@/utils/author";
 import { getPrettyDate } from "@/utils/dates";
+import { formatOutsideLink } from "@/utils/other";
 import { formatWpText } from "@/utils/posts";
 import { truncate } from "@/utils/strings";
-import type { WpStory } from "@/types/query";
-import { GrowableUnderline } from "@/components/General";
-import { FONT_SM } from "@/styles/variables";
-import { PublishedDate } from "@/components/Cards/IconedText.component";
-import { NamedLink } from "@/types/general";
-import { formatOutsideLink } from "@/utils/other";
-import { HeadBase } from "@/components/SEO";
 
 export const Head: React.FC<WpStory> = ({ data }) => {
 	const story = flattenStory(data.wpShortstory, data.file.publicURL);

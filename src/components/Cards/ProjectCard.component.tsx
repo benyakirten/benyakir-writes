@@ -1,20 +1,20 @@
-import React from "react";
 import { GatsbyImage } from "gatsby-plugin-image";
+import React from "react";
 import { styled } from "styled-components";
 
+import { useFetchRepoUpdatedDate } from "@/hooks";
+import { SIZE_XS } from "@/styles/variables";
+import { ProjectImage } from "@/types/portfolio";
 import { FlattenedProjectCard } from "@/types/posts";
-import CardExterior from "./CardExterior.component";
-import { FullContainer, TagContainer } from "./Card.styles";
 import {
 	LatestUpdate,
 	ProjectHost,
 	ProjectTech,
 	TechContainer,
 } from "../General";
+import { FullContainer, TagContainer } from "./Card.styles";
+import CardExterior from "./CardExterior.component";
 import { PublishedDate } from "./IconedText.component";
-import { useFetchRepoUpdatedDate } from "@/hooks";
-import { ProjectImage } from "@/types/portfolio";
-import { SIZE_XS } from "@/styles/variables";
 
 const ProjectCardInterior: React.FC<{
 	project: FlattenedProjectCard;

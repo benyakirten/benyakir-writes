@@ -1,15 +1,15 @@
 import React from "react";
 
+import { Text } from "@/components/Input";
 import { useFlyout } from "@/hooks/useFlyout.hook";
+import { SearchFilterProps } from "@/types/filters";
 import {
-	FilterPill,
-	FilterText,
 	FilterButton,
 	FilterMenu,
+	FilterPill,
+	FilterText,
 } from "../components";
-import { SearchFilterProps } from "@/types/filters";
 import { registerCleanupFn } from "../useFilter.hook";
-import { Text } from "@/components/Input";
 
 const SearchFilter: React.FC<SearchFilterProps> = ({
 	onSearch,

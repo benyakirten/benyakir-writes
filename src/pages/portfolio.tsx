@@ -2,22 +2,22 @@ import { graphql } from "gatsby";
 import * as React from "react";
 import { styled } from "styled-components";
 
-import { HeadBase } from "@/components/SEO";
 import { PortfolioHeader, RandomizedBackground } from "@/components/Portfolio";
-import { NormalPageContents, Page } from "@/styles/general-components";
-import type { RecentProjectItem } from "@/types/portfolio";
-import { getFirstParagraphOfContent } from "@/utils/project";
-import type { ProjectsQuery } from "@/types/query";
-import { portfolioDescription, projects } from "@/data/search";
 import {
 	AboutMe,
 	RecentProjects,
-	WorkHistory,
 	Tabs,
+	WorkHistory,
 } from "@/components/Portfolio";
+import { HeadBase } from "@/components/SEO";
+import { portfolioDescription, projects } from "@/data/search";
+import { NormalPageContents, Page } from "@/styles/general-components";
+import { media } from "@/styles/queries";
 import { SIZE_LG } from "@/styles/variables";
 import { TabData } from "@/types/general";
-import { media } from "@/styles/queries";
+import type { RecentProjectItem } from "@/types/portfolio";
+import type { ProjectsQuery } from "@/types/query";
+import { getFirstParagraphOfContent } from "@/utils/project";
 
 export const Head: React.FC = () => (
 	<HeadBase title="Portfolio" description={portfolioDescription} />

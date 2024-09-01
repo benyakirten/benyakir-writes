@@ -1,13 +1,13 @@
 import React from "react";
 import { styled } from "styled-components";
 
+import IconedText from "@/components/Cards/IconedText.component";
+import { Time } from "@/components/General";
+import RefreshIcon from "@/components/Icons/Refresh.component";
 import { FetchState } from "@/hooks";
+import { SIZE_XS } from "@/styles/variables";
 import { LatestUpdateState } from "@/types/hooks";
 import Loading from "../Loading/Loading.component";
-import IconedText from "@/components/Cards/IconedText.component";
-import RefreshIcon from "@/components/Icons/Refresh.component";
-import { SIZE_XS } from "@/styles/variables";
-import { Time } from "@/components/General";
 
 const TextContainer = styled.span`
 	display: flex;

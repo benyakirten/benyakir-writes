@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Subtitle } from "@/styles/general-components";
-import { SIZE_MD, SIZE_SM } from "@/styles/variables";
 import { Text } from "@/components/Input";
 import { useAppDispatch } from "@/store/hooks";
 import { changeThemeName } from "@/store/theme/theme.slice";
+import { Subtitle } from "@/styles/general-components";
+import { SIZE_MD, SIZE_SM } from "@/styles/variables";
 import SettingsGroup from "./SettingsGroup.component";
 
 const StyledThemeSettings = styled.div`

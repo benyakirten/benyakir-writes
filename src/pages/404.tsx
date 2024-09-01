@@ -1,14 +1,14 @@
-import * as React from "react";
 import { Link } from "gatsby";
+import * as React from "react";
 
 import { GrowableUnderline } from "@/components/General";
+import { HeadBase } from "@/components/SEO";
 import {
 	BigParagraph,
 	LeadHeading,
 	NormalPageContents,
 	Page,
 } from "@/styles/general-components";
-import { HeadBase } from "@/components/SEO";
 
 export const Head: React.FC = () => (
 	<HeadBase

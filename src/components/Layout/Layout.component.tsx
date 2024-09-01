@@ -1,22 +1,22 @@
-import * as React from "react";
 import { useLocation } from "@reach/router";
+import * as React from "react";
 import { Transition, TransitionGroup } from "react-transition-group";
 import { ThemeProvider } from "styled-components";
 
-import { GlobalStyles, LayoutContainer, MainContainer } from "./Layout.styles";
-import Sidebar from "./Sidebar/Sidebar.component";
-import {
-	PAGE_TRANSITION_DURATION,
-	getPageTransitionStyles,
-} from "@/styles/transitions";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setSidebarState } from "@/store/sidebar/sidebar.slice";
 import {
 	initializeThemeState,
 	setActiveThemeByID,
 } from "@/store/theme/theme.slice";
-import Search from "./Search";
+import {
+	PAGE_TRANSITION_DURATION,
+	getPageTransitionStyles,
+} from "@/styles/transitions";
 import { inputIsFocused } from "@/utils/dom";
-import { setSidebarState } from "@/store/sidebar/sidebar.slice";
+import { GlobalStyles, LayoutContainer, MainContainer } from "./Layout.styles";
+import Search from "./Search";
+import Sidebar from "./Sidebar/Sidebar.component";
 
 const Layout: React.FC<ChildrenProp> = ({ children }) => {
 	const location = useLocation();

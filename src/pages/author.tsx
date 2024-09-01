@@ -1,22 +1,23 @@
 import * as React from "react";
 
+import { BookCard, CardContainer, StoryCard } from "@/components/Cards";
+import { Filter } from "@/components/Filters";
+import { HeadBase } from "@/components/SEO";
+import { authorDescription, books, stories } from "@/data/search";
+import { usePagination } from "@/hooks";
 import {
 	Grouping,
 	LeadHeading,
 	Page,
 	PaginatedPageContents,
 } from "@/styles/general-components";
-import { usePagination } from "@/hooks";
-import type { AuthoredItemCard } from "@/types/posts";
-import { authorDescription, books, stories } from "@/data/search";
-import { CardContainer, BookCard, StoryCard } from "@/components/Cards";
 import {
-	ItemFilter,
-	FilterOption,
 	CreateFilterOption,
+	FilterOption,
+	ItemFilter,
 	KeywordFilter,
 } from "@/types/filters";
-import { Filter } from "@/components/Filters";
+import type { AuthoredItemCard } from "@/types/posts";
 import {
 	createAddDateFilterFn,
 	createAddSearchFilterFn,
@@ -24,7 +25,6 @@ import {
 	createFilterBySearchFn,
 	createModifyFilterFns,
 } from "@/utils/filter";
-import { HeadBase } from "@/components/SEO";
 
 export const Head: React.FC = () => (
 	<HeadBase title="Author" description={authorDescription} />

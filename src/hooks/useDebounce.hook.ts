@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 
-import type { DebounceHook } from "@/types/hooks";
 import { SEARCH_TIMEOUT } from "@/data/constants";
+import type { DebounceHook } from "@/types/hooks";
 
 const useDebounce: DebounceHook = (
 	callback: (t: string) => void,

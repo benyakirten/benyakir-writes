@@ -1,11 +1,11 @@
 import React from "react";
 import { styled } from "styled-components";
 
-import { SIZE_MD } from "@/styles/variables";
 import { CloseIcon } from "@/components/Icons";
+import { SIZE_MD } from "@/styles/variables";
+import { FilterPillProps } from "@/types/filters";
 import FilterButton from "./FilterButton.component";
 import IconContainer from "./IconContainer.component";
-import { FilterPillProps } from "@/types/filters";
 
 export const StyledFilterPill = styled.div`
     display: flex;

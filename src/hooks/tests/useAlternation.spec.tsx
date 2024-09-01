@@ -1,6 +1,6 @@
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
-import { fireEvent, render, screen, cleanup } from "@testing-library/react";
-import { describe, beforeEach, it, expect, afterEach } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import useAlternation from "../useAlternation.hook";
 

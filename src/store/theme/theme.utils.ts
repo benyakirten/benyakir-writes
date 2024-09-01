@@ -1,6 +1,6 @@
 import {
-	STORED_IGNORE_COMPUTER_PREFERENCE,
 	STORED_ACTIVE_THEME_ID,
+	STORED_IGNORE_COMPUTER_PREFERENCE,
 	STORED_THEMES,
 } from "@/data/constants";
 import { defaultDayTheme, defaultNightTheme } from "./theme.state";

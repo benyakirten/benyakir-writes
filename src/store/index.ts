@@ -1,4 +1,4 @@
-import { configureStore, type Middleware } from "@reduxjs/toolkit";
+import { type Middleware, configureStore } from "@reduxjs/toolkit";
 
 import sidebarReducer from "./sidebar/sidebar.slice";
 import themeReducer from "./theme/theme.slice";

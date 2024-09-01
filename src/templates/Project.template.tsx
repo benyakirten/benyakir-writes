@@ -11,21 +11,21 @@ import {
 	WpContent,
 } from "@/styles/general-components";
 
+import { PublishedDate } from "@/components/Cards/IconedText.component";
+import {
+	LatestUpdate,
+	ProjectHost,
+	ProjectTech,
+	TechContainer,
+} from "@/components/General";
+import { HeadBase } from "@/components/SEO";
+import { useFetchRepoUpdatedDate } from "@/hooks";
+import { FileNode } from "@/types/general";
+import type { WpProject } from "@/types/query";
 import { getPrettyDate } from "@/utils/dates";
 import { formatWpText } from "@/utils/posts";
 import { formatProject, getFullTechName } from "@/utils/project";
 import { truncate } from "@/utils/strings";
-import { useFetchRepoUpdatedDate } from "@/hooks";
-import type { WpProject } from "@/types/query";
-import {
-	ProjectHost,
-	ProjectTech,
-	TechContainer,
-	LatestUpdate,
-} from "@/components/General";
-import { FileNode } from "@/types/general";
-import { PublishedDate } from "@/components/Cards/IconedText.component";
-import { HeadBase } from "@/components/SEO";
 
 export const Head: React.FC<WpProject> = ({ data }) => {
 	const project = formatProject(data.wpProject);

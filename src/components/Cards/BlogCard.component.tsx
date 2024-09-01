@@ -1,15 +1,15 @@
 import React from "react";
 
+import { PillContainer } from "@/styles/general-components";
 import { FlattenedBlogCard } from "@/types/posts";
 import { getActiveCategory } from "@/utils/blog";
-import { PillContainer } from "@/styles/general-components";
-import CardExterior from "./CardExterior.component";
 import {
 	CardTitle,
 	CategoryContainer,
 	FullContainer,
 	TagContainer,
 } from "./Card.styles";
+import CardExterior from "./CardExterior.component";
 import { PublishedDate } from "./IconedText.component";
 
 const MAX_TAGS = 2;

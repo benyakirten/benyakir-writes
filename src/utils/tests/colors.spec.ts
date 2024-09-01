@@ -1,12 +1,12 @@
-import { describe, it, expect, test, assert } from "vitest";
+import { assert, describe, expect, it, test } from "vitest";
 
 import {
+	convertHSLToCSSColor,
+	convertHSLToHex,
 	convertHexToHSL,
 	convertHexToRGBA,
 	convertHexToRGBNumber,
 	convertHexToRGBString,
-	convertHSLToCSSColor,
-	convertHSLToHex,
 	convertRGBNumberToHex,
 	convertRGBNumberToRGBString,
 	convertRGBStringToRGBNumber,

@@ -1,19 +1,19 @@
 import styled from "styled-components";
 
+import { media } from "@/styles/queries";
 import {
-	SERIF_FONT,
 	FONT_SIZE_XL,
 	FONT_SIZE_XXL,
+	FONT_SIZE_XXS,
+	SERIF_FONT,
 	SHADOW_SIDEBAR,
+	SIZE_SM,
+	SIZE_XS,
 	TRANSITION_NORMAL,
 	TRANSITION_SLOW,
 	Z_ABOVE,
 	Z_RAISED,
-	SIZE_SM,
-	FONT_SIZE_XXS,
-	SIZE_XS,
 } from "@/styles/variables";
-import { media } from "@/styles/queries";
 import { setOpacityOnHSL } from "@/utils/colors";
 
 export const StyledSidebar = styled.nav<{ open?: boolean }>`

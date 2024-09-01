@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import { FONT_SIZE_LG, FONT_SIZE_MD, SIZE_SM } from "@/styles/variables";
 import { GrowableUnderline } from "@/components/General";
+import { FONT_SIZE_LG, FONT_SIZE_MD, SIZE_SM } from "@/styles/variables";
 
 const EmptyContainer = styled.div`
     padding: ${SIZE_SM};

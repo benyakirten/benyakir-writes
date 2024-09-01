@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import * as React from "react";
+import { beforeEach, describe, expect, it } from "vitest";
 
 import * as dom from "@/utils/dom";
 

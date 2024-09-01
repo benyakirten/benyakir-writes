@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import { FONT_XL, SIZE_SM, SIZE_XS } from "@/styles/variables";
-import ThemeButton from "./ThemeButton.component";
+import { EditIcon, SelectIcon } from "@/components/Icons";
+import CopyIcon from "@/components/Icons/Copy.component";
 import DeleteIcon from "@/components/Icons/Delete.component";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
@@ -10,9 +10,9 @@ import {
 	deleteThemeByID,
 	setActiveThemeByID,
 } from "@/store/theme/theme.slice";
-import CopyIcon from "@/components/Icons/Copy.component";
-import { EditIcon, SelectIcon } from "@/components/Icons";
 import { media } from "@/styles/queries";
+import { FONT_XL, SIZE_SM, SIZE_XS } from "@/styles/variables";
+import ThemeButton from "./ThemeButton.component";
 
 const StyledThemeItem = styled.li`
 	display: flex;

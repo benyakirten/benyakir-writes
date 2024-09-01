@@ -1,14 +1,14 @@
 import { cleanup, fireEvent, render } from "@testing-library/react";
 import React from "react";
 import {
-	vi,
-	describe,
-	it,
-	expect,
+	afterAll,
+	afterEach,
 	beforeAll,
 	beforeEach,
-	afterEach,
-	afterAll,
+	describe,
+	expect,
+	it,
+	vi,
 } from "vitest";
 
 import useDebounce from "../useDebounce.hook";

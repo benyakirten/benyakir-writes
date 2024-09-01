@@ -1,8 +1,11 @@
 import { graphql } from "gatsby";
-import * as React from "react";
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
+import * as React from "react";
 import styled from "styled-components";
 
+import { PublishedDate } from "@/components/Cards/IconedText.component";
+import { GrowableUnderline } from "@/components/General";
+import { HeadBase } from "@/components/SEO";
 import {
 	Card,
 	NormalPageContents,
@@ -12,18 +15,15 @@ import {
 	TemplateHeaderTitle,
 	WpContent,
 } from "@/styles/general-components";
+import { FONT_LG, SIZE_MD, SIZE_SM, SIZE_XS } from "@/styles/variables";
+import { NamedLink } from "@/types/general";
+import { BookCoverArtist } from "@/types/posts";
+import type { WpBook } from "@/types/query";
 import { flattenBook } from "@/utils/author";
 import { getPrettyDate } from "@/utils/dates";
+import { formatOutsideLink } from "@/utils/other";
 import { formatWpText } from "@/utils/posts";
 import { truncate } from "@/utils/strings";
-import type { WpBook } from "@/types/query";
-import { GrowableUnderline } from "@/components/General";
-import { FONT_LG, SIZE_MD, SIZE_SM, SIZE_XS } from "@/styles/variables";
-import { PublishedDate } from "@/components/Cards/IconedText.component";
-import { BookCoverArtist } from "@/types/posts";
-import { formatOutsideLink } from "@/utils/other";
-import { NamedLink } from "@/types/general";
-import { HeadBase } from "@/components/SEO";
 
 export const Head: React.FC<WpBook> = ({ data }) => {
 	const book = flattenBook(data.wpBook, data.file.publicURL);

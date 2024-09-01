@@ -1,12 +1,12 @@
-import { describe, it, expect, test } from "vitest";
+import { describe, expect, it, test } from "vitest";
 
 import {
+	camelToTitleCase,
+	capitalize,
+	multiplyCSSNumber,
+	titleCase,
 	titleToKebab,
 	truncate,
-	multiplyCSSNumber,
-	capitalize,
-	titleCase,
-	camelToTitleCase,
 } from "../strings";
 
 describe("titleToKebab", () => {

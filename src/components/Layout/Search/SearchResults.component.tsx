@@ -1,8 +1,8 @@
-import React from "react";
 import { navigate } from "gatsby";
+import React from "react";
 import styled from "styled-components";
 
-import { SearchResultsProps } from "./types";
+import { SIZE_SM } from "@/styles/variables";
 import {
 	BookResult,
 	EmptyResults,
@@ -11,8 +11,8 @@ import {
 	ProjectResult,
 	StoryResult,
 } from "./Results";
-import { SIZE_SM } from "@/styles/variables";
 import SearchResultGroup from "./SearchResultGroup.component";
+import { SearchResultsProps } from "./types";
 
 const SearchResultsContainer = styled.ul`
     display: grid;

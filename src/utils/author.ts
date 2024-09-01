@@ -1,11 +1,11 @@
-import { getTimeFromDateString } from "./dates";
-import { truncate } from "./strings";
 import type {
 	FlattenedSingleBook,
 	FlattenedSingleStory,
 	SingleBook,
 	SingleStory,
 } from "@/types/posts";
+import { getTimeFromDateString } from "./dates";
+import { truncate } from "./strings";
 
 export const flattenBook = (
 	book: SingleBook,

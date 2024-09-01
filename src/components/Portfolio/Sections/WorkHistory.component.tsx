@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import { WorkHistoryDatum } from "@/types/portfolio";
+import IconedText from "@/components/Cards/IconedText.component";
+import { CalendarIcon } from "@/components/Icons";
+import { Card } from "@/styles/general-components";
+import { media } from "@/styles/queries";
 import {
 	FONT_SIZE_MD,
 	FONT_SIZE_SM,
@@ -10,11 +13,8 @@ import {
 	SIZE_XS,
 	Z_ABOVE,
 } from "@/styles/variables";
-import { media } from "@/styles/queries";
-import IconedText from "@/components/Cards/IconedText.component";
-import { CalendarIcon } from "@/components/Icons";
+import { WorkHistoryDatum } from "@/types/portfolio";
 import { calculateDuration } from "@/utils/dates";
-import { Card } from "@/styles/general-components";
 
 const workHistory: WorkHistoryDatum[] = [
 	{

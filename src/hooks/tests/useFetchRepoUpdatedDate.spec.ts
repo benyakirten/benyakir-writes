@@ -1,16 +1,16 @@
-import { renderHook, act } from "@testing-library/react";
+import { act, renderHook } from "@testing-library/react";
 import {
-	describe,
-	it,
-	expect,
-	vi,
+	afterAll,
 	afterEach,
 	beforeAll,
-	afterAll,
+	describe,
+	expect,
+	it,
+	vi,
 } from "vitest";
 import {
-	useFetchRepoUpdatedDate,
 	FetchState,
+	useFetchRepoUpdatedDate,
 } from "../useFetchRepoUpdatedDate.hook";
 
 describe("useFetchRepoUpdatedDate", () => {

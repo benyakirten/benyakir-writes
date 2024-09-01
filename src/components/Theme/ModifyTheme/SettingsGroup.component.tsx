@@ -2,19 +2,19 @@ import * as React from "react";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { changePropOnTheme } from "@/store/theme/theme.slice";
+import { BigParagraph } from "@/styles/general-components";
+import { media } from "@/styles/queries";
+import { FONT_LG, SIZE_SM, SIZE_XS, Z_ABOVE } from "@/styles/variables";
 import {
-	convertHexToHSL,
 	convertHSLToCSSColor,
 	convertHSLToHex,
+	convertHexToHSL,
 	parseHSLString,
 } from "@/utils/colors";
-import { BigParagraph } from "@/styles/general-components";
-import { styled } from "styled-components";
 import { getThemePropRecursive } from "@/utils/other";
 import { camelToTitleCase, capitalize } from "@/utils/strings";
-import { FONT_LG, SIZE_SM, SIZE_XS, Z_ABOVE } from "@/styles/variables";
+import { styled } from "styled-components";
 import ColorPicker from "./ColorPicker/ColorPicker.component";
-import { media } from "@/styles/queries";
 
 const SettingsItem: React.FC<SettingsItemProps> = ({
 	accessors,

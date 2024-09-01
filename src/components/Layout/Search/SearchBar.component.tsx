@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-import { SearchIcon, CloseIcon } from "@/components/Icons";
-import { SearchBarProps } from "./types";
-import {
-	SIZE_XXL,
-	SIZE_SM,
-	FONT_SIZE_LG,
-	SIZE_MD,
-	FONT_SIZE_XS,
-} from "@/styles/variables";
+import { CloseIcon, SearchIcon } from "@/components/Icons";
 import { media } from "@/styles/queries";
+import {
+	FONT_SIZE_LG,
+	FONT_SIZE_XS,
+	SIZE_MD,
+	SIZE_SM,
+	SIZE_XXL,
+} from "@/styles/variables";
+import { SearchBarProps } from "./types";
 
 const StyledSearchBar = styled.div`
     display: flex;

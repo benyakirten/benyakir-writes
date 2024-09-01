@@ -1,14 +1,14 @@
-import React from "react";
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
+import React from "react";
 
 import { FlattenedStoryCard } from "@/types/posts";
-import CardExterior from "./CardExterior.component";
 import {
-	SpanOneTitle,
 	CategoryContainer,
-	SpanOneContent,
 	ImageContainer,
+	SpanOneContent,
+	SpanOneTitle,
 } from "./Card.styles";
+import CardExterior from "./CardExterior.component";
 import { PublishedDate } from "./IconedText.component";
 
 const StoryCard: React.FC<{ story: FlattenedStoryCard }> = ({ story }) => {

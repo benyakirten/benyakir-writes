@@ -1,18 +1,18 @@
-import rawBooks from "./wp/Author/books.json";
-import rawStories from "./wp/Author/stories.json";
-import rawProjects from "./wp/Projects/projects.json";
-import rawPosts from "./wp/Posts/all.json";
-import lookups from "./wp/lookups.json";
-import projectsMisc from "./wp/Projects/misc.json";
+import { PotentialChoice } from "@/types/general";
 import {
 	FlattenedBlogCard,
 	FlattenedBookCard,
 	FlattenedProjectCard,
 	FlattenedStoryCard,
 } from "@/types/posts";
-import { Trie } from "@/utils/search";
 import { createChoiceSet } from "@/utils/filter";
-import { PotentialChoice } from "@/types/general";
+import { Trie } from "@/utils/search";
+import rawBooks from "./wp/Author/books.json";
+import rawStories from "./wp/Author/stories.json";
+import rawPosts from "./wp/Posts/all.json";
+import projectsMisc from "./wp/Projects/misc.json";
+import rawProjects from "./wp/Projects/projects.json";
+import lookups from "./wp/lookups.json";
 
 export const blogDescription =
 	"Browse a list of all my blog posts ordered by most recent publication to least recent. Users can filter the blog results by publication date, category and tags.";

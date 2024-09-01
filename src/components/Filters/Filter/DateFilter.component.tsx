@@ -1,11 +1,11 @@
 import React from "react";
 
-import { useFlyout } from "@/hooks/useFlyout.hook";
-import { getShortDate } from "@/utils/dates";
 import { DatePicker } from "@/components/Input";
-import { FilterMenu } from "../components/Filters.styles";
-import { FilterText, FilterButton, FilterPill } from "../components";
+import { useFlyout } from "@/hooks/useFlyout.hook";
 import { DateFilterProps } from "@/types/filters";
+import { getShortDate } from "@/utils/dates";
+import { FilterButton, FilterPill, FilterText } from "../components";
+import { FilterMenu } from "../components/Filters.styles";
 import { registerCleanupFn } from "../useFilter.hook";
 
 const DateFilter: React.FC<DateFilterProps> = ({

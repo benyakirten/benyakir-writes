@@ -1,12 +1,12 @@
 import React from "react";
 import { styled } from "styled-components";
 
-import { FONT_SIZE_XS, SIZE_XS } from "@/styles/variables";
-import { NextIcon, PreviousIcon } from "@/components/Icons";
-import { StyledFilterPill } from "../components/FilterPill.component";
 import { FillIn } from "@/components/General";
-import { clamp } from "@/utils/numbers";
+import { NextIcon, PreviousIcon } from "@/components/Icons";
+import { FONT_SIZE_XS, SIZE_XS } from "@/styles/variables";
 import { CurrentPageProps } from "@/types/filters";
+import { clamp } from "@/utils/numbers";
+import { StyledFilterPill } from "../components/FilterPill.component";
 
 const DirectionButton = styled.button`
     height: 100%;

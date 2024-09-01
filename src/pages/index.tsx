@@ -1,26 +1,26 @@
 import * as React from "react";
 
+import {
+	BlogCard,
+	BookCard,
+	CardContainer,
+	ProjectCard,
+	StoryCard,
+} from "@/components/Cards";
 import { HeadBase } from "@/components/SEO";
+import { homeDescription, latestTwentyItems } from "@/data/search";
 import {
 	Grouping,
 	LeadHeading,
 	NormalPageContents,
 	Page,
 } from "@/styles/general-components";
-import { homeDescription, latestTwentyItems } from "@/data/search";
 import {
 	FlattenedBlogCard,
 	FlattenedBookCard,
 	FlattenedProjectCard,
 	FlattenedStoryCard,
 } from "@/types/posts";
-import {
-	CardContainer,
-	BlogCard,
-	BookCard,
-	ProjectCard,
-	StoryCard,
-} from "@/components/Cards";
 
 export const Head: React.FC = () => (
 	<HeadBase title="Home" description={homeDescription} />

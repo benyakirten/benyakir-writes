@@ -15,13 +15,13 @@ import { formatBlogPost, getActiveCategory } from "@/utils/blog";
 import { formatWpText } from "@/utils/posts";
 import { truncate } from "@/utils/strings";
 
-import type { WpPost } from "@/types/query";
-import { HeadBase } from "@/components/SEO";
 import {
 	CategoryContainer,
 	TagContainer,
 } from "@/components/Cards/Card.styles";
 import { PublishedDate } from "@/components/Cards/IconedText.component";
+import { HeadBase } from "@/components/SEO";
+import type { WpPost } from "@/types/query";
 
 export const Head: React.FC<WpPost> = ({ data }) => {
 	const post = formatBlogPost(data.wpPost);

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import { FONT_SM, SIZE_XS } from "@/styles/variables";
 import { media } from "@/styles/queries";
 import { limitLines } from "@/styles/style-mixins";
+import { FONT_SM, SIZE_XS } from "@/styles/variables";
 
 export const CardTitle = styled.h3`
     font-weight: bold;

@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 import { useAppSelector } from "@/store/hooks";
 import { fadeIn } from "@/styles/animations";
-import { FONT_MD } from "@/styles/variables";
 import { BigParagraph } from "@/styles/general-components";
+import { FONT_MD } from "@/styles/variables";
 import ThemeSettings from "./ThemeSettings.component";
 
 const ControlsContainer = styled.div`

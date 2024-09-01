@@ -1,12 +1,22 @@
 import * as React from "react";
 
+import { BlogCard, CardContainer } from "@/components/Cards";
+import { Filter } from "@/components/Filters";
+import { HeadBase } from "@/components/SEO";
+import {
+	blogDescription,
+	postCategories,
+	postTags,
+	posts,
+} from "@/data/search";
+import usePagination from "@/hooks/usePagination.hook";
 import {
 	Grouping,
 	LeadHeading,
 	Page,
 	PaginatedPageContents,
 } from "@/styles/general-components";
-import usePagination from "@/hooks/usePagination.hook";
+import { CreateFilterOption, FilterOption, ItemFilter } from "@/types/filters";
 import type { FlattenedBlogCard } from "@/types/posts";
 import {
 	createAddDateFilterFn,
@@ -17,16 +27,6 @@ import {
 	createFilterBySearchFn,
 	createModifyFilterFns,
 } from "@/utils/filter";
-import {
-	blogDescription,
-	postCategories,
-	posts,
-	postTags,
-} from "@/data/search";
-import { Filter } from "@/components/Filters";
-import { CardContainer, BlogCard } from "@/components/Cards";
-import { CreateFilterOption, FilterOption, ItemFilter } from "@/types/filters";
-import { HeadBase } from "@/components/SEO";
 
 export const Head: React.FC = () => (
 	<HeadBase title="Blog" description={blogDescription} />

@@ -1,5 +1,5 @@
-import { styled } from "styled-components";
 import React from "react";
+import { styled } from "styled-components";
 
 import { SIZE_XS } from "@/styles/variables";
 

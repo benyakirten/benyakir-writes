@@ -1,7 +1,7 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 
-import * as project from "@/utils/project";
 import type { FlattenedProject, ProjectType } from "@/types/posts";
+import * as project from "@/utils/project";
 
 describe("project util", () => {
 	const dummyQueries: ProjectType[] = [

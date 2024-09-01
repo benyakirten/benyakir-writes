@@ -1,18 +1,18 @@
 import React from "react";
 import styled, { useTheme } from "styled-components";
 
-import {
-	SIZE_SM,
-	Z_ABOVE,
-	SANS_SERIF_FONT,
-	FONT_SIZE_SM,
-	TRANSITION_NORMAL,
-	SIZE_MD,
-	SIZE_XS,
-} from "@/styles/variables";
-import { SearchResultGroupProps } from "./types";
 import { EyeIcon } from "@/components/Icons";
 import { useToggle } from "@/hooks";
+import {
+	FONT_SIZE_SM,
+	SANS_SERIF_FONT,
+	SIZE_MD,
+	SIZE_SM,
+	SIZE_XS,
+	TRANSITION_NORMAL,
+	Z_ABOVE,
+} from "@/styles/variables";
+import { SearchResultGroupProps } from "./types";
 
 const StyledSearchResultGroup = styled.li`
     padding: 0 ${SIZE_SM};

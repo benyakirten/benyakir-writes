@@ -1,8 +1,8 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 
+import type { BlogPostType, FlattenedBlogPost } from "@/types/posts";
 import * as blog from "@/utils/blog";
 import { getBlogPostDateInformation } from "@/utils/dates";
-import type { BlogPostType, FlattenedBlogPost } from "@/types/posts";
 
 describe("blog util", () => {
 	const rawPosts: BlogPostType[] = [

@@ -1,8 +1,10 @@
+import { Link, graphql, useStaticQuery } from "gatsby";
 import React from "react";
-import { graphql, Link, useStaticQuery } from "gatsby";
 import styled from "styled-components";
 
-import { FileQuery, ImageQuery } from "@/types/general";
+import IconedText from "@/components/Cards/IconedText.component";
+import { MailIcon, ResumeIcon } from "@/components/Icons";
+import { media } from "@/styles/queries";
 import {
 	FONT_SIZE_LG,
 	FONT_SIZE_SM,
@@ -12,11 +14,9 @@ import {
 	TRANSITION_NORMAL,
 	Z_ABOVE,
 } from "@/styles/variables";
-import { GatsbyImage } from "gatsby-plugin-image";
-import IconedText from "@/components/Cards/IconedText.component";
-import { MailIcon, ResumeIcon } from "@/components/Icons";
+import { FileQuery, ImageQuery } from "@/types/general";
 import { downloadFile } from "@/utils/dom";
-import { media } from "@/styles/queries";
+import { GatsbyImage } from "gatsby-plugin-image";
 
 const StyledProfile = styled.div`
 	display: flex;

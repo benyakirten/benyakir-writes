@@ -2,9 +2,9 @@ import { Link, graphql, useStaticQuery } from "gatsby";
 import * as React from "react";
 import styled from "styled-components";
 
-import { LogoProps, LogoQuery } from "@/types/props/layout";
 import { SVGContainer } from "@/styles/general-components";
 import { TRANSITION_SLOW } from "@/styles/variables";
+import { LogoProps, LogoQuery } from "@/types/props/layout";
 
 const LogoContainer = styled(SVGContainer)<{
 	$opening: boolean;

@@ -1,16 +1,16 @@
-import { describe, it, expect, test } from "vitest";
+import { describe, expect, it, test } from "vitest";
 
+import { DateInformation } from "@/types/general";
 import {
-	getTimeFromDateString,
-	getBlogPostDateInformation,
-	convertDatePickerValueToDate,
-	convertDateToDatePickerValue,
-	calculateDuration,
 	MS_IN_DAY,
 	MS_IN_HOUR,
 	MS_IN_MINUTE,
+	calculateDuration,
+	convertDatePickerValueToDate,
+	convertDateToDatePickerValue,
+	getBlogPostDateInformation,
+	getTimeFromDateString,
 } from "@/utils/dates";
-import { DateInformation } from "@/types/general";
 
 describe("getTimeFromDateString", () => {
 	it("should parse the input according to certain criteria", () => {

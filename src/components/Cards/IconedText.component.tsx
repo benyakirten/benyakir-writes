@@ -1,10 +1,10 @@
 import React from "react";
 import { styled } from "styled-components";
 
-import { SIZE_XS } from "@/styles/variables";
-import { CalendarIcon } from "../Icons";
 import { media } from "@/styles/queries";
+import { SIZE_XS } from "@/styles/variables";
 import { Time } from "../General";
+import { CalendarIcon } from "../Icons";
 
 const IconContainer = styled.div<{ span?: number }>`
 	grid-column: span ${(props) => props.span ?? 2};

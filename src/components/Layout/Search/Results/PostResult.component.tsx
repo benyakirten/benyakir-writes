@@ -1,28 +1,28 @@
 import React from "react";
 import styled from "styled-components";
 
-import { FlattenedBlogCard } from "@/types/posts";
 import {
-	ResultContainer,
-	ContentContainer,
-	ItemTitle,
-	SlubTitle,
-	TitleContainer,
-	InnerContainer,
-} from "./Result.styles";
-import { getActiveCategory } from "@/utils/blog";
-import { getPrettyDate } from "@/utils/dates";
+	PillContainer,
+	WpContentDescription,
+} from "@/styles/general-components";
 import {
 	FONT_SIZE_SM,
 	SANS_SERIF_FONT,
 	SIZE_SM,
 	SIZE_XS,
 } from "@/styles/variables";
-import {
-	PillContainer,
-	WpContentDescription,
-} from "@/styles/general-components";
+import { FlattenedBlogCard } from "@/types/posts";
+import { getActiveCategory } from "@/utils/blog";
+import { getPrettyDate } from "@/utils/dates";
 import { truncate } from "@/utils/strings";
+import {
+	ContentContainer,
+	InnerContainer,
+	ItemTitle,
+	ResultContainer,
+	SlubTitle,
+	TitleContainer,
+} from "./Result.styles";
 
 const PostTitleContainer = styled.div`
 	display: grid;

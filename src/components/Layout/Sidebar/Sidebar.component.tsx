@@ -1,28 +1,28 @@
-import * as React from "react";
 import { useLocation } from "@reach/router";
+import * as React from "react";
 
-import Logo from "./components/Logo.component";
-import {
-	ArrowButton,
-	LegalBox,
-	LegalItem,
-	NavGroup,
-	SidebarBackdrop,
-	SidebarContents,
-	StyledSidebar,
-	LinkGroup,
-} from "./Sidebar.styles";
+import { NextIcon } from "@/components/Icons";
 import { Toggle } from "@/components/Input";
-import { capitalize } from "@/utils/strings";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { toggleTimeOfDay } from "@/store/theme/theme.slice";
 import {
 	setSidebarState,
 	toggleSidebarState,
 } from "@/store/sidebar/sidebar.slice";
-import { NavLink, ActiveIndicator } from "./components";
+import { toggleTimeOfDay } from "@/store/theme/theme.slice";
+import { capitalize } from "@/utils/strings";
+import {
+	ArrowButton,
+	LegalBox,
+	LegalItem,
+	LinkGroup,
+	NavGroup,
+	SidebarBackdrop,
+	SidebarContents,
+	StyledSidebar,
+} from "./Sidebar.styles";
+import { ActiveIndicator, NavLink } from "./components";
+import Logo from "./components/Logo.component";
 import OpenSearchButton from "./components/OpenSearchButton.component";
-import { NextIcon } from "@/components/Icons";
 
 const Sidebar: React.FC<{ onSearch: () => void }> = ({ onSearch }) => {
 	const portfolioRef = React.useRef<HTMLElement>(null);

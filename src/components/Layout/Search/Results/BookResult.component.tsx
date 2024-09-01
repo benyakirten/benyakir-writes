@@ -1,18 +1,18 @@
-import React from "react";
 import { GatsbyImage } from "gatsby-plugin-image";
+import React from "react";
 
-import { FlattenedBookCard } from "@/types/posts";
-import {
-	ResultContainer,
-	InnerContainer,
-	ContentContainer,
-	TitleContainer,
-	SlubTitle,
-	ItemTitle,
-	BookCoverContainer,
-} from "./Result.styles";
-import { getPrettyDate } from "@/utils/dates";
 import { WpContentDescription } from "@/styles/general-components";
+import { FlattenedBookCard } from "@/types/posts";
+import { getPrettyDate } from "@/utils/dates";
+import {
+	BookCoverContainer,
+	ContentContainer,
+	InnerContainer,
+	ItemTitle,
+	ResultContainer,
+	SlubTitle,
+	TitleContainer,
+} from "./Result.styles";
 
 const BookResult: React.FC<{
 	book: FlattenedBookCard;

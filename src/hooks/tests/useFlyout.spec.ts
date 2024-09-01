@@ -1,7 +1,7 @@
-import { renderHook, act } from "@testing-library/react";
+import { act, renderHook } from "@testing-library/react";
 
 import { useFlyout } from "@/hooks/useFlyout.hook";
-import { describe, afterEach, it, expect, vi, afterAll } from "vitest";
+import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
 
 describe("useFlyout", () => {
 	const clientRectSpy = vi.fn();

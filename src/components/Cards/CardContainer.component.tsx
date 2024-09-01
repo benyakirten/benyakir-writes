@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import React from "react";
+import styled from "styled-components";
 
 import { media } from "@/styles/queries";
 import { FONT_LG, FONT_XL, SIZE_LG } from "@/styles/variables";

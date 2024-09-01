@@ -2,16 +2,16 @@ import * as React from "react";
 import { styled } from "styled-components";
 
 import { FillIn } from "@/components/General";
+import { Toggle } from "@/components/Input";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
 	resetThemeOptions,
 	toggleUseComputerPreferences,
 } from "@/store/theme/theme.slice";
 import { Subtitle } from "@/styles/general-components";
-import ThemeItem from "./ThemeItem.component";
-import { SIZE_MD, SIZE_SM, SIZE_XS } from "@/styles/variables";
-import { Toggle } from "@/components/Input";
 import { media } from "@/styles/queries";
+import { SIZE_MD, SIZE_SM, SIZE_XS } from "@/styles/variables";
+import ThemeItem from "./ThemeItem.component";
 
 const StyledThemeControls = styled.div`
 	display: grid;

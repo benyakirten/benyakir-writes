@@ -1,11 +1,11 @@
 import * as React from "react";
 import { styled } from "styled-components";
 
+import { useAlternation } from "@/hooks";
 import { Subtitle } from "@/styles/general-components";
+import { SIZE_SM } from "@/styles/variables";
 import ModifyTheme from "./ModifyTheme/ModifyTheme.component";
 import ThemeControls from "./ThemeControls/ThemeControl.component";
-import { useAlternation } from "@/hooks";
-import { SIZE_SM } from "@/styles/variables";
 
 const ThemeCardContainer = styled.div`
 	display: grid;

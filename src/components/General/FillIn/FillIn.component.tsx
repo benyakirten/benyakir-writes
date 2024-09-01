@@ -1,14 +1,14 @@
 import React from "react";
 
-import { getFourCorners, getNearestCornerIdx } from "@/utils/coordinates";
 import {
 	CORNER_INDEX_TO_POSITIONING,
 	TRANSFORM_ORIGIN_FOR_CORNER_INDEX,
 	TRIANGLES_FOR_CORNER_INDEX,
 } from "@/data/constants";
-import { FillInExterior } from "./FillIn.styles";
 import { BorderRadiusCorners } from "@/types/filters";
 import { Coord, Corners } from "@/types/general";
+import { getFourCorners, getNearestCornerIdx } from "@/utils/coordinates";
+import { FillInExterior } from "./FillIn.styles";
 
 const FillIn: React.FC<
 	ChildrenProp & {

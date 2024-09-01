@@ -1,16 +1,16 @@
 import React from "react";
 import { styled } from "styled-components";
 
+import { FillIn } from "@/components/General";
+import { AddIcon } from "@/components/Icons";
+import { SIZE_SM, TRANSITION_SLOW } from "@/styles/variables";
+import { FilterOption, NewFilterProps } from "@/types/filters";
 import {
 	FilterMenu,
 	FilterPillButtonExterior,
 	FilterText,
 	IconContainer,
 } from "../components";
-import { AddIcon } from "@/components/Icons";
-import { SIZE_SM, TRANSITION_SLOW } from "@/styles/variables";
-import { FillIn } from "@/components/General";
-import { NewFilterProps, FilterOption } from "@/types/filters";
 import { registerCleanupFn } from "../useFilter.hook";
 
 const InnerContainer = styled.button`

@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import { RecentProjectItem } from "@/types/portfolio";
 import ProjectCard from "@/components/Cards/ProjectCard.component";
-import { SIZE_MD, Z_ABOVE } from "@/styles/variables";
 import { media } from "@/styles/queries";
+import { SIZE_MD, Z_ABOVE } from "@/styles/variables";
+import { RecentProjectItem } from "@/types/portfolio";
 
 const RecentProjectsContainer = styled.ul`
 	display: grid;

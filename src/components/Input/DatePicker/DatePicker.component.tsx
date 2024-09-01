@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import { DateContainer, DateInput } from "./DatePicker.styles";
 import {
 	convertDatePickerValueToDate,
 	convertDateToDatePickerValue,
 } from "@/utils/dates";
+import { DateContainer, DateInput } from "./DatePicker.styles";
 
 const DatePicker: React.FC<DateProps> = ({
 	name,

@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import { SANS_SERIF_FONT, SIZE_SM } from "@/styles/variables";
 import { LeadHeading } from "@/styles/general-components";
+import { SANS_SERIF_FONT, SIZE_SM } from "@/styles/variables";
 
 const StyledPortfolioHeader = styled.div`
   display: grid;

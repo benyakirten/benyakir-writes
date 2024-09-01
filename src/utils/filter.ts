@@ -1,9 +1,9 @@
 import {
-	ItemFilter,
-	DateFilter,
-	SearchFilter,
-	KeywordFilter,
 	CreateFilterOption,
+	DateFilter,
+	ItemFilter,
+	KeywordFilter,
+	SearchFilter,
 	WordFilterType,
 } from "@/types/filters";
 import { capitalize } from "./strings";

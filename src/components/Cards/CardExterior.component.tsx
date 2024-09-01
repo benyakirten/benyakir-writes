@@ -4,12 +4,12 @@ import styled from "styled-components";
 
 import { media } from "@/styles/queries";
 import {
+	SHADOW_CARD_HOVER,
+	SHADOW_CARD_NORMAL,
 	SIZE_SM,
 	SIZE_XS,
-	TRANSITION_SLOW,
-	SHADOW_CARD_NORMAL,
-	SHADOW_CARD_HOVER,
 	TRANSITION_FAST,
+	TRANSITION_SLOW,
 } from "@/styles/variables";
 
 const StyledCardExterior = styled.article<{ $columns: string }>`

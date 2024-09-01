@@ -7,15 +7,18 @@ import {
 	PaginatedPageContents,
 } from "@/styles/general-components";
 
-import { usePagination } from "@/hooks";
+import { CardContainer, ProjectCard } from "@/components/Cards";
+import { Filter } from "@/components/Filters";
+import { HeadBase } from "@/components/SEO";
 import {
 	projectHosts,
 	projectTechs,
 	projects,
 	projectsDescription,
 } from "@/data/search";
-import { CardContainer, ProjectCard } from "@/components/Cards";
+import { usePagination } from "@/hooks";
 import { CreateFilterOption, FilterOption, ItemFilter } from "@/types/filters";
+import { FlattenedProjectCard } from "@/types/posts";
 import {
 	createAddDateFilterFn,
 	createAddKeywordFilterFn,
@@ -25,9 +28,6 @@ import {
 	createFilterBySearchFn,
 	createModifyFilterFns,
 } from "@/utils/filter";
-import { FlattenedProjectCard } from "@/types/posts";
-import { Filter } from "@/components/Filters";
-import { HeadBase } from "@/components/SEO";
 
 export const Head: React.FC = () => (
 	<HeadBase title="Projects" description={projectsDescription} />

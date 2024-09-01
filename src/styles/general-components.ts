@@ -3,20 +3,20 @@ import styled from "styled-components";
 import { fadeIn, slideInLeft, slideInRight } from "./animations";
 import { media } from "./queries";
 import {
+	FONT_LG,
+	FONT_MD,
 	FONT_SIZE_MD,
-	SIZE_MD,
-	TRANSITION_EXTRA_SLOW,
-	TRANSITION_NORMAL,
+	FONT_SIZE_XXS,
+	FONT_XL,
+	FONT_XXL,
+	FONT_XXXL,
 	SANS_SERIF_FONT,
+	SIZE_LG,
+	SIZE_MD,
 	SIZE_SM,
 	SIZE_XS,
-	SIZE_LG,
-	FONT_SIZE_XXS,
-	FONT_XXXL,
-	FONT_XXL,
-	FONT_XL,
-	FONT_MD,
-	FONT_LG,
+	TRANSITION_EXTRA_SLOW,
+	TRANSITION_NORMAL,
 } from "./variables";
 
 import {

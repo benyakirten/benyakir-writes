@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { media } from "@/styles/queries";
+import { limitLines } from "@/styles/style-mixins";
 import {
 	FONT_SIZE_XS,
 	SANS_SERIF_FONT,
@@ -9,8 +11,6 @@ import {
 	TRANSITION_NORMAL,
 } from "@/styles/variables";
 import { setOpacityOnHSL } from "@/utils/colors";
-import { media } from "@/styles/queries";
-import { limitLines } from "@/styles/style-mixins";
 
 export const ResultContainer = styled.button`
     width: 100%;

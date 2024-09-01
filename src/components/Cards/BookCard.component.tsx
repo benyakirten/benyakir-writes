@@ -1,9 +1,9 @@
-import React from "react";
 import { GatsbyImage } from "gatsby-plugin-image";
+import React from "react";
 
 import { FlattenedBookCard } from "@/types/posts";
+import { ImageContainer, SpanOneContent, SpanOneTitle } from "./Card.styles";
 import CardExterior from "./CardExterior.component";
-import { SpanOneContent, SpanOneTitle, ImageContainer } from "./Card.styles";
 import { PublishedDate } from "./IconedText.component";
 
 const BookCard: React.FC<{ book: FlattenedBookCard }> = ({ book }) => {
