@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { SearchIcon } from "@/components/Icons";
-import { FONT_SIZE_MD, SIZE_SM, SIZE_XS } from "@/styles/variables";
+import { FONT_SIZE_MD, SIZE_SM } from "@/styles/variables";
 import { GrowableUnderline } from "@/components/General";
 
 const SearchButton = styled.button`
@@ -11,6 +11,7 @@ const SearchButton = styled.button`
 	align-items: center;
 	
 	width: min-content;
+	color: ${(props) => props.theme.sidebar.link};
 `;
 
 const IconContainer = styled.div`

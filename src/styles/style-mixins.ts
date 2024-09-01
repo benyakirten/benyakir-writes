@@ -47,3 +47,14 @@ export function hoverUnderline(color: string) {
         }
     `;
 }
+
+export function limitLines(lines: number) {
+	return `
+    	overflow: hidden;
+        text-overflow: ellipsis;
+
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: ${lines};
+`;
+}

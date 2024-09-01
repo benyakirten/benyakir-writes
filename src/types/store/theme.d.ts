@@ -19,6 +19,7 @@ type ThemeBase = BasicThemeSection & {
 type ThemeSidebar = {
 	gradient: string;
 	shadowColor: string;
+	link: string;
 };
 
 type ThemeTextInput = BasicThemeSection & {

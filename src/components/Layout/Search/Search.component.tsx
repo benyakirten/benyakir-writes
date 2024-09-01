@@ -13,7 +13,7 @@ import { media } from "@/styles/queries";
 
 const SearchModal = styled.dialog`
     position: fixed;
-    top: 30%;
+    top: 20%;
     left: 50%;
     z-index: ${Z_SEARCH};
 

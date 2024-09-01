@@ -14,7 +14,7 @@ export const StyledNavLink = styled(Link)`
   font-size: ${FONT_SIZE_LG};
   width: fit-content;
 
-  color: ${(props) => props.theme.base.link};
+  color: ${(props) => props.theme.sidebar.link};
 
   transition: color ${TRANSITION_NORMAL} ease;
 

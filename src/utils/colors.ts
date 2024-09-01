@@ -32,6 +32,7 @@ function parseAndCheck(..._colors: string[]) {
 }
 
 function checkIfHexValid(color: string) {
+	console.trace();
 	if (color[0] !== "#" || !(color.length === 4 || color.length === 7)) {
 		throw new Error(
 			"Hex string must consist of # followed by three or six numbers",

@@ -61,7 +61,7 @@ const PostResult: React.FC<{
 				<ContentContainer>
 					<TitleContainer>
 						<PostTitleContainer>
-							<ItemTitle>{truncate(post.title, 30)}</ItemTitle>
+							<ItemTitle>{post.title}</ItemTitle>
 						</PostTitleContainer>
 						<SlubTitle>{getPrettyDate(post.published.date)}</SlubTitle>
 					</TitleContainer>

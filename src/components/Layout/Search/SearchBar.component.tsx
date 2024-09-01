@@ -17,7 +17,7 @@ const StyledSearchBar = styled.div`
     height: ${SIZE_XXL};
     gap: ${SIZE_SM};
 
-    padding: 0 ${SIZE_SM} 0 ${SIZE_SM};
+    padding: 0 ${SIZE_SM};
 `;
 
 const SearchInput = styled.input`

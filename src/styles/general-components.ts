@@ -19,7 +19,11 @@ import {
 	FONT_LG,
 } from "./variables";
 
-import { hoverUnderline, textClipWithHoverTransition } from "./style-mixins";
+import {
+	hoverUnderline,
+	limitLines,
+	textClipWithHoverTransition,
+} from "./style-mixins";
 
 export const FadeIn = styled.div<{ duration?: string; delay?: string }>`
   opacity: 0;
@@ -87,12 +91,7 @@ export const BigParagraph = styled.p`
 export const WpContentDescription = styled.div<{ fontSize?: string }>`
   ${FONT_MD};
 
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  ${limitLines(2)}  
 
   a:link,
   a:visited {

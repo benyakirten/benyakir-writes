@@ -9,10 +9,12 @@ import {
 	SIZE_XS,
 } from "@/styles/variables";
 
-const TechPill = styled.div`
+export const TechPill = styled.div`
 	display: flex;
 	align-items: center;
 	gap: ${SIZE_XS};
+
+	width: fit-content;
 	height: min-content;
 
 	font-family: ${SANS_SERIF_FONT};

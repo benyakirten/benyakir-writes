@@ -10,6 +10,10 @@ const EmptyContainer = styled.div`
 	line-height: ${FONT_SIZE_LG};
 `;
 
+const PossibleSearch = styled.button`
+	color: ${(props) => props.theme.base.link};
+`;
+
 const EmptyResults: React.FC<{
 	alternatives: string[];
 	onSelect: (q: string) => void;
@@ -21,9 +25,12 @@ const EmptyResults: React.FC<{
 				{alternatives.map((alternative, i) => (
 					<span key={alternative}>
 						<GrowableUnderline>
-							<button type="button" onClick={() => onSelect(alternative)}>
+							<PossibleSearch
+								type="button"
+								onClick={() => onSelect(alternative)}
+							>
 								{alternative}
-							</button>
+							</PossibleSearch>
 						</GrowableUnderline>
 						<span>{i < alternatives.length - 1 ? ",  " : ""}</span>
 					</span>

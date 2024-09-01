@@ -9,12 +9,10 @@ import {
 	SlubTitle,
 	TitleContainer,
 } from "./Result.styles";
-import {
-	PillContainer,
-	WpContentDescription,
-} from "@/styles/general-components";
+import { WpContentDescription } from "@/styles/general-components";
 import { getPrettyDate } from "@/utils/dates";
 import { ProjectTech, TechContainer } from "@/components/General";
+import { TechPill } from "@/components/General/Project/ProjectTech.component";
 
 const MAX_TECHS = 2;
 
@@ -46,9 +44,9 @@ const ProjectResult: React.FC<{
 						<ProjectTech key={i.name} tech={i.name} publicURL={i.publicURL} />
 					))}
 					{otherIcons > 0 && (
-						<PillContainer>
+						<TechPill>
 							{otherIcons} other{otherIcons > 1 && "s"}
-						</PillContainer>
+						</TechPill>
 					)}
 				</TechContainer>
 			</InnerContainer>

@@ -5,7 +5,7 @@ export const defaultDayTheme: BaseTheme = {
 		textColor: "hsl(213 58% 8%)",
 		background: "hsl(213 60% 97%)",
 		border: "hsl(213 53% 28%)",
-		link: "hsl(213 87% 15%)",
+		link: "hsl(213 87% 30%)",
 		pageGradient:
 			"linear-gradient(to bottom right, hsl(213 23% 97%), hsl(213 33% 95%) 80%, hsl(213 16% 92%))",
 	},
@@ -28,6 +28,7 @@ export const defaultDayTheme: BaseTheme = {
 		background: "hsl(213 6% 86%)",
 	},
 	sidebar: {
+		link: "hsl(213 90% 25%)",
 		gradient:
 			"linear-gradient(to right, hsl(213 14% 95%), hsl(213 25% 95%) 90%, hsl(213 45% 95%))",
 		shadowColor: "hsl(213 10% 10%)",
@@ -100,6 +101,7 @@ export const defaultNightTheme: BaseTheme = {
 		background: "#000",
 	},
 	sidebar: {
+		link: "#FFF",
 		gradient: "linear-gradient(to right, #252F47 70%, #2F3951)",
 		shadowColor: "#212529",
 	},

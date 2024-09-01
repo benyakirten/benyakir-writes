@@ -14,11 +14,6 @@ import {
 	SlubTitle,
 	BookCoverContainer,
 } from "./Result.styles";
-
-const SubtitleText = styled.p`
-	text-align: right;
-`;
-
 const PostStory: React.FC<{
 	story: FlattenedStoryCard;
 	onView: (slug: string) => void;
@@ -33,12 +28,12 @@ const PostStory: React.FC<{
 					<TitleContainer>
 						<ItemTitle>{story.title}</ItemTitle>
 						<SlubTitle>{getPrettyDate(story.published.date)}</SlubTitle>
+						{subtitle && <p>{subtitle}</p>}
 					</TitleContainer>
 					<WpContentDescription
 						fontSize="1rem"
 						dangerouslySetInnerHTML={{ __html: story.content }}
 					/>
-					{subtitle && <SubtitleText>{subtitle}</SubtitleText>}
 				</ContentContainer>
 				{relatedBook?.snapshotCover && (
 					<BookCoverContainer>

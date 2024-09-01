@@ -1,14 +1,16 @@
 import styled from "styled-components";
 
 import {
+	FONT_SIZE_XS,
 	SANS_SERIF_FONT,
 	SERIF_FONT,
 	SIZE_SM,
 	SIZE_XS,
 	TRANSITION_NORMAL,
 } from "@/styles/variables";
-import { convertHexToRGBA } from "@/utils/colors";
+import { setOpacityOnHSL } from "@/utils/colors";
 import { media } from "@/styles/queries";
+import { limitLines } from "@/styles/style-mixins";
 
 export const ResultContainer = styled.button`
     width: 100%;
@@ -17,7 +19,7 @@ export const ResultContainer = styled.button`
     font-family: ${SERIF_FONT};
 
     &:not(:last-child) {
-        border-bottom: 1px solid ${(props) => convertHexToRGBA(props.theme.base.textColor, 0.4)};
+        border-bottom: 1px solid ${(props) => setOpacityOnHSL(props.theme.base.textColor, 0.4)};
     }
     
     opacity: 0.6;
@@ -30,6 +32,7 @@ export const ResultContainer = styled.button`
 
 export const ItemTitle = styled.h2`
 	font-family: ${SANS_SERIF_FONT};
+	${limitLines(1)}
 `;
 
 export const InnerContainer = styled.div`
@@ -55,7 +58,7 @@ export const TitleContainer = styled.div`
 `;
 
 export const SlubTitle = styled.span`
-	font-size: 0.9rem;
+	font-size: ${FONT_SIZE_XS};
 	font-weight: bold;
 	text-transform: uppercase;
 `;

@@ -6,8 +6,8 @@ export const TechContainer = styled.div`
     flex: 1;
     grid-column: 1 / -1;
     
-    display: flex;
-    align-items: center;
-    gap: ${SIZE_XS};
-    flex-wrap: wrap;
+    & > div {
+        display: inline-flex;
+        margin: 2px;
+    }
 `;
