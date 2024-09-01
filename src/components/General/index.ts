@@ -3,3 +3,4 @@ export { default as GrowableUnderline } from "./GrowableUnderline/GrowableUnderl
 export { default as FillIn } from "./FillIn/FillIn.component";
 export { default as Time } from "./Accessibility/Time.component";
 export * from "./Project";
+export * from "./Author";

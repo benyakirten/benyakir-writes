@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { BookCard, CardContainer, StoryCard } from "@/components/Cards";
+import { CardContainer } from "@/components/Cards";
 import { Filter } from "@/components/Filters";
 import { HeadBase } from "@/components/SEO";
 import { authorDescription, books, stories } from "@/data/search";
@@ -25,17 +25,11 @@ import {
 	createFilterBySearchFn,
 	createModifyFilterFns,
 } from "@/utils/filter";
+import { AuthorCard } from "@/components/General";
 
 export const Head: React.FC = () => (
 	<HeadBase title="Author" description={authorDescription} />
 );
-
-const AuthorCard: React.FC<AuthoredItemCard> = (props) => {
-	if ("book" in props) {
-		return <StoryCard story={props} />;
-	}
-	return <BookCard book={props} />;
-};
 
 const AuthorPage: React.FC = () => {
 	const items = React.useMemo<AuthoredItemCard[]>(() => {

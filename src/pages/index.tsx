@@ -21,31 +21,27 @@ import {
 	FlattenedProjectCard,
 	FlattenedStoryCard,
 } from "@/types/posts";
+import { AuthorCard } from "@/components/General";
 
 export const Head: React.FC = () => (
 	<HeadBase title="Home" description={homeDescription} />
 );
 
-const ItemCard: React.FC<{
-	item:
-		| FlattenedBlogCard
-		| FlattenedProjectCard
-		| FlattenedBookCard
-		| FlattenedStoryCard;
-}> = ({ item }) => {
-	if ("categories" in item) {
-		return <BlogCard post={item} />;
+const ItemCard: React.FC<
+	| FlattenedBlogCard
+	| FlattenedProjectCard
+	| FlattenedBookCard
+	| FlattenedStoryCard
+> = (props) => {
+	if ("categories" in props) {
+		return <BlogCard {...props} />;
 	}
 
-	if ("firstReleased" in item) {
-		return <ProjectCard project={item} />;
+	if ("firstReleased" in props) {
+		return <ProjectCard {...props} />;
 	}
 
-	if ("stories" in item) {
-		return <BookCard book={item} />;
-	}
-
-	return <StoryCard story={item} />;
+	return <AuthorCard {...props} />;
 };
 
 const IndexPage: React.FC = () => {
@@ -54,11 +50,11 @@ const IndexPage: React.FC = () => {
 			<NormalPageContents>
 				<LeadHeading>Latest Posts</LeadHeading>
 				<Grouping>
-					<CardContainer>
-						{latestTwentyItems.map((item) => (
-							<ItemCard key={item.slug} item={item} />
-						))}
-					</CardContainer>
+					<CardContainer
+						items={latestTwentyItems}
+						Card={ItemCard}
+						type="recent item"
+					/>
 				</Grouping>
 			</NormalPageContents>
 		</Page>
