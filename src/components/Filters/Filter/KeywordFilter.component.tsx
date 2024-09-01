@@ -55,7 +55,7 @@ const KeywordFilter: React.FC<KeywordFilterProps> = ({
 				{type}
 			</FilterButton>
 			<FilterMenu
-				height="14.5rem"
+				height="16.5rem"
 				$pointUpwards={keywordsOpenTop}
 				aria-expanded={keywordsOpen}
 				onMouseEnter={() => setKeywordsSoftOpen(true)}

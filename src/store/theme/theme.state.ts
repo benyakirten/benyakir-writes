@@ -6,7 +6,7 @@ export const defaultDayTheme: BaseTheme = {
 		background: "hsl(213 60% 97%)",
 		border: "hsl(213 53% 28%)",
 		link: "hsl(213 87% 30%)",
-		disabled: "#495057",
+		disabled: "hsl(213 2% 70%)",
 		pageGradient:
 			"linear-gradient(to bottom right, hsl(213 23% 97%), hsl(213 33% 95%) 80%, hsl(213 16% 92%))",
 	},
@@ -17,8 +17,8 @@ export const defaultDayTheme: BaseTheme = {
 		selectedTabBackground: "hsl(213 1% 99%)",
 	},
 	card: {
-		arrowColor: "hsl(213 25% 92%)",
-		boxShadow: "hsl(213 80% 20%)",
+		arrowColor: "hsl(213 20% 92%)",
+		boxShadow: "hsl(213 70% 15%)",
 	},
 	header: {
 		startColor: "hsl(213 48% 10%)",
@@ -35,8 +35,8 @@ export const defaultDayTheme: BaseTheme = {
 		shadowColor: "hsl(213 10% 10%)",
 	},
 	multipleChoice: {
-		background: "#343a40",
-		textColor: "#FDF3D8",
+		textColor: "hsl(213 60% 97%)",
+		background: "hsl(213 58% 8%)",
 	},
 	fillIn: {
 		border: "#05491F",
