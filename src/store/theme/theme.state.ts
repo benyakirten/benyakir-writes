@@ -3,11 +3,11 @@ export const defaultDayTheme: BaseTheme = {
 	name: "Day",
 	base: {
 		textColor: "hsl(213 58% 8%)",
-		background: "hsl(213 50% 97%)",
+		background: "hsl(213 60% 97%)",
 		border: "hsl(213 53% 28%)",
 		link: "hsl(213 87% 15%)",
 		pageGradient:
-			"linear-gradient(to bottom right, hsl(213 23% 97%), hsl(213 33% 95%), hsl(213 16% 95%))",
+			"linear-gradient(to bottom right, hsl(213 23% 97%), hsl(213 33% 95%) 80%, hsl(213 16% 92%))",
 	},
 	portfolio: {
 		textColor: "hsl(213 50% 90%)",

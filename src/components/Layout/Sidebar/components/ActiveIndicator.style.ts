@@ -13,13 +13,3 @@ export const StyledActiveIndicator = styled.div<{ $pos: number }>`
 
     background: ${(props) => props.theme.base.link};
 `;
-
-// TODO: Make this better once we have redone theme colors.
-function createLinearGradient(color: string): string {
-	const startColor = convertHexToRGBA(color, 0);
-	const intermediateColor = convertHexToRGBA(color, 0.3);
-	const endColor = convertHexToRGBA(color, 1);
-
-	const gradient = `linear-gradient(to right, ${startColor} 0%, ${intermediateColor} 70%, ${endColor} 100%)`;
-	return gradient;
-}

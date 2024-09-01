@@ -6,7 +6,7 @@ export function textClipWithHoverTransition(
 	endColor: string,
 ) {
 	return `
-        background-image: linear-gradient(to right, ${startColor} 45%, ${endColor});
+        background-image: linear-gradient(to right, ${startColor} 40%, ${endColor});
         background-position: left;
         background-size: 300%;
         background-clip: text;
