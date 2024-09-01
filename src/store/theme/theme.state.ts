@@ -73,7 +73,7 @@ export const defaultNightTheme: BaseTheme = {
 	base: {
 		textColor: "hsl(222 30% 94%)",
 		background: "hsl(222 50% 13%)",
-		border: "#343a40",
+		border: "#hsl(222 10% 23%)",
 		link: "#FFF",
 		pageGradient:
 			"linear-gradient(to bottom right, hsl(222 50% 13%), hsl(222 80% 16%), hsl(222 50% 13%))",

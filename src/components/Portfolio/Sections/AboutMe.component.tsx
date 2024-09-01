@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import IconedText from "@/components/Cards/IconedText.component";
 import { MailIcon, ResumeIcon } from "@/components/Icons";
+import { useAppSelector } from "@/store/hooks";
 import { media } from "@/styles/queries";
 import {
 	FONT_SIZE_LG,
@@ -17,7 +18,6 @@ import {
 import { ImageQuery } from "@/types/general";
 import { downloadFile } from "@/utils/dom";
 import { GatsbyImage } from "gatsby-plugin-image";
-import { useAppSelector } from "@/store/hooks";
 
 const StyledProfile = styled.div`
 	display: flex;

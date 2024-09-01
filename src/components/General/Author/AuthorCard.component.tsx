@@ -1,6 +1,6 @@
 import React from "react";
 
-import { StoryCard, BookCard } from "@/components/Cards";
+import { BookCard, StoryCard } from "@/components/Cards";
 import { AuthoredItemCard } from "@/types/posts";
 
 const AuthorCard: React.FC<AuthoredItemCard> = (props) => {

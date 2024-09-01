@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { CardContainer } from "@/components/Cards";
 import { Filter } from "@/components/Filters";
+import { AuthorCard } from "@/components/General";
 import { HeadBase } from "@/components/SEO";
 import { authorDescription, books, stories } from "@/data/search";
 import { usePagination } from "@/hooks";
@@ -25,7 +26,6 @@ import {
 	createFilterBySearchFn,
 	createModifyFilterFns,
 } from "@/utils/filter";
-import { AuthorCard } from "@/components/General";
 
 export const Head: React.FC = () => (
 	<HeadBase title="Author" description={authorDescription} />
