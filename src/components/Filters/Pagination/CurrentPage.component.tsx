@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
 
-import { FONT_SIZE_XS, HORIZONTAL_XS } from "@/styles/variables";
+import { FONT_SIZE_XS, SIZE_XS } from "@/styles/variables";
 import { NextIcon, PreviousIcon } from "@/components/Icons";
 import { StyledFilterPill } from "../components/FilterPill.component";
 import { FillIn } from "@/components/General";
@@ -16,12 +16,12 @@ const InnerContainer = styled.div`
 	display: grid;
 	place-items: center;
 
-    padding: ${HORIZONTAL_XS};
+    padding: 0 ${SIZE_XS};
 `;
 
 const PageNumber = styled.input`
 	font-size: ${FONT_SIZE_XS};
-	padding: ${HORIZONTAL_XS};
+	padding: 0 ${SIZE_XS};
 
 	border: none;
 	outline: none;

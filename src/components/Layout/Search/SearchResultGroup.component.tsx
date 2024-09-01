@@ -6,9 +6,9 @@ import {
 	Z_ABOVE,
 	SANS_SERIF_FONT,
 	FONT_SIZE_SM,
-	HORIZONTAL_XS,
 	TRANSITION_NORMAL,
 	SIZE_MD,
+	SIZE_XS,
 } from "@/styles/variables";
 import { SearchResultGroupProps } from "./types";
 import { EyeIcon } from "@/components/Icons";
@@ -43,7 +43,7 @@ const GroupLabel = styled.h3`
     font-size: ${FONT_SIZE_SM};
 
     background-color: ${(props) => props.theme.base.background};
-    padding: ${HORIZONTAL_XS};
+    padding: 0 ${SIZE_XS};
 `;
 
 const ToggleVisibilityButton = styled.div`
@@ -52,7 +52,7 @@ const ToggleVisibilityButton = styled.div`
     right: ${SIZE_SM};
 
     background-color: ${(props) => props.theme.base.background};
-    padding: ${HORIZONTAL_XS};
+    padding: 0 ${SIZE_XS};
 `;
 
 const EyeBar = styled.div<{ open: boolean }>`

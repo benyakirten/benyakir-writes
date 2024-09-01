@@ -3,8 +3,6 @@ import styled from "styled-components";
 import {
 	FONT_SIZE_MD,
 	FONT_SIZE_SM,
-	FONT_SIZE_XS,
-	FONT_SIZE_XXS,
 	SIZE_SM,
 	SIZE_XS,
 	TRANSITION_NORMAL,

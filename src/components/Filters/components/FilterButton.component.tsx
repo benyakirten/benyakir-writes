@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 
 import { FillIn } from "@/components/General";
-import { HORIZONTAL_XS } from "@/styles/variables";
+import { SIZE_XS } from "@/styles/variables";
 import { FilterButtonProps } from "@/types/filters";
 
 const StyledFilterButtonExterior = styled.div`
@@ -18,7 +18,7 @@ const FilterButtonInterior = styled.button<{ width?: string }>`
 	height: 100%;
 	width: ${(props) => props.width || "auto"};
 	
-	padding: ${HORIZONTAL_XS};
+	padding: 0 ${SIZE_XS};
 	
 	white-space: nowrap;
 	overflow: hidden;

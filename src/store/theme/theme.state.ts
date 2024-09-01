@@ -23,7 +23,7 @@ export const defaultDayTheme: BaseTheme = {
 	},
 	sidebar: {
 		gradient:
-			"linear-gradient(to right, hsl(143 4% 99%), hsl(143 15% 95%) 80%, hsl(143 45% 94%))",
+			"linear-gradient(to right, hsl(143 4% 99%), hsl(143 15% 95%) 90%, hsl(143 45% 94%))",
 		shadowColor: "hsl(143 10% 10%)",
 	},
 	textInput: {

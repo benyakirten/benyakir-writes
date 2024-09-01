@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import { FONT_SIZE_MD, SHADOW_MD, SIZE_SM, SIZE_XS } from "@/styles/variables";
-import { convertHexToRGBA, setOpacityOnHSL } from "@/utils/colors";
+import { FONT_SIZE_MD, SIZE_SM, SIZE_XS } from "@/styles/variables";
+import { setOpacityOnHSL } from "@/utils/colors";
 
 export const Container = styled.div`
   display: flex;

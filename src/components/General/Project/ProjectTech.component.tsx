@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 import {
 	FONT_SIZE_XS,
-	FONT_SIZE_XXS,
 	SANS_SERIF_FONT,
 	SIZE_MD,
 	SIZE_SM,
@@ -25,12 +24,12 @@ const TechPill = styled.div`
 `;
 
 const TechIcon = styled.img`
-	width: ${FONT_SIZE_XS};
-	height: ${FONT_SIZE_XS};
+	width: calc(${SIZE_SM} * 1.2);
+	height: calc(${SIZE_SM} * 1.2);
 `;
 
 const TechName = styled.span`
-	font-size: ${FONT_SIZE_XXS};
+	font-size: ${FONT_SIZE_XS};
 `;
 
 const ProjectTech: React.FC<{ publicURL: string; tech: string }> = ({

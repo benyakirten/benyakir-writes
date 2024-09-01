@@ -6,14 +6,13 @@ import {
 	SIZE_SM,
 	SIZE_XS,
 	TRANSITION_NORMAL,
-	VERTICAL_SM,
 } from "@/styles/variables";
 import { convertHexToRGBA } from "@/utils/colors";
 import { media } from "@/styles/queries";
 
 export const ResultContainer = styled.button`
     width: 100%;
-    padding: ${VERTICAL_SM};
+    padding: ${SIZE_SM} 0;
 
     font-family: ${SERIF_FONT};
 

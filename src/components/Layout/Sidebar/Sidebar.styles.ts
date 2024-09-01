@@ -4,7 +4,7 @@ import {
 	SERIF_FONT,
 	FONT_SIZE_XL,
 	FONT_SIZE_XXL,
-	SHADOW_MD,
+	SHADOW_SIDEBAR,
 	TRANSITION_NORMAL,
 	TRANSITION_SLOW,
 	Z_ABOVE,
@@ -14,7 +14,7 @@ import {
 	SIZE_XS,
 } from "@/styles/variables";
 import { media } from "@/styles/queries";
-import { convertHexToRGBA, setOpacityOnHSL } from "@/utils/colors";
+import { setOpacityOnHSL } from "@/utils/colors";
 
 export const StyledSidebar = styled.nav<{ open?: boolean }>`
   position: fixed;
@@ -36,7 +36,7 @@ export const StyledSidebar = styled.nav<{ open?: boolean }>`
 
   background-image: ${(props) => props.theme.sidebar.gradient};
   border-right: 2px solid ${(props) => props.theme.base.border};
-  box-shadow: ${(props) => `${SHADOW_MD} ${setOpacityOnHSL(props.theme.sidebar.shadowColor, 0.3)}`};
+  box-shadow: ${(props) => (props.open ? "none" : `${SHADOW_SIDEBAR} ${setOpacityOnHSL(props.theme.sidebar.shadowColor, 0.3)}`)};
 
   transition: transform ${TRANSITION_SLOW};
 `;

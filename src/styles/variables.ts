@@ -20,7 +20,6 @@ export const LINE_HEIGHT_LG = "1.75rem";
 export const LINE_HEIGHT_MD = "1.75rem";
 export const LINE_HEIGHT_SM = "1.5rem";
 export const LINE_HEIGHT_XS = "1.25rem";
-export const LINE_HEIGHT_XXS = "1rem";
 
 // FONT
 export const FONT_XXXL = `font-size: ${FONT_SIZE_XXXL}; line-height: ${LINE_HEIGHT_XXXL};`;
@@ -30,7 +29,6 @@ export const FONT_LG = `font-size: ${FONT_SIZE_LG}; line-height: ${LINE_HEIGHT_L
 export const FONT_MD = `font-size: ${FONT_SIZE_MD}; line-height: ${LINE_HEIGHT_MD};`;
 export const FONT_SM = `font-size: ${FONT_SIZE_SM}; line-height: ${LINE_HEIGHT_SM};`;
 export const FONT_XS = `font-size: ${FONT_SIZE_XS}; line-height: ${LINE_HEIGHT_XS};`;
-export const FONT_XXS = `font-size: ${FONT_SIZE_XXS}; line-height: ${LINE_HEIGHT_XXS};`;
 
 // TODO: Remove these
 export const PRIMARY_100 = "#FDF3D8";
@@ -53,14 +51,6 @@ export const SECONDARY_700 = "#566488";
 export const SECONDARY_800 = "#485372";
 export const SECONDARY_900 = "#39435b";
 
-export const BLACK = "#05491F";
-export const WHITE = "#D8E3FD";
-export const ABS_BLACK = "#000";
-export const ABS_WHITE = "#FFF";
-
-export const SUCCESS = "#44764d";
-export const ERROR = "#993d4d";
-
 // SIZE
 export const SIZE_XXL = "4rem";
 export const SIZE_XL = "3rem";
@@ -69,30 +59,8 @@ export const SIZE_MD = "1.6rem";
 export const SIZE_SM = "0.8rem";
 export const SIZE_XS = "0.4rem";
 
-// PADDING/MARGIN
-export const HORIZONTAL_XL = "0 3rem";
-export const HORIZONTAL_LG = "0 2.4rem";
-export const HORIZONTAL_MD = "0 1.6rem";
-export const HORIZONTAL_SM = "0 0.8rem";
-export const HORIZONTAL_XS = "0 0.4rem";
-
-export const VERTICAL_XL = "3rem 0";
-export const VERTICAL_LG = "2.4rem 0";
-export const VERTICAL_MD = "1.6rem 0";
-export const VERTICAL_SM = "0.8rem 0";
-
-export const BOTH_XL = "2.4rem 3rem";
-export const BOTH_LG = "2rem 2.4rem";
-export const BOTH_MD = "1.4rem 1.6rem";
-export const BOTH_SM = "0.6rem 1rem";
-
-// BORDER SHADOW
-export const SHADOW_XL = "0 1.6rem 2.4rem";
-export const SHADOW_LG = "0 0.3rem 0.6rem";
-export const SHADOW_MD = "2px 0px 2px 1px";
-export const SHADOW_MD_BALANCED = "0px 2px 4px";
-export const SHADOW_SM = "0 1px 2px";
-export const SHADOW_UP = "-2px -3px 1.2rem -2px rgba(0,0,0,0.75)";
+// BOX SHADOW
+export const SHADOW_SIDEBAR = "2px 0px 2px 1px";
 export const SHADOW_CARD_NORMAL = "2px 6px 0px 0px";
 export const SHADOW_CARD_HOVER = "2px 16px 0px 0px";
 

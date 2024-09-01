@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
 
-import { FONT_SIZE_XXS, SIZE_XS } from "@/styles/variables";
+import { SIZE_XS } from "@/styles/variables";
 import { CalendarIcon } from "../Icons";
 import { media } from "@/styles/queries";
 import { Time } from "../General";
@@ -9,7 +9,6 @@ import { Time } from "../General";
 const IconContainer = styled.div<{ span?: number }>`
 	grid-column: span ${(props) => props.span ?? 2};
 	color: ${(props) => props.theme.base.pillText};
-	font-size: ${FONT_SIZE_XXS};
 
     display: flex;
     gap: ${SIZE_XS};
