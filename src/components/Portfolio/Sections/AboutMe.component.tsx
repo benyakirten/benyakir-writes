@@ -1,4 +1,4 @@
-import { Link, graphql, useStaticQuery } from "gatsby";
+import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
 import styled from "styled-components";
 
@@ -14,7 +14,7 @@ import {
 	TRANSITION_NORMAL,
 	Z_ABOVE,
 } from "@/styles/variables";
-import { FileQuery, ImageQuery } from "@/types/general";
+import { ImageQuery } from "@/types/general";
 import { downloadFile } from "@/utils/dom";
 import { GatsbyImage } from "gatsby-plugin-image";
 import { useAppSelector } from "@/store/hooks";
@@ -105,7 +105,13 @@ const StyledLinkText = styled.p`
 	opacity: 0.6;
 	color: ${(props) => props.theme.base.textColor};
 	transition: opacity ${TRANSITION_NORMAL} ease;
-	&:hover, &:focus {
+`;
+
+const PortfolioAnchor = styled.a`
+	width: max-content;
+	grid-column: span 1;
+
+	&:hover p, &:focus p {
 		opacity: 1;
 	}
 `;
@@ -116,9 +122,9 @@ const PortfolioLink: React.FC<{
 	icon: React.ReactNode;
 }> = ({ to, text, icon }) => {
 	return (
-		<a style={{ width: "max-content", gridColumn: "span 1" }} href={to}>
+		<PortfolioAnchor href={to}>
 			<IconedText icon={icon} text={<StyledLinkText>{text}</StyledLinkText>} />
-		</a>
+		</PortfolioAnchor>
 	);
 };
 
@@ -127,9 +133,16 @@ const GitHubIcon = styled(StyledLinkImage)<{ $isDark: boolean }>`
 	background: none;
 `;
 
+const StyledResumeButton = styled.button`
+	width: fit-content;
+	grid-column: span 1;
+	&:hover p, &:focus p {
+		opacity: 1;
+	}
+`;
+
 const ResumeButton: React.FC<{ resume: string }> = ({ resume }) => (
-	<button
-		style={{ width: "max-content", gridColumn: "span 1" }}
+	<StyledResumeButton
 		type="button"
 		onClick={() => downloadFile(resume, "Resume - Ben Horowitz.pdf")}
 	>
@@ -137,7 +150,7 @@ const ResumeButton: React.FC<{ resume: string }> = ({ resume }) => (
 			icon={<ResumeIcon />}
 			text={<StyledLinkText>Resume</StyledLinkText>}
 		/>
-	</button>
+	</StyledResumeButton>
 );
 
 const AboutMe: React.FC<{

@@ -71,12 +71,12 @@ export const defaultNightTheme: BaseTheme = {
 	id: "1",
 	name: "Night",
 	base: {
-		textColor: "#FFFFFF",
+		textColor: "hsl(222 30% 94%)",
 		background: "hsl(222 50% 13%)",
 		border: "#343a40",
 		link: "#FFF",
 		pageGradient:
-			"linear-gradient(to right, hsl(222 23% 97%), hsl(222 33% 95%) 80%, hsl(222 16% 92%))",
+			"linear-gradient(to bottom right, hsl(222 50% 13%), hsl(222 80% 16%), hsl(222 50% 13%))",
 		disabled: "#e9ecef",
 	},
 	portfolio: {
@@ -99,8 +99,9 @@ export const defaultNightTheme: BaseTheme = {
 	},
 	sidebar: {
 		link: "#FFF",
-		gradient: "linear-gradient(to right, #252F47 70%, #2F3951)",
-		shadowColor: "hsl(222 10% 10%)",
+		gradient:
+			"linear-gradient(to bottom right, hsl(222 90% 10%), hsl(222 80% 15%), hsl(222 80% 25%), hsl(222 40% 15%), hsl(222 67% 27%))",
+		shadowColor: "hsl(222 10% 80%)",
 	},
 	multipleChoice: {
 		background: "#343a40",
