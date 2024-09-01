@@ -32,12 +32,11 @@ const TabList = styled.div`
 	width: 100%;
 	padding: ${SIZE_SM};
 
-	color: ${(props) => props.theme.pill.textColor};
-	background-color: ${(props) => props.theme.pill.background};
+	background-color: ${(props) => props.theme.portfolio.tabBackground};
 	border-radius: ${SIZE_XS};
 
 	&:focus-within > [data-indicator]::after {
-		outline: 1px solid ${(props) => props.theme.base.link};
+		outline: 1px solid ${(props) => props.theme.header.link};
 	}
 `;
 
@@ -98,6 +97,13 @@ const TabButton = styled.button`
 	display: grid;
 	place-items: center;
 	z-index: ${Z_ABOVE};
+
+	color: ${(props) => props.theme.portfolio.textColor};
+	transition: color ${TRANSITION_NORMAL} ease;
+	
+	&[aria-selected='true'] {
+		color: ${(props) => props.theme.portfolio.selectedTextColor};
+	}
 `;
 
 const TabButtonLabel = styled.span`

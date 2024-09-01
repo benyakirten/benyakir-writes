@@ -59,6 +59,13 @@ type ThemeCard = {
 	boxShadow: string;
 };
 
+type ThemePortfolio = {
+	textColor: string;
+	selectedTextColor: string;
+	tabBackground: string;
+	selectedTabBackground: string;
+};
+
 type BaseTheme = {
 	id: string;
 	name: string;
@@ -69,6 +76,7 @@ type BaseTheme = {
 	textInput: ThemeTextInput;
 	multipleChoice: ThemeMultipleChoice;
 	fillIn: ThemeFillIn;
+	portfolio: ThemePortfolio;
 	toggle: ThemeToggle;
 	theme: ThemeThemePage;
 	card: ThemeCard;

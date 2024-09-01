@@ -9,6 +9,12 @@ export const defaultDayTheme: BaseTheme = {
 		pageGradient:
 			"linear-gradient(to bottom right, hsl(143 13% 99%), hsl(143 33% 98%), hsl(143 16% 99%))",
 	},
+	portfolio: {
+		textColor: "hsl(110 50% 90%)",
+		selectedTextColor: "hsl(143 40% 20%)",
+		tabBackground: "hsl(200 35% 25%)",
+		selectedTabBackground: "hsl(143 1% 99%)",
+	},
 	card: {
 		arrowColor: "hsl(143 25% 92%)",
 		boxShadow: "hsl(143 50% 15%)",
@@ -74,6 +80,12 @@ export const defaultNightTheme: BaseTheme = {
 		border: "#343a40",
 		link: "#FFF",
 		pageGradient: "TODO",
+	},
+	portfolio: {
+		textColor: "TODO",
+		selectedTextColor: "TODO",
+		tabBackground: "TODO",
+		selectedTabBackground: "TODO",
 	},
 	card: {
 		arrowColor: "TODO",
