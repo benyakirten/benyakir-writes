@@ -149,6 +149,21 @@ const AboutMe: React.FC<{
 				JavaScript. I also work with databases, Python, Node, Go, Rust and
 				Elixir.
 			</StyledBio>
+			<StyledBio>
+				I studied at the University of Colorado Boulder for my undergraduate,
+				where I studied Classics, Linguistics and Italian (graduated{" "}
+				<em>Summa cum Laude</em>). I have been a member of Phi Beta Kappa since
+				2010. I studied for my Masters in Italian Language at Middlebury College
+				and lived in Italy for two years (2014-2016).
+			</StyledBio>
+			<StyledBio>
+				I speak Italian fluently, studied Latin and Greek and can speak and read
+				French moderately. I worked as a writer and editor prior to becoming a
+				developer. Much of the same passion drives me in both fields: the desire
+				to create, the intense curiosity of how all things work, the need for
+				both long-term planning and quick thinking, and the ability to be both a
+				team player and a leader.
+			</StyledBio>
 			<StyledLinks>
 				<PortfolioLink
 					to="mailto:ben@benyakiredits.com"

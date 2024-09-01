@@ -10,7 +10,7 @@ import { Shapes } from "./shapes";
 const PortfolioBackground = styled.div`
   position: relative;
   min-height: 100vh;
-  background: ${(props) => props.theme.base.background};
+  background: ${(props) => props.theme.base.pageGradient};
 `;
 
 const RandomizedBackground: React.FC<ChildrenProp> = ({ children }) => {

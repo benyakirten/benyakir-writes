@@ -32,6 +32,11 @@ const CentralizedItem = styled.div`
 	}
 `;
 
+const PortfolioPageContents = styled(NormalPageContents)`
+	max-height: 100vh;
+	overflow: scroll;
+`;
+
 const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
 	const portfolioProjects = React.useMemo<RecentProjectItem[]>(() => {
 		const mappedProjects = projects
@@ -83,7 +88,7 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
 
 	return (
 		<Page>
-			<NormalPageContents>
+			<PortfolioPageContents>
 				<PortfolioHeader />
 				<RandomizedBackground>
 					<CentralizedItem>
@@ -95,7 +100,7 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
 						/>
 					</CentralizedItem>
 				</RandomizedBackground>
-			</NormalPageContents>
+			</PortfolioPageContents>
 		</Page>
 	);
 };
