@@ -157,12 +157,13 @@ const AboutMe: React.FC<{
 				and lived in Italy for two years (2014-2016).
 			</StyledBio>
 			<StyledBio>
-				I speak Italian fluently, studied Latin and Greek and can speak and read
-				French moderately. I worked as a writer and editor prior to becoming a
-				developer. Much of the same passion drives me in both fields: the desire
-				to create, the intense curiosity of how all things work, the need for
-				both long-term planning and quick thinking, and the ability to be both a
-				team player and a leader.
+				I speak Italian fluently, studied Latin and Greek and used to converse
+				in French (though it has been more than a decade since I last used it).
+				I worked as a writer and editor prior to becoming a developer. Much of
+				the same passion drives me in both fields: the desire to create, the
+				intense curiosity of how all things work, the need for both long-term
+				planning and quick thinking, and the ability to work independently, be a
+				team player and become a leader as the situation demands.
 			</StyledBio>
 			<StyledLinks>
 				<PortfolioLink

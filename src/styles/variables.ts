@@ -89,7 +89,7 @@ export const BOTH_SM = "0.6rem 1rem";
 // BORDER SHADOW
 export const SHADOW_XL = "0 1.6rem 2.4rem";
 export const SHADOW_LG = "0 0.3rem 0.6rem";
-export const SHADOW_MD = "3px 2px 4px";
+export const SHADOW_MD = "2px 0px 2px 1px";
 export const SHADOW_MD_BALANCED = "0px 2px 4px";
 export const SHADOW_SM = "0 1px 2px";
 export const SHADOW_UP = "-2px -3px 1.2rem -2px rgba(0,0,0,0.75)";

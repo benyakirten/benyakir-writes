@@ -32,6 +32,7 @@ const TabList = styled.div`
 	width: 100%;
 	padding: ${SIZE_SM};
 
+	color: ${(props) => props.theme.pill.textColor};
 	background-color: ${(props) => props.theme.pill.background};
 	border-radius: ${SIZE_XS};
 
@@ -83,7 +84,7 @@ function calculateSelectedTabIndicatorPositionTop(selectedIdx: number) {
 		case 1:
 			return `calc(33% - ${SIZE_XS} - 4px)`;
 		case 2:
-			return `calc(66% - ${SIZE_XS} - 9px)`;
+			return `calc(66% - ${SIZE_XS} - 10px)`;
 	}
 }
 

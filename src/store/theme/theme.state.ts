@@ -2,25 +2,25 @@ export const defaultDayTheme: BaseTheme = {
 	id: "0",
 	name: "Day",
 	base: {
-		textColor: "hsl(143 48% 10%)",
-		background: "hsl(143 1% 98%)",
+		textColor: "hsl(143 58% 8%)",
+		background: "hsl(143 1% 99%)",
 		border: "hsl(143 53% 28%)",
 		link: "hsl(143 87% 15%)",
 		pageGradient:
-			"linear-gradient(to bottom right, hsl(143 13% 99%), hsl(143 23% 98%), hsl(143 13% 99%))",
+			"linear-gradient(to bottom right, hsl(143 13% 99%), hsl(143 33% 98%), hsl(143 16% 99%))",
 	},
 	header: {
 		startColor: "hsl(143 48% 10%)",
 		endColor: "hsl(323 61% 56%)",
 	},
 	pill: {
-		textColor: "#6F6F77",
-		background: "#F4F4F5",
+		textColor: "hsl(143 40% 10%)",
+		background: "hsl(143 6% 86%)",
 	},
 	sidebar: {
 		gradient:
-			"linear-gradient(to right, hsl(143 4% 99%), hsl(143 10% 97%) 80%, hsl(143 5% 96%))",
-		shadowColor: "#000000",
+			"linear-gradient(to right, hsl(143 4% 99%), hsl(143 15% 95%) 80%, hsl(143 45% 94%))",
+		shadowColor: "hsl(143 10% 10%)",
 	},
 	textInput: {
 		textColor: "#000000",

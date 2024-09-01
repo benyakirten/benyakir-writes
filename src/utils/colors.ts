@@ -2,13 +2,23 @@ import chroma from "chroma-js";
 
 import { validateRange } from "./validation";
 
-const HSL_REGEX_PARSER = /hsl\(([a-zA-Z0-9\.]+) (\w+)%? (\w+)%?\)/;
+const HSL_REGEX_PARSER = /hsl\(([a-zA-Z0-9\.]+)[\s,](\w+)%?[\s,](\w+)%?\)/;
 
 export function convertHexToRGBA(color: string, opacity = 0.4) {
 	const parsedColors = convertHexToRGBNumber(color);
 	return `rgba(${parsedColors.red}, ${parsedColors.green}, ${
 		parsedColors.blue
 	}, ${+opacity.toFixed(2)})`;
+}
+
+export function setOpacityOnHSL(color: string, opacity: number) {
+	const parsedColor = parseHSLString(color);
+	if (parsedColor === null) {
+		throw new Error("Unable to parse HSL color");
+	}
+	return `hsl(${parsedColor.hue} ${parsedColor.saturation * 100}% ${
+		parsedColor.luminance * 100
+	}% / ${opacity})`;
 }
 
 function parseAndCheck(..._colors: string[]) {

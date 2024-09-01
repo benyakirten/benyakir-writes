@@ -14,7 +14,7 @@ import {
 	SIZE_XS,
 } from "@/styles/variables";
 import { media } from "@/styles/queries";
-import { convertHexToRGBA } from "@/utils/colors";
+import { convertHexToRGBA, setOpacityOnHSL } from "@/utils/colors";
 
 export const StyledSidebar = styled.nav<{ open?: boolean }>`
   position: fixed;
@@ -36,8 +36,7 @@ export const StyledSidebar = styled.nav<{ open?: boolean }>`
 
   background-image: ${(props) => props.theme.sidebar.gradient};
   border-right: 2px solid ${(props) => props.theme.base.border};
-  box-shadow: ${(props) =>
-		`${SHADOW_MD} ${convertHexToRGBA(props.theme.sidebar.shadowColor, 0.4)}`};
+  box-shadow: ${(props) => `${SHADOW_MD} ${setOpacityOnHSL(props.theme.sidebar.shadowColor, 0.3)}`};
 
   transition: transform ${TRANSITION_SLOW};
 `;
