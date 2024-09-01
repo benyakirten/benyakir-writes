@@ -144,11 +144,11 @@ const ProjectsPage: React.FC = () => {
 					setPage={projectPagination.setPage}
 				/>
 				<Grouping>
-					<CardContainer>
-						{projectPagination.visibleItems.map((project) => (
-							<ProjectCard key={project.title} project={project} />
-						))}
-					</CardContainer>
+					<CardContainer
+						items={projectPagination.visibleItems}
+						type="project"
+						Card={ProjectCard}
+					/>
 				</Grouping>
 			</PaginatedPageContents>
 		</Page>

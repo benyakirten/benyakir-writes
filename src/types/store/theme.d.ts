@@ -14,17 +14,13 @@ type ThemeBase = BasicThemeSection & {
 	border: string;
 	link: string;
 	pageGradient: string;
+	disabled: string;
 };
 
 type ThemeSidebar = {
 	gradient: string;
 	shadowColor: string;
 	link: string;
-};
-
-type ThemeTextInput = BasicThemeSection & {
-	border: string;
-	disabled: string;
 };
 
 type ThemeMultipleChoice = BasicThemeSection & {};
@@ -74,7 +70,6 @@ type BaseTheme = {
 	pill: BasicThemeSection;
 	header: ThemeHeader;
 	sidebar: ThemeSidebar;
-	textInput: ThemeTextInput;
 	multipleChoice: ThemeMultipleChoice;
 	fillIn: ThemeFillIn;
 	portfolio: ThemePortfolio;

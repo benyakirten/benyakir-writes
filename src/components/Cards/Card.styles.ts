@@ -3,16 +3,6 @@ import styled from "styled-components";
 import { FONT_SM, SIZE_LG, SIZE_XS } from "@/styles/variables";
 import { media } from "@/styles/queries";
 
-export const CardContainer = styled.ul`
-    display: grid;
-    gap: ${SIZE_LG};
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-
-    ${media.phone} {
-        grid-template-columns: 1fr;
-    }
-`;
-
 export const CardTitle = styled.h3`
     font-weight: bold;
     grid-column: span 2;

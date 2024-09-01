@@ -59,7 +59,7 @@ export const Grouping = styled.section<{ marginVertical?: string }>`
 export const LeadHeading = styled.h1`
   position: relative;
 
-  margin-bottom: ${SIZE_MD};
+  padding-bottom: ${SIZE_MD};
 
   ${FONT_XXXL};
 
@@ -237,7 +237,7 @@ export const PillContainer = styled.div`
   text-transform: capitalize;
   
   border-radius: ${SIZE_LG};
-  color: ${(props) => props.theme.base.textColor};
+  color: ${(props) => props.theme.pill.textColor};
   background-color: ${(props) => props.theme.pill.background};
 
 	padding: ${SIZE_XS} ${SIZE_SM};

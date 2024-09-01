@@ -6,6 +6,7 @@ export const defaultDayTheme: BaseTheme = {
 		background: "hsl(213 60% 97%)",
 		border: "hsl(213 53% 28%)",
 		link: "hsl(213 87% 30%)",
+		disabled: "#495057",
 		pageGradient:
 			"linear-gradient(to bottom right, hsl(213 23% 97%), hsl(213 33% 95%) 80%, hsl(213 16% 92%))",
 	},
@@ -17,27 +18,21 @@ export const defaultDayTheme: BaseTheme = {
 	},
 	card: {
 		arrowColor: "hsl(213 25% 92%)",
-		boxShadow: "hsl(213 50% 15%)",
+		boxShadow: "hsl(213 80% 20%)",
 	},
 	header: {
 		startColor: "hsl(213 48% 10%)",
 		endColor: "hsl(33 61% 56%)",
 	},
 	pill: {
-		textColor: "hsl(213 40% 10%)",
-		background: "hsl(213 6% 86%)",
+		textColor: "hsl(213 40% 8%)",
+		background: "hsl(213 10% 86%)",
 	},
 	sidebar: {
 		link: "hsl(213 90% 25%)",
 		gradient:
 			"linear-gradient(to right, hsl(213 14% 95%), hsl(213 25% 95%) 90%, hsl(213 45% 95%))",
 		shadowColor: "hsl(213 10% 10%)",
-	},
-	textInput: {
-		textColor: "#000000",
-		background: "#FFFFFF",
-		border: "#ced4da",
-		disabled: "#495057",
 	},
 	multipleChoice: {
 		background: "#343a40",
@@ -81,6 +76,7 @@ export const defaultNightTheme: BaseTheme = {
 		border: "#343a40",
 		link: "#FFF",
 		pageGradient: "TODO",
+		disabled: "#e9ecef",
 	},
 	portfolio: {
 		textColor: "TODO",
@@ -104,12 +100,6 @@ export const defaultNightTheme: BaseTheme = {
 		link: "#FFF",
 		gradient: "linear-gradient(to right, #252F47 70%, #2F3951)",
 		shadowColor: "#212529",
-	},
-	textInput: {
-		textColor: "#FFFFFF",
-		background: "#000000",
-		disabled: "#e9ecef",
-		border: "#ced4da",
 	},
 	multipleChoice: {
 		background: "#343a40",

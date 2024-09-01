@@ -30,11 +30,11 @@ export const Head: React.FC = () => (
 	<HeadBase title="Author" description={authorDescription} />
 );
 
-const AuthorCard: React.FC<{ item: AuthoredItemCard }> = ({ item }) => {
-	if ("book" in item) {
-		return <StoryCard story={item} />;
+const AuthorCard: React.FC<AuthoredItemCard> = (props) => {
+	if ("book" in props) {
+		return <StoryCard story={props} />;
 	}
-	return <BookCard book={item} />;
+	return <BookCard book={props} />;
 };
 
 const AuthorPage: React.FC = () => {
@@ -129,11 +129,11 @@ const AuthorPage: React.FC = () => {
 					setPage={itemPagination.setPage}
 				/>
 				<Grouping>
-					<CardContainer>
-						{itemPagination.visibleItems.map((item) => (
-							<AuthorCard item={item} key={item.slug} />
-						))}
-					</CardContainer>
+					<CardContainer
+						items={itemPagination.visibleItems}
+						Card={AuthorCard}
+						type="books or storie"
+					/>
 				</Grouping>
 			</PaginatedPageContents>
 		</Page>

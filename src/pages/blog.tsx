@@ -138,11 +138,11 @@ const BlogPage: React.FC = () => {
 					setPage={postPagination.setPage}
 				/>
 				<Grouping>
-					<CardContainer>
-						{postPagination.visibleItems.map((post) => (
-							<BlogCard key={post.slug} post={post} />
-						))}
-					</CardContainer>
+					<CardContainer
+						Card={BlogCard}
+						items={postPagination.visibleItems}
+						type="post"
+					/>
 				</Grouping>
 			</PaginatedPageContents>
 		</Page>

@@ -14,13 +14,13 @@ import { PublishedDate } from "./IconedText.component";
 
 const MAX_TAGS = 2;
 
-const BlogCard: React.FC<{ post: FlattenedBlogCard }> = ({ post }) => {
-	const activeCategory = getActiveCategory(post.categories);
-	const tags = post.tags?.slice(0, MAX_TAGS) ?? [];
-	const otherTags = post.tags ? post.tags.length - MAX_TAGS : 0;
+const BlogCard: React.FC<FlattenedBlogCard> = (props) => {
+	const activeCategory = getActiveCategory(props.categories);
+	const tags = props.tags?.slice(0, MAX_TAGS) ?? [];
+	const otherTags = props.tags ? props.tags.length - MAX_TAGS : 0;
 
 	return (
-		<CardExterior slug={`/post/${post.slug}`} columns="auto 1fr">
+		<CardExterior slug={`/post/${props.slug}`} columns="auto 1fr">
 			<CategoryContainer>{activeCategory}</CategoryContainer>
 			<TagContainer>
 				{tags.map((t) => (
@@ -32,13 +32,13 @@ const BlogCard: React.FC<{ post: FlattenedBlogCard }> = ({ post }) => {
 					</PillContainer>
 				)}
 			</TagContainer>
-			<CardTitle>{post.title}</CardTitle>
+			<CardTitle>{props.title}</CardTitle>
 			<FullContainer
 				dangerouslySetInnerHTML={{
-					__html: post.excerpt ?? post.content ?? "Click to read more.",
+					__html: props.excerpt ?? props.content ?? "Click to read more.",
 				}}
 			/>
-			<PublishedDate span={2} date={post.published.date} />
+			<PublishedDate span={2} date={props.published.date} />
 		</CardExterior>
 	);
 };

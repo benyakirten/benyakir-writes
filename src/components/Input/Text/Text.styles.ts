@@ -20,7 +20,7 @@ export const TextInputContainer = styled.div`
 
     cursor: text;
 
-    color: ${(props) => props.theme.textInput.textColor};
+    color: ${(props) => props.theme.base.textColor};
     font-size: ${FONT_SIZE_MD};
 
     opacity: 0.5;
@@ -30,18 +30,18 @@ export const TextInputContainer = styled.div`
 
   input {
     padding: calc(${SIZE_SM} + ${SIZE_XS}) ${SIZE_XS} 2px;
-    border: 2px solid ${(props) => props.theme.textInput.border};
+    border: 2px solid ${(props) => props.theme.base.border};
 
     font-size: ${FONT_SIZE_SM};
-    color: ${(props) => props.theme.textInput.textColor};
-    background-color: ${(props) => props.theme.textInput.background};
+    color: ${(props) => props.theme.base.textColor};
+    background-color: ${(props) => props.theme.base.background};
 
     &:hover + label,
     &:focus + label,
     &:not(:placeholder-shown) + label {
       top: 0;
       opacity: 1;
-      color: ${(props) => props.theme.textInput.disabled};
+      color: ${(props) => props.theme.base.disabled};
       transform: translateY(0) scale(0.6);
     }
   }

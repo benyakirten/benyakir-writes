@@ -4,7 +4,7 @@ import type { DateInformation, NamedLink } from "./general";
 
 type PostType = {
 	content: string;
-	slug?: string;
+	slug: string;
 	title: string;
 };
 

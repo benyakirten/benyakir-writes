@@ -49,13 +49,14 @@ const ProjectCardInterior: React.FC<{
 	);
 };
 
-const ProjectCard: React.FC<{
-	project: FlattenedProjectCard;
-	image?: ProjectImage;
-}> = ({ project, image }) => {
+const ProjectCard: React.FC<
+	FlattenedProjectCard & {
+		image?: ProjectImage;
+	}
+> = ({ image, ...props }) => {
 	return (
-		<CardExterior slug={`/project/${project.slug}`} columns="1fr 1fr">
-			<ProjectCardInterior project={project} image={image} />
+		<CardExterior slug={`/project/${props.slug}`} columns="1fr 1fr">
+			<ProjectCardInterior project={props} image={image} />
 		</CardExterior>
 	);
 };
