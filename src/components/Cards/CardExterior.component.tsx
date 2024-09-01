@@ -30,9 +30,9 @@ const StyledCardExterior = styled.article<{ $columns: string }>`
 	
 	transition: box-shadow ${TRANSITION_SLOW} ease;
 
-	box-shadow: ${(props) => `${SHADOW_CARD_NORMAL} ${props.theme.project.boxShadow}`};;
+	box-shadow: ${(props) => `${SHADOW_CARD_NORMAL} ${props.theme.card.boxShadow}`};;
 	&:hover {
-		box-shadow: ${(props) => `${SHADOW_CARD_HOVER} ${props.theme.project.boxShadow}`};
+		box-shadow: ${(props) => `${SHADOW_CARD_HOVER} ${props.theme.card.boxShadow}`};
 
 		& > [data-arrow] {
 			opacity: 1;
@@ -54,7 +54,7 @@ const ExternalArrow = styled.div`
 
 	opacity: 0;
 	clip-path: polygon(0% 35%, 1% 35%, 1% 0, 2% 50%, 1% 100%, 1% 65%, 0% 65%);
-	background-color: ${(props) => props.theme.project.arrowColor};
+	background-color: ${(props) => props.theme.card.arrowColor};
 	transition: clip-path ${TRANSITION_SLOW} ease ${TRANSITION_FAST};
 	transition: opacity: ${TRANSITION_FAST} ease;
 `;
