@@ -62,7 +62,7 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 					return;
 				}
 
-				dispatch(setActiveThemeByID(e.matches ? "0" : "0"));
+				dispatch(setActiveThemeByID(e.matches ? "1" : "1"));
 			};
 
 			const themePreferenceChange = (e: MediaQueryListEvent) =>

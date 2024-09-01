@@ -72,21 +72,22 @@ export const defaultNightTheme: BaseTheme = {
 	name: "Night",
 	base: {
 		textColor: "#FFFFFF",
-		background: "#111B33",
+		background: "hsl(222 50% 13%)",
 		border: "#343a40",
 		link: "#FFF",
-		pageGradient: "TODO",
+		pageGradient:
+			"linear-gradient(to right, hsl(222 23% 97%), hsl(222 33% 95%) 80%, hsl(222 16% 92%))",
 		disabled: "#e9ecef",
 	},
 	portfolio: {
-		textColor: "TODO",
-		selectedTextColor: "TODO",
-		tabBackground: "TODO",
-		selectedTabBackground: "TODO",
+		textColor: "hsl(222 1% 99%)",
+		selectedTextColor: "hsl(222 1% 99%)",
+		tabBackground: "hsl(222 1% 99%)",
+		selectedTabBackground: "hsl(222 1% 99%)",
 	},
 	card: {
-		arrowColor: "TODO",
-		boxShadow: "TODO",
+		arrowColor: "hsl(222 1% 99%)",
+		boxShadow: "hsl(222 1% 99%)",
 	},
 	header: {
 		startColor: "#FFF",
@@ -99,7 +100,7 @@ export const defaultNightTheme: BaseTheme = {
 	sidebar: {
 		link: "#FFF",
 		gradient: "linear-gradient(to right, #252F47 70%, #2F3951)",
-		shadowColor: "#212529",
+		shadowColor: "hsl(222 10% 10%)",
 	},
 	multipleChoice: {
 		background: "#343a40",
