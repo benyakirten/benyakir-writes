@@ -10,7 +10,7 @@ import {
 	SidebarBackdrop,
 	SidebarContents,
 	StyledSidebar,
-	VisibleGroup,
+	LinkGroup,
 } from "./Sidebar.styles";
 import { Toggle } from "@/components/Input";
 import { capitalize } from "@/utils/strings";
@@ -121,11 +121,10 @@ const Sidebar: React.FC<{ onSearch: () => void }> = ({ onSearch }) => {
 					data-navtoggle="nav-toggle"
 					open={open}
 				>
-					<VisibleGroup
+					<LinkGroup
 						className={open ? "nav-toggle-open" : "nav-toggle-close"}
 						data-navtoggle="nav-toggle"
 						aria-hidden={!open}
-						open={open}
 					>
 						<NavGroup>
 							<ActiveIndicator activeLinkRef={activeLinkRef?.ref} />
@@ -153,7 +152,7 @@ const Sidebar: React.FC<{ onSearch: () => void }> = ({ onSearch }) => {
 							<LegalItem>&copy; 2021-2024 by Benyakir Horowitz</LegalItem>
 							<LegalItem>All Rights Reserved</LegalItem>
 						</LegalBox>
-					</VisibleGroup>
+					</LinkGroup>
 				</SidebarContents>
 				<Logo opening={opening} open={open} />
 			</StyledSidebar>

@@ -9,11 +9,9 @@ import styled from "styled-components";
 
 export const ToggleGroup = styled.div`
   --orb-size: calc(${SIZE_MD} - 4px);
-  position: relative;
 
   display: flex;
   align-items: center;
-  height: ${SIZE_MD};
   gap: ${SIZE_SM};
 `;
 

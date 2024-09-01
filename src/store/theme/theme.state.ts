@@ -54,16 +54,16 @@ export const defaultDayTheme: BaseTheme = {
 		},
 	},
 	toggle: {
-		onColor: "#FBD989",
-		onBackground: "#485372",
-		offColor: "#993d4d",
-		offBackground: "#FDE6B0",
-		border: "#000000",
+		onColor: "hsl(213 93% 76%)",
+		onBackground: "hsl(213 26% 36%)",
+		offColor: "hsl(33 43% 42%)",
+		offBackground: "hsl(33 95% 84%)",
+		border: "hsl(213 1% 1%)",
 	},
 	theme: {
-		iconColor: "#FFFFFF",
-		iconHoverColor: "#0000FF",
-		selectedThemeColor: "#FF0000",
+		iconColor: "hsl(213 40% 91%)",
+		iconHoverColor: "hsl(33 60% 60%)",
+		selectedThemeColor: "hsl(213 90% 40%)",
 	},
 };
 

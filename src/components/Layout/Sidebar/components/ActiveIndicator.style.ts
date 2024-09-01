@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 export const StyledActiveIndicator = styled.div<{ $pos: number }>`
     position: absolute;
-    left: -14%;
+    left: 100%;
     top: ${({ $pos }) => $pos + 4}px;
 
     height: ${FONT_SIZE_LG};

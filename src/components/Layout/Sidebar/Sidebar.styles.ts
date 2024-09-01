@@ -62,9 +62,7 @@ export const ArrowButton = styled.button<{ open: boolean }>`
   left: ${(props) => (props.open ? "0%" : "83%")};
 `;
 
-export const VisibleGroup = styled.div<{ open: boolean }>`
-  opacity: ${(props) => (props.open ? "1" : "0")};
-
+export const LinkGroup = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -76,18 +74,6 @@ export const NavGroup = styled.div`
   flex-direction: column;
   gap: ${SIZE_XS};
   margin: ${SIZE_SM} 0;
-`;
-
-export const SubLinks = styled.div<{ open: boolean }>`
-  display: flex;
-  flex-direction: column;
-
-  margin-left: 1rem;
-
-  transform-origin: top;
-  transition: all ${TRANSITION_SLOW} ease;
-  height: ${(props) => (props.open ? "5rem" : "0")};
-  opacity: ${(props) => (props.open ? "1" : "0")};
 `;
 
 export const LegalBox = styled.div`
