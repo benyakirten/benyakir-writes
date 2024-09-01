@@ -27,11 +27,7 @@ const RecentProjects: React.FC<{ projects: RecentProjectItem[] }> = ({
 	return (
 		<RecentProjectsContainer>
 			{projects.map((project) => (
-				<ProjectCard
-					project={project}
-					key={project.slug}
-					image={project.image}
-				/>
+				<ProjectCard {...project} key={project.slug} image={project.image} />
 			))}
 		</RecentProjectsContainer>
 	);

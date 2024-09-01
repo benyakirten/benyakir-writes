@@ -8,7 +8,7 @@ export const defaultDayTheme: BaseTheme = {
 		link: "hsl(213 87% 30%)",
 		disabled: "hsl(213 2% 70%)",
 		pageGradient:
-			"linear-gradient(to bottom right, hsl(213 23% 97%), hsl(213 33% 95%) 80%, hsl(213 16% 92%))",
+			"linear-gradient(to right, hsl(213 23% 97%), hsl(213 33% 95%) 80%, hsl(213 16% 92%))",
 	},
 	portfolio: {
 		textColor: "hsl(213 50% 90%)",
@@ -31,7 +31,7 @@ export const defaultDayTheme: BaseTheme = {
 	sidebar: {
 		link: "hsl(213 90% 25%)",
 		gradient:
-			"linear-gradient(to right, hsl(213 14% 95%), hsl(213 25% 95%) 90%, hsl(213 45% 95%))",
+			"linear-gradient(to right, hsl(213 14% 95%), hsl(213 25% 95%) 90%, hsl(213 45% 90%))",
 		shadowColor: "hsl(213 10% 10%)",
 	},
 	multipleChoice: {
@@ -39,18 +39,18 @@ export const defaultDayTheme: BaseTheme = {
 		background: "hsl(213 58% 8%)",
 	},
 	fillIn: {
-		border: "#05491F",
+		border: "hsl(213 87% 15%)",
 		default: {
-			background: "#f8f9fa",
-			textColor: "#39435b",
+			background: "hsl(213 17% 98%)",
+			textColor: "hsl(213 23% 29%)",
 		},
 		disabled: {
-			background: "#343a40",
-			textColor: "#D8E3FD",
+			background: "hsl(213 20% 33%)",
+			textColor: "hsl(213 90% 92%)",
 		},
 		hover: {
-			background: "#05491F",
-			textColor: "#D8E3FD",
+			background: "hsl(213 87% 20%)",
+			textColor: "hsl(213 90% 92%)",
 		},
 	},
 	toggle: {

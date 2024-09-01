@@ -20,7 +20,7 @@ const workHistory: WorkHistoryDatum[] = [
 	{
 		title: "Independent Contractor",
 		company: "SpringBlock",
-		startDate: new Date("08/01/2023"),
+		startDate: new Date("10/01/2023"),
 		endDate: null,
 		points: [
 			"Planned and executed migration scheme to move data from legacy Oracle database to normalized Postgres database",

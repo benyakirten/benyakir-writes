@@ -1,11 +1,14 @@
 import styled from "styled-components";
 
-import { FONT_SM, SIZE_LG, SIZE_XS } from "@/styles/variables";
+import { FONT_SM, SIZE_XS } from "@/styles/variables";
 import { media } from "@/styles/queries";
+import { limitLines } from "@/styles/style-mixins";
 
 export const CardTitle = styled.h3`
     font-weight: bold;
     grid-column: span 2;
+
+    ${limitLines(1)}
 `;
 
 export const CategoryContainer = styled.p`
