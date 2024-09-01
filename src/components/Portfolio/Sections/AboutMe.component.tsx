@@ -17,6 +17,7 @@ import {
 import { FileQuery, ImageQuery } from "@/types/general";
 import { downloadFile } from "@/utils/dom";
 import { GatsbyImage } from "gatsby-plugin-image";
+import { useAppSelector } from "@/store/hooks";
 
 const StyledProfile = styled.div`
 	display: flex;
@@ -120,6 +121,12 @@ const PortfolioLink: React.FC<{
 		</a>
 	);
 };
+
+const GitHubIcon = styled(StyledLinkImage)<{ $isDark: boolean }>`
+	filter: invert(${(props) => (props.$isDark ? 1 : 0)});
+	background: none;
+`;
+
 const ResumeButton: React.FC<{ resume: string }> = ({ resume }) => (
 	<button
 		style={{ width: "max-content", gridColumn: "span 1" }}
@@ -138,6 +145,9 @@ const AboutMe: React.FC<{
 	liIcon?: string;
 	resume?: string;
 }> = ({ ghIcon, liIcon, resume }) => {
+	const theme = useAppSelector((root) => root.theme.active);
+	const isDark = theme.id === "1" || theme.name.toLowerCase().includes("night");
+
 	return (
 		<StyledAboutMe>
 			<Profile />
@@ -176,7 +186,7 @@ const AboutMe: React.FC<{
 					<PortfolioLink
 						to="https://github.com/benyakirten"
 						text="GitHub"
-						icon={<StyledLinkImage src={ghIcon} alt="GitHub" />}
+						icon={<GitHubIcon $isDark={isDark} src={ghIcon} alt="GitHub" />}
 					/>
 				)}
 				{liIcon && (
