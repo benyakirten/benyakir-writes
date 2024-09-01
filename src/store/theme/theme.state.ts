@@ -2,35 +2,35 @@ export const defaultDayTheme: BaseTheme = {
 	id: "0",
 	name: "Day",
 	base: {
-		textColor: "hsl(143 58% 8%)",
-		background: "hsl(143 1% 99%)",
-		border: "hsl(143 53% 28%)",
-		link: "hsl(143 87% 15%)",
+		textColor: "hsl(213 58% 8%)",
+		background: "hsl(213 50% 97%)",
+		border: "hsl(213 53% 28%)",
+		link: "hsl(213 87% 15%)",
 		pageGradient:
-			"linear-gradient(to bottom right, hsl(143 13% 99%), hsl(143 33% 98%), hsl(143 16% 99%))",
+			"linear-gradient(to bottom right, hsl(213 23% 97%), hsl(213 33% 95%), hsl(213 16% 95%))",
 	},
 	portfolio: {
-		textColor: "hsl(110 50% 90%)",
-		selectedTextColor: "hsl(143 40% 20%)",
-		tabBackground: "hsl(200 35% 25%)",
-		selectedTabBackground: "hsl(143 1% 99%)",
+		textColor: "hsl(213 50% 90%)",
+		selectedTextColor: "hsl(213 40% 20%)",
+		tabBackground: "hsl(213 35% 25%)",
+		selectedTabBackground: "hsl(213 1% 99%)",
 	},
 	card: {
-		arrowColor: "hsl(143 25% 92%)",
-		boxShadow: "hsl(143 50% 15%)",
+		arrowColor: "hsl(213 25% 92%)",
+		boxShadow: "hsl(213 50% 15%)",
 	},
 	header: {
-		startColor: "hsl(143 48% 10%)",
-		endColor: "hsl(323 61% 56%)",
+		startColor: "hsl(213 48% 10%)",
+		endColor: "hsl(33 61% 56%)",
 	},
 	pill: {
-		textColor: "hsl(143 40% 10%)",
-		background: "hsl(143 6% 86%)",
+		textColor: "hsl(213 40% 10%)",
+		background: "hsl(213 6% 86%)",
 	},
 	sidebar: {
 		gradient:
-			"linear-gradient(to right, hsl(143 4% 99%), hsl(143 15% 95%) 90%, hsl(143 45% 94%))",
-		shadowColor: "hsl(143 10% 10%)",
+			"linear-gradient(to right, hsl(213 14% 95%), hsl(213 25% 95%) 90%, hsl(213 45% 95%))",
+		shadowColor: "hsl(213 10% 10%)",
 	},
 	textInput: {
 		textColor: "#000000",
