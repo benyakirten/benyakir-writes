@@ -11,6 +11,7 @@ import {
 	convertRGBNumberToRGBString,
 	convertRGBStringToRGBNumber,
 	parseHSLString,
+	setOpacityOnHSL,
 	toHex,
 	validateRGBNumbers,
 } from "@/utils/colors";
@@ -509,6 +510,22 @@ describe("toHex", () => {
 		expect(toHex(123)).toEqual("7B");
 	});
 });
+describe("setOpacityOnHSL", () => {
+	test("should set opacity on HSL color", () => {
+		const color = "hsl(120 50% 50%)";
+		const opacity = 0.8;
+		const got = setOpacityOnHSL(color, opacity);
+
+		const want = "hsl(120 50% 50% / 0.8)";
+		expect(got).toEqual(want);
+	});
+
+	test("should throw an error for invalid HSL color", () => {
+		const color = "hsl(120 50% 50";
+		const opacity = 0.8;
+		expect(() => setOpacityOnHSL(color, opacity)).toThrow();
+	});
+});
 
 describe("convertHSLToHex", () => {
 	test.for<{ input: HSLColor; want: string }>([
@@ -650,6 +667,16 @@ describe("parseHSLString", () => {
 	test.for<{ input: string; want: HSLColor | null }>([
 		{
 			input: "hsl(0 100% 50%)",
+			want: {
+				hue: 0,
+				saturation: 1,
+				luminance: 0.5,
+			},
+		},
+		{
+			// Note the addition of commas
+			// since they're also valid CSS
+			input: "hsl(0, 100%, 50%)",
 			want: {
 				hue: 0,
 				saturation: 1,

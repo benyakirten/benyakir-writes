@@ -2,7 +2,7 @@ import chroma from "chroma-js";
 
 import { validateRange } from "./validation";
 
-const HSL_REGEX_PARSER = /hsl\(([a-zA-Z0-9\.]+)[\s,](\w+)%?[\s,](\w+)%?\)/;
+const HSL_REGEX_PARSER = /hsl\(([a-zA-Z0-9\.]+),? (\w+)%?,? (\w+)%?\)/;
 
 export function convertHexToRGBA(color: string, opacity = 0.4) {
 	const parsedColors = convertHexToRGBNumber(color);
