@@ -41,7 +41,7 @@ export const TagContainer = styled.div`
 	}
 `;
 
-export const FullContainer = styled.p`
+export const FullContainer = styled.div`
 	grid-column: span 2;
 `;
 

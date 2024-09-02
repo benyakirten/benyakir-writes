@@ -40,11 +40,12 @@ const themeSlice = createSlice({
 	initialState,
 	reducers: {
 		toggleTimeOfDay: (state) => {
-			const { name } = state.active;
+			const { id } = state.active;
 			const newTheme =
-				name === "day"
+				id === "0"
 					? state.themes.find((theme) => theme.id === "1")
 					: state.themes.find((theme) => theme.id === "0");
+
 			state.active = newTheme ? newTheme : state.active;
 			localStorage.setItem(STORED_ACTIVE_THEME_ID, state.active.id);
 		},

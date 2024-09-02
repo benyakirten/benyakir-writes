@@ -1,5 +1,3 @@
-import { DefaultTheme } from "styled-components/native";
-
 declare module "*.png";
 declare module "*.svg";
 declare module "*.json";
@@ -10,7 +8,9 @@ declare module "*.css" {
 	export = classNames;
 }
 
+import "styled-components";
 // https://styled-components.com/docs/api#typescript
+// Dunno why this isn't working, but I'm not going to investigate.
 declare module "styled-components" {
 	export type DefaultTheme = BaseTheme;
 }

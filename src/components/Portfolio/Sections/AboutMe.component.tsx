@@ -18,6 +18,7 @@ import {
 import { ImageQuery } from "@/types/general";
 import { downloadFile } from "@/utils/dom";
 import { GatsbyImage } from "gatsby-plugin-image";
+import { convertHexToHSL, parseHSLString } from "@/utils/colors";
 
 const StyledProfile = styled.div`
 	display: flex;
@@ -153,13 +154,31 @@ const ResumeButton: React.FC<{ resume: string }> = ({ resume }) => (
 	</StyledResumeButton>
 );
 
+function isBgDark(id: string, name: string, bgColor: string): boolean {
+	if (id === "1" || name.toLowerCase().includes("night")) {
+		return true;
+	}
+
+	let hsl = parseHSLString(bgColor);
+	if (hsl && hsl.luminance < 50) {
+		return true;
+	}
+
+	try {
+		hsl = convertHexToHSL(bgColor);
+		return hsl.luminance < 50;
+	} catch {
+		return false;
+	}
+}
+
 const AboutMe: React.FC<{
 	ghIcon?: string;
 	liIcon?: string;
 	resume?: string;
 }> = ({ ghIcon, liIcon, resume }) => {
 	const theme = useAppSelector((root) => root.theme.active);
-	const isDark = theme.id === "1" || theme.name.toLowerCase().includes("night");
+	const isDark = isBgDark(theme.id, theme.name, theme.base.background);
 
 	return (
 		<StyledAboutMe>
