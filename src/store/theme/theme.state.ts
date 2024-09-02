@@ -108,12 +108,12 @@ export const defaultNightTheme: BaseTheme = {
 		shadowColor: "hsl(222 10% 80%)",
 	},
 	multipleChoice: {
-		background: "hsl(222 10% 23%)",
-		textColor: "hsl(222 90% 92%)",
-		hoverBackground: "hsl(222 10% 23%)",
-		hoverTextColor: "hsl(222 90% 92%)",
-		controlBackground: "hsl(213 60% 20%)",
-		menuBackground: "hsl(213 60% 20%)",
+		background: "hsl(222 22% 30%)",
+		textColor: "hsl(222 90% 95%)",
+		hoverBackground: "hsl(222 90% 95%)",
+		hoverTextColor: "hsl(222 22% 30%)",
+		controlBackground: "hsl(213 20% 10%)",
+		menuBackground: "hsl(213 60% 15%)",
 	},
 	fillIn: {
 		border: "#e9ecef",

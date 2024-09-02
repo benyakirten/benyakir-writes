@@ -7,6 +7,7 @@ import {
 	WordFilterType,
 } from "@/types/filters";
 import { capitalize } from "./strings";
+import { PotentialChoice } from "@/types/general";
 
 export const createChoiceSet = <T extends object, U extends keyof T>(
 	items: T[],

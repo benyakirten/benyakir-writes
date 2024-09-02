@@ -38,7 +38,7 @@ const MultipleChoice: React.FC<MultipleChoiceInputProps> = ({
 					option: (base) => ({
 						...base,
 						color: theme.base.textColor,
-						background: theme.base.background,
+						background: theme.multipleChoice.menuBackground,
 						fontSize: FONT_SIZE_SM,
 						textTransform: "capitalize",
 						transition: `all ${TRANSITION_NORMAL} ease`,
@@ -50,8 +50,11 @@ const MultipleChoice: React.FC<MultipleChoiceInputProps> = ({
 					multiValue: (base) => ({
 						...base,
 						background: theme.multipleChoice.background,
-						color: theme.multipleChoice.textColor,
 						fontSize: FONT_SIZE_SM,
+					}),
+					multiValueLabel: (base) => ({
+						...base,
+						color: theme.multipleChoice.textColor,
 					}),
 					multiValueRemove: (base) => ({
 						...base,
@@ -59,8 +62,8 @@ const MultipleChoice: React.FC<MultipleChoiceInputProps> = ({
 						backgroundColor: theme.multipleChoice.hoverTextColor,
 						transition: `background-color ${TRANSITION_NORMAL} ease, color ${TRANSITION_NORMAL} ease`,
 						":hover": {
-							backgroundColor: theme.multipleChoice.hoverBackground,
 							color: theme.multipleChoice.hoverTextColor,
+							backgroundColor: theme.multipleChoice.hoverBackground,
 						},
 					}),
 				}}
