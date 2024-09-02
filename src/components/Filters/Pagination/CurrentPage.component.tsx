@@ -19,12 +19,20 @@ const InnerContainer = styled.div`
     padding: 0 ${SIZE_XS};
 `;
 
+const PageNumberContainer = styled.span`
+	color: ${(props) => props.theme.base.textColor};
+	background: ${(props) => props.theme.base.background};
+`;
+
 const PageNumber = styled.input`
 	font-size: ${FONT_SIZE_XS};
 	padding: 0 ${SIZE_XS};
 
 	border: none;
 	outline: none;
+
+	color: ${(props) => props.theme.base.textColor};
+	background: ${(props) => props.theme.base.background};
 
 	&:focus {
 		outline: 1px solid ${(prop) => prop.theme.base.border};
@@ -40,6 +48,8 @@ const PageCount = styled.div`
 
     height: 100%;
     width: max-content;
+
+	background: ${(props) => props.theme.base.background};
 `;
 
 const CurrentPage = React.forwardRef<HTMLInputElement, CurrentPageProps>(
@@ -74,7 +84,7 @@ const CurrentPage = React.forwardRef<HTMLInputElement, CurrentPageProps>(
 				</FillIn>
 				<PageCount>
 					<InnerContainer>
-						<span>
+						<PageNumberContainer>
 							Page{" "}
 							<PageNumber
 								ref={ref}
@@ -84,7 +94,7 @@ const CurrentPage = React.forwardRef<HTMLInputElement, CurrentPageProps>(
 								onChange={setPageNumber}
 							/>
 							/ {numPages + 1}
-						</span>
+						</PageNumberContainer>
 					</InnerContainer>
 				</PageCount>
 				<FillIn

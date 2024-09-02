@@ -38,20 +38,22 @@ const MultipleChoice: React.FC<MultipleChoiceInputProps> = ({
 						textTransform: "capitalize",
 						transition: `all ${TRANSITION_NORMAL} ease`,
 						":hover": {
-							backgroundColor: theme.multipleChoice.background,
-							color: theme.multipleChoice.textColor,
+							backgroundColor: theme.multipleChoice.hoverBackground,
+							color: theme.multipleChoice.hoverTextColor,
 						},
 					}),
 					multiValue: (base) => ({
 						...base,
+						backgroundColor: theme.multipleChoice.background,
+						color: theme.multipleChoice.textColor,
 						fontSize: FONT_SIZE_SM,
 					}),
 					multiValueRemove: (base) => ({
 						...base,
 						transition: `background-color ${TRANSITION_NORMAL} ease, color ${TRANSITION_NORMAL} ease`,
 						":hover": {
-							backgroundColor: theme.multipleChoice.background,
-							color: theme.multipleChoice.textColor,
+							backgroundColor: theme.multipleChoice.hoverBackground,
+							color: theme.multipleChoice.hoverTextColor,
 						},
 					}),
 				}}

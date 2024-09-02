@@ -35,8 +35,10 @@ export const defaultDayTheme: BaseTheme = {
 		shadowColor: "hsl(213 10% 10%)",
 	},
 	multipleChoice: {
-		textColor: "hsl(213 60% 97%)",
-		background: "hsl(213 58% 8%)",
+		background: "hsl(213 60% 92%)",
+		textColor: "hsl(213 58% 8%)",
+		hoverBackground: "hsl(213 87% 15%)",
+		hoverTextColor: "hsl(213 90% 92%)",
 	},
 	fillIn: {
 		border: "hsl(213 87% 15%)",
@@ -104,8 +106,10 @@ export const defaultNightTheme: BaseTheme = {
 		shadowColor: "hsl(222 10% 80%)",
 	},
 	multipleChoice: {
-		background: "#343a40",
-		textColor: "#FDF3D8",
+		background: "hsl(222 10% 23%)",
+		textColor: "hsl(222 90% 92%)",
+		hoverBackground: "hsl(222 10% 23%)",
+		hoverTextColor: "hsl(222 90% 92%)",
 	},
 	fillIn: {
 		border: "#e9ecef",

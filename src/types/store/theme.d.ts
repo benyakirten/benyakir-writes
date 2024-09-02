@@ -23,7 +23,12 @@ type ThemeSidebar = {
 	link: string;
 };
 
-type ThemeMultipleChoice = BasicThemeSection & {};
+type ThemeMultipleChoice = {
+	background: string;
+	textColor: string;
+	hoverBackground: string;
+	hoverTextColor: string;
+};
 
 type ThemeFillIn = {
 	border: string;
