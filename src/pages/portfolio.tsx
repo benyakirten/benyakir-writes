@@ -87,10 +87,10 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
 	const [selectedId, setSelectedId] = React.useState<string>("bio");
 
 	return (
-		<Page>
-			<PortfolioPageContents>
-				<PortfolioHeader />
-				<RandomizedBackground>
+		<RandomizedBackground>
+			<Page>
+				<PortfolioPageContents>
+					<PortfolioHeader />
 					<CentralizedItem>
 						<Tabs
 							tabs={tabs}
@@ -99,9 +99,9 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
 							onSelect={setSelectedId}
 						/>
 					</CentralizedItem>
-				</RandomizedBackground>
-			</PortfolioPageContents>
-		</Page>
+				</PortfolioPageContents>
+			</Page>
+		</RandomizedBackground>
 	);
 };
 

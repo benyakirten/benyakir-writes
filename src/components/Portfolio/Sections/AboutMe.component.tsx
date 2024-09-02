@@ -10,6 +10,7 @@ import {
 	FONT_SIZE_LG,
 	FONT_SIZE_SM,
 	FONT_SIZE_XS,
+	FONT_SM,
 	SIZE_SM,
 	SIZE_XS,
 	TRANSITION_NORMAL,
@@ -19,6 +20,7 @@ import { ImageQuery } from "@/types/general";
 import { convertHexToHSL, isBgDark, parseHSLString } from "@/utils/colors";
 import { downloadFile } from "@/utils/dom";
 import { GatsbyImage } from "gatsby-plugin-image";
+import { GrowableUnderline } from "@/components/General";
 
 const StyledProfile = styled.div`
 	display: flex;
@@ -101,9 +103,8 @@ const StyledLinkImage = styled.img`
 `;
 
 const StyledLinkText = styled.p`
-	font-size: ${FONT_SIZE_XS};
-
-	opacity: 0.6;
+	${FONT_SM}
+	
 	color: ${(props) => props.theme.base.textColor};
 	transition: opacity ${TRANSITION_NORMAL} ease;
 `;
@@ -111,10 +112,6 @@ const StyledLinkText = styled.p`
 const PortfolioAnchor = styled.a`
 	width: max-content;
 	grid-column: span 1;
-
-	&:hover p, &:focus p {
-		opacity: 1;
-	}
 `;
 
 const PortfolioLink: React.FC<{
@@ -123,9 +120,14 @@ const PortfolioLink: React.FC<{
 	icon: React.ReactNode;
 }> = ({ to, text, icon }) => {
 	return (
-		<PortfolioAnchor href={to}>
-			<IconedText icon={icon} text={<StyledLinkText>{text}</StyledLinkText>} />
-		</PortfolioAnchor>
+		<GrowableUnderline>
+			<PortfolioAnchor href={to}>
+				<IconedText
+					icon={icon}
+					text={<StyledLinkText>{text}</StyledLinkText>}
+				/>
+			</PortfolioAnchor>
+		</GrowableUnderline>
 	);
 };
 
@@ -137,21 +139,20 @@ const GitHubIcon = styled(StyledLinkImage)<{ $isDark: boolean }>`
 const StyledResumeButton = styled.button`
 	width: fit-content;
 	grid-column: span 1;
-	&:hover p, &:focus p {
-		opacity: 1;
-	}
 `;
 
 const ResumeButton: React.FC<{ resume: string }> = ({ resume }) => (
-	<StyledResumeButton
-		type="button"
-		onClick={() => downloadFile(resume, "Resume - Ben Horowitz.pdf")}
-	>
-		<IconedText
-			icon={<ResumeIcon />}
-			text={<StyledLinkText>Resume</StyledLinkText>}
-		/>
-	</StyledResumeButton>
+	<GrowableUnderline>
+		<StyledResumeButton
+			type="button"
+			onClick={() => downloadFile(resume, "Resume - Ben Horowitz.pdf")}
+		>
+			<IconedText
+				icon={<ResumeIcon />}
+				text={<StyledLinkText>Resume</StyledLinkText>}
+			/>
+		</StyledResumeButton>
+	</GrowableUnderline>
 );
 
 const AboutMe: React.FC<{
