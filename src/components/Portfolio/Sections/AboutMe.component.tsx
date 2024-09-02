@@ -3,13 +3,13 @@ import React from "react";
 import styled from "styled-components";
 
 import IconedText from "@/components/Cards/IconedText.component";
+import { GrowableUnderline } from "@/components/General";
 import { MailIcon, ResumeIcon } from "@/components/Icons";
 import { useAppSelector } from "@/store/hooks";
 import { media } from "@/styles/queries";
 import {
 	FONT_SIZE_LG,
 	FONT_SIZE_SM,
-	FONT_SIZE_XS,
 	FONT_SM,
 	SIZE_SM,
 	SIZE_XS,
@@ -17,10 +17,9 @@ import {
 	Z_ABOVE,
 } from "@/styles/variables";
 import { ImageQuery } from "@/types/general";
-import { convertHexToHSL, isBgDark, parseHSLString } from "@/utils/colors";
+import { isBgDark } from "@/utils/colors";
 import { downloadFile } from "@/utils/dom";
 import { GatsbyImage } from "gatsby-plugin-image";
-import { GrowableUnderline } from "@/components/General";
 
 const StyledProfile = styled.div`
 	display: flex;
