@@ -112,22 +112,22 @@ export const defaultNightTheme: BaseTheme = {
 		textColor: "hsl(222 90% 95%)",
 		hoverBackground: "hsl(222 90% 95%)",
 		hoverTextColor: "hsl(222 22% 30%)",
-		controlBackground: "hsl(213 20% 10%)",
-		menuBackground: "hsl(213 60% 15%)",
+		controlBackground: "hsl(222 20% 10%)",
+		menuBackground: "hsl(222 60% 15%)",
 	},
 	fillIn: {
-		border: "#e9ecef",
+		border: "hsl(222 16% 93%)",
 		default: {
-			background: "#111B33",
-			textColor: "#f8f9fa",
+			background: "hsl(222 50% 13%)",
+			textColor: "hsl(222 17% 98%)",
 		},
 		disabled: {
-			background: "#495057",
-			textColor: "#D8E3FD",
+			background: "hsl(222 8% 25%)",
+			textColor: "hsl(222 15% 92%)",
 		},
 		hover: {
-			background: "#D8E3FD",
-			textColor: "#05491F",
+			background: "hsl(222 90% 92%)",
+			textColor: "hsl(222 87% 15%)",
 		},
 	},
 	toggle: {
