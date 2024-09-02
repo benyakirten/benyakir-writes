@@ -320,3 +320,9 @@ type SearchableItem = {
 	title: string;
 	slug: string;
 };
+
+type HTMLBlock = {
+	tag: string;
+	classes: string[];
+	html: string;
+};

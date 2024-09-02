@@ -15,8 +15,12 @@ type SyntaxHighlighterBlock = BaseBlock & {
 };
 
 type BlockComponents = {
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	[identifier: string]: React.FC<any>;
+	[identifier: string]: {
+		// biome-ignore lint/suspicious/noExplicitAny: Typing this would be a pain.
+		el: React.FC<any>;
+		// biome-ignore lint/suspicious/noExplicitAny: Typing this would be a pain.
+		propGetter: (content: string) => any;
+	};
 };
 
 type EncodingFunction = (code: string) => string;

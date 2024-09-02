@@ -2,31 +2,42 @@ import React from "react";
 
 import { SyntaxHighlighter } from "@/components/Blocks";
 import { WpContent } from "@/styles/general-components";
+import { HTMLBlock } from "@/types/posts";
+import { BlockParser } from "./block-parser";
+
+const syntaxHighlighterGetter = (content: string) => {
+	const preBracketStart = content.indexOf("<pre");
+	const preBracketEnd = content.indexOf(">", preBracketStart);
+	const endPreEl = content.indexOf("</pre", preBracketEnd);
+
+	const preContent = content.slice(preBracketEnd + 1, endPreEl);
+
+	return JSON.parse(preContent);
+};
 
 const KNOWN_BLOCK_CLASSES: BlockComponents = {
-	"benyakir-syntax-highlighter": SyntaxHighlighter,
+	"benyakir-syntax-highlighter": {
+		el: SyntaxHighlighter,
+		propGetter: syntaxHighlighterGetter,
+	},
 };
 
 const BLOCKS_TO_REMOVE: string[] = ["sharedaddy", "sd-sharing-enbaled"];
 
-function parseChildToBlocks(child: Element): JSX.Element | null {
-	for (let i = 0; i < child.classList.length; i++) {
-		const cls = child.classList[i];
+function parseChildToBlocks(child: HTMLBlock): JSX.Element | null {
+	for (const cls of child.classes) {
 		if (cls in KNOWN_BLOCK_CLASSES) {
-			const innerHTML = child.firstElementChild?.innerHTML;
-			if (!innerHTML) {
-				return null;
-			}
 			try {
-				const properties = JSON.parse(innerHTML);
+				const propGetter = KNOWN_BLOCK_CLASSES[cls].propGetter;
+				const properties = propGetter(child.html);
 
 				// All attributes are stored as a json string in the innerHTML of a pre element.
 				// https://github.com/benyakirten/gutenberg-syntax-highlighter/blob/main/bshg.php
-				const Block = KNOWN_BLOCK_CLASSES[cls];
+				const Block = KNOWN_BLOCK_CLASSES[cls].el;
 
 				return <Block {...properties} />;
 			} catch (e) {
-				console.error(`Failed to parse ${cls} properties`, e, innerHTML);
+				console.error(`Failed to parse ${cls} properties`, e, child);
 				continue;
 			}
 		}
@@ -36,20 +47,19 @@ function parseChildToBlocks(child: Element): JSX.Element | null {
 		}
 	}
 
-	return <WpContent dangerouslySetInnerHTML={{ __html: child.outerHTML }} />;
+	return <WpContent dangerouslySetInnerHTML={{ __html: child.html }} />;
 }
 
 export function preprocessWPBlocks(content: string): JSX.Element[] {
-	const doc = new DOMParser().parseFromString(content, "text/html");
-	const body = doc.children[0].children[1] as HTMLBodyElement;
-
-	const blocks: JSX.Element[] = [];
-	for (const child of Array.from(body.children)) {
-		const block = parseChildToBlocks(child);
-		if (block) {
-			blocks.push(block);
+	const parser = new BlockParser(content);
+	const blocks = parser.blocks.reduce<JSX.Element[]>((acc, block) => {
+		const parsedBlock = parseChildToBlocks(block);
+		if (parsedBlock) {
+			acc.push(parsedBlock);
 		}
-	}
+
+		return acc;
+	}, []);
 
 	return blocks;
 }
