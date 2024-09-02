@@ -1,20 +1,51 @@
-import { useState } from 'react'
+import { useCallback, useMemo, useState } from "react";
 
-const usePagination: PaginationHook = <T>(initialItems: T[]) => {
-  const [currentPage, setCurrentPage] = useState(0)
-  const [currentItems, _setCurrentItems] = useState(initialItems)
+import type { PaginationHook } from "@/types/hooks";
 
-  const setCurrentItems = (_items: T[]) => {
-    setCurrentPage(0)
-    _setCurrentItems(_items)
-  }
+const DEFAULT_ITEMS_PER_PAGE = 10;
+const usePagination: PaginationHook = <T>(
+	initialItems: T[],
+	defaultItemsPerPage = DEFAULT_ITEMS_PER_PAGE,
+) => {
+	const [page, setPage] = useState(0);
+	const [items, _setItems] = useState(initialItems);
 
-  return {
-    currentPage,
-    onPageChange: setCurrentPage,
-    items: currentItems,
-    setCurrentItems,
-  }
-}
+	const [itemsPerPage, _setItemsPerPage] = useState(defaultItemsPerPage);
 
-export default usePagination
+	const setItemsPerPage = useCallback((itemsPerPage: number) => {
+		setPage(0);
+		_setItemsPerPage(itemsPerPage);
+	}, []);
+
+	const setItems = useCallback((items: T[]) => {
+		setPage(0);
+		_setItems(items);
+	}, []);
+
+	const numPages = useMemo(
+		() => Math.floor(items.length / itemsPerPage),
+		[items, itemsPerPage],
+	);
+
+	const visibleItems: T[] = useMemo(
+		() =>
+			items.slice(
+				itemsPerPage * page,
+				page < numPages ? itemsPerPage * (page + 1) : items.length,
+			),
+		[items, page, itemsPerPage, numPages],
+	);
+
+	return {
+		page,
+		setPage,
+		items,
+		setItems,
+		itemsPerPage,
+		setItemsPerPage,
+		numPages,
+		visibleItems,
+	};
+};
+
+export default usePagination;

@@ -1,61 +1,98 @@
-import { graphql } from 'gatsby'
-import * as React from 'react'
+import { graphql } from "gatsby";
+import * as React from "react";
 
 import {
-  Grouping,
-  LeadHeading,
-  Page,
-  WpContent,
-} from '@Styles/general-components'
-import { ProjectHeader } from '@Variants'
+	Box,
+	NormalPageContents,
+	Page,
+	TemplateContent,
+	TemplateHeaderContainer,
+	TemplateHeaderTitle,
+	WpContent,
+} from "@/styles/general-components";
 
-import { getPrettyDate } from '@Utils/dates'
-import { formatWpText } from '@Utils/posts'
-import { formatProject, getFullTechName } from '@Utils/project'
-import { firstWords } from '@Utils/strings'
-
-import { useFetchRepoUpdatedDate } from '@/hooks'
-import { WpProject } from '@Types/query'
+import { PublishedDate } from "@/components/Cards/IconedText.component";
+import {
+	LatestUpdate,
+	ProjectHost,
+	ProjectTech,
+	TechContainer,
+} from "@/components/General";
+import { HeadBase } from "@/components/SEO";
+import { useFetchRepoUpdatedDate } from "@/hooks";
+import { FileNode } from "@/types/general";
+import type { WpProject } from "@/types/query";
+import { getPrettyDate } from "@/utils/dates";
+import { formatWpText } from "@/utils/posts";
+import { formatProject, getFullTechName } from "@/utils/project";
+import { truncate } from "@/utils/strings";
 
 export const Head: React.FC<WpProject> = ({ data }) => {
-  const project = formatProject(data.wpProject)
-  return (
-    <>
-      <title>{project.title}</title>
-      <meta
-        name="description"
-        content={`${project.title}, created on ${getPrettyDate(
-          project.firstReleased.date
-        )}, using ${project.longTechnologies.join(', ')}. ${firstWords(
-          formatWpText(project.content!),
-          150
-        )}`}
-      />
-    </>
-  )
-}
+	const project = formatProject(data.wpProject);
+	const description = `${project.title}, created on ${getPrettyDate(
+		project.firstReleased.date,
+	)}, using ${project.longTechnologies.join(", ")}. ${truncate(
+		formatWpText(project.content),
+		150,
+	)}`;
+
+	return <HeadBase title={project.title} description={description} />;
+};
+
+const ProjectHeader: React.FC<{
+	title: string;
+	icons: FileNode[];
+	repoLink?: string;
+	firstReleasedDate: Date;
+	hostedOn?: string;
+	mainLink?: string;
+}> = ({ title, icons, repoLink, firstReleasedDate, hostedOn, mainLink }) => {
+	const latestUpdateState = useFetchRepoUpdatedDate(repoLink);
+	return (
+		<TemplateHeaderContainer>
+			<TechContainer>
+				{hostedOn && (
+					<a href={mainLink ?? "#"}>
+						<ProjectHost host={hostedOn} />
+					</a>
+				)}
+				{icons.map((i) => (
+					<ProjectTech key={i.name} tech={i.name} publicURL={i.publicURL} />
+				))}
+			</TechContainer>
+			<TemplateHeaderTitle>{title}</TemplateHeaderTitle>
+			<Box>
+				<PublishedDate date={firstReleasedDate} />
+				<LatestUpdate state={latestUpdateState} />
+			</Box>
+		</TemplateHeaderContainer>
+	);
+};
 
 const Project: React.FC<WpProject> = ({ data }) => {
-  const project = formatProject(data.wpProject)
-  const icons: FileNode[] = data.allFile.nodes
-    .filter((f) => project.shortTechnologies.includes(f.name))
-    .map((f) => ({ ...f, name: getFullTechName(f.name) }))
+	const project = formatProject(data.wpProject);
+	const icons: FileNode[] = data.allFile.nodes
+		.filter((f) => project.shortTechnologies.includes(f.name))
+		.map((f) => ({ ...f, name: getFullTechName(f.name) }));
 
-  const latestUpdateState = useFetchRepoUpdatedDate(project.repoLink)
-  return (
-    <Page>
-      <LeadHeading>{project.title}</LeadHeading>
-      <ProjectHeader
-        project={project}
-        icons={icons}
-        latestUpdateState={latestUpdateState}
-      />
-      <Grouping>
-        <WpContent dangerouslySetInnerHTML={{ __html: project.content! }} />
-      </Grouping>
-    </Page>
-  )
-}
+	return (
+		<Page>
+			<NormalPageContents>
+				<ProjectHeader
+					icons={icons}
+					title={project.title}
+					repoLink={project.repoLink}
+					firstReleasedDate={project.firstReleased.date}
+					hostedOn={project.hostedOn}
+					mainLink={project.mainLink}
+				/>
+				<TemplateContent>
+					<WpContent dangerouslySetInnerHTML={{ __html: project.content }} />
+				</TemplateContent>
+			</NormalPageContents>
+		</Page>
+	);
+};
 
 export const query = graphql`
   query ($id: String) {
@@ -78,6 +115,6 @@ export const query = graphql`
       }
     }
   }
-`
+`;
 
-export default Project
+export default Project;

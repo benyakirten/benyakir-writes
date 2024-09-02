@@ -1,134 +1,129 @@
-import * as React from 'react'
+import React from "react";
+import styled from "styled-components";
 
-import { Centered, Column, SubHeading } from '@Styles/general-components'
-import { ResultsContainer, SingleResult } from './Search.styles'
+import { autocomplete } from "@/data/search";
+import { useDebounce } from "@/hooks";
+import { media } from "@/styles/queries";
+import {
+	MODAL_BACKGROUND_COLOR,
+	MODAL_TEXT_COLOR,
+	SIZE_MD,
+	Z_SEARCH,
+} from "@/styles/variables";
+import { getRandomSuggestions } from "@/utils/search";
+import SearchBar from "./SearchBar.component";
+import SearchResults from "./SearchResults.component";
+import { search } from "./search";
+import { SearchProps, SearchResultItems } from "./types";
 
-import { CustomLink, Foldout, Loading } from '@Gen'
-import { Checkbox, Text } from '@Input'
+const SearchModal = styled.dialog`
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    z-index: ${Z_SEARCH};
 
-import { useDebounce, useLookup } from '@Hooks'
-import { capitalize, firstWords } from '@Utils/strings'
+    border-radius: ${SIZE_MD};
+    width: 50%;
 
-import data from '@Data/searchData.json'
+	background-color: ${MODAL_BACKGROUND_COLOR};
+	color: ${MODAL_TEXT_COLOR};
 
-import { SearchableItem } from '@Types/posts'
+	transform: translateX(-50%);
+    
+    &::backdrop {
+		height: 200vh;
+        background-color: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(4px);
+    }
 
-const Search: React.FC<SearchProps> = ({ open, onClick }) => {
-  const allResults = React.useMemo<SearchableItem[]>(() => data, [data])
+	${media.desktop} {
+		width: 70%;
+	}
 
-  const [pending, startTransition] = React.useTransition()
-  const [search, setSearch] = useDebounce(filterResults)
-  const [filteredResults, setFilteredResults] = React.useState<
-    SearchableItem[]
-  >([])
+	${media.tablet} {
+		width: 80%;
+	}
 
-  const [showState, showDispatch] = useLookup({
-    post: true,
-    project: true,
-    book: true,
-    story: true,
-  })
+	${media.phone} {
+		width: 90%;
+`;
 
-  const togglePostType = (postType: string) =>
-    showDispatch({ type: 'TOGGLE', payload: postType })
+const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
+	({ onClose }, ref) => {
+		const [showResultCount, setShowResultCount] = React.useState(false);
+		const handleClick = (e: React.MouseEvent<HTMLDialogElement>) => {
+			if (e.target === e.currentTarget) {
+				onClose();
+			}
+		};
 
-  function filterResults(val: string) {
-    // This is unnecessary for the component to function,
-    // but it causes the component not to re-render on initial render
-    // It really annoys me
-    if (filteredResults.length === 0 && !val) return
+		const [results, setResults] = React.useState<SearchResultItems | null>(
+			null,
+		);
 
-    const _search = val.toLowerCase().split(' ')
-    if (!val) setFilteredResults([])
-    const _results = allResults.filter(
-      (r) => showState[r.type] && _search.every((s) => r.meta[s])
-    )
+		const onSearch = React.useCallback((query: string) => {
+			const results = search(query);
+			setResults(results);
+		}, []);
 
-    startTransition(() => {
-      setFilteredResults(_results)
-    })
-  }
+		const [suggestions, setSuggestions] = React.useState<string[]>([]);
+		const [searchAutocomplete, setSearchAutocomplete] = React.useState<
+			string[]
+		>([]);
+		const [query, _setQuery] = useDebounce(onSearch);
 
-  React.useEffect(() => {
-    filterResults(search)
-  }, [showState])
+		const setQuery = (query: string) => {
+			_setQuery(query);
+			if (query === "") {
+				setShowResultCount(false);
+				setSuggestions([]);
+				setSearchAutocomplete([]);
+				return;
+			}
 
-  return (
-    <Foldout
-      open={open}
-      topbar={
-        <SubHeading style={{ transition: 'color 0.8s ease' }}>
-          Search
-        </SubHeading>
-      }
-      onClick={onClick}
-      height="min-content"
-    >
-      <Text
-        value={search}
-        onChange={setSearch}
-        label="Search"
-        name="global-search"
-        width="90%"
-        tabIndex={open ? 0 : -1}
-        cyId="search-text-input"
-      />
-      <div style={{ marginLeft: '2px', marginTop: '1rem' }}>
-        <Checkbox
-          value={!!showState['post']}
-          onToggle={() => togglePostType('post')}
-          label="Show Posts"
-          name="global-search-show-post"
-          tabIndex={open ? 0 : -1}
-        />
-        <Checkbox
-          value={!!showState['project']}
-          onToggle={() => togglePostType('project')}
-          label="Show Projects"
-          name="global-search-show-project"
-          tabIndex={open ? 0 : -1}
-        />
-        <Checkbox
-          value={!!showState['book']}
-          onToggle={() => togglePostType('book')}
-          label="Show Books"
-          name="global-search-show-book"
-          tabIndex={open ? 0 : -1}
-        />
-        <Checkbox
-          value={!!showState['story']}
-          onToggle={() => togglePostType('story')}
-          label="Show Stories"
-          name="global-search-show-story"
-          tabIndex={open ? 0 : -1}
-        />
-      </div>
-      <ResultsContainer resultLength={filteredResults.length}>
-        {pending ? (
-          <Loading />
-        ) : filteredResults.length === 0 ? (
-          <Centered>No results yet!</Centered>
-        ) : (
-          <>
-            {filteredResults.map((r, idx) => (
-              <SingleResult data-navtoggle="no-toggle" key={r.slug + idx}>
-                <CustomLink inheritColor={true} to={`/${r.type}/${r.slug}`}>
-                  <Column
-                    style={{
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <span>{firstWords(r.title, 18)}</span>
-                    <span>{capitalize(r.type)}</span>
-                  </Column>
-                </CustomLink>
-              </SingleResult>
-            ))}
-          </>
-        )}
-      </ResultsContainer>
-    </Foldout>
-  )
-}
+			const suggestions = autocomplete.suggest(query);
+			if (suggestions === null || suggestions.length === 0) {
+				setSearchAutocomplete([]);
 
-export default Search
+				const randomSuggestions = getRandomSuggestions(autocomplete);
+				setSuggestions(randomSuggestions);
+
+				return;
+			}
+			const allSuggestions = suggestions.map((s) => s.word);
+
+			setSearchAutocomplete(allSuggestions);
+			setSuggestions(allSuggestions);
+			setShowResultCount(true);
+		};
+
+		const numResults = results
+			? results.books.length +
+				results.stories.length +
+				results.posts.length +
+				results.projects.length +
+				results.pages.length
+			: 0;
+
+		return (
+			<SearchModal ref={ref} onClick={handleClick}>
+				<SearchBar
+					showResultCount={showResultCount}
+					numResults={numResults}
+					suggestions={searchAutocomplete}
+					search={query}
+					setSearch={setQuery}
+					onClose={onClose}
+				/>
+				<SearchResults
+					results={results}
+					onClose={onClose}
+					onSetQuery={setQuery}
+					alternatives={suggestions}
+				/>
+			</SearchModal>
+		);
+	},
+);
+
+export default Search;

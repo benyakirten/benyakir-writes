@@ -1,48 +1,84 @@
-import { graphql } from 'gatsby'
-import * as React from 'react'
+import { graphql } from "gatsby";
+import * as React from "react";
 
-import { Grouping, LeadHeading, Page } from '@Styles/general-components'
+import {
+	NormalPageContents,
+	Page,
+	PillContainer,
+	TemplateContent,
+	TemplateHeaderContainer,
+	TemplateHeaderTitle,
+} from "@/styles/general-components";
 
-import { createBlocks, preprocessWPEntry } from '@Utils/blocks/identify-blocks'
-import { formatBlogPost } from '@Utils/blog'
-import { formatWpText } from '@Utils/posts'
-import { firstWords } from '@Utils/strings'
+import { preprocessWPBlocks } from "@/utils/blocks/identify-blocks";
+import { formatBlogPost, getActiveCategory } from "@/utils/blog";
+import { formatWpText } from "@/utils/posts";
+import { truncate } from "@/utils/strings";
 
-import { WpPost } from '@Types/query'
-import { PostHeader } from '@Variants'
+import {
+	CategoryContainer,
+	TagContainer,
+} from "@/components/Cards/Card.styles";
+import { PublishedDate } from "@/components/Cards/IconedText.component";
+import { HeadBase } from "@/components/SEO";
+import type { WpPost } from "@/types/query";
 
 export const Head: React.FC<WpPost> = ({ data }) => {
-  const post = formatBlogPost(data.wpPost)
-  return (
-    <>
-      <title>Benyakir Writes - {post.title}</title>
-      <meta
-        name="description"
-        content={firstWords(formatWpText(post.excerpt!), 150)}
-      />
-    </>
-  )
-}
+	const post = formatBlogPost(data.wpPost);
+	const description = truncate(formatWpText(post.excerpt ?? ""), 150);
+
+	return <HeadBase title={post.title} description={description} />;
+};
+
+const PostHeader: React.FC<{
+	title: string;
+	category: string;
+	tags: string[] | null;
+	date: Date;
+}> = ({ category, tags, title, date }) => {
+	return (
+		<TemplateHeaderContainer>
+			<CategoryContainer style={{ alignSelf: "self-start" }}>
+				{category}
+			</CategoryContainer>
+			{tags && (
+				<TagContainer style={{ justifyContent: "start" }}>
+					{tags.map((t) => (
+						<PillContainer key={t}>{t}</PillContainer>
+					))}
+				</TagContainer>
+			)}
+			<TemplateHeaderTitle>{title}</TemplateHeaderTitle>
+			<PublishedDate date={date} />
+		</TemplateHeaderContainer>
+	);
+};
 
 const Post: React.FC<WpPost> = ({ data }) => {
-  const entry = preprocessWPEntry(data.wpPost.content!)
-  const blocks = createBlocks(entry)
-  const post = formatBlogPost(data.wpPost)
+	const blocks = preprocessWPBlocks(data.wpPost.content ?? "");
+	const post = formatBlogPost(data.wpPost);
+	const activeCategory = getActiveCategory(post.categories);
 
-  return (
-    <Page>
-      <LeadHeading>{post.title}</LeadHeading>
-      <PostHeader post={post} />
-      <Grouping>
-        {blocks.map((block, idx) => (
-          <div key={idx}>{block}</div>
-        ))}
-      </Grouping>
-    </Page>
-  )
-}
+	return (
+		<Page>
+			<NormalPageContents>
+				<PostHeader
+					title={post.title}
+					category={activeCategory}
+					tags={post.tags}
+					date={post.published.date}
+				/>
+				<TemplateContent>
+					{blocks.map((block) => (
+						<div key={block.key ?? Math.random()}>{block}</div>
+					))}
+				</TemplateContent>
+			</NormalPageContents>
+		</Page>
+	);
+};
 
-export default Post
+export default Post;
 
 export const query = graphql`
   query ($id: String) {
@@ -64,4 +100,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;

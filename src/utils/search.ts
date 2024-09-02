@@ -1,71 +1,122 @@
-import {
-  GlobalSearch,
-  SearchableBlogPost,
-  SearchableBook,
-  SearchableItem,
-  SearchableProject,
-  SearchableStory,
-} from '@Types/posts'
-import { GlobalQuery } from '@Types/query'
-
-import { formatStory, formatBook } from './author'
-import { formatBlogPost } from './blog'
-import { createLookupMeta } from './posts'
-import { formatProject } from './project'
-
 export const hasSomeContent = (filterWords: string[]) => {
-  if (!filterWords) return false
-  if (filterWords.length === 0) return false
-  if (filterWords.length === 1 && filterWords[0].trim() === '') return false
-  return true
+	if (!filterWords) return false;
+	if (filterWords.length === 0) return false;
+	if (filterWords.length === 1 && filterWords[0].trim() === "") return false;
+	return true;
+};
+
+export class TrieNode {
+	constructor(
+		public children: Map<string, TrieNode> = new Map(),
+		public weight: number | null = null,
+	) {}
 }
 
-const flattenSearchItems = (
-  items: (
-    | SearchableBlogPost
-    | SearchableStory
-    | SearchableProject
-    | SearchableBook
-  )[]
-): SearchableItem[] =>
-  items.map((i) => ({
-    type: i.type,
-    meta: createLookupMeta(i.meta),
-    slug: i.slug!,
-    title: i.title,
-  }))
+export type CompletionOption = { word: string; weight: number };
+export class Trie {
+	private root: TrieNode;
+	public words: string[] = [];
 
-export const prepareGlobalValues = (query: GlobalQuery) => {
-  const prep: GlobalSearch = {
-    stories: query.allWpShortstory.nodes
-      .sort(
-        (a, b) =>
-          new Date(b.shortStory.publishedOn).getTime() -
-          new Date(a.shortStory.publishedOn).getTime()
-      )
-      .map((story) => ({ ...formatStory(story), type: 'story' })),
-    books: query.allWpBook.nodes
-      .sort(
-        (a, b) =>
-          new Date(b.book.publishedOn).getTime() -
-          new Date(a.book.publishedOn).getTime()
-      )
-      .map((book) => ({ ...formatBook(book), type: 'book' })),
-    projects: query.allWpProject.nodes
-      .sort(
-        (a, b) =>
-          new Date(b.project.firstReleased).getTime() -
-          new Date(a.project.firstReleased).getTime()
-      )
-      .map((proj) => ({ ...formatProject(proj), type: 'project' })),
-    posts: query.allWpPost.nodes
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-      .map((post) => ({ ...formatBlogPost(post), type: 'post' })),
-  }
-  return flattenSearchItems([
-    ...prep.stories,
-    ...prep.books,
-    ...prep.projects,
-    ...prep.posts,
-  ])
+	constructor(words: [string, number][] = []) {
+		this.root = new TrieNode();
+		for (const [word, count] of words) {
+			this.insert(word, count);
+		}
+	}
+
+	insert(word: string, count: number): void {
+		this.words.push(word);
+
+		let node = this.root;
+		for (let i = 0; i < word.length; i++) {
+			const char = word[i];
+			const childNode = node.children.get(char) ?? new TrieNode();
+			if (!node.children.has(char)) {
+				node.children.set(char, childNode);
+			}
+
+			node = childNode;
+		}
+		node.weight = count;
+	}
+
+	private startWith(prefix: string): TrieNode | null {
+		if (prefix === "") {
+			return null;
+		}
+
+		let node = this.root;
+		for (let i = 0; i < prefix.length; i++) {
+			const char = prefix[i];
+			const childNode = node.children.get(char);
+			if (!childNode) {
+				return null;
+			}
+
+			node = childNode;
+		}
+
+		return node;
+	}
+
+	// Returns all possible nodes that can be formed from the given prefix
+	private dfs(
+		prefix: string,
+		node: TrieNode,
+		first = true,
+	): CompletionOption[] {
+		const options: CompletionOption[] = [];
+		if (!first && node.weight !== null) {
+			options.push({ word: prefix, weight: node.weight });
+		}
+
+		for (const [char, childNode] of node.children) {
+			const childPrefix = prefix + char;
+			options.push(...this.dfs(childPrefix, childNode, false));
+		}
+
+		return options;
+	}
+
+	suggest(prefix: string): CompletionOption[] | null {
+		const headNode = this.startWith(prefix);
+		if (!headNode) {
+			return null;
+		}
+
+		const options = this.dfs(prefix, headNode);
+		if (!options || options.length === 0) {
+			return null;
+		}
+
+		return options.sort((a, b) => {
+			if (a.weight === null) {
+				return 1;
+			}
+
+			if (b.weight === null) {
+				return -1;
+			}
+
+			return b.weight - a.weight;
+		});
+	}
+}
+
+const NUM_SUGGESTIONS = 5;
+export function getRandomSuggestions(trie: Trie): string[] {
+	const { words } = trie;
+	if (words.length <= NUM_SUGGESTIONS) {
+		return [...words];
+	}
+
+	const indices: number[] = [];
+	while (indices.length < NUM_SUGGESTIONS) {
+		const index = Math.floor(Math.random() * words.length);
+		if (!indices.includes(index)) {
+			indices.push(index);
+		}
+	}
+
+	return indices.map((i) => words[i]);
 }

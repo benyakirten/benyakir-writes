@@ -1,9 +1,3 @@
-export { default as Toggle } from './Toggle/Toggle.component'
-export { default as TextArea } from './TextArea/TextArea.component'
-export { default as Text } from './Text/Text.component'
-export { default as MultipleChoice } from './MultipleChoice/MultipleChoice.component'
-export { default as Choice } from './MultipleChoice/Choice/Choice.component'
-export { default as Filter } from './Filter/Filter.component'
-export { default as DatePicker } from './DatePicker/DatePicker.component'
-export { default as ColorPicker } from './ColorPicker/ColorPicker.component'
-export { default as Checkbox } from './Checkbox/Checkbox.component'
+export { default as Toggle } from "./Toggle/Toggle.component";
+export { default as Text } from "./Text/Text.component";
+export { default as DatePicker } from "./DatePicker/DatePicker.component";

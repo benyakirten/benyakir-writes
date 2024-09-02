@@ -6,6 +6,7 @@ public
 
 # Statically built data
 src/data/searchData.json
+src/data/wp/lookups.json
 src/data/wp/Author/*.json
 src/data/wp/Posts/*.json
 src/data/wp/Projects/*.json

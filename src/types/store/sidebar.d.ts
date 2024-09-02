@@ -1,3 +1,3 @@
-interface SidebarState {
-  open: boolean
-}
+type SidebarState = {
+	open: boolean;
+};

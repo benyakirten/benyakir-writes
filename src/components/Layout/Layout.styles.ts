@@ -1,7 +1,11 @@
-import styled, { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from "styled-components";
 
-import { media } from '@Styles/queries'
-import { MULISH, TRANSITION_NORMAL } from '@StyleVars'
+import { media } from "@/styles/queries";
+import {
+	SANS_SERIF_FONT,
+	SERIF_FONT,
+	TRANSITION_NORMAL,
+} from "@/styles/variables";
 
 export const GlobalStyles = createGlobalStyle`
   *,
@@ -20,24 +24,42 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
-  html {
-    font-size: 62.5%;
-    
-    ${media.phone} {
-      font-size: 45%;
-    }
-  }
-
-
   body {
     box-sizing: border-box;
-    font-family: ${MULISH};
-    color: ${(props) => props.theme.base.textColor};
-    background-color: ${(props) => props.theme.base.background};
+    font-family: ${SERIF_FONT};
+    color: ${(props) =>
+			// @ts-ignore
+			props.theme.base.textColor};
+    background-color: ${(props) =>
+			// @ts-ignore
+			props.theme.base.background};
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: ${SANS_SERIF_FONT};
+  }
+
+  button {
+      all: unset;
+      cursor: pointer;
+
+      &:disabled {
+          cursor: default;
+      }
   }
 
   a {
+    color: currentColor;
     text-decoration: none;
+  }
+
+  ul {
+    list-style: none;
   }
 
   .filterable-card-enter {
@@ -69,17 +91,17 @@ export const GlobalStyles = createGlobalStyle`
       transform: rotate(-90deg);
     }
   }
-`
+`;
 
 export const LayoutContainer = styled.div`
   display: flex;
   min-height: 100vh;
-`
+`;
 
 export const MainContainer = styled.main`
   position: relative;
   width: 100%;
-  margin-left: 4rem;
+  margin-left: 3rem;
   background-color: ${(props) => props.theme.base.background};
   overflow: hidden;
-`
+`;

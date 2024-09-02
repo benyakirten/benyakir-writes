@@ -1,30 +1,28 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from "react";
 
-import { DebounceHook } from '@/types/hooks'
-import { SEARCH_TIMEOUT } from '@Constants'
+import { SEARCH_TIMEOUT } from "@/data/constants";
+import type { DebounceHook } from "@/types/hooks";
 
 const useDebounce: DebounceHook = (
-  callback: (t: string) => void,
-  initialVal: string = '',
-  timeLimit: number = SEARCH_TIMEOUT
+	callback: (t: string) => void,
+	initialVal = "",
+	timeLimit = SEARCH_TIMEOUT,
 ) => {
-  const memoizedCallback = useCallback((text) => callback(text), [callback])
-  const [timer, setTimer] = useState<NodeJS.Timeout>()
-  const [text, setText] = useState(initialVal)
+	const [text, _setText] = useState(initialVal);
+	const [timer, setTimer] = useState<NodeJS.Timeout>();
 
-  useEffect(() => {
-    if (!text) {
-      memoizedCallback('')
-    }
-    if (timer) {
-      clearTimeout(timer)
-      setTimer(undefined)
-    }
-    const timeout = setTimeout(() => memoizedCallback(text), timeLimit)
-    setTimer(timeout)
-  }, [text])
+	const setText = (value: string) => {
+		_setText(value);
 
-  return [text, setText]
-}
+		if (timer) {
+			clearTimeout(timer);
+		}
 
-export default useDebounce
+		const time = value ? timeLimit : 0;
+		const timeout = setTimeout(() => callback(value), time);
+		setTimer(timeout);
+	};
+	return [text, setText];
+};
+
+export default useDebounce;

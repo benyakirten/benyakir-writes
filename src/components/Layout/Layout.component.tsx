@@ -1,106 +1,112 @@
-import { useLocation } from '@reach/router'
-import * as React from 'react'
-import { Transition, TransitionGroup } from 'react-transition-group'
-import { ThemeProvider } from 'styled-components'
+import { useLocation } from "@reach/router";
+import * as React from "react";
+import { Transition, TransitionGroup } from "react-transition-group";
+import { ThemeProvider } from "styled-components";
 
-import { GlobalStyles, LayoutContainer, MainContainer } from './Layout.styles'
-import Sidebar from './Sidebar/Sidebar.component'
-
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setSidebarState } from "@/store/sidebar/sidebar.slice";
 import {
-  getPageTransitionStyles,
-  PAGE_TRANSITION_DURATION,
-} from '@/styles/transitions'
-import { useAppDispatch, useAppSelector } from '@Store/hooks'
+	initializeThemeState,
+	setActiveThemeByID,
+} from "@/store/theme/theme.slice";
 import {
-  intializeThemeStore,
-  setActiveThemeByName,
-} from '@Store/theme/theme.slice'
-
-export const Head: React.FC = () => (
-  <>
-    <html lang="en" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Faustina&family=Mulish&display=swap"
-      rel="stylesheet"
-    />
-    <title>Benyakir Writes</title>
-    <meta
-      name="description"
-      content="Benyakir Writes is my blog, an outlet for my latest works. Learn about the latest books, projects and short stories he's written.
-              Or check out his blog posts, reviews of books or podcast episodes.."
-    />
-  </>
-)
+	PAGE_TRANSITION_DURATION,
+	getPageTransitionStyles,
+} from "@/styles/transitions";
+import { inputIsFocused } from "@/utils/dom";
+import { GlobalStyles, LayoutContainer, MainContainer } from "./Layout.styles";
+import Search from "./Search";
+import Sidebar from "./Sidebar/Sidebar.component";
 
 const Layout: React.FC<ChildrenProp> = ({ children }) => {
-  const location = useLocation()
-  const themeStore = useAppSelector((root) => root.theme)
-  const dispatch = useAppDispatch()
+	const location = useLocation();
+	const modalRef = React.useRef<HTMLDialogElement>(null);
 
-  React.useEffect(() => {
-    const storedComputerPreferences = localStorage.getItem('BWB_ICP') === 'true'
-    let storedThemes = localStorage.getItem('BWB_TS')
-    const storedPreference = localStorage.getItem('BWB_TNP')?.replace(/"/g, '')
+	const themeStore = useAppSelector((root) => root.theme);
+	const dispatch = useAppDispatch();
 
-    dispatch(
-      intializeThemeStore({
-        computerPreferences: storedComputerPreferences,
-        themes: storedThemes,
-        preference: storedPreference,
-      })
-    )
+	const closeModal = () => modalRef.current?.close();
+	const openModal = () => modalRef.current?.showModal();
 
-    if (window && window.matchMedia) {
-      const darkColorScheme = window.matchMedia('(prefers-color-scheme: dark)')
+	React.useEffect(() => {
+		const handler = (e: KeyboardEvent) => {
+			if (inputIsFocused()) {
+				return;
+			}
 
-      const setThemeByPreference = (e: MediaQueryList) => {
-        if (!storedComputerPreferences) {
-          dispatch(setActiveThemeByName(e.matches ? 'night' : 'day'))
-        }
-      }
+			if ((e.ctrlKey || e.metaKey) && e.key === "/") {
+				openModal();
+			} else if (e.key === "Escape") {
+				if (modalRef.current?.open) {
+					closeModal();
+				} else {
+					dispatch(setSidebarState(false));
+				}
+			}
+		};
 
-      const themePreferenceChange = (e: any) => setThemeByPreference(e.target)
-      darkColorScheme.addEventListener('change', themePreferenceChange)
-      setThemeByPreference(darkColorScheme)
-      return () =>
-        darkColorScheme.removeEventListener('change', themePreferenceChange)
-    }
-  }, [])
+		document.addEventListener("keydown", handler);
+		return () => document.removeEventListener("keydown", handler);
+	});
 
-  return (
-    <ThemeProvider theme={themeStore.active}>
-      <LayoutContainer>
-        <GlobalStyles />
-        <Sidebar />
-        <MainContainer>
-          <TransitionGroup>
-            <Transition
-              key={location.pathname}
-              timeout={{
-                enter: PAGE_TRANSITION_DURATION,
-                exit: PAGE_TRANSITION_DURATION,
-              }}
-              unmountOnExit
-            >
-              {(status) => (
-                <div
-                  style={{
-                    ...getPageTransitionStyles(PAGE_TRANSITION_DURATION)[
-                      status
-                    ],
-                  }}
-                >
-                  {children}
-                </div>
-              )}
-            </Transition>
-          </TransitionGroup>
-        </MainContainer>
-      </LayoutContainer>
-    </ThemeProvider>
-  )
-}
+	React.useEffect(() => {
+		dispatch(initializeThemeState());
+	}, [dispatch]);
 
-export default Layout
+	React.useEffect(() => {
+		if (window?.matchMedia) {
+			const darkColorScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+			const setThemeByPreference = (e: MediaQueryList) => {
+				if (themeStore.ignoreComputerPreferences) {
+					return;
+				}
+
+				dispatch(setActiveThemeByID(e.matches ? "1" : "0"));
+			};
+
+			const themePreferenceChange = (e: MediaQueryListEvent) =>
+				setThemeByPreference(e.target as MediaQueryList);
+			darkColorScheme.addEventListener("change", themePreferenceChange);
+
+			return () =>
+				darkColorScheme.removeEventListener("change", themePreferenceChange);
+		}
+	}, [dispatch, themeStore]);
+
+	return (
+		<ThemeProvider theme={themeStore.active}>
+			<LayoutContainer>
+				<GlobalStyles />
+				<Search ref={modalRef} onClose={closeModal} />
+				<Sidebar onSearch={openModal} />
+				<MainContainer>
+					<TransitionGroup>
+						<Transition
+							key={location.pathname}
+							timeout={{
+								enter: PAGE_TRANSITION_DURATION,
+								exit: PAGE_TRANSITION_DURATION,
+							}}
+							unmountOnExit
+						>
+							{(status) => (
+								<div
+									style={{
+										...getPageTransitionStyles(PAGE_TRANSITION_DURATION)[
+											status
+										],
+									}}
+								>
+									{children}
+								</div>
+							)}
+						</Transition>
+					</TransitionGroup>
+				</MainContainer>
+			</LayoutContainer>
+		</ThemeProvider>
+	);
+};
+
+export default Layout;

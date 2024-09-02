@@ -1,52 +1,46 @@
-interface InputProps {
-  label: string
-  name: string
-  tabIndex?: number
-}
+type InputProps = {
+	label: string;
+	name: string;
+	tabIndex?: number;
+};
 
-type FilterProps = ChildrenProp & {
-  name: string
-  onSearch: (val: string) => void
-}
+type TextProps = InputProps & {
+	value: string;
+	onChange: (newText: string) => void;
+	width?: string;
+	cyId?: string;
+};
 
-interface TextProps extends InputProps {
-  value: string
-  onChange: (newText: string) => void
-  width?: string
-  autofocus?: boolean
-  cyId?: string
-}
+type CheckboxProps = InputProps & {
+	value: boolean;
+	onToggle: (newState: boolean) => void;
+};
 
-interface CheckboxProps extends InputProps {
-  value: boolean
-  onToggle: (newState: boolean) => void
-}
+type DateProps = InputProps & {
+	value: Date;
+	onChange: (date: Date) => void;
+};
 
-interface DateProps extends InputProps {
-  value: Date
-  onChange: (date: Date) => void
-}
+type ChoiceProps = {
+	tabIndex?: number;
+	label: string;
+	value: boolean;
+	onSelect: (label: string) => void;
+};
 
-interface ChoiceProps {
-  tabIndex?: number
-  label: string
-  value: boolean
-  onSelect: (label: string) => void
-}
+type MultipleChoiceProps = {
+	tabIndex?: number;
+	choices: PotentialChoice[];
+	onSelect: (choices: PotentialChoice[]) => void;
+};
 
-interface MultipleChoiceProps {
-  tabIndex?: number
-  choices: PotentialChoice[]
-  onSelect: (choices: PotentialChoice[]) => void
-}
+type ToggleProps = InputProps & {
+	value: boolean;
+	onToggle: () => void;
+	dataCy?: string;
+};
 
-interface ToggleProps extends InputProps {
-  value: boolean
-  onToggle: () => void
-  dataCy?: string
-}
-
-interface ColorPickerProps extends InputProps {
-  value: string
-  onChange: (newVal: string) => void
-}
+type ColorPickerProps = InputProps & {
+	value: string;
+	onChange: (newVal: string) => void;
+};

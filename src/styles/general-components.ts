@@ -1,292 +1,103 @@
-import { GatsbyImage } from 'gatsby-plugin-image'
-import styled from 'styled-components'
+import styled from "styled-components";
 
-import { convertHexToRGBA } from '@Utils/colors'
-import { fadeIn, slideInLeft, slideInRight } from './animations'
-import { media } from './queries'
+import { fadeIn, slideInLeft, slideInRight } from "./animations";
+import { media } from "./queries";
 import {
-  BLACK,
-  FAUSTINA,
-  FONT_LG,
-  FONT_MD,
-  FONT_XL,
-  FONT_XXL,
-  FONT_XXXL,
-  SECONDARY_800,
-  SHADOW_MD_BALANCED,
-  SIZE_MD,
-  TRANSITION_EXTRA_SLOW,
-  TRANSITION_NORMAL,
-  TRANSITION_SLOW,
-} from './variables'
+	FONT_LG,
+	FONT_MD,
+	FONT_SIZE_MD,
+	FONT_SIZE_XXS,
+	FONT_XL,
+	FONT_XXL,
+	FONT_XXXL,
+	SANS_SERIF_FONT,
+	SIZE_LG,
+	SIZE_MD,
+	SIZE_SM,
+	SIZE_XS,
+	TRANSITION_EXTRA_SLOW,
+	TRANSITION_NORMAL,
+} from "./variables";
+
+import {
+	hoverUnderline,
+	limitLines,
+	textClipWithHoverTransition,
+} from "./style-mixins";
 
 export const FadeIn = styled.div<{ duration?: string; delay?: string }>`
   opacity: 0;
   animation: ${fadeIn}
-    ${(props) => (props.duration ? props.duration : '1600ms')}
-    ${(props) => (props.delay ? props.delay : '0ms')} ease forwards;
-`
+    ${(props) => (props.duration ? props.duration : TRANSITION_NORMAL)}
+    ${(props) => (props.delay ? props.delay : "0ms")} ease forwards;
+`;
 
 export const SlideInLeft = styled.div<{ duration?: string; delay?: string }>`
   opacity: 0;
   transform: translateX(-40vw);
   animation: ${slideInLeft}
-    ${(props) => (props.duration ? props.duration : '4s')}
-    ${(props) => (props.delay ? props.delay : '0ms')} ease forwards;
-`
+    ${(props) => (props.duration ? props.duration : TRANSITION_EXTRA_SLOW)}
+    ${(props) => (props.delay ? props.delay : "0ms")} ease forwards;
+`;
 
 export const SlideInRight = styled.div<{ duration?: string; delay?: string }>`
   opacity: 0;
   transform: translateX(40vw);
   animation: ${slideInRight}
-    ${(props) => (props.duration ? props.duration : '4s')}
-    ${(props) => (props.delay ? props.delay : '0ms')} ease forwards;
-`
+    ${(props) => (props.duration ? props.duration : TRANSITION_EXTRA_SLOW)}
+    ${(props) => (props.delay ? props.delay : "0ms")} ease forwards;
+`;
 
 export const Grouping = styled.section<{ marginVertical?: string }>`
   position: relative;
-  margin-top: ${(props) => (props.marginVertical ? props.marginVertical : '0')};
+  margin-top: ${(props) => (props.marginVertical ? props.marginVertical : "0")};
   margin-bottom: ${(props) =>
-    props.marginVertical ? props.marginVertical : '4rem'};
-`
+		props.marginVertical ? props.marginVertical : "4rem"};
+`;
 
-export const GroupingBox = styled.section`
-  position: relative;
-  padding: 1rem;
-  box-shadow: ${(props) =>
-    `${SHADOW_MD_BALANCED} ${convertHexToRGBA(
-      props.theme.base.shadowColor,
-      0.4
-    )}`};
-`
-
+// TODO: Make the colors look good
 export const LeadHeading = styled.h1`
   position: relative;
 
-  padding-bottom: 1rem;
-  margin-bottom: 1rem;
+  padding-bottom: ${SIZE_MD};
 
-  font-family: ${FAUSTINA};
-  font-size: ${FONT_XXXL};
+  ${FONT_XXXL};
 
-  ${media.phone} {
-    font-size: ${FONT_XXL};
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-
-    bottom: 0;
-    left: 0;
-
-    width: 100%;
-    height: 2px;
-
-    background-color: ${(props) => props.theme.base.textColor};
-
-    transform-origin: left;
-    transform: scaleX(1) translateY(0);
-    transition: transform ${TRANSITION_NORMAL} ease;
-
-    ${media.reducedMotion} {
-      transform: scaleX(0.9) translateY(-2rem);
-    }
-  }
-
-  &:hover {
-    &::after {
-      transform: scaleX(0.9) translateY(-2rem);
-    }
-  }
-`
-
-export const Subtitle = styled.h2<{ noUnderline?: boolean }>`
-    font-family: ${FAUSTINA};
-    font-size: ${FONT_XXL};
-
-    ${media.phone} {
-        ${FONT_XL};
-    }
-    text-decoration: ${(props) => (props.noUnderline ? 'none' : 'underline')};
-
-    margin-bottom: 1rem;
-
-    ${media.tablet} {
-        margin-bottom 0.5rem;
-        font-size: ${FONT_XL};
-    }
-`
-
-export const SubHeading = styled.h3<{ noUnderline?: boolean }>`
-  font-family: ${FAUSTINA};
-  font-size: ${FONT_XL};
-  text-decoration: ${(props) => (props.noUnderline ? 'none' : 'underline')};
-
-  margin-bottom: 0.5rem;
-
-  ${media.tablet} {
-    font-size: ${FONT_LG};
-  }
-`
-
-export const MinorHeading = styled.h4`
-    font-family: ${FAUSTINA};
-    font-size: ${FONT_LG};
-
-    ${media.tablet} {
-        margin-bottom 0.5rem;
-        font-size: ${FONT_MD};
-    }
-`
-
-export const BigParagraph = styled.p<{
-  marginRight?: string
-  marginVertical?: string
-}>`
-  font-size: ${FONT_XL};
-  margin-top: ${(props) => (props.marginVertical ? props.marginVertical : '0')};
-  margin-bottom: ${(props) =>
-    props.marginVertical ? props.marginVertical : '0'};
-  margin-right: ${(props) => (props.marginRight ? props.marginRight : '0')};
-`
-
-export const Paragraph = styled.p`
-  font-size: ${FONT_MD};
-  margin: 0;
-`
-
-export const Centered = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
-  height: 100%;
-
-  font-size: ${FONT_MD};
-`
-
-// There's no reason to include a third google font
-// and cause browsers to download another ~10kb of data
-// Especially since the monospace font will only be used here
-export const Card = styled.article`
-  position: relative;
-
-  height: 24rem;
-  box-shadow: ${SHADOW_MD_BALANCED};
-
-  font-family: monospace;
-
-  overflow: auto;
-
-  padding: 2rem;
-
-  &:not(:last-child) {
-    margin-bottom: 2rem;
-  }
-`
-
-export const CardSection = styled.div`
-  flex: 1;
-  &:not(:last-child) {
-    margin-right: 2rem;
-  }
-`
-
-export const CardDoubleSection = styled.div`
-  flex: 2;
-  &:not(:last-child) {
-    margin-right: 2rem;
-  }
-`
-
-export const VerticalSeparator = styled.div`
-  padding-top: 10rem;
-`
-
-export const Grid = styled.div`
-  display: grid;
-  grid-gap: 2rem 2rem;
-`
-
-export const Row = styled.div`
-  position: relative;
-
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-`
-
-export const RowUntilPhone = styled.div`
-  display: flex;
-  align-items: center;
+  ${(props) => textClipWithHoverTransition(props.theme.header.startColor, props.theme.header.endColor)}
 
   ${media.phone} {
-    flex-direction: column;
-    align-items: start;
+    ${FONT_XXL};
   }
-`
+`;
 
-export const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  gap: 1rem;
-`
+export const Subtitle = styled.h2`
+  position: relative;
 
-export const NoLineBreak = styled.span`
-  white-space: nowrap;
-`
+  margin-bottom: ${SIZE_MD};
 
-export const CardLinkBox = styled.div`
-  display: flex;
-  align-items: center;
+  ${FONT_XL};
 
-  margin-top: 1rem;
-  gap: 1rem;
-`
+  ${(props) => textClipWithHoverTransition(props.theme.header.startColor, props.theme.header.endColor)}
 
-export const HoverableContainer = styled.div<{
-  height?: number
-  width?: number
-}>`
-  height: ${(props) => (props.height ? `${props.height}px` : '200px')};
-  width: ${(props) => (props.height ? `${props.width}px` : '134px')};
-
-  border: 2px solid ${BLACK};
-
-  overflow: hidden;
-`
-
-export const HoverableGatsbyImage = styled(GatsbyImage)`
-  transition: transform calc(2 * ${TRANSITION_EXTRA_SLOW});
-  &:hover {
-    transform: scale(1.2);
+  ${media.phone} {
+    ${FONT_LG};
   }
-`
+`;
 
-export const List = styled.ul`
-  font-size: ${FONT_MD};
-  list-style: none;
-`
-
-export const LItem = styled.li`
-  margin: 1rem 0;
-`
+export const BigParagraph = styled.p`
+  ${FONT_XL};
+`;
 
 export const WpContentDescription = styled.div<{ fontSize?: string }>`
-  font-size: ${(props) => (props.fontSize ? props.fontSize : FONT_LG)};
-  ${media.desktop} {
-    font-size: ${FONT_MD};
-  }
-  text-overflow: ellipsis;
+  ${FONT_MD};
+
+  ${limitLines(2)}  
 
   a:link,
   a:visited {
     position: relative;
 
-    color: ${SECONDARY_800};
+    color: ${(props) => props.theme.base.textColor};
 
     overflow: hidden;
     white-space: nowrap;
@@ -301,7 +112,7 @@ export const WpContentDescription = styled.div<{ fontSize?: string }>`
       height: 2px;
       width: 100%;
 
-      background-color: ${SECONDARY_800};
+      background-color: ${(props) => props.theme.base.background};
 
       transition: transform ${TRANSITION_NORMAL} ease;
       transform-origin: left;
@@ -318,50 +129,31 @@ export const WpContentDescription = styled.div<{ fontSize?: string }>`
       }
     }
   }
-`
+`;
 
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: start;
+export const Card = styled.div`
+  border-radius: ${SIZE_XS};
+  border: 1px solid ${(props) => props.theme.base.border};
 
-  transition: all ${TRANSITION_SLOW} ease;
-`
-
-export const ControlGroup = styled.div`
-  margin: 1rem 0;
-`
-
-export const DisappearOnTablet = styled.div`
-  ${media.desktop} {
-    display: none;
-  }
-`
-
-export const DisappearOnPhone = styled.div`
-  ${media.phone} {
-    display: none;
-  }
-`
+  padding: ${SIZE_SM};
+  background-color: ${(props) => props.theme.base.background};
+`;
 
 export const Box = styled.div`
   display: flex;
   align-items: center;
-  margin: 1rem 0;
-  gap: 1rem;
-`
+  gap: ${SIZE_MD};
+`;
 
 export const FlatBox = styled(Box)`
   margin: 0;
-`
+`;
 
 // https://stackoverflow.com/questions/24933430/img-src-svg-changing-the-styles-with-css
-
 export const SVGContainer = styled.div<{
-  src: string
-  alt: string
-  size?: string
+	src: string;
+	alt: string;
+	size?: string;
 }>`
   position: relative;
 
@@ -370,50 +162,18 @@ export const SVGContainer = styled.div<{
 
   height: ${(props) => props.size ?? SIZE_MD};
   width: ${(props) => props.size ?? SIZE_MD};
-`
+`;
 
-export const WpContent = styled.div<{ fontSize?: string }>`
-  font-size: ${(props) => (props.fontSize ? props.fontSize : FONT_LG)};
+export const WpContent = styled.div`
+  ${FONT_LG};
 
   ${media.phone} {
-    font-size: ${(props) => (props.fontSize ? props.fontSize : FONT_MD)};
+    ${FONT_MD};
   }
 
   a:link,
   a:visited {
-    position: relative;
-
-    color: ${(props) => props.theme.base.textColor};
-
-    overflow: hidden;
-    white-space: nowrap;
-
-    &::after {
-      content: '';
-
-      position: absolute;
-      left: 0;
-      bottom: 0;
-
-      height: 2px;
-      width: 100%;
-
-      background-color: ${(props) => props.theme.base.textColor};
-
-      transition: transform ${TRANSITION_NORMAL} ease;
-      transform-origin: left;
-      transform: scaleX(0);
-    }
-
-    &:hover {
-      &::after {
-        transform: scaleX(1);
-
-        ${media.reducedMotion} {
-          transform: scaleX(0);
-        }
-      }
-    }
+    ${(props) => hoverUnderline(props.theme.base.link)}
   }
 
   h1,
@@ -422,83 +182,99 @@ export const WpContent = styled.div<{ fontSize?: string }>`
   h4,
   h5,
   h6 {
-    font-family: ${FAUSTINA};
-    margin: 2rem 0;
+    font-family: ${SANS_SERIF_FONT};
+    padding: ${SIZE_MD} 0;
+    ${(props) => textClipWithHoverTransition(props.theme.header.startColor, props.theme.header.endColor)}
   }
 
+
+  ul,
   ol,
   li {
-    margin-left: 1rem;
+    margin-left: ${SIZE_SM};
+  }
+
+  ul:has(li > a), ol:has(li > a) {
+    list-style-type: disc;
   }
 
   p {
-    margin: 1rem 0;
-  }
-`
-
-export const WpContentInline = styled.span<{ fontSize?: string }>`
-  font-size: ${(props) => (props.fontSize ? props.fontSize : FONT_LG)};
-
-  a:link,
-  a:visited {
-    position: relative;
-
-    color: ${(props) => props.theme.base.textColor};
-
-    overflow: hidden;
-    white-space: nowrap;
-
-    &::after {
-      content: '';
-
-      position: absolute;
-      left: 0;
-      bottom: 0;
-
-      height: 2px;
-      width: 100%;
-
-      background-color: ${(props) => props.theme.base.textColor};
-
-      transition: transform ${TRANSITION_NORMAL} ease;
-      transform-origin: left;
-      transform: scaleX(0);
-    }
-
-    &:hover {
-      &::after {
-        transform: scaleX(1);
-
-        ${media.reducedMotion} {
-          transform: scaleX(0);
-        }
-      }
-    }
+    margin-bottom: ${SIZE_MD};
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: ${FAUSTINA};
-    margin: 2rem 0;
+  code {
+    font-family: monospace;
+    font-size: ${FONT_SIZE_MD};
   }
-
-  ol,
-  li {
-    margin-left: 1rem;
-  }
-
-  p {
-    margin: 0.25rem 0;
-  }
-`
+`;
 
 export const Page = styled.div`
+  overflow-y: auto;
+  height: 100vh;
+
+  background-image: ${(props) => props.theme.base.pageGradient};
+`;
+
+export const PageContents = styled.div`
   padding: 2rem 4rem;
   ${media.tablet} {
     padding: 1rem 4rem;
   }
-`
+`;
+
+export const PillContainer = styled.div<{
+	$backgroundColor?: string;
+	$textColor?: string;
+}>`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+  white-space: nowrap;
+	
+  height: min-content;
+  width: min-content;
+
+	font-family: ${SANS_SERIF_FONT};
+  font-size: ${FONT_SIZE_XXS};
+  text-transform: capitalize;
+  
+  border-radius: ${SIZE_LG};
+  color: ${(props) => props.$textColor ?? props.theme.pill.textColor};
+  background-color: ${(props) => props.$backgroundColor ?? props.theme.pill.background};
+
+	padding: ${SIZE_XS} ${SIZE_SM};
+
+  ${media.phone} {
+    padding: ${SIZE_XS};
+  }
+`;
+
+export const PaginatedPageContents = styled.div`
+  padding: 2rem 18rem 4rem 1rem;
+  ${media.phone} {
+    padding: 2rem 0.5rem 4rem 0.5rem;
+  }
+`;
+
+export const NormalPageContents = styled.div`
+  padding: 2rem 1rem;
+  ${media.phone} {
+    padding: 2rem 0.5rem;
+  }
+`;
+
+export const TemplateHeaderTitle = styled(LeadHeading)`
+  padding-bottom: 0;
+`;
+
+export const TemplateContent = styled.div`
+  margin: ${SIZE_MD} 0;
+`;
+
+export const TemplateHeaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${SIZE_XS};
+  margin-bottom: ${SIZE_SM};
+`;

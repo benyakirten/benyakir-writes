@@ -1,13 +1,19 @@
-import { FONT_MD, TRANSITION_SLOW } from '@StyleVars'
-import styled from 'styled-components'
+import {
+	FONT_SIZE_MD,
+	SIZE_MD,
+	SIZE_SM,
+	SIZE_XXL,
+	TRANSITION_SLOW,
+} from "@/styles/variables";
+import styled from "styled-components";
 
 export const ToggleGroup = styled.div`
-  position: relative;
+  --orb-size: calc(${SIZE_MD} - 4px);
 
   display: flex;
   align-items: center;
-  height: 2.2rem;
-`
+  gap: ${SIZE_SM};
+`;
 
 export const ToggleInput = styled.input`
   display: none;
@@ -18,7 +24,7 @@ export const ToggleInput = styled.input`
 
     &::after {
       background-color: ${(props) => props.theme.toggle.onColor};
-      left: calc(100% - 1.8rem);
+      left: calc(100% - var(--orb-size));
     }
   }
 
@@ -30,7 +36,7 @@ export const ToggleInput = styled.input`
       left: 0;
     }
   }
-`
+`;
 
 export const ToggleLabel = styled.label<{ label: string }>`
   cursor: pointer;
@@ -39,24 +45,22 @@ export const ToggleLabel = styled.label<{ label: string }>`
 
   border-radius: 2rem;
   border: 2px solid ${(props) => props.theme.toggle.border};
-  height: 2.2rem;
-  width: 6rem;
+  height: ${SIZE_MD};
+  width: ${SIZE_XXL};
 
   transition: all ${TRANSITION_SLOW} ease;
 
   &::after {
     content: '';
     position: absolute;
-    width: 1.8rem;
-    height: 1.8rem;
-    border-radius: 50%;
+    width: var(--orb-size);
+    height: var(--orb-size);
+    border-radius: 9999px;
 
     transition: all ${TRANSITION_SLOW} ease;
   }
-`
+`;
 
-export const ToggleOutput = styled.span`
-  cursor: pointer;
-  font-size: ${FONT_MD};
-  margin-left: 1rem;
-`
+export const ToggleOutput = styled.button`
+  font-size: ${FONT_SIZE_MD};
+`;

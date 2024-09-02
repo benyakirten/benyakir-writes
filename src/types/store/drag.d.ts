@@ -1,4 +1,4 @@
-interface DragState {
-  draggedIndex: number
-  draggedValue: string
-}
+type DragState = {
+	draggedIndex: number;
+	draggedValue: string;
+};

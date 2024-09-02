@@ -1,133 +1,99 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-import { media } from '@Styles/queries'
+import { media } from "@/styles/queries";
 import {
-  FAUSTINA,
-  FONT_SM,
-  FONT_XL,
-  FONT_XXL,
-  SHADOW_MD,
-  TRANSITION_FAST,
-  TRANSITION_NORMAL,
-  TRANSITION_SLOW,
-  Z_ABOVE,
-  Z_RAISED,
-} from '@StyleVars'
-import { convertHexToRGBA } from '@Utils/colors'
+	FONT_SIZE_XL,
+	FONT_SIZE_XXL,
+	FONT_SIZE_XXS,
+	SERIF_FONT,
+	SHADOW_SIDEBAR,
+	SIZE_SM,
+	SIZE_XS,
+	TRANSITION_NORMAL,
+	TRANSITION_SLOW,
+	Z_ABOVE,
+	Z_RAISED,
+} from "@/styles/variables";
+import { setOpacityOnHSL } from "@/utils/colors";
 
 export const StyledSidebar = styled.nav<{ open?: boolean }>`
   position: fixed;
   z-index: ${Z_RAISED};
 
-  width: 25rem;
+  width: 15rem;
   height: 100vh;
   overflow: auto;
 
-  transform: translateX(${(props) => (props.open ? '0%' : '-80%')});
+  padding-top: 1rem;
+  padding-left: 1rem;
 
-  font-family: ${FAUSTINA};
-  font-size: ${FONT_XXL};
+  transform: translateX(${(props) => (props.open ? "0%" : "-80%")});
 
-  background-color: red;
+  font-family: ${SERIF_FONT};
+  font-size: ${FONT_SIZE_XXL};
 
-  background-image: ${(props) => `linear-gradient(
-    to right,
-    ${props.theme.sidebar.primaryColor} ${props.theme.sidebar.primaryColorEnd}%,
-    ${props.theme.sidebar.secondaryColor}
-  )`};
+  user-select: none;
+
+  background-image: ${(props) => props.theme.sidebar.gradient};
   border-right: 2px solid ${(props) => props.theme.base.border};
-  box-shadow: ${(props) =>
-    `${SHADOW_MD} ${convertHexToRGBA(props.theme.sidebar.shadowColor, 0.4)}`};
+  box-shadow: ${(props) => (props.open ? "none" : `${SHADOW_SIDEBAR} ${setOpacityOnHSL(props.theme.sidebar.shadowColor, 0.3)}`)};
 
   transition: transform ${TRANSITION_SLOW};
-`
+`;
 
 export const SidebarContents = styled.div<{ open: boolean }>`
   position: relative;
-  top: 1rem;
-  left: 2.5rem;
-  padding-right: 2rem;
-
-  transform: translateX(${(props) => (props.open ? '0' : '-100%')});
-`
+  transform: translateX(${(props) => (props.open ? "0" : "-100%")});
+`;
 
 export const ArrowButton = styled.button<{ open: boolean }>`
-  cursor: pointer;
-
   position: relative;
-  left: 1rem;
-  top: 1rem;
 
-  background: none;
-  border: none;
-
-  align-self: start;
-
-  font-size: ${FONT_XL};
+  font-size: ${FONT_SIZE_XL};
 
   ${media.phone} {
-    font-size: ${FONT_XXL};
+    font-size: ${FONT_SIZE_XXL};
   }
 
   color: ${(props) => props.theme.base.textColor};
 
   transition: all ${TRANSITION_SLOW} ease;
-  rotate: ${(props) => (props.open ? '180' : '0')}deg;
-  translate: ${(props) => (props.open ? '0' : '20')}rem 0;
-`
+  rotate: ${(props) => (props.open ? "180" : "0")}deg;
+  left: ${(props) => (props.open ? "0%" : "83%")};
+`;
 
-export const VisibleGroup = styled.div<{ open: boolean }>`
-  opacity: ${(props) => (props.open ? '1' : '0')};
-
+export const LinkGroup = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-`
+`;
 
 export const NavGroup = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
-  justify-content: space-around;
-`
-
-export const SubLinks = styled.div<{ open: boolean }>`
-  display: flex;
-  flex-direction: column;
-
-  margin-left: 1rem;
-
-  transform-origin: top;
-  transition: all ${TRANSITION_SLOW} ease;
-  height: ${(props) => (props.open ? '5rem' : '0')};
-  opacity: ${(props) => (props.open ? '1' : '0')};
-`
+  gap: ${SIZE_XS};
+  margin: ${SIZE_SM} 0;
+`;
 
 export const LegalBox = styled.div`
-  cursor: default;
-
   display: flex;
   flex-direction: column;
-
-  height: 4rem;
-  margin: 2rem 4rem;
-  min-width: 4rem;
-
-  transition: opacity ${TRANSITION_FAST} ease;
-`
+`;
 
 export const LegalItem = styled.span`
-  font-size: ${FONT_SM};
+  font-size: ${FONT_SIZE_XXS};
   color: ${(props) => props.theme.base.textColor};
-`
+`;
 
 export const SidebarBackdrop = styled.div<{ open: boolean }>`
-  display: ${(props) => (props.open ? 'block' : 'none')};
+  display: ${(props) => (props.open ? "block" : "none")};
 
   position: fixed;
   height: 100vh;
   width: 100vw;
   z-index: ${Z_ABOVE};
 
-  backdrop-filter: blur(${(props) => (props.open ? '4' : '0')}px);
+  backdrop-filter: blur(${(props) => (props.open ? "4" : "0")}px);
   transition: backdrop-filter ${TRANSITION_NORMAL} ease;
-`
+`;

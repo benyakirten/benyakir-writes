@@ -1,1 +1,1 @@
-export { default as SyntaxHighlighter } from './SyntaxHighlighter/SyntaxHighlighter.component'
+export { default as SyntaxHighlighter } from "./SyntaxHighlighter/SyntaxHighlighter.component";

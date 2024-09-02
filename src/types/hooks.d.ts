@@ -1,56 +1,79 @@
-import { FetchState } from '@/hooks'
+import type { FetchState } from "@/hooks";
 
-type AlternationHook = () => [string, (val: string) => void]
+type AlternationHook = () => [string, (val: string) => void];
 
 type LookupHook = (items: BooleanLookup) => [
-  BooleanLookup,
-  React.Dispatch<{
-    type: LookupActionType
-    payload: keyof BooleanLookup
-  }>
-]
+	BooleanLookup,
+	React.Dispatch<{
+		type: LookupActionType;
+		payload: keyof BooleanLookup;
+	}>,
+];
 
 type DebounceHook = (
-  callback: (val: string) => void,
-  initialValue?: string,
-  timeout?: number
-) => [string, (val: string) => void]
+	callback: (val: string) => void,
+	initialValue?: string,
+	timeout?: number,
+) => [string, (val: string) => void];
 
-type PaginationHook = <T>(initialItems: T[]) => {
-  currentPage: number
-  onPageChange: React.Dispatch<React.SetStateAction<number>>
-  items: T[]
-  setCurrentItems: (_items: T[]) => void
-}
+type PaginationHook = <T>(
+	initialItems: T[],
+	defaultItemsPerPage?: number,
+) => {
+	page: number;
+	setPage: React.Dispatch<React.SetStateAction<number>>;
+	items: T[];
+	setItems: (_items: T[]) => void;
+	itemsPerPage: number;
+	setItemsPerPage: (_itemsPerPage: number) => void;
+	numPages: number;
+	visibleItems: T[];
+};
 
-type ToggleHook = (initialVal?: boolean) => [boolean, () => void]
+type ToggleHook = (initialVal?: boolean) => [boolean, () => void];
 
-type ValidateStringFunction<T> = (args: T) => (input: string) => boolean
-type ValidateNumberFunction<T> = (args: T) => (input: number) => boolean
-type ValidationFunction = ValidateNumberFunction | ValidateStringFunction
+type ValidateStringFunction<T> = (args: T) => (input: string) => boolean;
+type ValidateNumberFunction<T> = (args: T) => (input: number) => boolean;
+type ValidationFunction = ValidateNumberFunction | ValidateStringFunction;
 
 type ValidationHook = (
-  valFns: ValidationFunction[],
-  initialValue?: string | number,
-  initialValidity?: boolean
-) => [string | number, (newVal: string | number) => void, boolean]
+	valFns: ValidationFunction[],
+	initialValue?: string | number,
+	initialValidity?: boolean,
+) => [string | number, (newVal: string | number) => void, boolean];
 
 type MultipleHook = (
-  allOptions: string[],
-  currentlyOpen?: string[]
-) => [BooleanLookup, (...alternatables: string[]) => void]
-type SetHook = <T = string>(items?: T[]) => [Set<T>, (item: T) => void]
+	allOptions: string[],
+	currentlyOpen?: string[],
+) => [BooleanLookup, (...options: string[]) => void];
+type SetHook = <T = string>(items?: T[]) => [Set<T>, (item: T) => void];
 
-type LatestUpdateState = FetchState | Date
-type LatestRepoUpdateHook = (repoLink?: string) => LatestUpdateState
+type LatestUpdateState = FetchState | Date;
+type LatestRepoUpdateHook = (repoLink?: string) => LatestUpdateState;
 
+type MultiSelectHookFilterFunction = <T extends object>(
+	choices: Set<string>,
+	items: T[],
+	getter: (item: T) => string[] | null,
+) => T[];
 type MultiSelectHook = (
-  defaultValue?: string[]
+	defaultValue?: string[],
+) => [Set<string>, MultiSelectHookFilterFunction];
+
+type EventListenerHook<K extends keyof WindowEventMap> = (
+	event: K,
+	handler: WindowEventMap[K],
+	options?: AddEventListenerOptions & {
+		element?: HTMLElement | Window;
+	},
+) => void;
+
+type FlyoutHook = (
+	menuRef: React.RefObject<HTMLElement>,
+	initialState?: boolean,
 ) => [
-  Set<string>,
-  (choices: PotentialChoice[]) => void,
-  <T extends object, U extends keyof T>(
-    items: T[],
-    getter: (item: T) => string[] | null
-  ) => T[]
-]
+	boolean,
+	boolean,
+	React.Dispatch<React.SetStateAction<boolean>>,
+	React.Dispatch<React.SetStateAction<boolean>>,
+];

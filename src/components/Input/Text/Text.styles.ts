@@ -1,41 +1,48 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-import { media } from '@Styles/queries'
-import { FONT_LG, FONT_XS, TRANSITION_NORMAL } from '@StyleVars'
+import {
+	FONT_SIZE_MD,
+	FONT_SIZE_SM,
+	SIZE_SM,
+	SIZE_XS,
+	TRANSITION_NORMAL,
+} from "@/styles/variables";
 
 export const TextInputContainer = styled.div`
   position: relative;
 
   label {
     position: absolute;
-    top: 1.6rem;
-    left: 0.75rem;
+    top: 40%;
+    left: calc(${SIZE_XS} + 2.6px);
+    transform: translateY(-40%) scale(1);
+    transform-origin: left;
 
     cursor: text;
 
-    color: ${(props) => props.theme.textInput.textColor};
-    font-size: ${FONT_LG};
+    color: ${(props) => props.theme.base.textColor};
+    font-size: ${FONT_SIZE_MD};
+
+    opacity: 0.5;
 
     transition: all ${TRANSITION_NORMAL} ease;
   }
 
   input {
-    padding: 1.6rem 0.5rem;
-    border: 2px solid ${(props) => props.theme.textInput.border};
+    padding: calc(${SIZE_SM} + ${SIZE_XS}) ${SIZE_XS} 2px;
+    border: 2px solid ${(props) => props.theme.base.border};
 
-    font-size: ${FONT_LG};
-    color: ${(props) => props.theme.textInput.textColor};
-    background-color: ${(props) => props.theme.textInput.background};
-
-    ${media.phone} {
-      min-width: 10rem;
-    }
+    font-size: ${FONT_SIZE_SM};
+    color: ${(props) => props.theme.base.textColor};
+    background-color: ${(props) => props.theme.base.background};
 
     &:hover + label,
     &:focus + label,
     &:not(:placeholder-shown) + label {
-      top: 0.5rem;
-      font-size: ${FONT_XS};
+      top: 0;
+      opacity: 1;
+      color: ${(props) => props.theme.base.disabled};
+      transform: translateY(0) scale(0.6);
     }
   }
-`
+`;

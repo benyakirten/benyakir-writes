@@ -1,15 +1,25 @@
-name: Unit Test
+name: Unit Test/Lint
 
 on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
         with:
-          node-version: '20'
-      - run: npm install
-      - run: npm run test:unit
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+      - name: Lint
+        run: pnpm lint:ci
+      - name: Unit Test
+        run: pnpm test:unit

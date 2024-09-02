@@ -1,29 +1,30 @@
-import * as React from 'react'
+import * as React from "react";
 
-import { Grouping, LeadHeading, Page } from '@Styles/general-components'
-import { ThemeOptions } from '@Variants'
+import { HeadBase } from "@/components/SEO";
+import ThemeOptions from "@/components/Theme/ThemeOptions.component";
+import { themeDescription } from "@/data/search";
+import {
+	Grouping,
+	LeadHeading,
+	NormalPageContents,
+	Page,
+} from "@/styles/general-components";
 
 export const Head: React.FC = () => (
-  <>
-    {' '}
-    <title>Benyakir Writes - Themes</title>
-    <meta
-      name="description"
-      content="Visitors can set a color theme or customize their own.
-    Optionally, they can save anything local storage and set it as the default."
-    />
-  </>
-)
+	<HeadBase title="Theme" description={themeDescription} />
+);
 
 const Theme: React.FC = () => {
-  return (
-    <Page>
-      <LeadHeading>Theme Customization</LeadHeading>
-      <Grouping>
-        <ThemeOptions />
-      </Grouping>
-    </Page>
-  )
-}
+	return (
+		<Page>
+			<NormalPageContents>
+				<LeadHeading>Theme Customization</LeadHeading>
+				<Grouping>
+					<ThemeOptions />
+				</Grouping>
+			</NormalPageContents>
+		</Page>
+	);
+};
 
-export default Theme
+export default Theme;

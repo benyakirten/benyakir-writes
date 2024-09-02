@@ -1,55 +1,35 @@
-import { getBlogPostDateInformation } from './dates'
-import { createSearchableString } from './posts'
+import { getBlogPostDateInformation } from "./dates";
 
-import {
-  BlogPostType,
-  FlattenedBlogPost,
-  PartiallyFlattenedBlogPost,
-} from '@Types/posts'
-
-export const formatAllBlogPosts = (
-  posts: BlogPostType[]
-): FlattenedBlogPost[] =>
-  posts
-    .map((p) => formatBlogPost(p))
-    .sort((a, b) => b.published.date.getTime() - a.published.date.getTime())
+import type { BlogPostType, FlattenedBlogPost } from "@/types/posts";
 
 export function formatBlogPost(post: BlogPostType): FlattenedBlogPost {
-  const data: PartiallyFlattenedBlogPost = {
-    title: post.title,
-    slug: post.slug,
-    excerpt: post.excerpt,
-    content: post.content,
-    published: getBlogPostDateInformation(post.date),
-    categories:
-      post.categories.nodes && post.categories.nodes.map((n) => n.name),
-    tags: post.tags.nodes && post.tags.nodes.map((n) => n.name),
-  }
-
-  const flattenedPost: FlattenedBlogPost = {
-    ...data,
-    meta: createMetaForPost(data),
-  }
-
-  return flattenedPost
+	return {
+		title: post.title,
+		slug: post.slug,
+		excerpt: post.excerpt,
+		content: post.content,
+		published: getBlogPostDateInformation(post.date),
+		categories: post.categories.nodes?.map((n) => n.name) ?? null,
+		tags: post.tags.nodes?.map((n) => n.name) ?? null,
+		meta: {},
+	};
 }
 
-export function createMetaForPost(post: PartiallyFlattenedBlogPost) {
-  let data = [
-    post.title,
-    post.slug,
-    post.excerpt,
-    post.content,
-    post.published.full,
-    post.published.month.toString(),
-    post.published.short,
-    post.published.year,
-  ]
-  if (post.categories) {
-    data = data.concat(post.categories)
-  }
-  if (post.tags) {
-    data = data.concat(post.tags)
-  }
-  return createSearchableString(data)
+export function getActiveCategory(categories: string[] | null): string {
+	if (!categories) {
+		return "Unknown";
+	}
+
+	const possibleCategories = categories.filter(
+		(cat) => cat.toLowerCase() !== "uncategorized",
+	);
+
+	if (possibleCategories.length > 1) {
+		const possibleCategory = possibleCategories.find(
+			(cat) => cat !== "Ben's Blogs",
+		);
+		return possibleCategory ?? possibleCategories[0];
+	}
+
+	return possibleCategories.length === 0 ? "Unknown" : possibleCategories[0];
 }

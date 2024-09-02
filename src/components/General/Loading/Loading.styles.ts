@@ -1,6 +1,4 @@
-import styled from 'styled-components'
-
-import { ABS_BLACK } from '@StyleVars'
+import styled from "styled-components";
 
 export const LoadingContainer = styled.span<{ size: string }>`
   display: inline-block;
@@ -21,4 +19,4 @@ export const LoadingContainer = styled.span<{ size: string }>`
       transform: rotate(360deg);
     }
   }
-`
+`;

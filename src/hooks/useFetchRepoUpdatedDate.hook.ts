@@ -1,56 +1,58 @@
-import { LatestRepoUpdateHook, LatestUpdateState } from '@/types/hooks'
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
+
+import type { LatestRepoUpdateHook, LatestUpdateState } from "@/types/hooks";
 
 export enum FetchState {
-  LOADING,
-  ERROR,
-  NONE,
+	LOADING = 0,
+	ERROR = 1,
+	NONE = 2,
 }
 
-const updatedDatesCache: Record<string, Date> = {}
-
+const cache: Map<string, Date> = new Map();
 export const useFetchRepoUpdatedDate: LatestRepoUpdateHook = (
-  repoLink?: string
+	repoLink?: string,
 ) => {
-  const [state, setState] = useState<LatestUpdateState>(FetchState.LOADING)
-  const controller = new AbortController()
+	const [state, setState] = useState<LatestUpdateState>(FetchState.LOADING);
 
-  async function fetchLatestUpdate(repo: string) {
-    if (updatedDatesCache[repo]) {
-      setState(updatedDatesCache[repo])
-      return
-    }
+	useEffect(() => {
+		const controller = new AbortController();
 
-    setState(FetchState.LOADING)
-    try {
-      const res = await fetch(repo, { signal: controller.signal })
-      if (!res.ok) {
-        throw new Error()
-      }
-      const data = await res.json()
+		async function fetchLatestUpdate(repo: string) {
+			const cached = cache.get(repo);
+			if (cached) {
+				setState(cached);
+				return;
+			}
 
-      const date = new Date(data.pushed_at)
-      // Cache results
-      updatedDatesCache[repo] = date
-      setState(date)
-    } catch (e) {
-      setState(FetchState.ERROR)
-    }
-  }
+			setState(FetchState.LOADING);
+			try {
+				const res = await fetch(repo, { signal: controller.signal });
+				if (!res.ok) {
+					throw new Error(res.statusText);
+				}
 
-  useEffect(() => {
-    if (!repoLink) {
-      setState(FetchState.NONE)
-    } else {
-      fetchLatestUpdate(
-        repoLink.replace('github.com/', 'api.github.com/repos/')
-      )
-    }
+				const data = await res.json();
+				const date = new Date(data.pushed_at);
 
-    return () => controller.abort()
-  }, [repoLink])
+				cache.set(repo, date);
+				setState(date);
+			} catch (e) {
+				setState(FetchState.ERROR);
+			}
+		}
 
-  return state
-}
+		if (!repoLink) {
+			setState(FetchState.NONE);
+		} else {
+			fetchLatestUpdate(
+				repoLink.replace("github.com/", "api.github.com/repos/"),
+			);
+		}
 
-export default useFetchRepoUpdatedDate
+		return () => controller.abort();
+	}, [repoLink]);
+
+	return state;
+};
+
+export default useFetchRepoUpdatedDate;

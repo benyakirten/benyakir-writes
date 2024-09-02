@@ -1,34 +1,41 @@
-import { ProjectImageData } from "./query"
+import { FlattenedProjectCard } from "./posts";
 
-export interface ProjectGridDatum {
-  title: string
-  description: string
-  technologies: string[]
-  firstReleased: Date
-  mainLink?: string
-  repoLink?: string
-  hostedOn?: string
-  image?: ProjectImageData
-}
+type ProjectImage = FileNode & {
+	childImageSharp: {
+		gatsbyImageData: IGatsbyImageData;
+	};
+};
 
-export interface ProjectGridData {
-  projects: ProjectGridDatum[]
-  highlightedProjectTitles: Set<string>
-  viewedTechs: Set<string>
-  handleMouseEnter: (title: string) => void
-  handleMouseLeave: () => void
-}
+type RecentProjectItem = FlattenedProjectCard & {
+	image?: ProjectImage;
+};
 
-export interface SVGData {
-  xMovement: number
-  yMovement: number
-}
+type ProjectGridData = {
+	projects: RecentProjectItem[];
+	highlightedProjectTitles: Set<string>;
+	viewedTechs: Set<string>;
+	handleMouseEnter: (title: string) => void;
+	handleMouseLeave: () => void;
+};
 
-export type SVGShapeData = SVGData & ChildrenProp
+type SVGData = {
+	xMovement: number;
+	yMovement: number;
+};
 
-export interface ProjectFiltersData {
-  allTechs: string[]
-  viewedTechs: Set<string>
-  onToggle: (tech: string) => void
-  onToggleTentativeTech: (tech: string) => void
-}
+type SVGShapeData = SVGData & ChildrenProp;
+
+type ProjectFiltersData = {
+	allTechs: string[];
+	viewedTechs: Set<string>;
+	onToggle: (tech: string) => void;
+	onToggleTentativeTech: (tech: string) => void;
+};
+
+type WorkHistoryDatum = {
+	title: string;
+	company: string;
+	startDate: Date;
+	endDate: Date | null;
+	points: string[];
+};

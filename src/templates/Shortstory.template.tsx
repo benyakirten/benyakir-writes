@@ -1,52 +1,110 @@
-import { graphql } from 'gatsby'
-import * as React from 'react'
+import { Link, graphql } from "gatsby";
+import * as React from "react";
+import styled from "styled-components";
 
+import { PublishedDate } from "@/components/Cards/IconedText.component";
+import { GrowableUnderline } from "@/components/General";
+import { HeadBase } from "@/components/SEO";
 import {
-  Grouping,
-  LeadHeading,
-  Page,
-  Subtitle,
-  WpContent,
-} from '@Styles/general-components'
-
-import { flattenStory } from '@/utils/author'
-import { getPrettyDate } from '@Utils/dates'
-import { formatWpText } from '@Utils/posts'
-import { firstWords } from '@Utils/strings'
-
-import ShortStoryHeader from '@/components/Variants/Headers/ShortStoryHeader.component'
-import { WpStory } from '@Types/query'
+	NormalPageContents,
+	Page,
+	TemplateContent,
+	TemplateHeaderContainer,
+	TemplateHeaderTitle,
+	WpContent,
+} from "@/styles/general-components";
+import { FONT_SM } from "@/styles/variables";
+import { NamedLink } from "@/types/general";
+import type { WpStory } from "@/types/query";
+import { flattenStory } from "@/utils/author";
+import { getPrettyDate } from "@/utils/dates";
+import { formatOutsideLink } from "@/utils/other";
+import { formatWpText } from "@/utils/posts";
+import { truncate } from "@/utils/strings";
 
 export const Head: React.FC<WpStory> = ({ data }) => {
-  const story = flattenStory(data.wpShortstory, data.file.publicURL)
-  return (
-    <>
-      <title>{story.title}</title>
-      <meta
-        name="description"
-        content={`${story.title}, published on ${getPrettyDate(
-          story.published.date
-        )}${
-          story.book ? `, related to ${story.book.title}` : null
-        }: ${firstWords(formatWpText(story.content), 100)}`}
-      />
-    </>
-  )
-}
+	const story = flattenStory(data.wpShortstory, data.file.publicURL);
+	const description = `${story.title}, published on ${getPrettyDate(
+		story.published.date,
+	)}${
+		story.book ? `, related to ${story.book.title}` : null
+	}: ${truncate(formatWpText(story.content), 100)}`;
+
+	return <HeadBase title={story.title} description={description} />;
+};
+
+const StoryBookRelationshipContainer = styled.span`
+  ${FONT_SM};
+`;
+
+const StoryBookRelationship: React.FC<{
+	title: string;
+	relationship: string;
+	link: string;
+}> = ({ title, relationship, link }) => {
+	return (
+		<StoryBookRelationshipContainer>
+			{relationship} to{" "}
+			<GrowableUnderline>
+				<Link to={link}>{title}</Link>
+			</GrowableUnderline>
+		</StoryBookRelationshipContainer>
+	);
+};
+
+const StoryHeader: React.FC<{
+	title: string;
+	published: Date;
+	relatedBook: null | { title: string; relationship: string; link: string };
+	alternateLinks?: NamedLink[];
+}> = ({ title, published, relatedBook, alternateLinks }) => {
+	return (
+		<TemplateHeaderContainer>
+			{relatedBook && <StoryBookRelationship {...relatedBook} />}
+			<TemplateHeaderTitle>{title}</TemplateHeaderTitle>
+			<PublishedDate date={published} />
+			{alternateLinks && (
+				<p>
+					Available on{" "}
+					{alternateLinks.map((link, i) => (
+						<>
+							<GrowableUnderline key={link.name}>
+								<a href={formatOutsideLink(link.link)}>{link.name}</a>
+							</GrowableUnderline>
+							{i < alternateLinks.length - 1 && ", "}
+						</>
+					))}
+				</p>
+			)}
+		</TemplateHeaderContainer>
+	);
+};
 
 const Story: React.FC<WpStory> = ({ data }) => {
-  const story = flattenStory(data.wpShortstory, data.file.publicURL)
-  return (
-    <Page>
-      <LeadHeading>{story.title}</LeadHeading>
-      <ShortStoryHeader story={story} />
-      <Grouping>
-        <Subtitle>The Story</Subtitle>
-        <WpContent dangerouslySetInnerHTML={{ __html: story.content }} />
-      </Grouping>
-    </Page>
-  )
-}
+	const story = flattenStory(data.wpShortstory, data.file.publicURL);
+
+	const relatedBook = story.book && {
+		title: story.book.title,
+		relationship: story.book.relationship,
+		link: `/book/${story.book.slug}`,
+	};
+
+	return (
+		<Page>
+			<NormalPageContents>
+				<StoryHeader
+					title={story.title}
+					published={story.published.date}
+					relatedBook={relatedBook}
+					alternateLinks={story.alternateLinks}
+				/>
+				<TemplateContent>
+					<WpContent dangerouslySetInnerHTML={{ __html: story.content }} />
+				</TemplateContent>
+			</NormalPageContents>
+		</Page>
+	);
+};
 
 export const query = graphql`
   query ($id: String) {
@@ -88,6 +146,6 @@ export const query = graphql`
       }
     }
   }
-`
+`;
 
-export default Story
+export default Story;

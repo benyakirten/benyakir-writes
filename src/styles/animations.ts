@@ -1,13 +1,4 @@
-import { keyframes } from 'styled-components'
-
-export const rotate = keyframes`
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(-360deg);
-    }
-`
+import { keyframes } from "styled-components";
 
 export const fadeIn = keyframes`
     from {
@@ -16,18 +7,7 @@ export const fadeIn = keyframes`
     to {
         opacity: 100%;
     }
-`
-
-export const rollOut = keyframes`
-    from {
-        opacity: 0.2;
-        transform: scaleY(0.6);
-    }
-    to {
-        opactiy: 1;
-        transform: scaleY(1);
-    }
-`
+`;
 
 export const slideInLeft = keyframes`
     0% {
@@ -42,7 +22,7 @@ export const slideInLeft = keyframes`
         transform: translateX(0);
         opacity: 1;
     }
-`
+`;
 
 export const slideInRight = keyframes`
     0% {
@@ -57,4 +37,4 @@ export const slideInRight = keyframes`
         transform: translateX(0);
         opacity: 1;
     }
-`
+`;

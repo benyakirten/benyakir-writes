@@ -1,26 +1,40 @@
 export function findAttrInElTree(
-  el: HTMLElement,
-  attr: string,
-  val: string | boolean
+	el: HTMLElement,
+	attr: string,
+	val: string | boolean,
 ): boolean {
-  const attrHasValue = el.getAttribute(attr) === val
-  if (attrHasValue) {
-    return true
-  } else {
-    if (el.parentElement && el.parentElement.tagName !== 'BODY') {
-      return findAttrInElTree(el.parentElement, attr, val)
-    } else {
-      return false
-    }
-  }
+	const hasAttr = el.hasAttribute(attr);
+
+	if (hasAttr) {
+		return el.getAttribute(attr) === val;
+	}
+
+	if (!el.parentElement || el.parentElement.tagName === "BODY") {
+		return false;
+	}
+
+	return findAttrInElTree(el.parentElement, attr, val);
 }
 
 export function downloadFile(href: string, name: string) {
-  const link = document.createElement('a')
-  link.href = href
-  link.download = name
+	const link = document.createElement("a");
+	link.href = href;
+	link.download = name;
 
-  document.body.appendChild(link)
-  link.click()
-  document.body.removeChild(link)
+	document.body.appendChild(link);
+	link.click();
+	document.body.removeChild(link);
+}
+
+export function inputIsFocused(): boolean {
+	const el = document.activeElement;
+	if (!el) {
+		return false;
+	}
+
+	return (
+		el instanceof HTMLInputElement ||
+		el instanceof HTMLTextAreaElement ||
+		Boolean((el as HTMLElement).isContentEditable)
+	);
 }

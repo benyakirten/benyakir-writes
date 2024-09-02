@@ -1,227 +1,152 @@
 export const defaultDayTheme: BaseTheme = {
-  id: '0',
-  name: 'day',
-  base: {
-    textColor: '#000000',
-    background: '#FFFFFF',
-    border: '#39435b',
-    shadowColor: '#9b825d',
-    disabled: '#495057',
-    highlighted: '#FF00FF',
-  },
-  searchBox: {
-    border: '#05491F',
-    background: '#000000',
-    textColor: '#D8E3FD',
-    result: {
-      textColor: '#FFFFFF',
-      border: '#FFFFFF',
-    },
-  },
-  sidebar: {
-    primaryColor: '#FDEDC4',
-    useGradient: true,
-    primaryColorEnd: 70,
-    secondaryColor: '#FDF3D8',
-    shadowColor: '#000000',
-  },
-  paginate: {
-    textColor: '#000000',
-    arrowColor: '#39435b',
-    pageNumberColor: '#485372',
-  },
-  textInput: {
-    textColor: '#000000',
-    background: '#FFFFFF',
-    border: '#ced4da',
-  },
-  filter: {
-    background: '#39435b',
-    textColor: '#FFFFFF',
-  },
-  checkbox: {
-    border: '#05491F',
-    fingerColor: '#05491F',
-    backgroundColor: '#FFFFFF',
-  },
-  multipleChoice: {
-    background: '#343a40',
-    textColor: '#FDF3D8',
-  },
-  link: {
-    normal: '#D8E3FD',
-    inline: '#65749f',
-    dark: '#05491F',
-  },
-  icon: {
-    default: {
-      background: '#FFFFFF',
-      textColor: '#05491F',
-    },
-    hover: {
-      background: '#000000',
-      textColor: '#FFFFFF',
-    },
-  },
-  skewRow: {
-    background: '#FFFFFF',
-  },
-  hoverImage: {
-    textColor: '#05491F',
-    hoveredTextColor: '#000000',
-  },
-  button: {
-    border: '#05491F',
-    default: {
-      background: '#f8f9fa',
-      textColor: '#39435b',
-    },
-    disabled: {
-      background: '#343a40',
-      textColor: '#D8E3FD',
-    },
-    hover: {
-      background: '#05491F',
-      textColor: '#D8E3FD',
-    },
-  },
-  alertBox: {
-    alert: {
-      success: '#44764d',
-      error: '#993d4d',
-    },
-    textColor: '#FFFFFF',
-  },
-  toggle: {
-    onColor: '#FBD989',
-    onBackground: '#485372',
-    offColor: '#993d4d',
-    offBackground: '#FDE6B0',
-    border: '#000000',
-  },
-  portfolio: {
-    gradient: {
-      color1: '#FEFDF3',
-      color2: '#FEF8E3',
-      color3: '#FEF4E1',
-    },
-  },
-}
+	id: "0",
+	name: "Day",
+	base: {
+		textColor: "hsl(213 58% 8%)",
+		background: "hsl(213 60% 97%)",
+		border: "hsl(213 53% 28%)",
+		link: "hsl(213 87% 30%)",
+		disabled: "hsl(213 2% 70%)",
+		pageGradient:
+			"linear-gradient(to right, hsl(213 23% 97%), hsl(213 33% 95%) 80%, hsl(213 16% 92%))",
+	},
+	portfolio: {
+		textColor: "hsl(213 50% 90%)",
+		selectedTextColor: "hsl(213 40% 20%)",
+		tabBackground: "hsl(213 35% 25%)",
+		selectedTabBackground: "hsl(213 40% 92%)",
+	},
+	card: {
+		arrowColor: "hsl(213 20% 92%)",
+		boxShadow: "hsl(213 70% 15%)",
+	},
+	header: {
+		startColor: "hsl(213 48% 10%)",
+		endColor: "hsl(33 61% 56%)",
+	},
+	pill: {
+		textColor: "hsl(213 40% 8%)",
+		background: "hsl(213 10% 86%)",
+	},
+	sidebar: {
+		link: "hsl(213 90% 25%)",
+		gradient:
+			"linear-gradient(to right, hsl(213 14% 95%), hsl(213 25% 95%) 90%, hsl(213 45% 90%))",
+		shadowColor: "hsl(213 10% 10%)",
+	},
+	multipleChoice: {
+		background: "hsl(213 60% 92%)",
+		textColor: "hsl(213 58% 8%)",
+		hoverBackground: "hsl(213 87% 15%)",
+		hoverTextColor: "hsl(213 90% 92%)",
+		controlBackground: "hsl(213 60% 99%)",
+		menuBackground: "hsl(213 60% 99%)",
+	},
+	fillIn: {
+		border: "hsl(213 87% 15%)",
+		default: {
+			background: "hsl(213 17% 98%)",
+			textColor: "hsl(213 23% 29%)",
+		},
+		disabled: {
+			background: "hsl(213 20% 33%)",
+			textColor: "hsl(213 90% 92%)",
+		},
+		hover: {
+			background: "hsl(213 87% 20%)",
+			textColor: "hsl(213 90% 92%)",
+		},
+	},
+	toggle: {
+		onColor: "hsl(33 83% 42%)",
+		onBackground: "hsl(33 95% 84%)",
+		offColor: "hsl(213 93% 76%)",
+		offBackground: "hsl(213 26% 36%)",
+		border: "hsl(213 1% 1%)",
+	},
+	theme: {
+		iconColor: "hsl(213 40% 91%)",
+		iconHoverColor: "hsl(33 60% 60%)",
+		selectedThemeColor: "hsl(213 90% 40%)",
+	},
+};
 
 export const defaultNightTheme: BaseTheme = {
-  id: '1',
-  name: 'night',
-  base: {
-    textColor: '#FFFFFF',
-    background: '#111B33',
-    border: '#343a40',
-    shadowColor: '#647DA2',
-    disabled: '#e9ecef',
-    highlighted: '#35F58F',
-  },
-  searchBox: {
-    border: '#e9ecef',
-    background: '#000000',
-    textColor: '#D8E3FD',
-    result: {
-      textColor: '#FFFFFF',
-      border: '#FFFFFF',
-    },
-  },
-  sidebar: {
-    primaryColor: '#252F47',
-    useGradient: true,
-    primaryColorEnd: 80,
-    secondaryColor: '#2F3951',
-    shadowColor: '#212529',
-  },
-  paginate: {
-    textColor: '#FFFFFF',
-    arrowColor: '#FDF3D8',
-    pageNumberColor: '#FDF3D8',
-  },
-  textInput: {
-    textColor: '#FFFFFF',
-    background: '#000000',
-    border: '#ced4da',
-  },
-  filter: {
-    background: '#202039',
-    textColor: '#FFFFFF',
-  },
-  checkbox: {
-    border: '#000000',
-    fingerColor: '#000000',
-    backgroundColor: '#FFFFFF',
-  },
-  multipleChoice: {
-    background: '#343a40',
-    textColor: '#FDF3D8',
-  },
-  link: {
-    normal: '#05491F',
-    inline: '#D8E2FD',
-    dark: '#FFFFFF',
-  },
-  icon: {
-    default: {
-      background: '#111B33',
-      textColor: '#D8E3FD',
-    },
-    hover: {
-      background: '#000000',
-      textColor: '#FFFFFF',
-    },
-  },
-  skewRow: {
-    background: '#FFFFFF',
-  },
-  hoverImage: {
-    textColor: '#05491F',
-    hoveredTextColor: '#000000',
-  },
-  button: {
-    border: '#e9ecef',
-    default: {
-      background: '#111B33',
-      textColor: '#f8f9fa',
-    },
-    disabled: {
-      background: '#495057',
-      textColor: '#D8E3FD',
-    },
-    hover: {
-      background: '#D8E3FD',
-      textColor: '#05491F',
-    },
-  },
-  alertBox: {
-    alert: {
-      success: '#44764d',
-      error: '#993d4d',
-    },
-    textColor: '#FFFFFF',
-  },
-  toggle: {
-    onColor: '#FBD989',
-    onBackground: '#485372',
-    offColor: '#993d4d',
-    offBackground: '#FDE6B0',
-    border: '#D8E2FD',
-  },
-  portfolio: {
-    gradient: {
-      color1: '#111B33',
-      color2: '#23314D',
-      color3: '#394860',
-    },
-  },
-}
+	id: "1",
+	name: "Night",
+	base: {
+		textColor: "hsl(222 30% 94%)",
+		background: "hsl(222 50% 13%)",
+		border: "hsl(222 40% 80%)",
+		link: "hsl(222 70% 94%)",
+		pageGradient:
+			"linear-gradient(to bottom right, hsl(222 50% 13%), hsl(222 80% 16%), hsl(222 50% 13%))",
+		disabled: "hsl(222 4% 70%)",
+	},
+	portfolio: {
+		textColor: "hsl(222 25% 15%)",
+		selectedTextColor: "hsl(222 30% 94%)",
+		tabBackground: "hsl(222 30% 92%)",
+		selectedTabBackground: "hsl(222 80% 15%)",
+	},
+	card: {
+		arrowColor: "hsl(222 60% 25%)",
+		boxShadow: "hsl(222 35% 94%)",
+	},
+	header: {
+		startColor: "hsl(222 30% 92%)",
+		endColor: "hsl(42 70% 44%)",
+	},
+	pill: {
+		textColor: "hsl(222 60% 5%)",
+		background: "hsl(222 25% 85%)",
+	},
+	sidebar: {
+		link: "hsl(222 70% 90%)",
+		gradient:
+			"linear-gradient(to bottom right, hsl(222 90% 10%), hsl(222 80% 15%), hsl(222 80% 25%), hsl(222 40% 15%), hsl(222 67% 27%))",
+		shadowColor: "hsl(222 10% 80%)",
+	},
+	multipleChoice: {
+		background: "hsl(222 22% 30%)",
+		textColor: "hsl(222 90% 95%)",
+		hoverBackground: "hsl(222 90% 95%)",
+		hoverTextColor: "hsl(222 22% 30%)",
+		controlBackground: "hsl(222 20% 10%)",
+		menuBackground: "hsl(222 60% 15%)",
+	},
+	fillIn: {
+		border: "hsl(222 16% 93%)",
+		default: {
+			background: "hsl(222 50% 13%)",
+			textColor: "hsl(222 17% 98%)",
+		},
+		disabled: {
+			background: "hsl(222 8% 25%)",
+			textColor: "hsl(222 15% 92%)",
+		},
+		hover: {
+			background: "hsl(222 90% 92%)",
+			textColor: "hsl(222 87% 15%)",
+		},
+	},
+	toggle: {
+		onColor: "hsl(42 93% 66%)",
+		onBackground: "hsl(42 23% 20%)",
+		offColor: "hsl(222 93% 66%)",
+		offBackground: "hsl(222 35% 25%)",
+		border: "hsl(222 80% 85%)",
+	},
+	theme: {
+		iconColor: "hsl(222 60% 25%)",
+		iconHoverColor: "hsl(42 80% 50%)",
+		selectedThemeColor: "hsl(222 80% 55%)",
+	},
+};
 
 export const initialState: ThemeState = {
-  themes: [defaultDayTheme, defaultNightTheme],
-  ignoreComputerPreferences: false,
-  prefers: '0',
-  active: defaultDayTheme,
-  error: undefined,
-}
+	themes: [defaultDayTheme, defaultNightTheme],
+	ignoreComputerPreferences: false,
+	active: defaultDayTheme,
+	latestId: 1,
+};
