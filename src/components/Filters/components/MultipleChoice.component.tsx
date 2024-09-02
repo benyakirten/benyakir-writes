@@ -44,12 +44,14 @@ const MultipleChoice: React.FC<MultipleChoiceInputProps> = ({
 					}),
 					multiValue: (base) => ({
 						...base,
-						backgroundColor: theme.multipleChoice.background,
+						background: theme.multipleChoice.background,
 						color: theme.multipleChoice.textColor,
 						fontSize: FONT_SIZE_SM,
 					}),
 					multiValueRemove: (base) => ({
 						...base,
+						color: theme.multipleChoice.hoverBackground,
+						backgroundColor: theme.multipleChoice.hoverTextColor,
 						transition: `background-color ${TRANSITION_NORMAL} ease, color ${TRANSITION_NORMAL} ease`,
 						":hover": {
 							backgroundColor: theme.multipleChoice.hoverBackground,
