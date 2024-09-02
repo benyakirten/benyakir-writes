@@ -28,6 +28,8 @@ type ThemeMultipleChoice = {
 	textColor: string;
 	hoverBackground: string;
 	hoverTextColor: string;
+	controlBackground: string;
+	menuBackground: string;
 };
 
 type ThemeFillIn = {

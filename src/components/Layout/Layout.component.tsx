@@ -55,7 +55,8 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 
 	React.useEffect(() => {
 		localStorage.clear();
-	});
+		return localStorage.clear;
+	}, []);
 
 	React.useEffect(() => {
 		if (window?.matchMedia) {

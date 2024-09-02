@@ -28,7 +28,12 @@ const MultipleChoice: React.FC<MultipleChoiceInputProps> = ({
 				styles={{
 					menuList: (base) => ({
 						...base,
+						background: theme.multipleChoice.menuBackground,
 						maxHeight: "8rem",
+					}),
+					control: (base) => ({
+						...base,
+						background: theme.multipleChoice.controlBackground,
 					}),
 					option: (base) => ({
 						...base,

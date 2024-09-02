@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 
 import { FillIn } from "@/components/General";
 import { AddIcon } from "@/components/Icons";
-import { SIZE_SM, TRANSITION_SLOW } from "@/styles/variables";
+import { SIZE_SM, TRANSITION_SLOW, Z_HIGH } from "@/styles/variables";
 import { FilterOption, NewFilterProps } from "@/types/filters";
 import {
 	FilterMenu,
@@ -89,6 +89,7 @@ const NewFilter = React.forwardRef<HTMLButtonElement, NewFilterProps>(
 				onClick={() => setHardOpen((open) => !open)}
 			>
 				<FilterMenu
+					style={{ zIndex: Z_HIGH }}
 					$removeSpacing
 					$pointUpwards={menuOpenTop}
 					aria-expanded={menuOpen}

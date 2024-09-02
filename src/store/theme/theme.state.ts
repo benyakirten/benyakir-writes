@@ -39,6 +39,8 @@ export const defaultDayTheme: BaseTheme = {
 		textColor: "hsl(213 58% 8%)",
 		hoverBackground: "hsl(213 87% 15%)",
 		hoverTextColor: "hsl(213 90% 92%)",
+		controlBackground: "hsl(213 60% 99%)",
+		menuBackground: "hsl(213 60% 99%)",
 	},
 	fillIn: {
 		border: "hsl(213 87% 15%)",
@@ -110,6 +112,8 @@ export const defaultNightTheme: BaseTheme = {
 		textColor: "hsl(222 90% 92%)",
 		hoverBackground: "hsl(222 10% 23%)",
 		hoverTextColor: "hsl(222 90% 92%)",
+		controlBackground: "hsl(213 60% 20%)",
+		menuBackground: "hsl(213 60% 20%)",
 	},
 	fillIn: {
 		border: "#e9ecef",
