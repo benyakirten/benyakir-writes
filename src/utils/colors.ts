@@ -191,13 +191,13 @@ export function isBgDark(id: string, name: string, bgColor: string): boolean {
 	}
 
 	let hsl = parseHSLString(bgColor);
-	if (hsl && hsl.luminance < 50) {
+	if (hsl && hsl.luminance < 0.5) {
 		return true;
 	}
 
 	try {
 		hsl = convertHexToHSL(bgColor);
-		return hsl.luminance < 50;
+		return hsl.luminance < 0.5;
 	} catch {
 		return false;
 	}
