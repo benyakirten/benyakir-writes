@@ -138,9 +138,9 @@ export const defaultNightTheme: BaseTheme = {
 		border: "hsl(222 80% 85%)",
 	},
 	theme: {
-		iconColor: "#000000",
-		iconHoverColor: "#FF00FF",
-		selectedThemeColor: "#00FFFF",
+		iconColor: "hsl(222 60% 25%)",
+		iconHoverColor: "hsl(42 80% 50%)",
+		selectedThemeColor: "hsl(222 80% 55%)",
 	},
 };
 

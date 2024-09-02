@@ -54,11 +54,6 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 	}, [dispatch]);
 
 	React.useEffect(() => {
-		localStorage.clear();
-		return localStorage.clear;
-	}, []);
-
-	React.useEffect(() => {
 		if (window?.matchMedia) {
 			const darkColorScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -67,7 +62,7 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 					return;
 				}
 
-				dispatch(setActiveThemeByID(e.matches ? "1" : "1"));
+				dispatch(setActiveThemeByID(e.matches ? "1" : "0"));
 			};
 
 			const themePreferenceChange = (e: MediaQueryListEvent) =>
