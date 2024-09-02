@@ -30,26 +30,10 @@ export const FONT_MD = `font-size: ${FONT_SIZE_MD}; line-height: ${LINE_HEIGHT_M
 export const FONT_SM = `font-size: ${FONT_SIZE_SM}; line-height: ${LINE_HEIGHT_SM};`;
 export const FONT_XS = `font-size: ${FONT_SIZE_XS}; line-height: ${LINE_HEIGHT_XS};`;
 
-// TODO: Remove these
-export const PRIMARY_100 = "#FDF3D8";
-export const PRIMARY_200 = "#FDEDC4";
-export const PRIMARY_300 = "#FDE6B0";
-export const PRIMARY_400 = "#FBD989";
-export const PRIMARY_500 = "#F9C74F";
-export const PRIMARY_600 = "#FBD989";
-export const PRIMARY_700 = "#F7B926";
-export const PRIMARY_800 = "#FF7000";
-export const PRIMARY_900 = "#A34700";
-
-export const SECONDARY_100 = "#D8E2FD";
-export const SECONDARY_200 = "#9EB7FA";
-export const SECONDARY_300 = "#90A6E3";
-export const SECONDARY_400 = "#8196CD";
-export const SECONDARY_500 = "#7385B6";
-export const SECONDARY_600 = "#65749f";
-export const SECONDARY_700 = "#566488";
-export const SECONDARY_800 = "#485372";
-export const SECONDARY_900 = "#39435b";
+// Search modal colors
+export const MODAL_BACKGROUND_COLOR = "hsl(212 5% 98%)";
+export const MODAL_TEXT_COLOR = "hsl(212 25% 5%)";
+export const MODAL_NEUTRAL_BACKGROUND = "hsl(212 5% 80%)";
 
 // SIZE
 export const SIZE_XXL = "4rem";

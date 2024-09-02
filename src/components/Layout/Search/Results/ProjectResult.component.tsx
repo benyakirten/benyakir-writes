@@ -13,6 +13,7 @@ import {
 	SlubTitle,
 	TitleContainer,
 } from "./Result.styles";
+import { MODAL_BACKGROUND_COLOR, MODAL_TEXT_COLOR } from "@/styles/variables";
 
 const MAX_TECHS = 2;
 
@@ -41,10 +42,19 @@ const ProjectResult: React.FC<{
 				</ContentContainer>
 				<TechContainer>
 					{firstIcons.map((i) => (
-						<ProjectTech key={i.name} tech={i.name} publicURL={i.publicURL} />
+						<ProjectTech
+							override={{
+								borderColor: MODAL_TEXT_COLOR,
+								keepIconColor: true,
+								textColor: MODAL_TEXT_COLOR,
+							}}
+							key={i.name}
+							tech={i.name}
+							publicURL={i.publicURL}
+						/>
 					))}
 					{otherIcons > 0 && (
-						<TechPill>
+						<TechPill $borderColor={MODAL_TEXT_COLOR}>
 							{otherIcons} other{otherIcons > 1 && "s"}
 						</TechPill>
 					)}

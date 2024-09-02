@@ -11,7 +11,7 @@ import {
 } from "@/styles/variables";
 import { isBgDark } from "@/utils/colors";
 
-export const TechPill = styled.div`
+export const TechPill = styled.div<{ $borderColor?: string }>`
 	display: flex;
 	align-items: center;
 	gap: ${SIZE_XS};
@@ -22,7 +22,7 @@ export const TechPill = styled.div`
 	font-family: ${SANS_SERIF_FONT};
 
 	border-radius: ${SIZE_MD};
-	border: 1px solid ${(props) => props.theme.base.textColor};
+	border: 1px solid ${(props) => props.$borderColor ?? props.theme.base.textColor};
 
 	padding: ${SIZE_XS} ${SIZE_SM};
 `;
@@ -33,23 +33,30 @@ const TechIcon = styled.img<{ $isDark: boolean }>`
 	height: calc(${SIZE_SM} * 1.2);
 `;
 
-const TechName = styled.span`
+const TechName = styled.span<{ $textColor?: string }>`
 	font-size: ${FONT_SIZE_XS};
+	color: ${(props) => props.$textColor ?? props.theme.base.textColor};
 `;
 
-const ProjectTech: React.FC<{ publicURL: string; tech: string }> = ({
-	publicURL,
-	tech,
-}) => {
+const ProjectTech: React.FC<{
+	publicURL: string;
+	tech: string;
+	override?: {
+		borderColor: string;
+		keepIconColor: boolean;
+		textColor: string;
+	};
+}> = ({ publicURL, tech, override = null }) => {
 	const theme = useAppSelector((root) => root.theme.active);
-	const shouldUseDark =
-		(tech === "Rust" || tech === "WebSockets") &&
-		isBgDark(theme.id, theme.name, theme.base.background);
+	const shouldUseDark = override?.keepIconColor
+		? false
+		: (tech === "Rust" || tech === "WebSockets") &&
+			isBgDark(theme.id, theme.name, theme.base.background);
 
 	return (
-		<TechPill>
+		<TechPill $borderColor={override?.borderColor}>
 			<TechIcon $isDark={shouldUseDark} src={publicURL} alt={tech} />
-			<TechName>{tech}</TechName>
+			<TechName $textColor={override?.textColor}>{tech}</TechName>
 		</TechPill>
 	);
 };

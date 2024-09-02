@@ -7,6 +7,9 @@ import {
 } from "@/styles/general-components";
 import {
 	FONT_SIZE_SM,
+	MODAL_BACKGROUND_COLOR,
+	MODAL_NEUTRAL_BACKGROUND,
+	MODAL_TEXT_COLOR,
 	SANS_SERIF_FONT,
 	SIZE_SM,
 	SIZE_XS,
@@ -76,10 +79,19 @@ const PostResult: React.FC<{
 					<CategoryContainer>{activeCategory}</CategoryContainer>
 					<TagContainer>
 						{tags.map((tag) => (
-							<PillContainer key={tag}>{tag}</PillContainer>
+							<PillContainer
+								$backgroundColor={MODAL_NEUTRAL_BACKGROUND}
+								$textColor={MODAL_TEXT_COLOR}
+								key={tag}
+							>
+								{tag}
+							</PillContainer>
 						))}
 						{otherTags > 0 && (
-							<PillContainer>
+							<PillContainer
+								$backgroundColor={MODAL_NEUTRAL_BACKGROUND}
+								$textColor={MODAL_TEXT_COLOR}
+							>
 								{otherTags} other{otherTags > 1 && "s"}
 							</PillContainer>
 						)}

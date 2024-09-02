@@ -222,7 +222,10 @@ export const PageContents = styled.div`
   }
 `;
 
-export const PillContainer = styled.div`
+export const PillContainer = styled.div<{
+	$backgroundColor?: string;
+	$textColor?: string;
+}>`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -237,8 +240,8 @@ export const PillContainer = styled.div`
   text-transform: capitalize;
   
   border-radius: ${SIZE_LG};
-  color: ${(props) => props.theme.pill.textColor};
-  background-color: ${(props) => props.theme.pill.background};
+  color: ${(props) => props.$textColor ?? props.theme.pill.textColor};
+  background-color: ${(props) => props.$backgroundColor ?? props.theme.pill.background};
 
 	padding: ${SIZE_XS} ${SIZE_SM};
 

@@ -5,6 +5,8 @@ import { EyeIcon } from "@/components/Icons";
 import { useToggle } from "@/hooks";
 import {
 	FONT_SIZE_SM,
+	MODAL_BACKGROUND_COLOR,
+	MODAL_TEXT_COLOR,
 	SANS_SERIF_FONT,
 	SIZE_MD,
 	SIZE_SM,
@@ -25,10 +27,10 @@ const TopBar = styled.button`
     pointer: cursor;
 
     width: 100%;
-    border-top: 2px solid ${(props) => props.theme.base.textColor};
+    border-top: 2px solid ${MODAL_TEXT_COLOR};
 
     &:focus-within {
-        outline: 2px solid ${(props) => props.theme.base.textColor};
+        outline: 2px solid ${MODAL_TEXT_COLOR};
     }
 `;
 
@@ -42,7 +44,7 @@ const GroupLabel = styled.h3`
     font-family: ${SANS_SERIF_FONT};
     font-size: ${FONT_SIZE_SM};
 
-    background-color: ${(props) => props.theme.base.background};
+    background-color: ${MODAL_BACKGROUND_COLOR};
     padding: 0 ${SIZE_XS};
 `;
 
@@ -51,8 +53,12 @@ const ToggleVisibilityButton = styled.div`
     top: calc(-${SIZE_SM} + 2px);
     right: ${SIZE_SM};
 
-    background-color: ${(props) => props.theme.base.background};
+    background-color: ${MODAL_BACKGROUND_COLOR};
     padding: 0 ${SIZE_XS};
+
+	& svg {
+		fill: ${MODAL_TEXT_COLOR};
+	}
 `;
 
 const EyeBar = styled.div<{ open: boolean }>`
@@ -62,7 +68,7 @@ const EyeBar = styled.div<{ open: boolean }>`
     height: 100%;
     width: 100%;
     
-    background-color: ${(props) => props.theme.base.textColor};
+    background-color: ${MODAL_TEXT_COLOR};
     
     clip-path: ${(props) => (props.open ? "polygon(18% 87%, 26% 87%, 26% 86%, 18% 88%)" : "polygon(68% 4%, 76% 5%, 26% 86%, 18% 86%)")};
     transition: clip-path ${TRANSITION_NORMAL} ease;

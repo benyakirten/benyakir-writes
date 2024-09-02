@@ -4,7 +4,12 @@ import styled from "styled-components";
 import { autocomplete } from "@/data/search";
 import { useDebounce } from "@/hooks";
 import { media } from "@/styles/queries";
-import { SIZE_MD, Z_SEARCH } from "@/styles/variables";
+import {
+	MODAL_BACKGROUND_COLOR,
+	MODAL_TEXT_COLOR,
+	SIZE_MD,
+	Z_SEARCH,
+} from "@/styles/variables";
 import { getRandomSuggestions } from "@/utils/search";
 import SearchBar from "./SearchBar.component";
 import SearchResults from "./SearchResults.component";
@@ -19,6 +24,9 @@ const SearchModal = styled.dialog`
 
     border-radius: ${SIZE_MD};
     width: 50%;
+
+	background-color: ${MODAL_BACKGROUND_COLOR};
+	color: ${MODAL_TEXT_COLOR};
 
 	transform: translateX(-50%);
     

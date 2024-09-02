@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { GatsbyImage } from "gatsby-plugin-image";
 
 import { WpContentDescription } from "@/styles/general-components";
 import { FlattenedStoryCard } from "@/types/posts";
 import { getPrettyDate } from "@/utils/dates";
-import { GatsbyImage } from "gatsby-plugin-image";
 import {
 	BookCoverContainer,
 	ContentContainer,
@@ -14,6 +14,8 @@ import {
 	SlubTitle,
 	TitleContainer,
 } from "./Result.styles";
+import { FONT_SM, FONT_XS } from "@/styles/variables";
+
 const PostStory: React.FC<{
 	story: FlattenedStoryCard;
 	onView: (slug: string) => void;
@@ -27,8 +29,10 @@ const PostStory: React.FC<{
 				<ContentContainer>
 					<TitleContainer>
 						<ItemTitle>{story.title}</ItemTitle>
-						<SlubTitle>{getPrettyDate(story.published.date)}</SlubTitle>
-						{subtitle && <p>{subtitle}</p>}
+						<SlubTitle>
+							{getPrettyDate(story.published.date)}
+							{subtitle && <span>&nbsp;&mdash;&nbsp;{subtitle}</span>}
+						</SlubTitle>
 					</TitleContainer>
 					<WpContentDescription
 						fontSize="1rem"

@@ -6,6 +6,8 @@ import { media } from "@/styles/queries";
 import {
 	FONT_SIZE_LG,
 	FONT_SIZE_XS,
+	MODAL_BACKGROUND_COLOR,
+	MODAL_TEXT_COLOR,
 	SIZE_MD,
 	SIZE_SM,
 	SIZE_XXL,
@@ -26,6 +28,9 @@ const SearchInput = styled.input`
 	width: 50%;
 	font-size: ${FONT_SIZE_LG};
 	flex-grow: 1;
+
+	background-color: ${MODAL_BACKGROUND_COLOR};
+	color: ${MODAL_TEXT_COLOR};
 `;
 
 const SearchCount = styled.span`
