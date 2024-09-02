@@ -58,10 +58,10 @@ export const defaultDayTheme: BaseTheme = {
 		},
 	},
 	toggle: {
-		onColor: "hsl(213 93% 76%)",
-		onBackground: "hsl(213 26% 36%)",
-		offColor: "hsl(33 43% 42%)",
-		offBackground: "hsl(33 95% 84%)",
+		onColor: "hsl(33 83% 42%)",
+		onBackground: "hsl(33 95% 84%)",
+		offColor: "hsl(213 93% 76%)",
+		offBackground: "hsl(213 26% 36%)",
 		border: "hsl(213 1% 1%)",
 	},
 	theme: {
