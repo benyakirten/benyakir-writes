@@ -131,11 +131,11 @@ export const defaultNightTheme: BaseTheme = {
 		},
 	},
 	toggle: {
-		onColor: "#FBD989",
-		onBackground: "#485372",
-		offColor: "#993d4d",
-		offBackground: "#FDE6B0",
-		border: "#D8E2FD",
+		onColor: "hsl(42 93% 66%)",
+		onBackground: "hsl(42 23% 20%)",
+		offColor: "hsl(222 93% 66%)",
+		offBackground: "hsl(222 35% 25%)",
+		border: "hsl(222 80% 85%)",
 	},
 	theme: {
 		iconColor: "#000000",
