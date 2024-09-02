@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import { useAppSelector } from "@/store/hooks";
 import {
 	FONT_SIZE_XS,
 	SANS_SERIF_FONT,
@@ -8,7 +9,6 @@ import {
 	SIZE_SM,
 	SIZE_XS,
 } from "@/styles/variables";
-import { useAppSelector } from "@/store/hooks";
 import { isBgDark } from "@/utils/colors";
 
 export const TechPill = styled.div`

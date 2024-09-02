@@ -16,9 +16,9 @@ import {
 	Z_ABOVE,
 } from "@/styles/variables";
 import { ImageQuery } from "@/types/general";
+import { convertHexToHSL, isBgDark, parseHSLString } from "@/utils/colors";
 import { downloadFile } from "@/utils/dom";
 import { GatsbyImage } from "gatsby-plugin-image";
-import { convertHexToHSL, isBgDark, parseHSLString } from "@/utils/colors";
 
 const StyledProfile = styled.div`
 	display: flex;
