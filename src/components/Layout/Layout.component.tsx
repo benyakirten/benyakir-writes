@@ -54,6 +54,10 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 	}, [dispatch]);
 
 	React.useEffect(() => {
+		localStorage.clear();
+	});
+
+	React.useEffect(() => {
 		if (window?.matchMedia) {
 			const darkColorScheme = window.matchMedia("(prefers-color-scheme: dark)");
 

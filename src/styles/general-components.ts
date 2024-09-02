@@ -199,7 +199,7 @@ export const WpContent = styled.div`
   }
 
   p {
-    margin: ${SIZE_MD} 0;
+    margin-bottom: ${SIZE_MD};
   }
 
   code {

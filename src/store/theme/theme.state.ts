@@ -74,10 +74,10 @@ export const defaultNightTheme: BaseTheme = {
 		textColor: "hsl(222 30% 94%)",
 		background: "hsl(222 50% 13%)",
 		border: "#hsl(222 10% 23%)",
-		link: "#FFF",
+		link: "hsl(222 70% 94%)",
 		pageGradient:
 			"linear-gradient(to bottom right, hsl(222 50% 13%), hsl(222 80% 16%), hsl(222 50% 13%))",
-		disabled: "#e9ecef",
+		disabled: "hsl(222 4% 70%)",
 	},
 	portfolio: {
 		textColor: "hsl(222 1% 99%)",
@@ -90,8 +90,8 @@ export const defaultNightTheme: BaseTheme = {
 		boxShadow: "hsl(222 1% 99%)",
 	},
 	header: {
-		startColor: "#FFF",
-		endColor: "#35F58F",
+		startColor: "hsl(222 30% 92%)",
+		endColor: "hsl(42 70% 44%)",
 	},
 	pill: {
 		textColor: "#FFF",
