@@ -8,6 +8,8 @@ import {
 	SIZE_SM,
 	SIZE_XS,
 } from "@/styles/variables";
+import { useAppSelector } from "@/store/hooks";
+import { isBgDark } from "@/utils/colors";
 
 export const TechPill = styled.div`
 	display: flex;
@@ -25,7 +27,8 @@ export const TechPill = styled.div`
 	padding: ${SIZE_XS} ${SIZE_SM};
 `;
 
-const TechIcon = styled.img`
+const TechIcon = styled.img<{ $isDark: boolean }>`
+	filter: invert(${(props) => (props.$isDark ? 1 : 0)});
 	width: calc(${SIZE_SM} * 1.2);
 	height: calc(${SIZE_SM} * 1.2);
 `;
@@ -38,9 +41,14 @@ const ProjectTech: React.FC<{ publicURL: string; tech: string }> = ({
 	publicURL,
 	tech,
 }) => {
+	const theme = useAppSelector((root) => root.theme.active);
+	const shouldUseDark =
+		(tech === "Rust" || tech === "WebSockets") &&
+		isBgDark(theme.id, theme.name, theme.base.background);
+
 	return (
 		<TechPill>
-			<TechIcon src={publicURL} alt={tech} />
+			<TechIcon $isDark={shouldUseDark} src={publicURL} alt={tech} />
 			<TechName>{tech}</TechName>
 		</TechPill>
 	);

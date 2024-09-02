@@ -12,9 +12,14 @@ import {
 	ProjectTech,
 	TechContainer,
 } from "../General";
-import { FullContainer, TagContainer } from "./Card.styles";
+import { FullContainer, SpanOneContent, TagContainer } from "./Card.styles";
 import CardExterior from "./CardExterior.component";
 import { PublishedDate } from "./IconedText.component";
+
+const ExtraMarginedContainer = styled.div`
+	margin: ${SIZE_XS} 0;
+	grid-column: span 2;
+`;
 
 const ProjectCardInterior: React.FC<{
 	project: FlattenedProjectCard;
@@ -23,7 +28,7 @@ const ProjectCardInterior: React.FC<{
 	const latestUpdateState = useFetchRepoUpdatedDate(project.repoLink);
 	return (
 		<>
-			<FullContainer>{project.title}</FullContainer>
+			<SpanOneContent>{project.title}</SpanOneContent>
 			{project.hostedOn && (
 				<TagContainer>
 					<ProjectHost host={project.hostedOn} />
@@ -55,15 +60,14 @@ const ProjectCard: React.FC<
 	}
 > = ({ image, ...props }) => {
 	return (
-		<CardExterior slug={`/project/${props.slug}`} columns="1fr 1fr">
+		<CardExterior
+			rows="auto 1fr auto auto"
+			slug={`/project/${props.slug}`}
+			columns="1fr 1fr"
+		>
 			<ProjectCardInterior project={props} image={image} />
 		</CardExterior>
 	);
 };
-
-const ExtraMarginedContainer = styled.div`
-	margin: ${SIZE_XS} 0;
-	grid-column: span 2;
-`;
 
 export default ProjectCard;

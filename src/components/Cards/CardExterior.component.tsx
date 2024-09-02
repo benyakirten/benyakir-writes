@@ -60,12 +60,15 @@ const ExternalArrow = styled.div`
 `;
 
 const CardExterior: React.FC<
-	{ slug: string; columns: string } & ChildrenProp
-> = ({ slug, children, columns }) => {
+	{ slug: string; columns: string; rows?: string } & ChildrenProp
+> = ({ slug, children, columns, rows }) => {
 	return (
 		<li>
 			<Link to={slug}>
-				<StyledCardExterior $columns={columns}>
+				<StyledCardExterior
+					style={{ gridTemplateRows: rows }}
+					$columns={columns}
+				>
 					<ExternalArrow data-arrow />
 					{children}
 				</StyledCardExterior>

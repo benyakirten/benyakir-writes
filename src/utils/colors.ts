@@ -184,3 +184,21 @@ export function convertHexToHSL(hex: string): HSLColor {
 		luminance: l,
 	};
 }
+
+export function isBgDark(id: string, name: string, bgColor: string): boolean {
+	if (id === "1" || name.toLowerCase().includes("night")) {
+		return true;
+	}
+
+	let hsl = parseHSLString(bgColor);
+	if (hsl && hsl.luminance < 50) {
+		return true;
+	}
+
+	try {
+		hsl = convertHexToHSL(bgColor);
+		return hsl.luminance < 50;
+	} catch {
+		return false;
+	}
+}
