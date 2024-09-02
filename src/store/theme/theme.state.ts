@@ -73,7 +73,7 @@ export const defaultNightTheme: BaseTheme = {
 	base: {
 		textColor: "hsl(222 30% 94%)",
 		background: "hsl(222 50% 13%)",
-		border: "#hsl(222 10% 23%)",
+		border: "hsl(222 40% 80%)",
 		link: "hsl(222 70% 94%)",
 		pageGradient:
 			"linear-gradient(to bottom right, hsl(222 50% 13%), hsl(222 80% 16%), hsl(222 50% 13%))",
@@ -86,19 +86,19 @@ export const defaultNightTheme: BaseTheme = {
 		selectedTabBackground: "hsl(222 80% 15%)",
 	},
 	card: {
-		arrowColor: "hsl(222 1% 99%)",
-		boxShadow: "hsl(222 1% 99%)",
+		arrowColor: "hsl(222 60% 25%)",
+		boxShadow: "hsl(222 35% 94%)",
 	},
 	header: {
 		startColor: "hsl(222 30% 92%)",
 		endColor: "hsl(42 70% 44%)",
 	},
 	pill: {
-		textColor: "#FFF",
-		background: "#000",
+		textColor: "hsl(222 60% 5%)",
+		background: "hsl(222 25% 85%)",
 	},
 	sidebar: {
-		link: "#FFF",
+		link: "hsl(222 70% 90%)",
 		gradient:
 			"linear-gradient(to bottom right, hsl(222 90% 10%), hsl(222 80% 15%), hsl(222 80% 25%), hsl(222 40% 15%), hsl(222 67% 27%))",
 		shadowColor: "hsl(222 10% 80%)",
