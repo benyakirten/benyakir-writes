@@ -36,7 +36,7 @@ const TabList = styled.div`
 	border-radius: ${SIZE_XS};
 
 	&:focus-within > [data-indicator]::after {
-		outline: 1px solid ${(props) => props.theme.header.link};
+		outline: 1px solid ${(props) => props.theme.portfolio.selectedTabBackground};
 	}
 `;
 
@@ -63,7 +63,7 @@ const SelectedTabIndicator = styled.div<{ $selectedIdx: number }>`
 		border-radius: ${SIZE_XS};
 		transition: left ${TRANSITION_NORMAL} ease, top ${TRANSITION_NORMAL} ease;
 	
-		background-color: ${(props) => props.theme.base.background};
+		background-color: ${(props) => props.theme.portfolio.selectedTabBackground};
 
 		${media.phone} {
 			width: 90%;

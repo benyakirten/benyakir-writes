@@ -14,7 +14,7 @@ export const defaultDayTheme: BaseTheme = {
 		textColor: "hsl(213 50% 90%)",
 		selectedTextColor: "hsl(213 40% 20%)",
 		tabBackground: "hsl(213 35% 25%)",
-		selectedTabBackground: "hsl(213 1% 99%)",
+		selectedTabBackground: "hsl(213 40% 92%)",
 	},
 	card: {
 		arrowColor: "hsl(213 20% 92%)",
@@ -80,10 +80,10 @@ export const defaultNightTheme: BaseTheme = {
 		disabled: "hsl(222 4% 70%)",
 	},
 	portfolio: {
-		textColor: "hsl(222 1% 99%)",
-		selectedTextColor: "hsl(222 1% 99%)",
-		tabBackground: "hsl(222 1% 99%)",
-		selectedTabBackground: "hsl(222 1% 99%)",
+		textColor: "hsl(222 25% 15%)",
+		selectedTextColor: "hsl(222 30% 94%)",
+		tabBackground: "hsl(222 30% 92%)",
+		selectedTabBackground: "hsl(222 80% 15%)",
 	},
 	card: {
 		arrowColor: "hsl(222 1% 99%)",
