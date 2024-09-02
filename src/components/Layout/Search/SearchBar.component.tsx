@@ -34,11 +34,15 @@ const SearchInput = styled.input`
 `;
 
 const SearchCount = styled.span`
-	font-size: ${FONT_SIZE_XS};
-	text-transform: uppercase;
-	opacity: 0.8;
 	align-self: center;
-	width: max-content;
+	width: fit-content;
+
+	font-size: ${FONT_SIZE_XS};
+	color: ${MODAL_TEXT_COLOR};
+	text-transform: uppercase;
+	
+	opacity: 0.8;
+	
 	${media.phone} {
 		display: none;
 	}

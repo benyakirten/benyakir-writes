@@ -3,6 +3,7 @@ import React from "react";
 import { ProjectTech, TechContainer } from "@/components/General";
 import { TechPill } from "@/components/General/Project/ProjectTech.component";
 import { WpContentDescription } from "@/styles/general-components";
+import { MODAL_BACKGROUND_COLOR, MODAL_TEXT_COLOR } from "@/styles/variables";
 import { FlattenedProjectCard } from "@/types/posts";
 import { getPrettyDate } from "@/utils/dates";
 import {
@@ -13,7 +14,6 @@ import {
 	SlubTitle,
 	TitleContainer,
 } from "./Result.styles";
-import { MODAL_BACKGROUND_COLOR, MODAL_TEXT_COLOR } from "@/styles/variables";
 
 const MAX_TECHS = 2;
 

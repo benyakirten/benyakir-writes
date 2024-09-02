@@ -2,7 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 import { GrowableUnderline } from "@/components/General";
-import { FONT_SIZE_LG, FONT_SIZE_MD, SIZE_SM } from "@/styles/variables";
+import {
+	FONT_SIZE_LG,
+	FONT_SIZE_MD,
+	MODAL_LINK_COLOR,
+	SIZE_SM,
+} from "@/styles/variables";
 
 const EmptyContainer = styled.div`
     padding: ${SIZE_SM};
@@ -11,7 +16,7 @@ const EmptyContainer = styled.div`
 `;
 
 const PossibleSearch = styled.button`
-	color: ${(props) => props.theme.base.link};
+	color: ${MODAL_LINK_COLOR};
 `;
 
 const EmptyResults: React.FC<{
@@ -24,7 +29,7 @@ const EmptyResults: React.FC<{
 				No results found. Did you mean:{" "}
 				{alternatives.map((alternative, i) => (
 					<span key={alternative}>
-						<GrowableUnderline>
+						<GrowableUnderline underlineColor={MODAL_LINK_COLOR}>
 							<PossibleSearch
 								type="button"
 								onClick={() => onSelect(alternative)}

@@ -1,8 +1,9 @@
+import { GatsbyImage } from "gatsby-plugin-image";
 import React from "react";
 import styled from "styled-components";
-import { GatsbyImage } from "gatsby-plugin-image";
 
 import { WpContentDescription } from "@/styles/general-components";
+import { FONT_SM, FONT_XS } from "@/styles/variables";
 import { FlattenedStoryCard } from "@/types/posts";
 import { getPrettyDate } from "@/utils/dates";
 import {
@@ -14,7 +15,6 @@ import {
 	SlubTitle,
 	TitleContainer,
 } from "./Result.styles";
-import { FONT_SM, FONT_XS } from "@/styles/variables";
 
 const PostStory: React.FC<{
 	story: FlattenedStoryCard;

@@ -34,6 +34,7 @@ export const FONT_XS = `font-size: ${FONT_SIZE_XS}; line-height: ${LINE_HEIGHT_X
 export const MODAL_BACKGROUND_COLOR = "hsl(212 5% 98%)";
 export const MODAL_TEXT_COLOR = "hsl(212 25% 5%)";
 export const MODAL_NEUTRAL_BACKGROUND = "hsl(212 5% 80%)";
+export const MODAL_LINK_COLOR = "hsl(212 100% 30%)";
 
 // SIZE
 export const SIZE_XXL = "4rem";

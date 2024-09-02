@@ -5,16 +5,22 @@ import { hoverUnderline } from "@/styles/style-mixins";
 
 const UnderlinableItem = styled.div<{
 	display?: React.CSSProperties["display"];
+	$underlineColor?: string;
 }>`
     display: ${(props) => props.display ?? "inline"};
 
-	${(props) => hoverUnderline(props.theme.base.link)}
+	${(props) => hoverUnderline(props.$underlineColor ?? props.theme.base.link)}
 `;
 
 const GrowableUnderline: React.FC<
-	{ display?: React.CSSProperties["display"] } & ChildrenProp
-> = ({ children, display }) => (
-	<UnderlinableItem display={display}>{children}</UnderlinableItem>
+	{
+		display?: React.CSSProperties["display"];
+		underlineColor?: string;
+	} & ChildrenProp
+> = ({ children, display, underlineColor }) => (
+	<UnderlinableItem $underlineColor={underlineColor} display={display}>
+		{children}
+	</UnderlinableItem>
 );
 
 export default GrowableUnderline;
