@@ -1,8 +1,3 @@
-// @ts-ignore
-require("dotenv").config({
-	path: `.env.${process.env.NODE_ENV}`,
-});
-
 module.exports = {
 	siteMetadata: {
 		siteUrl: "https://www.benyakir-writes.com",
@@ -21,7 +16,7 @@ module.exports = {
 		{
 			resolve: "gatsby-source-wordpress",
 			options: {
-				url: `${process.env.WP_URL}/graphql`,
+				url: "https://benyakiredits.com/graphql",
 			},
 		},
 		"gatsby-plugin-styled-components",
