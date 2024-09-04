@@ -1,8 +1,11 @@
-import { books, pageSearch, posts, projects, stories } from "@/data/search";
-import { SearchResultItems } from "./types";
+import { books, pageSearch, posts, projects, stories } from "../data/search";
 
-// TODO: Make this into API function
-export function search(query: string): SearchResultItems | null {
+/**
+ *
+ * @param {string} query
+ * @returns {null | import("../types/search").SearchResultItems}
+ */
+export function search(query) {
 	if (!query) {
 		return null;
 	}
@@ -63,3 +66,16 @@ export function search(query: string): SearchResultItems | null {
 		pages: pageResults,
 	};
 }
+
+/**
+ *
+ * @param {MessageEvent<{ query: string }>} e
+ */
+const handleMessage = (e) => {
+	const { query } = e.data;
+	const results = search(query);
+	postMessage(results);
+};
+
+// biome-ignore lint/suspicious/noGlobalAssign: Using self.global causes an error in Gatsby's eslint so we reassign the global
+onmessage = handleMessage;

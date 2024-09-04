@@ -1,75 +1,50 @@
 import React from "react";
-import styled from "styled-components";
 
 import { autocomplete } from "@/data/search";
 import { useDebounce } from "@/hooks";
-import { media } from "@/styles/queries";
-import {
-	MODAL_BACKGROUND_COLOR,
-	MODAL_TEXT_COLOR,
-	SIZE_MD,
-	Z_SEARCH,
-} from "@/styles/variables";
-import { getRandomSuggestions } from "@/utils/search";
+import { SearchProps, SearchResultItems } from "@/types/search";
+import Modal from "../Modal.component";
 import SearchBar from "./SearchBar.component";
 import SearchResults from "./SearchResults.component";
-import { search } from "./search";
-import { SearchProps, SearchResultItems } from "./types";
-
-const SearchModal = styled.dialog`
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    z-index: ${Z_SEARCH};
-
-    border-radius: ${SIZE_MD};
-    width: 50%;
-
-	background-color: ${MODAL_BACKGROUND_COLOR};
-	color: ${MODAL_TEXT_COLOR};
-
-	transform: translateX(-50%);
-    
-    &::backdrop {
-		height: 200vh;
-        background-color: rgba(0, 0, 0, 0.2);
-        backdrop-filter: blur(4px);
-    }
-
-	${media.desktop} {
-		width: 70%;
-	}
-
-	${media.tablet} {
-		width: 80%;
-	}
-
-	${media.phone} {
-		width: 90%;
-`;
 
 const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 	({ onClose }, ref) => {
 		const [showResultCount, setShowResultCount] = React.useState(false);
-		const handleClick = (e: React.MouseEvent<HTMLDialogElement>) => {
-			if (e.target === e.currentTarget) {
-				onClose();
-			}
-		};
-
 		const [results, setResults] = React.useState<SearchResultItems | null>(
 			null,
 		);
 
-		const onSearch = React.useCallback((query: string) => {
-			const results = search(query);
-			setResults(results);
+		const [searchWorker, setSearchWorker] = React.useState<Worker>();
+		React.useEffect(() => {
+			const worker = new Worker(
+				new URL("../../../workers/search.worker.js", import.meta.url),
+			);
+
+			worker.addEventListener(
+				"message",
+				(e: MessageEvent<SearchResultItems>) => {
+					setResults(e.data);
+				},
+			);
+
+			setSearchWorker(worker);
+
+			return () => {
+				worker.terminate();
+			};
 		}, []);
+
+		const onSearch = React.useCallback(
+			(query: string) => {
+				searchWorker?.postMessage({ query });
+			},
+			[searchWorker],
+		);
 
 		const [suggestions, setSuggestions] = React.useState<string[]>([]);
 		const [searchAutocomplete, setSearchAutocomplete] = React.useState<
-			string[]
-		>([]);
+			string | undefined
+		>();
 		const [query, _setQuery] = useDebounce(onSearch);
 
 		const setQuery = (query: string) => {
@@ -77,22 +52,22 @@ const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 			if (query === "") {
 				setShowResultCount(false);
 				setSuggestions([]);
-				setSearchAutocomplete([]);
+				setSearchAutocomplete(undefined);
 				return;
 			}
 
 			const suggestions = autocomplete.suggest(query);
 			if (suggestions === null || suggestions.length === 0) {
-				setSearchAutocomplete([]);
+				setSearchAutocomplete(undefined);
 
-				const randomSuggestions = getRandomSuggestions(autocomplete);
+				const randomSuggestions = autocomplete.getRandomSuggestions();
 				setSuggestions(randomSuggestions);
 
 				return;
 			}
 			const allSuggestions = suggestions.map((s) => s.word);
 
-			setSearchAutocomplete(allSuggestions);
+			setSearchAutocomplete(allSuggestions.at(0));
 			setSuggestions(allSuggestions);
 			setShowResultCount(true);
 		};
@@ -106,11 +81,11 @@ const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 			: 0;
 
 		return (
-			<SearchModal ref={ref} onClick={handleClick}>
+			<Modal ref={ref} onClose={onClose}>
 				<SearchBar
 					showResultCount={showResultCount}
 					numResults={numResults}
-					suggestions={searchAutocomplete}
+					suggestion={searchAutocomplete}
 					search={query}
 					setSearch={setQuery}
 					onClose={onClose}
@@ -121,7 +96,7 @@ const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 					onSetQuery={setQuery}
 					alternatives={suggestions}
 				/>
-			</SearchModal>
+			</Modal>
 		);
 	},
 );

@@ -20,6 +20,7 @@ export const useFilter = (
 	filterBarRef: React.RefObject<HTMLElement>,
 	newFilterRef: React.RefObject<HTMLButtonElement>,
 	pageRef: React.RefObject<HTMLInputElement>,
+	setPage: React.Dispatch<React.SetStateAction<number>>,
 ) => {
 	const keydownListener = useCallback(
 		(event: KeyboardEvent) => {
@@ -39,9 +40,17 @@ export const useFilter = (
 				case "p":
 					pageRef.current?.focus();
 					break;
+				case "=":
+				case "+":
+					setPage((p) => p + 1);
+					break;
+				case "_":
+				case "-":
+					setPage((p) => p - 1);
+					break;
 			}
 		},
-		[newFilterRef, pageRef],
+		[newFilterRef, pageRef, setPage],
 	);
 
 	const clickListener = useCallback(

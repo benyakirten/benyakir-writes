@@ -16,32 +16,63 @@ import {
 import { inputIsFocused } from "@/utils/dom";
 import { GlobalStyles, LayoutContainer, MainContainer } from "./Layout.styles";
 import Search from "./Search";
+import Shortcuts from "./Shortcuts/Shortcuts.component";
 import Sidebar from "./Sidebar/Sidebar.component";
 
 const Layout: React.FC<ChildrenProp> = ({ children }) => {
 	const location = useLocation();
-	const modalRef = React.useRef<HTMLDialogElement>(null);
+	const searchModalRef = React.useRef<HTMLDialogElement>(null);
+	const keyboaradShortcutModalRef = React.useRef<HTMLDialogElement>(null);
 
 	const themeStore = useAppSelector((root) => root.theme);
 	const dispatch = useAppDispatch();
 
-	const closeModal = () => modalRef.current?.close();
-	const openModal = () => modalRef.current?.showModal();
+	const closeAllModals = () => {
+		searchModalRef.current?.close();
+		keyboaradShortcutModalRef.current?.close();
+	};
+	const openSearch = () => searchModalRef.current?.showModal();
+	const openShortcuts = () => keyboaradShortcutModalRef.current?.showModal();
 
 	React.useEffect(() => {
 		const handler = (e: KeyboardEvent) => {
+			if (
+				e.key === "Escape" &&
+				(searchModalRef.current?.open ||
+					keyboaradShortcutModalRef.current?.open)
+			) {
+				closeAllModals();
+				return;
+			}
+
 			if (inputIsFocused()) {
 				return;
 			}
 
+			if (e.key === "?" && e.shiftKey) {
+				keyboaradShortcutModalRef.current?.open
+					? closeAllModals()
+					: openShortcuts();
+				return;
+			}
+
+			if (e.key === "<" && e.shiftKey) {
+				dispatch(setSidebarState(false));
+				return;
+			}
+
+			if (e.key === ">" && e.shiftKey) {
+				dispatch(setSidebarState(true));
+				return;
+			}
+
 			if ((e.ctrlKey || e.metaKey) && e.key === "/") {
-				openModal();
-			} else if (e.key === "Escape") {
-				if (modalRef.current?.open) {
-					closeModal();
-				} else {
-					dispatch(setSidebarState(false));
-				}
+				openSearch();
+				return;
+			}
+
+			if (e.key === "Escape") {
+				dispatch(setSidebarState(false));
 			}
 		};
 
@@ -78,8 +109,9 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 		<ThemeProvider theme={themeStore.active}>
 			<LayoutContainer>
 				<GlobalStyles />
-				<Search ref={modalRef} onClose={closeModal} />
-				<Sidebar onSearch={openModal} />
+				<Search ref={searchModalRef} onClose={closeAllModals} />
+				<Shortcuts ref={keyboaradShortcutModalRef} onClose={closeAllModals} />
+				<Sidebar onSearch={openSearch} onOpenShortcuts={openShortcuts} />
 				<MainContainer>
 					<TransitionGroup>
 						<Transition

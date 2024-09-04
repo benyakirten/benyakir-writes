@@ -57,7 +57,7 @@ export const FillInExterior = styled.div<{
     transform: scale(0);
   }
 
-  &:hover, &:focus, &[data-force-fill-in='true'] {
+  &:hover, &:focus-within, &[data-force-fill-in='true'] {
     span {
       color: ${(props) => props.theme.fillIn.hover.textColor};
     }

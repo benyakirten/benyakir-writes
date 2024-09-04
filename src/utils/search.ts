@@ -11,10 +11,10 @@ export class TrieNode {
 		public weight: number | null = null,
 	) {}
 }
-
 export type CompletionOption = { word: string; weight: number };
 export class Trie {
 	private root: TrieNode;
+	private static readonly NUM_SUGGESTIONS = 5;
 	public words: string[] = [];
 
 	constructor(words: [string, number][] = []) {
@@ -101,22 +101,20 @@ export class Trie {
 			return b.weight - a.weight;
 		});
 	}
-}
 
-const NUM_SUGGESTIONS = 5;
-export function getRandomSuggestions(trie: Trie): string[] {
-	const { words } = trie;
-	if (words.length <= NUM_SUGGESTIONS) {
-		return [...words];
-	}
-
-	const indices: number[] = [];
-	while (indices.length < NUM_SUGGESTIONS) {
-		const index = Math.floor(Math.random() * words.length);
-		if (!indices.includes(index)) {
-			indices.push(index);
+	getRandomSuggestions(): string[] {
+		if (this.words.length <= Trie.NUM_SUGGESTIONS) {
+			return [...this.words];
 		}
-	}
 
-	return indices.map((i) => words[i]);
+		const indices: number[] = [];
+		while (indices.length < Trie.NUM_SUGGESTIONS) {
+			const index = Math.floor(Math.random() * this.words.length);
+			if (!indices.includes(index)) {
+				indices.push(index);
+			}
+		}
+
+		return indices.map((i) => this.words[i]);
+	}
 }

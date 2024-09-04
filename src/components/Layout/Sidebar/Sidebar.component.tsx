@@ -1,7 +1,8 @@
 import { useLocation } from "@reach/router";
 import * as React from "react";
+import styled from "styled-components";
 
-import { NextIcon } from "@/components/Icons";
+import { NextIcon, SearchIcon, ShortcutsIcon } from "@/components/Icons";
 import { Toggle } from "@/components/Input";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
@@ -9,6 +10,7 @@ import {
 	toggleSidebarState,
 } from "@/store/sidebar/sidebar.slice";
 import { toggleTimeOfDay } from "@/store/theme/theme.slice";
+import { SIZE_SM } from "@/styles/variables";
 import { capitalize } from "@/utils/strings";
 import {
 	ArrowButton,
@@ -22,9 +24,17 @@ import {
 } from "./Sidebar.styles";
 import { ActiveIndicator, NavLink } from "./components";
 import Logo from "./components/Logo.component";
-import OpenSearchButton from "./components/OpenSearchButton.component";
+import OpenModalButton from "./components/OpenModalButton.component";
 
-const Sidebar: React.FC<{ onSearch: () => void }> = ({ onSearch }) => {
+const IconButtonColumn = styled.div`
+	display: grid;
+	gap: ${SIZE_SM};
+`;
+
+const Sidebar: React.FC<{
+	onSearch: () => void;
+	onOpenShortcuts: () => void;
+}> = ({ onSearch, onOpenShortcuts }) => {
 	const portfolioRef = React.useRef<HTMLElement>(null);
 	const blogRef = React.useRef<HTMLElement>(null);
 	const authorRef = React.useRef<HTMLElement>(null);
@@ -140,7 +150,17 @@ const Sidebar: React.FC<{ onSearch: () => void }> = ({ onSearch }) => {
 								</NavLink>
 							))}
 						</NavGroup>
-						<OpenSearchButton onSearch={onSearch} />
+						<IconButtonColumn>
+							<OpenModalButton onClick={onSearch} icon={<SearchIcon />}>
+								Search
+							</OpenModalButton>
+							<OpenModalButton
+								onClick={onOpenShortcuts}
+								icon={<ShortcutsIcon />}
+							>
+								Shortcuts
+							</OpenModalButton>
+						</IconButtonColumn>
 						<Toggle
 							value={activeTheme.id === "1"}
 							onToggle={() => dispatch(toggleTimeOfDay())}

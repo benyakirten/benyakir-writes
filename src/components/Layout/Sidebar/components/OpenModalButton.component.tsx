@@ -26,17 +26,20 @@ const TextContainer = styled.span`
 `;
 
 // TODO: Update this button's styles
-const OpenSearchButton: React.FC<{ onSearch: () => void }> = ({ onSearch }) => {
+const OpenModalButton: React.FC<
+	{
+		onClick: () => void;
+		icon: React.ReactNode;
+	} & ChildrenProp
+> = ({ onClick, icon, children }) => {
 	return (
 		<GrowableUnderline>
-			<SearchButton type="button" onClick={onSearch}>
-				<IconContainer>
-					<SearchIcon />
-				</IconContainer>
-				<TextContainer>Search</TextContainer>
+			<SearchButton type="button" onClick={onClick}>
+				{icon && <IconContainer>{icon}</IconContainer>}
+				<TextContainer>{children}</TextContainer>
 			</SearchButton>
 		</GrowableUnderline>
 	);
 };
 
-export default OpenSearchButton;
+export default OpenModalButton;

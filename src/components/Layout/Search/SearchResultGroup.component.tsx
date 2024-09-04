@@ -57,7 +57,7 @@ const ToggleVisibilityButton = styled.div`
     padding: 0 ${SIZE_XS};
 
 	& svg {
-		fill: ${MODAL_TEXT_COLOR};
+		fill: ${MODAL_BACKGROUND_COLOR};
 	}
 `;
 

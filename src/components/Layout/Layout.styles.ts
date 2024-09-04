@@ -4,6 +4,7 @@ import { media } from "@/styles/queries";
 import {
 	SANS_SERIF_FONT,
 	SERIF_FONT,
+	SIZE_MD,
 	TRANSITION_NORMAL,
 } from "@/styles/variables";
 
@@ -62,6 +63,18 @@ export const GlobalStyles = createGlobalStyle`
     list-style: none;
   }
 
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
   .filterable-card-enter {
     opacity: 0;
     transform: scale(0);
@@ -104,4 +117,12 @@ export const MainContainer = styled.main`
   margin-left: 3rem;
   background-color: ${(props) => props.theme.base.background};
   overflow: hidden;
+`;
+
+export const IconButton = styled.button`
+    width: ${SIZE_MD};
+    appearance: none;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
 `;

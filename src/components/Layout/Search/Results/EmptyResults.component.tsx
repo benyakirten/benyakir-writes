@@ -25,7 +25,7 @@ const EmptyResults: React.FC<{
 }> = ({ alternatives, onSelect }) => {
 	return (
 		<EmptyContainer>
-			<p>
+			<div>
 				No results found. Did you mean:{" "}
 				{alternatives.map((alternative, i) => (
 					<span key={alternative}>
@@ -40,7 +40,7 @@ const EmptyResults: React.FC<{
 						<span>{i < alternatives.length - 1 ? ",  " : ""}</span>
 					</span>
 				))}
-			</p>
+			</div>
 		</EmptyContainer>
 	);
 };

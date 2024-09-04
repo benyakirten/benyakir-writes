@@ -8,11 +8,13 @@ import {
 	FONT_SIZE_XS,
 	MODAL_BACKGROUND_COLOR,
 	MODAL_TEXT_COLOR,
+	SANS_SERIF_FONT,
 	SIZE_MD,
 	SIZE_SM,
 	SIZE_XXL,
 } from "@/styles/variables";
-import { SearchBarProps } from "./types";
+import { SearchBarProps } from "@/types/search";
+import { IconButton } from "../Layout.styles";
 
 const StyledSearchBar = styled.div`
     display: flex;
@@ -22,20 +24,9 @@ const StyledSearchBar = styled.div`
     padding: 0 ${SIZE_SM};
 `;
 
-const SearchInput = styled.input`
-    border: 0;
-    outline: none;
-	width: 50%;
-	font-size: ${FONT_SIZE_LG};
-	flex-grow: 1;
-
-	background-color: ${MODAL_BACKGROUND_COLOR};
-	color: ${MODAL_TEXT_COLOR};
-`;
-
 const SearchCount = styled.span`
 	align-self: center;
-	width: fit-content;
+	width: 10ch;
 
 	font-size: ${FONT_SIZE_XS};
 	color: ${MODAL_TEXT_COLOR};
@@ -54,29 +45,104 @@ const SearchIconContainer = styled.label`
     width: ${SIZE_MD};
 `;
 
-const CloseButton = styled.button`
-    width: ${SIZE_MD};
-    appearance: none;
-    background-color: transparent;
-    border: 0;
-    cursor: pointer;
+const StyledSearchContainer = styled.div`
+	flex-grow: 1;
+	width: 50%;
+
+	position: relative;
 `;
 
-const SearchSuggestions: React.FC<{ suggestions: string[]; id: string }> = ({
-	id,
-	suggestions,
-}) => (
-	<datalist id={id}>
-		{suggestions.map((suggestion) => (
-			<option key={suggestion} value={suggestion} />
-		))}
-	</datalist>
-);
+const StyledSearchInput = styled.input`
+	height: 100%;
+	width: 100%;
+
+    border: 0;
+    outline: none;
+	font-size: ${FONT_SIZE_LG};
+	font-family: ${SANS_SERIF_FONT};
+
+	background-color: ${MODAL_BACKGROUND_COLOR};
+	color: ${MODAL_TEXT_COLOR};
+`;
+
+const HiddenInputContainer = styled.div`
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translateY(-50%);
+	
+	display: block;
+	visibility: hidden;
+	
+	border: 0;
+    outline: none;
+
+	font-size: ${FONT_SIZE_LG};
+	font-family: ${SANS_SERIF_FONT};
+
+	&::after {
+		content: attr(data-suggestion);
+
+		position: absolute;
+		visibility: visible;
+		left: 100%;
+		opacity: 0.6;
+	}
+`;
+
+const SearchInput: React.FC<{
+	search: string;
+	setSearch: (val: string) => void;
+	suggestion?: string;
+}> = ({ search, setSearch, suggestion }) => {
+	const suggestionRemainder = suggestion
+		? suggestion.slice(search.length)
+		: null;
+
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === "Escape" && search) {
+			setSearch("");
+			e.stopPropagation();
+			e.preventDefault();
+			return;
+		}
+
+		if ((e.key === "Tab" || e.key === "Enter") && suggestionRemainder) {
+			setSearch(suggestion as string);
+			e.preventDefault();
+			return;
+		}
+	};
+	return (
+		<StyledSearchContainer>
+			<StyledSearchInput
+				autoFocus
+				value={search}
+				onKeyDown={handleKeyDown}
+				onChange={(e) => setSearch(e.currentTarget.value)}
+				placeholder="Search"
+				id="global-search-input"
+				aria-autocomplete="inline"
+				aria-describedby="search-autosuggest"
+				aria-live="polite"
+				type="search"
+			/>
+			{suggestion && (
+				<span id="search-autosuggest" className="sr-only" aria-live="assertive">
+					Press Tab or Enter to accept the suggestion: {suggestion}
+				</span>
+			)}
+			<HiddenInputContainer data-suggestion={suggestionRemainder}>
+				{search}
+			</HiddenInputContainer>
+		</StyledSearchContainer>
+	);
+};
 
 const SearchBar: React.FC<SearchBarProps> = ({
 	showResultCount,
 	numResults,
-	suggestions,
+	suggestion,
 	search,
 	onClose,
 	setSearch,
@@ -87,13 +153,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
 				<SearchIcon />
 			</SearchIconContainer>
 			<SearchInput
-				autoFocus
-				value={search}
-				onChange={(e) => setSearch(e.target.value)}
-				placeholder="Search"
-				id="global-search-input"
-				aria-label="Search"
-				list="search-suggestions"
+				search={search}
+				setSearch={setSearch}
+				suggestion={suggestion}
 			/>
 			{showResultCount && search !== "" && (
 				<SearchCount>
@@ -101,10 +163,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
 					{numResults === 1 ? "" : "s"}
 				</SearchCount>
 			)}
-			<SearchSuggestions suggestions={suggestions} id="search-suggestions" />
-			<CloseButton aria-label="Close Modal" type="button" onClick={onClose}>
+			<IconButton aria-label="Close Modal" type="button" onClick={onClose}>
 				<CloseIcon />
-			</CloseButton>
+			</IconButton>
 		</StyledSearchBar>
 	);
 };

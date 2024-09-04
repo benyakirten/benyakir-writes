@@ -1,6 +1,8 @@
 // FONT FAMILY
 export const SERIF_FONT = "'Faustina', serif";
 export const SANS_SERIF_FONT = "'Mulish', sans-serif";
+export const MONOSPACE_FONT =
+	"ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace";
 
 // FONT SIZE
 export const FONT_SIZE_XXXL = "2.25rem";
@@ -35,6 +37,7 @@ export const MODAL_BACKGROUND_COLOR = "hsl(212 5% 98%)";
 export const MODAL_TEXT_COLOR = "hsl(212 25% 5%)";
 export const MODAL_NEUTRAL_BACKGROUND = "hsl(212 5% 80%)";
 export const MODAL_LINK_COLOR = "hsl(212 100% 30%)";
+export const MODAL_SHORTCUT_BACKGROUND = "hsl(212 20% 90%)";
 
 // SIZE
 export const SIZE_XXL = "4rem";
@@ -43,6 +46,7 @@ export const SIZE_LG = "2.4rem";
 export const SIZE_MD = "1.6rem";
 export const SIZE_SM = "0.8rem";
 export const SIZE_XS = "0.4rem";
+export const SIZE_XXS = "0.2rem";
 
 // BOX SHADOW
 export const SHADOW_SIDEBAR = "2px 0px 2px 1px";

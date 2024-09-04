@@ -15,8 +15,10 @@ import {
 	SIZE_MD,
 	SIZE_SM,
 	SIZE_XS,
+	SIZE_XXL,
 	TRANSITION_EXTRA_SLOW,
 	TRANSITION_NORMAL,
+	Z_ABOVE,
 } from "./variables";
 
 import {
@@ -91,7 +93,7 @@ export const BigParagraph = styled.p`
 export const WpContentDescription = styled.div<{ fontSize?: string }>`
   ${FONT_MD};
 
-  ${limitLines(2)}  
+  ${limitLines(2)}
 
   a:link,
   a:visited {
@@ -187,7 +189,6 @@ export const WpContent = styled.div`
     ${(props) => textClipWithHoverTransition(props.theme.header.startColor, props.theme.header.endColor)}
   }
 
-
   ul,
   ol,
   li {
@@ -198,13 +199,17 @@ export const WpContent = styled.div`
     list-style-type: disc;
   }
 
-  p {
+  p, code, figure {
     margin-bottom: ${SIZE_MD};
   }
 
   code {
+    display: inline-block;
+
     font-family: monospace;
     font-size: ${FONT_SIZE_MD};
+    text-wrap: wrap;
+
   }
 `;
 
@@ -265,7 +270,7 @@ export const NormalPageContents = styled.div`
 `;
 
 export const TemplateHeaderTitle = styled(LeadHeading)`
-  padding-bottom: 0;
+  padding: ${SIZE_XS} 0;
 `;
 
 export const TemplateContent = styled.div`

@@ -120,7 +120,7 @@ const PortfolioLink: React.FC<{
 }> = ({ to, text, icon }) => {
 	return (
 		<GrowableUnderline>
-			<PortfolioAnchor href={to}>
+			<PortfolioAnchor target="_blank" href={to}>
 				<IconedText
 					icon={icon}
 					text={<StyledLinkText>{text}</StyledLinkText>}
