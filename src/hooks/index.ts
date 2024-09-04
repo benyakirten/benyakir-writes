@@ -4,7 +4,6 @@ export {
 	default as useFetchRepoUpdatedDate,
 	FetchState,
 } from "./useFetchRepoUpdatedDate.hook";
-export { default as useLookup } from "./useLookup.hook";
 export { default as useMultiple } from "./useMultiple.hook";
 export { default as usePagination } from "./usePagination.hook";
 export { default as useSet } from "./useSet.hook";

@@ -9,3 +9,4 @@ export { default as MailIcon } from "./Mail.component";
 export { default as ResumeIcon } from "./Document.component";
 export { default as SelectIcon } from "./Select.component";
 export { default as EditIcon } from "./Edit.component";
+export { default as ShortcutsIcon } from "./Shortcuts.component";

@@ -14,6 +14,7 @@ import {
 	SIZE_XXL,
 } from "@/styles/variables";
 import { SearchBarProps } from "./types";
+import { IconButton } from "../Layout.styles";
 
 const StyledSearchBar = styled.div`
     display: flex;
@@ -42,14 +43,6 @@ const SearchIconContainer = styled.label`
     display: grid;
     place-items: center;
     width: ${SIZE_MD};
-`;
-
-const IconButton = styled.button`
-    width: ${SIZE_MD};
-    appearance: none;
-    background-color: transparent;
-    border: 0;
-    cursor: pointer;
 `;
 
 const StyledSearchContainer = styled.div`

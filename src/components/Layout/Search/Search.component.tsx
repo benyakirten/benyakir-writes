@@ -1,61 +1,16 @@
 import React from "react";
-import styled from "styled-components";
 
 import { autocomplete } from "@/data/search";
 import { useDebounce } from "@/hooks";
-import { media } from "@/styles/queries";
-import {
-	MODAL_BACKGROUND_COLOR,
-	MODAL_TEXT_COLOR,
-	SIZE_MD,
-	Z_SEARCH,
-} from "@/styles/variables";
 import SearchBar from "./SearchBar.component";
 import SearchResults from "./SearchResults.component";
 import { search } from "./search";
 import { SearchProps, SearchResultItems } from "./types";
-
-const SearchModal = styled.dialog`
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    z-index: ${Z_SEARCH};
-
-    border-radius: ${SIZE_MD};
-    width: 50%;
-
-	background-color: ${MODAL_BACKGROUND_COLOR};
-	color: ${MODAL_TEXT_COLOR};
-
-	transform: translateX(-50%);
-    
-    &::backdrop {
-		height: 200vh;
-        background-color: rgba(0, 0, 0, 0.2);
-        backdrop-filter: blur(4px);
-    }
-
-	${media.desktop} {
-		width: 70%;
-	}
-
-	${media.tablet} {
-		width: 80%;
-	}
-
-	${media.phone} {
-		width: 90%;
-`;
+import Modal from "../Modal.component";
 
 const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 	({ onClose }, ref) => {
 		const [showResultCount, setShowResultCount] = React.useState(false);
-		const handleClick = (e: React.MouseEvent<HTMLDialogElement>) => {
-			if (e.target === e.currentTarget) {
-				onClose();
-			}
-		};
-
 		const [results, setResults] = React.useState<SearchResultItems | null>(
 			null,
 		);
@@ -105,7 +60,7 @@ const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 			: 0;
 
 		return (
-			<SearchModal ref={ref} onClick={handleClick}>
+			<Modal ref={ref} onClose={onClose}>
 				<SearchBar
 					showResultCount={showResultCount}
 					numResults={numResults}
@@ -120,7 +75,7 @@ const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 					onSetQuery={setQuery}
 					alternatives={suggestions}
 				/>
-			</SearchModal>
+			</Modal>
 		);
 	},
 );

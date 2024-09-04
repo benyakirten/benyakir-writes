@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 import { SEARCH_TIMEOUT } from "@/data/constants";
 import type { DebounceHook } from "@/types/hooks";

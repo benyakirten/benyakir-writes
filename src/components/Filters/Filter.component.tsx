@@ -97,7 +97,8 @@ const Filter: React.FC<FilterProps> = ({
 	const [menuOpenTop, menuOpen, setSoftOpen, setHardOpen] =
 		useFlyout(newFilterRef);
 
-	useFilter(filterBarRef, newFilterRef, pageRef);
+	useFilter(filterBarRef, newFilterRef, pageRef, setPage);
+
 	return (
 		<FilterBar ref={filterBarRef}>
 			<CurrentPage

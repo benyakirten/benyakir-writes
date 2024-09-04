@@ -4,6 +4,7 @@ import { media } from "@/styles/queries";
 import {
 	SANS_SERIF_FONT,
 	SERIF_FONT,
+	SIZE_MD,
 	TRANSITION_NORMAL,
 } from "@/styles/variables";
 
@@ -116,4 +117,12 @@ export const MainContainer = styled.main`
   margin-left: 3rem;
   background-color: ${(props) => props.theme.base.background};
   overflow: hidden;
+`;
+
+export const IconButton = styled.button`
+    width: ${SIZE_MD};
+    appearance: none;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
 `;
