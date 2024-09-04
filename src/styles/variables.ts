@@ -35,6 +35,7 @@ export const MODAL_BACKGROUND_COLOR = "hsl(212 5% 98%)";
 export const MODAL_TEXT_COLOR = "hsl(212 25% 5%)";
 export const MODAL_NEUTRAL_BACKGROUND = "hsl(212 5% 80%)";
 export const MODAL_LINK_COLOR = "hsl(212 100% 30%)";
+export const MODAL_AUTOCOMPLETE_COLOR = "hsl(212 10% 50%)";
 
 // SIZE
 export const SIZE_XXL = "4rem";
