@@ -10,7 +10,6 @@ import {
 	SIZE_MD,
 	Z_SEARCH,
 } from "@/styles/variables";
-import { getRandomSuggestions } from "@/utils/search";
 import SearchBar from "./SearchBar.component";
 import SearchResults from "./SearchResults.component";
 import { search } from "./search";
@@ -68,8 +67,8 @@ const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 
 		const [suggestions, setSuggestions] = React.useState<string[]>([]);
 		const [searchAutocomplete, setSearchAutocomplete] = React.useState<
-			string[]
-		>([]);
+			string | undefined
+		>();
 		const [query, _setQuery] = useDebounce(onSearch);
 
 		const setQuery = (query: string) => {
@@ -77,22 +76,22 @@ const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 			if (query === "") {
 				setShowResultCount(false);
 				setSuggestions([]);
-				setSearchAutocomplete([]);
+				setSearchAutocomplete(undefined);
 				return;
 			}
 
 			const suggestions = autocomplete.suggest(query);
 			if (suggestions === null || suggestions.length === 0) {
-				setSearchAutocomplete([]);
+				setSearchAutocomplete(undefined);
 
-				const randomSuggestions = getRandomSuggestions(autocomplete);
+				const randomSuggestions = autocomplete.getRandoSuggestions();
 				setSuggestions(randomSuggestions);
 
 				return;
 			}
 			const allSuggestions = suggestions.map((s) => s.word);
 
-			setSearchAutocomplete(allSuggestions);
+			setSearchAutocomplete(allSuggestions.at(0));
 			setSuggestions(allSuggestions);
 			setShowResultCount(true);
 		};
@@ -110,7 +109,7 @@ const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 				<SearchBar
 					showResultCount={showResultCount}
 					numResults={numResults}
-					suggestions={searchAutocomplete}
+					suggestion={searchAutocomplete}
 					search={query}
 					setSearch={setQuery}
 					onClose={onClose}

@@ -6,9 +6,7 @@ import { media } from "@/styles/queries";
 import {
 	FONT_SIZE_LG,
 	FONT_SIZE_XS,
-	MODAL_AUTOCOMPLETE_COLOR,
 	MODAL_BACKGROUND_COLOR,
-	MODAL_LINK_COLOR,
 	MODAL_TEXT_COLOR,
 	SANS_SERIF_FONT,
 	SIZE_MD,
@@ -27,7 +25,7 @@ const StyledSearchBar = styled.div`
 
 const SearchCount = styled.span`
 	align-self: center;
-	width: fit-content;
+	width: 10ch;
 
 	font-size: ${FONT_SIZE_XS};
 	color: ${MODAL_TEXT_COLOR};
@@ -46,7 +44,7 @@ const SearchIconContainer = styled.label`
     width: ${SIZE_MD};
 `;
 
-const CloseButton = styled.button`
+const IconButton = styled.button`
     width: ${SIZE_MD};
     appearance: none;
     background-color: transparent;
@@ -63,6 +61,7 @@ const StyledSearchContainer = styled.div`
 
 const StyledSearchInput = styled.input`
 	height: 100%;
+	width: 100%;
 
     border: 0;
     outline: none;
@@ -89,14 +88,13 @@ const HiddenInputContainer = styled.div`
 	font-family: ${SANS_SERIF_FONT};
 
 	&::after {
-		content: attr(data-value);
+		content: attr(data-suggestion);
 
 		position: absolute;
 		visibility: visible;
 		left: 100%;
-		color: ${MODAL_AUTOCOMPLETE_COLOR};
+		opacity: 0.6;
 	}
-
 `;
 
 const SearchInput: React.FC<{
@@ -109,8 +107,16 @@ const SearchInput: React.FC<{
 		: null;
 
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-		if (e.key === "Tab" && suggestionRemainder) {
+		if (e.key === "Escape" && search) {
+			setSearch("");
+			e.stopPropagation();
+			e.preventDefault();
+			return;
+		}
+
+		if ((e.key === "Tab" || e.key === "Enter") && suggestionRemainder) {
 			setSearch(suggestion as string);
+			e.preventDefault();
 			return;
 		}
 	};
@@ -123,9 +129,17 @@ const SearchInput: React.FC<{
 				onChange={(e) => setSearch(e.currentTarget.value)}
 				placeholder="Search"
 				id="global-search-input"
-				aria-label="Search"
+				aria-autocomplete="inline"
+				aria-describedby="search-autosuggest"
+				aria-live="polite"
+				type="search"
 			/>
-			<HiddenInputContainer data-value={suggestionRemainder}>
+			{suggestion && (
+				<span id="search-autosuggest" className="sr-only" aria-live="assertive">
+					Press Tab or Enter to accept the suggestion: {suggestion}
+				</span>
+			)}
+			<HiddenInputContainer data-suggestion={suggestionRemainder}>
 				{search}
 			</HiddenInputContainer>
 		</StyledSearchContainer>
@@ -135,7 +149,7 @@ const SearchInput: React.FC<{
 const SearchBar: React.FC<SearchBarProps> = ({
 	showResultCount,
 	numResults,
-	suggestions,
+	suggestion,
 	search,
 	onClose,
 	setSearch,
@@ -148,7 +162,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 			<SearchInput
 				search={search}
 				setSearch={setSearch}
-				suggestion={suggestions.at(0)}
+				suggestion={suggestion}
 			/>
 			{showResultCount && search !== "" && (
 				<SearchCount>
@@ -156,9 +170,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
 					{numResults === 1 ? "" : "s"}
 				</SearchCount>
 			)}
-			<CloseButton aria-label="Close Modal" type="button" onClick={onClose}>
+			<IconButton aria-label="Close Modal" type="button" onClick={onClose}>
 				<CloseIcon />
-			</CloseButton>
+			</IconButton>
 		</StyledSearchBar>
 	);
 };

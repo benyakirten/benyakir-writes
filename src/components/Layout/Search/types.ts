@@ -11,7 +11,7 @@ export type SearchProps = {
 };
 
 export type SearchBarProps = {
-	suggestions: string[];
+	suggestion?: string;
 	search: string;
 	numResults: number;
 	showResultCount: boolean;
