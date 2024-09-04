@@ -36,6 +36,15 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 
 	React.useEffect(() => {
 		const handler = (e: KeyboardEvent) => {
+			if (
+				e.key === "Escape" &&
+				(searchModalRef.current?.open ||
+					keyboaradShortcutModalRef.current?.open)
+			) {
+				closeAllModals();
+				return;
+			}
+
 			if (inputIsFocused()) {
 				return;
 			}
@@ -63,11 +72,7 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 			}
 
 			if (e.key === "Escape") {
-				if (searchModalRef.current?.open) {
-					closeAllModals();
-				} else {
-					dispatch(setSidebarState(false));
-				}
+				dispatch(setSidebarState(false));
 			}
 		};
 
