@@ -10,6 +10,7 @@ import {
 	toggleSidebarState,
 } from "@/store/sidebar/sidebar.slice";
 import { toggleTimeOfDay } from "@/store/theme/theme.slice";
+import { SIZE_SM } from "@/styles/variables";
 import { capitalize } from "@/utils/strings";
 import {
 	ArrowButton,
@@ -24,7 +25,6 @@ import {
 import { ActiveIndicator, NavLink } from "./components";
 import Logo from "./components/Logo.component";
 import OpenModalButton from "./components/OpenModalButton.component";
-import { SIZE_SM } from "@/styles/variables";
 
 const IconButtonColumn = styled.div`
 	display: grid;

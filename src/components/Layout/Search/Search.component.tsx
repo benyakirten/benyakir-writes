@@ -2,11 +2,10 @@ import React from "react";
 
 import { autocomplete } from "@/data/search";
 import { useDebounce } from "@/hooks";
+import { SearchProps, SearchResultItems } from "@/types/search";
+import Modal from "../Modal.component";
 import SearchBar from "./SearchBar.component";
 import SearchResults from "./SearchResults.component";
-import { search } from "./search";
-import { SearchProps, SearchResultItems } from "./types";
-import Modal from "../Modal.component";
 
 const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 	({ onClose }, ref) => {
@@ -15,10 +14,32 @@ const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 			null,
 		);
 
-		const onSearch = React.useCallback((query: string) => {
-			const results = search(query);
-			setResults(results);
+		const [searchWorker, setSearchWorker] = React.useState<Worker>();
+		React.useEffect(() => {
+			const worker = new Worker(
+				new URL("../../../workers/search.worker.js", import.meta.url),
+			);
+
+			worker.addEventListener(
+				"message",
+				(e: MessageEvent<SearchResultItems>) => {
+					setResults(e.data);
+				},
+			);
+
+			setSearchWorker(worker);
+
+			return () => {
+				worker.terminate();
+			};
 		}, []);
+
+		const onSearch = React.useCallback(
+			(query: string) => {
+				searchWorker?.postMessage({ query });
+			},
+			[searchWorker],
+		);
 
 		const [suggestions, setSuggestions] = React.useState<string[]>([]);
 		const [searchAutocomplete, setSearchAutocomplete] = React.useState<

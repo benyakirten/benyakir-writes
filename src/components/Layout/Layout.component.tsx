@@ -16,8 +16,8 @@ import {
 import { inputIsFocused } from "@/utils/dom";
 import { GlobalStyles, LayoutContainer, MainContainer } from "./Layout.styles";
 import Search from "./Search";
-import Sidebar from "./Sidebar/Sidebar.component";
 import Shortcuts from "./Shortcuts/Shortcuts.component";
+import Sidebar from "./Sidebar/Sidebar.component";
 
 const Layout: React.FC<ChildrenProp> = ({ children }) => {
 	const location = useLocation();

@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import Modal from "../Modal.component";
+import { CloseIcon } from "@/components/Icons";
+import { LeadHeading, Subtitle } from "@/styles/general-components";
+import { media } from "@/styles/queries";
 import {
 	MODAL_SHORTCUT_BACKGROUND,
 	MONOSPACE_FONT,
@@ -12,9 +14,7 @@ import {
 	TRANSITION_NORMAL,
 } from "@/styles/variables";
 import { IconButton } from "../Layout.styles";
-import { CloseIcon } from "@/components/Icons";
-import { LeadHeading, Subtitle } from "@/styles/general-components";
-import { media } from "@/styles/queries";
+import Modal from "../Modal.component";
 
 const StyledContainer = styled.div`
     position: relative;

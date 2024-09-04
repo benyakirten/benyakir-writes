@@ -13,7 +13,7 @@ import {
 	SIZE_SM,
 	SIZE_XXL,
 } from "@/styles/variables";
-import { SearchBarProps } from "./types";
+import { SearchBarProps } from "@/types/search";
 import { IconButton } from "../Layout.styles";
 
 const StyledSearchBar = styled.div`

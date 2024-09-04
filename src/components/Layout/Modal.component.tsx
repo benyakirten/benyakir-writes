@@ -1,13 +1,13 @@
 import React from "react";
+import styled from "styled-components";
 
 import { media } from "@/styles/queries";
 import {
-	Z_SEARCH,
-	SIZE_MD,
 	MODAL_BACKGROUND_COLOR,
 	MODAL_TEXT_COLOR,
+	SIZE_MD,
+	Z_SEARCH,
 } from "@/styles/variables";
-import styled from "styled-components";
 
 const StyledModal = styled.dialog<{ $baseWidth?: string }>`
   position: fixed;
