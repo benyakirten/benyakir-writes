@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { useFlyout } from "@/hooks/useFlyout.hook";
 import { media } from "@/styles/queries";
-import { SIZE_SM, Z_RAISED } from "@/styles/variables";
+import { SIZE_MD, SIZE_SM, SIZE_XXL, Z_RAISED } from "@/styles/variables";
 import { FilterProps, ItemFilter, WordFilterType } from "@/types/filters";
 import { PotentialChoice } from "@/types/general";
 import { DateFilter, KeywordFilter, NewFilter, SearchFilter } from "./Filter";
@@ -12,11 +12,11 @@ import { useFilter } from "./useFilter.hook";
 
 const FilterBar = styled.div`
     position: fixed;
-    top: 2rem;
+    top: ${SIZE_MD};
 	right: 2%;
 
-	width: 0px;
-
+	width: fit-content;
+	
     display: flex;
     flex-wrap: wrap;
 	justify-content: end;
@@ -25,7 +25,7 @@ const FilterBar = styled.div`
 	z-index: ${Z_RAISED};
 
 	${media.phone} {
-		position: sticky;
+		top: calc(1.5 * ${SIZE_XXL});
 		margin-bottom: ${SIZE_SM};
 	}
 `;
