@@ -7,12 +7,12 @@ const END_TAG = "/";
 const EMPTY_SPACE_CHARS = [" ", "\n", "\t"];
 
 export class BlockParser {
-	public blocks: HTMLBlock[] = [];
-	constructor(public content: string) {
+	public blocks: HTMLBlock[];
+	constructor(content: string) {
 		this.blocks = this.identifyHTMLBlocks(content);
 	}
 
-	getTagName(content: string, position: number): string {
+	private getTagName(content: string, position: number): string {
 		let tag = "";
 		let pos = position;
 
@@ -27,7 +27,7 @@ export class BlockParser {
 		return tag.trim();
 	}
 
-	getBlockClasses(elOpen: string): string[] {
+	private getBlockClasses(elOpen: string): string[] {
 		const classAttr = elOpen.match(/class="([^"]*)"/);
 		if (!classAttr || classAttr.length < 2) {
 			return [];
@@ -37,7 +37,7 @@ export class BlockParser {
 		return classString.split(" ");
 	}
 
-	identifyHTMLBlocks(content: string): HTMLBlock[] {
+	private identifyHTMLBlocks(content: string): HTMLBlock[] {
 		let currentBlock: HTMLBlock | null = null;
 
 		const stack: string[] = [];
@@ -69,10 +69,19 @@ export class BlockParser {
 				continue;
 			}
 
-			if (char === OPEN_ANGLE_BRACKET && content[i + 1] === END_TAG) {
+			const isAtEndOfElement =
+				char === OPEN_ANGLE_BRACKET && content[i + 1] === END_TAG;
+			const isSelfClosing =
+				char === END_TAG && content[i + 1] === CLOSE_ANGLE_BRACKET;
+
+			if (!isAtEndOfElement && !isSelfClosing) {
+				continue;
+			}
+
+			if (isAtEndOfElement) {
 				const tag = this.getTagName(content, i + 1);
-				i += tag.length + 1;
-				currentBlock.html += `/${tag}`;
+				i += tag.length + 2;
+				currentBlock.html += `/${tag}>`;
 
 				if (stack.length > 0 && stack.at(-1) === tag) {
 					stack.pop();
@@ -82,17 +91,27 @@ export class BlockParser {
 				if (tag !== currentBlock.tag) {
 					continue;
 				}
-
-				const endOpenTag = currentBlock.html.indexOf(CLOSE_ANGLE_BRACKET);
-				const elOpen = currentBlock.html.slice(0, endOpenTag + 1);
-
-				currentBlock.classes = this.getBlockClasses(elOpen);
-				currentBlock.html = currentBlock.html.trim();
-
-				blocks.push(currentBlock);
-
-				currentBlock = null;
 			}
+
+			if (isSelfClosing) {
+				currentBlock.html += CLOSE_ANGLE_BRACKET;
+				i++;
+
+				if (stack.length > 0) {
+					stack.pop();
+					continue;
+				}
+			}
+
+			const endOpenTag = currentBlock.html.indexOf(CLOSE_ANGLE_BRACKET);
+			const elOpen = currentBlock.html.slice(0, endOpenTag + 1);
+
+			currentBlock.classes = this.getBlockClasses(elOpen);
+			currentBlock.html = currentBlock.html.trim();
+
+			blocks.push(currentBlock);
+
+			currentBlock = null;
 		}
 
 		return blocks;

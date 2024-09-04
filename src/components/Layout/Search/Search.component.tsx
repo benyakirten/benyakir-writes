@@ -84,7 +84,7 @@ const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 			if (suggestions === null || suggestions.length === 0) {
 				setSearchAutocomplete(undefined);
 
-				const randomSuggestions = autocomplete.getRandoSuggestions();
+				const randomSuggestions = autocomplete.getRandomSuggestions();
 				setSuggestions(randomSuggestions);
 
 				return;

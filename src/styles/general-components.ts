@@ -265,7 +265,7 @@ export const NormalPageContents = styled.div`
 `;
 
 export const TemplateHeaderTitle = styled(LeadHeading)`
-  padding-bottom: 0;
+  padding: ${SIZE_XS} 0;
 `;
 
 export const TemplateContent = styled.div`

@@ -102,7 +102,7 @@ export class Trie {
 		});
 	}
 
-	getRandoSuggestions(): string[] {
+	getRandomSuggestions(): string[] {
 		if (this.words.length <= Trie.NUM_SUGGESTIONS) {
 			return [...this.words];
 		}
