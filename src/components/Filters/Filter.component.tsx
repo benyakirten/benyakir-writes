@@ -13,7 +13,7 @@ import { useFilter } from "./useFilter.hook";
 const FilterBar = styled.div`
     position: fixed;
     top: 2rem;
-	left: 98%;
+	right: 2%;
 
 	width: 0px;
 
