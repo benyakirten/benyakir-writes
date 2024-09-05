@@ -61,9 +61,9 @@ const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 			if (suggestions === null || suggestions.length === 0) {
 				setSearchAutocomplete(undefined);
 
-				const randomSuggestions = autocomplete.getRandomSuggestions();
-				setSuggestions(randomSuggestions);
-
+				const levenshteinSuggestions =
+					autocomplete.getClosestLevenshteinSuggestions(query);
+				setSuggestions(levenshteinSuggestions);
 				return;
 			}
 			const allSuggestions = suggestions.map((s) => s.word);

@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 import { GrowableUnderline } from "@/components/General";
-import { SearchIcon } from "@/components/Icons";
 import { FONT_SIZE_MD, SIZE_SM } from "@/styles/variables";
 
 const SearchButton = styled.button`

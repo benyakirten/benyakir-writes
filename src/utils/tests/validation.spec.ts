@@ -6,6 +6,7 @@ import {
 	validateByRegex,
 	validateLength,
 	validateRange,
+	validateThemeShape,
 } from "@/utils/validation";
 
 describe("validateByRegex", () => {
@@ -264,5 +265,87 @@ describe("validate", () => {
 		for (const input of incorrectInputs) {
 			expect(validate(input, validationFunctions)).toBe(false);
 		}
+	});
+});
+describe("validateThemeShape", () => {
+	it("should return true when the two objects have the same shape", () => {
+		const first = {
+			colors: {
+				primary: "#FF0000",
+				secondary: "#00FF00",
+			},
+			fontSize: "16",
+		};
+
+		const second = {
+			colors: {
+				primary: "#FF0000",
+				secondary: "#00FF00",
+			},
+			fontSize: "16",
+		};
+
+		expect(validateThemeShape(first, second)).toBe(true);
+	});
+
+	it("should return false when the two objects have different shapes", () => {
+		const first = {
+			colors: {
+				primary: "#FF0000",
+				secondary: "#00FF00",
+			},
+			fontSize: "16",
+		};
+
+		const second = {
+			colors: {
+				primary: "#FF0000",
+			},
+			fontSize: "16",
+		};
+
+		expect(validateThemeShape(first, second)).toBe(false);
+	});
+
+	it("should return false when the values of the same key have different types", () => {
+		const first = {
+			colors: {
+				primary: "#FF0000",
+				secondary: "#00FF00",
+			},
+			fontSize: "16",
+		};
+
+		const second = {
+			colors: {
+				primary: "#FF0000",
+				secondary: "#0000FF",
+			},
+			fontSize: 16,
+		};
+
+		// @ts-ignore
+		expect(validateThemeShape(first, second)).toBe(false);
+	});
+
+	it("should return false when the values of nested data of the same key have different types", () => {
+		const first = {
+			colors: {
+				primary: null,
+				secondary: "#00FF00",
+			},
+			fontSize: "16",
+		};
+
+		const second = {
+			colors: {
+				primary: "#FF0000",
+				secondary: "#0000FF",
+			},
+			fontSize: 16,
+		};
+
+		// @ts-ignore
+		expect(validateThemeShape(first, second)).toBe(false);
 	});
 });

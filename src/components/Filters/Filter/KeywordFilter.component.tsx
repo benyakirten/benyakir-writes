@@ -10,6 +10,7 @@ import {
 	MultipleChoice,
 } from "../components";
 import { registerCleanupFn } from "../useFilter.hook";
+import { SIZE_MD } from "@/styles/variables";
 
 const MAX_KEYWORDS = 1;
 
@@ -68,7 +69,7 @@ const KeywordFilter: React.FC<KeywordFilterProps> = ({
 				/>
 			</FilterMenu>
 			<FilterButton
-				borderRadiusCorners={{ topRight: "2rem", bottomRight: "2rem" }}
+				borderRadiusCorners={{ topRight: SIZE_MD, bottomRight: SIZE_MD }}
 				width="10rem"
 				filledIn={keywordsOpen}
 				onMouseEnter={() => setKeywordsSoftOpen(true)}

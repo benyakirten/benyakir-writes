@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { useAppSelector } from "@/store/hooks";
 import { fadeIn } from "@/styles/animations";
-import { BigParagraph } from "@/styles/general-components";
+import { BigParagraph, Subtitle } from "@/styles/general-components";
 import { FONT_MD } from "@/styles/variables";
 import ThemeSettings from "./ThemeSettings.component";
 
@@ -23,15 +23,18 @@ const ModifyTheme: React.FC<ModifyThemeProps> = ({ selectedTheme }) => {
 	const theme = themes.find((theme) => theme.id === selectedTheme);
 
 	return (
-		<ControlsContainer>
-			{theme ? (
-				<ThemeAppearance>
-					<ThemeSettings theme={theme} />
-				</ThemeAppearance>
-			) : (
-				<BigParagraph>Select a theme to modify it here</BigParagraph>
-			)}
-		</ControlsContainer>
+		<>
+			<Subtitle style={{ marginBottom: 0 }}>Modify Theme</Subtitle>
+			<ControlsContainer>
+				{theme ? (
+					<ThemeAppearance>
+						<ThemeSettings theme={theme} />
+					</ThemeAppearance>
+				) : (
+					<BigParagraph>Select a theme to modify it here</BigParagraph>
+				)}
+			</ControlsContainer>
+		</>
 	);
 };
 

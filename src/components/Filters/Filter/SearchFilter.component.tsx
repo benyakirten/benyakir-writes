@@ -10,6 +10,7 @@ import {
 	FilterText,
 } from "../components";
 import { registerCleanupFn } from "../useFilter.hook";
+import { SIZE_MD } from "@/styles/variables";
 
 const SearchFilter: React.FC<SearchFilterProps> = ({
 	onSearch,
@@ -52,7 +53,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
 				<Text label="Search" name={id} value={search} onChange={onSearch} />
 			</FilterMenu>
 			<FilterButton
-				borderRadiusCorners={{ topRight: "2rem", bottomRight: "2rem" }}
+				borderRadiusCorners={{ topRight: SIZE_MD, bottomRight: SIZE_MD }}
 				width="10rem"
 				filledIn={searchOpen}
 				onMouseEnter={() => setSearchSoftOpen(true)}

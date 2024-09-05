@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {
 	FONT_SIZE_MD,
 	FONT_SIZE_SM,
+	SIZE_MD,
 	SIZE_SM,
 	SIZE_XS,
 	TRANSITION_NORMAL,
@@ -10,11 +11,12 @@ import {
 
 export const TextInputContainer = styled.div`
   position: relative;
-
+  margin-left: 2px;
+  
   label {
     position: absolute;
     top: 40%;
-    left: calc(${SIZE_XS} + 2.6px);
+    left: calc(${SIZE_MD} - 2px);
     transform: translateY(-40%) scale(1);
     transform-origin: left;
 
@@ -29,12 +31,17 @@ export const TextInputContainer = styled.div`
   }
 
   input {
-    padding: calc(${SIZE_SM} + ${SIZE_XS}) ${SIZE_XS} 2px;
+    padding: calc(${SIZE_SM} + ${SIZE_XS}) calc(${SIZE_MD} - 4px) 2px;
     border: 2px solid ${(props) => props.theme.base.border};
 
     font-size: ${FONT_SIZE_SM};
     color: ${(props) => props.theme.base.textColor};
     background-color: ${(props) => props.theme.base.background};
+
+    border-top-right-radius: ${SIZE_MD};
+    border-bottom-right-radius: ${SIZE_MD};
+    border-bottom-left-radius: ${SIZE_MD};
+    border-top-left-radius: ${SIZE_MD};
 
     &:hover + label,
     &:focus + label,

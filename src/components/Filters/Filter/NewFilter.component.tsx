@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 
 import { FillIn } from "@/components/General";
 import { AddIcon } from "@/components/Icons";
-import { SIZE_SM, TRANSITION_SLOW, Z_HIGH } from "@/styles/variables";
+import { SIZE_MD, SIZE_SM, TRANSITION_SLOW, Z_HIGH } from "@/styles/variables";
 import { FilterOption, NewFilterProps } from "@/types/filters";
 import {
 	FilterMenu,
@@ -106,10 +106,10 @@ const NewFilter = React.forwardRef<HTMLButtonElement, NewFilterProps>(
 				</FilterMenu>
 				<FillIn
 					borderRadiusCorners={{
-						bottomLeft: "2rem",
-						bottomRight: "2rem",
-						topLeft: "2rem",
-						topRight: "2rem",
+						bottomLeft: SIZE_MD,
+						bottomRight: SIZE_MD,
+						topLeft: SIZE_MD,
+						topRight: SIZE_MD,
 					}}
 				>
 					<InnerContainer ref={ref}>

@@ -10,3 +10,5 @@ export { default as ResumeIcon } from "./Document.component";
 export { default as SelectIcon } from "./Select.component";
 export { default as EditIcon } from "./Edit.component";
 export { default as ShortcutsIcon } from "./Shortcuts.component";
+export { default as ClipboardIcon } from "./Clipboard.component";
+export { default as CheckIcon } from "./Check.component";

@@ -59,3 +59,20 @@ export function validate(
 	}
 	return true;
 }
+
+export function validateThemeShape<T extends object = RecursiveControlGroup>(
+	first: T,
+	second: T,
+): boolean {
+	for (const key in first) {
+		if (typeof first[key] === "object") {
+			if (!validateThemeShape(first[key] as T, second[key] as T)) {
+				return false;
+			}
+		} else if (typeof first[key] !== typeof second[key]) {
+			return false;
+		}
+	}
+
+	return true;
+}

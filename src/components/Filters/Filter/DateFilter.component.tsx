@@ -7,6 +7,7 @@ import { getShortDate } from "@/utils/dates";
 import { FilterButton, FilterPill, FilterText } from "../components";
 import { FilterMenu } from "../components/Filters.styles";
 import { registerCleanupFn } from "../useFilter.hook";
+import { SIZE_MD } from "@/styles/variables";
 
 const DateFilter: React.FC<DateFilterProps> = ({
 	onModify,
@@ -88,7 +89,7 @@ const DateFilter: React.FC<DateFilterProps> = ({
 				</li>
 			</FilterMenu>
 			<FilterButton
-				borderRadiusCorners={{ topRight: "2rem", bottomRight: "2rem" }}
+				borderRadiusCorners={{ topRight: SIZE_MD, bottomRight: SIZE_MD }}
 				filledIn={endOpen}
 				onMouseEnter={() => setEndSoftOpen(true)}
 				onMouseLeave={() => setEndSoftOpen(false)}

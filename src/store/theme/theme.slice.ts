@@ -11,6 +11,7 @@ import {
 	determineComputerPreferredTheme,
 	getDefaultThemeState,
 } from "./theme.utils";
+import { validateThemeShape } from "@/utils/validation";
 
 function copyTheme(
 	copiedTheme: BaseTheme,
@@ -217,6 +218,30 @@ const themeSlice = createSlice({
 
 			return getDefaultThemeState();
 		},
+
+		importTheme: (state, action: PayloadAction<string>) => {
+			if (!action.payload) {
+				return;
+			}
+
+			try {
+				const decoded = atob(action.payload);
+				const importedTheme = JSON.parse(decoded);
+
+				if (!validateThemeShape(defaultDayTheme, importedTheme)) {
+					throw new Error("Invalid theme shape");
+				}
+
+				const { name, id } = copyTheme(importedTheme, state);
+				state.themes.push({ ...importedTheme, name, id: id.toString() });
+				state.latestId = id;
+
+				localStorage.setItem(STORED_THEMES, JSON.stringify(state.themes));
+				localStorage.setItem(STORED_ACTIVE_THEME_ID, id.toString());
+			} catch (e) {
+				console.error(e);
+			}
+		},
 	},
 });
 
@@ -232,6 +257,7 @@ export const {
 	changeThemeName,
 	changePropOnTheme,
 	resetThemeOptions,
+	importTheme,
 } = themeSlice.actions;
 
 export default themeSlice.reducer;
