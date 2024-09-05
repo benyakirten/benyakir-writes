@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { CloseIcon, SearchIcon } from "@/components/Icons";
+import { ScreenReaderOnly } from "@/styles/general-components";
 import { media } from "@/styles/queries";
 import {
 	FONT_SIZE_LG,
@@ -128,9 +129,9 @@ const SearchInput: React.FC<{
 				type="search"
 			/>
 			{suggestion && (
-				<span id="search-autosuggest" className="sr-only" aria-live="assertive">
-					Press Tab or Enter to accept the suggestion: {suggestion}
-				</span>
+				<ScreenReaderOnly id="search-autosuggest" aria-live="assertive">
+					Press Tab or Enter to accept the suggestion {suggestion}
+				</ScreenReaderOnly>
 			)}
 			<HiddenInputContainer data-suggestion={suggestionRemainder}>
 				{search}

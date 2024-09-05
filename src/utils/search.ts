@@ -79,13 +79,8 @@ export class Trie {
 	}
 
 	suggest(prefix: string): CompletionOption[] | null {
-		const headNode = this.startWith(prefix);
-		if (!headNode) {
-			return null;
-		}
-
-		const options = this.dfs(prefix, headNode);
-		if (!options || options.length === 0) {
+		const options = this.getAutocompleteForSearch(prefix);
+		if (!options) {
 			return null;
 		}
 
@@ -99,6 +94,83 @@ export class Trie {
 			}
 
 			return b.weight - a.weight;
+		});
+	}
+
+	getLevenshteinDistance(prefix: string, suggestion: string): number {
+		const prefixLength = prefix.length;
+		const suggestionLength = suggestion.length;
+
+		// Matrix to store Levenshtein distances between prefixes and suggestions
+		const ldMatrix = Array.from({ length: prefixLength + 1 }, () =>
+			Array.from({ length: suggestionLength + 1 }, () => 0),
+		);
+
+		// Initialize the first row and column of the matrix
+		for (let i = 0; i <= prefixLength; i++) {
+			// Deleting all characters from prefix
+			ldMatrix[i][0] = i;
+		}
+		for (let j = 0; j <= suggestionLength; j++) {
+			// Inserting all characters from suggestion
+			ldMatrix[0][j] = j;
+		}
+
+		for (let i = 1; i <= prefixLength; i++) {
+			for (let j = 1; j <= suggestionLength; j++) {
+				if (prefix[i - 1] === suggestion[j - 1]) {
+					ldMatrix[i][j] = ldMatrix[i - 1][j - 1];
+				} else {
+					ldMatrix[i][j] = Math.min(
+						ldMatrix[i - 1][j] + 1, // Deletion
+						ldMatrix[i][j - 1] + 1, // Insertion
+						ldMatrix[i - 1][j - 1] + 1, // Substitution
+					);
+				}
+			}
+		}
+
+		return ldMatrix[prefixLength][suggestionLength];
+	}
+
+	private getAutocompleteForSearch(prefix: string): CompletionOption[] | null {
+		const headNode = this.startWith(prefix);
+		if (!headNode) {
+			return null;
+		}
+
+		const options = this.dfs(prefix, headNode);
+		if (!options || options.length === 0) {
+			return null;
+		}
+
+		return options;
+	}
+
+	// Even though this isn't used anymore, it might be useful in the future.
+	suggestByLevenshteinDistance(prefix: string): CompletionOption[] | null {
+		const options = this.getAutocompleteForSearch(prefix);
+		if (!options) {
+			return null;
+		}
+
+		return options.sort((a, b) => {
+			if (a.weight === null) {
+				return 1;
+			}
+
+			if (b.weight === null) {
+				return -1;
+			}
+
+			const aDistance = this.getLevenshteinDistance(prefix, a.word);
+			const bDistance = this.getLevenshteinDistance(prefix, b.word);
+
+			if (aDistance === bDistance) {
+				return b.weight - a.weight;
+			}
+
+			return aDistance - bDistance;
 		});
 	}
 

@@ -56,6 +56,7 @@ const Search = React.forwardRef<HTMLDialogElement, SearchProps>(
 				return;
 			}
 
+			// I prefer this over the Levenshtein distance
 			const suggestions = autocomplete.suggest(query);
 			if (suggestions === null || suggestions.length === 0) {
 				setSearchAutocomplete(undefined);

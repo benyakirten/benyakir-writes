@@ -132,4 +132,97 @@ describe("Trie", () => {
 			expect(suggestions).toHaveLength(0);
 		});
 	});
+
+	describe("levenshtein distance", () => {
+		beforeEach(() => {
+			trie = new Trie([
+				["apples", 5],
+				["apply", 4],
+				["banana", 3],
+			]);
+		});
+
+		it("should return the correct Levenshtein distance between two strings", () => {
+			const trie = new Trie();
+			expect(trie.getLevenshteinDistance("kitten", "sitting")).toBe(3);
+			expect(trie.getLevenshteinDistance("book", "back")).toBe(2);
+			expect(trie.getLevenshteinDistance("hello", "world")).toBe(4);
+			expect(trie.getLevenshteinDistance("abc", "def")).toBe(3);
+			expect(trie.getLevenshteinDistance("abc", "abc")).toBe(0);
+			expect(trie.getLevenshteinDistance("abc", "abcdef")).toBe(3);
+			expect(trie.getLevenshteinDistance("abcd", "abc")).toBe(1);
+		});
+
+		it("should return 0 when both strings are empty", () => {
+			const trie = new Trie();
+			expect(trie.getLevenshteinDistance("", "")).toBe(0);
+		});
+
+		it("should return the length of the non-empty string when the other string is empty", () => {
+			const trie = new Trie();
+			expect(trie.getLevenshteinDistance("hello", "")).toBe(5);
+			expect(trie.getLevenshteinDistance("abc", "")).toBe(3);
+		});
+
+		it("should return the length of the non-empty string when the other string is empty", () => {
+			const trie = new Trie();
+			expect(trie.getLevenshteinDistance("", "hello")).toBe(5);
+			expect(trie.getLevenshteinDistance("", "abc")).toBe(3);
+		});
+		it("should suggest words based on prefix and sort them by Levenshtein distance", () => {
+			expect(trie.suggestByLevenshteinDistance("a")).toEqual([
+				{
+					weight: 4,
+					word: "apply",
+				},
+				{
+					weight: 5,
+					word: "apples",
+				},
+			]);
+			expect(trie.suggestByLevenshteinDistance("ap")).toEqual([
+				{
+					weight: 4,
+					word: "apply",
+				},
+				{
+					weight: 5,
+					word: "apples",
+				},
+			]);
+			expect(trie.suggestByLevenshteinDistance("app")).toEqual([
+				{
+					weight: 4,
+					word: "apply",
+				},
+				{
+					weight: 5,
+					word: "apples",
+				},
+			]);
+			expect(trie.suggestByLevenshteinDistance("appl")).toEqual([
+				{
+					weight: 4,
+					word: "apply",
+				},
+				{
+					weight: 5,
+					word: "apples",
+				},
+			]);
+			expect(trie.suggestByLevenshteinDistance("apple")).toEqual([
+				{
+					weight: 5,
+					word: "apples",
+				},
+			]);
+		});
+
+		it("should return null when no suggestions are available", () => {
+			expect(trie.suggestByLevenshteinDistance("")).toBeNull();
+			expect(trie.suggestByLevenshteinDistance("x")).toBeNull();
+			expect(trie.suggestByLevenshteinDistance("xyz")).toBeNull();
+			expect(trie.suggestByLevenshteinDistance("apples")).toBeNull();
+		});
+	});
 });

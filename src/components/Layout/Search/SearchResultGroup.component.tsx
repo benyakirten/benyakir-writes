@@ -14,7 +14,7 @@ import {
 	TRANSITION_NORMAL,
 	Z_ABOVE,
 } from "@/styles/variables";
-import { SearchResultGroupProps } from "./types";
+import { SearchResultGroupProps } from "@/types/search";
 
 const StyledSearchResultGroup = styled.li`
     padding: 0 ${SIZE_SM};
@@ -56,8 +56,12 @@ const ToggleVisibilityButton = styled.div`
     background-color: ${MODAL_BACKGROUND_COLOR};
     padding: 0 ${SIZE_XS};
 
-	& svg {
-		fill: ${MODAL_BACKGROUND_COLOR};
+	& > svg {
+		fill: ${MODAL_TEXT_COLOR};
+	}
+
+	& > svg > path:nth-of-type(2) {
+		stroke: ${MODAL_BACKGROUND_COLOR};
 	}
 `;
 
