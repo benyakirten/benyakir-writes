@@ -6,12 +6,12 @@ import {
 	STORED_THEMES,
 } from "@/data/constants";
 import { StringLookup } from "@/types/general";
+import { validateThemeShape } from "@/utils/validation";
 import { defaultDayTheme, initialState } from "./theme.state";
 import {
 	determineComputerPreferredTheme,
 	getDefaultThemeState,
 } from "./theme.utils";
-import { validateThemeShape } from "@/utils/validation";
 
 function copyTheme(
 	copiedTheme: BaseTheme,

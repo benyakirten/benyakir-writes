@@ -2,6 +2,7 @@ import React from "react";
 
 import { Text } from "@/components/Input";
 import { useFlyout } from "@/hooks/useFlyout.hook";
+import { SIZE_MD } from "@/styles/variables";
 import { SearchFilterProps } from "@/types/filters";
 import {
 	FilterButton,
@@ -10,7 +11,6 @@ import {
 	FilterText,
 } from "../components";
 import { registerCleanupFn } from "../useFilter.hook";
-import { SIZE_MD } from "@/styles/variables";
 
 const SearchFilter: React.FC<SearchFilterProps> = ({
 	onSearch,

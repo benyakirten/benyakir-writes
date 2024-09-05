@@ -1,6 +1,7 @@
 import React from "react";
 
 import { useFlyout } from "@/hooks/useFlyout.hook";
+import { SIZE_MD } from "@/styles/variables";
 import { KeywordFilterProps } from "@/types/filters";
 import {
 	FilterButton,
@@ -10,7 +11,6 @@ import {
 	MultipleChoice,
 } from "../components";
 import { registerCleanupFn } from "../useFilter.hook";
-import { SIZE_MD } from "@/styles/variables";
 
 const MAX_KEYWORDS = 1;
 
