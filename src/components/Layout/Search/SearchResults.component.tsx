@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { SIZE_SM } from "@/styles/variables";
+import { SearchResultsProps } from "@/types/search";
 import {
 	BookResult,
 	EmptyResults,
@@ -12,7 +13,6 @@ import {
 	StoryResult,
 } from "./Results";
 import SearchResultGroup from "./SearchResultGroup.component";
-import { SearchResultsProps } from "./types";
 
 const SearchResultsContainer = styled.ul`
     display: grid;

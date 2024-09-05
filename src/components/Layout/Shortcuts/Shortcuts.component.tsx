@@ -5,7 +5,12 @@ import { CloseIcon } from "@/components/Icons";
 import { LeadHeading, Subtitle } from "@/styles/general-components";
 import { media } from "@/styles/queries";
 import {
+	FONT_LG,
+	FONT_XL,
+	FONT_XXL,
+	FONT_XXXL,
 	MODAL_SHORTCUT_BACKGROUND,
+	MODAL_TEXT_COLOR,
 	MONOSPACE_FONT,
 	SIZE_MD,
 	SIZE_SM,
@@ -66,6 +71,30 @@ const ShortcutKey = styled.kbd`
     background: ${MODAL_SHORTCUT_BACKGROUND};
 `;
 
+const ShortcutHeading = styled.h1`
+	position: relative;
+
+  	padding-bottom: ${SIZE_MD};
+
+  	${FONT_XXXL};
+
+	${media.phone} {
+		${FONT_XXL};
+	}
+`;
+
+const ShortcutSubtitle = styled.h2`
+	position: relative;
+
+	margin-bottom: ${SIZE_XS};
+
+	${FONT_XL};
+
+	${media.phone} {
+		${FONT_LG};
+	}
+`;
+
 type Shortcut = { key: string; description: string };
 
 const shortcuts: Shortcut[] = [
@@ -88,12 +117,12 @@ const Shortcuts = React.forwardRef<HTMLDialogElement, { onClose: () => void }>(
 		return (
 			<Modal width="70%" ref={ref} onClose={onClose}>
 				<StyledContainer>
-					<LeadHeading>Keyboard Shortcuts</LeadHeading>
+					<ShortcutHeading>Keyboard Shortcuts</ShortcutHeading>
 					<CloseButton aria-label="Close Modal" onClick={onClose}>
 						<CloseIcon />
 					</CloseButton>
 					<article>
-						<Subtitle style={{ marginBottom: SIZE_XS }}>General</Subtitle>
+						<ShortcutSubtitle>General</ShortcutSubtitle>
 						<ShortcutsContainer>
 							{shortcuts.map(({ key, description }) => (
 								<ShortcutItem key={key}>
@@ -104,7 +133,7 @@ const Shortcuts = React.forwardRef<HTMLDialogElement, { onClose: () => void }>(
 						</ShortcutsContainer>
 					</article>
 					<article>
-						<Subtitle style={{ marginBottom: SIZE_XS }}>Filter-only</Subtitle>
+						<ShortcutSubtitle>Filter-only</ShortcutSubtitle>
 						<ShortcutsContainer>
 							{filterShortcuts.map(({ key, description }) => (
 								<ShortcutItem key={key}>

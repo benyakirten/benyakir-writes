@@ -408,6 +408,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 			.replace(/:/g, "")
 			.replace(/'/g, "")
 			.replace(/=/g, " ")
+			.replace(/\//g, " ")
 			.replace(/”“/g, "");
 	}
 
