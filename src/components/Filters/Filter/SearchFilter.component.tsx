@@ -2,6 +2,7 @@ import React from "react";
 
 import { Text } from "@/components/Input";
 import { useFlyout } from "@/hooks/useFlyout.hook";
+import { SIZE_MD } from "@/styles/variables";
 import { SearchFilterProps } from "@/types/filters";
 import {
 	FilterButton,
@@ -52,7 +53,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
 				<Text label="Search" name={id} value={search} onChange={onSearch} />
 			</FilterMenu>
 			<FilterButton
-				borderRadiusCorners={{ topRight: "2rem", bottomRight: "2rem" }}
+				borderRadiusCorners={{ topRight: SIZE_MD, bottomRight: SIZE_MD }}
 				width="10rem"
 				filledIn={searchOpen}
 				onMouseEnter={() => setSearchSoftOpen(true)}

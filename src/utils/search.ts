@@ -147,31 +147,16 @@ export class Trie {
 		return options;
 	}
 
-	// Even though this isn't used anymore, it might be useful in the future.
-	suggestByLevenshteinDistance(prefix: string): CompletionOption[] | null {
-		const options = this.getAutocompleteForSearch(prefix);
-		if (!options) {
-			return null;
-		}
-
-		return options.sort((a, b) => {
-			if (a.weight === null) {
-				return 1;
-			}
-
-			if (b.weight === null) {
-				return -1;
-			}
-
-			const aDistance = this.getLevenshteinDistance(prefix, a.word);
-			const bDistance = this.getLevenshteinDistance(prefix, b.word);
-
-			if (aDistance === bDistance) {
-				return b.weight - a.weight;
-			}
-
-			return aDistance - bDistance;
-		});
+	getClosestLevenshteinSuggestions(prefix: string): string[] {
+		const allOptionsWeighted: { word: string; weight: number }[] =
+			this.words.map((word) => ({
+				word,
+				weight: this.getLevenshteinDistance(prefix, word),
+			}));
+		return allOptionsWeighted
+			.sort((a, b) => a.weight - b.weight)
+			.slice(0, Trie.NUM_SUGGESTIONS)
+			.map((option) => option.word);
 	}
 
 	getRandomSuggestions(): string[] {

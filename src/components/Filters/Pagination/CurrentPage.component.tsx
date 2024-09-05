@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 
 import { FillIn } from "@/components/General";
 import { NextIcon, PreviousIcon } from "@/components/Icons";
-import { FONT_SIZE_XS, SIZE_XS } from "@/styles/variables";
+import { FONT_SIZE_XS, SIZE_MD, SIZE_XS } from "@/styles/variables";
 import { CurrentPageProps } from "@/types/filters";
 import { clamp } from "@/utils/numbers";
 import { StyledFilterPill } from "../components/FilterPill.component";
@@ -70,7 +70,7 @@ const CurrentPage = React.forwardRef<HTMLInputElement, CurrentPageProps>(
 			<StyledFilterPill style={{ backgroundColor: "white" }}>
 				<FillIn
 					disabled={previousDisabled}
-					borderRadiusCorners={{ topLeft: "2rem", bottomLeft: "2rem" }}
+					borderRadiusCorners={{ topLeft: SIZE_MD, bottomLeft: SIZE_MD }}
 				>
 					<DirectionButton
 						aria-label="Previous Page"
@@ -99,7 +99,7 @@ const CurrentPage = React.forwardRef<HTMLInputElement, CurrentPageProps>(
 				</PageCount>
 				<FillIn
 					disabled={nextDisabled}
-					borderRadiusCorners={{ topRight: "2rem", bottomRight: "2rem" }}
+					borderRadiusCorners={{ topRight: SIZE_MD, bottomRight: SIZE_MD }}
 				>
 					<DirectionButton
 						aria-label="Next Page"

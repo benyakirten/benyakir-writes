@@ -1,6 +1,7 @@
 import React from "react";
 
 import { useFlyout } from "@/hooks/useFlyout.hook";
+import { SIZE_MD } from "@/styles/variables";
 import { KeywordFilterProps } from "@/types/filters";
 import {
 	FilterButton,
@@ -68,7 +69,7 @@ const KeywordFilter: React.FC<KeywordFilterProps> = ({
 				/>
 			</FilterMenu>
 			<FilterButton
-				borderRadiusCorners={{ topRight: "2rem", bottomRight: "2rem" }}
+				borderRadiusCorners={{ topRight: SIZE_MD, bottomRight: SIZE_MD }}
 				width="10rem"
 				filledIn={keywordsOpen}
 				onMouseEnter={() => setKeywordsSoftOpen(true)}

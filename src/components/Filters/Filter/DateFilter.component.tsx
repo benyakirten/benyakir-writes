@@ -2,6 +2,7 @@ import React from "react";
 
 import { DatePicker } from "@/components/Input";
 import { useFlyout } from "@/hooks/useFlyout.hook";
+import { SIZE_MD } from "@/styles/variables";
 import { DateFilterProps } from "@/types/filters";
 import { getShortDate } from "@/utils/dates";
 import { FilterButton, FilterPill, FilterText } from "../components";
@@ -88,7 +89,7 @@ const DateFilter: React.FC<DateFilterProps> = ({
 				</li>
 			</FilterMenu>
 			<FilterButton
-				borderRadiusCorners={{ topRight: "2rem", bottomRight: "2rem" }}
+				borderRadiusCorners={{ topRight: SIZE_MD, bottomRight: SIZE_MD }}
 				filledIn={endOpen}
 				onMouseEnter={() => setEndSoftOpen(true)}
 				onMouseLeave={() => setEndSoftOpen(false)}

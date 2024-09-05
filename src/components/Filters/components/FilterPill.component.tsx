@@ -25,7 +25,7 @@ const FilterPill = React.forwardRef<HTMLDivElement, FilterPillProps>(
 		return (
 			<StyledFilterPill ref={ref}>
 				<FilterButton
-					borderRadiusCorners={{ topLeft: "2rem", bottomLeft: "2rem" }}
+					borderRadiusCorners={{ topLeft: SIZE_MD, bottomLeft: SIZE_MD }}
 					type="button"
 					onClick={onRemove}
 				>

@@ -133,7 +133,7 @@ describe("Trie", () => {
 		});
 	});
 
-	describe("levenshtein distance", () => {
+	describe("getLevenshteinDistance", () => {
 		beforeEach(() => {
 			trie = new Trie([
 				["apples", 5],
@@ -169,60 +169,46 @@ describe("Trie", () => {
 			expect(trie.getLevenshteinDistance("", "hello")).toBe(5);
 			expect(trie.getLevenshteinDistance("", "abc")).toBe(3);
 		});
-		it("should suggest words based on prefix and sort them by Levenshtein distance", () => {
-			expect(trie.suggestByLevenshteinDistance("a")).toEqual([
-				{
-					weight: 4,
-					word: "apply",
-				},
-				{
-					weight: 5,
-					word: "apples",
-				},
-			]);
-			expect(trie.suggestByLevenshteinDistance("ap")).toEqual([
-				{
-					weight: 4,
-					word: "apply",
-				},
-				{
-					weight: 5,
-					word: "apples",
-				},
-			]);
-			expect(trie.suggestByLevenshteinDistance("app")).toEqual([
-				{
-					weight: 4,
-					word: "apply",
-				},
-				{
-					weight: 5,
-					word: "apples",
-				},
-			]);
-			expect(trie.suggestByLevenshteinDistance("appl")).toEqual([
-				{
-					weight: 4,
-					word: "apply",
-				},
-				{
-					weight: 5,
-					word: "apples",
-				},
-			]);
-			expect(trie.suggestByLevenshteinDistance("apple")).toEqual([
-				{
-					weight: 5,
-					word: "apples",
-				},
+	});
+
+	describe("getClosestLevenshteinSuggestions", () => {
+		beforeEach(() => {
+			trie = new Trie([
+				["apples", 5],
+				["apply", 4],
+				["banana", 3],
+				["cherry", 2],
+				["orange", 1],
+				["grape", 1],
+				["kiwi", 1],
 			]);
 		});
 
-		it("should return null when no suggestions are available", () => {
-			expect(trie.suggestByLevenshteinDistance("")).toBeNull();
-			expect(trie.suggestByLevenshteinDistance("x")).toBeNull();
-			expect(trie.suggestByLevenshteinDistance("xyz")).toBeNull();
-			expect(trie.suggestByLevenshteinDistance("apples")).toBeNull();
+		it("should return the closest Levenshtein suggestions based on the prefix up to the specified amount", () => {
+			expect(trie.getClosestLevenshteinSuggestions("ap")).toEqual([
+				"apply",
+				"grape",
+				"apples",
+				"kiwi",
+				"banana",
+			]);
+		});
+
+		it("should return suggestions even when there are no similar values", () => {
+			expect(trie.getClosestLevenshteinSuggestions("xyz")).toEqual([
+				"kiwi",
+				"apply",
+				"grape",
+				"apples",
+				"banana",
+			]);
+			expect(trie.getClosestLevenshteinSuggestions("")).toEqual([
+				"kiwi",
+				"apply",
+				"grape",
+				"apples",
+				"banana",
+			]);
 		});
 	});
 });
