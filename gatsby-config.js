@@ -4,7 +4,6 @@ module.exports = {
 		title: "Benyakir Writes",
 	},
 	plugins: [
-		"gatsby-plugin-netlify",
 		"gatsby-plugin-sharp",
 		"gatsby-plugin-image",
 		"gatsby-transformer-sharp",
