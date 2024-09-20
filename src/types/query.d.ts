@@ -103,7 +103,6 @@ type ProjectsQuery = {
 		allFile: {
 			nodes: ProjectImageData[];
 		};
-		resume: { publicURL: string };
 		ghIcon: { publicURL: string };
 		liIcon: { publicURL: string };
 	};

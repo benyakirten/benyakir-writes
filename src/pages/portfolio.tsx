@@ -76,7 +76,8 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
 					<AboutMe
 						liIcon={data.liIcon.publicURL}
 						ghIcon={data.ghIcon.publicURL}
-						resume={data.resume.publicURL}
+						// Let's not waste bandwidth
+						resume="https://utfs.io/f/jl5ip7RNwFcAASylqLNhZviu5QWm7rMzboldeBIKnY39H1Sq"
 					/>
 				),
 			},
@@ -115,9 +116,6 @@ export const query = graphql`
           gatsbyImageData(height: 200, formats: [AVIF, WEBP, AUTO])
         }
       }
-    }
-    resume: file(extension: { eq: "pdf" }) {
-		publicURL
     }
 	ghIcon: file(name: { eq: "Github" }) {
 		publicURL
