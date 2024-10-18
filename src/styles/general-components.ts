@@ -65,7 +65,11 @@ export const LeadHeading = styled.h1`
 
   ${FONT_XXXL};
 
-  ${(props) => textClipWithHoverTransition(props.theme.header.startColor, props.theme.header.endColor)}
+  ${(props) =>
+		textClipWithHoverTransition(
+			props.theme.header.startColor,
+			props.theme.header.endColor,
+		)}
 
   ${media.phone} {
     ${FONT_XXL};
@@ -79,7 +83,11 @@ export const Subtitle = styled.h2`
 
   ${FONT_XL};
 
-  ${(props) => textClipWithHoverTransition(props.theme.header.startColor, props.theme.header.endColor)}
+  ${(props) =>
+		textClipWithHoverTransition(
+			props.theme.header.startColor,
+			props.theme.header.endColor,
+		)}
 
   ${media.phone} {
     ${FONT_LG};
@@ -105,7 +113,7 @@ export const WpContentDescription = styled.div<{ fontSize?: string }>`
     white-space: nowrap;
 
     &::after {
-      content: '';
+      content: "";
 
       position: absolute;
       left: 0;
@@ -144,6 +152,7 @@ export const Card = styled.div`
 export const Box = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: ${SIZE_MD};
 `;
 
@@ -186,7 +195,11 @@ export const WpContent = styled.div`
   h6 {
     font-family: ${SANS_SERIF_FONT};
     padding: ${SIZE_MD} 0;
-    ${(props) => textClipWithHoverTransition(props.theme.header.startColor, props.theme.header.endColor)}
+    ${(props) =>
+			textClipWithHoverTransition(
+				props.theme.header.startColor,
+				props.theme.header.endColor,
+			)}
   }
 
   ul,
@@ -195,11 +208,14 @@ export const WpContent = styled.div`
     margin-left: ${SIZE_SM};
   }
 
-  ul:has(li > a), ol:has(li > a) {
+  ul:has(li > a),
+  ol:has(li > a) {
     list-style-type: disc;
   }
 
-  p, code, figure {
+  p,
+  code,
+  figure {
     margin-bottom: ${SIZE_MD};
   }
 
@@ -209,7 +225,6 @@ export const WpContent = styled.div`
     font-family: monospace;
     font-size: ${FONT_SIZE_MD};
     text-wrap: wrap;
-
   }
 `;
 
@@ -244,24 +259,25 @@ export const PillContainer = styled.div<{
 	$backgroundColor?: string;
 	$textColor?: string;
 }>`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   white-space: nowrap;
-	
+
   height: min-content;
   width: min-content;
 
-	font-family: ${SANS_SERIF_FONT};
+  font-family: ${SANS_SERIF_FONT};
   font-size: ${FONT_SIZE_XXS};
   text-transform: capitalize;
-  
+
   border-radius: ${SIZE_LG};
   color: ${(props) => props.$textColor ?? props.theme.pill.textColor};
-  background-color: ${(props) => props.$backgroundColor ?? props.theme.pill.background};
+  background-color: ${(props) =>
+		props.$backgroundColor ?? props.theme.pill.background};
 
-	padding: ${SIZE_XS} ${SIZE_SM};
+  padding: ${SIZE_XS} ${SIZE_SM};
 
   ${media.phone} {
     padding: ${SIZE_XS};

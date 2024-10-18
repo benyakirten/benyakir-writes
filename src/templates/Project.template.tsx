@@ -1,5 +1,6 @@
 import { graphql } from "gatsby";
 import * as React from "react";
+import styled from "styled-components";
 
 import {
 	Box,
@@ -11,7 +12,9 @@ import {
 	WpContent,
 } from "@/styles/general-components";
 
-import { PublishedDate } from "@/components/Cards/IconedText.component";
+import IconedText, {
+	PublishedDate,
+} from "@/components/Cards/IconedText.component";
 import {
 	LatestUpdate,
 	ProjectHost,
@@ -20,6 +23,7 @@ import {
 } from "@/components/General";
 import { HeadBase } from "@/components/SEO";
 import { useFetchRepoUpdatedDate } from "@/hooks";
+import { SIZE_SM } from "@/styles/variables";
 import { FileNode } from "@/types/general";
 import type { WpProject } from "@/types/query";
 import { getPrettyDate } from "@/utils/dates";
@@ -46,15 +50,22 @@ const ProjectHeader: React.FC<{
 	firstReleasedDate: Date;
 	hostedOn?: string;
 	mainLink?: string;
-}> = ({ title, icons, repoLink, firstReleasedDate, hostedOn, mainLink }) => {
+	githubIcon: string;
+}> = ({
+	title,
+	icons,
+	repoLink,
+	firstReleasedDate,
+	hostedOn,
+	mainLink,
+	githubIcon,
+}) => {
 	const latestUpdateState = useFetchRepoUpdatedDate(repoLink);
 	return (
 		<TemplateHeaderContainer>
-			<TechContainer>
+			<TechContainer style={{ rowGap: SIZE_SM }}>
 				{hostedOn && (
-					<a href={mainLink ?? "#"}>
-						<ProjectHost host={hostedOn} />
-					</a>
+					<ProjectHostedOn mainLink={mainLink} hostedOn={hostedOn} />
 				)}
 				{icons.map((i) => (
 					<ProjectTech key={i.name} tech={i.name} publicURL={i.publicURL} />
@@ -64,8 +75,25 @@ const ProjectHeader: React.FC<{
 			<Box>
 				<PublishedDate date={firstReleasedDate} />
 				<LatestUpdate state={latestUpdateState} />
+				<RepoLink repoLink={repoLink} icon={githubIcon} />
 			</Box>
 		</TemplateHeaderContainer>
+	);
+};
+
+const StyledHostedOnLink = styled.a`
+  display: block;
+  margin-bottom: ${SIZE_SM};
+`;
+
+const ProjectHostedOn: React.FC<{ hostedOn: string; mainLink?: string }> = ({
+	hostedOn,
+	mainLink,
+}) => {
+	return (
+		<StyledHostedOnLink href={mainLink ?? "#"}>
+			<ProjectHost host={hostedOn} />
+		</StyledHostedOnLink>
 	);
 };
 
@@ -85,6 +113,7 @@ const Project: React.FC<WpProject> = ({ data }) => {
 					firstReleasedDate={project.firstReleased.date}
 					hostedOn={project.hostedOn}
 					mainLink={project.mainLink}
+					githubIcon={data.file.publicURL}
 				/>
 				<TemplateContent>
 					<WpContent dangerouslySetInnerHTML={{ __html: project.content }} />
@@ -114,7 +143,27 @@ export const query = graphql`
         name
       }
     }
+    file(name: { eq: "Github" }) {
+      publicURL
+    }
   }
 `;
+
+const StyledRepoLink = styled.a``;
+
+const RepoLink: React.FC<{ repoLink?: string; icon: string }> = ({
+	repoLink,
+	icon,
+}) => {
+	if (!repoLink) return null;
+	return (
+		<a href={repoLink} target="_blank" rel="noreferrer">
+			<IconedText
+				icon={<img src={icon} alt="Repository Link" />}
+				text="View Repository"
+			/>
+		</a>
+	);
+};
 
 export default Project;
