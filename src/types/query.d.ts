@@ -80,6 +80,9 @@ type WpProject = {
 		allFile: {
 			nodes: FileNode[];
 		};
+		file: {
+			publicURL: string;
+		};
 	};
 };
 
