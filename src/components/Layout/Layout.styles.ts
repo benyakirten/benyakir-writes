@@ -2,10 +2,10 @@ import styled, { createGlobalStyle } from "styled-components";
 
 import { media } from "@/styles/queries";
 import {
-	SANS_SERIF_FONT,
-	SERIF_FONT,
-	SIZE_MD,
-	TRANSITION_NORMAL,
+  SANS_SERIF_FONT,
+  SERIF_FONT,
+  SIZE_MD,
+  TRANSITION_NORMAL,
 } from "@/styles/variables";
 
 export const GlobalStyles = createGlobalStyle`
@@ -15,6 +15,18 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: inherit;
+  }
+
+  @font-face {
+    font-family: 'Mulish';
+    font-display: swap;
+    src: url(/fonts/Mulish-VariableFont_wght.ttf) format("ttf");
+  }
+
+  @font-face {
+    font-family: 'Faustina';
+    font-display: swap;
+    src: url(/fonts/Faustina-VariableFont_wght.ttf) format("ttf");
   }
 
   ${media.reducedMotion} {
@@ -29,11 +41,11 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     font-family: ${SERIF_FONT};
     color: ${(props) =>
-			// @ts-ignore
-			props.theme.base.textColor};
+      // @ts-ignore
+      props.theme.base.textColor};
     background-color: ${(props) =>
-			// @ts-ignore
-			props.theme.base.background};
+      // @ts-ignore
+      props.theme.base.background};
   }
 
   h1,
@@ -108,9 +120,9 @@ export const MainContainer = styled.main`
 `;
 
 export const IconButton = styled.button`
-    width: ${SIZE_MD};
-    appearance: none;
-    background-color: transparent;
-    border: 0;
-    cursor: pointer;
+  width: ${SIZE_MD};
+  appearance: none;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
 `;
