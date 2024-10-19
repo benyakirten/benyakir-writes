@@ -2,7 +2,7 @@
 export const SERIF_FONT = "'Faustina', serif";
 export const SANS_SERIF_FONT = "'Mulish', sans-serif";
 export const MONOSPACE_FONT =
-  "ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace";
+	"ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace";
 
 // FONT SIZE
 export const FONT_SIZE_XXXL = "2.25rem";
