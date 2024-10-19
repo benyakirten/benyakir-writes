@@ -25,6 +25,8 @@
     "test:e2e:ci": "start-server-and-test develop http://localhost:8000 cy:run"
   },
   "dependencies": {
+    "@fontsource/faustina": "^5.1.0",
+    "@fontsource/mulish": "^5.1.0",
     "@reduxjs/toolkit": "^1.9.5",
     "babel-plugin-styled-components": "^2.0.2",
     "chroma-js": "^3.0.0",

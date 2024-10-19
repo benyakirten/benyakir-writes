@@ -17,6 +17,7 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: inherit;
   }
 
+
   ${media.reducedMotion} {
     * {
       animation-duration: 0.001ms !important;
@@ -108,9 +109,9 @@ export const MainContainer = styled.main`
 `;
 
 export const IconButton = styled.button`
-    width: ${SIZE_MD};
-    appearance: none;
-    background-color: transparent;
-    border: 0;
-    cursor: pointer;
+  width: ${SIZE_MD};
+  appearance: none;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
 `;
