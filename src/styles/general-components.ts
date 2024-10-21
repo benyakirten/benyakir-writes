@@ -6,7 +6,7 @@ import {
 	FONT_LG,
 	FONT_MD,
 	FONT_SIZE_MD,
-	FONT_SIZE_XXS,
+	FONT_SIZE_XS,
 	FONT_XL,
 	FONT_XXL,
 	FONT_XXXL,
@@ -15,10 +15,8 @@ import {
 	SIZE_MD,
 	SIZE_SM,
 	SIZE_XS,
-	SIZE_XXL,
 	TRANSITION_EXTRA_SLOW,
 	TRANSITION_NORMAL,
-	Z_ABOVE,
 } from "./variables";
 
 import {
@@ -269,7 +267,7 @@ export const PillContainer = styled.div<{
   width: min-content;
 
   font-family: ${SANS_SERIF_FONT};
-  font-size: ${FONT_SIZE_XXS};
+  font-size: ${FONT_SIZE_XS};
   text-transform: capitalize;
 
   border-radius: ${SIZE_LG};

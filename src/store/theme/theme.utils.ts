@@ -3,6 +3,7 @@ import {
 	STORED_IGNORE_COMPUTER_PREFERENCE,
 	STORED_THEMES,
 } from "@/data/constants";
+import { DARK_MODE_QUERY } from "@/styles/queries";
 import { defaultDayTheme, defaultNightTheme } from "./theme.state";
 
 export function getDefaultThemeState(): ThemeState {
@@ -41,9 +42,7 @@ export function getDefaultThemeState(): ThemeState {
 }
 
 export function determineComputerPreferredTheme(state: ThemeState) {
-	const darkThemeTime = window.matchMedia(
-		"(prefers-color-scheme: dark)",
-	).matches;
+	const darkThemeTime = window.matchMedia(DARK_MODE_QUERY).matches;
 
 	const themePreference = darkThemeTime ? "1" : "0";
 	if (state.active.id !== themePreference) {

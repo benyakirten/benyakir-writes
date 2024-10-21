@@ -9,6 +9,7 @@ import {
 	initializeThemeState,
 	setActiveThemeByID,
 } from "@/store/theme/theme.slice";
+import { DARK_MODE_QUERY } from "@/styles/queries";
 import {
 	PAGE_TRANSITION_DURATION,
 	getPageTransitionStyles,
@@ -86,7 +87,7 @@ const Layout: React.FC<ChildrenProp> = ({ children }) => {
 
 	React.useEffect(() => {
 		if (window?.matchMedia) {
-			const darkColorScheme = window.matchMedia("(prefers-color-scheme: dark)");
+			const darkColorScheme = window.matchMedia(DARK_MODE_QUERY);
 
 			const setThemeByPreference = (e: MediaQueryList) => {
 				if (themeStore.ignoreComputerPreferences) {
