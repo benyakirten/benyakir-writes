@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { media } from "@/styles/queries";
 import { limitLines } from "@/styles/style-mixins";
 import {
-  FONT_LG,
-  FONT_SM,
-  LINE_HEIGHT_LG,
-  LINE_HEIGHT_XL,
-  SIZE_XS,
+	FONT_LG,
+	FONT_SM,
+	LINE_HEIGHT_LG,
+	LINE_HEIGHT_XL,
+	SIZE_XS,
 } from "@/styles/variables";
 
 export const CardTitle = styled.h3`

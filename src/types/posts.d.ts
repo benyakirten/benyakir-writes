@@ -1,6 +1,6 @@
 import type { IGatsbyImageData } from "gatsby-plugin-image";
 
-import type { DateInformation, NamedLink } from "./general";
+import type { DateInformation, FileNode, NamedLink } from "./general";
 
 type PostType = {
 	content: string;

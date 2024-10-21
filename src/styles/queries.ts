@@ -6,9 +6,9 @@ export const PHONE_QUERY = mediaQuery(576);
 export const DARK_MODE_QUERY = "(prefers-color-scheme: dark)";
 
 export const media = {
-  desktop: `@media ${DESKTOP_QUERY}`,
-  tablet: `@media ${TABLET_QUERY}`,
-  phone: `@media ${PHONE_QUERY}`,
-  reducedMotion: "@media (prefers-reduced-motion)",
-  noHover: "@media (any-hover: none)",
+	desktop: `@media ${DESKTOP_QUERY}`,
+	tablet: `@media ${TABLET_QUERY}`,
+	phone: `@media ${PHONE_QUERY}`,
+	reducedMotion: "@media (prefers-reduced-motion)",
+	noHover: "@media (any-hover: none)",
 };

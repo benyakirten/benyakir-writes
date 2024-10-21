@@ -3,11 +3,11 @@ import styled from "styled-components";
 
 import { useAppSelector } from "@/store/hooks";
 import {
-  FONT_SIZE_XS,
-  SANS_SERIF_FONT,
-  SIZE_MD,
-  SIZE_SM,
-  SIZE_XS,
+	FONT_SIZE_XS,
+	SANS_SERIF_FONT,
+	SIZE_MD,
+	SIZE_SM,
+	SIZE_XS,
 } from "@/styles/variables";
 import { isBgDark } from "@/utils/colors";
 
@@ -40,27 +40,27 @@ const TechName = styled.span<{ $textColor?: string }>`
 `;
 
 const ProjectTech: React.FC<{
-  publicURL: string;
-  tech: string;
-  override?: {
-    borderColor: string;
-    keepIconColor: boolean;
-    textColor: string;
-  };
-  forceDetectDark?: boolean;
-}> = ({ publicURL, tech, override = null, forceDetectDark = false }) => {
-  const theme = useAppSelector((root) => root.theme.active);
-  const shouldUseDark = override?.keepIconColor
-    ? false
-    : (forceDetectDark || tech === "Rust" || tech === "WebSockets") &&
-      isBgDark(theme.id, theme.name, theme.base.background);
+	publicURL: string;
+	tech: string;
+	override?: {
+		borderColor: string;
+		keepIconColor: boolean;
+		textColor: string;
+	};
+	shouldInvertInDark?: boolean;
+}> = ({ publicURL, tech, override = null, shouldInvertInDark = false }) => {
+	const theme = useAppSelector((root) => root.theme.active);
+	const shouldUseDark = override?.keepIconColor
+		? false
+		: shouldInvertInDark &&
+			isBgDark(theme.id, theme.name, theme.base.background);
 
-  return (
-    <TechPill $borderColor={override?.borderColor}>
-      <TechIcon $isDark={shouldUseDark} src={publicURL} alt={tech} />
-      <TechName $textColor={override?.textColor}>{tech}</TechName>
-    </TechPill>
-  );
+	return (
+		<TechPill $borderColor={override?.borderColor}>
+			<TechIcon $isDark={shouldUseDark} src={publicURL} alt={tech} />
+			<TechName $textColor={override?.textColor}>{tech}</TechName>
+		</TechPill>
+	);
 };
 
 export default ProjectTech;

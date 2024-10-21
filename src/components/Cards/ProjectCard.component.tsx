@@ -5,7 +5,7 @@ import { styled } from "styled-components";
 import { useFetchRepoUpdatedDate } from "@/hooks";
 import { SIZE_XS } from "@/styles/variables";
 import { ProjectImage } from "@/types/portfolio";
-import { FlattenedProjectCard } from "@/types/posts";
+import type { FlattenedProjectCard } from "@/types/posts";
 import {
 	LatestUpdate,
 	ProjectHost,
@@ -17,8 +17,8 @@ import CardExterior from "./CardExterior.component";
 import { PublishedDate } from "./IconedText.component";
 
 const ExtraMarginedContainer = styled.div`
-	margin: ${SIZE_XS} 0;
-	grid-column: span 2;
+  margin: ${SIZE_XS} 0;
+  grid-column: span 2;
 `;
 
 const ProjectCardInterior: React.FC<{
@@ -37,7 +37,12 @@ const ProjectCardInterior: React.FC<{
 			<FullContainer dangerouslySetInnerHTML={{ __html: project.content }} />
 			<TechContainer>
 				{project.icons.map((i) => (
-					<ProjectTech key={i.name} tech={i.name} publicURL={i.publicURL} />
+					<ProjectTech
+						shouldInvertInDark={i.name === "Rust" || i.name === "WebSockets"}
+						key={i.name}
+						tech={i.name}
+						publicURL={i.publicURL}
+					/>
 				))}
 			</TechContainer>
 			{image && (
