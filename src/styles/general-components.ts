@@ -3,28 +3,26 @@ import styled from "styled-components";
 import { fadeIn, slideInLeft, slideInRight } from "./animations";
 import { media } from "./queries";
 import {
-	FONT_LG,
-	FONT_MD,
-	FONT_SIZE_MD,
-	FONT_SIZE_XXS,
-	FONT_XL,
-	FONT_XXL,
-	FONT_XXXL,
-	SANS_SERIF_FONT,
-	SIZE_LG,
-	SIZE_MD,
-	SIZE_SM,
-	SIZE_XS,
-	SIZE_XXL,
-	TRANSITION_EXTRA_SLOW,
-	TRANSITION_NORMAL,
-	Z_ABOVE,
+  FONT_LG,
+  FONT_MD,
+  FONT_SIZE_MD,
+  FONT_SIZE_XS,
+  FONT_XL,
+  FONT_XXL,
+  FONT_XXXL,
+  SANS_SERIF_FONT,
+  SIZE_LG,
+  SIZE_MD,
+  SIZE_SM,
+  SIZE_XS,
+  TRANSITION_EXTRA_SLOW,
+  TRANSITION_NORMAL,
 } from "./variables";
 
 import {
-	hoverUnderline,
-	limitLines,
-	textClipWithHoverTransition,
+  hoverUnderline,
+  limitLines,
+  textClipWithHoverTransition,
 } from "./style-mixins";
 
 export const FadeIn = styled.div<{ duration?: string; delay?: string }>`
@@ -54,7 +52,7 @@ export const Grouping = styled.section<{ marginVertical?: string }>`
   position: relative;
   margin-top: ${(props) => (props.marginVertical ? props.marginVertical : "0")};
   margin-bottom: ${(props) =>
-		props.marginVertical ? props.marginVertical : "4rem"};
+    props.marginVertical ? props.marginVertical : "4rem"};
 `;
 
 // TODO: Make the colors look good
@@ -66,10 +64,10 @@ export const LeadHeading = styled.h1`
   ${FONT_XXXL};
 
   ${(props) =>
-		textClipWithHoverTransition(
-			props.theme.header.startColor,
-			props.theme.header.endColor,
-		)}
+    textClipWithHoverTransition(
+      props.theme.header.startColor,
+      props.theme.header.endColor
+    )}
 
   ${media.phone} {
     ${FONT_XXL};
@@ -84,10 +82,10 @@ export const Subtitle = styled.h2`
   ${FONT_XL};
 
   ${(props) =>
-		textClipWithHoverTransition(
-			props.theme.header.startColor,
-			props.theme.header.endColor,
-		)}
+    textClipWithHoverTransition(
+      props.theme.header.startColor,
+      props.theme.header.endColor
+    )}
 
   ${media.phone} {
     ${FONT_LG};
@@ -162,9 +160,9 @@ export const FlatBox = styled(Box)`
 
 // https://stackoverflow.com/questions/24933430/img-src-svg-changing-the-styles-with-css
 export const SVGContainer = styled.div<{
-	src: string;
-	alt: string;
-	size?: string;
+  src: string;
+  alt: string;
+  size?: string;
 }>`
   position: relative;
 
@@ -196,10 +194,10 @@ export const WpContent = styled.div`
     font-family: ${SANS_SERIF_FONT};
     padding: ${SIZE_MD} 0;
     ${(props) =>
-			textClipWithHoverTransition(
-				props.theme.header.startColor,
-				props.theme.header.endColor,
-			)}
+      textClipWithHoverTransition(
+        props.theme.header.startColor,
+        props.theme.header.endColor
+      )}
   }
 
   ul,
@@ -256,8 +254,8 @@ export const PageContents = styled.div`
 `;
 
 export const PillContainer = styled.div<{
-	$backgroundColor?: string;
-	$textColor?: string;
+  $backgroundColor?: string;
+  $textColor?: string;
 }>`
   display: flex;
   align-items: center;
@@ -269,13 +267,13 @@ export const PillContainer = styled.div<{
   width: min-content;
 
   font-family: ${SANS_SERIF_FONT};
-  font-size: ${FONT_SIZE_XXS};
+  font-size: ${FONT_SIZE_XS};
   text-transform: capitalize;
 
   border-radius: ${SIZE_LG};
   color: ${(props) => props.$textColor ?? props.theme.pill.textColor};
   background-color: ${(props) =>
-		props.$backgroundColor ?? props.theme.pill.background};
+    props.$backgroundColor ?? props.theme.pill.background};
 
   padding: ${SIZE_XS} ${SIZE_SM};
 
