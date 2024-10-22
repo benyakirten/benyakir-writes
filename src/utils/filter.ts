@@ -329,7 +329,7 @@ export function getQueryParamState(): Map<string, string | number | string[]> {
     } else if (!Number.isNaN(Number(value))) {
       state.set(key, Number(value));
     } else {
-      state.set(key, value);
+      state.set(key, decodeURIComponent(value));
     }
   }
 
