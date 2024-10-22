@@ -3,16 +3,31 @@ export function getQueryParams(): URLSearchParams {
 }
 
 export function setQueryParams(
-  newParams: Record<string, string>,
+  newParams: Record<string, string | number>,
   reset = false
 ): void {
   const params = reset ? new URLSearchParams() : getQueryParams();
   for (const key in newParams) {
-    params.set(key, newParams[key]);
+    params.set(key, newParams[key].toString());
   }
 
-  const newUrl = `${window.location.pathname}?${params.toString()}`;
-  window.history.replaceState({}, "", newUrl);
+  visitQueryParams(params);
+}
+
+export function removeQueryParam(key: string): void {
+  const params = getQueryParams();
+  params.delete(key);
+  visitQueryParams(params);
+}
+
+export function removePartialQueryParam(key: string): void {
+  const params = getQueryParams();
+  for (const param of params.keys()) {
+    if (param.toLowerCase().includes(key.toLowerCase())) {
+      params.delete(param);
+    }
+  }
+  visitQueryParams(params);
 }
 
 export function composeQueryParams(
@@ -24,4 +39,17 @@ export function composeQueryParams(
     searchParams.set(key, params[key]);
   }
   return searchParams.toString();
+}
+
+export function visitQueryParams(params: URLSearchParams): void {
+  const newUrl = `${window.location.pathname}?${params.toString()}`;
+  window.history.replaceState({}, "", newUrl);
+}
+
+export function serializeToQueryParams<T extends string | number>(data: T[]) {
+  return data.map((d) => encodeURIComponent(d)).join(",");
+}
+
+export function deserializeFromQueryParams(data: string): string[] {
+  return data.split(",").map((d) => decodeURIComponent(d));
 }
