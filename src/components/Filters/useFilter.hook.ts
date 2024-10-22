@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 
 import { inputIsFocused } from "@/utils/dom";
-import { setQueryParams } from "@/utils/queries";
+import { setOneQueryParam, setQueryParams } from "@/utils/queries";
 
 const closeFns: Map<string, () => void> = new Map();
 export function registerCleanupFn(key: string, fn: () => void) {
@@ -43,19 +43,11 @@ export const useFilter = (
           break;
         case "=":
         case "+":
-          setPage((p) => {
-            const page = p + 1;
-            setQueryParams({ page });
-            return page;
-          });
+          setPage((p) => p + 1);
           break;
         case "_":
         case "-":
-          setPage((p) => {
-            const page = p - 1;
-            setQueryParams({ page });
-            return page;
-          });
+          setPage((p) => p - 1);
           break;
       }
     },
