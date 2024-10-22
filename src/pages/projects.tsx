@@ -35,17 +35,9 @@ export const Head: React.FC = () => (
 );
 
 function parseInitialFilters(): ItemFilter[] {
-  const rawFilters = getQueryParamState([
-    "date",
-    "hosts",
-    "technologies",
-    "search",
-  ]);
+  const rawFilters = getQueryParamState();
 
-  const date = rawFilters.get("date");
-  if (date) {
-    console.log(date);
-  }
+  console.log(rawFilters);
 
   const filters: ItemFilter[] = [];
   return filters;
@@ -147,8 +139,6 @@ const ProjectsPage: React.FC = () => {
     projectPagination.setItems,
     projects
   );
-
-  console.log(filters);
 
   return (
     <Page>

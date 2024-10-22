@@ -2,6 +2,20 @@ export function getQueryParams(): URLSearchParams {
   return new URLSearchParams(window.location.search);
 }
 
+export function setOneQueryParam(
+  key: string,
+  value: string | number | string[],
+  reset = false
+): void {
+  const params = reset ? new URLSearchParams() : getQueryParams();
+  const val = Array.isArray(value)
+    ? serializeToQueryParams(value)
+    : value.toString();
+  params.set(key, val);
+
+  visitQueryParams(params);
+}
+
 export function setQueryParams(
   newParams: Record<string, string | number>,
   reset = false

@@ -11,7 +11,9 @@ import { capitalize } from "./strings";
 import {
   deserializeFromQueryParams,
   getQueryParams,
-  setQueryParams,
+  removeQueryParam,
+  serializeToQueryParams,
+  setOneQueryParam,
 } from "./queries";
 import { getShortDate } from "./dates";
 
@@ -92,12 +94,11 @@ export function createAddSearchFilterFn(
 ): () => void {
   let searchId = 0;
   return () => {
-    console.log(searchId);
     setFilters((filters) => [
       ...filters,
       {
         label: "Search",
-        id: `${searchId++}`,
+        id: `search_${searchId++}`,
         search: "",
         type: "any",
       },
@@ -124,7 +125,8 @@ function createRemoveFilterFn(
 ): (id: string) => void {
   return (id: string) =>
     setFilters((filters) => {
-      console.log(id);
+      removeQueryParam(id);
+      removeQueryParam(`${id}_type`);
       const newFilters = filters.filter((filter) => filter.id !== id);
       filterItems(newFilters);
       return newFilters;
@@ -137,9 +139,7 @@ function createModifyDateFn(
 ): (time: "start" | "end", value: Date) => void {
   return (time: "start" | "end", value: Date) =>
     setFilters((filters) => {
-      setQueryParams({
-        [`date_${time}`]: getShortDate(value).replace(/\//g, "-"),
-      });
+      setOneQueryParam(`date_${time}`, getShortDate(value).replace(/\//g, "-"));
       const dateFilter = filters.find((filter) => filter.id === "date");
       if (!dateFilter || !("start" in dateFilter)) {
         return filters;
@@ -158,6 +158,10 @@ function createModifyKeywordFn(
 ): (id: string, keywords: readonly PotentialChoice[]) => void {
   return (id: string, keywords: readonly PotentialChoice[]) =>
     setFilters((filters) => {
+      setOneQueryParam(
+        id,
+        keywords.map((k) => k.value)
+      );
       const keywordFilter = filters.find((filter) => filter.id === id);
       if (!keywordFilter || !("currentKeywords" in keywordFilter)) {
         return filters;
@@ -177,6 +181,7 @@ function createModifyFilterTypeFn(
   return (id: string, type: WordFilterType) =>
     setFilters((filters) => {
       const filter = filters.find((filter) => filter.id === id);
+      setOneQueryParam(`${id}_type`, type);
       if (!filter || !("type" in filter)) {
         return filters;
       }
@@ -195,6 +200,7 @@ function createModifySearchFn(
   return (id: string, search: string) =>
     setFilters((filters) => {
       const searchFilter = filters.find((filter) => filter.id === id);
+      setOneQueryParam(id, serializeToQueryParams([search]));
       if (!searchFilter || !("search" in searchFilter)) {
         return filters;
       }
@@ -307,13 +313,11 @@ export function createFilterByDateFn<T extends object>(
   };
 }
 
-export function getQueryParamState<T extends string[]>(
-  keys: T
-): Map<string, string | number | string[]> {
+export function getQueryParamState(): Map<string, string | number | string[]> {
   const state = new Map<string, string | number | string[]>();
 
   const params = getQueryParams();
-  for (const key of keys) {
+  for (const key of params.keys()) {
     const value = params.get(key);
     if (!value) {
       continue;
