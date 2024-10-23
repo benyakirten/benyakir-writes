@@ -8,7 +8,7 @@ import { FilterProps, ItemFilter, WordFilterType } from "@/types/filters";
 import { PotentialChoice } from "@/types/general";
 import { DateFilter, KeywordFilter, NewFilter, SearchFilter } from "./Filter";
 import { CurrentPage } from "./Pagination";
-import { useFilter } from "./useFilter.hook";
+import { useFilterComponent } from "./useFilterComponent.hook";
 import { setOneQueryParam } from "@/utils/queries";
 
 const FilterBar = styled.div`
@@ -110,7 +110,7 @@ const Filter: React.FC<FilterProps> = ({
   const [menuOpenTop, menuOpen, setSoftOpen, setHardOpen] =
     useFlyout(newFilterRef);
 
-  useFilter(filterBarRef, newFilterRef, pageRef, changePage);
+  useFilterComponent(filterBarRef, newFilterRef, pageRef, changePage);
 
   return (
     <FilterBar ref={filterBarRef}>

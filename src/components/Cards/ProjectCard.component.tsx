@@ -12,12 +12,7 @@ import {
   ProjectTech,
   TechContainer,
 } from "../General";
-import {
-  CardTitle,
-  FullContainer,
-  SpanOneContent,
-  TagContainer,
-} from "./Card.styles";
+import { CardTitle, FullContainer, TagContainer } from "./Card.styles";
 import CardExterior from "./CardExterior.component";
 import { PublishedDate } from "./IconedText.component";
 
