@@ -118,4 +118,4 @@ type KeywordFilterDetails = {
   allKeywords: PotentialChoice[];
 };
 
-type ParsedQueryParams = Map<string, number, string[]>;
+type ParsedQueryParams = Map<string, number | string[]>;

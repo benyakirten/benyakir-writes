@@ -274,6 +274,7 @@ export function createModifyFilterFns<T extends object>(
     modifyKeywords: createModifyKeywordFn(setFilters, filterItems),
     modifyFilterType: createModifyFilterTypeFn(setFilters, filterItems),
     modifySearch: createModifySearchFn(setFilters, filterItems),
+    filterItems,
   };
 }
 
@@ -341,28 +342,20 @@ export function getQueryParamState(): ParsedQueryParams {
       continue;
     }
 
-    if (!Number.isNaN(Number(value))) {
-      state.set(key, Number(value));
-    } else {
-      state.set(
-        key,
-        value.split(",").map((v) => decodeURIComponent(v))
-      );
-    }
+    const val = Number.isNaN(Number(value))
+      ? deserializeFromQueryParams(value)
+      : Number(value);
+    state.set(key, val);
   }
 
   return state;
 }
 
-export function getPageNumberFromQuery(
-  state: ParsedQueryParams
-): number | null {
-  const page = state.get(PAGE_KEY);
-  if (!page || Array.isArray(page) || typeof page === "string") {
-    return null;
-  }
+export function getPageNumberFromQuery(searchParams: URLSearchParams): number {
+  const page = searchParams.get(PAGE_KEY) ?? "";
+  const p = Number.parseInt(page);
 
-  return page;
+  return Number.isNaN(p) || p < 0 ? 0 : p;
 }
 
 export function getDateFilterFromQuery(
@@ -378,16 +371,16 @@ export function getDateFilterFromQuery(
   }
 
   let startDate: Date | null = startDateDefault;
-  if (start && typeof start === "string") {
-    const tentativeStartDate = new Date(start.replace(/-/g, "/"));
+  if (Array.isArray(start) && start.length === 1) {
+    const tentativeStartDate = new Date(start[0].replace(/-/g, "/"));
     if (!Number.isNaN(tentativeStartDate.getTime())) {
       startDate = tentativeStartDate;
     }
   }
 
   let endDate: Date | null = endDateDefault;
-  if (end && typeof end === "string") {
-    const tentativeEndDate = new Date(end.replace(/-/g, "/"));
+  if (Array.isArray(end) && end.length === 1) {
+    const tentativeEndDate = new Date(end[0].replace(/-/g, "/"));
     if (!Number.isNaN(tentativeEndDate.getTime())) {
       endDate = tentativeEndDate;
     }

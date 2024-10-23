@@ -32,9 +32,11 @@ import {
   createFilterByKeywordFn,
   createFilterBySearchFn,
   createModifyFilterFns,
+  getPageNumberFromQuery,
   parseInitialFilters,
 } from "@/utils/filter";
 import { PotentialChoice } from "@/types/general";
+import { getQueryParams } from "@/utils/queries";
 
 export const Head: React.FC = () => (
   <HeadBase title="Projects" description={projectsDescription} />
@@ -50,11 +52,13 @@ function getProjectInitialFilters(
     { id: "hosts", allKeywords: allHosts },
     { id: "technologies", allKeywords: allTechnologies },
   ];
+
   const initialFilters = parseInitialFilters(
     startDate,
     endDate,
     keywordFilterDetails
   );
+
   return initialFilters;
 }
 
@@ -68,28 +72,6 @@ const ProjectsPage: React.FC = () => {
       projectTechs
     )
   );
-  const options: FilterOption[] = [
-    {
-      label: "Publish Date",
-      id: "date",
-      disabled: filters.some((filter) => filter.id === "date"),
-    },
-    {
-      label: "Hosts",
-      id: "hosts",
-      disabled: false,
-    },
-    {
-      label: "Technologies",
-      id: "technologies",
-      disabled: false,
-    },
-    {
-      label: "Search",
-      id: "search",
-      disabled: false,
-    },
-  ];
 
   const newFilterOptions: CreateFilterOption[] = React.useMemo(
     () => [
@@ -151,6 +133,7 @@ const ProjectsPage: React.FC = () => {
     modifyKeywords,
     modifySearch,
     modifyFilterType,
+    filterItems,
   } = createModifyFilterFns(
     newFilterOptions,
     setFilters,
@@ -160,6 +143,38 @@ const ProjectsPage: React.FC = () => {
     projectPagination.setItems,
     projects
   );
+
+  // TODO: Create a custom hook for all of the filters/inputs
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Filter items by initial filters
+  React.useEffect(() => {
+    filterItems(filters);
+    const queryParams = getQueryParams();
+    const initialPage = getPageNumberFromQuery(queryParams);
+    projectPagination.setPage(initialPage);
+  }, []);
+
+  const options: FilterOption[] = [
+    {
+      label: "Publish Date",
+      id: "date",
+      disabled: filters.some((filter) => filter.id === "date"),
+    },
+    {
+      label: "Hosts",
+      id: "hosts",
+      disabled: false,
+    },
+    {
+      label: "Technologies",
+      id: "technologies",
+      disabled: false,
+    },
+    {
+      label: "Search",
+      id: "search",
+      disabled: false,
+    },
+  ];
 
   return (
     <Page>
