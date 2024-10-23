@@ -42,22 +42,17 @@ const useFilter: FilterHook = <T extends object>(
     modifySearch,
     modifyFilterType,
     filterItems,
-    // biome-ignore lint/correctness/useExhaustiveDependencies: We only need to run this function once
-  } = useMemo(
-    () =>
-      createModifyFilterFns(
-        createFilterOptionsFn(setFilters),
-        setFilters,
-        filterByDate,
-        filterByKeywords,
-        filterBySearch,
-        pagination.setItems,
-        items
-      ),
-    []
+  } = createModifyFilterFns(
+    createFilterOptionsFn(setFilters),
+    setFilters,
+    filterByDate,
+    filterByKeywords,
+    filterBySearch,
+    pagination.setItems,
+    items
   );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We want this to run once on component mount
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We want this to run only once on component mount
   useEffect(() => {
     const queryParams = getQueryParams();
     const initialPage = getPageNumberFromQuery(queryParams);

@@ -31,6 +31,10 @@ const usePagination: PaginationHook = <T>(
     [numPages]
   );
 
+  if (page > numPages) {
+    setPage(numPages);
+  }
+
   const setItemsPerPage = useCallback(
     (itemsPerPage: number) => {
       setPage(0);
