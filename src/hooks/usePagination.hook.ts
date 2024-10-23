@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 
 import type { PaginationHook } from "@/types/hooks";
+import { clamp } from "@/utils/numbers";
 
 const DEFAULT_ITEMS_PER_PAGE = 10;
 const usePagination: PaginationHook = <T>(
@@ -23,11 +24,8 @@ const usePagination: PaginationHook = <T>(
           typeof pageOrPageFn === "function"
             ? pageOrPageFn(prevPage)
             : pageOrPageFn;
-        if (newPage < 0 || newPage >= numPages) {
-          return prevPage;
-        }
 
-        return newPage;
+        return clamp(newPage, 0, numPages);
       });
     },
     [numPages]
