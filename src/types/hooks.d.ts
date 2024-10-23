@@ -1,4 +1,12 @@
 import type { FetchState } from "@/hooks";
+import {
+  CreateFilterOption,
+  DateFilter,
+  ItemFilter,
+  KeywordFilter,
+  KeywordFilterDetails,
+  SearchFilter,
+} from "@/types/filters";
 
 type AlternationHook = () => [string, (val: string) => void];
 
@@ -77,3 +85,25 @@ type FlyoutHook = (
   React.Dispatch<React.SetStateAction<boolean>>,
   React.Dispatch<React.SetStateAction<boolean>>
 ];
+
+type FilterHook = <T extends object>(
+  items: T[],
+  startDate: Date,
+  endDate: Date,
+  keywordFilterDetails: KeywordFilterDetails[],
+  ncreateFilterOptionsFn: (
+    setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>
+  ) => CreateFilterOption[],
+  filterByDate: (filter: DateFilter, items: T[]) => T[],
+  filterByKeywords: (filter: KeywordFilter, items: T[]) => T[],
+  filterBySearch: (filter: SearchFilter, items: T[]) => T[]
+) => {
+  pagination: ReturnType<PaginationHook<T>>;
+  createFilter: (id: string) => void;
+  removeFilter: (id: string) => void;
+  modifyDate: (time: "start" | "end", value: Date) => void;
+  modifyKeywords: (id: string, keywords: readonly PotentialChoice[]) => void;
+  modifyFilterType: (id: string, type: WordFilterType) => void;
+  modifySearch: (id: string, search: string) => void;
+  filters: ItemFilter[];
+};

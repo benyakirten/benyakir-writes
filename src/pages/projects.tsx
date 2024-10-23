@@ -16,13 +16,8 @@ import {
   projects,
   projectsDescription,
 } from "@/data/search";
-import { usePagination } from "@/hooks";
-import {
-  CreateFilterOption,
-  FilterOption,
-  ItemFilter,
-  KeywordFilterDetails,
-} from "@/types/filters";
+import { useFilter } from "@/hooks";
+import { FilterOption, ItemFilter } from "@/types/filters";
 import { FlattenedProjectCard } from "@/types/posts";
 import {
   createAddDateFilterFn,
@@ -31,127 +26,87 @@ import {
   createFilterByDateFn,
   createFilterByKeywordFn,
   createFilterBySearchFn,
-  createModifyFilterFns,
-  getPageNumberFromQuery,
-  parseInitialFilters,
 } from "@/utils/filter";
-import { PotentialChoice } from "@/types/general";
-import { getQueryParams } from "@/utils/queries";
 
 export const Head: React.FC = () => (
   <HeadBase title="Projects" description={projectsDescription} />
 );
 
-function getProjectInitialFilters(
-  startDate: Date,
-  endDate: Date,
-  allHosts: PotentialChoice[],
-  allTechnologies: PotentialChoice[]
-): ItemFilter[] {
-  const keywordFilterDetails: KeywordFilterDetails[] = [
-    { id: "hosts", allKeywords: allHosts },
-    { id: "technologies", allKeywords: allTechnologies },
-  ];
-
-  const initialFilters = parseInitialFilters(
-    startDate,
-    endDate,
-    keywordFilterDetails
-  );
-
-  return initialFilters;
-}
-
-const ProjectsPage: React.FC = () => {
-  const projectPagination = usePagination<FlattenedProjectCard>(projects);
-  const [filters, setFilters] = React.useState<ItemFilter[]>(
-    getProjectInitialFilters(
+const createFilterOptionsFn = (
+  setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>
+) => [
+  {
+    match: "date",
+    fn: createAddDateFilterFn(
       projects[projects.length - 1].firstReleased.date,
       projects[0].firstReleased.date,
-      projectHosts,
-      projectTechs
-    )
-  );
+      setFilters
+    ),
+  },
+  {
+    match: "hosts",
+    fn: createAddKeywordFilterFn("hosts", projectHosts, setFilters),
+  },
+  {
+    match: "technologies",
+    fn: createAddKeywordFilterFn("technologies", projectTechs, setFilters),
+  },
+  {
+    match: "search",
+    fn: createAddSearchFilterFn(setFilters),
+  },
+];
 
-  const newFilterOptions: CreateFilterOption[] = React.useMemo(
-    () => [
-      {
-        match: "date",
-        fn: createAddDateFilterFn(
-          projects[projects.length - 1].firstReleased.date,
-          projects[0].firstReleased.date,
-          setFilters
-        ),
-      },
-      {
-        match: "hosts",
-        fn: createAddKeywordFilterFn("hosts", projectHosts, setFilters),
-      },
-      {
-        match: "technologies",
-        fn: createAddKeywordFilterFn("technologies", projectTechs, setFilters),
-      },
-      {
-        match: "search",
-        fn: createAddSearchFilterFn(setFilters),
-      },
-    ],
-    []
-  );
+const filterBySearch = createFilterBySearchFn<FlattenedProjectCard>(
+  (project, word) => {
+    const lcWord = word.toLocaleLowerCase();
+    return (
+      !!project.meta[word] ||
+      project.title.toLocaleLowerCase().includes(lcWord) ||
+      project.content?.toLocaleLowerCase().includes(lcWord) ||
+      !!project.longTechnologies?.find((lt) =>
+        lt.toLocaleLowerCase().includes(lcWord)
+      ) ||
+      !!project.shortTechnologies.find((st) =>
+        st.toLocaleLowerCase().includes(lcWord)
+      ) ||
+      !!project.hostedOn?.toLocaleLowerCase().includes(lcWord)
+    );
+  }
+);
 
-  const filterBySearch = createFilterBySearchFn<FlattenedProjectCard>(
-    (project, word) => {
-      const lcWord = word.toLocaleLowerCase();
-      return (
-        !!project.meta[word] ||
-        project.title.toLocaleLowerCase().includes(lcWord) ||
-        project.content?.toLocaleLowerCase().includes(lcWord) ||
-        !!project.longTechnologies?.find((lt) =>
-          lt.toLocaleLowerCase().includes(lcWord)
-        ) ||
-        !!project.shortTechnologies.find((st) =>
-          st.toLocaleLowerCase().includes(lcWord)
-        ) ||
-        !!project.hostedOn?.toLocaleLowerCase().includes(lcWord)
-      );
-    }
-  );
+const filterByKeywords = createFilterByKeywordFn<FlattenedProjectCard>(
+  (project, id) =>
+    id === "hosts" ? [project.hostedOn ?? ""] : project.longTechnologies
+);
 
-  const filterByKeywords = createFilterByKeywordFn<FlattenedProjectCard>(
-    (project, id) =>
-      id === "hosts" ? [project.hostedOn ?? ""] : project.longTechnologies
-  );
+const filterByDate = createFilterByDateFn<FlattenedProjectCard>(
+  (project) => project.firstReleased.date
+);
 
-  const filterByDate = createFilterByDateFn<FlattenedProjectCard>(
-    (project) => project.firstReleased.date
-  );
-
+const ProjectsPage: React.FC = () => {
   const {
+    pagination,
     createFilter,
     removeFilter,
     modifyDate,
     modifyKeywords,
-    modifySearch,
     modifyFilterType,
-    filterItems,
-  } = createModifyFilterFns(
-    newFilterOptions,
-    setFilters,
+    modifySearch,
+    filters,
+  } = useFilter(
+    projects,
+    projects[projects.length - 1].firstReleased.date,
+    projects[0].firstReleased.date,
+    [
+      { id: "hosts", allKeywords: projectHosts },
+      { id: "technologies", allKeywords: projectTechs },
+    ],
+    createFilterOptionsFn,
     filterByDate,
     filterByKeywords,
-    filterBySearch,
-    projectPagination.setItems,
-    projects
+    filterBySearch
   );
-
-  // TODO: Create a custom hook for all of the filters/inputs
-  // biome-ignore lint/correctness/useExhaustiveDependencies: Filter items by initial filters
-  React.useEffect(() => {
-    filterItems(filters);
-    const queryParams = getQueryParams();
-    const initialPage = getPageNumberFromQuery(queryParams);
-    projectPagination.setPage(initialPage);
-  }, []);
 
   const options: FilterOption[] = [
     {
@@ -189,13 +144,13 @@ const ProjectsPage: React.FC = () => {
           onModifySearch={modifySearch}
           options={options}
           filters={filters}
-          currentPage={projectPagination.page}
-          numPages={projectPagination.numPages}
-          setPage={projectPagination.setPage}
+          currentPage={pagination.page}
+          numPages={pagination.numPages}
+          setPage={pagination.setPage}
         />
         <Grouping>
           <CardContainer
-            items={projectPagination.visibleItems}
+            items={pagination.visibleItems}
             type="project"
             Card={ProjectCard}
           />

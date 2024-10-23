@@ -23,7 +23,7 @@ const usePagination: PaginationHook = <T>(
           typeof pageOrPageFn === "function"
             ? pageOrPageFn(prevPage)
             : pageOrPageFn;
-        if (newPage < 0 || newPage > numPages) {
+        if (newPage < 0 || newPage >= numPages) {
           return prevPage;
         }
 
