@@ -162,12 +162,12 @@ const ProjectsPage: React.FC = () => {
     {
       label: "Hosts",
       id: "hosts",
-      disabled: false,
+      disabled: filters.some((filter) => filter.id === "hosts"),
     },
     {
       label: "Technologies",
       id: "technologies",
-      disabled: false,
+      disabled: filters.some((filter) => filter.id === "technologies"),
     },
     {
       label: "Search",
