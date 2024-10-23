@@ -17,7 +17,12 @@ import {
   projectsDescription,
 } from "@/data/search";
 import { usePagination } from "@/hooks";
-import { CreateFilterOption, FilterOption, ItemFilter } from "@/types/filters";
+import {
+  CreateFilterOption,
+  FilterOption,
+  ItemFilter,
+  KeywordFilterDetails,
+} from "@/types/filters";
 import { FlattenedProjectCard } from "@/types/posts";
 import {
   createAddDateFilterFn,
@@ -27,26 +32,42 @@ import {
   createFilterByKeywordFn,
   createFilterBySearchFn,
   createModifyFilterFns,
-  getQueryParamState,
+  parseInitialFilters,
 } from "@/utils/filter";
+import { PotentialChoice } from "@/types/general";
 
 export const Head: React.FC = () => (
   <HeadBase title="Projects" description={projectsDescription} />
 );
 
-function parseInitialFilters(): ItemFilter[] {
-  const rawFilters = getQueryParamState();
-
-  console.log(rawFilters);
-
-  const filters: ItemFilter[] = [];
-  return filters;
+function getProjectInitialFilters(
+  startDate: Date,
+  endDate: Date,
+  allHosts: PotentialChoice[],
+  allTechnologies: PotentialChoice[]
+): ItemFilter[] {
+  const keywordFilterDetails: KeywordFilterDetails[] = [
+    { id: "hosts", allKeywords: allHosts },
+    { id: "technologies", allKeywords: allTechnologies },
+  ];
+  const initialFilters = parseInitialFilters(
+    startDate,
+    endDate,
+    keywordFilterDetails
+  );
+  return initialFilters;
 }
 
 const ProjectsPage: React.FC = () => {
   const projectPagination = usePagination<FlattenedProjectCard>(projects);
-  const [filters, setFilters] =
-    React.useState<ItemFilter[]>(parseInitialFilters);
+  const [filters, setFilters] = React.useState<ItemFilter[]>(
+    getProjectInitialFilters(
+      projects[projects.length - 1].firstReleased.date,
+      projects[0].firstReleased.date,
+      projectHosts,
+      projectTechs
+    )
+  );
   const options: FilterOption[] = [
     {
       label: "Publish Date",

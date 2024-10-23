@@ -3,6 +3,8 @@ import {
   DateFilter,
   ItemFilter,
   KeywordFilter,
+  KeywordFilterDetails,
+  ParsedQueryParams,
   SearchFilter,
   WordFilterType,
 } from "@/types/filters";
@@ -106,7 +108,7 @@ export function createAddSearchFilterFn(
       {
         label: "Search",
         id: `${SEARCH_KEY}_${_searchId++}`,
-        search: "",
+        search: [],
         type: "any",
       },
     ]);
@@ -215,7 +217,10 @@ function createModifySearchFn(
         return filters;
       }
 
-      searchFilter.search = search;
+      searchFilter.search = search
+        .replace(/,\s/g, " ")
+        .replace(/,(\S)/g, " $1")
+        .split(" ");
       filterItems(filters);
 
       return structuredClone(filters);
@@ -276,11 +281,14 @@ export function createFilterBySearchFn<T extends object>(
   searchFn: (item: T, word: string) => boolean
 ) {
   return (filter: SearchFilter, items: T[]): T[] => {
-    if (filter.search === "") {
+    if (
+      filter.search.length === 0 ||
+      (filter.search.length === 1 && filter.search[0] === "")
+    ) {
       return items;
     }
 
-    const search = filter.search.toLowerCase().split(" ");
+    const { search } = filter;
     const fn =
       filter.type === "any"
         ? search.some.bind(search)
@@ -323,8 +331,8 @@ export function createFilterByDateFn<T extends object>(
   };
 }
 
-export function getQueryParamState(): Map<string, string | number | string[]> {
-  const state = new Map<string, string | number | string[]>();
+export function getQueryParamState(): ParsedQueryParams {
+  const state = new Map<string, number | string[]>();
 
   const params = getQueryParams();
   for (const key of params.keys()) {
@@ -333,13 +341,13 @@ export function getQueryParamState(): Map<string, string | number | string[]> {
       continue;
     }
 
-    if (value.includes(",")) {
-      const values = deserializeFromQueryParams(value);
-      state.set(key, values);
-    } else if (!Number.isNaN(Number(value))) {
+    if (!Number.isNaN(Number(value))) {
       state.set(key, Number(value));
     } else {
-      state.set(key, decodeURIComponent(value));
+      state.set(
+        key,
+        value.split(",").map((v) => decodeURIComponent(v))
+      );
     }
   }
 
@@ -347,7 +355,7 @@ export function getQueryParamState(): Map<string, string | number | string[]> {
 }
 
 export function getPageNumberFromQuery(
-  state: Map<string, string | number | string[]>
+  state: ParsedQueryParams
 ): number | null {
   const page = state.get(PAGE_KEY);
   if (!page || Array.isArray(page) || typeof page === "string") {
@@ -357,13 +365,17 @@ export function getPageNumberFromQuery(
   return page;
 }
 
-export function getDateInformationFromQuery(
-  state: Map<string, string | number | string[]>,
+export function getDateFilterFromQuery(
+  state: ParsedQueryParams,
   startDateDefault: Date,
   endDateDefault: Date
 ): DateFilter | null {
   const start = state.get(DATE_START_KEY) ?? null;
   const end = state.get(DATE_END_KEY) ?? null;
+
+  if (!start && !end) {
+    return null;
+  }
 
   let startDate: Date | null = startDateDefault;
   if (start && typeof start === "string") {
@@ -389,29 +401,28 @@ export function getDateInformationFromQuery(
   };
 }
 
-export function getSearchInformationFromQuery(
-  state: Map<string, string | number | string[]>
+export function getSearchFilterFromQuery(
+  state: ParsedQueryParams
 ): SearchFilter[] {
   const searches: SearchFilter[] = [];
 
   for (const [key, value] of state.entries()) {
-    if (!key.startsWith(SEARCH_KEY)) {
+    if (!key.startsWith(SEARCH_KEY) || typeof value === "number") {
       continue;
     }
 
-    const search = value as string;
     const id = key as string;
     const type = getTypeForFilterFromQuery(id, state);
 
-    searches.push({ label: "Search", id, search, type });
+    searches.push({ label: "Search", id, search: value, type });
   }
 
   return searches;
 }
 
-export function getKeywordInformationFromQuery(
+export function getKeywordFilterFromQuery(
   id: string,
-  state: Map<string, number | string | string[]>,
+  state: Map<string, number | string[]>,
   allKeywords: PotentialChoice[]
 ): KeywordFilter | null {
   const keywords = state.get(id);
@@ -435,17 +446,43 @@ export function getKeywordInformationFromQuery(
 
 export function getTypeForFilterFromQuery(
   id: string,
-  state: Map<string, string | number | string[]>
+  state: Map<string, number | string[]>
 ): WordFilterType {
   const rawType = state.get(`${id}${TYPE_KEY_SEGMENT}`);
   let type: WordFilterType = "all";
-  if (
-    rawType &&
-    typeof rawType === "string" &&
-    (rawType === "any" || rawType === "all")
-  ) {
-    type = rawType;
+  if (rawType && Array.isArray(rawType)) {
+    const [typeString] = rawType;
+    if (typeString === "any") {
+      type = typeString;
+    }
   }
 
   return type;
+}
+
+export function parseInitialFilters(
+  startDate: Date,
+  endDate: Date,
+  keywordFilterDetails: KeywordFilterDetails[]
+): ItemFilter[] {
+  const rawFilters = getQueryParamState();
+
+  let filters: ItemFilter[] = [];
+
+  const dateFilters = getDateFilterFromQuery(rawFilters, startDate, endDate);
+  if (dateFilters) {
+    filters.push(dateFilters);
+  }
+
+  const searchFilters = getSearchFilterFromQuery(rawFilters);
+  filters = filters.concat(searchFilters);
+
+  for (const { id, allKeywords } of keywordFilterDetails) {
+    const filter = getKeywordFilterFromQuery(id, rawFilters, allKeywords);
+    if (filter) {
+      filters.push(filter);
+    }
+  }
+
+  return filters;
 }

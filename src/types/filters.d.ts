@@ -99,7 +99,7 @@ type SearchFilter = {
   id: Exclude<string, "date">;
   label: string;
   type: WordFilterType;
-  search: string;
+  search: string[];
 };
 
 type CurrentPageProps = {
@@ -112,3 +112,10 @@ type CreateFilterOption = {
   match: string;
   fn: () => void;
 };
+
+type KeywordFilterDetails = {
+  id: string;
+  allKeywords: PotentialChoice[];
+};
+
+type ParsedQueryParams = Map<string, number, string[]>;
