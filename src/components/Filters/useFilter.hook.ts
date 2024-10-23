@@ -1,7 +1,6 @@
 import { useCallback, useEffect } from "react";
 
 import { inputIsFocused } from "@/utils/dom";
-import { setOneQueryParam, setQueryParams } from "@/utils/queries";
 
 const closeFns: Map<string, () => void> = new Map();
 export function registerCleanupFn(key: string, fn: () => void) {

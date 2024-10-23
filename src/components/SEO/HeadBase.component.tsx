@@ -7,6 +7,7 @@ const BaseHead: React.FC<
     <html lang="en" />
     <title>Benyakir Writes - {title}</title>
     <meta name="description" content={description} />
+    <meta name="author" content="Benyakir Horowitz" />
     {children}
   </>
 );

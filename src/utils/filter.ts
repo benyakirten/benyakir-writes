@@ -17,6 +17,12 @@ import {
 } from "./queries";
 import { getShortDate } from "./dates";
 
+const DATE_START_KEY = "date_start";
+const DATE_END_KEY = "date_end";
+const SEARCH_KEY = "search";
+const TYPE_KEY_SEGMENT = "_type";
+const PAGE_KEY = "page";
+
 export const createChoiceSet = <T extends object, U extends keyof T>(
   items: T[],
   key: T[U] extends string[] | null ? U : never
@@ -90,15 +96,16 @@ export function createAddKeywordFilterFn(
 }
 
 export function createAddSearchFilterFn(
-  setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>
+  setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>,
+  searchId = 0
 ): () => void {
-  let searchId = 0;
+  let _searchId = searchId;
   return () => {
     setFilters((filters) => [
       ...filters,
       {
         label: "Search",
-        id: `search_${searchId++}`,
+        id: `${SEARCH_KEY}_${_searchId++}`,
         search: "",
         type: "any",
       },
@@ -126,7 +133,7 @@ function createRemoveFilterFn(
   return (id: string) =>
     setFilters((filters) => {
       removeQueryParam(id);
-      removeQueryParam(`${id}_type`);
+      removeQueryParam(`${id}${TYPE_KEY_SEGMENT}`);
       const newFilters = filters.filter((filter) => filter.id !== id);
       filterItems(newFilters);
       return newFilters;
@@ -139,7 +146,10 @@ function createModifyDateFn(
 ): (time: "start" | "end", value: Date) => void {
   return (time: "start" | "end", value: Date) =>
     setFilters((filters) => {
-      setOneQueryParam(`date_${time}`, getShortDate(value).replace(/\//g, "-"));
+      setOneQueryParam(
+        time === "end" ? DATE_END_KEY : DATE_START_KEY,
+        getShortDate(value).replace(/\//g, "-")
+      );
       const dateFilter = filters.find((filter) => filter.id === "date");
       if (!dateFilter || !("start" in dateFilter)) {
         return filters;
@@ -181,7 +191,7 @@ function createModifyFilterTypeFn(
   return (id: string, type: WordFilterType) =>
     setFilters((filters) => {
       const filter = filters.find((filter) => filter.id === id);
-      setOneQueryParam(`${id}_type`, type);
+      setOneQueryParam(`${id}${TYPE_KEY_SEGMENT}`, type);
       if (!filter || !("type" in filter)) {
         return filters;
       }
@@ -306,8 +316,8 @@ export function createFilterByDateFn<T extends object>(
   return (filter: DateFilter, items: T[]): T[] => {
     return items.filter((item) => {
       const itemDate = getDateFn(item).getTime();
-      const start = filter.start.getTime();
-      const end = filter.end.getTime();
+      const start = filter.start?.getTime() ?? 0;
+      const end = filter.end?.getTime() ?? 0;
       return itemDate >= start && itemDate <= end;
     });
   };
@@ -334,4 +344,108 @@ export function getQueryParamState(): Map<string, string | number | string[]> {
   }
 
   return state;
+}
+
+export function getPageNumberFromQuery(
+  state: Map<string, string | number | string[]>
+): number | null {
+  const page = state.get(PAGE_KEY);
+  if (!page || Array.isArray(page) || typeof page === "string") {
+    return null;
+  }
+
+  return page;
+}
+
+export function getDateInformationFromQuery(
+  state: Map<string, string | number | string[]>,
+  startDateDefault: Date,
+  endDateDefault: Date
+): DateFilter | null {
+  const start = state.get(DATE_START_KEY) ?? null;
+  const end = state.get(DATE_END_KEY) ?? null;
+
+  let startDate: Date | null = startDateDefault;
+  if (start && typeof start === "string") {
+    const tentativeStartDate = new Date(start.replace(/-/g, "/"));
+    if (!Number.isNaN(tentativeStartDate.getTime())) {
+      startDate = tentativeStartDate;
+    }
+  }
+
+  let endDate: Date | null = endDateDefault;
+  if (end && typeof end === "string") {
+    const tentativeEndDate = new Date(end.replace(/-/g, "/"));
+    if (!Number.isNaN(tentativeEndDate.getTime())) {
+      endDate = tentativeEndDate;
+    }
+  }
+
+  return {
+    label: "Date",
+    id: "date",
+    start: startDate,
+    end: endDate,
+  };
+}
+
+export function getSearchInformationFromQuery(
+  state: Map<string, string | number | string[]>
+): SearchFilter[] {
+  const searches: SearchFilter[] = [];
+
+  for (const [key, value] of state.entries()) {
+    if (!key.startsWith(SEARCH_KEY)) {
+      continue;
+    }
+
+    const search = value as string;
+    const id = key as string;
+    const type = getTypeForFilterFromQuery(id, state);
+
+    searches.push({ label: "Search", id, search, type });
+  }
+
+  return searches;
+}
+
+export function getKeywordInformationFromQuery(
+  id: string,
+  state: Map<string, number | string | string[]>,
+  allKeywords: PotentialChoice[]
+): KeywordFilter | null {
+  const keywords = state.get(id);
+  if (!Array.isArray(keywords) || keywords.length === 0) {
+    return null;
+  }
+
+  const type = getTypeForFilterFromQuery(id, state);
+
+  return {
+    label: capitalize(id),
+    id,
+    type,
+    currentKeywords: keywords.map((keyword) => ({
+      label: keyword,
+      value: keyword,
+    })),
+    allKeywords,
+  };
+}
+
+export function getTypeForFilterFromQuery(
+  id: string,
+  state: Map<string, string | number | string[]>
+): WordFilterType {
+  const rawType = state.get(`${id}${TYPE_KEY_SEGMENT}`);
+  let type: WordFilterType = "all";
+  if (
+    rawType &&
+    typeof rawType === "string" &&
+    (rawType === "any" || rawType === "all")
+  ) {
+    type = rawType;
+  }
+
+  return type;
 }
