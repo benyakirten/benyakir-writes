@@ -135,7 +135,6 @@ function createRemoveFilterFn(
   return (id: string) =>
     setFilters((filters) => {
       removeQueryParam(id);
-      removeQueryParam(`${id}${TYPE_KEY_SEGMENT}`);
       const newFilters = filters.filter((filter) => filter.id !== id);
       filterItems(newFilters);
       return newFilters;
@@ -355,7 +354,7 @@ export function getPageNumberFromQuery(searchParams: URLSearchParams): number {
   const page = searchParams.get(PAGE_KEY) ?? "";
   const p = Number.parseInt(page);
 
-  return Number.isNaN(p) || p < 0 ? 0 : p;
+  return Number.isNaN(p) || p < 0 ? 0 : p - 1;
 }
 
 export function getDateFilterFromQuery(

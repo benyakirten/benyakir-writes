@@ -30,8 +30,12 @@ export function setQueryParams(
 
 export function removeQueryParam(key: string): void {
   const params = getQueryParams();
-  params.delete(key);
-  visitQueryParams(params);
+  for (const param of params.keys()) {
+    if (param.toLowerCase().startsWith(key.toLowerCase())) {
+      params.delete(param);
+    }
+    visitQueryParams(params);
+  }
 }
 
 export function removePartialQueryParam(key: string): void {

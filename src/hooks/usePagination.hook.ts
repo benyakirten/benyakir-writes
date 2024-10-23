@@ -2,6 +2,7 @@ import { useCallback, useMemo, useState } from "react";
 
 import type { PaginationHook } from "@/types/hooks";
 import { clamp } from "@/utils/numbers";
+import { setOneQueryParam } from "@/utils/queries";
 
 const DEFAULT_ITEMS_PER_PAGE = 10;
 const usePagination: PaginationHook = <T>(
@@ -12,10 +13,7 @@ const usePagination: PaginationHook = <T>(
   const [items, _setItems] = useState(initialItems);
   const [itemsPerPage, _setItemsPerPage] = useState(defaultItemsPerPage);
 
-  const numPages = useMemo(
-    () => Math.floor(items.length / itemsPerPage),
-    [items, itemsPerPage]
-  );
+  const numPages = Math.floor(items.length / itemsPerPage);
 
   const setPage: React.Dispatch<React.SetStateAction<number>> = useCallback(
     (pageOrPageFn) => {
@@ -25,7 +23,9 @@ const usePagination: PaginationHook = <T>(
             ? pageOrPageFn(prevPage)
             : pageOrPageFn;
 
-        return clamp(newPage, 0, numPages);
+        const page = clamp(newPage, 0, numPages);
+        setOneQueryParam("page", (page + 1).toString());
+        return page;
       });
     },
     [numPages]

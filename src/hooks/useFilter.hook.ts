@@ -59,9 +59,10 @@ const useFilter: FilterHook = <T extends object>(
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We want this to run once on component mount
   useEffect(() => {
-    filterItems(filters);
     const queryParams = getQueryParams();
     const initialPage = getPageNumberFromQuery(queryParams);
+
+    filterItems(filters);
     pagination.setPage(initialPage);
   }, []);
 

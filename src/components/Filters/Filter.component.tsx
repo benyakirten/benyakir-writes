@@ -91,18 +91,6 @@ const Filter: React.FC<FilterProps> = ({
   numPages,
   setPage,
 }) => {
-  const changePage: React.Dispatch<React.SetStateAction<number>> = (p) => {
-    if (typeof p === "number") {
-      setPage(p);
-      setOneQueryParam("page", p);
-    } else {
-      setPage((current) => {
-        const newPage = p(current);
-        setOneQueryParam("page", newPage);
-        return newPage;
-      });
-    }
-  };
   const filterBarRef = useRef<HTMLDivElement>(null);
   const pageRef = useRef<HTMLInputElement>(null);
   const newFilterRef = useRef<HTMLButtonElement>(null);
@@ -110,14 +98,14 @@ const Filter: React.FC<FilterProps> = ({
   const [menuOpenTop, menuOpen, setSoftOpen, setHardOpen] =
     useFlyout(newFilterRef);
 
-  useFilterComponent(filterBarRef, newFilterRef, pageRef, changePage);
+  useFilterComponent(filterBarRef, newFilterRef, pageRef, setPage);
 
   return (
     <FilterBar ref={filterBarRef}>
       <CurrentPage
         currentPage={currentPage}
         numPages={numPages}
-        onSetPage={changePage}
+        onSetPage={setPage}
         ref={pageRef}
       />
       <NewFilter
