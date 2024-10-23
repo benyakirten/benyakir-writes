@@ -5,7 +5,7 @@ import { Filter } from "@/components/Filters";
 import { AuthorCard } from "@/components/General";
 import { HeadBase } from "@/components/SEO";
 import { authorDescription, books, stories } from "@/data/search";
-import { usePagination } from "@/hooks";
+import { useFilter, usePagination } from "@/hooks";
 import {
   Grouping,
   LeadHeading,
@@ -31,15 +31,68 @@ export const Head: React.FC = () => (
   <HeadBase title="Author" description={authorDescription} />
 );
 
-const AuthorPage: React.FC = () => {
-  const items = React.useMemo<AuthoredItemCard[]>(() => {
-    return [...books, ...stories].sort(
-      (a, b) => b.published.date.valueOf() - a.published.date.valueOf()
-    );
-  }, []);
-  const itemPagination = usePagination<AuthoredItemCard>(items);
+const items: AuthoredItemCard[] = [...books, ...stories].sort(
+  (a, b) => b.published.date.valueOf() - a.published.date.valueOf()
+);
 
-  const [filters, setFilters] = React.useState<ItemFilter[]>([]);
+const filterBySearch = createFilterBySearchFn<AuthoredItemCard>(
+  (item, word) => {
+    const lcWord = word.toLocaleLowerCase();
+    return (
+      item.meta[word] ||
+      item.title.toLocaleLowerCase().includes(lcWord) ||
+      item.content?.toLocaleLowerCase().includes(lcWord)
+    );
+  }
+);
+
+const filterByKeywords = (
+  _: KeywordFilter,
+  items: AuthoredItemCard[]
+): AuthoredItemCard[] => items;
+
+const filterByDate = createFilterByDateFn<AuthoredItemCard>(
+  (item) => item.published.date
+);
+
+const createFilterOptionsFn = (
+  setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>
+) => [
+  {
+    match: "date",
+    fn: createAddDateFilterFn(
+      items[items.length - 1].published.date,
+      items[0].published.date,
+      setFilters
+    ),
+  },
+  {
+    match: "search",
+    fn: createAddSearchFilterFn(setFilters),
+  },
+];
+
+const AuthorPage: React.FC = () => {
+  const {
+    pagination,
+    createFilter,
+    removeFilter,
+    modifyDate,
+    modifyKeywords,
+    modifyFilterType,
+    modifySearch,
+    filters,
+  } = useFilter(
+    items,
+    items[items.length - 1].published.date,
+    items[0].published.date,
+    [],
+    createFilterOptionsFn,
+    filterByDate,
+    filterByKeywords,
+    filterBySearch
+  );
+
   const options: FilterOption[] = [
     {
       label: "Publish Date",
@@ -52,61 +105,6 @@ const AuthorPage: React.FC = () => {
       disabled: false,
     },
   ];
-
-  const newFilterOptions: CreateFilterOption[] = React.useMemo(
-    () => [
-      {
-        match: "date",
-        fn: createAddDateFilterFn(
-          items[items.length - 1].published.date,
-          items[0].published.date,
-          setFilters
-        ),
-      },
-      {
-        match: "search",
-        fn: createAddSearchFilterFn(setFilters),
-      },
-    ],
-    [items]
-  );
-
-  const filterBySearch = createFilterBySearchFn<AuthoredItemCard>(
-    (item, word) => {
-      const lcWord = word.toLocaleLowerCase();
-      return (
-        item.meta[word] ||
-        item.title.toLocaleLowerCase().includes(lcWord) ||
-        item.content?.toLocaleLowerCase().includes(lcWord)
-      );
-    }
-  );
-
-  const filterByKeywords = (
-    _: KeywordFilter,
-    items: AuthoredItemCard[]
-  ): AuthoredItemCard[] => items;
-
-  const filterByDate = createFilterByDateFn<AuthoredItemCard>(
-    (item) => item.published.date
-  );
-
-  const {
-    createFilter,
-    removeFilter,
-    modifyDate,
-    modifyKeywords,
-    modifySearch,
-    modifyFilterType,
-  } = createModifyFilterFns(
-    newFilterOptions,
-    setFilters,
-    filterByDate,
-    filterByKeywords,
-    filterBySearch,
-    itemPagination.setItems,
-    items
-  );
 
   return (
     <Page>
@@ -121,13 +119,13 @@ const AuthorPage: React.FC = () => {
           onModifySearch={modifySearch}
           options={options}
           filters={filters}
-          currentPage={itemPagination.page}
-          numPages={itemPagination.numPages}
-          setPage={itemPagination.setPage}
+          currentPage={pagination.page}
+          numPages={pagination.numPages}
+          setPage={pagination.setPage}
         />
         <Grouping>
           <CardContainer
-            items={itemPagination.visibleItems}
+            items={pagination.visibleItems}
             Card={AuthorCard}
             type="books or storie"
           />

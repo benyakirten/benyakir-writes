@@ -16,7 +16,7 @@ import {
   Page,
   PaginatedPageContents,
 } from "@/styles/general-components";
-import { CreateFilterOption, FilterOption, ItemFilter } from "@/types/filters";
+import { FilterOption, ItemFilter } from "@/types/filters";
 import type { FlattenedBlogCard } from "@/types/posts";
 import {
   createAddDateFilterFn,
@@ -25,16 +25,82 @@ import {
   createFilterByDateFn,
   createFilterByKeywordFn,
   createFilterBySearchFn,
-  createModifyFilterFns,
 } from "@/utils/filter";
+import { useFilter } from "@/hooks";
 
 export const Head: React.FC = () => (
   <HeadBase title="Blog" description={blogDescription} />
 );
 
+const createFilterOptionsFn = (
+  setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>
+) => [
+  {
+    match: "date",
+    fn: createAddDateFilterFn(
+      posts[posts.length - 1].published.date,
+      posts[0].published.date,
+      setFilters
+    ),
+  },
+  {
+    match: "tags",
+    fn: createAddKeywordFilterFn("tags", postTags, setFilters),
+  },
+  {
+    match: "categories",
+    fn: createAddKeywordFilterFn("categories", postCategories, setFilters),
+  },
+  {
+    match: "search",
+    fn: createAddSearchFilterFn(setFilters),
+  },
+];
+
+const filterBySearch = createFilterBySearchFn<FlattenedBlogCard>(
+  (post, word) => {
+    const lcWord = word.toLocaleLowerCase();
+    return (
+      !!post.meta[word] ||
+      post.title.toLocaleLowerCase().includes(lcWord) ||
+      post.excerpt?.toLocaleLowerCase().includes(lcWord) ||
+      post.content?.toLocaleLowerCase().includes(lcWord) ||
+      !!post.tags?.find((tag) => tag.toLocaleLowerCase().includes(lcWord)) ||
+      !!post.categories?.find((cat) => cat.toLocaleLowerCase().includes(lcWord))
+    );
+  }
+);
+const filterByKeywords = createFilterByKeywordFn<FlattenedBlogCard>(
+  (post, id) => (id === "tags" ? post.tags : post.categories) ?? []
+);
+const filterByDate = createFilterByDateFn<FlattenedBlogCard>(
+  (post) => post.published.date
+);
+
 const BlogPage: React.FC = () => {
-  const postPagination = usePagination(posts);
-  const [filters, setFilters] = React.useState<ItemFilter[]>([]);
+  const {
+    pagination,
+    createFilter,
+    removeFilter,
+    modifyDate,
+    modifyKeywords,
+    modifyFilterType,
+    modifySearch,
+    filters,
+  } = useFilter(
+    posts,
+    posts[posts.length - 1].published.date,
+    posts[0].published.date,
+    [
+      { id: "tags", allKeywords: postTags },
+      { id: "categories", allKeywords: postCategories },
+    ],
+    createFilterOptionsFn,
+    filterByDate,
+    filterByKeywords,
+    filterBySearch
+  );
+
   const options: FilterOption[] = [
     {
       label: "Publish Date",
@@ -44,12 +110,12 @@ const BlogPage: React.FC = () => {
     {
       label: "Tags",
       id: "tags",
-      disabled: false,
+      disabled: filters.some((filter) => filter.id === "tags"),
     },
     {
       label: "Categories",
       id: "categories",
-      disabled: false,
+      disabled: filters.some((filter) => filter.id === "categories"),
     },
     {
       label: "Search",
@@ -57,71 +123,6 @@ const BlogPage: React.FC = () => {
       disabled: false,
     },
   ];
-
-  const newFilterOptions: CreateFilterOption[] = React.useMemo(
-    () => [
-      {
-        match: "date",
-        fn: createAddDateFilterFn(
-          posts[posts.length - 1].published.date,
-          posts[0].published.date,
-          setFilters
-        ),
-      },
-      {
-        match: "tags",
-        fn: createAddKeywordFilterFn("tags", postTags, setFilters),
-      },
-      {
-        match: "categories",
-        fn: createAddKeywordFilterFn("categories", postCategories, setFilters),
-      },
-      {
-        match: "search",
-        fn: createAddSearchFilterFn(setFilters),
-      },
-    ],
-    []
-  );
-
-  const filterBySearch = createFilterBySearchFn<FlattenedBlogCard>(
-    (post, word) => {
-      const lcWord = word.toLocaleLowerCase();
-      return (
-        !!post.meta[word] ||
-        post.title.toLocaleLowerCase().includes(lcWord) ||
-        post.excerpt?.toLocaleLowerCase().includes(lcWord) ||
-        post.content?.toLocaleLowerCase().includes(lcWord) ||
-        !!post.tags?.find((tag) => tag.toLocaleLowerCase().includes(lcWord)) ||
-        !!post.categories?.find((cat) =>
-          cat.toLocaleLowerCase().includes(lcWord)
-        )
-      );
-    }
-  );
-  const filterByKeywords = createFilterByKeywordFn<FlattenedBlogCard>(
-    (post, id) => (id === "tags" ? post.tags : post.categories) ?? []
-  );
-  const filterByDate = createFilterByDateFn<FlattenedBlogCard>(
-    (post) => post.published.date
-  );
-
-  const {
-    createFilter,
-    removeFilter,
-    modifyDate,
-    modifyKeywords,
-    modifySearch,
-    modifyFilterType,
-  } = createModifyFilterFns(
-    newFilterOptions,
-    setFilters,
-    filterByDate,
-    filterByKeywords,
-    filterBySearch,
-    postPagination.setItems,
-    posts
-  );
 
   return (
     <Page>
@@ -136,14 +137,14 @@ const BlogPage: React.FC = () => {
           onRemove={removeFilter}
           onModifyWordFilterType={modifyFilterType}
           onModifySearch={modifySearch}
-          currentPage={postPagination.page}
-          numPages={postPagination.numPages}
-          setPage={postPagination.setPage}
+          currentPage={pagination.page}
+          numPages={pagination.numPages}
+          setPage={pagination.setPage}
         />
         <Grouping>
           <CardContainer
             Card={BlogCard}
-            items={postPagination.visibleItems}
+            items={pagination.visibleItems}
             type="post"
           />
         </Grouping>
