@@ -133,6 +133,7 @@ const themeSlice = createSlice({
       if (themeQueryParam === action.payload) {
         removeQueryParam("theme");
       }
+
       const themeIndexToDelete = state.themes.findIndex(
         (theme) => theme.id === action.payload
       );
