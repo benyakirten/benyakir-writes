@@ -5,16 +5,24 @@ import {
   addKeywordFilter,
   addSearchFilter,
   createChoiceSet,
+  createFilterBySearchFn,
   isDateFilter,
   isKeywordFilter,
   isSearchFilter,
 } from "@/utils/filter";
-import { ItemFilter } from "@/types/filters";
+import { ItemFilter, SearchFilter } from "@/types/filters";
 import { getQueryParams } from "../queries";
 
 beforeEach(() => {
   window.history.pushState({}, "", "/");
 });
+
+const startDate = new Date(0);
+startDate.setFullYear(2023, 0, 1);
+startDate.setHours(0, 0, 0, 0);
+const endDate = new Date(0);
+endDate.setFullYear(2023, 11, 31);
+endDate.setHours(0, 0, 0, 0);
 
 describe("createChoiceSet", () => {
   it("should return only unique objects", () => {
@@ -105,12 +113,6 @@ describe("is filter type tests", () => {
 
 describe("addDateFilter", () => {
   it("should return a function that adds the date formatted to m-d-y ", () => {
-    const startDate = new Date(0);
-    startDate.setFullYear(2023, 0, 1);
-    startDate.setHours(0, 0, 0, 0);
-    const endDate = new Date(0);
-    endDate.setFullYear(2023, 11, 31);
-    endDate.setHours(0, 0, 0, 0);
     addDateFilter(startDate, endDate);
 
     const got = getQueryParams();
@@ -158,5 +160,99 @@ describe("addSearchFilter", () => {
     const got = getQueryParams();
     expect(got.get("search_4")).toBe("");
     expect(got.get("search_4_type")).toBe("all");
+  });
+
+  describe("createFilterBySearchFn", () => {
+    const items = [
+      { name: "John Doe" },
+      { name: "Jane Doe" },
+      { name: "Alice Johnson" },
+      { name: "Bob Smith" },
+    ];
+
+    const searchFn = (item: { name: string }, word: string) =>
+      item.name.includes(word);
+
+    it("should return all items if search filter is empty", () => {
+      const filter: SearchFilter = {
+        search: [""],
+        id: "search",
+        label: "Search",
+        type: "all",
+      };
+      const filterBySearch = createFilterBySearchFn(searchFn);
+      const got = filterBySearch(filter, items);
+      expect(got).toEqual(items);
+    });
+
+    it("should return items that match all search terms when type is 'all'", () => {
+      const filter: SearchFilter = {
+        search: ["Doe, John"],
+        id: "search",
+        label: "Search",
+        type: "all",
+      };
+      const filterBySearch = createFilterBySearchFn(searchFn);
+      const got = filterBySearch(filter, items);
+      expect(got).toEqual([{ name: "John Doe" }]);
+    });
+
+    it("should return items that match any search term when type is 'any'", () => {
+      const filter: SearchFilter = {
+        search: ["Doe, Smith"],
+        id: "search",
+        label: "Search",
+        type: "any",
+      };
+      const filterBySearch = createFilterBySearchFn(searchFn);
+      const got = filterBySearch(filter, items);
+      expect(got).toEqual([
+        { name: "John Doe" },
+        { name: "Jane Doe" },
+        { name: "Bob Smith" },
+      ]);
+    });
+
+    it("should filter the same way regardless of if the separator is a comma, a space or a comma and a space", () => {
+      const filter1: SearchFilter = {
+        search: ["Doe, Smith"],
+        id: "search",
+        label: "Search",
+        type: "any",
+      };
+
+      const filter2: SearchFilter = {
+        search: ["Doe,Smith"],
+        id: "search",
+        label: "Search",
+        type: "any",
+      };
+
+      const filter3: SearchFilter = {
+        search: ["Doe Smith"],
+        id: "search",
+        label: "Search",
+        type: "any",
+      };
+
+      const filterBySearch = createFilterBySearchFn(searchFn);
+      const got1 = filterBySearch(filter1, items);
+      const got2 = filterBySearch(filter2, items);
+      const got3 = filterBySearch(filter3, items);
+      expect(got1).toEqual(got2);
+      expect(got2).toEqual(got3);
+    });
+
+    it("should return an empty array if no items match the search terms", () => {
+      const filter: SearchFilter = {
+        search: ["Nonexistent"],
+        id: "search",
+        label: "Search",
+        type: "all",
+      };
+      const filterBySearch = createFilterBySearchFn(searchFn);
+      const got = filterBySearch(filter, items);
+      expect(got).toEqual([]);
+    });
   });
 });
