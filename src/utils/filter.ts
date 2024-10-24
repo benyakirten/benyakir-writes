@@ -128,102 +128,56 @@ function createFilterCreationFn(
   };
 }
 
-function createRemoveFilterFn(
-  setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>,
-  filterItems: (filters: ItemFilter[]) => void
-): (id: string) => void {
-  return (id: string) =>
-    setFilters((filters) => {
-      removeQueryParam(id);
-      const newFilters = filters.filter((filter) => filter.id !== id);
-      filterItems(newFilters);
-      return newFilters;
-    });
+function createRemoveFilterFn(filterItems: () => void): (id: string) => void {
+  return (id: string) => {
+    removeQueryParam(id);
+    filterItems();
+  };
 }
 
 function createModifyDateFn(
-  setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>,
-  filterItems: (filters: ItemFilter[]) => void
+  filterItems: () => void
 ): (time: "start" | "end", value: Date) => void {
-  return (time: "start" | "end", value: Date) =>
-    setFilters((filters) => {
-      setOneQueryParam(
-        time === "end" ? DATE_END_KEY : DATE_START_KEY,
-        getShortDate(value).replace(/\//g, "-")
-      );
-      const dateFilter = filters.find((filter) => filter.id === "date");
-      if (!dateFilter || !("start" in dateFilter)) {
-        return filters;
-      }
+  return (time: "start" | "end", value: Date) => {
+    setOneQueryParam(
+      time === "end" ? DATE_END_KEY : DATE_START_KEY,
+      getShortDate(value).replace(/\//g, "-")
+    );
 
-      dateFilter[time] = value;
-      filterItems(filters);
-
-      return structuredClone(filters);
-    });
+    filterItems();
+  };
 }
 
 function createModifyKeywordFn(
-  setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>,
-  filterItems: (filters: ItemFilter[]) => void
+  filterItems: () => void
 ): (id: string, keywords: readonly PotentialChoice[]) => void {
-  return (id: string, keywords: readonly PotentialChoice[]) =>
-    setFilters((filters) => {
-      setOneQueryParam(
-        id,
-        keywords.map((k) => k.value)
-      );
-      const keywordFilter = filters.find((filter) => filter.id === id);
-      if (!keywordFilter || !("currentKeywords" in keywordFilter)) {
-        return filters;
-      }
+  return (id: string, keywords: readonly PotentialChoice[]) => {
+    setOneQueryParam(
+      id,
+      keywords.map((k) => k.value)
+    );
 
-      keywordFilter.currentKeywords = keywords;
-      filterItems(filters);
-
-      return structuredClone(filters);
-    });
+    filterItems();
+  };
 }
 
 function createModifyFilterTypeFn(
-  setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>,
-  filterItems: (filters: ItemFilter[]) => void
+  filterItems: () => void
 ): (id: string, type: WordFilterType) => void {
-  return (id: string, type: WordFilterType) =>
-    setFilters((filters) => {
-      const filter = filters.find((filter) => filter.id === id);
-      setOneQueryParam(`${id}${TYPE_KEY_SEGMENT}`, type);
-      if (!filter || !("type" in filter)) {
-        return filters;
-      }
-
-      filter.type = type;
-      filterItems(filters);
-
-      return structuredClone(filters);
-    });
+  return (id: string, type: WordFilterType) => {
+    setOneQueryParam(`${id}${TYPE_KEY_SEGMENT}`, type);
+    filterItems();
+  };
 }
 
 function createModifySearchFn(
-  setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>,
-  filterItems: (filters: ItemFilter[]) => void
+  filterItems: () => void
 ): (id: string, search: string) => void {
-  return (id: string, search: string) =>
-    setFilters((filters) => {
-      const searchFilter = filters.find((filter) => filter.id === id);
-      setOneQueryParam(id, serializeToQueryParams([search]));
-      if (!searchFilter || !("search" in searchFilter)) {
-        return filters;
-      }
+  return (id: string, search: string) => {
+    setOneQueryParam(id, serializeToQueryParams([search]));
 
-      searchFilter.search = search
-        .replace(/,\s/g, " ")
-        .replace(/,(\S)/g, " $1")
-        .split(" ");
-      filterItems(filters);
-
-      return structuredClone(filters);
-    });
+    filterItems();
+  };
 }
 
 function createFilterItemsFn<T extends object>(
@@ -231,9 +185,19 @@ function createFilterItemsFn<T extends object>(
   filterByKeywords: (filter: KeywordFilter, items: T[]) => T[],
   filterBySearch: (filter: SearchFilter, items: T[]) => T[],
   setItems: (items: T[]) => void,
-  items: T[]
+  setPage: (page: number) => void,
+  setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>,
+  items: T[],
+  startDate: Date,
+  endDate: Date,
+  keywordFilterDetails: KeywordFilterDetails[]
 ) {
-  return (filters: ItemFilter[]) => {
+  return () => {
+    const filters = parseFiltersFromQueryParameters(
+      startDate,
+      endDate,
+      keywordFilterDetails
+    );
     let filteredItems = items;
     for (const filter of filters) {
       if (isDateFilter(filter)) {
@@ -246,6 +210,12 @@ function createFilterItemsFn<T extends object>(
     }
 
     setItems(filteredItems);
+
+    const queryParams = getQueryParams();
+    const page = getPageNumberFromQuery(queryParams);
+
+    setPage(page);
+    setFilters(filters);
   };
 }
 
@@ -256,23 +226,32 @@ export function createModifyFilterFns<T extends object>(
   filterByKeywords: (filter: KeywordFilter, items: T[]) => T[],
   filterBySearch: (filter: SearchFilter, items: T[]) => T[],
   setItems: (items: T[]) => void,
-  items: T[]
+  setPage: (page: number) => void,
+  items: T[],
+  startDate: Date,
+  endDate: Date,
+  keywordFilterDetails: KeywordFilterDetails[]
 ) {
   const filterItems = createFilterItemsFn(
     filterByDate,
     filterByKeywords,
     filterBySearch,
     setItems,
-    items
+    setPage,
+    setFilters,
+    items,
+    startDate,
+    endDate,
+    keywordFilterDetails
   );
 
   return {
     createFilter: createFilterCreationFn(options),
-    removeFilter: createRemoveFilterFn(setFilters, filterItems),
-    modifyDate: createModifyDateFn(setFilters, filterItems),
-    modifyKeywords: createModifyKeywordFn(setFilters, filterItems),
-    modifyFilterType: createModifyFilterTypeFn(setFilters, filterItems),
-    modifySearch: createModifySearchFn(setFilters, filterItems),
+    removeFilter: createRemoveFilterFn(filterItems),
+    modifyDate: createModifyDateFn(filterItems),
+    modifyKeywords: createModifyKeywordFn(filterItems),
+    modifyFilterType: createModifyFilterTypeFn(filterItems),
+    modifySearch: createModifySearchFn(filterItems),
     filterItems,
   };
 }
@@ -452,7 +431,7 @@ export function getTypeForFilterFromQuery(
   return type;
 }
 
-export function parseInitialFilters(
+export function parseFiltersFromQueryParameters(
   startDate: Date,
   endDate: Date,
   keywordFilterDetails: KeywordFilterDetails[]

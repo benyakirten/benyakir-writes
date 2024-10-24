@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { FilterHook } from "@/types/hooks";
 import usePagination from "./usePagination.hook";
@@ -10,12 +10,7 @@ import {
   KeywordFilterDetails,
   SearchFilter,
 } from "@/types/filters";
-import {
-  createModifyFilterFns,
-  getPageNumberFromQuery,
-  parseInitialFilters,
-} from "@/utils/filter";
-import { getQueryParams } from "@/utils/queries";
+import { createModifyFilterFns } from "@/utils/filter";
 
 const useFilter: FilterHook = <T extends object>(
   items: T[],
@@ -30,9 +25,7 @@ const useFilter: FilterHook = <T extends object>(
   filterBySearch: (filter: SearchFilter, items: T[]) => T[]
 ) => {
   const pagination = usePagination(items);
-  const [filters, setFilters] = useState<ItemFilter[]>(
-    parseInitialFilters(startDate, endDate, keywordFilterDetails)
-  );
+  const [filters, setFilters] = useState<ItemFilter[]>([]);
 
   const {
     createFilter,
@@ -49,16 +42,16 @@ const useFilter: FilterHook = <T extends object>(
     filterByKeywords,
     filterBySearch,
     pagination.setItems,
-    items
+    pagination.setPage,
+    items,
+    startDate,
+    endDate,
+    keywordFilterDetails
   );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We want this to run only once on component mount
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Run this only once - on component mount
   useEffect(() => {
-    const queryParams = getQueryParams();
-    const initialPage = getPageNumberFromQuery(queryParams);
-
-    filterItems(filters);
-    pagination.setPage(initialPage);
+    filterItems();
   }, []);
 
   return {
