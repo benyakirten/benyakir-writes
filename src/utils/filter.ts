@@ -79,7 +79,7 @@ export function addKeywordFilter(id: string): void {
 export function addSearchFilter(): void {
   const highestSearchId = getHighestSearchId();
   const id = `${SEARCH_KEY}_${highestSearchId + 1}`;
-  setQueryParams({ [id]: "", [`${id}${TYPE_KEY_SEGMENT}`]: "any" });
+  setQueryParams({ [id]: "", [`${id}${TYPE_KEY_SEGMENT}`]: "all" });
 }
 
 function createFilterCreationFn(
