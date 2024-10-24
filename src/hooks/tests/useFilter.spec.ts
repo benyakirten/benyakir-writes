@@ -35,7 +35,11 @@ describe("useFilter", () => {
   const filterByKeywords = vi.fn();
   const filterBySearch = vi.fn();
 
-  const allKeywords = ["keyword1", "keyword2", "keyword3"];
+  const allKeywords = [
+    { label: "keyword1", value: "keyword1" },
+    { label: "keyword2", value: "keyword2" },
+    { label: "keyword3", value: "keyword3" },
+  ];
   const keywordFilterDetails: KeywordFilterDetails[] = [
     {
       id: "keyword",

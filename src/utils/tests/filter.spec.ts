@@ -5,8 +5,12 @@ import {
   isDateFilter,
   isKeywordFilter,
   isSearchFilter,
+  createAddDateFilterFn,
+  createAddKeywordFilterFn,
+  createAddSearchFilterFn,
 } from "@/utils/filter";
 import { ItemFilter } from "@/types/filters";
+import { getQueryParams } from "../queries";
 
 beforeEach(() => {
   window.history.pushState({}, "", "/");
@@ -98,3 +102,33 @@ describe("is filter type tests", () => {
     });
   });
 });
+
+// describe("createAddDateFilterFn", () => {
+//   it("should return a function that adds the date formatted to m-d-y ", () => {
+//     const startDate = new Date(0);
+//     startDate.setFullYear(2023, 0, 1);
+//     startDate.setHours(0, 0, 0, 0);
+//     const endDate = new Date(0);
+//     endDate.setFullYear(2023, 11, 31);
+//     endDate.setHours(0, 0, 0, 0);
+//     const fn = createAddDateFilterFn(startDate, endDate);
+//     fn();
+
+//     const got = getQueryParams();
+//     expect(got.get("date_start")).toBe("01/01/2023");
+//     expect(got.get("date_end")).toBe("12/31/2023");
+//   });
+// });
+
+// describe("createAddKeywordFilterFn", () => {
+//   it("should return a function that adds the keyword to the query", () => {
+//     const fn = createAddKeywordFilterFn("keyword");
+//     fn();
+
+//     const got = getQueryParams();
+//     expect(got.get("keyword")).toBe("");
+//     expect(got.get("keyword_type")).toBe("all");
+//   });
+// });
+
+// describe("createAdd")

@@ -7,123 +7,103 @@ import { HeadBase } from "@/components/SEO";
 import { authorDescription, books, stories } from "@/data/search";
 import { useFilter } from "@/hooks";
 import {
-	Grouping,
-	LeadHeading,
-	Page,
-	PaginatedPageContents,
+  Grouping,
+  LeadHeading,
+  Page,
+  PaginatedPageContents,
 } from "@/styles/general-components";
 import { FilterOption, KeywordFilter } from "@/types/filters";
 import type { AuthoredItemCard } from "@/types/posts";
-import {
-	createAddDateFilterFn,
-	createAddSearchFilterFn,
-	createFilterByDateFn,
-	createFilterBySearchFn,
-} from "@/utils/filter";
+import { createFilterByDateFn, createFilterBySearchFn } from "@/utils/filter";
 
 export const Head: React.FC = () => (
-	<HeadBase title="Author" description={authorDescription} />
+  <HeadBase title="Author" description={authorDescription} />
 );
 
 const items: AuthoredItemCard[] = [...books, ...stories].sort(
-	(a, b) => b.published.date.valueOf() - a.published.date.valueOf(),
+  (a, b) => b.published.date.valueOf() - a.published.date.valueOf()
 );
 
 const filterBySearch = createFilterBySearchFn<AuthoredItemCard>(
-	(item, word) => {
-		const lcWord = word.toLocaleLowerCase();
-		return (
-			item.meta[word] ||
-			item.title.toLocaleLowerCase().includes(lcWord) ||
-			item.content?.toLocaleLowerCase().includes(lcWord)
-		);
-	},
+  (item, word) => {
+    const lcWord = word.toLocaleLowerCase();
+    return (
+      item.meta[word] ||
+      item.title.toLocaleLowerCase().includes(lcWord) ||
+      item.content?.toLocaleLowerCase().includes(lcWord)
+    );
+  }
 );
 
 const filterByKeywords = (
-	_: KeywordFilter,
-	items: AuthoredItemCard[],
+  _: KeywordFilter,
+  items: AuthoredItemCard[]
 ): AuthoredItemCard[] => items;
 
 const filterByDate = createFilterByDateFn<AuthoredItemCard>(
-	(item) => item.published.date,
+  (item) => item.published.date
 );
 
-const createFilterOptions = [
-	{
-		match: "date",
-		fn: createAddDateFilterFn(
-			items[items.length - 1].published.date,
-			items[0].published.date,
-		),
-	},
-	{
-		match: "search",
-		fn: createAddSearchFilterFn(),
-	},
-];
-
 const AuthorPage: React.FC = () => {
-	const {
-		pagination,
-		createFilter,
-		removeFilter,
-		modifyDate,
-		modifyKeywords,
-		modifyFilterType,
-		modifySearch,
-		filters,
-	} = useFilter(
-		items,
-		items[items.length - 1].published.date,
-		items[0].published.date,
-		[],
-		createFilterOptions,
-		filterByDate,
-		filterByKeywords,
-		filterBySearch,
-	);
+  const {
+    pagination,
+    createFilter,
+    removeFilter,
+    modifyDate,
+    modifyKeywords,
+    modifyFilterType,
+    modifySearch,
+    filters,
+  } = useFilter(
+    items,
+    items[items.length - 1].published.date,
+    items[0].published.date,
+    [],
+    filterByDate,
+    filterByKeywords,
+    filterBySearch
+  );
 
-	const options: FilterOption[] = [
-		{
-			label: "Publish Date",
-			id: "date",
-			disabled: filters.some((filter) => filter.id === "date"),
-		},
-		{
-			label: "Search",
-			id: "search",
-			disabled: false,
-		},
-	];
+  const options: FilterOption[] = [
+    {
+      label: "Publish Date",
+      id: "date",
+      disabled: filters.some((filter) => filter.id === "date"),
+    },
+    {
+      label: "Search",
+      id: "search",
+      disabled: false,
+    },
+  ];
 
-	return (
-		<Page>
-			<PaginatedPageContents>
-				<LeadHeading>Written Work</LeadHeading>
-				<Filter
-					onCreate={createFilter}
-					onRemove={removeFilter}
-					onModifyDate={modifyDate}
-					onModifyKeywords={modifyKeywords}
-					onModifyWordFilterType={modifyFilterType}
-					onModifySearch={modifySearch}
-					options={options}
-					filters={filters}
-					currentPage={pagination.page}
-					numPages={pagination.numPages}
-					setPage={pagination.setPage}
-				/>
-				<Grouping>
-					<CardContainer
-						items={pagination.visibleItems}
-						Card={AuthorCard}
-						type="books or storie"
-					/>
-				</Grouping>
-			</PaginatedPageContents>
-		</Page>
-	);
+  return (
+    <Page>
+      <PaginatedPageContents>
+        <LeadHeading>Written Work</LeadHeading>
+        <Filter
+          onCreate={createFilter}
+          onRemove={removeFilter}
+          onModifyDate={modifyDate}
+          onModifyKeywords={modifyKeywords}
+          onModifyWordFilterType={modifyFilterType}
+          onModifySearch={modifySearch}
+          options={options}
+          filters={filters}
+          currentPage={pagination.page}
+          numPages={pagination.numPages}
+          setPage={pagination.setPage}
+        />
+        <Grouping>
+          <CardContainer
+            items={pagination.visibleItems}
+            Card={AuthorCard}
+            type="books or storie"
+          />
+        </Grouping>
+      </PaginatedPageContents>
+    </Page>
+  );
 };
 
 export default AuthorPage;

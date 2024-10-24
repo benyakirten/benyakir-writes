@@ -83,9 +83,9 @@ describe("setQueryParams", () => {
 });
 
 describe("removeQueryParam", () => {
-  it("should remove a single query parameter", () => {
-    window.history.pushState({}, "", "/?param1=value1");
-    removeQueryParam("param1");
+  it("should remove any number of query parameters starting with that key", () => {
+    window.history.pushState({}, "", "/?param1=value1&param2=value2");
+    removeQueryParam("param");
     const params = getQueryParams();
     expect(params.size).toEqual(0);
   });

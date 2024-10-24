@@ -109,11 +109,6 @@ type CurrentPageProps = {
   onSetPage: (page: number) => void;
 };
 
-type CreateFilterOption = {
-  match: string;
-  fn: () => void;
-};
-
 type KeywordFilterDetails = {
   id: string;
   allKeywords: PotentialChoice[];

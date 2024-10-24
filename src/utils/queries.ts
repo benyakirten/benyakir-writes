@@ -28,12 +28,18 @@ export function setQueryParams(
 
 export function removeQueryParam(key: string): void {
   const params = getQueryParams();
+  const keysToDelete: string[] = [];
   for (const param of params.keys()) {
     if (param.toLowerCase().startsWith(key.toLowerCase())) {
-      params.delete(param);
+      keysToDelete.push(param);
     }
-    visitQueryParams(params);
   }
+
+  for (const param of keysToDelete) {
+    params.delete(param);
+  }
+
+  visitQueryParams(params);
 }
 
 export function visitQueryParams(params: URLSearchParams): void {
