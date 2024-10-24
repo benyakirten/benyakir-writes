@@ -298,14 +298,14 @@ export function getQueryParamState(): ParsedQueryParams {
 
   const params = getQueryParams();
   for (const [key, value] of params.entries()) {
-    if (value === null) {
+    if (value === null || value === "") {
+      state.set(key, []);
       continue;
     }
 
-    const val =
-      Number.isNaN(Number(value)) || value === ""
-        ? deserializeFromQueryParams(value)
-        : Number(value);
+    const val = Number.isNaN(Number(value))
+      ? deserializeFromQueryParams(value)
+      : Number(value);
     state.set(key, val);
   }
 
@@ -389,7 +389,7 @@ export function getKeywordFilterFromQuery(
   allKeywords: PotentialChoice[]
 ): KeywordFilter | null {
   const keywords = state.get(id);
-  if (!Array.isArray(keywords) || keywords.length === 0) {
+  if (!Array.isArray(keywords)) {
     return null;
   }
 
@@ -399,12 +399,10 @@ export function getKeywordFilterFromQuery(
     label: capitalize(id),
     id,
     type,
-    currentKeywords: keywords
-      .filter((keyword) => keyword !== "")
-      .map((keyword) => ({
-        label: keyword,
-        value: keyword,
-      })),
+    currentKeywords: keywords.map((keyword) => ({
+      label: keyword,
+      value: keyword,
+    })),
     allKeywords,
   };
 }

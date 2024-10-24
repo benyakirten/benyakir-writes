@@ -2,7 +2,6 @@ import { act, renderHook } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { KeywordFilterDetails } from "@/types/filters";
-import { setQueryParams } from "@/utils/queries";
 import useFilter from "../useFilter.hook";
 
 describe("useFilter", () => {
@@ -89,8 +88,9 @@ describe("useFilter", () => {
         items
       );
 
-      expect([...queryParams.keys()]).toContain("keyword");
+      expect(queryParams.get("keyword")).toEqual("");
       expect(queryParams.get("keyword_type")).toEqual("all");
+
       expect(filterByKeywords).toHaveBeenCalledTimes(2);
       expect(filterByKeywords).toHaveBeenCalledWith(
         {
@@ -103,7 +103,7 @@ describe("useFilter", () => {
         items
       );
 
-      expect([...queryParams.keys()]).toContain("search_1");
+      expect(queryParams.get("search_1")).toEqual("");
       expect(queryParams.get("search_1_type")).toEqual("all");
       expect(filterBySearch).toHaveBeenCalledOnce();
       expect(filterBySearch).toHaveBeenCalledWith(

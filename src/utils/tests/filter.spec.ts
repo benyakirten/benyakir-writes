@@ -511,6 +511,6 @@ describe("getQueryParamState", () => {
   it("should handle empty query parameters as an empty string", () => {
     window.history.pushState({}, "", "?param1=");
     const got = getQueryParamState();
-    expect(got.get("param1")).toEqual([""]);
+    expect(got.get("param1")).toEqual([]);
   });
 });
