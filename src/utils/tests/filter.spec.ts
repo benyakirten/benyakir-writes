@@ -11,9 +11,14 @@ import {
   createFilterBySearchFn,
   getHighestSearchId,
   getQueryParamState,
+  getPageNumberFromQuery,
   isDateFilter,
   isKeywordFilter,
   isSearchFilter,
+  getDateFilterFromQuery,
+  getSearchFilterFromQuery,
+  getKeywordFilterFromQuery,
+  getTypeForFilterFromQuery,
 } from "@/utils/filter";
 import {
   DateFilter,
@@ -484,8 +489,8 @@ describe("getQueryParamState", () => {
   it("should correctly parse numeric query parameters", () => {
     window.history.pushState({}, "", "?param1=123&param2=456");
     const got = getQueryParamState();
-    expect(got.get("param1")).toBe(123);
-    expect(got.get("param2")).toBe(456);
+    expect(got.get("param1")).toEqual(["123"]);
+    expect(got.get("param2")).toEqual(["456"]);
   });
 
   it("should correctly parse string array query parameters", () => {
@@ -501,10 +506,10 @@ describe("getQueryParamState", () => {
     expect(got.get("param1")).toEqual(["value 1", "value 2"]);
   });
 
-  it("should handle mixed numeric and string array query parameters", () => {
+  it("should handle recognize everything as a strimg", () => {
     window.history.pushState({}, "", "?param1=123&param2=value1,value2");
     const got = getQueryParamState();
-    expect(got.get("param1")).toBe(123);
+    expect(got.get("param1")).toEqual(["123"]);
     expect(got.get("param2")).toEqual(["value1", "value2"]);
   });
 
@@ -512,5 +517,337 @@ describe("getQueryParamState", () => {
     window.history.pushState({}, "", "?param1=");
     const got = getQueryParamState();
     expect(got.get("param1")).toEqual([]);
+  });
+});
+
+describe("getPageNumberFromQuery", () => {
+  it("should return 0 if the page parameter is missing", () => {
+    const searchParams = new URLSearchParams("");
+    const got = getPageNumberFromQuery(searchParams);
+    expect(got).toBe(0);
+  });
+
+  it("should return 0 if the page parameter is not a number", () => {
+    const searchParams = new URLSearchParams("?page=abc");
+    const got = getPageNumberFromQuery(searchParams);
+    expect(got).toBe(0);
+  });
+
+  it("should return 0 if the page parameter is a negative number", () => {
+    const searchParams = new URLSearchParams("?page=-1");
+    const got = getPageNumberFromQuery(searchParams);
+    expect(got).toBe(0);
+  });
+
+  it("should return the correct page number minus one if the page parameter is a valid number", () => {
+    const searchParams = new URLSearchParams("?page=3");
+    const got = getPageNumberFromQuery(searchParams);
+    expect(got).toBe(2);
+  });
+
+  it("should return 0 if the page parameter is zero", () => {
+    const searchParams = new URLSearchParams("?page=0");
+    const got = getPageNumberFromQuery(searchParams);
+    expect(got).toBe(0);
+  });
+
+  it("should handle multiple parameters correctly", () => {
+    const searchParams = new URLSearchParams(
+      "?param1=value1&page=4&param2=value2"
+    );
+    const got = getPageNumberFromQuery(searchParams);
+    expect(got).toBe(3);
+  });
+});
+
+describe("getDateFilterFromQuery", () => {
+  const startDateDefault = new Date(2023, 0, 1);
+  const endDateDefault = new Date(2023, 11, 31);
+
+  it("should return null if both start and end dates are missing", () => {
+    const state = new Map<string, string[]>();
+    const got = getDateFilterFromQuery(state, startDateDefault, endDateDefault);
+    expect(got).toBeNull();
+  });
+
+  it("should return the default start and end dates if both are missing in the state", () => {
+    const state = new Map<string, string[]>();
+    state.set("date_start", []);
+    state.set("date_end", []);
+    const got = getDateFilterFromQuery(state, startDateDefault, endDateDefault);
+    expect(got).toEqual({
+      label: "Date",
+      id: "date",
+      start: startDateDefault,
+      end: endDateDefault,
+    });
+  });
+
+  it("should return the parsed start date and default end date if only start date is present", () => {
+    const state = new Map<string, string[]>();
+    state.set("date_start", ["01-01-2023"]);
+    const got = getDateFilterFromQuery(state, startDateDefault, endDateDefault);
+    expect(got).toEqual({
+      label: "Date",
+      id: "date",
+      start: new Date(2023, 0, 1),
+      end: endDateDefault,
+    });
+  });
+
+  it("should return the default start date and parsed end date if only end date is present", () => {
+    const state = new Map<string, string[]>();
+    state.set("date_end", ["12-31-2023"]);
+    const got = getDateFilterFromQuery(state, startDateDefault, endDateDefault);
+    expect(got).toEqual({
+      label: "Date",
+      id: "date",
+      start: startDateDefault,
+      end: new Date(2023, 11, 31),
+    });
+  });
+
+  it("should return the parsed start and end dates if both are present", () => {
+    const state = new Map<string, string[]>();
+    state.set("date_start", ["01-01-2023"]);
+    state.set("date_end", ["12-31-2023"]);
+    const got = getDateFilterFromQuery(state, startDateDefault, endDateDefault);
+    expect(got).toEqual({
+      label: "Date",
+      id: "date",
+      start: new Date(2023, 0, 1),
+      end: new Date(2023, 11, 31),
+    });
+  });
+
+  it("should return the default start date if the parsed start date is invalid", () => {
+    const state = new Map<string, string[]>();
+    state.set("date_start", ["invalid-date"]);
+    const got = getDateFilterFromQuery(state, startDateDefault, endDateDefault);
+    expect(got).toEqual({
+      label: "Date",
+      id: "date",
+      start: startDateDefault,
+      end: endDateDefault,
+    });
+  });
+
+  it("should return the default end date if the parsed end date is invalid", () => {
+    const state = new Map<string, string[]>();
+    state.set("date_end", ["invalid-date"]);
+    const got = getDateFilterFromQuery(state, startDateDefault, endDateDefault);
+    expect(got).toEqual({
+      label: "Date",
+      id: "date",
+      start: startDateDefault,
+      end: endDateDefault,
+    });
+  });
+});
+
+describe("getSearchFilterFromQuery", () => {
+  it("should return an empty array if there are no search filters in the state", () => {
+    const state = new Map<string, string[]>();
+    const got = getSearchFilterFromQuery(state);
+    expect(got).toEqual([]);
+  });
+
+  it("should return search filters from the state", () => {
+    const state = new Map<string, string[]>();
+    state.set("search_1", ["test"]);
+    state.set("search_1_type", ["all"]);
+    state.set("search_2", ["example"]);
+    state.set("search_2_type", ["any"]);
+
+    const got = getSearchFilterFromQuery(state);
+    expect(got).toEqual([
+      {
+        label: "Search",
+        id: "search_1",
+        search: ["test"],
+        type: "all",
+      },
+      {
+        label: "Search",
+        id: "search_2",
+        search: ["example"],
+        type: "any",
+      },
+    ]);
+  });
+
+  it("should ignore non-search filters in the state", () => {
+    const state = new Map<string, string[]>();
+    state.set("search_1", ["test"]);
+    state.set("search_1_type", ["all"]);
+    state.set("other_param", ["value"]);
+
+    const got = getSearchFilterFromQuery(state);
+    expect(got).toEqual([
+      {
+        label: "Search",
+        id: "search_1",
+        search: ["test"],
+        type: "all",
+      },
+    ]);
+  });
+
+  it("should filter out empty search values", () => {
+    const state = new Map<string, string[]>();
+    state.set("search_1", ["", "test"]);
+    state.set("search_1_type", ["all"]);
+
+    const got = getSearchFilterFromQuery(state);
+    expect(got).toEqual([
+      {
+        label: "Search",
+        id: "search_1",
+        search: ["test"],
+        type: "all",
+      },
+    ]);
+  });
+
+  it("should handle multiple search filters correctly", () => {
+    const state = new Map<string, string[]>();
+    state.set("search_1", ["test1"]);
+    state.set("search_1_type", ["all"]);
+    state.set("search_2", ["test2"]);
+    state.set("search_2_type", ["any"]);
+    state.set("search_3", ["test3"]);
+    state.set("search_3_type", ["all"]);
+
+    const got = getSearchFilterFromQuery(state);
+    expect(got).toEqual([
+      {
+        label: "Search",
+        id: "search_1",
+        search: ["test1"],
+        type: "all",
+      },
+      {
+        label: "Search",
+        id: "search_2",
+        search: ["test2"],
+        type: "any",
+      },
+      {
+        label: "Search",
+        id: "search_3",
+        search: ["test3"],
+        type: "all",
+      },
+    ]);
+  });
+});
+describe("getKeywordFilterFromQuery", () => {
+  const allKeywords = [
+    { value: "test", label: "test" },
+    { value: "example", label: "example" },
+  ];
+
+  it("should return null if the keyword is not present in the state", () => {
+    const state = new Map<string, string[]>();
+    const got = getKeywordFilterFromQuery("keyword", state, allKeywords);
+    expect(got).toBeNull();
+  });
+
+  it("should return a KeywordFilter object if the keyword is present and is an array", () => {
+    const state = new Map<string, string[]>();
+    state.set("keyword", ["test", "example"]);
+    state.set("keyword_type", ["any"]);
+    const got = getKeywordFilterFromQuery("keyword", state, allKeywords);
+    expect(got).toEqual({
+      label: "Keyword",
+      id: "keyword",
+      type: "any",
+      currentKeywords: [
+        { label: "test", value: "test" },
+        { label: "example", value: "example" },
+      ],
+      allKeywords,
+    });
+  });
+
+  it("should return a KeywordFilter object with default type if type is not present in the state", () => {
+    const state = new Map<string, string[]>();
+    state.set("keyword", ["test", "example"]);
+    const got = getKeywordFilterFromQuery("keyword", state, allKeywords);
+    expect(got).toEqual({
+      label: "Keyword",
+      id: "keyword",
+      type: "all",
+      currentKeywords: [
+        { label: "test", value: "test" },
+        { label: "example", value: "example" },
+      ],
+      allKeywords,
+    });
+  });
+
+  it("should return a KeywordFilter object with capitalized label", () => {
+    const state = new Map<string, string[]>();
+    state.set("keyword", ["test", "example"]);
+    state.set("keyword_type", ["any"]);
+    const got = getKeywordFilterFromQuery("keyword", state, allKeywords);
+    expect(got?.label).toBe("Keyword");
+  });
+
+  it("should handle empty keyword array correctly", () => {
+    const state = new Map<string, string[]>();
+    state.set("keyword", []);
+    state.set("keyword_type", ["any"]);
+    const got = getKeywordFilterFromQuery("keyword", state, allKeywords);
+    expect(got).toEqual({
+      label: "Keyword",
+      id: "keyword",
+      type: "any",
+      currentKeywords: [],
+      allKeywords,
+    });
+  });
+});
+
+describe("getTypeForFilterFromQuery", () => {
+  it("should return 'all' if the type is not present in the state", () => {
+    const state = new Map<string, string[]>();
+    const got = getTypeForFilterFromQuery("filter_id", state);
+    expect(got).toBe("all");
+  });
+
+  it("should return 'all' if the type array is empty", () => {
+    const state = new Map<string, string[]>();
+    state.set("filter_id_type", []);
+    const got = getTypeForFilterFromQuery("filter_id", state);
+    expect(got).toBe("all");
+  });
+
+  it("should return 'all' if the type array contains an invalid type", () => {
+    const state = new Map<string, string[]>();
+    state.set("filter_id_type", ["invalid"]);
+    const got = getTypeForFilterFromQuery("filter_id", state);
+    expect(got).toBe("all");
+  });
+
+  it("should return 'any' if the type array contains 'any'", () => {
+    const state = new Map<string, string[]>();
+    state.set("filter_id_type", ["any"]);
+    const got = getTypeForFilterFromQuery("filter_id", state);
+    expect(got).toBe("any");
+  });
+
+  it("should return 'all' if the type array contains multiple types but 'any' is not the first element", () => {
+    const state = new Map<string, string[]>();
+    state.set("filter_id_type", ["all", "any"]);
+    const got = getTypeForFilterFromQuery("filter_id", state);
+    expect(got).toBe("all");
+  });
+
+  it("should return 'any' if the type array contains multiple types and 'any' is the first element", () => {
+    const state = new Map<string, string[]>();
+    state.set("filter_id_type", ["any", "all"]);
+    const got = getTypeForFilterFromQuery("filter_id", state);
+    expect(got).toBe("any");
   });
 });

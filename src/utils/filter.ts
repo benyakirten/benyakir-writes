@@ -294,7 +294,7 @@ export function createFilterByDateFn<T extends object>(
 }
 
 export function getQueryParamState(): ParsedQueryParams {
-  const state = new Map<string, number | string[]>();
+  const state = new Map<string, string[]>();
 
   const params = getQueryParams();
   for (const [key, value] of params.entries()) {
@@ -303,9 +303,7 @@ export function getQueryParamState(): ParsedQueryParams {
       continue;
     }
 
-    const val = Number.isNaN(Number(value))
-      ? deserializeFromQueryParams(value)
-      : Number(value);
+    const val = deserializeFromQueryParams(value);
     state.set(key, val);
   }
 
@@ -316,7 +314,7 @@ export function getPageNumberFromQuery(searchParams: URLSearchParams): number {
   const page = searchParams.get(PAGE_KEY) ?? "";
   const p = Number.parseInt(page);
 
-  return Number.isNaN(p) || p < 0 ? 0 : p - 1;
+  return Number.isNaN(p) || p < 1 ? 0 : p - 1;
 }
 
 export function getDateFilterFromQuery(
@@ -361,11 +359,7 @@ export function getSearchFilterFromQuery(
   const searches: SearchFilter[] = [];
 
   for (const [key, value] of state.entries()) {
-    if (
-      !key.startsWith(SEARCH_KEY) ||
-      key.endsWith(TYPE_KEY_SEGMENT) ||
-      typeof value === "number"
-    ) {
+    if (!key.startsWith(SEARCH_KEY) || key.endsWith(TYPE_KEY_SEGMENT)) {
       continue;
     }
 
@@ -385,7 +379,7 @@ export function getSearchFilterFromQuery(
 
 export function getKeywordFilterFromQuery(
   id: string,
-  state: Map<string, number | string[]>,
+  state: ParsedQueryParams,
   allKeywords: PotentialChoice[]
 ): KeywordFilter | null {
   const keywords = state.get(id);
@@ -409,16 +403,10 @@ export function getKeywordFilterFromQuery(
 
 export function getTypeForFilterFromQuery(
   id: string,
-  state: Map<string, number | string[]>
+  state: ParsedQueryParams
 ): WordFilterType {
   const rawType = state.get(`${id}${TYPE_KEY_SEGMENT}`);
-  let type: WordFilterType = "all";
-  if (rawType && Array.isArray(rawType)) {
-    const [typeString] = rawType;
-    if (typeString === "any") {
-      type = typeString;
-    }
-  }
+  const type = rawType?.[0] === "any" ? "any" : "all";
 
   return type;
 }
