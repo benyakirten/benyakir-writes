@@ -10,6 +10,7 @@ import {
 import { FilterHook } from "@/types/hooks";
 import { createModifyFilterFns } from "@/utils/filter";
 import usePagination from "./usePagination.hook";
+import { getQueryParams } from "@/utils/queries";
 
 const useFilter: FilterHook = <T extends object>(
   items: T[],
@@ -46,7 +47,13 @@ const useFilter: FilterHook = <T extends object>(
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: Run this only once - on component mount
   useEffect(() => {
+    const page = getQueryParams().get("page");
+    const p = Number.parseInt(page ?? "0");
     filterItems();
+
+    if (page && !Number.isNaN(p)) {
+      pagination.setPage(p - 1);
+    }
     return () => setFilters([]);
   }, []);
 
