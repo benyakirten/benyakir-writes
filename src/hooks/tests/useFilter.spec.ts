@@ -1,9 +1,9 @@
-import { renderHook, act } from "@testing-library/react";
-import { vi, describe, it, expect, beforeEach } from "vitest";
+import { act, renderHook } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import useFilter from "../useFilter.hook";
 import { CreateFilterOption, KeywordFilterDetails } from "@/types/filters";
 import { setQueryParams } from "@/utils/queries";
+import useFilter from "../useFilter.hook";
 
 describe("useFilter", () => {
   const items = [
@@ -58,27 +58,14 @@ describe("useFilter", () => {
     },
   ];
 
-  let filterResults: ReturnType<typeof useFilter>;
   beforeEach(() => {
-    filterResults = renderHook(() =>
-      useFilter(
-        items,
-        startDate,
-        endDate,
-        keywordFilterDetails,
-        createFilterOptions,
-        filterByDate,
-        filterByKeywords,
-        filterBySearch
-      )
-    ).result.current;
-
     createDateFiter.mockClear();
     createKeywordFilter.mockClear();
     createSearchFilter.mockClear();
     filterByDate.mockClear();
     filterByKeywords.mockClear();
     filterBySearch.mockClear();
+    window.history.pushState("", "", "/");
   });
 
   function getQueryParams() {
@@ -87,6 +74,19 @@ describe("useFilter", () => {
 
   describe("createFilter", () => {
     it("should call the function to create a filter based on what matcher was called", () => {
+      const filterResults = renderHook(() =>
+        useFilter(
+          items,
+          startDate,
+          endDate,
+          keywordFilterDetails,
+          createFilterOptions,
+          filterByDate,
+          filterByKeywords,
+          filterBySearch
+        )
+      ).result.current;
+
       act(() => {
         filterResults.createFilter("date");
       });
@@ -104,6 +104,19 @@ describe("useFilter", () => {
     });
 
     it("should alter the query params, filter based on them and assign a page", () => {
+      const filterResults = renderHook(() =>
+        useFilter(
+          items,
+          startDate,
+          endDate,
+          keywordFilterDetails,
+          createFilterOptions,
+          filterByDate,
+          filterByKeywords,
+          filterBySearch
+        )
+      ).result.current;
+
       filterByDate.mockReturnValue(items);
       filterByKeywords.mockReturnValue(items);
       filterBySearch.mockReturnValue(items);
@@ -151,7 +164,7 @@ describe("useFilter", () => {
       );
 
       expect(queryParams.get("search_1")).toBe("search%20term");
-      expect(filterBySearch).toHaveBeenCalledTimes(1);
+      expect(filterBySearch).toHaveBeenCalledOnce();
       expect(filterBySearch).toHaveBeenCalledWith(
         {
           id: "search_1",
@@ -162,5 +175,67 @@ describe("useFilter", () => {
         items
       );
     });
+  });
+
+  it("should filter the items on initialization by the preexisting query params", () => {
+    filterByDate.mockReturnValue(items);
+    filterByKeywords.mockReturnValue(items);
+    filterBySearch.mockReturnValue(items);
+
+    window.history.pushState(
+      "",
+      "",
+      "?date_start=01-01-2023&date_end=12-31-2023&keyword=keyword1%2Ckeyword2&search_1=search%20term"
+    );
+    const filterResults = renderHook(() =>
+      useFilter(
+        items,
+        startDate,
+        endDate,
+        keywordFilterDetails,
+        createFilterOptions,
+        filterByDate,
+        filterByKeywords,
+        filterBySearch
+      )
+    ).result.current;
+
+    const queryParams = getQueryParams();
+
+    expect(queryParams.get("date_start")).toBe("01-01-2023");
+    expect(queryParams.get("date_end")).toBe("12-31-2023");
+    expect(filterByDate).toHaveBeenCalledOnce();
+    expect(filterByDate).toHaveBeenCalledWith(
+      { end: endDate, start: startDate, id: "date", label: "Date" },
+      items
+    );
+
+    expect(queryParams.get("keyword")).toBe("keyword1,keyword2");
+    expect(filterByKeywords).toHaveBeenCalledOnce();
+    expect(filterByKeywords).toHaveBeenCalledWith(
+      {
+        id: "keyword",
+        label: "Keyword",
+        currentKeywords: [
+          { label: "keyword1", value: "keyword1" },
+          { label: "keyword2", value: "keyword2" },
+        ],
+        allKeywords,
+        type: "all",
+      },
+      items
+    );
+
+    expect(queryParams.get("search_1")).toBe("search term");
+    expect(filterBySearch).toHaveBeenCalledOnce();
+    expect(filterBySearch).toHaveBeenCalledWith(
+      {
+        id: "search_1",
+        label: "Search",
+        search: ["search term"],
+        type: "all",
+      },
+      items
+    );
   });
 });

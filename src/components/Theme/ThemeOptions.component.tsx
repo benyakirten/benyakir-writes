@@ -12,17 +12,17 @@ const ThemeCardContainer = styled.div`
 `;
 
 const ThemeCard: React.FC = () => {
-  const [selectedTheme, setSelectedTheme] = useAlternation("theme");
+	const [selectedTheme, setSelectedTheme] = useAlternation("theme");
 
-  return (
-    <ThemeCardContainer>
-      <ThemeControls
-        selectedTheme={selectedTheme}
-        setSelectedTheme={setSelectedTheme}
-      />
-      <ModifyTheme selectedTheme={selectedTheme} />
-    </ThemeCardContainer>
-  );
+	return (
+		<ThemeCardContainer>
+			<ThemeControls
+				selectedTheme={selectedTheme}
+				setSelectedTheme={setSelectedTheme}
+			/>
+			<ModifyTheme selectedTheme={selectedTheme} />
+		</ThemeCardContainer>
+	);
 };
 
 export default ThemeCard;

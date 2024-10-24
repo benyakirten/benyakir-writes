@@ -7,7 +7,7 @@ type ThemeItemProps = {
 	name: string;
 	id: string;
 	onSelect: (val: string) => void;
-	selectedTheme: string;
+	selectedTheme: string | null;
 };
 
 type ThemeButtonProps = {
@@ -19,7 +19,7 @@ type ThemeButtonProps = {
 };
 
 type ModifyThemeProps = {
-	selectedTheme: string;
+	selectedTheme: string | null;
 };
 
 type SettingsGroupProps = {
@@ -34,6 +34,6 @@ type SettingsItemProps = {
 };
 
 type ThemeControlProps = ModifyThemeProps & {
-	selectedTheme: string;
+	selectedTheme: string | null;
 	setSelectedTheme: (theme: string) => void;
 };
