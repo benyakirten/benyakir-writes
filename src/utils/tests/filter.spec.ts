@@ -19,6 +19,7 @@ import {
   getSearchFilterFromQuery,
   getKeywordFilterFromQuery,
   getTypeForFilterFromQuery,
+  parseFiltersFromQueryParameters,
 } from "@/utils/filter";
 import {
   DateFilter,
@@ -849,5 +850,183 @@ describe("getTypeForFilterFromQuery", () => {
     state.set("filter_id_type", ["any", "all"]);
     const got = getTypeForFilterFromQuery("filter_id", state);
     expect(got).toBe("any");
+  });
+});
+
+describe("parseFiltersFromQueryParameters", () => {
+  const startDate = new Date(2023, 0, 1);
+  const endDate = new Date(2023, 11, 31);
+  const keywordFilterDetails = [
+    {
+      id: "keyword1",
+      allKeywords: [
+        { value: "test1", label: "test1" },
+        { value: "example1", label: "example1" },
+      ],
+    },
+    {
+      id: "keyword2",
+      allKeywords: [
+        { value: "test2", label: "test2" },
+        { value: "example2", label: "example2" },
+      ],
+    },
+  ];
+
+  it("should return an empty array if there are no filters in the query parameters", () => {
+    const got = parseFiltersFromQueryParameters(
+      startDate,
+      endDate,
+      keywordFilterDetails
+    );
+    expect(got).toEqual([]);
+  });
+
+  it("should return date filter if date parameters are present", () => {
+    window.history.pushState(
+      {},
+      "",
+      "?date_start=01-01-2023&date_end=12-31-2023"
+    );
+    const got = parseFiltersFromQueryParameters(
+      startDate,
+      endDate,
+      keywordFilterDetails
+    );
+    expect(got).toEqual([
+      {
+        label: "Date",
+        id: "date",
+        start: new Date(2023, 0, 1),
+        end: new Date(2023, 11, 31),
+      },
+    ]);
+  });
+
+  it("should return search filters if search parameters are present", () => {
+    window.history.pushState({}, "", "?search_1=test&search_1_type=all");
+    const got = parseFiltersFromQueryParameters(
+      startDate,
+      endDate,
+      keywordFilterDetails
+    );
+    expect(got).toEqual([
+      {
+        label: "Search",
+        id: "search_1",
+        search: ["test"],
+        type: "all",
+      },
+    ]);
+  });
+
+  it("should return keyword filters if keyword parameters are present", () => {
+    window.history.pushState(
+      {},
+      "",
+      "?keyword1=test1,example1&keyword1_type=any"
+    );
+    const got = parseFiltersFromQueryParameters(
+      startDate,
+      endDate,
+      keywordFilterDetails
+    );
+    expect(got).toEqual([
+      {
+        label: "Keyword1",
+        id: "keyword1",
+        type: "any",
+        currentKeywords: [
+          { label: "test1", value: "test1" },
+          { label: "example1", value: "example1" },
+        ],
+        allKeywords: [
+          { value: "test1", label: "test1" },
+          { value: "example1", label: "example1" },
+        ],
+      },
+    ]);
+  });
+
+  it("should return all filters if multiple parameters are present", () => {
+    window.history.pushState(
+      {},
+      "",
+      "?date_start=01-01-2023&date_end=12-31-2023&search_1=test&search_1_type=all&keyword1=test1,example1&keyword1_type=any"
+    );
+    const got = parseFiltersFromQueryParameters(
+      startDate,
+      endDate,
+      keywordFilterDetails
+    );
+    expect(got).toEqual([
+      {
+        label: "Date",
+        id: "date",
+        start: new Date(2023, 0, 1),
+        end: new Date(2023, 11, 31),
+      },
+      {
+        label: "Search",
+        id: "search_1",
+        search: ["test"],
+        type: "all",
+      },
+      {
+        label: "Keyword1",
+        id: "keyword1",
+        type: "any",
+        currentKeywords: [
+          { label: "test1", value: "test1" },
+          { label: "example1", value: "example1" },
+        ],
+        allKeywords: [
+          { value: "test1", label: "test1" },
+          { value: "example1", label: "example1" },
+        ],
+      },
+    ]);
+  });
+
+  it("should handle invalid date parameters with the default values", () => {
+    window.history.pushState(
+      {},
+      "",
+      "?date_start=invalid-date&date_end=12-31-2023"
+    );
+    const got = parseFiltersFromQueryParameters(
+      startDate,
+      endDate,
+      keywordFilterDetails
+    );
+    expect(got).toEqual([
+      {
+        label: "Date",
+        id: "date",
+        start: startDate,
+        end: new Date(2023, 11, 31),
+      },
+    ]);
+  });
+
+  it("should handle empty keyword parameters with an empty array", () => {
+    window.history.pushState({}, "", "?keyword1=&keyword1_type=any");
+    const got = parseFiltersFromQueryParameters(
+      startDate,
+      endDate,
+      keywordFilterDetails
+    );
+    expect(got).toEqual([
+      {
+        label: "Keyword1",
+        id: "keyword1",
+        type: "any",
+        currentKeywords: [],
+        allKeywords: [
+          { value: "test1", label: "test1" },
+          { value: "example1", label: "example1" },
+        ],
+      },
+    ]);
   });
 });
