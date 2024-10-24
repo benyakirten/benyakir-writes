@@ -239,7 +239,11 @@ export function createFilterBySearchFn<T extends object>(
       return items;
     }
 
-    const { search } = filter;
+    const search = filter.search[0]
+      .replace(/,\s/g, " ")
+      .replace(/,(\S)/g, " $1")
+      .split(" ");
+
     const fn =
       filter.type === "any"
         ? search.some.bind(search)
@@ -350,7 +354,11 @@ export function getSearchFilterFromQuery(
   const searches: SearchFilter[] = [];
 
   for (const [key, value] of state.entries()) {
-    if (!key.startsWith(SEARCH_KEY) || typeof value === "number") {
+    if (
+      !key.startsWith(SEARCH_KEY) ||
+      key.endsWith(TYPE_KEY_SEGMENT) ||
+      typeof value === "number"
+    ) {
       continue;
     }
 
