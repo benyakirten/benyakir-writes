@@ -9,7 +9,7 @@ import {
   WordFilterType,
 } from "@/types/filters";
 import { PotentialChoice } from "@/types/general";
-import { getShortDate } from "./dates";
+import { formatDateForQuery, getShortDate } from "./dates";
 import {
   deserializeFromQueryParams,
   getQueryParams,
@@ -118,7 +118,7 @@ function createModifyDateFn(
   return (time: "start" | "end", value: Date) => {
     setOneQueryParam(
       time === "end" ? DATE_END_KEY : DATE_START_KEY,
-      getShortDate(value).replace(/\//g, "-")
+      convertDateToQueryParam(value)
     );
 
     filterItems();
@@ -327,7 +327,7 @@ export function getDateFilterFromQuery(
 
   let startDate: Date | null = startDateDefault;
   if (Array.isArray(start) && start.length === 1) {
-    const tentativeStartDate = new Date(start[0].replace(/-/g, "/"));
+    const tentativeStartDate = convertQueryParamToDate(start[0]);
     if (!Number.isNaN(tentativeStartDate.getTime())) {
       startDate = tentativeStartDate;
     }
@@ -335,7 +335,7 @@ export function getDateFilterFromQuery(
 
   let endDate: Date | null = endDateDefault;
   if (Array.isArray(end) && end.length === 1) {
-    const tentativeEndDate = new Date(end[0].replace(/-/g, "/"));
+    const tentativeEndDate = convertQueryParamToDate(end[0]);
     if (!Number.isNaN(tentativeEndDate.getTime())) {
       endDate = tentativeEndDate;
     }
@@ -462,4 +462,19 @@ export function getHighestSearchId(): number {
   }
 
   return highestId;
+}
+
+export function convertDateToQueryParam(date: Date): string {
+  return formatDateForQuery(date).replace(/\//g, "-");
+}
+
+export function convertQueryParamToDate(rawDate: string): Date {
+  const date = new Date(0);
+
+  const [month, day, year] = rawDate.split("-").map(Number);
+
+  date.setFullYear(year, month - 1, day);
+  date.setHours(0, 0, 0, 0);
+
+  return date;
 }
