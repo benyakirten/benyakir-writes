@@ -1,13 +1,13 @@
 import { beforeEach, describe, expect, it } from "vitest";
 
 import {
+  addDateFilter,
+  addKeywordFilter,
+  addSearchFilter,
   createChoiceSet,
   isDateFilter,
   isKeywordFilter,
   isSearchFilter,
-  createAddDateFilterFn,
-  createAddKeywordFilterFn,
-  createAddSearchFilterFn,
 } from "@/utils/filter";
 import { ItemFilter } from "@/types/filters";
 import { getQueryParams } from "../queries";
@@ -103,32 +103,60 @@ describe("is filter type tests", () => {
   });
 });
 
-// describe("createAddDateFilterFn", () => {
-//   it("should return a function that adds the date formatted to m-d-y ", () => {
-//     const startDate = new Date(0);
-//     startDate.setFullYear(2023, 0, 1);
-//     startDate.setHours(0, 0, 0, 0);
-//     const endDate = new Date(0);
-//     endDate.setFullYear(2023, 11, 31);
-//     endDate.setHours(0, 0, 0, 0);
-//     const fn = createAddDateFilterFn(startDate, endDate);
-//     fn();
+describe("addDateFilter", () => {
+  it("should return a function that adds the date formatted to m-d-y ", () => {
+    const startDate = new Date(0);
+    startDate.setFullYear(2023, 0, 1);
+    startDate.setHours(0, 0, 0, 0);
+    const endDate = new Date(0);
+    endDate.setFullYear(2023, 11, 31);
+    endDate.setHours(0, 0, 0, 0);
+    addDateFilter(startDate, endDate);
 
-//     const got = getQueryParams();
-//     expect(got.get("date_start")).toBe("01/01/2023");
-//     expect(got.get("date_end")).toBe("12/31/2023");
-//   });
-// });
+    const got = getQueryParams();
+    expect(got.get("date_start")).toBe("01/01/2023");
+    expect(got.get("date_end")).toBe("12/31/2023");
+  });
+});
 
-// describe("createAddKeywordFilterFn", () => {
-//   it("should return a function that adds the keyword to the query", () => {
-//     const fn = createAddKeywordFilterFn("keyword");
-//     fn();
+describe("addKeywordFilter", () => {
+  it("should add the keyword filter param with an empty string and a type of all to  the query params", () => {
+    addKeywordFilter("keyword");
 
-//     const got = getQueryParams();
-//     expect(got.get("keyword")).toBe("");
-//     expect(got.get("keyword_type")).toBe("all");
-//   });
-// });
+    const got = getQueryParams();
+    expect(got.get("keyword")).toBe("");
+    expect(got.get("keyword_type")).toBe("all");
+  });
+});
 
-// describe("createAdd")
+describe("addSearchFilter", () => {
+  it("should add a search filter param with a value of an empty string and a type of all to the queyr params", () => {
+    addSearchFilter();
+
+    const got = getQueryParams();
+    expect(got.get("search_1")).toBe("");
+    expect(got.get("search_1_type")).toBe("all");
+  });
+
+  it("should add the next consecutive number as the search filter based on the highest search filter already in use", () => {
+    window.history.pushState({}, "", "?search_1=test&search_1_type=any");
+
+    addSearchFilter();
+    const got = getQueryParams();
+    expect(got.get("search_2")).toBe("");
+    expect(got.get("search_2_type")).toBe("all");
+  });
+
+  it("should not try to fill in the gap in sequences if there is one", () => {
+    window.history.pushState(
+      {},
+      "",
+      "?search_1=test&search_1_type=any&search_3=test&search_3_type=any"
+    );
+
+    addSearchFilter();
+    const got = getQueryParams();
+    expect(got.get("search_4")).toBe("");
+    expect(got.get("search_4_type")).toBe("all");
+  });
+});
