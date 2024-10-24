@@ -286,8 +286,8 @@ export function createFilterByDateFn<T extends object>(
   return (filter: DateFilter, items: T[]): T[] => {
     return items.filter((item) => {
       const itemDate = getDateFn(item).getTime();
-      const start = filter.start?.getTime() ?? 0;
-      const end = filter.end?.getTime() ?? 0;
+      const start = filter.start.getTime();
+      const end = filter.end.getTime();
       return itemDate >= start && itemDate <= end;
     });
   };
