@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 
+import { BooleanLookup } from "@/types/general";
 import type { MultipleHook } from "@/types/hooks";
 
 const useMultiple: MultipleHook = (allOptions, currentlyOpen) => {

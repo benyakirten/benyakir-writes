@@ -1,8 +1,8 @@
 export { default as useAlternation } from "./useAlternation.hook";
 export { default as useDebounce } from "./useDebounce.hook";
 export {
-  default as useFetchRepoUpdatedDate,
-  FetchState,
+	default as useFetchRepoUpdatedDate,
+	FetchState,
 } from "./useFetchRepoUpdatedDate.hook";
 export { default as useMultiple } from "./useMultiple.hook";
 export { default as usePagination } from "./usePagination.hook";

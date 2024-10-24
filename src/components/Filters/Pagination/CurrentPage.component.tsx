@@ -53,83 +53,83 @@ const PageCount = styled.div`
 `;
 
 const CurrentPage = React.forwardRef<HTMLInputElement, CurrentPageProps>(
-  ({ currentPage, numPages, onSetPage }, ref) => {
-    const previousDisabled = currentPage === 0;
-    const nextDisabled = currentPage === numPages;
+	({ currentPage, numPages, onSetPage }, ref) => {
+		const previousDisabled = currentPage === 0;
+		const nextDisabled = currentPage === numPages;
 
-    function setPageNumber(event: React.ChangeEvent<HTMLInputElement>) {
-      const value = Number.parseInt(event.target.value, 10);
-      if (Number.isNaN(value)) {
-        return;
-      }
+		function setPageNumber(event: React.ChangeEvent<HTMLInputElement>) {
+			const value = Number.parseInt(event.target.value, 10);
+			if (Number.isNaN(value)) {
+				return;
+			}
 
-      const newPageNumber = clamp(value - 1, 0, numPages);
-      onSetPage(newPageNumber);
-    }
+			const newPageNumber = clamp(value - 1, 0, numPages);
+			onSetPage(newPageNumber);
+		}
 
-    function handleKeydown(event: React.KeyboardEvent) {
-      if (event.key === "ArrowLeft") {
-        const newPageNumber = clamp(currentPage - 1, 0, numPages);
-        onSetPage(newPageNumber);
-        event.stopPropagation();
-      } else if (event.key === "ArrowRight") {
-        const newPageNumber = clamp(currentPage + 1, 0, numPages);
-        onSetPage(newPageNumber);
-        event.stopPropagation();
-      }
-    }
+		function handleKeydown(event: React.KeyboardEvent) {
+			if (event.key === "ArrowLeft") {
+				const newPageNumber = clamp(currentPage - 1, 0, numPages);
+				onSetPage(newPageNumber);
+				event.stopPropagation();
+			} else if (event.key === "ArrowRight") {
+				const newPageNumber = clamp(currentPage + 1, 0, numPages);
+				onSetPage(newPageNumber);
+				event.stopPropagation();
+			}
+		}
 
-    return (
-      <StyledFilterPill
-        onKeyDown={handleKeydown}
-        style={{ backgroundColor: "white" }}
-      >
-        <FillIn
-          disabled={previousDisabled}
-          borderRadiusCorners={{ topLeft: SIZE_MD, bottomLeft: SIZE_MD }}
-        >
-          <DirectionButton
-            aria-label="Previous Page"
-            disabled={previousDisabled}
-            onClick={() => onSetPage(currentPage - 1)}
-          >
-            <InnerContainer>
-              <PreviousIcon />
-            </InnerContainer>
-          </DirectionButton>
-        </FillIn>
-        <PageCount>
-          <InnerContainer>
-            <PageNumberContainer>
-              Page{" "}
-              <PageNumber
-                ref={ref}
-                aria-label="Set page number"
-                type="number"
-                value={currentPage + 1}
-                onChange={setPageNumber}
-              />
-              / {numPages + 1}
-            </PageNumberContainer>
-          </InnerContainer>
-        </PageCount>
-        <FillIn
-          disabled={nextDisabled}
-          borderRadiusCorners={{ topRight: SIZE_MD, bottomRight: SIZE_MD }}
-        >
-          <DirectionButton
-            aria-label="Next Page"
-            disabled={nextDisabled}
-            onClick={() => onSetPage(currentPage + 1)}
-          >
-            <InnerContainer>
-              <NextIcon />
-            </InnerContainer>
-          </DirectionButton>
-        </FillIn>
-      </StyledFilterPill>
-    );
-  }
+		return (
+			<StyledFilterPill
+				onKeyDown={handleKeydown}
+				style={{ backgroundColor: "white" }}
+			>
+				<FillIn
+					disabled={previousDisabled}
+					borderRadiusCorners={{ topLeft: SIZE_MD, bottomLeft: SIZE_MD }}
+				>
+					<DirectionButton
+						aria-label="Previous Page"
+						disabled={previousDisabled}
+						onClick={() => onSetPage(currentPage - 1)}
+					>
+						<InnerContainer>
+							<PreviousIcon />
+						</InnerContainer>
+					</DirectionButton>
+				</FillIn>
+				<PageCount>
+					<InnerContainer>
+						<PageNumberContainer>
+							Page{" "}
+							<PageNumber
+								ref={ref}
+								aria-label="Set page number"
+								type="number"
+								value={currentPage + 1}
+								onChange={setPageNumber}
+							/>
+							/ {numPages + 1}
+						</PageNumberContainer>
+					</InnerContainer>
+				</PageCount>
+				<FillIn
+					disabled={nextDisabled}
+					borderRadiusCorners={{ topRight: SIZE_MD, bottomRight: SIZE_MD }}
+				>
+					<DirectionButton
+						aria-label="Next Page"
+						disabled={nextDisabled}
+						onClick={() => onSetPage(currentPage + 1)}
+					>
+						<InnerContainer>
+							<NextIcon />
+						</InnerContainer>
+					</DirectionButton>
+				</FillIn>
+			</StyledFilterPill>
+		);
+	},
 );
 
 export default CurrentPage;
