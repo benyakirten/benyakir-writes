@@ -27,10 +27,7 @@ type DebounceHook = (
   timeout?: number
 ) => [string, (val: string) => void];
 
-type PaginationHook = <T>(
-  initialItems: T[],
-  defaultItemsPerPage?: number
-) => {
+type PaginationHookReturnType<T> = {
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
   items: T[];
@@ -40,6 +37,10 @@ type PaginationHook = <T>(
   numPages: number;
   visibleItems: T[];
 };
+type PaginationHook = <T>(
+  initialItems: T[],
+  defaultItemsPerPage?: number
+) => PaginationHookReturnType<T>;
 
 type ToggleHook = (initialVal?: boolean) => [boolean, () => void];
 
@@ -98,7 +99,7 @@ type FilterHook = <T extends object>(
   filterByKeywords: (filter: KeywordFilter, items: T[]) => T[],
   filterBySearch: (filter: SearchFilter, items: T[]) => T[]
 ) => {
-  pagination: ReturnType<PaginationHook<T>>;
+  pagination: PaginationHookReturnType<T>;
   createFilter: (id: string) => void;
   removeFilter: (id: string) => void;
   modifyDate: (time: "start" | "end", value: Date) => void;

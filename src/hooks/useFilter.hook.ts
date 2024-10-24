@@ -21,7 +21,7 @@ const useFilter: FilterHook = <T extends object>(
   filterByKeywords: (filter: KeywordFilter, items: T[]) => T[],
   filterBySearch: (filter: SearchFilter, items: T[]) => T[]
 ) => {
-  const pagination = usePagination(items);
+  const pagination = usePagination<T>(items);
   const [filters, setFilters] = useState<ItemFilter[]>([]);
 
   const {

@@ -179,6 +179,90 @@ describe("useFilter", () => {
         items
       );
     });
+
+    it("should set the page number correctly if it is in the query params", () => {
+      window.history.pushState("", "", "?page=2");
+      const filterResults = renderHook(() =>
+        useFilter(
+          items,
+          startDate,
+          endDate,
+          keywordFilterDetails,
+          filterByDate,
+          filterByKeywords,
+          filterBySearch
+        )
+      ).result.current;
+
+      expect(filterResults.pagination.page).toEqual(1);
+    });
+
+    it("should set the page number to 0 if the page number is not a number", () => {
+      window.history.pushState("", "", "?page=notanumber");
+      const filterResults = renderHook(() =>
+        useFilter(
+          items,
+          startDate,
+          endDate,
+          keywordFilterDetails,
+          filterByDate,
+          filterByKeywords,
+          filterBySearch
+        )
+      ).result.current;
+
+      expect(filterResults.pagination.page).toEqual(0);
+    });
+
+    it("should set the page number to 0 if the page number is not present", () => {
+      const filterResults = renderHook(() =>
+        useFilter(
+          items,
+          startDate,
+          endDate,
+          keywordFilterDetails,
+          filterByDate,
+          filterByKeywords,
+          filterBySearch
+        )
+      ).result.current;
+
+      expect(filterResults.pagination.page).toEqual(0);
+    });
+
+    it("should set the page number to 0 if the page number is less than 1", () => {
+      window.history.pushState("", "", "?page=-1");
+      const filterResults = renderHook(() =>
+        useFilter(
+          items,
+          startDate,
+          endDate,
+          keywordFilterDetails,
+          filterByDate,
+          filterByKeywords,
+          filterBySearch
+        )
+      ).result.current;
+
+      expect(filterResults.pagination.page).toEqual(0);
+    });
+
+    it("should set the page number to the maximum page if the query param is greater than the number of available pages", () => {
+      window.history.pushState("", "", "?page=100");
+      const filterResults = renderHook(() =>
+        useFilter(
+          items,
+          startDate,
+          endDate,
+          keywordFilterDetails,
+          filterByDate,
+          filterByKeywords,
+          filterBySearch
+        )
+      ).result.current;
+
+      expect(filterResults.pagination.page).toEqual(1);
+    });
   });
 
   describe("removeFilter", () => {
