@@ -10,6 +10,7 @@ import {
   createFilterByKeywordFn,
   createFilterBySearchFn,
   getHighestSearchId,
+  getQueryParamState,
   isDateFilter,
   isKeywordFilter,
   isSearchFilter,
@@ -471,5 +472,45 @@ describe("getHighestSearchId", () => {
     );
     const got = getHighestSearchId();
     expect(got).toBe(0);
+  });
+});
+
+describe("getQueryParamState", () => {
+  it("should return an empty map if there are no query parameters", () => {
+    const got = getQueryParamState();
+    expect(got.size).toBe(0);
+  });
+
+  it("should correctly parse numeric query parameters", () => {
+    window.history.pushState({}, "", "?param1=123&param2=456");
+    const got = getQueryParamState();
+    expect(got.get("param1")).toBe(123);
+    expect(got.get("param2")).toBe(456);
+  });
+
+  it("should correctly parse string array query parameters", () => {
+    window.history.pushState({}, "", "?param1=value1,value2&param2=value3");
+    const got = getQueryParamState();
+    expect(got.get("param1")).toEqual(["value1", "value2"]);
+    expect(got.get("param2")).toEqual(["value3"]);
+  });
+
+  it("should decode array query parameters correctly", () => {
+    window.history.pushState({}, "", "?param1=value%201,value%202");
+    const got = getQueryParamState();
+    expect(got.get("param1")).toEqual(["value 1", "value 2"]);
+  });
+
+  it("should handle mixed numeric and string array query parameters", () => {
+    window.history.pushState({}, "", "?param1=123&param2=value1,value2");
+    const got = getQueryParamState();
+    expect(got.get("param1")).toBe(123);
+    expect(got.get("param2")).toEqual(["value1", "value2"]);
+  });
+
+  it("should handle empty query parameters as an empty string", () => {
+    window.history.pushState({}, "", "?param1=");
+    const got = getQueryParamState();
+    expect(got.get("param1")).toEqual([""]);
   });
 });
