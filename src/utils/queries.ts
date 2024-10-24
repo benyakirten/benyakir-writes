@@ -36,24 +36,6 @@ export function removeQueryParam(key: string): void {
   }
 }
 
-export function removePartialQueryParam(key: string): void {
-  const params = getQueryParams();
-  for (const param of params.keys()) {
-    if (param.toLowerCase().includes(key.toLowerCase())) {
-      params.delete(param);
-    }
-  }
-  visitQueryParams(params);
-}
-
-export function composeQueryParams(params: Record<string, string>): string {
-  const searchParams = getQueryParams();
-  for (const key in params) {
-    searchParams.set(key, params[key]);
-  }
-  return searchParams.toString();
-}
-
 export function visitQueryParams(params: URLSearchParams): void {
   const newUrl = `${window.location.pathname}?${params.toString()}`;
   window.history.replaceState({}, "", newUrl);
