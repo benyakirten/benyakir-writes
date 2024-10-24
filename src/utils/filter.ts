@@ -16,6 +16,7 @@ import {
   removeQueryParam,
   serializeToQueryParams,
   setOneQueryParam,
+  setQueryParams,
 } from "./queries";
 import { getShortDate } from "./dates";
 
@@ -65,57 +66,31 @@ export const isKeywordFilter = (
   return "currentKeywords" in filter;
 };
 
-export function createAddDateFilterFn(
-  start: Date,
-  end: Date,
-  setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>
-): () => void {
+export function createAddDateFilterFn(start: Date, end: Date): () => void {
   return () => {
-    setFilters((filters) => [
-      ...filters,
-      { label: "Date", id: "date", start, end },
-    ]);
+    setQueryParams({
+      [DATE_START_KEY]: getShortDate(start),
+      [DATE_END_KEY]: getShortDate(end),
+    });
   };
 }
 
-export function createAddKeywordFilterFn(
-  id: string,
-  keywords: PotentialChoice[],
-  setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>
-): () => void {
+export function createAddKeywordFilterFn(id: string): () => void {
   return () => {
-    setFilters((filters) => [
-      ...filters,
-      {
-        label: capitalize(id),
-        id,
-        type: "any",
-        currentKeywords: [],
-        allKeywords: keywords,
-      },
-    ]);
+    setQueryParams({ [id]: "", [`${id}${TYPE_KEY_SEGMENT}`]: "all" });
   };
 }
 
-export function createAddSearchFilterFn(
-  setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>,
-  searchId = 0
-): () => void {
-  let _searchId = searchId;
+export function createAddSearchFilterFn(): () => void {
   return () => {
-    setFilters((filters) => [
-      ...filters,
-      {
-        label: "Search",
-        id: `${SEARCH_KEY}_${_searchId++}`,
-        search: [],
-        type: "any",
-      },
-    ]);
+    const highestSearchId = getHighestSearchId();
+    const id = `${SEARCH_KEY}_${highestSearchId + 1}`;
+    setQueryParams({ [id]: "", [`${id}${TYPE_KEY_SEGMENT}`]: "any" });
   };
 }
 
 function createFilterCreationFn(
+  filterItems: () => void,
   items: CreateFilterOption[]
 ): (id: string) => void {
   return (id: string) => {
@@ -125,6 +100,7 @@ function createFilterCreationFn(
     }
 
     item.fn();
+    filterItems();
   };
 }
 
@@ -175,7 +151,6 @@ function createModifySearchFn(
 ): (id: string, search: string) => void {
   return (id: string, search: string) => {
     setOneQueryParam(id, serializeToQueryParams([search]));
-
     filterItems();
   };
 }
@@ -246,7 +221,7 @@ export function createModifyFilterFns<T extends object>(
   );
 
   return {
-    createFilter: createFilterCreationFn(options),
+    createFilter: createFilterCreationFn(filterItems, options),
     removeFilter: createRemoveFilterFn(filterItems),
     modifyDate: createModifyDateFn(filterItems),
     modifyKeywords: createModifyKeywordFn(filterItems),
@@ -260,10 +235,7 @@ export function createFilterBySearchFn<T extends object>(
   searchFn: (item: T, word: string) => boolean
 ) {
   return (filter: SearchFilter, items: T[]): T[] => {
-    if (
-      filter.search.length === 0 ||
-      (filter.search.length === 1 && filter.search[0] === "")
-    ) {
+    if (filter.search.length === 0 || filter.search[0] === "") {
       return items;
     }
 
@@ -314,15 +286,15 @@ export function getQueryParamState(): ParsedQueryParams {
   const state = new Map<string, number | string[]>();
 
   const params = getQueryParams();
-  for (const key of params.keys()) {
-    const value = params.get(key);
-    if (!value) {
+  for (const [key, value] of params.entries()) {
+    if (value === null) {
       continue;
     }
 
-    const val = Number.isNaN(Number(value))
-      ? deserializeFromQueryParams(value)
-      : Number(value);
+    const val =
+      Number.isNaN(Number(value)) || value === ""
+        ? deserializeFromQueryParams(value)
+        : Number(value);
     state.set(key, val);
   }
 
@@ -385,7 +357,12 @@ export function getSearchFilterFromQuery(
     const id = key as string;
     const type = getTypeForFilterFromQuery(id, state);
 
-    searches.push({ label: "Search", id, search: value, type });
+    searches.push({
+      label: "Search",
+      id,
+      search: value.filter((v) => v !== ""),
+      type,
+    });
   }
 
   return searches;
@@ -407,10 +384,12 @@ export function getKeywordFilterFromQuery(
     label: capitalize(id),
     id,
     type,
-    currentKeywords: keywords.map((keyword) => ({
-      label: keyword,
-      value: keyword,
-    })),
+    currentKeywords: keywords
+      .filter((keyword) => keyword !== "")
+      .map((keyword) => ({
+        label: keyword,
+        value: keyword,
+      })),
     allKeywords,
   };
 }
@@ -456,4 +435,22 @@ export function parseFiltersFromQueryParameters(
   }
 
   return filters;
+}
+
+export function getHighestSearchId(): number {
+  const queryParams = getQueryParams();
+  let highestId = 0;
+  for (const param of queryParams.keys()) {
+    if (!param.startsWith(SEARCH_KEY) || param.endsWith(TYPE_KEY_SEGMENT)) {
+      continue;
+    }
+
+    const id = Number.parseInt(param.split("_")[1]);
+    if (Number.isNaN(id)) {
+      continue;
+    }
+    highestId = Math.max(highestId, id);
+  }
+
+  return highestId;
 }

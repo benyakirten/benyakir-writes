@@ -17,9 +17,7 @@ const useFilter: FilterHook = <T extends object>(
   startDate: Date,
   endDate: Date,
   keywordFilterDetails: KeywordFilterDetails[],
-  createFilterOptionsFn: (
-    setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>
-  ) => CreateFilterOption[],
+  createFilterOptions: CreateFilterOption[],
   filterByDate: (filter: DateFilter, items: T[]) => T[],
   filterByKeywords: (filter: KeywordFilter, items: T[]) => T[],
   filterBySearch: (filter: SearchFilter, items: T[]) => T[]
@@ -36,7 +34,7 @@ const useFilter: FilterHook = <T extends object>(
     modifyFilterType,
     filterItems,
   } = createModifyFilterFns(
-    createFilterOptionsFn(setFilters),
+    createFilterOptions,
     setFilters,
     filterByDate,
     filterByKeywords,

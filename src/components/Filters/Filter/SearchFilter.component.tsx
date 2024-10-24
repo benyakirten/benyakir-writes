@@ -50,7 +50,12 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
         onMouseEnter={() => setSearchSoftOpen(true)}
         onMouseLeave={() => setSearchSoftOpen(false)}
       >
-        <Text label="Search" name={id} value={search} onChange={onSearch} />
+        <Text
+          label="Search"
+          name={id}
+          value={search.join(", ")}
+          onChange={onSearch}
+        />
       </FilterMenu>
       <FilterButton
         borderRadiusCorners={{ topRight: SIZE_MD, bottomRight: SIZE_MD }}
@@ -60,7 +65,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
         onMouseLeave={() => setSearchSoftOpen(false)}
         onClick={() => setSearchHardOpen((val) => !val)}
       >
-        {search || "No search selected."}
+        {search.length === 0 ? "Search Keywords" : search.join(", ")}
       </FilterButton>
     </FilterPill>
   );

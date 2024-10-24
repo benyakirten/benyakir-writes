@@ -6,7 +6,6 @@ import {
   Page,
   PaginatedPageContents,
 } from "@/styles/general-components";
-
 import { CardContainer, ProjectCard } from "@/components/Cards";
 import { Filter } from "@/components/Filters";
 import { HeadBase } from "@/components/SEO";
@@ -17,7 +16,7 @@ import {
   projectsDescription,
 } from "@/data/search";
 import { useFilter } from "@/hooks";
-import { FilterOption, ItemFilter } from "@/types/filters";
+import { CreateFilterOption, FilterOption } from "@/types/filters";
 import { FlattenedProjectCard } from "@/types/posts";
 import {
   createAddDateFilterFn,
@@ -32,28 +31,25 @@ export const Head: React.FC = () => (
   <HeadBase title="Projects" description={projectsDescription} />
 );
 
-const createFilterOptionsFn = (
-  setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>
-) => [
+const createFilterOptions: CreateFilterOption[] = [
   {
     match: "date",
     fn: createAddDateFilterFn(
       projects[projects.length - 1].firstReleased.date,
-      projects[0].firstReleased.date,
-      setFilters
+      projects[0].firstReleased.date
     ),
   },
   {
     match: "hosts",
-    fn: createAddKeywordFilterFn("hosts", projectHosts, setFilters),
+    fn: createAddKeywordFilterFn("hosts"),
   },
   {
     match: "technologies",
-    fn: createAddKeywordFilterFn("technologies", projectTechs, setFilters),
+    fn: createAddKeywordFilterFn("technologies"),
   },
   {
     match: "search",
-    fn: createAddSearchFilterFn(setFilters),
+    fn: createAddSearchFilterFn(),
   },
 ];
 
@@ -102,7 +98,7 @@ const ProjectsPage: React.FC = () => {
       { id: "hosts", allKeywords: projectHosts },
       { id: "technologies", allKeywords: projectTechs },
     ],
-    createFilterOptionsFn,
+    createFilterOptions,
     filterByDate,
     filterByKeywords,
     filterBySearch

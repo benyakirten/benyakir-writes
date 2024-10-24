@@ -91,9 +91,7 @@ type FilterHook = <T extends object>(
   startDate: Date,
   endDate: Date,
   keywordFilterDetails: KeywordFilterDetails[],
-  ncreateFilterOptionsFn: (
-    setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>
-  ) => CreateFilterOption[],
+  createFilterOptions: CreateFilterOption[],
   filterByDate: (filter: DateFilter, items: T[]) => T[],
   filterByKeywords: (filter: KeywordFilter, items: T[]) => T[],
   filterBySearch: (filter: SearchFilter, items: T[]) => T[]

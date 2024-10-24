@@ -5,26 +5,20 @@ import { Filter } from "@/components/Filters";
 import { AuthorCard } from "@/components/General";
 import { HeadBase } from "@/components/SEO";
 import { authorDescription, books, stories } from "@/data/search";
-import { useFilter, usePagination } from "@/hooks";
+import { useFilter } from "@/hooks";
 import {
   Grouping,
   LeadHeading,
   Page,
   PaginatedPageContents,
 } from "@/styles/general-components";
-import {
-  CreateFilterOption,
-  FilterOption,
-  ItemFilter,
-  KeywordFilter,
-} from "@/types/filters";
+import { FilterOption, KeywordFilter } from "@/types/filters";
 import type { AuthoredItemCard } from "@/types/posts";
 import {
   createAddDateFilterFn,
   createAddSearchFilterFn,
   createFilterByDateFn,
   createFilterBySearchFn,
-  createModifyFilterFns,
 } from "@/utils/filter";
 
 export const Head: React.FC = () => (
@@ -55,20 +49,17 @@ const filterByDate = createFilterByDateFn<AuthoredItemCard>(
   (item) => item.published.date
 );
 
-const createFilterOptionsFn = (
-  setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>
-) => [
+const createFilterOptions = [
   {
     match: "date",
     fn: createAddDateFilterFn(
       items[items.length - 1].published.date,
-      items[0].published.date,
-      setFilters
+      items[0].published.date
     ),
   },
   {
     match: "search",
-    fn: createAddSearchFilterFn(setFilters),
+    fn: createAddSearchFilterFn(),
   },
 ];
 
@@ -87,7 +78,7 @@ const AuthorPage: React.FC = () => {
     items[items.length - 1].published.date,
     items[0].published.date,
     [],
-    createFilterOptionsFn,
+    createFilterOptions,
     filterByDate,
     filterByKeywords,
     filterBySearch

@@ -9,14 +9,13 @@ import {
   postTags,
   posts,
 } from "@/data/search";
-import usePagination from "@/hooks/usePagination.hook";
 import {
   Grouping,
   LeadHeading,
   Page,
   PaginatedPageContents,
 } from "@/styles/general-components";
-import { FilterOption, ItemFilter } from "@/types/filters";
+import { FilterOption } from "@/types/filters";
 import type { FlattenedBlogCard } from "@/types/posts";
 import {
   createAddDateFilterFn,
@@ -32,28 +31,25 @@ export const Head: React.FC = () => (
   <HeadBase title="Blog" description={blogDescription} />
 );
 
-const createFilterOptionsFn = (
-  setFilters: React.Dispatch<React.SetStateAction<ItemFilter[]>>
-) => [
+const createFilterOptions = [
   {
     match: "date",
     fn: createAddDateFilterFn(
       posts[posts.length - 1].published.date,
-      posts[0].published.date,
-      setFilters
+      posts[0].published.date
     ),
   },
   {
     match: "tags",
-    fn: createAddKeywordFilterFn("tags", postTags, setFilters),
+    fn: createAddKeywordFilterFn("tags"),
   },
   {
     match: "categories",
-    fn: createAddKeywordFilterFn("categories", postCategories, setFilters),
+    fn: createAddKeywordFilterFn("categories"),
   },
   {
     match: "search",
-    fn: createAddSearchFilterFn(setFilters),
+    fn: createAddSearchFilterFn(),
   },
 ];
 
@@ -95,7 +91,7 @@ const BlogPage: React.FC = () => {
       { id: "tags", allKeywords: postTags },
       { id: "categories", allKeywords: postCategories },
     ],
-    createFilterOptionsFn,
+    createFilterOptions,
     filterByDate,
     filterByKeywords,
     filterBySearch
