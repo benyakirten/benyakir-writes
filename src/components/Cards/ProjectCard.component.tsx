@@ -12,13 +12,17 @@ import {
 	ProjectTech,
 	TechContainer,
 } from "../General";
-import { FullContainer, SpanOneContent, TagContainer } from "./Card.styles";
+import { CardTitle, FullContainer, TagContainer } from "./Card.styles";
 import CardExterior from "./CardExterior.component";
 import { PublishedDate } from "./IconedText.component";
 
 const ExtraMarginedContainer = styled.div`
   margin: ${SIZE_XS} 0;
   grid-column: span 2;
+`;
+
+const ProjectTitle = styled(CardTitle)`
+  grid-column: span 1;
 `;
 
 const ProjectCardInterior: React.FC<{
@@ -28,7 +32,7 @@ const ProjectCardInterior: React.FC<{
 	const latestUpdateState = useFetchRepoUpdatedDate(project.repoLink);
 	return (
 		<>
-			<SpanOneContent>{project.title}</SpanOneContent>
+			<ProjectTitle>{project.title}</ProjectTitle>
 			{project.hostedOn && (
 				<TagContainer>
 					<ProjectHost host={project.hostedOn} />

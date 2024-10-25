@@ -7,7 +7,7 @@ import { DateFilterProps } from "@/types/filters";
 import { getShortDate } from "@/utils/dates";
 import { FilterButton, FilterPill, FilterText } from "../components";
 import { FilterMenu } from "../components/Filters.styles";
-import { registerCleanupFn } from "../useFilter.hook";
+import { registerCleanupFn } from "../useFilterComponent.hook";
 
 const DateFilter: React.FC<DateFilterProps> = ({
 	onModify,
@@ -22,18 +22,6 @@ const DateFilter: React.FC<DateFilterProps> = ({
 
 	const [endOpenTop, endOpen, setEndSoftOpen, setEndHardOpen] =
 		useFlyout(menuRef);
-
-	function modifyDate(time: "start" | "end", value: Date) {
-		if (time === "start") {
-			setStartSoftOpen(false);
-			setStartHardOpen(false);
-		} else {
-			setEndSoftOpen(false);
-			setEndHardOpen(false);
-		}
-
-		onModify(time, value);
-	}
 
 	const closeAllMenus = React.useCallback(() => {
 		setStartSoftOpen(false);
@@ -61,7 +49,7 @@ const DateFilter: React.FC<DateFilterProps> = ({
 						label={`${label} Since`}
 						name="date-start"
 						value={start}
-						onChange={(val) => modifyDate("start", val)}
+						onChange={(val) => onModify("start", val)}
 					/>
 				</li>
 			</FilterMenu>
@@ -84,7 +72,7 @@ const DateFilter: React.FC<DateFilterProps> = ({
 						label={`${label} Until`}
 						name="date-end"
 						value={end}
-						onChange={(val) => modifyDate("end", val)}
+						onChange={(val) => onModify("end", val)}
 					/>
 				</li>
 			</FilterMenu>

@@ -1,4 +1,5 @@
 import { useFlyout } from "@/hooks/useFlyout.hook";
+import { PotentialChoice } from "./general";
 
 type FilterOption = {
 	label: string;
@@ -81,11 +82,12 @@ type ItemFilter = DateFilter | KeywordFilter | SearchFilter;
 
 type DateFilter = {
 	id: "date";
-	label: string;
+	label: "Date";
 	start: Date;
 	end: Date;
 };
 
+type WordFilterType = "any" | "all";
 type KeywordFilter = {
 	id: string;
 	label: string;
@@ -94,12 +96,11 @@ type KeywordFilter = {
 	allKeywords: PotentialChoice[];
 };
 
-type WordFilterType = "any" | "all";
 type SearchFilter = {
-	id: string;
+	id: Exclude<string, "date">;
 	label: string;
 	type: WordFilterType;
-	search: string;
+	search: string[];
 };
 
 type CurrentPageProps = {
@@ -108,7 +109,9 @@ type CurrentPageProps = {
 	onSetPage: (page: number) => void;
 };
 
-type CreateFilterOption = {
-	match: string;
-	fn: () => void;
+type KeywordFilterDetails = {
+	id: string;
+	allKeywords: PotentialChoice[];
 };
+
+type ParsedQueryParams = Map<string, string[]>;

@@ -11,29 +11,29 @@ import {
 	FilterText,
 	IconContainer,
 } from "../components";
-import { registerCleanupFn } from "../useFilter.hook";
+import { registerCleanupFn } from "../useFilterComponent.hook";
 
 const InnerContainer = styled.button`
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 
-	& > *:last-child {
-        border-left: 1px solid ${(props) => props.theme.base.border};
-		transition: all ${TRANSITION_SLOW} ease;
-    }
+  & > *:last-child {
+    border-left: 1px solid ${(props) => props.theme.base.border};
+    transition: all ${TRANSITION_SLOW} ease;
+  }
 
-	&:hover > *:last-child {
-		border-left: 1px solid ${(props) => props.theme.base.background};
-	}
+  &:hover > *:last-child {
+    border-left: 1px solid ${(props) => props.theme.base.background};
+  }
 `;
 
 const OptionButton = styled.button`
-	padding: ${SIZE_SM};
-	white-space: nowrap;
+  padding: ${SIZE_SM};
+  white-space: nowrap;
 
-	&:disabled {
-		cursor: default;
-	}
+  &:disabled {
+    cursor: default;
+  }
 `;
 
 const FilterChoice: React.FC<{

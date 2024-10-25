@@ -9,47 +9,47 @@ import { clamp } from "@/utils/numbers";
 import { StyledFilterPill } from "../components/FilterPill.component";
 
 const DirectionButton = styled.button`
-    height: 100%;
+  height: 100%;
 `;
 
 const InnerContainer = styled.div`
-	display: grid;
-	place-items: center;
+  display: grid;
+  place-items: center;
 
-    padding: 0 ${SIZE_XS};
+  padding: 0 ${SIZE_XS};
 `;
 
 const PageNumberContainer = styled.span`
-	color: ${(props) => props.theme.base.textColor};
-	background: ${(props) => props.theme.base.background};
+  color: ${(props) => props.theme.base.textColor};
+  background: ${(props) => props.theme.base.background};
 `;
 
 const PageNumber = styled.input`
-	font-size: ${FONT_SIZE_XS};
-	padding: 0 ${SIZE_XS};
+  font-size: ${FONT_SIZE_XS};
+  padding: 0 ${SIZE_XS};
 
-	border: none;
-	outline: none;
+  border: none;
+  outline: none;
 
-	color: ${(props) => props.theme.base.textColor};
-	background: ${(props) => props.theme.base.background};
+  color: ${(props) => props.theme.base.textColor};
+  background: ${(props) => props.theme.base.background};
 
-	&:focus {
-		outline: 1px solid ${(prop) => prop.theme.base.border};
-	}
+  &:focus {
+    outline: 1px solid ${(prop) => prop.theme.base.border};
+  }
 
-	width: 3rem;
-	border-bottom: 1px solid ${(prop) => prop.theme.base.border};
+  width: 3rem;
+  border-bottom: 1px solid ${(prop) => prop.theme.base.border};
 `;
 
 const PageCount = styled.div`
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 
-    height: 100%;
-    width: max-content;
+  height: 100%;
+  width: max-content;
 
-	background: ${(props) => props.theme.base.background};
+  background: ${(props) => props.theme.base.background};
 `;
 
 const CurrentPage = React.forwardRef<HTMLInputElement, CurrentPageProps>(
@@ -66,8 +66,24 @@ const CurrentPage = React.forwardRef<HTMLInputElement, CurrentPageProps>(
 			const newPageNumber = clamp(value - 1, 0, numPages);
 			onSetPage(newPageNumber);
 		}
+
+		function handleKeydown(event: React.KeyboardEvent) {
+			if (event.key === "ArrowLeft") {
+				const newPageNumber = clamp(currentPage - 1, 0, numPages);
+				onSetPage(newPageNumber);
+				event.stopPropagation();
+			} else if (event.key === "ArrowRight") {
+				const newPageNumber = clamp(currentPage + 1, 0, numPages);
+				onSetPage(newPageNumber);
+				event.stopPropagation();
+			}
+		}
+
 		return (
-			<StyledFilterPill style={{ backgroundColor: "white" }}>
+			<StyledFilterPill
+				onKeyDown={handleKeydown}
+				style={{ backgroundColor: "white" }}
+			>
 				<FillIn
 					disabled={previousDisabled}
 					borderRadiusCorners={{ topLeft: SIZE_MD, bottomLeft: SIZE_MD }}

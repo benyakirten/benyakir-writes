@@ -70,4 +70,37 @@ describe("usePagination", () => {
 		expect(result.current.numPages).toBe(0);
 		expect(result.current.visibleItems).toEqual(newItems);
 	});
+
+	it("should set the page query param to current page + 1 when the page is set", () => {
+		const { result } = renderHook(() => usePagination(initialItems));
+
+		act(() => {
+			result.current.setPage(1);
+		});
+
+		expect(result.current.page).toBe(1);
+		expect(window.location.search).toBe("?page=2");
+	});
+
+	it("should prevent the page from being set to a negative value", () => {
+		const { result } = renderHook(() => usePagination(initialItems));
+
+		act(() => {
+			result.current.setPage(-1);
+		});
+
+		expect(result.current.page).toBe(0);
+		expect(window.location.search).toBe("?page=1");
+	});
+
+	it("should prevent the page from being set to a value greater than the number of pages", () => {
+		const { result } = renderHook(() => usePagination(initialItems));
+
+		act(() => {
+			result.current.setPage(100);
+		});
+
+		expect(result.current.page).toBe(1);
+		expect(window.location.search).toBe("?page=2");
+	});
 });

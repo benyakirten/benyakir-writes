@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 import { Text } from "@/components/Input";
 import { useFlyout } from "@/hooks/useFlyout.hook";
@@ -10,7 +11,15 @@ import {
 	FilterPill,
 	FilterText,
 } from "../components";
-import { registerCleanupFn } from "../useFilter.hook";
+import { registerCleanupFn } from "../useFilterComponent.hook";
+
+const PlaceholderSpan = styled.span`
+  opacity: 0.8;
+`;
+
+const ValuesSpan = styled.span`
+  text-transform: none;
+`;
 
 const SearchFilter: React.FC<SearchFilterProps> = ({
 	onSearch,
@@ -50,7 +59,12 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
 				onMouseEnter={() => setSearchSoftOpen(true)}
 				onMouseLeave={() => setSearchSoftOpen(false)}
 			>
-				<Text label="Search" name={id} value={search} onChange={onSearch} />
+				<Text
+					label="Search"
+					name={id}
+					value={search.join(", ")}
+					onChange={onSearch}
+				/>
 			</FilterMenu>
 			<FilterButton
 				borderRadiusCorners={{ topRight: SIZE_MD, bottomRight: SIZE_MD }}
@@ -60,7 +74,11 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
 				onMouseLeave={() => setSearchSoftOpen(false)}
 				onClick={() => setSearchHardOpen((val) => !val)}
 			>
-				{search || "No search selected."}
+				{search.length === 0 ? (
+					<PlaceholderSpan>Search...</PlaceholderSpan>
+				) : (
+					<ValuesSpan>{search.join(" ")}</ValuesSpan>
+				)}
 			</FilterButton>
 		</FilterPill>
 	);

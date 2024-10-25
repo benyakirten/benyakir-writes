@@ -18,23 +18,24 @@ import { TabData } from "@/types/general";
 import type { RecentProjectItem } from "@/types/portfolio";
 import type { ProjectsQuery } from "@/types/query";
 import { getFirstParagraphOfContent } from "@/utils/project";
+import { getQueryParams, setQueryParams } from "@/utils/queries";
 
 export const Head: React.FC = () => (
 	<HeadBase title="Portfolio" description={portfolioDescription} />
 );
 
 const CentralizedItem = styled.div`
-	margin: ${SIZE_LG} auto;
-	width: 80%;
+  margin: ${SIZE_LG} auto;
+  width: 80%;
 
-	${media.tablet} {
-		width: 100%;
-	}
+  ${media.tablet} {
+    width: 100%;
+  }
 `;
 
 const PortfolioPageContents = styled(NormalPageContents)`
-	max-height: 100vh;
-	overflow: scroll;
+  max-height: 100vh;
+  overflow: scroll;
 `;
 
 const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
@@ -85,7 +86,13 @@ const Portfolio: React.FC<ProjectsQuery> = ({ data }) => {
 		[portfolioProjects, data],
 	);
 
-	const [selectedId, setSelectedId] = React.useState<string>("bio");
+	const [selectedId, _setSelectedId] = React.useState<string>(
+		getQueryParams().get("section") ?? "bio",
+	);
+	function setSelectedId(id: string) {
+		_setSelectedId(id);
+		setQueryParams({ section: id });
+	}
 
 	return (
 		<RandomizedBackground>
@@ -117,12 +124,12 @@ export const query = graphql`
         }
       }
     }
-	ghIcon: file(name: { eq: "Github" }) {
-		publicURL
-	}
-	liIcon: file(name: { eq: "LinkedIn" }) {
-		publicURL
-	}
+    ghIcon: file(name: { eq: "Github" }) {
+      publicURL
+    }
+    liIcon: file(name: { eq: "LinkedIn" }) {
+      publicURL
+    }
   }
 `;
 

@@ -16,7 +16,7 @@ const closeAll = () => {
 	}
 };
 
-export const useFilter = (
+export const useFilterComponent = (
 	filterBarRef: React.RefObject<HTMLElement>,
 	newFilterRef: React.RefObject<HTMLButtonElement>,
 	pageRef: React.RefObject<HTMLInputElement>,

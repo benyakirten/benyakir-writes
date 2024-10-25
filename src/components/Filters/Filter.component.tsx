@@ -6,28 +6,29 @@ import { media } from "@/styles/queries";
 import { SIZE_MD, SIZE_SM, SIZE_XXL, Z_RAISED } from "@/styles/variables";
 import { FilterProps, ItemFilter, WordFilterType } from "@/types/filters";
 import { PotentialChoice } from "@/types/general";
+import { setOneQueryParam } from "@/utils/queries";
 import { DateFilter, KeywordFilter, NewFilter, SearchFilter } from "./Filter";
 import { CurrentPage } from "./Pagination";
-import { useFilter } from "./useFilter.hook";
+import { useFilterComponent } from "./useFilterComponent.hook";
 
 const FilterBar = styled.div`
-    position: fixed;
-    top: ${SIZE_MD};
-	right: 2%;
+  position: fixed;
+  top: ${SIZE_MD};
+  right: 2%;
 
-	width: fit-content;
-	
-    display: flex;
-    flex-wrap: wrap;
-	justify-content: end;
-    gap: ${SIZE_SM};
+  width: fit-content;
 
-	z-index: ${Z_RAISED};
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  gap: ${SIZE_SM};
 
-	${media.phone} {
-		top: calc(1.5 * ${SIZE_XXL});
-		margin-bottom: ${SIZE_SM};
-	}
+  z-index: ${Z_RAISED};
+
+  ${media.phone} {
+    top: calc(1.5 * ${SIZE_XXL});
+    margin-bottom: ${SIZE_SM};
+  }
 `;
 
 const FilterComponent: React.FC<{
@@ -97,7 +98,7 @@ const Filter: React.FC<FilterProps> = ({
 	const [menuOpenTop, menuOpen, setSoftOpen, setHardOpen] =
 		useFlyout(newFilterRef);
 
-	useFilter(filterBarRef, newFilterRef, pageRef, setPage);
+	useFilterComponent(filterBarRef, newFilterRef, pageRef, setPage);
 
 	return (
 		<FilterBar ref={filterBarRef}>

@@ -75,23 +75,23 @@ export const defaultNightTheme: BaseTheme = {
 	id: "1",
 	name: "Night",
 	base: {
-		textColor: "hsl(222 30% 94%)",
+		textColor: "hsl(222 30% 84%)",
 		background: "hsl(222 50% 13%)",
 		border: "hsl(222 40% 80%)",
-		link: "hsl(222 70% 94%)",
+		link: "hsl(222 70% 84%)",
 		pageGradient:
 			"linear-gradient(to bottom right, hsl(222 50% 13%), hsl(222 80% 16%), hsl(222 50% 13%))",
 		disabled: "hsl(222 4% 70%)",
 	},
 	portfolio: {
 		textColor: "hsl(222 25% 15%)",
-		selectedTextColor: "hsl(222 30% 94%)",
+		selectedTextColor: "hsl(222 30% 84%)",
 		tabBackground: "hsl(222 30% 92%)",
 		selectedTabBackground: "hsl(222 80% 15%)",
 	},
 	card: {
 		arrowColor: "hsl(222 60% 25%)",
-		boxShadow: "hsl(222 35% 94%)",
+		boxShadow: "hsl(222 35% 84%)",
 	},
 	header: {
 		startColor: "hsl(222 30% 92%)",

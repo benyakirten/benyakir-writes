@@ -1,6 +1,17 @@
 import type { FetchState } from "@/hooks";
+import {
+	CreateFilterOption,
+	DateFilter,
+	ItemFilter,
+	KeywordFilter,
+	KeywordFilterDetails,
+	SearchFilter,
+} from "@/types/filters";
 
-type AlternationHook = () => [string, (val: string) => void];
+type AlternationHook = (
+	id: string,
+	defaultValue?: string,
+) => [string | null, (val: string | null) => void];
 
 type LookupHook = (items: BooleanLookup) => [
 	BooleanLookup,
@@ -16,10 +27,7 @@ type DebounceHook = (
 	timeout?: number,
 ) => [string, (val: string) => void];
 
-type PaginationHook = <T>(
-	initialItems: T[],
-	defaultItemsPerPage?: number,
-) => {
+type PaginationHookReturnType<T> = {
 	page: number;
 	setPage: React.Dispatch<React.SetStateAction<number>>;
 	items: T[];
@@ -29,6 +37,10 @@ type PaginationHook = <T>(
 	numPages: number;
 	visibleItems: T[];
 };
+type PaginationHook = <T>(
+	initialItems: T[],
+	defaultItemsPerPage?: number,
+) => PaginationHookReturnType<T>;
 
 type ToggleHook = (initialVal?: boolean) => [boolean, () => void];
 
@@ -77,3 +89,22 @@ type FlyoutHook = (
 	React.Dispatch<React.SetStateAction<boolean>>,
 	React.Dispatch<React.SetStateAction<boolean>>,
 ];
+
+type FilterHook = <T extends object>(
+	items: T[],
+	startDate: Date,
+	endDate: Date,
+	keywordFilterDetails: KeywordFilterDetails[],
+	filterByDate: (filter: DateFilter, items: T[]) => T[],
+	filterByKeywords: (filter: KeywordFilter, items: T[]) => T[],
+	filterBySearch: (filter: SearchFilter, items: T[]) => T[],
+) => {
+	pagination: PaginationHookReturnType<T>;
+	createFilter: (id: string) => void;
+	removeFilter: (id: string) => void;
+	modifyDate: (time: "start" | "end", value: Date) => void;
+	modifyKeywords: (id: string, keywords: readonly PotentialChoice[]) => void;
+	modifyFilterType: (id: string, type: WordFilterType) => void;
+	modifySearch: (id: string, search: string) => void;
+	filters: ItemFilter[];
+};

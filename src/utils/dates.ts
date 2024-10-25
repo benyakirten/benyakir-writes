@@ -43,6 +43,14 @@ export function getShortDate(date: Date) {
 	});
 }
 
+export function formatDateForQuery(date: Date) {
+	return date.toLocaleString("en-US", {
+		year: "numeric",
+		month: "2-digit",
+		day: "2-digit",
+	});
+}
+
 export function getMonth(month: number): FullMonth {
 	switch (month) {
 		case 1:

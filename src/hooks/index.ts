@@ -10,3 +10,4 @@ export { default as useSet } from "./useSet.hook";
 export { default as useToggle } from "./useToggle.hook";
 export { default as useValidation } from "./useValidation.hook";
 export { default as useMultiSelect } from "./useMultiSelect.hook";
+export { default as useFilter } from "./useFilter.hook";

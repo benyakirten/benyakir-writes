@@ -10,7 +10,7 @@ import {
 	FilterText,
 	MultipleChoice,
 } from "../components";
-import { registerCleanupFn } from "../useFilter.hook";
+import { registerCleanupFn } from "../useFilterComponent.hook";
 
 const MAX_KEYWORDS = 1;
 
@@ -83,7 +83,9 @@ const KeywordFilter: React.FC<KeywordFilterProps> = ({
 						{displayedKeywords.join(", ")}
 						<span style={{ textTransform: "lowercase" }}>
 							{otherKeywordCount > 0 &&
-								`, and ${otherKeywordCount} other${otherKeywordCount !== 1 ? "s" : ""}`}
+								`, and ${otherKeywordCount} other${
+									otherKeywordCount !== 1 ? "s" : ""
+								}`}
 						</span>
 					</span>
 				)}

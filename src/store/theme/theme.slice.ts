@@ -6,6 +6,7 @@ import {
 	STORED_THEMES,
 } from "@/data/constants";
 import { StringLookup } from "@/types/general";
+import { getQueryParams, removeQueryParam } from "@/utils/queries";
 import { validateThemeShape } from "@/utils/validation";
 import { defaultDayTheme, initialState } from "./theme.state";
 import {
@@ -128,6 +129,11 @@ const themeSlice = createSlice({
 				return;
 			}
 
+			const themeQueryParam = getQueryParams().get("theme");
+			if (themeQueryParam === action.payload) {
+				removeQueryParam("theme");
+			}
+
 			const themeIndexToDelete = state.themes.findIndex(
 				(theme) => theme.id === action.payload,
 			);
@@ -215,6 +221,7 @@ const themeSlice = createSlice({
 			localStorage.removeItem(STORED_THEMES);
 			localStorage.removeItem(STORED_ACTIVE_THEME_ID);
 			localStorage.removeItem(STORED_IGNORE_COMPUTER_PREFERENCE);
+			removeQueryParam("theme");
 
 			return getDefaultThemeState();
 		},
