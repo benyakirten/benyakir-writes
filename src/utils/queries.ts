@@ -1,5 +1,5 @@
 export function getQueryParams(): URLSearchParams {
-	return new URLSearchParams(window.location.search);
+	return new URLSearchParams(globalThis?.location?.search);
 }
 
 export function setOneQueryParam(
