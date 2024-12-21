@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 module.exports = {
 	siteMetadata: {
 		siteUrl: "https://www.benyakir-writes.com",
@@ -38,6 +40,16 @@ module.exports = {
 				theme_color: "#fff",
 				display: "standalone",
 				icon: "src/files/images/icon.png",
+			},
+		},
+		{
+			resolve: "gatsby-plugin-posthog",
+			options: {
+				// Specify the API key for your PostHog Project (required)
+				apiKey: process.env.POSTHOG_KEY,
+				apiHost: process.env.POSTHOG_HOST,
+				head: true,
+				isEnabledDevMode: false,
 			},
 		},
 	],
