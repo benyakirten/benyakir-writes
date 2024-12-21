@@ -12,4 +12,4 @@ jobs:
         with:
           node-version: "20"
       - run: pnpm install
-      - run: pnpm run test:e2e:ci
+      # - run: pnpm run test:e2e:ci

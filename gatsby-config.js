@@ -1,4 +1,3 @@
-// @ts-ignore
 require("dotenv").config();
 
 module.exports = {
