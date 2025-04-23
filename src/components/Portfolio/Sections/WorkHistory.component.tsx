@@ -19,9 +19,18 @@ import { calculateDuration } from "@/utils/dates";
 const workHistory: WorkHistoryDatum[] = [
 	{
 		title: "Independent Contractor",
+		company: "English Garden Talk Press",
+		startDate: new Date("01/01/2025"),
+		endDate: null,
+		points: [
+			"Designed, architected and began to implement an open and extensible word processor for writers",
+		],
+	},
+	{
+		title: "Independent Contractor",
 		company: "SpringBlock",
 		startDate: new Date("10/01/2023"),
-		endDate: null,
+		endDate: new Date("12/31/2024"),
 		points: [
 			"Planned and executed migration scheme to move data from legacy Oracle database to normalized Postgres database",
 			"Create dynamic no-build frontend with JSDoc, Jinja templates and HTMX",
@@ -55,50 +64,50 @@ const workHistory: WorkHistoryDatum[] = [
 ];
 
 const WorkHistoryContainer = styled.ul`
-	display: grid;
-	gap: ${SIZE_MD};
+  display: grid;
+  gap: ${SIZE_MD};
 `;
 
 const WorkHistoryItem = styled(Card)`
-	position: relative;
-	z-index: ${Z_ABOVE};
-	
-	display: grid;
-	gap: ${SIZE_XS};
+  position: relative;
+  z-index: ${Z_ABOVE};
+
+  display: grid;
+  gap: ${SIZE_XS};
 `;
 
 const WorkHistoryPosition = styled.p`
-	display: flex;
-	align-items: center;
-	gap: 1ch;
-	${media.phone} {
-		justify-content: space-between;
-		align-items: start;
-	}
+  display: flex;
+  align-items: center;
+  gap: 1ch;
+  ${media.phone} {
+    justify-content: space-between;
+    align-items: start;
+  }
 `;
 
 const WorkHistoryPositionText = styled.span`
-	font-weight: bold;
-	font-size: ${FONT_SIZE_MD};
-	white-space: nowrap;
+  font-weight: bold;
+  font-size: ${FONT_SIZE_MD};
+  white-space: nowrap;
 
-	${media.phone} {
-		font-weight: normal;
-		font-size: ${FONT_SIZE_SM};
-		white-space: initial;
-	}
+  ${media.phone} {
+    font-weight: normal;
+    font-size: ${FONT_SIZE_SM};
+    white-space: initial;
+  }
 `;
 
 const WorkHistoryPositionAt = styled(WorkHistoryPositionText)`
-	${media.phone} {
-		display: none;
-	}
+  ${media.phone} {
+    display: none;
+  }
 `;
 
 const WorkHistoryPositionCompany = styled(WorkHistoryPositionText)`
-	${media.phone} {
-		text-align: right;
-	}
+  ${media.phone} {
+    text-align: right;
+  }
 `;
 
 const WorkPosition: React.FC<{ title: string; company: string }> = ({
@@ -113,20 +122,20 @@ const WorkPosition: React.FC<{ title: string; company: string }> = ({
 );
 
 const WorkHistoryDates = styled.div`
-	margin-left: -2px;
+  margin-left: -2px;
 `;
 
 const BulletedList = styled.ul`
-	margin-top: ${SIZE_SM};
-	list-style: disc;
-	padding-left: ${SIZE_SM};
+  margin-top: ${SIZE_SM};
+  list-style: disc;
+  padding-left: ${SIZE_SM};
 `;
 
 const BulletedListItem = styled.li`
-	margin-top: ${SIZE_XS};
-	&:first-of-type {
-		margin-top: 0;
-	}
+  margin-top: ${SIZE_XS};
+  &:first-of-type {
+    margin-top: 0;
+  }
 `;
 
 const WorkHistoryLength: React.FC<{ start: Date; end: Date | null }> = ({

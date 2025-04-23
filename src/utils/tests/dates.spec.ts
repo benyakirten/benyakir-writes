@@ -199,9 +199,9 @@ describe("convertDateToDatePickerValue", () => {
 
 	it("should handle leap year dates", () => {
 		const date = new Date();
+		date.setFullYear(2024);
 		date.setDate(29);
 		date.setMonth(1);
-		date.setFullYear(2024);
 
 		const result = convertDateToDatePickerValue(date);
 		expect(result).toEqual("2024-02-29");
