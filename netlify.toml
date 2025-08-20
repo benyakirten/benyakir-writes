@@ -1,8 +1,0 @@
-[build]
-  command = "pnpm clean && pnpm build"
-  publish = "public"
-
-[[plugins]]
-  package = "@netlify/plugin-gatsby"
-  # force a newer version
-  version = "4.0.0"
